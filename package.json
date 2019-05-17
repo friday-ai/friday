@@ -1,0 +1,32 @@
+{
+  "name": "friday",
+  "version": "1.0.0",
+  "description": "Server and web app of the Friday assistant",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run install-server && npm run install-client",
+    "start": "per-env",
+    "start:prod": "concurrently -k -p \"none\" \"npm run start-server:prod\" \"npm run start-client:prod\"",
+    "start:dev": "concurrently -k -p \"none\" \"npm run start-server:dev\" \"npm run start-client:dev\"",
+    "test": "npm run test-server && npm run test-client",
+    "install-server": "cd server && npm install",
+    "start-server:prod": "cd server && npm run start:prod",
+    "start-server:dev": "cd server && npm run start:dev",
+    "test-server": "cd server && npm run test",
+    "install-client": "cd client && npm install",
+    "start-client:prod": "cd client && npm run start:prod",
+    "start-client:dev": "cd client && npm run start:dev",
+    "test-client": "cd client && npm run test"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/friday-ai/friday.git"
+  },
+  "bugs": {
+    "url": "https://github.com/friday-ai/friday/issues"
+  },
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
