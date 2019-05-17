@@ -7,7 +7,7 @@
     "start": "per-env",
     "start:prod": "npm run -s serve",
     "start:dev": "npm run -s dev",
-    "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"cross-env NODE_ENV=production node ./src/server.ts\"",
+    "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"cross-env NODE_ENV=production ts-node ./src/server.ts\"",
     "dev": "concurrently -k -n \"TypeScript,Node\" -c \"blue,green\" \"tsc --watch\" \"cross-env NODE_ENV=development nodemon ./src/server.ts\"",
     "test": "concurrently -k -n \"Jest\" -c \"red\" \"jest --coverage\""
   },
