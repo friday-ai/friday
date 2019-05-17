@@ -8,11 +8,12 @@
     "start:prod": "npm run -s serve",
     "start:dev": "npm run -s dev",
     "build": "preact build",
-    "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"preact build && preact serve\"",
+    "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"preact build && preact serve ./build\"",
     "dev": "concurrently -k -n \"Preact\" -c \"magenta\" \"preact watch -p 1444\"",
     "test": "concurrently -k -n \"Jest\" -c \"red\" \"jest --coverage\""
   },
   "dependencies": {
+    "concurrently": "^4.1.0",
     "preact": "^8.3.1",
     "preact-compat": "^3.18.4",
     "preact-router": "^2.6.1"
