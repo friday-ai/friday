@@ -22,7 +22,9 @@
     "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
-    "ts-node": "^8.1.0"
+    "ts-node": "^8.1.0",
+    "sequelize": "^5.8.6",
+    "sqlite3": "^4.0.8"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",
