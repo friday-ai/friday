@@ -1,14 +1,6 @@
 import { Component, h } from 'preact';
 
-export interface AppProps {
-    title: string;
-}
-
-interface AppState {
-    title: string;
-}
-
-export default class App extends Component<AppProps, AppState> {
+export default class App extends Component {
 
     public render() {
         return (
