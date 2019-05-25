@@ -9,6 +9,8 @@ export interface DeviceAttributes {
   subtype: Enumerator;
   variable: JSON | null;
   unit: string;
+  plugin: number;
+  room: number;
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -31,6 +33,12 @@ export const DeviceFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequeli
     },
     unit: {
       type: DataTypes.STRING
+    },
+    number: {
+      type: DataTypes.number
+    },
+    room: {
+      type: DataTypes.number
     }
   };
 

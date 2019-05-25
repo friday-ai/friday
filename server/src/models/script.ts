@@ -22,7 +22,7 @@ export const ScriptFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequeli
     }
   };
 
-  const Script = sequelize.define<ScriptInstance, ScriptAttributes>('script', attributes);
+  const script = sequelize.define<ScriptInstance, ScriptAttributes>('script', attributes);
 
-  return Script;
+  return script;
 };

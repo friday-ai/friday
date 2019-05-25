@@ -6,6 +6,7 @@ export interface PluginAttributes {
   id?: number;
   name: string;
   version: string;
+  state: number;
   createdAt?: Date;
   updatedAt?: Date;
 };
@@ -19,17 +20,20 @@ export const PluginFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequeli
     },
     version: {
       type: DataTypes.STRING
+    },
+    state: {
+        type: DataTypes.number
     }
   };
 
-  const Plugin = sequelize.define<PluginInstance, PluginAttributes>('plugin', attributes);
+  const plugin = sequelize.define<PluginInstance, PluginAttributes>('plugin', attributes);
 
-  Plugin.associate = models => {
-    Plugin.hasMany(models.device);
-    Plugin.hasMany(models.variable);
-    Plugin.belongsTo(models.state, { as: 'state', foreignKey: 'id' });
+  plugin.associate = models => {
+    plugin.hasMany(models.device);
+    plugin.hasMany(models.variable);
+    plugin.belongsTo(models.state, { as: 'state', foreignKey: 'id' });
     // Gérer satellite
   };
 
-  return Plugin;
+  return plugin;
 };

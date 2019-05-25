@@ -26,13 +26,13 @@ export const VariableFactory = (sequelize: Sequelize.Sequelize, DataTypes: Seque
     }
   };
 
-  const Variable = sequelize.define<VariableInstance, VariableAttributes>('Variable', attributes);
+  const variable = sequelize.define<VariableInstance, VariableAttributes>('variable', attributes);
 
-  Variable.associate = models => {
-    Variable.hasMany(models.User);
-    Variable.hasMany(models.plugin);
-    Variable.hasMany(models.satellite);
+  variable.associate = models => {
+    variable.hasMany(models.user);
+    variable.hasMany(models.plugin);
+    variable.hasMany(models.satellite);
   };
 
-  return Variable;
+  return variable;
 };
