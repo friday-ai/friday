@@ -1,32 +1,34 @@
-// src/models/Scene.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, ForeignKey, HasMany, IsUUID, AllowNull } from 'sequelize-typescript';
+import Trigger from './trigger';
+import Action from './action';
 
-export interface SceneAttributes {
-  id?: number;
+@Table({
+  tableName: 'scene',
+  underscored: true
+})
+export default class Scene extends Model<Scene> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
-  actions: JSON;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface SceneInstance extends Sequelize.Instance<SceneAttributes>, SceneAttributes {};
+  @Column
+  description: string;
 
-export const SceneFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<SceneInstance, SceneAttributes> => {
-  const attributes: SequelizeAttributes<SceneAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
-    actions: {
-      type: DataTypes.JSON
-    }
-  };
+  @ForeignKey(() => Trigger)
+  @Column(DataType.INTEGER)
+  trigger_id: number;
 
-  const scene = sequelize.define<SceneInstance, SceneAttributes>('scene', attributes);
+  @BelongsTo(() => Trigger)
+  trigger: Trigger[];
 
-  scene.associate = models => {
-    scene.hasMany(models.trigger);
-  };
+  @HasMany(() => Action)
+  action: Action[];
 
-  return scene;
-};
+}

@@ -1,28 +1,21 @@
-// src/models/Script.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull } from 'sequelize-typescript';
 
-export interface ScriptAttributes {
-  id?: number;
+@Table({
+  tableName: 'script',
+  underscored: true
+})
+export default class Script extends Model<Script> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
-  code: JSON;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface ScriptInstance extends Sequelize.Instance<ScriptAttributes>, ScriptAttributes {};
-
-export const ScriptFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<ScriptInstance, ScriptAttributes> => {
-  const attributes: SequelizeAttributes<ScriptAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
-    code: {
-      type: DataTypes.JSON
-    }
-  };
-
-  const script = sequelize.define<ScriptInstance, ScriptAttributes>('script', attributes);
-
-  return script;
-};
+  @Column(DataType.JSON)
+  code: any;
+}

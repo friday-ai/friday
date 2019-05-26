@@ -1,46 +1,48 @@
-// src/models/State.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, DataType, ForeignKey, IsUUID, AllowNull } from 'sequelize-typescript';
+import { State_owner } from '../utils/constants';
+import User from './user';
+import Satellite from './satellite';
+import Room from './room';
+import House from './house';
+import Device from './device';
+import Plugin from './plugin';
 
-export interface StateAttributes {
-  id?: number;
+@Table({
+  tableName: 'state',
+  underscored: true
+})
+export default class State extends Model<State> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
+
+  @AllowNull(false)
+  @Column
+  description: string;
+
+  @AllowNull(false)
+  @ForeignKey(() => User)
+  @ForeignKey(() => Room)
+  @ForeignKey(() => House)
+  @ForeignKey(() => Plugin)
+  @ForeignKey(() => Satellite)
+  @ForeignKey(() => Device)
+  @Column(DataType.INTEGER)
   owner: number;
-  owner_type: Enumerator;
+
+  @AllowNull(false)
+  @Column
+  owner_type: State_owner;
+
+  @AllowNull(false)
+  @Column
   value: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface StateInstance extends Sequelize.Instance<StateAttributes>, StateAttributes {};
-
-export const StateFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<StateInstance, StateAttributes> => {
-  const attributes: SequelizeAttributes<StateAttributes> = {
-    name: {
-      type: DataTypes.string
-    },
-    owner: {
-      type: DataTypes.number
-    },
-    owner_type: {
-        type: DataTypes.Enumerator
-    },
-    value: {
-        type: DataTypes.string
-    }
-  };
-
-  const state = sequelize.define<StateInstance, StateAttributes>('state', attributes);
-
-  state.associate = models => {
-    state.hasMany(models.house);
-    state.hasMany(models.user);
-    state.hasMany(models.device);
-    state.hasMany(models.plugin);
-    state.hasMany(models.house);
-    state.hasMany(models.room);
-    state.hasMany(models.satellite);
-  };
-
-  return state;
-};
+}

@@ -46,4 +46,7 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
-dist/
+# Database files
+friday-test.db
+friday-development.db
+friday.db

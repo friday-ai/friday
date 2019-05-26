@@ -1,4 +1,12 @@
-{
+{ 
+  "linterOptions": {
+  "exclude": [
+    "**/build/**",
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/coverage/**"
+  ]
+},
   "rules": {
     "align": [
       true,
@@ -24,7 +32,7 @@
     "label-position": true,
     "max-line-length": [
       true,
-      140
+      170
     ],
     "member-ordering": [
       true,

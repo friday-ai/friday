@@ -1,39 +1,39 @@
-// src/models/Plugin.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasMany, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
+import Satellite from './satellite';
+import Variable from './variable';
+import State from './state';
 
-export interface PluginAttributes {
-  id?: number;
+@Table({
+  tableName: 'plugin',
+  underscored: true
+})
+export default class Plugin extends Model<Plugin> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
+
+  @AllowNull(false)
+  @Column
   version: string;
-  state: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface PluginInstance extends Sequelize.Instance<PluginAttributes>, PluginAttributes {};
+  @AllowNull(false)
+  @ForeignKey(() => Satellite)
+  @Column(DataType.INTEGER)
+  satellite_id: number;
 
-export const PluginFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<PluginInstance, PluginAttributes> => {
-  const attributes: SequelizeAttributes<PluginAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
-    version: {
-      type: DataTypes.STRING
-    },
-    state: {
-        type: DataTypes.number
-    }
-  };
+  @BelongsTo(() => Satellite)
+  satellite: Satellite;
 
-  const plugin = sequelize.define<PluginInstance, PluginAttributes>('plugin', attributes);
+  @HasMany(() => Variable)
+  variable: Variable[];
 
-  plugin.associate = models => {
-    plugin.hasMany(models.device);
-    plugin.hasMany(models.variable);
-    plugin.belongsTo(models.state, { as: 'state', foreignKey: 'id' });
-    // Gérer satellite
-  };
-
-  return plugin;
-};
+  @HasOne(() => State)
+  state: State;
+}

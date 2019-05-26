@@ -1,40 +1,34 @@
-// src/models/trigger.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, HasMany, DataType, IsUUID, AllowNull } from 'sequelize-typescript';
+import Scene from './scene';
 
-export interface TriggerAttributes {
-  id?: number;
+@Table({
+  tableName: 'trigger',
+  underscored: true
+})
+export default class Trigger extends Model<Trigger> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
+
+  @Column
+  description: string;
+
+  @AllowNull(false)
+  @Column
   type: string;
-  rules: number;
-  scene_to_execute: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface TriggerInstance extends Sequelize.Instance<TriggerAttributes>, TriggerAttributes {};
+  @AllowNull(false)
+  @Column(DataType.JSON)
+  rules: any;
 
-export const TriggerFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<TriggerInstance, TriggerAttributes> => {
-  const attributes: SequelizeAttributes<TriggerAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
-    type: {
-      type: DataTypes.number
-    },
-    rules: {
-      type: DataTypes.number
-    },
-    scene_to_execute: {
-        type: DataTypes.number
-    }
-  };
+  @HasMany(() => Scene)
+  scene: Scene[];
 
-  const trigger = sequelize.define<TriggerInstance, TriggerAttributes>('trigger', attributes);
-
-  trigger.associate = models => {
-    trigger.belongsTo(models.scene_to_execute, { as: 'scene', foreignKey: 'id' });
-  };
-
-  return trigger;
-};
+}

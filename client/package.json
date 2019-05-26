@@ -10,7 +10,9 @@
     "build": "preact build",
     "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"preact build && preact serve ./build\"",
     "dev": "concurrently -k -n \"Preact\" -c \"magenta\" \"preact watch -p 1444\"",
-    "test": "concurrently -k -n \"Jest\" -c \"red\" \"jest --coverage\""
+    "test": "concurrently -k -n \"Jest\" -c \"red\" \"jest --coverage\"",
+    "lint": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force -t stylish -p tsconfig.json -c ../tslint.json\"",
+    "lint:fix": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force --fix -t stylish -p tsconfig.json -c ../tslint.json\""
   },
   "dependencies": {
     "@types/sequelize": "^4.28.1",

@@ -1,38 +1,37 @@
-// src/models/Variable.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, DataType, ForeignKey, IsUUID, AllowNull } from 'sequelize-typescript';
+import { Variable_owner } from '../utils/constants';
+import User from './user';
+import Plugin from './plugin';
+import Satellite from './satellite';
 
-export interface VariableAttributes {
-  id?: number;
+@Table({
+  tableName: 'variable',
+  underscored: true
+})
+export default class Variable extends Model<Variable> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   key: string;
+
+  @AllowNull(false)
+  @Column
   value: string;
-  ownerType: Enumerator;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface VariableInstance extends Sequelize.Instance<VariableAttributes>, VariableAttributes {};
+  @AllowNull(false)
+  @ForeignKey(() => User)
+  @ForeignKey(() => Plugin)
+  @ForeignKey(() => Satellite)
+  @Column(DataType.INTEGER)
+  owner: number;
 
-export const VariableFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<VariableInstance, VariableAttributes> => {
-  const attributes: SequelizeAttributes<VariableAttributes> = {
-    key: {
-      type: DataTypes.STRING
-    },
-    value: {
-      type: DataTypes.STRING
-    },
-    ownerType: {
-        type: DataTypes.Enumerator
-    }
-  };
-
-  const variable = sequelize.define<VariableInstance, VariableAttributes>('variable', attributes);
-
-  variable.associate = models => {
-    variable.hasMany(models.user);
-    variable.hasMany(models.plugin);
-    variable.hasMany(models.satellite);
-  };
-
-  return variable;
-};
+  @AllowNull(false)
+  @Column
+  ownerType: Variable_owner;
+}

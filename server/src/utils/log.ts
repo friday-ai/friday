@@ -7,7 +7,7 @@ export default class Log {
   }
 
   title (text: string) {
-    console.log('\n---\n\n\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase())
+    console.log('\n---\n\n\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase());
   }
 
   info (text: string) {

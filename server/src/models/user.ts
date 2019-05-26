@@ -1,57 +1,57 @@
-// src/models/User.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, HasMany, DataType, HasOne, IsDate, IsUUID, Default, AllowNull, Unique, IsEmail, NotEmpty } from 'sequelize-typescript';
+import Variable from './variable';
+import { User_role, Available_languages } from '../utils/constants';
+import State from './state';
 
-export interface UserAttributes {
-  id?: number;
+@Table({
+  tableName: 'user',
+  underscored: true
+})
+export default class User extends Model<User> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
+
+  @AllowNull(false)
+  @Unique
+  @IsEmail
+  @Column
   first_name: string;
+
+  @AllowNull(false)
+  @Column
   email: string;
+
+  @AllowNull(false)
+  @IsDate
+  @Column
   date_of_birth: Date;
+
+  @AllowNull(false)
+  @NotEmpty
+  @Column
   password_hash: string;
-  role: string;
-  state: number;
-  language: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface UserInstance extends Sequelize.Instance<UserAttributes>, UserAttributes {};
+  @AllowNull(false)
+  @Default('habitant')
+  @Column
+  role: User_role;
 
-export const UserFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<UserInstance, UserAttributes> => {
-  const attributes: SequelizeAttributes<UserAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
-    first_name: {
-      type: DataTypes.STRING
-    },
-    email: {
-        type: DataTypes.Enumerator
-    },
-    date_of_birth: {
-        type: DataTypes.Date
-    },
-    password_hash: {
-        type: DataTypes.STRING
-    },
-    role: {
-        type: DataTypes.STRING
-    },
-    language: {
-        type: DataTypes.STRING
-    },
-    state: {
-        type: DataTypes.number
-    }
-  };
+  @AllowNull(false)
+  @Column
+  language: Available_languages;
 
-  const user = sequelize.define<UserInstance, UserAttributes>('user', attributes);
+  @HasMany(() => Variable)
+  variable: Variable[];
 
-  user.associate = models => {
-    user.hasMany(models.variable);
-    user.belongsTo(models.state, { as: 'state', foreignKey: 'id' });
-  };
+  @HasOne(() => State)
+  state: State;
 
-  return user;
-};
+}

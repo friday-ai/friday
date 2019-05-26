@@ -1,6 +1,5 @@
 import {Request, Response} from 'express';
 import express from 'express';
-import log from './utils/log';
 import Log from './utils/log';
 
 export default class Server {

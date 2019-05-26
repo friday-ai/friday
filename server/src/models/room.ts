@@ -1,39 +1,40 @@
-// src/models/Room.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasMany, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
+import House from './house';
+import Satellite from './satellite';
+import Device from './device';
+import State from './state';
 
-export interface RoomAttributes {
-  id?: number;
+@Table({
+  tableName: 'room',
+  underscored: true
+})
+export default class Room extends Model<Room> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
-  house: number;
-  state: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface RoomInstance extends Sequelize.Instance<RoomAttributes>, RoomAttributes {};
+  @AllowNull(false)
+  @ForeignKey(() => House)
+  @Column(DataType.INTEGER)
+  house_id: number;
 
-export const RoomFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<RoomInstance, RoomAttributes> => {
-  const attributes: SequelizeAttributes<RoomAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
-    room: {
-      type: DataTypes.number
-    },
-    state: {
-      type: DataTypes.number
-    }
-  };
+  @BelongsTo(() => House)
+  house: House;
 
-  const room = sequelize.define<RoomInstance, RoomAttributes>('room', attributes);
+  @HasMany(() => Device)
+  device: Device[];
 
-  room.associate = models => {
-    room.hasMany(models.variable);
-    room.belongsTo(models.state, { as: 'state', foreignKey: 'state' });
-    room.belongsTo(models.house, { as: 'house', foreignKey: 'id' });
-    // Gérer Room
-  };
+  @HasMany(() => Satellite)
+  satellite: Satellite[];
 
-  return room;
-};
+  @HasOne(() => State)
+  state: State;
+
+}

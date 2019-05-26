@@ -1,53 +1,60 @@
-// src/models/Device.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
+import Plugin from './plugin';
+import Room from './room';
+import { Available_type_of_device, Available_sub_type_of_device } from '../utils/constants';
+import State from './state';
 
-export interface DeviceAttributes {
-  id?: number;
+@Table({
+  tableName: 'device',
+  underscored: true
+})
+export default class Device extends Model<Device> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
-  type: Enumerator;
-  subtype: Enumerator;
-  variable: JSON | null;
+
+  @AllowNull(false)
+  @Column
+  type: Available_type_of_device;
+
+  @AllowNull(false)
+  @Column
+  sub_type: Available_sub_type_of_device;
+
+  @Column(DataType.JSON)
+  variable: any;
+
+  @Column
+  variable_value: string;
+
+  @Column
   unit: string;
-  plugin: number;
-  room: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface DeviceInstance extends Sequelize.Instance<DeviceAttributes>, DeviceAttributes {};
+  @Column
+  value: string;
 
-export const DeviceFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<DeviceInstance, DeviceAttributes> => {
-  const attributes: SequelizeAttributes<DeviceAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
-    type: {
-      type: DataTypes.Enumerator
-    },
-    subtype: {
-      type: DataTypes.Enumerator
-    },
-    variable: {
-      type: DataTypes.JSON
-    },
-    unit: {
-      type: DataTypes.STRING
-    },
-    number: {
-      type: DataTypes.number
-    },
-    room: {
-      type: DataTypes.number
-    }
-  };
+  @ForeignKey(() => Room)
+  @Column(DataType.INTEGER)
+  room_id: number;
 
-  const device = sequelize.define<DeviceInstance, DeviceAttributes>('device', attributes);
+  @BelongsTo(() => Room)
+  room: Room;
 
-  device.associate = models => {
-    device.belongsTo(models.plugin, { as: 'plugin', foreignKey: 'id' });
-    device.belongsTo(models.room, { as: 'room', foreignKey: 'id' });
-  };
+  @ForeignKey(() => Plugin)
+  @Column(DataType.INTEGER)
+  plugin_id: number;
 
-  return device;
-};
+  @BelongsTo(() => Plugin)
+  plugin: Plugin;
+
+  @HasOne(() => State)
+  state: State;
+
+}

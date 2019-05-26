@@ -1,38 +1,35 @@
-// src/models/Satellite.ts
-import * as Sequelize from 'sequelize';
-import { SequelizeAttributes } from 'typings/SequelizeAttributes';
+import { Table, Column, Model, PrimaryKey, BelongsTo, HasMany, ForeignKey, DataType, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
+import Room from './room';
+import Variable from './variable';
+import State from './state';
 
-export interface SatelliteAttributes {
-  id?: number;
+@Table({
+  tableName: 'satellite',
+  underscored: true
+})
+export default class Satellite extends Model<Satellite> {
+
+  @IsUUID(4)
+  @AllowNull(false)
+  @PrimaryKey
+  @Column({type: DataType.INTEGER})
+  id: number;
+
+  @AllowNull(false)
+  @Column
   name: string;
-  room: number;
-  state: number;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
 
-export interface SatelliteInstance extends Sequelize.Instance<SatelliteAttributes>, SatelliteAttributes {};
+  @AllowNull(false)
+  @ForeignKey(() => Room)
+  @Column(DataType.INTEGER)
+  room_id: number;
 
-export const SatelliteFactory = (sequelize: Sequelize.Sequelize, DataTypes: Sequelize.DataTypes): Sequelize.Model<SatelliteInstance, SatelliteAttributes> => {
-  const attributes: SequelizeAttributes<SatelliteAttributes> = {
-    name: {
-      type: DataTypes.STRING
-    },
-    room: {
-      type: DataTypes.number
-    },
-    state: {
-      type: DataTypes.number
-    }
-  };
+  @BelongsTo(() => Room)
+  room: Room;
 
-  const satellite = sequelize.define<SatelliteInstance, SatelliteAttributes>('satellite', attributes);
+  @HasMany(() => Variable)
+  variable: Variable[];
 
-  satellite.associate = models => {
-    satellite.hasMany(models.variable);
-    satellite.belongsTo(models.state, { as: 'state', foreignKey: 'state' });
-    satellite.belongsTo(models.room, { as: 'room', foreignKey: 'id' });
-  };
-
-  return satellite;
-};
+  @HasOne(() => State)
+  state: State;
+}

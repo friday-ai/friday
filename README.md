@@ -11,4 +11,11 @@ npm run start:dev
 
 # run tests with jest
 npm run test
+
+# run linter
+npm i -g typescript tslint
+npm run lint
+
+# fix linting errors 
+npm run lint:fix
 ```
