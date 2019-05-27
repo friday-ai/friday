@@ -12,46 +12,46 @@ export default class User extends Model<User> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @AllowNull(false)
   @Unique
   @IsEmail
   @Column
-  first_name: string;
+  first_name!: string;
 
   @AllowNull(false)
   @Column
-  email: string;
+  email!: string;
 
   @AllowNull(false)
   @IsDate
   @Column
-  date_of_birth: Date;
+  date_of_birth!: Date;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-  password_hash: string;
+  password_hash!: string;
 
   @AllowNull(false)
   @Default('habitant')
   @Column
-  role: User_role;
+  role!: User_role;
 
   @AllowNull(false)
   @Column
-  language: Available_languages;
+  language!: Available_languages;
 
   @HasMany(() => Variable)
-  variable: Variable[];
+  variable?: Variable[];
 
   @HasOne(() => State)
-  state: State;
+  state?: State;
 
 }
