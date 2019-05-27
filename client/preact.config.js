@@ -1,6 +1,6 @@
 import { resolve } from "path";
 
-export default function(config, env, helpers) {
+export default function (config, env, helpers) {
     // Switch css-loader for typings-for-css-modules-loader, which is a wrapper
     // that automatically generates .d.ts files for loaded CSS
     helpers.getLoadersByName(config, "css-loader").forEach(({ loader }) => {
@@ -12,6 +12,11 @@ export default function(config, env, helpers) {
             namedExport: true,
             silent: true
         });
+    });
+
+    config.module.loaders.push({
+        test: /\.[tj]sx?$/,
+        loader: "ts-loader"
     });
 
     // Use any `index` file, not just index.js
