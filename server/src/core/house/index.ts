@@ -4,6 +4,7 @@ import destroy from './house.destroy';
 import get from './house.get';
 import getHouse from './house.getHouse';
 import getRooms from './house.getRooms';
+import getState from './house.getState';
 
 export default class House {
     create = create;
@@ -12,4 +13,5 @@ export default class House {
     get = get;
     getHouse = getHouse;
     getRooms = getRooms;
+    getState = getState;
 }

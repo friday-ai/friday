@@ -4,6 +4,7 @@ import destroy from './room.destroy';
 import get from './room.get';
 import getDevices from './room.getDevices';
 import getSatellites from './room.getSatellites';
+import getState from './room.getState';
 
 export default class Room {
     create = create;
@@ -12,4 +13,5 @@ export default class Room {
     get = get;
     getDevice = getDevices;
     getSatellites = getSatellites;
+    getState = getState;
 }
