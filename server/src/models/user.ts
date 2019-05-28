@@ -12,27 +12,27 @@ export default class User extends Model<User> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({ type: DataType.INTEGER })
-  id!: number;
+  @Column({ type: DataType.UUIDV4 })
+  id!: string;
 
   @AllowNull(false)
   @Column
   name!: string;
 
   @AllowNull(false)
-  @Unique
-  @IsEmail
   @Column
   first_name!: string;
 
   @AllowNull(false)
+  @Unique
+  @IsEmail
   @Column
   email!: string;
 
   @AllowNull(false)
   @IsDate
   @Column
-  date_of_birth!: Date;
+  birth_date !: Date;
 
   @AllowNull(false)
   @NotEmpty
@@ -40,12 +40,12 @@ export default class User extends Model<User> {
   password_hash!: string;
 
   @AllowNull(false)
-  @Default('habitant')
-  @Column
+  @Default(User_role.HABITANT)
+  @Column({ type: DataType.ENUM() })
   role!: User_role;
 
   @AllowNull(false)
-  @Column
+  @Column({ type: DataType.ENUM })
   language!: Available_languages;
 
   @HasMany(() => Variable)
