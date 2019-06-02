@@ -2,7 +2,7 @@ import Room from '../../models/room';
 import Log from '../../utils/log';
 const logger = new Log();
 
-export default async function get(): Promise<Room[]> {
+export default async function getAll(): Promise<Room[]> {
   try {
     const rooms = await Room.findAll();
     return rooms;
