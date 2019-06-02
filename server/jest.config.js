@@ -1,4 +1,7 @@
 module.exports = {
+	setupFilesAfterEnv: [
+		"<rootDir>/test/setup.ts"
+	  ],
 	globals: {
 		'ts-jest': {
 			tsConfig: 'tsconfig.json'
@@ -8,7 +11,7 @@ module.exports = {
 		"^.+\\.tsx?$": "ts-jest"
 	},
 	testRegex: [
-		"/test/.*\\.(ts|tsx|js)$"
+		"/test/.*test\\.(ts|tsx|js)$"
 	],
 	moduleNameMapper: {
 		"\\.(css|less|scss|sass|svg|png|jpg|jpeg|ttf|woff|woff2)$": "identity-obj-proxy",
@@ -25,5 +28,6 @@ module.exports = {
 		"jsx",
 		"json",
 		"node"
-	]
+	],
+	testPathIgnorePatterns : ["<rootDir>/dist/", "<rootDir>/node_modules/"]
 }

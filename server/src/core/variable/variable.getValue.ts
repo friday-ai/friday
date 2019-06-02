@@ -5,12 +5,17 @@ const logger = new Log();
 export default async function getVariable(variable: Variable): Promise<Variable> {
     try {
         const thisVariable = await Variable.findOne({
-            where: { 
+            where: {
                 key: variable.key,
                 ownerType: variable.ownerType
             }
         });
-        return thisVariable.value;
+
+        if (thisVariable === null) {
+            throw logger.error('Variable not found');
+        }
+
+        return thisVariable;
     } catch (e) {
         throw logger.error(e);
     }

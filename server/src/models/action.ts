@@ -10,36 +10,36 @@ export default class Action extends Model<Action> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @AllowNull(false)
   @Column
-  description: string;
+  description!: string;
 
   @AllowNull(false)
   @Column
-  type: string;
+  type!: string;
 
   @AllowNull(false)
   @Column
-  sub_type: string;
+  sub_type!: string;
 
   @Column
-  variable_key: string;
+  variable_key!: string;
 
   @Column
-  variable_value: string;
+  variable_value!: string;
 
   @ForeignKey(() => Scene)
   @Column(DataType.INTEGER)
-  scene_id: number;
+  scene_id!: number;
 
   @BelongsTo(() => Scene)
-  scene: Scene;
+  scene!: Scene;
 
 }

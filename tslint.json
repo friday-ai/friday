@@ -25,7 +25,8 @@
     "forin": true,
     "indent": [
       true,
-      "spaces"
+      "spaces",
+      2
     ],
     "interface-name": false,
     "jsdoc-format": true,

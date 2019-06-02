@@ -7,7 +7,7 @@ const logger = new Log();
 
 export default async function getSatellites(room: Room): Promise<Satellite[]> {
     try {
-        const thisRoom = await getRoom(room);
+        const thisRoom = await getRoom(room.id);
         return thisRoom.satellite;
     } catch (e) {
         throw logger.error(e);

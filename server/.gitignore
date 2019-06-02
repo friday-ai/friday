@@ -48,5 +48,11 @@ jspm_packages
 
 # Database files
 friday-test.db
+friday-test.db-journal
 friday-development.db
+friday-development.db-journal
 friday.db
+friday.db-journal
+
+# Package lock
+package-lock.json

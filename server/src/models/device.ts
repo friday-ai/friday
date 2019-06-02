@@ -13,48 +13,48 @@ export default class Device extends Model<Device> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @AllowNull(false)
   @Column
-  type: Available_type_of_device;
+  type!: Available_type_of_device;
 
   @AllowNull(false)
   @Column
-  sub_type: Available_sub_type_of_device;
+  sub_type!: Available_sub_type_of_device;
 
   @Column(DataType.JSON)
   variable: any;
 
   @Column
-  variable_value: string;
+  variable_value!: string;
 
   @Column
-  unit: string;
+  unit!: string;
 
   @Column
-  value: string;
+  value!: string;
 
   @ForeignKey(() => Room)
   @Column(DataType.INTEGER)
-  room_id: number;
+  room_id!: number;
 
   @BelongsTo(() => Room)
-  room: Room;
+  room!: Room;
 
   @ForeignKey(() => Plugin)
   @Column(DataType.INTEGER)
-  plugin_id: number;
+  plugin_id!: number;
 
   @BelongsTo(() => Plugin)
-  plugin: Plugin;
+  plugin!: Plugin;
 
   @HasOne(() => State)
-  state: State;
+  state!: State;
 
 }

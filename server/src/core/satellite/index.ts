@@ -7,7 +7,7 @@ import getRoom from './satellite.getRoom';
 import getVariable from './satellite.getVariable';
 import getState from './satellite.getState';
 
-export default class satellite {
+export default class Satellite {
     create = create;
     update = update;
     destoy = destroy;

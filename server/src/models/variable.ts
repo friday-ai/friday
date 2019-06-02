@@ -13,25 +13,25 @@ export default class Variable extends Model<Variable> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  key: string;
+  key!: string;
 
   @AllowNull(false)
   @Column
-  value: string;
+  value!: string;
 
   @AllowNull(false)
   @ForeignKey(() => User)
   @ForeignKey(() => Plugin)
   @ForeignKey(() => Satellite)
   @Column(DataType.INTEGER)
-  owner: number;
+  owner!: number;
 
   @AllowNull(false)
   @Column
-  ownerType: Variable_owner;
+  ownerType!: Variable_owner;
 }

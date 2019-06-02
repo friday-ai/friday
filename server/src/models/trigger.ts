@@ -10,25 +10,25 @@ export default class Trigger extends Model<Trigger> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @Column
-  description: string;
+  description!: string;
 
   @AllowNull(false)
   @Column
-  type: string;
+  type!: string;
 
   @AllowNull(false)
   @Column(DataType.JSON)
   rules: any;
 
   @HasMany(() => Scene)
-  scene: Scene[];
+  scene!: Scene[];
 
 }

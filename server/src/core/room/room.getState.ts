@@ -7,7 +7,7 @@ const logger = new Log();
 
 export default async function getState(room: Room): Promise<State> {
     try {
-        const thisRoom = await getRoom(room);
+        const thisRoom = await getRoom(room.id);
         return thisRoom.state;
     } catch (e) {
         throw logger.error(e);

@@ -13,28 +13,28 @@ export default class Room extends Model<Room> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: string;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @AllowNull(false)
   @ForeignKey(() => House)
   @Column(DataType.INTEGER)
-  house_id: number;
+  house_id!: number;
 
   @BelongsTo(() => House)
-  house: House;
+  house!: House;
 
   @HasMany(() => Device)
-  device: Device[];
+  device!: Device[];
 
   @HasMany(() => Satellite)
-  satellite: Satellite[];
+  satellite!: Satellite[];
 
   @HasOne(() => State)
-  state: State;
+  state!: State;
 
 }

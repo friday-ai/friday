@@ -11,24 +11,24 @@ export default class Scene extends Model<Scene> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @Column
-  description: string;
+  description!: string;
 
   @ForeignKey(() => Trigger)
   @Column(DataType.INTEGER)
-  trigger_id: number;
+  trigger_id!: number;
 
   @BelongsTo(() => Trigger)
-  trigger: Trigger[];
+  trigger!: Trigger[];
 
   @HasMany(() => Action)
-  action: Action[];
+  action!: Action[];
 
 }

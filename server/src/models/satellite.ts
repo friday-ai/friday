@@ -12,24 +12,24 @@ export default class Satellite extends Model<Satellite> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: string;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @AllowNull(false)
   @ForeignKey(() => Room)
   @Column(DataType.INTEGER)
-  room_id: number;
+  room_id!: number;
 
   @BelongsTo(() => Room)
-  room: Room;
+  room!: Room;
 
   @HasMany(() => Variable)
-  variable: Variable[];
+  variable!: Variable[];
 
   @HasOne(() => State)
-  state: State;
+  state!: State;
 }

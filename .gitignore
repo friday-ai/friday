@@ -47,3 +47,6 @@ jspm_packages
 .yarn-integrity
 
 dist/
+
+# Package lock
+package-lock.json

@@ -9,12 +9,12 @@ export default class Script extends Model<Script> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @Column(DataType.JSON)
   code: any;

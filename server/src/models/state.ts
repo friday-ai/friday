@@ -16,16 +16,16 @@ export default class State extends Model<State> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @AllowNull(false)
   @Column
-  description: string;
+  description!: string;
 
   @AllowNull(false)
   @ForeignKey(() => User)
@@ -35,14 +35,14 @@ export default class State extends Model<State> {
   @ForeignKey(() => Satellite)
   @ForeignKey(() => Device)
   @Column(DataType.INTEGER)
-  owner: number;
+  owner!: number;
 
   @AllowNull(false)
   @Column
-  owner_type: State_owner;
+  owner_type!: State_owner;
 
   @AllowNull(false)
   @Column
-  value: string;
+  value!: string;
 
 }

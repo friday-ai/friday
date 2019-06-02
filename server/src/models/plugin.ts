@@ -12,28 +12,28 @@ export default class Plugin extends Model<Plugin> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Column({ type: DataType.INTEGER })
+  id!: number;
 
   @AllowNull(false)
   @Column
-  name: string;
+  name!: string;
 
   @AllowNull(false)
   @Column
-  version: string;
+  version!: string;
 
   @AllowNull(false)
   @ForeignKey(() => Satellite)
   @Column(DataType.INTEGER)
-  satellite_id: number;
+  satellite_id!: number;
 
   @BelongsTo(() => Satellite)
-  satellite: Satellite;
+  satellite!: Satellite;
 
   @HasMany(() => Variable)
-  variable: Variable[];
+  variable!: Variable[];
 
   @HasOne(() => State)
-  state: State;
+  state!: State;
 }

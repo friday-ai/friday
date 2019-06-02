@@ -4,7 +4,7 @@ const logger = new Log();
 
 export default async function update(room: Room): Promise<Room> {
     try {
-        const roomToUpdate = await room.findByPk(room.id);
+        const roomToUpdate = await Room.findByPk(room.id);
 
         if (roomToUpdate === null) {
             throw logger.error('Room not found');

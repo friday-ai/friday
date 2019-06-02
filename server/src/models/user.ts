@@ -1,8 +1,19 @@
-import { Table, Column, Model, PrimaryKey, HasMany, DataType, HasOne, IsDate, IsUUID, Default, AllowNull, Unique, IsEmail, NotEmpty } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, HasMany, DataType, HasOne, IsDate, IsUUID,
+  Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate } from 'sequelize-typescript';
+
 import Variable from './variable';
 import { User_role, Available_languages } from '../utils/constants';
 import State from './state';
-
+import { hash } from '../../src/utils/password';
+@DefaultScope({
+  attributes: ['id', 'name', 'first_name', 'email', 'birth_date', 'role', 'language'],
+  include: [
+    {
+      as: 'state',
+      model: () => State
+    }
+  ]
+})
 @Table({
   tableName: 'user',
   underscored: true
@@ -12,10 +23,12 @@ export default class User extends Model<User> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
+  @Unique
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 
   @AllowNull(false)
+  @NotEmpty
   @Column
   name!: string;
 
@@ -26,26 +39,29 @@ export default class User extends Model<User> {
   @AllowNull(false)
   @Unique
   @IsEmail
+  @NotEmpty
   @Column
   email!: string;
 
   @AllowNull(false)
-  @IsDate
-  @Column
-  birth_date !: Date;
-
-  @AllowNull(false)
+  @Length({ min: 10 })
   @NotEmpty
   @Column
-  password_hash!: string;
+  password!: string;
+
+  @AllowNull(true)
+  @IsDate
+  @Column({ type: DataType.DATEONLY })
+  birth_date!: Date;
 
   @AllowNull(false)
   @Default(User_role.HABITANT)
-  @Column({ type: DataType.ENUM() })
+  @Column
   role!: User_role;
 
   @AllowNull(false)
-  @Column({ type: DataType.ENUM })
+  @Default(Available_languages.EN)
+  @Column
   language!: Available_languages;
 
   @HasMany(() => Variable)
@@ -54,4 +70,8 @@ export default class User extends Model<User> {
   @HasOne(() => State)
   state?: State;
 
+  @BeforeCreate
+  static async HassPassword(user: User) {
+    user.password = await hash(user.password!);
+  }
 }

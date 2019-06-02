@@ -2,9 +2,15 @@ import Room from '../../models/room';
 import Log from '../../utils/log';
 const logger = new Log();
 
-export default async function getRoom(room: Room): Promise<Room> {
+export default async function getRoom(id: string): Promise<Room> {
     try {
-        return await Room.findByPk(room.id);
+        const room = await Room.findByPk(id);
+
+        if (room === null) {
+            throw logger.error('Room not found');
+        }
+
+        return room;
     } catch (e) {
         throw logger.error(e);
     }
