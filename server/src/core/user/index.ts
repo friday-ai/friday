@@ -1,11 +1,11 @@
 import create from './user.create';
 import update from './user.update';
 import destroy from './user.destroy';
-import get from './user.get';
+import getAll from './user.getAll';
 
 export default class User {
     create = create;
     update = update;
     destoy = destroy;
-    get = get;
+    getAll = getAll;
 }
