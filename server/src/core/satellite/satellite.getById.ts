@@ -2,7 +2,7 @@ import Satellite from '../../models/satellite';
 import Log from '../../utils/log';
 const logger = new Log();
 
-export default async function getSatellite(id: string): Promise<Satellite> {
+export default async function getById(id: string): Promise<Satellite> {
   try {
     const satellite = await Satellite.findByPk(id);
 

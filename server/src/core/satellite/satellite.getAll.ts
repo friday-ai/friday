@@ -2,7 +2,7 @@ import Satellite from '../../models/satellite';
 import Log from '../../utils/log';
 const logger = new Log();
 
-export default async function get(): Promise<Satellite[]> {
+export default async function getAll(): Promise<Satellite[]> {
   try {
     const satellites = await Satellite.findAll();
     return satellites;

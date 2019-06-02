@@ -1,8 +1,8 @@
 import create from './satellite.create';
 import update from './satellite.update';
 import destroy from './satellite.destroy';
-import get from './satellite.get';
-import getSatellites from './satellite.getSatellites';
+import getAll from './satellite.getAll';
+import getById from './satellite.getById';
 import getRoom from './satellite.getRoom';
 import getVariable from './satellite.getVariable';
 import getState from './satellite.getState';
@@ -11,9 +11,9 @@ export default class Satellite {
   create = create;
   update = update;
   destoy = destroy;
-  get = get;
+  getAll = getAll;
   getRoom = getRoom;
   getVariable = getVariable;
-  getSatellites = getSatellites;
+  getById = getById;
   getState = getState;
 }
