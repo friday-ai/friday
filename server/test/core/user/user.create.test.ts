@@ -27,9 +27,9 @@ describe('user.create', () => {
       password: 'mysuperpassword',
       birth_date: new Date(1996, 12, 20)
     })
-    .catch((err) => {
-      expect(`${err}`).toContain('Validation error');
-    });
+      .catch((err) => {
+        expect(`${err}`).toContain('Validation error');
+      });
 
 
   });
@@ -44,9 +44,9 @@ describe('user.create', () => {
       password: 'mysuperpassword',
       birth_date: new Date(1996, 12, 20)
     })
-    .catch((err) => {
-      expect(`${err}`).toContain('Validation isEmail on email failed');
-    });
+      .catch((err) => {
+        expect(`${err}`).toContain('Validation isEmail on email failed');
+      });
 
   });
 
@@ -60,9 +60,9 @@ describe('user.create', () => {
       password: 'test',
       birth_date: new Date(1996, 12, 20)
     })
-    .catch((err) => {
-      expect(`${err}`).toContain('Validation error');
-    });
+      .catch((err) => {
+        expect(`${err}`).toContain('Validation error');
+      });
 
   });
 });

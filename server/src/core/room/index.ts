@@ -8,12 +8,12 @@ import getSatellites from './room.getSatellites';
 import getState from './room.getState';
 
 export default class Room {
-    create = create;
-    update = update;
-    destoy = destroy;
-    get = get;
-    getRoom = getRoom;
-    getDevice = getDevices;
-    getSatellites = getSatellites;
-    getState = getState;
+  create = create;
+  update = update;
+  destoy = destroy;
+  get = get;
+  getRoom = getRoom;
+  getDevice = getDevices;
+  getSatellites = getSatellites;
+  getState = getState;
 }

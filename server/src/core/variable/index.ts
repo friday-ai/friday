@@ -5,9 +5,9 @@ import get from './variable.get';
 import getValue from './variable.getValue';
 
 export default class Variable {
-    create = create;
-    update = update;
-    destoy = destroy;
-    get = get;
-    getValue = getValue;
+  create = create;
+  update = update;
+  destoy = destroy;
+  get = get;
+  getValue = getValue;
 }

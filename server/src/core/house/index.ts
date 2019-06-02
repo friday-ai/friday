@@ -7,11 +7,11 @@ import getRooms from './house.getRooms';
 import getState from './house.getState';
 
 export default class House {
-    create = create;
-    update = update;
-    destoy = destroy;
-    get = get;
-    getHouse = getHouse;
-    getRooms = getRooms;
-    getState = getState;
+  create = create;
+  update = update;
+  destoy = destroy;
+  get = get;
+  getHouse = getHouse;
+  getRooms = getRooms;
+  getState = getState;
 }

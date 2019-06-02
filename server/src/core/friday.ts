@@ -6,10 +6,10 @@ import Variable from './variable';
 import * as Constants from '../utils/constants';
 
 export {
-    House,
-    Room,
-    Satellite,
-    User,
-    Variable,
-    Constants
+  House,
+  Room,
+  Satellite,
+  User,
+  Variable,
+  Constants
 };

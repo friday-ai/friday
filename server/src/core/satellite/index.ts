@@ -8,12 +8,12 @@ import getVariable from './satellite.getVariable';
 import getState from './satellite.getState';
 
 export default class Satellite {
-    create = create;
-    update = update;
-    destoy = destroy;
-    get = get;
-    getRoom = getRoom;
-    getVariable = getVariable;
-    getSatellites = getSatellites;
-    getState = getState;
+  create = create;
+  update = update;
+  destoy = destroy;
+  get = get;
+  getRoom = getRoom;
+  getVariable = getVariable;
+  getSatellites = getSatellites;
+  getState = getState;
 }

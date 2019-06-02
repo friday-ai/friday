@@ -4,30 +4,30 @@ import * as bodyParser from 'body-parser';
 import Log from './utils/log';
 
 export default class Server {
-    readonly port: number;
+  readonly port: number;
 
-    constructor(port: number) {
-        this.port = port;
-    }
+  constructor(port: number) {
+    this.port = port;
+  }
 
-    start() {
-        const app = express();
-        const logger = new Log();
+  start() {
+    const app = express();
+    const logger = new Log();
 
-        // middleware for parsing application/x-www-form-urlencoded
-        app.use(bodyParser.urlencoded({ extended: true }));
+    // middleware for parsing application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: true }));
 
-        // middleware for json body parsing
-        app.use(bodyParser.json());
+    // middleware for json body parsing
+    app.use(bodyParser.json());
 
-        app.get('/', function (req: Request, res: Response) {
-            res.sendStatus(200);
-            logger.info('This query gives nothing.. finally for the moment ;)');
-        });
+    app.get('/', function (req: Request, res: Response) {
+      res.sendStatus(200);
+      logger.info('This query gives nothing.. finally for the moment ;)');
+    });
 
-        app.listen(this.port, function () {
-            logger.title('Friday server initialized !');
-            logger.info(`Friday server is available at localhost:`);
-        });
-    }
+    app.listen(this.port, function () {
+      logger.title('Friday server initialized !');
+      logger.info(`Friday server is available at localhost:`);
+    });
+  }
 }

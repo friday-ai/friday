@@ -1,4 +1,4 @@
-import {Sequelize} from 'sequelize-typescript';
+import { Sequelize } from 'sequelize-typescript';
 
 export const production = new Sequelize({
   dialect: 'sqlite',

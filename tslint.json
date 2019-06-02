@@ -1,12 +1,12 @@
-{ 
+{
   "linterOptions": {
-  "exclude": [
-    "**/build/**",
-    "**/dist/**",
-    "**/node_modules/**",
-    "**/coverage/**"
-  ]
-},
+    "exclude": [
+      "**/build/**",
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/coverage/**"
+    ]
+  },
   "rules": {
     "align": [
       true,
