@@ -25,9 +25,9 @@ export default class Server {
       logger.info('This query gives nothing.. finally for the moment ;)');
     });
 
-    app.listen(this.port, function () {
+    app.listen(this.port, () => {
       logger.title('Friday server initialized !');
-      logger.info(`Friday server is available at localhost:`);
+      logger.info(`Friday server is available at localhost:${this.port}`);
     });
   }
 }
