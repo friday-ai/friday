@@ -2,7 +2,7 @@ import House from '../../models/house';
 import Log from '../../utils/log';
 const logger = new Log();
 
-export default async function getHouse(id: string): Promise<House> {
+export default async function getById(id: string): Promise<House> {
   try {
     const house = await House.findByPk(id);
 
