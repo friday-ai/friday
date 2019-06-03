@@ -29,6 +29,6 @@ export default class Scene extends Model<Scene> {
   trigger!: Trigger[];
 
   @HasMany(() => Action)
-  action!: Action[];
+  actions!: Action[];
 
 }

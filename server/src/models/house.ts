@@ -27,7 +27,7 @@ export default class House extends Model<House> {
   longitude!: string;
 
   @HasMany(() => Room)
-  room!: Room[];
+  rooms!: Room[];
 
   @HasOne(() => State)
   state!: State;

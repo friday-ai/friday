@@ -28,7 +28,7 @@ export default class Satellite extends Model<Satellite> {
   room!: Room;
 
   @HasMany(() => Variable)
-  variable!: Variable[];
+  variables!: Variable[];
 
   @HasOne(() => State)
   state!: State;

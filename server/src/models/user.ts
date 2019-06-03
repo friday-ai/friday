@@ -65,7 +65,7 @@ export default class User extends Model<User> {
   language!: Available_languages;
 
   @HasMany(() => Variable)
-  variable?: Variable[];
+  variables?: Variable[];
 
   @HasOne(() => State)
   state?: State;

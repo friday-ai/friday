@@ -32,7 +32,7 @@ export default class Plugin extends Model<Plugin> {
   satellite!: Satellite;
 
   @HasMany(() => Variable)
-  variable!: Variable[];
+  variables!: Variable[];
 
   @HasOne(() => State)
   state!: State;

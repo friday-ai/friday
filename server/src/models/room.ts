@@ -29,10 +29,10 @@ export default class Room extends Model<Room> {
   house!: House;
 
   @HasMany(() => Device)
-  device!: Device[];
+  devices!: Device[];
 
   @HasMany(() => Satellite)
-  satellite!: Satellite[];
+  satellites!: Satellite[];
 
   @HasOne(() => State)
   state!: State;

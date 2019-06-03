@@ -29,6 +29,6 @@ export default class Trigger extends Model<Trigger> {
   rules: any;
 
   @HasMany(() => Scene)
-  scene!: Scene[];
+  scenes!: Scene[];
 
 }

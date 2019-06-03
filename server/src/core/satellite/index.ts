@@ -4,7 +4,7 @@ import destroy from './satellite.destroy';
 import getAll from './satellite.getAll';
 import getById from './satellite.getById';
 import getRoom from './satellite.getRoom';
-import getVariable from './satellite.getVariable';
+import getVariables from './satellite.getVariables';
 import getState from './satellite.getState';
 
 export default class Satellite {
@@ -13,7 +13,7 @@ export default class Satellite {
   destoy = destroy;
   getAll = getAll;
   getRoom = getRoom;
-  getVariable = getVariable;
+  getVariables = getVariables;
   getById = getById;
   getState = getState;
 }
