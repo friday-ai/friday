@@ -4,8 +4,8 @@ import destroy from './user.destroy';
 import getAll from './user.getAll';
 
 export default class User {
-    create = create;
-    update = update;
-    destoy = destroy;
-    getAll = getAll;
+  create = create;
+  update = update;
+  destoy = destroy;
+  getAll = getAll;
 }

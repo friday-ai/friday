@@ -1,5 +1,5 @@
-import * as db from '../src/utils/database';
+import * as database from '../src/utils/database';
 
 beforeAll(async () => {
-  await db.test.sync({ force: true });
+  await database.init();
 });

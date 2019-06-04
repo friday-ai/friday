@@ -1,38 +1,35 @@
 import { Sequelize } from 'sequelize-typescript';
 
-export const production = new Sequelize({
-  dialect: 'sqlite',
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  },
-  logging: false,
-  storage: './friday.db',
-  models: [__dirname + '/../models']
-});
+const env = process.env.NODE_ENV || 'production';
 
-export const development = new Sequelize({
-  dialect: 'sqlite',
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  },
-  logging: false,
-  storage: './friday-development.db',
-  models: [__dirname + '/../models']
-});
+const database_name: {[x: string]: any} = {
+  production: './friday.db',
+  development: './friday-development.db',
+  test: './friday-test.db'
+};
 
-export const test = new Sequelize({
-  dialect: 'sqlite',
-  pool: {
-    max: 5,
-    min: 0,
-    idle: 10000
-  },
-  logging: false,
-  storage: './friday-test.db',
-  models: [__dirname + '/../models']
-});
+const init = async () => {
+  const database = await new Sequelize({
+    dialect: 'sqlite',
+    pool: {
+      max: 5,
+      min: 0,
+      idle: 10000
+    },
+    logging: false,
+    storage: database_name[env],
+    models: [__dirname + '/../models']
+  });
 
+  if (env === 'test') {
+    // If exist, drop tables for tests
+    await database.sync({force: true});
+  } else {
+    await database.sync();
+  }
+
+};
+
+export {
+  init
+};
