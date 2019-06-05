@@ -8,8 +8,10 @@ const database_name: {[x: string]: any} = {
   test: './friday-test.db'
 };
 
+let database: Sequelize;
+
 const init = async () => {
-  const database = await new Sequelize({
+  database = await new Sequelize({
     dialect: 'sqlite',
     pool: {
       max: 5,
@@ -30,6 +32,11 @@ const init = async () => {
 
 };
 
+const closeConnection = async () => {
+  database.close();
+};
+
 export {
-  init
+  init,
+  closeConnection
 };

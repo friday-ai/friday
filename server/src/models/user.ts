@@ -1,18 +1,27 @@
 import { Table, Column, Model, PrimaryKey, HasMany, DataType, HasOne, IsDate, IsUUID,
-  Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate } from 'sequelize-typescript';
+  Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate, Scopes } from 'sequelize-typescript';
 
 import Variable from './variable';
 import { User_role, Available_languages } from '../utils/constants';
 import State from './state';
 import { hash } from '../../src/utils/password';
+
 @DefaultScope({
-  attributes: ['id', 'name', 'first_name', 'email', 'birth_date', 'role', 'language'],
-  include: [
-    {
-      as: 'state',
-      model: () => State
-    }
-  ]
+  attributes: ['id', 'name', 'first_name', 'email', 'birth_date']
+})
+@Scopes({
+  full: {
+    attributes: ['id', 'name', 'first_name', 'email', 'birth_date', 'role', 'language'],
+    include: [() => State, () => Variable]
+  },
+  withState: {
+    attributes: ['id', 'name', 'first_name', 'email', 'birth_date', 'role', 'language'],
+    include: [() => State]
+  },
+  withVariables: {
+    attributes: ['id', 'name', 'first_name', 'email', 'birth_date', 'role', 'language'],
+    include: [() => Variable]
+  }
 })
 @Table({
   tableName: 'user',

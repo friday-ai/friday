@@ -8,13 +8,12 @@ describe('user.create', () => {
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
       name: 'Pepperwood',
       first_name: 'John',
-      email: 'john@pepperwood.com',
+      email: 'test@test.com',
       password: 'mysuperpassword',
       birth_date: new Date(1996, 12, 20)
     });
 
     expect(createdUser).not.toHaveProperty('password');
-
   });
 
   it('should not create a user with an existing email', async () => {
@@ -30,8 +29,6 @@ describe('user.create', () => {
       .catch((err) => {
         expect(`${err}`).toContain('Validation error');
       });
-
-
   });
 
   it('should not create user with wrong email', async () => {
@@ -47,7 +44,6 @@ describe('user.create', () => {
       .catch((err) => {
         expect(`${err}`).toContain('Validation isEmail on email failed');
       });
-
   });
 
   it('should not create user with password too small', async () => {
@@ -63,6 +59,5 @@ describe('user.create', () => {
       .catch((err) => {
         expect(`${err}`).toContain('Validation error');
       });
-
   });
 });
