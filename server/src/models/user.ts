@@ -1,5 +1,5 @@
-import { Table, Column, Model, PrimaryKey, HasMany, DataType, HasOne, IsDate, IsUUID,
-  Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate, Scopes } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, HasOne, IsDate, IsUUID,
+  Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate, Scopes, HasMany } from 'sequelize-typescript';
 
 import Variable from './variable';
 import { User_role, Available_languages } from '../utils/constants';
@@ -73,7 +73,9 @@ export default class User extends Model<User> {
   @Column
   language!: Available_languages;
 
-  @HasMany(() => Variable)
+  @HasMany(() => Variable, {
+     foreignKey: 'owner'
+  })
   variables?: Variable[];
 
   @HasOne(() => State)

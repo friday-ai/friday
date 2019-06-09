@@ -1,6 +1,5 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, HasMany, ForeignKey, DataType, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
 import Room from './room';
-import Variable from './variable';
 import State from './state';
 
 @Table({
@@ -27,8 +26,10 @@ export default class Satellite extends Model<Satellite> {
   @BelongsTo(() => Room)
   room!: Room;
 
-  @HasMany(() => Variable)
-  variables!: Variable[];
+  // @HasMany(() => Variable, {
+  //   foreignKey: 'owner'
+  // })
+  // variables?: Variable[];
 
   @HasOne(() => State)
   state!: State;

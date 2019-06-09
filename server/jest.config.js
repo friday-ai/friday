@@ -1,6 +1,7 @@
 module.exports = {
 	setupFilesAfterEnv: [
-		"<rootDir>/test/setup.ts"
+    "<rootDir>/test/setup.ts",
+    "jest-extended"
 	  ],
 	globals: {
 		'ts-jest': {

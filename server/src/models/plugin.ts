@@ -1,6 +1,5 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasMany, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
 import Satellite from './satellite';
-import Variable from './variable';
 import State from './state';
 
 @Table({
@@ -31,8 +30,10 @@ export default class Plugin extends Model<Plugin> {
   @BelongsTo(() => Satellite)
   satellite!: Satellite;
 
-  @HasMany(() => Variable)
-  variables!: Variable[];
+  // @HasMany(() => Variable, {
+  //   foreignKey: 'owner'
+  // })
+  // variables?: Variable[];
 
   @HasOne(() => State)
   state!: State;
