@@ -29,6 +29,9 @@ export default class House extends Model<House> {
   @HasMany(() => Room)
   rooms!: Room[];
 
-  @HasOne(() => State)
+  @HasOne(() => State, {
+    foreignKey: 'owner',
+    constraints: false
+  })
   state!: State;
 }

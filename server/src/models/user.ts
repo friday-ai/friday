@@ -2,30 +2,30 @@ import { Table, Column, Model, PrimaryKey, DataType, HasOne, IsDate, IsUUID,
   Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate, Scopes, HasMany } from 'sequelize-typescript';
 
 import Variable from './variable';
-import { User_role, Available_languages } from '../utils/constants';
+import { UserRole, AvailableLanguages } from '../utils/constants';
 import State from './state';
 import { hash } from '../../src/utils/password';
 
 @DefaultScope({
-  attributes: ['id', 'name', 'first_name', 'email', 'birth_date']
+  attributes: ['id', 'name', 'firstName', 'email', 'birthDate']
 })
 @Scopes({
   full: {
-    attributes: ['id', 'name', 'first_name', 'email', 'birth_date', 'role', 'language'],
+    attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
     include: [() => State, () => Variable]
   },
   withState: {
-    attributes: ['id', 'name', 'first_name', 'email', 'birth_date', 'role', 'language'],
+    attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
     include: [() => State]
   },
   withVariables: {
-    attributes: ['id', 'name', 'first_name', 'email', 'birth_date', 'role', 'language'],
+    attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
     include: [() => Variable]
   }
 })
 @Table({
   tableName: 'user',
-  underscored: true
+  underscored: false
 })
 export default class User extends Model<User> {
 
@@ -43,7 +43,7 @@ export default class User extends Model<User> {
 
   @AllowNull(false)
   @Column
-  first_name!: string;
+  firstName!: string;
 
   @AllowNull(false)
   @Unique
@@ -61,28 +61,32 @@ export default class User extends Model<User> {
   @AllowNull(true)
   @IsDate
   @Column({ type: DataType.DATEONLY })
-  birth_date!: Date;
+  birthDate!: Date;
 
   @AllowNull(false)
-  @Default(User_role.HABITANT)
+  @Default(UserRole.HABITANT)
   @Column
-  role!: User_role;
+  role!: UserRole;
 
   @AllowNull(false)
-  @Default(Available_languages.EN)
+  @Default(AvailableLanguages.EN)
   @Column
-  language!: Available_languages;
+  language!: AvailableLanguages;
 
   @HasMany(() => Variable, {
-     foreignKey: 'owner'
+    foreignKey: 'owner',
+    constraints: false
   })
   variables?: Variable[];
 
-  @HasOne(() => State)
+  @HasOne(() => State, {
+    foreignKey: 'owner',
+    constraints: false
+  })
   state?: State;
 
   @BeforeCreate
-  static async HassPassword(user: User) {
+  static async hashPassword(user: User) {
     user.password = await hash(user.password!);
   }
 }

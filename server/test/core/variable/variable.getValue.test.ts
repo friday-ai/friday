@@ -12,7 +12,7 @@ describe('variable.getValue', () => {
       key: 'test_key0',
       value: 'test_value0',
       owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      owner_type: 'user'
+      ownerType: 'user'
     });
   });
 

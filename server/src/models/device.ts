@@ -1,12 +1,12 @@
 import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
 import Plugin from './plugin';
 import Room from './room';
-import { Available_type_of_device, Available_sub_type_of_device } from '../utils/constants';
+import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../utils/constants';
 import State from './state';
 
 @Table({
   tableName: 'device',
-  underscored: true
+  underscored: false
 })
 export default class Device extends Model<Device> {
 
@@ -22,17 +22,17 @@ export default class Device extends Model<Device> {
 
   @AllowNull(false)
   @Column
-  type!: Available_type_of_device;
+  type!: AvailableTypeOfDevice;
 
   @AllowNull(false)
   @Column
-  sub_type!: Available_sub_type_of_device;
+  subType!: AvailableSubTypeOfDevice;
 
   @Column(DataType.JSON)
   variable: any;
 
   @Column
-  variable_value!: string;
+  variableValue!: string;
 
   @Column
   unit!: string;
@@ -42,19 +42,22 @@ export default class Device extends Model<Device> {
 
   @ForeignKey(() => Room)
   @Column(DataType.INTEGER)
-  room_id!: number;
+  roomId!: number;
 
   @BelongsTo(() => Room)
   room!: Room;
 
   @ForeignKey(() => Plugin)
   @Column(DataType.INTEGER)
-  plugin_id!: number;
+  pluginId!: number;
 
   @BelongsTo(() => Plugin)
   plugin!: Plugin;
 
-  @HasOne(() => State)
+  @HasOne(() => State, {
+    foreignKey: 'owner',
+    constraints: false
+  })
   state!: State;
 
 }

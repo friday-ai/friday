@@ -11,9 +11,9 @@ describe('user.getById', () => {
       {
         id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
         name: 'Pepperwood',
-        first_name: 'John',
+        firstName: 'John',
         email: 'john@pepperwood.com',
-        birth_date: '1997-01-20'
+        birthDate: '1997-01-20'
       }
     );
 
@@ -31,7 +31,7 @@ describe('user.getById', () => {
       expect(v).toHaveProperty('key');
       expect(v).toHaveProperty('value');
       expect(v).toHaveProperty('owner');
-      expect(v).toHaveProperty('owner_type');
+      expect(v).toHaveProperty('ownerType');
     });
 
 
@@ -43,9 +43,9 @@ describe('user.getById', () => {
     expect(userRetruned).toEqual({
       id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
       name: 'Pepperwood',
-      first_name: 'John',
+      firstName: 'John',
       email: 'john@pepperwood.com',
-      birth_date: '1997-01-20',
+      birthDate: '1997-01-20',
       role: 'habitant',
       language: 'en',
       state: null
@@ -63,7 +63,7 @@ describe('user.getById', () => {
       expect(v).toHaveProperty('key');
       expect(v).toHaveProperty('value');
       expect(v).toHaveProperty('owner');
-      expect(v).toHaveProperty('owner_type');
+      expect(v).toHaveProperty('ownerType');
     });
 
   });

@@ -7,11 +7,11 @@ describe('user.update', () => {
 
     const updatedUser = await user.update({
       id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      first_name: 'John update'
+      firstName: 'John update'
     });
 
     expect(updatedUser).not.toHaveProperty('password');
-    expect(updatedUser.first_name).toEqual('John update');
+    expect(updatedUser.firstName).toEqual('John update');
   });
 
   it('should not found user to update', async () => {

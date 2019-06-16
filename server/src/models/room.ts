@@ -6,7 +6,7 @@ import State from './state';
 
 @Table({
   tableName: 'room',
-  underscored: true
+  underscored: false
 })
 export default class Room extends Model<Room> {
 
@@ -23,7 +23,7 @@ export default class Room extends Model<Room> {
   @AllowNull(false)
   @ForeignKey(() => House)
   @Column(DataType.INTEGER)
-  house_id!: number;
+  houseId!: number;
 
   @BelongsTo(() => House)
   house!: House;
@@ -34,7 +34,10 @@ export default class Room extends Model<Room> {
   @HasMany(() => Satellite)
   satellites!: Satellite[];
 
-  @HasOne(() => State)
+  @HasOne(() => State, {
+    foreignKey: 'owner',
+    constraints: false
+  })
   state!: State;
 
 }

@@ -10,16 +10,16 @@ describe('user.getAll', () => {
       [{
         id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
         name: 'Pepperwood',
-        first_name: 'John',
+        firstName: 'John',
         email: 'john@pepperwood.com',
-        birth_date: '1997-01-20'
+        birthDate: '1997-01-20'
       },
       {
         id: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
         name: 'Pepperwood',
-        first_name: 'Jess',
+        firstName: 'Jess',
         email: 'jess@pepperwood.com',
-        birth_date: '1997-01-20'
+        birthDate: '1997-01-20'
       }]
     );
 
@@ -43,7 +43,7 @@ describe('user.getAll', () => {
         expect(v).toHaveProperty('key');
         expect(v).toHaveProperty('value');
         expect(v).toHaveProperty('owner');
-        expect(v).toHaveProperty('owner_type');
+        expect(v).toHaveProperty('ownerType');
       });
     });
 
@@ -55,9 +55,9 @@ describe('user.getAll', () => {
     expect(users).toEqual([{
       id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
       name: 'Pepperwood',
-      first_name: 'John',
+      firstName: 'John',
       email: 'john@pepperwood.com',
-      birth_date: '1997-01-20',
+      birthDate: '1997-01-20',
       role: 'habitant',
       language: 'en',
       state: null
@@ -65,9 +65,9 @@ describe('user.getAll', () => {
     {
       id: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
       name: 'Pepperwood',
-      first_name: 'Jess',
+      firstName: 'Jess',
       email: 'jess@pepperwood.com',
-      birth_date: '1997-01-20',
+      birthDate: '1997-01-20',
       role: 'habitant',
       language: 'en',
       state: null
@@ -91,7 +91,7 @@ describe('user.getAll', () => {
         expect(v).toHaveProperty('key');
         expect(v).toHaveProperty('value');
         expect(v).toHaveProperty('owner');
-        expect(v).toHaveProperty('owner_type');
+        expect(v).toHaveProperty('ownerType');
       });
     });
 

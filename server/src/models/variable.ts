@@ -1,12 +1,15 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
-import { Variable_owner } from '../utils/constants';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, BelongsTo } from 'sequelize-typescript';
+import { VariableOwner } from '../utils/constants';
+import User from './user';
+import Plugin from './plugin';
+import Satellite from './satellite';
 
 @DefaultScope({
-  attributes: ['id', 'key', 'value', 'owner', 'owner_type']
+  attributes: ['id', 'key', 'value', 'owner', 'ownerType']
 })
 @Table({
   tableName: 'variable',
-  underscored: true
+  underscored: false
 })
 export default class Variable extends Model<Variable> {
 
@@ -34,5 +37,24 @@ export default class Variable extends Model<Variable> {
 
   @AllowNull(false)
   @Column
-  owner_type!: Variable_owner;
+  ownerType!: VariableOwner;
+
+  @BelongsTo(() => User, {
+    foreignKey: 'owner',
+    constraints: false
+  })
+  user?: User;
+
+  @BelongsTo(() => Plugin, {
+    foreignKey: 'owner',
+    constraints: false
+  })
+  plugin?: Plugin;
+
+  @BelongsTo(() => Satellite, {
+    foreignKey: 'owner',
+    constraints: false
+  })
+  satellite?: Satellite;
+
 }

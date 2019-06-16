@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 
 const env = process.env.NODE_ENV || 'production';
 
-const database_name: {[x: string]: any} = {
+const DATABASE_NAME: {[x: string]: any} = {
   production: './friday.db',
   development: './friday-development.db',
   test: './friday-test.db'
@@ -19,7 +19,7 @@ const init = async () => {
       idle: 10000
     },
     logging: false,
-    storage: database_name[env],
+    storage: DATABASE_NAME[env],
     models: [__dirname + '/../models']
   });
 

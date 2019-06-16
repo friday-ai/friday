@@ -1,5 +1,5 @@
 import { Variable } from '../../../src/core/friday';
-import { Variable_owner } from '../../../src/utils/constants';
+import { VariableOwner } from '../../../src/utils/constants';
 
 describe('variable.create', () => {
   const variable = new Variable();
@@ -10,13 +10,13 @@ describe('variable.create', () => {
       key: 'key_test',
       value: 'value_test',
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
-      owner_type: Variable_owner.USER
+      ownerType: VariableOwner.USER
     });
 
     expect(createdVariable).toHaveProperty('key');
     expect(createdVariable).toHaveProperty('value');
     expect(createdVariable).toHaveProperty('owner');
-    expect(createdVariable).toHaveProperty('owner_type');
+    expect(createdVariable).toHaveProperty('ownerType');
   });
 
   it('should not create a variable with an existing key', async () => {
@@ -26,7 +26,7 @@ describe('variable.create', () => {
       key: 'key_test',
       value: 'value_test',
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
-      owner_type: Variable_owner.USER
+      ownerType: VariableOwner.USER
     })
       .catch((err) => {
         expect(`${err}`).toContain('Validation error');
@@ -40,7 +40,7 @@ describe('variable.create', () => {
       key: 'key_test',
       value: 'value_test',
       owner: '2f5a9f86-2612-436b-9a3b-7040dae16c0d',
-      owner_type: Variable_owner.USER
+      ownerType: VariableOwner.USER
     })
       .catch((err) => {
         expect(`${err}`).toContain('Validation error');
@@ -54,7 +54,7 @@ describe('variable.create', () => {
       key: '',
       value: 'value_test',
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
-      owner_type: Variable_owner.USER
+      ownerType: VariableOwner.USER
     })
       .catch((err) => {
         expect(`${err}`).toContain('Validation error');
@@ -68,7 +68,7 @@ describe('variable.create', () => {
       key: 'key_test',
       value: '',
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
-      owner_type: Variable_owner.USER
+      ownerType: VariableOwner.USER
     })
       .catch((err) => {
         expect(`${err}`).toContain('Validation error');

@@ -1,22 +1,22 @@
 
-export enum User_role {
+export enum UserRole {
   ADMIN = 'admin',
   HABITANT = 'habitant',
   GUEST = 'guest'
 }
 
-export enum Available_languages {
+export enum AvailableLanguages {
   EN = 'en',
   FR = 'fr'
 }
 
-export enum Variable_owner {
+export enum VariableOwner {
   USER = 'user',
   PLUGIN = 'plugin',
   SATELLITE = 'satellite'
 }
 
-export enum State_owner {
+export enum StateOwner {
   USER = 'user',
   HOUSE = 'house',
   ROOM = 'room',
@@ -26,13 +26,13 @@ export enum State_owner {
 }
 
 // TODO = Create a Json file with all type of device available
-export enum Available_type_of_device {
+export enum AvailableTypeOfDevice {
   LIGHT = 'light',
   SENSOR = 'sensor'
 }
 
 // TODO = Create a Json file with all sub type of device available
-export enum Available_sub_type_of_device {
+export enum AvailableSubTypeOfDevice {
   LIGHT_W = 'light_w',
   LIGHT_RGB = 'light_rgb',
   LIGHT_RGBW = 'light_rgbw',

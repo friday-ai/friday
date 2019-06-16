@@ -1,9 +1,9 @@
-import { Variable_owner } from '../../utils/constants';
+import { VariableOwner } from '../../utils/constants';
 
-export default interface VariableType {
+export default interface IVariable {
   id?: string;
   key?: string;
   value?: string;
   owner?: string;
-  owner_type?: Variable_owner;
+  ownerType?: VariableOwner;
 }

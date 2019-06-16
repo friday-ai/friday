@@ -8,7 +8,7 @@ interface UserOptions {
   skip?: number;
 }
 const logger = new Log();
-const default_options: UserOptions = {
+const DEFAULT_OPTIONS: UserOptions = {
   scope: '',
   take: 20,
   skip: 0
@@ -16,7 +16,7 @@ const default_options: UserOptions = {
 
 export default async function getAll(options?: UserOptions): Promise<UserType[]> {
   try {
-    options = Object.assign({}, default_options, options);
+    options = Object.assign({}, DEFAULT_OPTIONS, options);
 
     let users;
 

@@ -7,10 +7,10 @@ describe('user.create', () => {
     const createdUser = await user.create({
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
       name: 'Pepperwood',
-      first_name: 'John',
+      firstName: 'John',
       email: 'test@test.com',
       password: 'mysuperpassword',
-      birth_date: new Date(1996, 12, 20)
+      birthDate: new Date(1996, 12, 20)
     });
 
     expect(createdUser).not.toHaveProperty('password');
@@ -21,10 +21,10 @@ describe('user.create', () => {
     await user.create({
       id: '0cd30aef-9c4e-4a23-88e3-3544971296e5',
       name: 'Pepperwood',
-      first_name: 'John',
+      firstName: 'John',
       email: 'john@pepperwood.com',
       password: 'mysuperpassword',
-      birth_date: new Date(1996, 12, 20)
+      birthDate: new Date(1996, 12, 20)
     })
       .catch((err) => {
         expect(`${err}`).toContain('Validation error');
@@ -36,10 +36,10 @@ describe('user.create', () => {
     await user.create({
       id: '0cd30aef-9c4e-4c23-88e3-3547971296e5',
       name: 'Pepperwood',
-      first_name: 'John',
+      firstName: 'John',
       email: 'johnpepperwood',
       password: 'mysuperpassword',
-      birth_date: new Date(1996, 12, 20)
+      birthDate: new Date(1996, 12, 20)
     })
       .catch((err) => {
         expect(`${err}`).toContain('Validation isEmail on email failed');
@@ -51,10 +51,10 @@ describe('user.create', () => {
     await user.create({
       id: '0cd30aef-9c4e-4c23-89e3-3547971296e5',
       name: 'Pepperwood',
-      first_name: 'John',
+      firstName: 'John',
       email: 'john@pepperwood.com',
       password: 'test',
-      birth_date: new Date(1996, 12, 20)
+      birthDate: new Date(1996, 12, 20)
     })
       .catch((err) => {
         expect(`${err}`).toContain('Validation error');

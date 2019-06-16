@@ -3,7 +3,7 @@ import Scene from './scene';
 
 @Table({
   tableName: 'action',
-  underscored: true
+  underscored: false
 })
 export default class Action extends Model<Action> {
 
@@ -27,17 +27,17 @@ export default class Action extends Model<Action> {
 
   @AllowNull(false)
   @Column
-  sub_type!: string;
+  subType!: string;
 
   @Column
-  variable_key!: string;
+  variableKey!: string;
 
   @Column
-  variable_value!: string;
+  variableValue!: string;
 
   @ForeignKey(() => Scene)
   @Column(DataType.INTEGER)
-  scene_id!: number;
+  sceneId!: number;
 
   @BelongsTo(() => Scene)
   scene!: Scene;

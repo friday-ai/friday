@@ -1,10 +1,29 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull, HasMany, DefaultScope, Scopes } from 'sequelize-typescript';
 import Room from './room';
 import State from './state';
+import Variable from './variable';
 
+@DefaultScope({
+  attributes: ['id', 'name', 'roomId'],
+  include: [() => Room]
+})
+@Scopes({
+  full: {
+    attributes: ['id', 'name', 'roomId'],
+    include: [() => State, () => Variable]
+  },
+  withState: {
+    attributes: ['id', 'name', 'roomId'],
+    include: [() => State]
+  },
+  withVariables: {
+    attributes: ['id', 'name', 'roomId'],
+    include: [() => Variable]
+  }
+})
 @Table({
   tableName: 'satellite',
-  underscored: true
+  underscored: false
 })
 export default class Satellite extends Model<Satellite> {
 
@@ -21,16 +40,20 @@ export default class Satellite extends Model<Satellite> {
   @AllowNull(false)
   @ForeignKey(() => Room)
   @Column(DataType.INTEGER)
-  room_id!: number;
+  roomId!: number;
 
   @BelongsTo(() => Room)
   room!: Room;
 
-  // @HasMany(() => Variable, {
-  //   foreignKey: 'owner'
-  // })
-  // variables?: Variable[];
+  @HasMany(() => Variable, {
+    foreignKey: 'owner',
+    constraints: false
+  })
+  variables?: Variable[];
 
-  @HasOne(() => State)
+  @HasOne(() => State, {
+    foreignKey: 'owner',
+    constraints: false
+  })
   state!: State;
 }

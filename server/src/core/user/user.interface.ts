@@ -1,15 +1,15 @@
-import { User_role, Available_languages } from '../../utils/constants';
+import { UserRole, AvailableLanguages } from '../../utils/constants';
 import VariableType from '../variable/variable.interface';
 
 export default interface UserType {
   id: string;
   name?: string;
-  first_name?: string;
+  firstName?: string;
   email?: string;
   password?: string;
-  birth_date?: Date;
-  role?: User_role;
-  language?: Available_languages;
+  birthDate?: Date;
+  role?: UserRole;
+  language?: AvailableLanguages;
   state?: string;
   variables?: Array<VariableType[]>;
 }

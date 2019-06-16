@@ -7,6 +7,7 @@
       "**/coverage/**"
     ]
   },
+  "extends": ["tslint-consistent-codestyle"],
   "rules": {
     "align": [
       true,
@@ -125,6 +126,22 @@
       "check-operator",
       "check-separator",
       "check-type"
+    ],
+    "naming-convention": [
+      true,
+      {"type": "default", "format": "camelCase", "leadingUnderscore": "forbid", "trailingUnderscore": "forbid"},
+      {"type": "variable", "modifiers": ["global", "const"], "format": ["camelCase","UPPER_CASE"]},
+      {"type": "variable", "modifiers": ["export", "const"], "format": "UPPER_CASE"},
+      {"type": "functionVariable", "modifiers": ["export", "const"], "format": "camelCase"},
+      {"type": "parameter", "modifiers": "unused", "leadingUnderscore": "allow"},
+      {"type": "member", "modifiers": "private", "leadingUnderscore": "require"},
+      {"type": "member", "modifiers": "protected", "leadingUnderscore": "require"},
+      {"type": "method", "filter": "^toJSON$", "format": null},
+      {"type": "property", "modifiers": ["public", "static", "const"], "format": "UPPER_CASE"},
+      {"type": "type", "format": "PascalCase"},
+      {"type": "class", "modifiers": "abstract", "prefix": "Abstract"},
+      {"type": "genericTypeParameter", "prefix": "T"},
+      {"type": "enumMember", "leadingUnderscore": "allow"}
     ]
   }
 }

@@ -4,7 +4,7 @@ import Action from './action';
 
 @Table({
   tableName: 'scene',
-  underscored: true
+  underscored: false
 })
 export default class Scene extends Model<Scene> {
 
@@ -23,7 +23,7 @@ export default class Scene extends Model<Scene> {
 
   @ForeignKey(() => Trigger)
   @Column(DataType.INTEGER)
-  trigger_id!: number;
+  triggerId!: number;
 
   @BelongsTo(() => Trigger)
   trigger!: Trigger[];

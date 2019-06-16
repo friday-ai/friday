@@ -42,6 +42,7 @@
     "nodemon": "^1.19.0",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
+    "tslint-consistent-codestyle": "^1.15.1",
     "typescript": "^3.4.5"
   }
 }

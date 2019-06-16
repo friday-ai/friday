@@ -13,7 +13,7 @@ export default async function getById(id: string, scope?: string): Promise<UserT
       user = await User.scope(scope).findByPk(id);
     } else {
       user = await User.findByPk(id, {
-        attributes: ['id', 'name', 'first_name', 'email', 'birth_date']
+        attributes: ['id', 'name', 'firstName', 'email', 'birthDate']
       });
     }
 
