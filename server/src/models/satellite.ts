@@ -1,4 +1,6 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull, HasMany, DefaultScope, Scopes } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne,
+  IsUUID, AllowNull, HasMany, DefaultScope, Scopes, NotEmpty, Unique } from 'sequelize-typescript';
+
 import Room from './room';
 import State from './state';
 import Variable from './variable';
@@ -30,17 +32,20 @@ export default class Satellite extends Model<Satellite> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({ type: DataType.INTEGER })
+  @Unique
+  @Column({ type: DataType.UUIDV4 })
   id!: string;
 
   @AllowNull(false)
+  @Unique
+  @NotEmpty
   @Column
   name!: string;
 
   @AllowNull(false)
   @ForeignKey(() => Room)
-  @Column(DataType.INTEGER)
-  roomId!: number;
+  @Column(DataType.UUIDV4)
+  roomId!: string;
 
   @BelongsTo(() => Room)
   room!: Room;

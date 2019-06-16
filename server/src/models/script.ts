@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty } from 'sequelize-typescript';
 
 @Table({
   tableName: 'script',
@@ -9,13 +9,17 @@ export default class Script extends Model<Script> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({ type: DataType.INTEGER })
+  @Unique
+  @Column({ type: DataType.UUIDV4 })
   id!: number;
 
   @AllowNull(false)
+  @Unique
+  @NotEmpty
   @Column
   name!: string;
 
+  @AllowNull(false)
   @Column(DataType.JSON)
   code: any;
 }

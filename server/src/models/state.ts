@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, BelongsTo, Unique, NotEmpty } from 'sequelize-typescript';
 import { StateOwner } from '../utils/constants';
 import User from './user';
 import Satellite from './satellite';
@@ -16,10 +16,13 @@ export default class State extends Model<State> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({ type: DataType.INTEGER })
-  id!: number;
+  @Unique
+  @Column({ type: DataType.UUIDV4 })
+  id!: string;
 
   @AllowNull(false)
+  @Unique
+  @NotEmpty
   @Column
   name!: string;
 

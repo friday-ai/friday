@@ -1,8 +1,28 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull, HasMany } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne,
+  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes } from 'sequelize-typescript';
+
 import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';
 
+@DefaultScope({
+  attributes: ['id', 'name', 'version', 'satelliteId'],
+  include: [() => Satellite]
+})
+@Scopes({
+  full: {
+    attributes: ['id', 'name', 'version', 'satelliteId'],
+    include: [() => Satellite, () => State, () => Variable]
+  },
+  withState: {
+    attributes: ['id', 'name', 'version', 'satelliteId'],
+    include: [() => Satellite, () => State]
+  },
+  withVariables: {
+    attributes: ['id', 'name', 'version', 'satelliteId'],
+    include: [() => Satellite, () => Variable]
+  }
+})
 @Table({
   tableName: 'plugin',
   underscored: false
@@ -12,10 +32,13 @@ export default class Plugin extends Model<Plugin> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({ type: DataType.INTEGER })
-  id!: number;
+  @Unique
+  @Column({ type: DataType.UUIDV4 })
+  id!: string;
 
   @AllowNull(false)
+  @Unique
+  @NotEmpty
   @Column
   name!: string;
 
@@ -25,8 +48,8 @@ export default class Plugin extends Model<Plugin> {
 
   @AllowNull(false)
   @ForeignKey(() => Satellite)
-  @Column(DataType.INTEGER)
-  satelliteId!: number;
+  @Column(DataType.UUIDV4)
+  satelliteId!: string;
 
   @BelongsTo(() => Satellite)
   satellite!: Satellite;
