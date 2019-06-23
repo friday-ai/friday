@@ -18,9 +18,9 @@ export default async function getById(id: string, scope?: string): Promise<Satel
       throw logger.error('Satellite not found');
     }
 
-    let userToReturn = <SatelliteType>satellite.get({ plain: true });
+    let satelliteToReturn = <SatelliteType>satellite.get({ plain: true });
 
-    return userToReturn;
+    return satelliteToReturn;
   } catch (e) {
     throw logger.error(e);
   }

@@ -1,20 +1,16 @@
 import Satellite from '../../models/satellite';
 import SatelliteType from './satellite.interface';
+import { GetOptions } from '../../utils/constants';
 import Log from '../../utils/log';
 
-interface SatelliteOptions {
-  scope?: string;
-  take?: number;
-  skip?: number;
-}
 const logger = new Log();
-const DEFAULT_OPTIONS: SatelliteOptions = {
+const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
   skip: 0
 };
 
-export default async function getAll(options?: SatelliteOptions): Promise<SatelliteType[]> {
+export default async function getAll(options?: GetOptions): Promise<SatelliteType[]> {
   try {
     options = Object.assign({}, DEFAULT_OPTIONS, options);
 

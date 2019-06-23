@@ -1,11 +1,14 @@
 import VariableType from '../variable/variable.interface';
-import Room from '../room';
+import RoomType from '../room/room.interface';
+import StateType from '../state/state.interface';
+import PluginType from '../plugin/plugin.interface';
 
 export default interface SatelliteType {
   id: string;
   name?: string;
   roomId?: string;
-  room?: Room;
-  state?: string;
+  room?: RoomType;
+  plugins?: Array<PluginType[]>;
   variables?: Array<VariableType[]>;
+  state?: StateType;
 }
