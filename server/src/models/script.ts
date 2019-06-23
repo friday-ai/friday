@@ -11,7 +11,7 @@ export default class Script extends Model<Script> {
   @PrimaryKey
   @Unique
   @Column({ type: DataType.UUIDV4 })
-  id!: number;
+  id!: string;
 
   @AllowNull(false)
   @Unique

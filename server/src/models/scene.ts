@@ -2,7 +2,6 @@ import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, ForeignKey, HasM
 import Trigger from './trigger';
 import Action from './action';
 
-
 @DefaultScope({
   include: [() => Trigger, () => Action]
 })
@@ -17,7 +16,7 @@ export default class Scene extends Model<Scene> {
   @PrimaryKey
   @Unique
   @Column({ type: DataType.UUIDV4 })
-  id!: number;
+  id!: string;
 
   @AllowNull(false)
   @Unique

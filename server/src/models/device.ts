@@ -35,7 +35,7 @@ export default class Device extends Model<Device> {
   @PrimaryKey
   @Unique
   @Column({ type: DataType.INTEGER })
-  id!: number;
+  id!: string;
 
   @AllowNull(false)
   @Unique
@@ -53,9 +53,6 @@ export default class Device extends Model<Device> {
 
   @Column(DataType.JSON)
   variable: any;
-
-  @Column
-  variableValue!: string;
 
   @Column
   unit!: string;

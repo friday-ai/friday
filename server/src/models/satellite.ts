@@ -4,6 +4,7 @@ import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasO
 import Room from './room';
 import State from './state';
 import Variable from './variable';
+import Plugin from './plugin';
 
 @DefaultScope({
   attributes: ['id', 'name', 'roomId'],
@@ -55,6 +56,12 @@ export default class Satellite extends Model<Satellite> {
     constraints: false
   })
   variables?: Variable[];
+
+  @HasMany(() => Plugin, {
+    foreignKey: 'satelliteId',
+    constraints: false
+  })
+  plugins?: Plugin[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',

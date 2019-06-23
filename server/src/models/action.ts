@@ -16,7 +16,7 @@ export default class Action extends Model<Action> {
   @PrimaryKey
   @Unique
   @Column({ type: DataType.UUIDV4 })
-  id!: number;
+  id!: string;
 
   @AllowNull(false)
   @Unique
