@@ -25,6 +25,12 @@ export enum StateOwner {
   DEVICE = 'device'
 }
 
+export interface GetOptions {
+  scope?: string;
+  take?: number;
+  skip?: number;
+}
+
 // TODO = Create a Json file with all type of device available
 export enum AvailableTypeOfDevice {
   LIGHT = 'light',
