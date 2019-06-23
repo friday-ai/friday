@@ -1,20 +1,16 @@
 import User from '../../models/user';
 import UserType from './user.interface';
+import { GetOptions } from '../../utils/constants';
 import Log from '../../utils/log';
 
-interface UserOptions {
-  scope?: string;
-  take?: number;
-  skip?: number;
-}
 const logger = new Log();
-const DEFAULT_OPTIONS: UserOptions = {
+const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
   skip: 0
 };
 
-export default async function getAll(options?: UserOptions): Promise<UserType[]> {
+export default async function getAll(options?: GetOptions): Promise<UserType[]> {
   try {
     options = Object.assign({}, DEFAULT_OPTIONS, options);
 

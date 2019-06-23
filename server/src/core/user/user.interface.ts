@@ -1,5 +1,6 @@
 import { UserRole, AvailableLanguages } from '../../utils/constants';
 import VariableType from '../variable/variable.interface';
+import StateType from '../state/state.interface';
 
 export default interface UserType {
   id: string;
@@ -10,6 +11,6 @@ export default interface UserType {
   birthDate?: Date;
   role?: UserRole;
   language?: AvailableLanguages;
-  state?: string;
+  state?: StateType;
   variables?: Array<VariableType[]>;
 }
