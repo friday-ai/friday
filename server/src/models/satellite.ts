@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne,
+import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
   IsUUID, AllowNull, HasMany, DefaultScope, Scopes, NotEmpty, Unique } from 'sequelize-typescript';
 
 import Room from './room';
@@ -44,11 +44,12 @@ export default class Satellite extends Model<Satellite> {
   name!: string;
 
   @AllowNull(false)
-  @ForeignKey(() => Room)
   @Column(DataType.UUIDV4)
   roomId!: string;
 
-  @BelongsTo(() => Room)
+  @BelongsTo(() => Room, {
+    foreignKey: 'room_id'
+  })
   room!: Room;
 
   @HasMany(() => Variable, {
@@ -58,8 +59,7 @@ export default class Satellite extends Model<Satellite> {
   variables?: Variable[];
 
   @HasMany(() => Plugin, {
-    foreignKey: 'satelliteId',
-    constraints: false
+    foreignKey: 'satellite_id'
   })
   plugins?: Plugin[];
 

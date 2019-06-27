@@ -1,6 +1,6 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, ForeignKey, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
 import Scene from './scene';
-
+import { ActionsType } from '../utils/constants';
 
 @DefaultScope({
   include: [() => Scene]
@@ -30,7 +30,7 @@ export default class Action extends Model<Action> {
 
   @AllowNull(false)
   @Column
-  type!: string;
+  type!: ActionsType;
 
   @AllowNull(false)
   @Column
@@ -42,11 +42,12 @@ export default class Action extends Model<Action> {
   @Column
   variableValue!: string;
 
-  @ForeignKey(() => Scene)
-  @Column(DataType.INTEGER)
-  sceneId!: number;
+  @Column(DataType.UUIDV4)
+  sceneId!: string;
 
-  @BelongsTo(() => Scene)
+  @BelongsTo(() => Scene, {
+    foreignKey: 'scene_id'
+  })
   scene!: Scene;
 
 }

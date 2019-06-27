@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne,
+import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
   IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes } from 'sequelize-typescript';
 
 import Plugin from './plugin';
@@ -34,7 +34,7 @@ export default class Device extends Model<Device> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Column({ type: DataType.INTEGER })
+  @Column({ type: DataType.UUIDV4 })
   id!: string;
 
   @AllowNull(false)
@@ -60,18 +60,20 @@ export default class Device extends Model<Device> {
   @Column
   value!: string;
 
-  @ForeignKey(() => Room)
-  @Column(DataType.INTEGER)
-  roomId!: number;
+  @Column(DataType.UUIDV4)
+  roomId!: string;
 
-  @BelongsTo(() => Room)
+  @BelongsTo(() => Room, {
+    foreignKey: 'room_id'
+  })
   room!: Room;
 
-  @ForeignKey(() => Plugin)
-  @Column(DataType.INTEGER)
-  pluginId!: number;
+  @Column(DataType.UUIDV4)
+  pluginId!: string;
 
-  @BelongsTo(() => Plugin)
+  @BelongsTo(() => Plugin, {
+    foreignKey: 'plugin_id'
+  })
   plugin!: Plugin;
 
   @HasOne(() => State, {

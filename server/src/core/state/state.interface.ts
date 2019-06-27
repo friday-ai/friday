@@ -7,8 +7,6 @@ import DeviceType from '../device/device.interface';
 
 export default interface SatelliteType {
   id: string;
-  name?: string;
-  description?: string;
   owner?: string;
   ownerType?: StateOwner;
   user?: UserType;

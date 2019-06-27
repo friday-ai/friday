@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, BelongsTo, Unique, NotEmpty } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, BelongsTo, Unique, DefaultScope } from 'sequelize-typescript';
 import { StateOwner } from '../utils/constants';
 import User from './user';
 import Satellite from './satellite';
@@ -7,6 +7,9 @@ import House from './house';
 import Device from './device';
 import Plugin from './plugin';
 
+@DefaultScope({
+  attributes: ['id', 'owner', 'ownerType', 'value']
+})
 @Table({
   tableName: 'state',
   underscored: false
@@ -19,16 +22,6 @@ export default class State extends Model<State> {
   @Unique
   @Column({ type: DataType.UUIDV4 })
   id!: string;
-
-  @AllowNull(false)
-  @Unique
-  @NotEmpty
-  @Column
-  name!: string;
-
-  @AllowNull(false)
-  @Column
-  description!: string;
 
   @AllowNull(false)
   @Column(DataType.UUIDV4)

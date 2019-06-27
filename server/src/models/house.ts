@@ -39,7 +39,9 @@ export default class House extends Model<House> {
   @Column
   longitude!: string;
 
-  @HasMany(() => Room)
+  @HasMany(() => Room, {
+    foreignKey: 'house_id'
+  })
   rooms!: Room[];
 
   @HasOne(() => State, {

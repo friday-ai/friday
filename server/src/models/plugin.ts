@@ -1,9 +1,10 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne,
+import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
   IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes } from 'sequelize-typescript';
 
 import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';
+import Device  from './device';
 
 @DefaultScope({
   attributes: ['id', 'name', 'version', 'satelliteId'],
@@ -47,12 +48,18 @@ export default class Plugin extends Model<Plugin> {
   version!: string;
 
   @AllowNull(false)
-  @ForeignKey(() => Satellite)
   @Column(DataType.UUIDV4)
   satelliteId!: string;
 
-  @BelongsTo(() => Satellite)
+  @BelongsTo(() => Satellite, {
+    foreignKey: 'satellite_id'
+  })
   satellite!: Satellite;
+
+  @HasMany(() => Device, {
+    foreignKey: 'plugin_id'
+  })
+  devices!: Device[];
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',

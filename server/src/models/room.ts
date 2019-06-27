@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasMany, HasOne,
+import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasMany, HasOne,
   IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes } from 'sequelize-typescript';
 
 import House from './house';
@@ -48,17 +48,22 @@ export default class Room extends Model<Room> {
   name!: string;
 
   @AllowNull(false)
-  @ForeignKey(() => House)
   @Column(DataType.UUIDV4)
   houseId!: string;
 
-  @BelongsTo(() => House)
+  @BelongsTo(() => House, {
+    foreignKey: 'house_id'
+  })
   house!: House;
 
-  @HasMany(() => Device)
+  @HasMany(() => Device, {
+    foreignKey: 'room_id'
+  })
   devices!: Device[];
 
-  @HasMany(() => Satellite)
+  @HasMany(() => Satellite, {
+    foreignKey: 'room_id'
+  })
   satellites!: Satellite[];
 
   @HasOne(() => State, {

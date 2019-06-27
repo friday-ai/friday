@@ -1,5 +1,6 @@
 import { Table, Column, Model, PrimaryKey, HasMany, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
 import Scene from './scene';
+import { AvailableConditions } from '../utils/constants';
 
 @DefaultScope({
   include: [() => Scene]
@@ -29,13 +30,15 @@ export default class Trigger extends Model<Trigger> {
 
   @AllowNull(false)
   @Column
-  type!: string;
+  type!: AvailableConditions;
 
   @AllowNull(false)
   @Column(DataType.JSON)
   rules: any;
 
-  @HasMany(() => Scene)
+  @HasMany(() => Scene, {
+    foreignKey: 'trigger_id'
+  })
   scenes!: Scene[];
 
 }

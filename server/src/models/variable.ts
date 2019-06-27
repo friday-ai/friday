@@ -1,9 +1,12 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, BelongsTo } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope } from 'sequelize-typescript';
 import { VariableOwner } from '../utils/constants';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
 
+@DefaultScope({
+  attributes: ['id', 'key', 'value', 'owner', 'ownerType']
+})
 @Table({
   tableName: 'variable',
   underscored: false

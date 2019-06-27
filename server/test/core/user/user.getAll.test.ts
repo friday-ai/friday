@@ -70,7 +70,12 @@ describe('user.getAll', () => {
       birthDate: '1997-01-20',
       role: 'habitant',
       language: 'en',
-      state: null
+      state: {
+        id: '17ea7282-507b-496b-b496-a6d8ce7fac17',
+        owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
+        ownerType: 'user',
+        value: 'user.at.home'
+      }
     }]);
   });
 

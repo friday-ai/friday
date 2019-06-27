@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, ForeignKey, HasMany, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope } from 'sequelize-typescript';
 import Trigger from './trigger';
 import Action from './action';
 
@@ -28,14 +28,17 @@ export default class Scene extends Model<Scene> {
   @Column
   description!: string;
 
-  @ForeignKey(() => Trigger)
   @Column(DataType.UUIDV4)
   triggerId!: string;
 
-  @BelongsTo(() => Trigger)
+  @BelongsTo(() => Trigger, {
+    foreignKey: 'trigger_id'
+  })
   trigger!: Trigger[];
 
-  @HasMany(() => Action)
+  @HasMany(() => Action, {
+    foreignKey: 'scene_id'
+  })
   actions!: Action[];
 
 }
