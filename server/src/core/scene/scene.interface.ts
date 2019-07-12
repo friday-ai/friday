@@ -1,7 +1,7 @@
 import Trigger from '../trigger/trigger.interface';
 import Action from '../action/action.interface';
 
-export default interface SatelliteType {
+export default interface SceneType {
   id: string;
   name?: string;
   description?: string;

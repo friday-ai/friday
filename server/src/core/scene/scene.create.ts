@@ -5,7 +5,7 @@ const logger = new Log();
 
 export default async function create(scene: SceneType): Promise<SceneType> {
   try {
-    const createdScene = await Scene.create(Scene);
+    const createdScene = await Scene.create(scene);
     let sceneToReturn = <SceneType>createdScene.get({ plain: true });
     return sceneToReturn;
   } catch (e) {

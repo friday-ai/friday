@@ -1,9 +1,23 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes } from 'sequelize-typescript';
 import Trigger from './trigger';
 import Action from './action';
 
 @DefaultScope({
-  include: [() => Trigger, () => Action]
+  attributes: ['id', 'name', 'description', 'triggerId']
+})
+@Scopes({
+  full: {
+    attributes: ['id', 'name', 'description', 'triggerId'],
+    include: [() => Trigger, () => Action]
+  },
+  withActions: {
+    attributes: ['id', 'name', 'description', 'triggerId'],
+    include: [() => Action]
+  },
+  withTrigger: {
+    attributes: ['id', 'name', 'description', 'triggerId'],
+    include: [() => Trigger]
+  }
 })
 @Table({
   tableName: 'scene',
@@ -32,12 +46,14 @@ export default class Scene extends Model<Scene> {
   triggerId!: string;
 
   @BelongsTo(() => Trigger, {
-    foreignKey: 'trigger_id'
+    foreignKey: 'triggerId',
+    constraints: false
   })
-  trigger!: Trigger[];
+  trigger!: Trigger;
 
   @HasMany(() => Action, {
-    foreignKey: 'scene_id'
+    foreignKey: 'sceneId',
+    constraints: false
   })
   actions!: Action[];
 

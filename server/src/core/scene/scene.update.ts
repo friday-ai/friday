@@ -10,7 +10,7 @@ export default async function update(scene: SceneType): Promise<SceneType> {
     if (sceneToUpdate === null) {
       throw logger.error('Scene not found');
     }
-    sceneToUpdate.update(Scene);
+    sceneToUpdate.update(scene);
     let sceneToReturn = <SceneType>sceneToUpdate.get({ plain: true });
     return sceneToReturn;
   } catch (e) {
