@@ -7,25 +7,28 @@ import Device from './device';
 import State from './state';
 
 @DefaultScope({
-  attributes: ['id', 'name', 'houseId'],
-  include: [() => House]
+  attributes: ['id', 'name', 'houseId']
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'houseId'],
     include: [() => House, () => Device, () => Satellite, () => State]
   },
+  withHouse: {
+    attributes: ['id', 'name', 'houseId'],
+    include: [() => House]
+  },
   withState: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => House, () => State]
+    include: [() => State]
   },
   withDevices: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => House, () => Device]
+    include: [() => Device]
   },
   withSatellites: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => House, () => Satellite]
+    include: [() => Satellite]
   }
 })
 @Table({
@@ -48,21 +51,25 @@ export default class Room extends Model<Room> {
   name!: string;
 
   @AllowNull(false)
+  @NotEmpty
   @Column(DataType.UUIDV4)
   houseId!: string;
 
   @BelongsTo(() => House, {
-    foreignKey: 'house_id'
+    foreignKey: 'houseId',
+    constraints: false
   })
   house!: House;
 
   @HasMany(() => Device, {
-    foreignKey: 'room_id'
+    foreignKey: 'roomId',
+    constraints: false
   })
   devices!: Device[];
 
   @HasMany(() => Satellite, {
-    foreignKey: 'room_id'
+    foreignKey: 'roomId',
+    constraints: false
   })
   satellites!: Satellite[];
 
