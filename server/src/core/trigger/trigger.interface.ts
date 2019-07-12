@@ -1,7 +1,7 @@
 import Scene from '../scene/scene.interface';
 import { AvailableConditions } from '../../utils/constants';
 
-export default interface SatelliteType {
+export default interface TriggerType {
   id: string;
   name?: string;
   description?: string;

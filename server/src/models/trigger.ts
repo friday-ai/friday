@@ -1,9 +1,15 @@
-import { Table, Column, Model, PrimaryKey, HasMany, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, HasMany, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Scopes } from 'sequelize-typescript';
 import Scene from './scene';
 import { AvailableConditions } from '../utils/constants';
 
 @DefaultScope({
-  include: [() => Scene]
+  attributes: ['id', 'name', 'description', 'type', 'rules']
+})
+@Scopes({
+  full: {
+    attributes: ['id', 'name', 'description', 'type', 'rules'],
+    include: [() => Scene]
+  }
 })
 @Table({
   tableName: 'trigger',
@@ -37,7 +43,8 @@ export default class Trigger extends Model<Trigger> {
   rules: any;
 
   @HasMany(() => Scene, {
-    foreignKey: 'trigger_id'
+    foreignKey: 'triggerId',
+    constraints: false
   })
   scenes!: Scene[];
 
