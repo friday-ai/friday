@@ -8,11 +8,7 @@ export default async function getById(id: string, scope?: string): Promise<Scrip
 
     let script;
 
-    if (scope !== '' && scope !== null && scope !== undefined) {
-      script = await Script.scope(scope).findByPk(id);
-    } else {
-      script = await Script.findByPk(id);
-    }
+    script = await Script.findByPk(id);
 
     if (script === null) {
       throw logger.error('Script not found');

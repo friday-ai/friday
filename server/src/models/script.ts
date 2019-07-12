@@ -1,5 +1,8 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
 
+@DefaultScope({
+  attributes: ['id', 'name', 'code']
+})
 @Table({
   tableName: 'script',
   underscored: true

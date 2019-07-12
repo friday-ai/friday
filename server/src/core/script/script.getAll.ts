@@ -16,17 +16,10 @@ export default async function getAll(options?: GetOptions): Promise<ScriptType[]
 
     let scripts;
 
-    if (options.scope !== '' && options.scope !== null && options.scope !== undefined) {
-      scripts = await Script.scope(options.scope).findAll({
-        limit: options.take,
-        offset: options.skip
-      });
-    } else {
-      scripts = await Script.findAll({
-        limit: options.take,
-        offset: options.skip
-      });
-    }
+    scripts = await Script.findAll({
+      limit: options.take,
+      offset: options.skip
+    });
 
     const scriptsPlain = <ScriptType[]>scripts.map((script) => {
       const scriptPlain = script.get({ plain: true });
