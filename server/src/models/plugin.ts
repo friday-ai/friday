@@ -7,21 +7,28 @@ import Variable from './variable';
 import Device  from './device';
 
 @DefaultScope({
-  attributes: ['id', 'name', 'version', 'satelliteId'],
-  include: [() => Satellite]
+  attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId']
 })
 @Scopes({
   full: {
-    attributes: ['id', 'name', 'version', 'satelliteId'],
-    include: [() => Satellite, () => State, () => Variable]
+    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    include: [() => Satellite, () => State, () => Device, () => Variable]
+  },
+  withSatellite: {
+    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    include: [() => Satellite]
   },
   withState: {
-    attributes: ['id', 'name', 'version', 'satelliteId'],
-    include: [() => Satellite, () => State]
+    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    include: [() => State]
+  },
+  withDevices: {
+    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    include: [() => Device]
   },
   withVariables: {
-    attributes: ['id', 'name', 'version', 'satelliteId'],
-    include: [() => Satellite, () => Variable]
+    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    include: [() => Variable]
   }
 })
 @Table({
@@ -48,16 +55,27 @@ export default class Plugin extends Model<Plugin> {
   version!: string;
 
   @AllowNull(false)
+  @NotEmpty
+  @Column
+  url!: string;
+
+  @AllowNull(false)
+  @Column
+  enabled!: boolean;
+
+  @AllowNull(false)
   @Column(DataType.UUIDV4)
   satelliteId!: string;
 
   @BelongsTo(() => Satellite, {
-    foreignKey: 'satellite_id'
+    foreignKey: 'satelliteId',
+    constraints: false
   })
   satellite!: Satellite;
 
   @HasMany(() => Device, {
-    foreignKey: 'plugin_id'
+    foreignKey: 'pluginId',
+    constraints: false
   })
   devices!: Device[];
 

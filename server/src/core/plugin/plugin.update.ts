@@ -11,7 +11,7 @@ export default async function update(plugin: PluginType): Promise<PluginType> {
     if (pluginToUpdate === null) {
       throw logger.error('Plugin not found');
     }
-    pluginToUpdate.update(Plugin);
+    pluginToUpdate.update(plugin);
     let pluginToReturn = <PluginType>pluginToUpdate.get({ plain: true });
     return pluginToReturn;
 
