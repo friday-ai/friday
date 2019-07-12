@@ -1,9 +1,15 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Scopes } from 'sequelize-typescript';
 import Scene from './scene';
 import { ActionsType } from '../utils/constants';
 
 @DefaultScope({
-  include: [() => Scene]
+  attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
+})
+@Scopes({
+  full: {
+    attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
+    include: [() => Scene]
+  }
 })
 @Table({
   tableName: 'action',
@@ -46,7 +52,8 @@ export default class Action extends Model<Action> {
   sceneId!: string;
 
   @BelongsTo(() => Scene, {
-    foreignKey: 'scene_id'
+    foreignKey: 'sceneId',
+    constraints: false
   })
   scene!: Scene;
 
