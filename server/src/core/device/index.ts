@@ -4,7 +4,7 @@ import destroy from './device.destroy';
 import getAll from './device.getAll';
 import getById from './device.getById';
 
-export default class House {
+export default class Device {
   create = create;
   update = update;
   destoy = destroy;

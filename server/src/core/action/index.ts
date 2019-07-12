@@ -4,7 +4,7 @@ import destroy from './action.destroy';
 import getAll from './action.getAll';
 import getById from './action.getById';
 
-export default class House {
+export default class Action {
   create = create;
   update = update;
   destoy = destroy;
