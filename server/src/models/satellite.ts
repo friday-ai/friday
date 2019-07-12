@@ -7,13 +7,16 @@ import Variable from './variable';
 import Plugin from './plugin';
 
 @DefaultScope({
-  attributes: ['id', 'name', 'roomId'],
-  include: [() => Room]
+  attributes: ['id', 'name', 'roomId']
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => State, () => Variable]
+    include: [() => Room, () => Plugin, () => State, () => Variable]
+  },
+  withRoom: {
+    attributes: ['id', 'name', 'roomId'],
+    include: [() => Room]
   },
   withState: {
     attributes: ['id', 'name', 'roomId'],
@@ -22,6 +25,10 @@ import Plugin from './plugin';
   withVariables: {
     attributes: ['id', 'name', 'roomId'],
     include: [() => Variable]
+  },
+  withPlugins: {
+    attributes: ['id', 'name', 'roomId'],
+    include: [() => Plugin]
   }
 })
 @Table({
@@ -44,11 +51,13 @@ export default class Satellite extends Model<Satellite> {
   name!: string;
 
   @AllowNull(false)
+  @NotEmpty
   @Column(DataType.UUIDV4)
   roomId!: string;
 
   @BelongsTo(() => Room, {
-    foreignKey: 'room_id'
+    foreignKey: 'roomId',
+    constraints: false
   })
   room!: Room;
 
@@ -59,7 +68,8 @@ export default class Satellite extends Model<Satellite> {
   variables?: Variable[];
 
   @HasMany(() => Plugin, {
-    foreignKey: 'satellite_id'
+    foreignKey: 'satelliteId',
+    constraints: false
   })
   plugins?: Plugin[];
 
