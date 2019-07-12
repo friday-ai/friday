@@ -7,21 +7,24 @@ import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../utils/consta
 import State from './state';
 
 @DefaultScope({
-  attributes: ['id', 'name', 'type', 'subType', 'variable', 'variableValue', 'unit', 'value'],
-  include: [() => Room]
+  attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
 })
 @Scopes({
   full: {
-    attributes: ['id', 'name', 'type', 'subType', 'variable', 'variableValue', 'unit', 'value', 'roomId', 'pluginId'],
+    attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
     include: [() => Room, () => Plugin, () => State]
   },
+  withRoom: {
+    attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+    include: [() => Room]
+  },
   withPlugin: {
-    attributes: ['id', 'name', 'type', 'subType', 'variable', 'variableValue', 'unit', 'value', 'roomId', 'pluginId'],
-    include: [() => Room, () => Plugin]
+    attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+    include: [() => Plugin]
   },
   withState: {
-    attributes: ['id', 'name', 'type', 'subType', 'variable', 'variableValue', 'unit', 'value', 'roomId'],
-    include: [() => Room]
+    attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+    include: [() => State]
   }
 })
 @Table({
@@ -64,7 +67,8 @@ export default class Device extends Model<Device> {
   roomId!: string;
 
   @BelongsTo(() => Room, {
-    foreignKey: 'room_id'
+    foreignKey: 'roomId',
+    constraints: false
   })
   room!: Room;
 
@@ -72,7 +76,8 @@ export default class Device extends Model<Device> {
   pluginId!: string;
 
   @BelongsTo(() => Plugin, {
-    foreignKey: 'plugin_id'
+    foreignKey: 'pluginId',
+    constraints: false
   })
   plugin!: Plugin;
 
