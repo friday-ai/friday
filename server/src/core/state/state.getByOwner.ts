@@ -3,20 +3,14 @@ import StateType from './state.interface';
 import Log from '../../utils/log';
 const logger = new Log();
 
-export default async function getByOwner(owner: string, scope?: string): Promise<StateType> {
+export default async function getByOwner(owner: string): Promise<StateType> {
   try {
 
     let state;
 
-    if (scope !== '' && scope !== null && scope !== undefined) {
-      state = await State.scope(scope).findOne({
-        where: { owner: owner}
-      });
-    } else {
-      state = await State.findOne({
-        where: { owner: owner}
-      });
-    }
+    state = await State.findOne({
+      where: { owner: owner}
+    });
 
     if (state === null) {
       throw logger.error('State not found');
