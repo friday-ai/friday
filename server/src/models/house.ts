@@ -3,13 +3,20 @@ import Room from './room';
 import State from './state';
 
 @DefaultScope({
-  attributes: ['id', 'name', 'latitude', 'longitude'],
-  include: [() => Room]
+  attributes: ['id', 'name', 'latitude', 'longitude']
 })
 @Scopes({
-  withState: {
+  full: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
     include: [() => Room, () => State]
+  },
+  withRooms: {
+    attributes: ['id', 'name', 'latitude', 'longitude'],
+    include: [() => Room]
+  },
+  withState: {
+    attributes: ['id', 'name', 'latitude', 'longitude'],
+    include: [() => State]
   }
 })
 @Table({
@@ -40,7 +47,8 @@ export default class House extends Model<House> {
   longitude!: string;
 
   @HasMany(() => Room, {
-    foreignKey: 'house_id'
+    foreignKey: 'houseId',
+    constraints: false
   })
   rooms!: Room[];
 

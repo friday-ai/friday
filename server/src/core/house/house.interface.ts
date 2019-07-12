@@ -6,6 +6,6 @@ export default interface HouseType {
   name?: string;
   latitude?: string;
   longitude?: string;
-  rooms?: RoomType[];
+  rooms?: Array<RoomType[]>;
   state?: StateType;
 }
