@@ -10,6 +10,18 @@ const DEFAULT_OPTIONS: GetOptions = {
   skip: 0
 };
 
+/**
+ * @name script.getAll
+ * @description Get list of scripts.
+ * @param {Getoptions} options - Options of the query.
+ * @returns {Promise<ScriptType[]>} Resolve with script array.
+ * @example
+ * friday.script.getAll({
+ *    scope: '',
+ *    take: 20,
+ *    skip: 0
+ *  });
+ */
 export default async function getAll(options?: GetOptions): Promise<ScriptType[]> {
   try {
     options = Object.assign({}, DEFAULT_OPTIONS, options);
