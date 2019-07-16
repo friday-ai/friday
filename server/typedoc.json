@@ -1,0 +1,21 @@
+{
+  "excludeExternals": true,
+  "excludeNotExported": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "ignoreCompilerErrors": "false",
+  "preserveConstEnums": "true",
+  "mode": "modules",
+  "out": "docs",
+  "exclude": [
+    "test/**",
+    "node_modules",
+    "src/core/friday.ts"
+  ],
+  "theme": "markdown",
+  "platform": "gitbook",
+  "external-modulemap": ".*\/src\/core\/([\\w\\-_]+)\/",
+  "module": "commonjs",
+  "hideGenerator": true,
+  "stripInternal": true
+}
