@@ -3,6 +3,15 @@ import TriggerType from './trigger.interface';
 import Log from '../../utils/log';
 const logger = new Log();
 
+/**
+ * @name trigger.getById
+ * @description Get a trigger by id.
+ * @param {String} id - Id of trigger.
+ * @param {String} scope - Scope option. (Optional)
+ * @returns {Promise<TriggerType>} Resolve with trigger.
+ * @example
+ * friday.trigger.getById('7f4bc504-16bd-4a78-aab1-48243237ab5c', 'full');
+ */
 export default async function getById(id: string, scope?: string): Promise<TriggerType> {
   try {
 
