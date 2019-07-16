@@ -10,6 +10,18 @@ const DEFAULT_OPTIONS: GetOptions = {
   skip: 0
 };
 
+/**
+ * @name scene.getAll
+ * @description Get list of scenes.
+ * @param {Getoptions} options - Options of the query.
+ * @returns {Promise<SceneType[]>} Resolve with scene array.
+ * @example
+ * friday.scene.getAll({
+ *    scope: '',
+ *    take: 20,
+ *    skip: 0
+ *  });
+ */
 export default async function getAll(options?: GetOptions): Promise<SceneType[]> {
   try {
     options = Object.assign({}, DEFAULT_OPTIONS, options);
