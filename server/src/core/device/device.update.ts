@@ -3,6 +3,17 @@ import DeviceType from './device.interface';
 import Log from '../../utils/log';
 const logger = new Log();
 
+/**
+ * @name device.update
+ * @description Update a device.
+ * @param {DeviceType} device - A device object.
+ * @returns {Promise<DeviceType>} Resolve with updated device.
+ * @example
+ * friday.device.update({
+ *   id: '36440e00-bef2-4cdb-883e-1bada5bc501b'
+ *   name: 'device update'
+ * });
+ */
 export default async function update(device: DeviceType): Promise<DeviceType> {
   try {
 

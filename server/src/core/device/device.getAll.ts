@@ -10,6 +10,18 @@ const DEFAULT_OPTIONS: GetOptions = {
   skip: 0
 };
 
+/**
+ * @name device.getAll
+ * @description Get list of devices.
+ * @param {Getoptions} options - Options of the query.
+ * @returns {Promise<DeviceType[]>} Resolve with device array.
+ * @example
+ * friday.device.getAll({
+ *    scope: '',
+ *    take: 20,
+ *    skip: 0
+ *  });
+ */
 export default async function getAll(options?: GetOptions): Promise<DeviceType[]> {
   try {
     options = Object.assign({}, DEFAULT_OPTIONS, options);
