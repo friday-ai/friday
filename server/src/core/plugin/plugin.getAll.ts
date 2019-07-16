@@ -10,6 +10,18 @@ const DEFAULT_OPTIONS: GetOptions = {
   skip: 0
 };
 
+/**
+ * @name plugin.getAll
+ * @description Get list of plugins.
+ * @param {Getoptions} options - Options of the query.
+ * @returns {Promise<PluginType[]>} Resolve with plugin array.
+ * @example
+ * friday.plugin.getAll({
+ *    scope: '',
+ *    take: 20,
+ *    skip: 0
+ *  });
+ */
 export default async function getAll(options?: GetOptions): Promise<PluginType[]> {
   try {
     options = Object.assign({}, DEFAULT_OPTIONS, options);

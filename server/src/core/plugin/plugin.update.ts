@@ -3,6 +3,17 @@ import PluginType from './plugin.interface';
 import Log from '../../utils/log';
 const logger = new Log();
 
+/**
+ * @name plugin.update
+ * @description Update a plugin.
+ * @param {PluginType} plugin - A plugin object.
+ * @returns {Promise<PluginType>} Resolve with updated plugin.
+ * @example
+ * friday.plugin.update({
+ *   id: '40d43cf1-2127-41e9-ac69-9e39636fac20'
+ *   name: 'plugin update'
+ * });
+ */
 export default async function update(plugin: PluginType): Promise<PluginType> {
   try {
 
