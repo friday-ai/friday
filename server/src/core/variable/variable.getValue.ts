@@ -3,6 +3,14 @@ import VariableType from './variable.interface';
 import Log from '../../utils/log';
 const logger = new Log();
 
+/**
+ * @name variable.getValue
+ * @description Get a variable value by key.
+ * @param {String} key - Key of variable.
+ * @returns {Promise<VariableType>} Resolve with variable.
+ * @example
+ * friday.variable.getValue('key');
+ */
 export default async function getValue(key: string): Promise<VariableType> {
   try {
 

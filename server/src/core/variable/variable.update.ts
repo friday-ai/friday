@@ -3,6 +3,17 @@ import VariableType from './variable.interface';
 import Log from '../../utils/log';
 const logger = new Log();
 
+/**
+ * @name variable.update
+ * @description Update a variable.
+ * @param {VariableType} variable - A variable object.
+ * @returns {Promise<VariableType>} Resolve with updated variable.
+ * @example
+ * friday.variable.update({
+ *   id: '47728070-a1d2-4aaf-9930-47dc82fc1771'
+ *   key: 'variable update'
+ * });
+ */
 export default async function update(variable: VariableType): Promise<VariableType> {
   try {
 
