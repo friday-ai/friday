@@ -10,6 +10,18 @@ const DEFAULT_OPTIONS: GetOptions = {
   skip: 0
 };
 
+/**
+ * @name action.getAll
+ * @description Get list of actions.
+ * @param {Getoptions} options - Options of the query.
+ * @returns {Promise<ActionType[]>} Resolve with action array.
+ * @example
+ * friday.action.getAll({
+ *     scope: '',
+ *     take: 20,
+ *     skip: 0
+ *   });
+ */
 export default async function getAll(options?: GetOptions): Promise<ActionType[]> {
   try {
     options = Object.assign({}, DEFAULT_OPTIONS, options);
