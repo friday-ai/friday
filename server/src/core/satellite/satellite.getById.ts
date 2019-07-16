@@ -3,6 +3,15 @@ import SatelliteType from './satellite.interface';
 import Log from '../../utils/log';
 const logger = new Log();
 
+/**
+ * @name satellite.getById
+ * @description Get a satellite by id.
+ * @param {String} id - Id of satellite.
+ * @param {String} scope - Scope option. (Optional)
+ * @returns {Promise<SatelliteType>} Resolve with satellite.
+ * @example
+ * friday.satellite.getById('d30cad70-503a-43ed-8913-c80a80c5ba6a', 'full');
+ */
 export default async function getById(id: string, scope?: string): Promise<SatelliteType> {
   try {
 

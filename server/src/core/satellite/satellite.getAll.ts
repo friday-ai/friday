@@ -10,6 +10,18 @@ const DEFAULT_OPTIONS: GetOptions = {
   skip: 0
 };
 
+/**
+ * @name satellite.getAll
+ * @description Get list of satellites.
+ * @param {Getoptions} options - Options of the query.
+ * @returns {Promise<SatelliteType[]>} Resolve with satellite array.
+ * @example
+ * friday.satellite.getAll({
+ *    scope: '',
+ *    take: 20,
+ *    skip: 0
+ *  });
+ */
 export default async function getAll(options?: GetOptions): Promise<SatelliteType[]> {
   try {
     options = Object.assign({}, DEFAULT_OPTIONS, options);
