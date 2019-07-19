@@ -7,12 +7,7 @@ import DeviceType from '../device/device.interface';
 import SatelliteType from '../satellite/satellite.interface';
 
 /**
- * @name StateType
- * @description State interface.
- * @param {String} id - Id of state.
- * @param {String} owner - Owner of state.
- * @param {StateOwner} ownerType - A owner type of state.
- * @param {AvailableState} value - A state value.
+ * State interface.
  */
 export default interface StateType {
   id: string;

@@ -11,16 +11,17 @@ const DEFAULT_OPTIONS: GetOptions = {
 };
 
 /**
- * @name trigger.getAll
- * @description Get list of triggers.
+ * Get all triggers.
  * @param {Getoptions} options - Options of the query.
  * @returns {Promise<TriggerType[]>} Resolve with trigger array.
  * @example
+ * ````
  * friday.trigger.getAll({
  *    scope: '',
  *    take: 20,
  *    skip: 0
  *  });
+ * ````
  */
 export default async function getAll(options?: GetOptions): Promise<TriggerType[]> {
   try {

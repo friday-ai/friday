@@ -13,7 +13,6 @@
     "src/core/friday.ts"
   ],
   "theme": "markdown",
-  "platform": "gitbook",
   "external-modulemap": ".*\/src\/core\/([\\w\\-_]+)\/",
   "module": "commonjs",
   "hideGenerator": true,

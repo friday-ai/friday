@@ -11,16 +11,17 @@ const DEFAULT_OPTIONS: GetOptions = {
 };
 
 /**
- * @name house.getAll
- * @description Get list of houses.
+ * Get all houses.
  * @param {Getoptions} options - Options of the query.
  * @returns {Promise<HouseType[]>} Resolve with house array.
  * @example
+ * ````
  * friday.house.getAll({
  *    scope: '',
  *    take: 20,
  *    skip: 0
  *  });
+ * ````
  */
 export default async function getAll(options?: GetOptions): Promise<HouseType[]> {
   try {

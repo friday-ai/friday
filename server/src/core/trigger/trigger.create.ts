@@ -4,11 +4,11 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name trigger.create
- * @description Create a trigger.
+ * Create a trigger.
  * @param {TriggerType} trigger - A trigger object.
  * @returns {Promise<TriggerType>} Resolve with created trigger.
  * @example
+ * ````
  * friday.trigger.create({
  *    id: '41a0c318-efe0-46c9-885b-545481a32f3d',
  *    name: 'Sample trigger',
@@ -19,6 +19,7 @@ const logger = new Log();
  *      value: '23'
  *    })
  * });
+ * ````
  */
 export default async function create(trigger: TriggerType): Promise<TriggerType> {
   try {

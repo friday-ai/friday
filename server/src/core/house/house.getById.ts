@@ -4,13 +4,14 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name house.getById
- * @description Get a house by id.
+ * Get a house by id.
  * @param {String} id - Id of house.
  * @param {String} scope - Scope option. (Optional)
  * @returns {Promise<HouseType>} Resolve with house.
  * @example
+ * ````
  * friday.device.getById('6be1d66d-da22-47c2-b7d0-54b51429db62', 'full');
+ * ````
  */
 export default async function getById(id: string, scope?: string): Promise<HouseType> {
   try {

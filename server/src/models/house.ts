@@ -2,6 +2,9 @@ import { Table, Column, Model, PrimaryKey, DataType, HasMany, HasOne, IsUUID, Al
 import Room from './room';
 import State from './state';
 
+/**
+ * House model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'latitude', 'longitude']
 })

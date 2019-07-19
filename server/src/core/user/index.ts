@@ -4,6 +4,9 @@ import destroy from './user.destroy';
 import getAll from './user.getAll';
 import getById from './user.getById';
 
+/**
+ * User
+ */
 export default class User {
   create = create;
   update = update;

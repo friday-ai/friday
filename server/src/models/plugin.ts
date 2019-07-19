@@ -6,6 +6,9 @@ import State from './state';
 import Variable from './variable';
 import Device  from './device';
 
+/**
+ * Plugin model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId']
 })

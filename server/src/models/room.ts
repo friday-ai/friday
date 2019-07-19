@@ -6,6 +6,9 @@ import Satellite from './satellite';
 import Device from './device';
 import State from './state';
 
+/**
+ * Room model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'houseId']
 })

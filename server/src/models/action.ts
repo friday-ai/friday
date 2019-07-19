@@ -2,6 +2,9 @@ import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNul
 import Scene from './scene';
 import { ActionsType } from '../utils/constants';
 
+/**
+ * Action model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
 })

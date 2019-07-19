@@ -7,6 +7,9 @@ import House from './house';
 import Device from './device';
 import Plugin from './plugin';
 
+/**
+ * Scene model
+ */
 @DefaultScope({
   attributes: ['id', 'owner', 'ownerType', 'value']
 })

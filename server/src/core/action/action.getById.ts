@@ -4,13 +4,14 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name action.getById
- * @description Get a action by id.
+ * Get action by id
  * @param {String} id - Id of action.
  * @param {String} scope - Scope option. (Optional)
  * @returns {Promise<ActionType>} Resolve with action.
  * @example
+ * ````
  * friday.device.getById('0480d9b4-0968-491a-8693-b1788ae0dc7d', 'full');
+ * ````
  */
 export default async function getById(id: string, scope?: string): Promise<ActionType> {
   try {

@@ -4,6 +4,9 @@ import destroy from './satellite.destroy';
 import getAll from './satellite.getAll';
 import getById from './satellite.getById';
 
+/**
+ * Satellite
+ */
 export default class Satellite {
   create = create;
   update = update;

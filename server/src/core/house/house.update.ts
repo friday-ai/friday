@@ -4,15 +4,16 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name house.update
- * @description Update an house.
+ * Update an house.
  * @param {HouseType} house - An house object.
  * @returns {Promise<HouseType>} Resolve with updated house.
  * @example
+ * ````
  * friday.house.update({
  *   id: '40d43cf1-2127-41e9-ac69-9e39636fac20'
  *   name: 'house update'
  * });
+ * ````
  */
 export default async function update(house: HouseType): Promise<HouseType> {
   try {

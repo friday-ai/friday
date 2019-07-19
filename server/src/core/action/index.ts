@@ -4,6 +4,9 @@ import destroy from './action.destroy';
 import getAll from './action.getAll';
 import getById from './action.getById';
 
+/**
+ * Action
+ */
 export default class Action {
   create = create;
   update = update;

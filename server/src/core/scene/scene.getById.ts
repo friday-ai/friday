@@ -4,13 +4,14 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name scene.getById
- * @description Get a scene by id.
+ * Get a scene by id.
  * @param {String} id - Id of scene.
  * @param {String} scope - Scope option. (Optional)
  * @returns {Promise<SceneType>} Resolve with scene.
  * @example
+ * ````
  * friday.scene.getById('d0766a83-68e7-44aa-9124-f8e5fa137304', 'full');
+ * ````
  */
 export default async function getById(id: string, scope?: string): Promise<SceneType> {
   try {

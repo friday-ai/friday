@@ -3,12 +3,13 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name user.desrtoy
- * @description Destroy a user.
+ * Destroy a user.
  * @param {String} id - Id of user.
  * @returns {Promise<void>}
  * @example
+ * ````
  * friday.user.destroy('e8768abf-f6c9-4689-9ca4-2fe663e4ce9f');
+ * ````
  */
 export default async function destroy(id: string): Promise<void> {
   try {

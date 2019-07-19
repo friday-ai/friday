@@ -11,16 +11,17 @@ const DEFAULT_OPTIONS: GetOptions = {
 };
 
 /**
- * @name user.getAll
- * @description Get list of users.
+ * GEt all users.
  * @param {Getoptions} options - Options of the query.
  * @returns {Promise<UserType[]>} Resolve with user array.
  * @example
+ * ````
  * friday.user.getAll({
  *    scope: '',
  *    take: 20,
  *    skip: 0
  *  });
+ * ````
  */
 export default async function getAll(options?: GetOptions): Promise<UserType[]> {
   try {

@@ -5,17 +5,7 @@ import StateType from '../state/state.interface';
 import PluginType from '../plugin/plugin.interface';
 
 /**
- * @name DeviceType
- * @description Device interface.
- * @param {String} id - Id of device.
- * @param {String} name - Name of device.
- * @param {AvailableTypeOfDevice} type - Type of device.
- * @param {AvailableSubTypeOfDevice} subType - Sub type of device.
- * @param {Any} variable - Variables of device. (Must be a JSON)
- * @param {String} unit - Unite of device.
- * @param {String} value - Value of device.
- * @param {String} roomId - Identifier of the room in which the device is located
- * @param {String} pluginId - Id of the owner plugin.
+ * Device interface.
  */
 export default interface DeviceType {
   id: string;

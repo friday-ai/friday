@@ -6,6 +6,9 @@ import Room from './room';
 import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../utils/constants';
 import State from './state';
 
+/**
+ * Device model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
 })

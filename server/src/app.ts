@@ -3,6 +3,9 @@ import express from 'express';
 import * as bodyParser from 'body-parser';
 import Log from './utils/log';
 
+/**
+ * Server class
+ */
 export default class Server {
   readonly port: number;
 
@@ -10,6 +13,10 @@ export default class Server {
     this.port = port;
   }
 
+  /**
+   * Start function of server
+   * @memberof Server
+   */
   start() {
     const app = express();
     const logger = new Log();

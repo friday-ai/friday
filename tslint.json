@@ -9,6 +9,19 @@
   },
   "extends": ["tslint-consistent-codestyle"],
   "rules": {
+    "completed-docs": [true, {
+      "classes": {"visibilities": ["exported"]},
+      "functions": {"visibilities": ["exported"]},
+      "interfaces": {"visibilities": ["exported"], "properties": false},
+      "methods": {"privacies": ["protected", "public"]},
+      "namespaces": {"visibilities": ["exported"]},
+      "types": {"visibilities": ["exported"]},
+      "variables": {"visibilities": ["exported"]},
+      "tags": {
+        "content": {},
+        "exists": ["inheritDoc"]
+      }
+    }],
     "align": [
       true,
       "parameters",

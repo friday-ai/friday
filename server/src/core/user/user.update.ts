@@ -4,15 +4,16 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name user.update
- * @description Update a user.
+ * Update a user.
  * @param {UserType} user - A user object.
  * @returns {Promise<UserType>} Resolve with updated user.
  * @example
+ * ````
  * friday.user.update({
  *   id: 'f8be3bad-3d46-4009-b965-fe03a4d6d5f1'
  *   name: 'user update'
  * });
+ * ````
  */
 export default async function update(user: UserType): Promise<UserType> {
   try {

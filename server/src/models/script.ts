@@ -1,5 +1,8 @@
 import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
 
+/**
+ * Script model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'code']
 })

@@ -2,6 +2,9 @@ import { Table, Column, Model, PrimaryKey, HasMany, DataType, IsUUID, AllowNull,
 import Scene from './scene';
 import { AvailableConditions } from '../utils/constants';
 
+/**
+ * Trigger model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'description', 'type', 'rules']
 })

@@ -4,15 +4,16 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name room.update
- * @description Update a room.
+ * Update a room.
  * @param {RoomType} room - A room object.
  * @returns {Promise<RoomType>} Resolve with updated room.
  * @example
+ * ````
  * friday.room.update({
  *   id: '31f61b90-27cc-4bf6-9855-4cc59526157b'
  *   name: 'room update'
  * });
+ * ````
  */
 export default async function update(room: RoomType): Promise<RoomType> {
   try {

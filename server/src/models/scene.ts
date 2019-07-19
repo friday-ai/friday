@@ -2,6 +2,9 @@ import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID,
 import Trigger from './trigger';
 import Action from './action';
 
+/**
+ * Scene model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'description', 'triggerId']
 })

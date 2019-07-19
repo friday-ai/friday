@@ -3,12 +3,13 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name house.desrtoy
- * @description Destroy an house.
+ * Destroy an house.
  * @param {String} id - Id of house.
  * @returns {Promise<void>}
  * @example
+ * ````
  * friday.house.destroy('d5988c5b-c3ae-4aff-ab63-037d855c1978');
+ * ````
  */
 export default async function destroy(id: string): Promise<void> {
   try {

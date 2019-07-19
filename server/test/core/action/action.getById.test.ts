@@ -24,7 +24,7 @@ describe('action.getAll', () => {
 
   it('should return an action with full scope', async () => {
 
-    const actionReturned = await action.getById('33ab56b0-4064-40d0-b1f4-1e426bff1ea3', 'full')
+    const actionReturned = await action.getById('33ab56b0-4064-40d0-b1f4-1e426bff1ea3', 'full');
 
     expect(actionReturned).toBeObject();
     expect(actionReturned).toHaveProperty('id');

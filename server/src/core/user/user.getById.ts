@@ -5,13 +5,14 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name user.getById
- * @description Get a user by id.
+ * Get a user by id.
  * @param {String} id - Id of user.
  * @param {String} scope - Scope option. (Optional)
  * @returns {Promise<UserType>} Resolve with user.
  * @example
+ * ````
  * friday.user.getById('a8ba342e-854a-4906-8670-d400c868bdb1', 'full');
+ * ````
  */
 export default async function getById(id: string, scope?: string): Promise<UserType> {
   try {

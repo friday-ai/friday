@@ -11,16 +11,17 @@ const DEFAULT_OPTIONS: GetOptions = {
 };
 
 /**
- * @name plugin.getAll
- * @description Get list of plugins.
+ * Get all plugins.
  * @param {Getoptions} options - Options of the query.
  * @returns {Promise<PluginType[]>} Resolve with plugin array.
  * @example
+ * ````
  * friday.plugin.getAll({
  *    scope: '',
  *    take: 20,
  *    skip: 0
  *  });
+ * ````
  */
 export default async function getAll(options?: GetOptions): Promise<PluginType[]> {
   try {

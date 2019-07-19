@@ -6,6 +6,9 @@ import State from './state';
 import Variable from './variable';
 import Plugin from './plugin';
 
+/**
+ * Satellite model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'roomId']
 })

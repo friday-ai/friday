@@ -3,12 +3,13 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name device.desrtoy
- * @description Destroy a device.
+ * Destroy a device.
  * @param {String} id - Id of device.
  * @returns {Promise<void>}
  * @example
+ * ````
  * friday.device.destroy('ffba6936-2ce0-411c-91c9-6f1dd6ed0b17');
+ * ````
  */
 export default async function destroy(id: string): Promise<void> {
   try {

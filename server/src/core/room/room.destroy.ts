@@ -3,12 +3,13 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name room.desrtoy
- * @description Destroy a room.
+ * Destroy a room.
  * @param {String} id - Id of room.
  * @returns {Promise<void>}
  * @example
+ * ````
  * friday.room.destroy('c61a79e0-fb49-43be-bd45-507864de978f');
+ * ````
  */
 export default async function destroy(id: string): Promise<void> {
   try {

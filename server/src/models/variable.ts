@@ -4,6 +4,9 @@ import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
 
+/**
+ * Variable model
+ */
 @DefaultScope({
   attributes: ['id', 'key', 'value', 'owner', 'ownerType']
 })

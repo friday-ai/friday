@@ -4,11 +4,11 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name action.create
- * @description Create an action.
+ * Create an action
  * @param {ActionType} action - An action object.
  * @returns {Promise<ActionType>} Resolve with created action.
  * @example
+ * ````
  * friday.action.create({
  *    id: '53dd38a4-f462-4021-a82f-92aca2aa8dea',
  *    name: 'action sample',
@@ -19,6 +19,8 @@ const logger = new Log();
  *    variableValue: 'action sample variable value',
  *    sceneId: '8a7823aa-8ec9-4169-b5b9-40ad52804f67'
  * });
+ * ````
+ * @memberof Action
  */
 export default async function create(action: ActionType): Promise<ActionType> {
   try {

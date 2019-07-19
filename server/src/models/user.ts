@@ -6,6 +6,9 @@ import { UserRole, AvailableLanguages } from '../utils/constants';
 import State from './state';
 import { hash } from '../../src/utils/password';
 
+/**
+ * User model
+ */
 @DefaultScope({
   attributes: ['id', 'name', 'firstName', 'email', 'birthDate']
 })
@@ -85,6 +88,9 @@ export default class User extends Model<User> {
   })
   state?: State;
 
+  /**
+   * Function to hash password before saving in the database
+   */
   @BeforeCreate
   static async hashPassword(user: User) {
     user.password = await hash(user.password!);

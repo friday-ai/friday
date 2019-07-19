@@ -4,13 +4,14 @@ import Log from '../../utils/log';
 const logger = new Log();
 
 /**
- * @name script.getById
- * @description Get a script by id.
+ * Get a script by id.
  * @param {String} id - Id of script.
  * @param {String} scope - Scope option. (Optional)
  * @returns {Promise<ScriptType>} Resolve with script.
  * @example
+ * ````
  * friday.script.getById('e16be2ff-9ee3-4373-8b40-9f0a2ff04ed3', 'full');
+ * ````
  */
 export default async function getById(id: string, scope?: string): Promise<ScriptType> {
   try {

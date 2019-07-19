@@ -4,6 +4,9 @@ import destroy from './plugin.destroy';
 import getAll from './plugin.getAll';
 import getById from './plugin.getById';
 
+/**
+ * Plugin
+ */
 export default class Plugin {
   create = create;
   update = update;

@@ -97,6 +97,9 @@ export enum ActionsType {
   OTHER = 'other'
 }
 
+/**
+ * Options for core functions type 'getAll'
+ */
 export interface GetOptions {
   scope?: string;
   take?: number;
