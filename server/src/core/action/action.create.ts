@@ -20,7 +20,6 @@ const logger = new Log();
  *    sceneId: '8a7823aa-8ec9-4169-b5b9-40ad52804f67'
  * });
  * ````
- * @memberof Action
  */
 export default async function create(action: ActionType): Promise<ActionType> {
   try {
