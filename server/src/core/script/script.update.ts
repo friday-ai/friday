@@ -1,7 +1,6 @@
 import Script from '../../models/script';
 import ScriptType from './script.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Update a script.
@@ -20,12 +19,12 @@ export default async function update(script: ScriptType): Promise<ScriptType> {
     const scriptToUpdate = await Script.findByPk(script.id);
 
     if (scriptToUpdate === null) {
-      throw logger.error('Script not found');
+      throw new NotFoundError({name: 'Update a Script', message: 'Script not found', metadata: script.id});
     }
     scriptToUpdate.update(script);
     let scriptToReturn = <ScriptType>scriptToUpdate.get({ plain: true });
     return scriptToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: script});
   }
 }

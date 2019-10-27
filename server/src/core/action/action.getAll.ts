@@ -1,9 +1,8 @@
 import Action from '../../models/action';
 import ActionType from './action.interface';
-import Log from '../../utils/log';
+import error from '../../utils/error';
 import { GetOptions } from '../../utils/constants';
 
-const logger = new Log();
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
@@ -48,6 +47,6 @@ export default async function getAll(options?: GetOptions): Promise<ActionType[]
 
     return actionsPlain;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: options});
   }
 }

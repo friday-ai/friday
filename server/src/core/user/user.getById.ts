@@ -1,8 +1,6 @@
 import User from '../../models/user';
 import UserType from './user.interface';
-import Log from '../../utils/log';
-
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Get a user by id.
@@ -28,7 +26,7 @@ export default async function getById(id: string, scope?: string): Promise<UserT
     }
 
     if (user === null) {
-      throw logger.error('User not found');
+      throw new NotFoundError({name: 'Get User by Id', message: 'User not found', metadata: id});
     }
 
     let userToReturn = <UserType>user.get({ plain: true });
@@ -37,6 +35,6 @@ export default async function getById(id: string, scope?: string): Promise<UserT
     return userToReturn;
 
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

@@ -1,7 +1,6 @@
 import Trigger from '../../models/trigger';
 import TriggerType from './trigger.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import error from '../../utils/error';
 
 /**
  * Create a trigger.
@@ -27,6 +26,6 @@ export default async function create(trigger: TriggerType): Promise<TriggerType>
     let triggerToReturn = <TriggerType>createdTrigger.get({ plain: true });
     return triggerToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: trigger});
   }
 }

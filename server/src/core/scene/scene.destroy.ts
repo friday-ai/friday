@@ -1,6 +1,5 @@
 import Scene from '../../models/scene';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Destroy a scene.
@@ -16,11 +15,11 @@ export default async function destroy(id: string): Promise<void> {
     const sceneToDelete = await Scene.findByPk(id);
 
     if (sceneToDelete === null) {
-      throw logger.error('Scene not found');
+      throw new NotFoundError({name: 'Destroy an Scene', message: 'Scene not found', metadata: id});
     }
 
     await sceneToDelete.destroy();
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

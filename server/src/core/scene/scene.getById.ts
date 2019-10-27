@@ -1,7 +1,6 @@
 import Scene from '../../models/scene';
 import SceneType from './scene.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Get a scene by id.
@@ -25,13 +24,13 @@ export default async function getById(id: string, scope?: string): Promise<Scene
     }
 
     if (scene === null) {
-      throw logger.error('Scene not found');
+      throw new NotFoundError({name: 'Get Scene by Id', message: 'Scene not found', metadata: id});
     }
 
     let sceneToReturn = <SceneType>scene.get({ plain: true });
 
     return sceneToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

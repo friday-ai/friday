@@ -1,7 +1,6 @@
 import House from '../../models/house';
 import HouseType from './house.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Get a house by id.
@@ -25,13 +24,13 @@ export default async function getById(id: string, scope?: string): Promise<House
     }
 
     if (house === null) {
-      throw logger.error('House not found');
+      throw new NotFoundError({name: 'Get House by Id', message: 'House not found', metadata: id});
     }
 
     let houseToReturn = <HouseType>house.get({ plain: true });
 
     return houseToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

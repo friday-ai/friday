@@ -1,9 +1,8 @@
 import Scene from '../../models/scene';
 import SceneType from './scene.interface';
 import { GetOptions } from '../../utils/constants';
-import Log from '../../utils/log';
+import error from '../../utils/error';
 
-const logger = new Log();
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
@@ -48,6 +47,6 @@ export default async function getAll(options?: GetOptions): Promise<SceneType[]>
 
     return scenesPlain;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: options});
   }
 }

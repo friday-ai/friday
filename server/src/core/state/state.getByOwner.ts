@@ -1,7 +1,6 @@
 import State from '../../models/state';
 import StateType from './state.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Get a state by owner.
@@ -22,13 +21,13 @@ export default async function getByOwner(owner: string): Promise<StateType> {
     });
 
     if (state === null) {
-      throw logger.error('State not found');
+      throw new NotFoundError({name: 'Get State by owner', message: 'State not found', metadata: owner});
     }
 
     let stateToReturn = <StateType>state.get({ plain: true });
 
     return stateToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: owner});
   }
 }

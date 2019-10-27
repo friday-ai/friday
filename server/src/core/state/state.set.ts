@@ -1,7 +1,6 @@
 import State from '../../models/state';
 import StateType from './state.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import error from '../../utils/error';
 
 /**
  * Set a state.
@@ -23,6 +22,6 @@ export default async function create(state: StateType): Promise<StateType> {
     let stateToReturn = <StateType>createdState.get({ plain: true });
     return stateToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: state});
   }
 }

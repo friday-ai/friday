@@ -1,7 +1,6 @@
 import House from '../../models/house';
 import HouseType from './house.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import error from '../../utils/error';
 
 /**
  * Create an house.
@@ -23,6 +22,6 @@ export default async function create(house: HouseType): Promise<HouseType> {
     let houseToReturn = <HouseType>createdHouse.get({ plain: true });
     return houseToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: house});
   }
 }

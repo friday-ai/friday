@@ -1,7 +1,6 @@
 import Scene from '../../models/scene';
 import SceneType from './scene.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Update a scene.
@@ -20,12 +19,12 @@ export default async function update(scene: SceneType): Promise<SceneType> {
     const sceneToUpdate = await Scene.findByPk(scene.id);
 
     if (sceneToUpdate === null) {
-      throw logger.error('Scene not found');
+      throw new NotFoundError({name: 'Update an Scene', message: 'Scene not found', metadata: scene.id});
     }
     sceneToUpdate.update(scene);
     let sceneToReturn = <SceneType>sceneToUpdate.get({ plain: true });
     return sceneToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: scene});
   }
 }

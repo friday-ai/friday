@@ -1,7 +1,6 @@
 import Satellite from '../../models/satellite';
 import SatelliteType from './satellite.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Update a satellite.
@@ -20,12 +19,12 @@ export default async function update(satellite: SatelliteType): Promise<Satellit
     const satelliteToUpdate = await Satellite.findByPk(satellite.id);
 
     if (satelliteToUpdate === null) {
-      throw logger.error('Satellite not found');
+      throw new NotFoundError({name: 'Update a Stallite', message: 'Satellite not found', metadata: satellite.id});
     }
     satelliteToUpdate.update(satellite);
     let satelliteToReturn = <SatelliteType>satelliteToUpdate.get({ plain: true });
     return satelliteToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: satellite});
   }
 }

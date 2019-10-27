@@ -1,6 +1,5 @@
 import Trigger from '../../models/trigger';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Destroy a trigger.
@@ -16,11 +15,11 @@ export default async function destroy(id: string): Promise<void> {
     const triggerToDelete = await Trigger.findByPk(id);
 
     if (triggerToDelete === null) {
-      throw logger.error('Trigger not found');
+      throw new NotFoundError({name: 'Destroy a Trigger', message: 'Trigger not found', metadata: id});
     }
 
     await triggerToDelete.destroy();
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

@@ -1,7 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError, BadParametersError} from '../../utils/error';
 
 /**
  * Update a variable.
@@ -19,7 +18,7 @@ export default async function update(variable: VariableType): Promise<VariableTy
   try {
 
     if (!variable.key || variable.key === '') {
-      throw logger.error('Variable\'s key must be specified');
+      throw new BadParametersError({name: 'Update an Variable', message: 'Variable\'s key must be specified', metadata: variable.key});
     }
 
     const variableToUpdate = await Variable.findOne({
@@ -27,13 +26,13 @@ export default async function update(variable: VariableType): Promise<VariableTy
     });
 
     if (variableToUpdate === null) {
-      throw logger.error('Variable not found');
+      throw new NotFoundError({name: 'Update an Variable', message: 'Variable not found', metadata: variable.key});
     }
 
     variableToUpdate.update(variable);
     let variableToReturn = <VariableType>variableToUpdate.get({ plain: true });
     return variableToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: variable});
   }
 }

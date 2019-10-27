@@ -1,7 +1,6 @@
 import Device from '../../models/device';
 import DeviceType from './device.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Update a device.
@@ -21,13 +20,13 @@ export default async function update(device: DeviceType): Promise<DeviceType> {
     const deviceToUpdate = await Device.findByPk(device.id);
 
     if (deviceToUpdate === null) {
-      throw logger.error('Device not found');
+      throw new NotFoundError({name: 'Update a Device', message: 'Device not found', metadata: device.id});
     }
     deviceToUpdate.update(device);
     let deviceToReturn = <DeviceType>deviceToUpdate.get({ plain: true });
     return deviceToReturn;
 
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: device});
   }
 }

@@ -1,7 +1,6 @@
 import User from '../../models/user';
 import UserType from './user.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Update a user.
@@ -20,13 +19,14 @@ export default async function update(user: UserType): Promise<UserType> {
     const userToUpdate = await User.findByPk(user.id);
 
     if (userToUpdate === null) {
-      throw logger.error('User not found');
+      throw new NotFoundError({name: 'Update a User', message: 'User not found', metadata: user.id});
     }
     userToUpdate.update(user);
     let userToReturn = <UserType>userToUpdate.get({ plain: true });
     delete userToReturn.password;
     return userToReturn;
   } catch (e) {
-    throw logger.error(e);
+    delete user.password;
+    throw error({name: e.name, message: e.message, cause: e, metadata: user});
   }
 }

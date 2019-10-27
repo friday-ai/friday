@@ -1,7 +1,6 @@
 import Action from '../../models/action';
 import ActionType from './action.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import error from '../../utils/error';
 
 /**
  * Create an action
@@ -27,6 +26,6 @@ export default async function create(action: ActionType): Promise<ActionType> {
     let actionToReturn = <ActionType>createdAction.get({ plain: true });
     return actionToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: action});
   }
 }

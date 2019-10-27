@@ -1,7 +1,6 @@
 import Plugin from '../../models/plugin';
 import PluginType from './plugin.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Update a plugin.
@@ -21,13 +20,13 @@ export default async function update(plugin: PluginType): Promise<PluginType> {
     const pluginToUpdate = await Plugin.findByPk(plugin.id);
 
     if (pluginToUpdate === null) {
-      throw logger.error('Plugin not found');
+      throw new NotFoundError({name: 'Update a Plugin', message: 'Plugin not found', metadata: plugin.id});
     }
     pluginToUpdate.update(plugin);
     let pluginToReturn = <PluginType>pluginToUpdate.get({ plain: true });
     return pluginToReturn;
 
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: plugin});
   }
 }

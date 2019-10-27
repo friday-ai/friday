@@ -1,7 +1,6 @@
 import Script from '../../models/script';
 import ScriptType from './script.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import error from '../../utils/error';
 
 /**
  * Create a script.
@@ -22,6 +21,6 @@ export default async function create(script: ScriptType): Promise<ScriptType> {
     let scriptToReturn = <ScriptType>createdScript.get({ plain: true });
     return scriptToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: script});
   }
 }

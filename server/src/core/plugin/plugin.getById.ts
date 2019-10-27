@@ -1,7 +1,6 @@
 import Plugin from '../../models/plugin';
 import PluginType from './plugin.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Get a plugin by id.
@@ -25,13 +24,13 @@ export default async function getById(id: string, scope?: string): Promise<Plugi
     }
 
     if (plugin === null) {
-      throw logger.error('PLugin not found');
+      throw new NotFoundError({name: 'Get Plugin by Id', message: 'Plugin not found', metadata: id});
     }
 
     let pluginToReturn = <PluginType>plugin.get({ plain: true });
 
     return pluginToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

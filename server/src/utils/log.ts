@@ -64,6 +64,5 @@ export default class Log {
       // tslint:disable-next-line: no-console
       console.trace('\x1b[31m✖ %s\x1b[0m', text);
     }
-    return new Error(text);
   }
 }

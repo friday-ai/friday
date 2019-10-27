@@ -1,7 +1,6 @@
 import Device from '../../models/device';
 import DeviceType from './device.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Get a device by id.
@@ -25,13 +24,13 @@ export default async function getById(id: string, scope?: string): Promise<Devic
     }
 
     if (device === null) {
-      throw logger.error('Device not found');
+      throw new NotFoundError({name: 'Get Device by Id', message: 'Device not found', metadata: id});
     }
 
     let deviceToReturn = <DeviceType>device.get({ plain: true });
 
     return deviceToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

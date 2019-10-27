@@ -1,7 +1,6 @@
 import Action from '../../models/action';
 import ActionType from './action.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Update an action
@@ -21,13 +20,13 @@ export default async function update(action: ActionType): Promise<ActionType> {
     const actionToUpdate = await Action.findByPk(action.id);
 
     if (actionToUpdate === null) {
-      throw logger.error('Action not found');
+      throw new NotFoundError({name: 'Update an Action', message: 'Action not found', metadata: action.id});
     }
     actionToUpdate.update(action);
     let actionToReturn = <ActionType>actionToUpdate.get({ plain: true });
     return actionToReturn;
 
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: action});
   }
 }

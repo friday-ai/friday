@@ -1,6 +1,5 @@
 import Action from '../../models/action';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Destroy an action
@@ -16,11 +15,11 @@ export default async function destroy(id: string): Promise<void> {
     const actionToDelete = await Action.findByPk(id);
 
     if (actionToDelete === null) {
-      throw logger.error('Action not found');
+      throw new NotFoundError({name: 'Destroy an Action', message: 'Action not found', metadata: id});
     }
 
     await actionToDelete.destroy();
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

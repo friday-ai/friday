@@ -1,6 +1,5 @@
 import User from '../../models/user';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Destroy a user.
@@ -16,11 +15,11 @@ export default async function destroy(id: string): Promise<void> {
     const userToDelete = await User.findByPk(id);
 
     if (userToDelete === null) {
-      throw logger.error('User not found');
+      throw new NotFoundError({name: 'Destroy a User', message: 'User not found', metadata: id});
     }
 
     await userToDelete.destroy();
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

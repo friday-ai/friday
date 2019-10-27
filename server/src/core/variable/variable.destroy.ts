@@ -1,7 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Destroy a variable.
@@ -17,11 +16,11 @@ export default async function destroy(variable: VariableType): Promise<void> {
     const variableToDelete = await Variable.findByPk(variable.id);
 
     if (variableToDelete === null) {
-      throw logger.error('Variable not found');
+      throw new NotFoundError({name: 'Destroy an Variable', message: 'Variable not found', metadata: variable.id});
     }
 
     await variableToDelete.destroy();
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: variable});
   }
 }

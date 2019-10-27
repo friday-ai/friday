@@ -1,7 +1,6 @@
 import User from '../../models/user';
 import UserType from './user.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import error from '../../utils/error';
 
 /**
  * Create a user.
@@ -26,6 +25,7 @@ export default async function create(user: UserType): Promise<UserType> {
     delete userToReturn.password;
     return userToReturn;
   } catch (e) {
-    throw logger.error(e);
+    delete user.password;
+    throw error({name: e.name, message: e.message, cause: e, metadata: user});
   }
 }

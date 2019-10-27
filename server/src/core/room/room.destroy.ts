@@ -1,6 +1,6 @@
 import Room from '../../models/room';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
+
 
 /**
  * Destroy a room.
@@ -16,11 +16,11 @@ export default async function destroy(id: string): Promise<void> {
     const roomToDelete = await Room.findByPk(id);
 
     if (roomToDelete === null) {
-      throw logger.error('Room not found');
+      throw new NotFoundError({name: 'Destroy an Room', message: 'Room not found', metadata: id});
     }
 
     await roomToDelete.destroy();
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

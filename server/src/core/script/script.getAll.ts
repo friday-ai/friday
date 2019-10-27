@@ -1,9 +1,8 @@
 import Script from '../../models/script';
 import ScriptType from './script.interface';
 import { GetOptions } from '../../utils/constants';
-import Log from '../../utils/log';
+import error from '../../utils/error';
 
-const logger = new Log();
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
@@ -41,6 +40,6 @@ export default async function getAll(options?: GetOptions): Promise<ScriptType[]
 
     return scriptsPlain;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: options});
   }
 }

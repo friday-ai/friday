@@ -1,7 +1,6 @@
 import Room from '../../models/room';
 import RoomType from './room.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Update a room.
@@ -21,13 +20,13 @@ export default async function update(room: RoomType): Promise<RoomType> {
     const roomToUpdate = await Room.findByPk(room.id);
 
     if (roomToUpdate === null) {
-      throw logger.error('Room not found');
+      throw new NotFoundError({name: 'Update an Room', message: 'Room not found', metadata: room.id});
     }
     roomToUpdate.update(room);
     let roomToReturn = <RoomType>roomToUpdate.get({ plain: true });
     return roomToReturn;
 
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: room});
   }
 }

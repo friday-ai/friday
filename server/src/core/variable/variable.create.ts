@@ -1,7 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import error from '../../utils/error';
 
 /**
  * Create a variable.
@@ -24,6 +23,6 @@ export default async function create(variable: VariableType): Promise<VariableTy
     let variableToReturn = <VariableType>createdVariable.get({ plain: true });
     return variableToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: variable});
   }
 }

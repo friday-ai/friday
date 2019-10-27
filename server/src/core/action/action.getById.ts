@@ -1,7 +1,6 @@
 import Action from '../../models/action';
 import ActionType from './action.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Get action by id
@@ -25,13 +24,13 @@ export default async function getById(id: string, scope?: string): Promise<Actio
     }
 
     if (action === null) {
-      throw logger.error('Action not found');
+      throw new NotFoundError({name: 'Get Action by Id', message: 'Action not found', metadata: id});
     }
 
     let actionToReturn = <ActionType>action.get({ plain: true });
 
     return actionToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

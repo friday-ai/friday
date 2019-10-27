@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import express from 'express';
 import * as bodyParser from 'body-parser';
-import Log from './utils/log';
+import Log from '../utils/log';
 
 /**
  * Server class

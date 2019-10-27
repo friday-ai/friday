@@ -1,6 +1,5 @@
 import Device from '../../models/device';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Destroy a device.
@@ -16,11 +15,11 @@ export default async function destroy(id: string): Promise<void> {
     const deviceToDelete = await Device.findByPk(id);
 
     if (deviceToDelete === null) {
-      throw logger.error('Device not found');
+      throw new NotFoundError({name: 'Destoy a device', message: 'Device not found', metadata: id});
     }
 
     await deviceToDelete.destroy();
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

@@ -1,6 +1,5 @@
 import House from '../../models/house';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Destroy an house.
@@ -16,11 +15,11 @@ export default async function destroy(id: string): Promise<void> {
     const houseToDelete = await House.findByPk(id);
 
     if (houseToDelete === null) {
-      throw logger.error('House not found');
+      throw new NotFoundError({name: 'Destroy an House', message: 'House not found', metadata: id});
     }
 
     await houseToDelete.destroy();
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

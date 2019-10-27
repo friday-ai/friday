@@ -1,7 +1,6 @@
 import Scene from '../../models/scene';
 import SceneType from './scene.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import error from '../../utils/error';
 
 /**
  * Create a scene.
@@ -22,6 +21,6 @@ export default async function create(scene: SceneType): Promise<SceneType> {
     let sceneToReturn = <SceneType>createdScene.get({ plain: true });
     return sceneToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: scene});
   }
 }

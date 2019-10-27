@@ -1,7 +1,6 @@
 import Room from '../../models/room';
 import RoomType from './room.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError} from '../../utils/error';
 
 /**
  * Get a room by id.
@@ -25,13 +24,13 @@ export default async function getById(id: string, scope?: string): Promise<RoomT
     }
 
     if (room === null) {
-      throw logger.error('Room not found');
+      throw new NotFoundError({name: 'Get Room by Id', message: 'Room not found', metadata: id});
     }
 
     let roomToReturn = <RoomType>room.get({ plain: true });
 
     return roomToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: id});
   }
 }

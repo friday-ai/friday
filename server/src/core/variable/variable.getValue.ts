@@ -1,7 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import Log from '../../utils/log';
-const logger = new Log();
+import { default as error, NotFoundError, BadParametersError} from '../../utils/error';
 
 /**
  * Get a variable value by key.
@@ -16,7 +15,7 @@ export default async function getValue(key: string): Promise<VariableType> {
   try {
 
     if (key === '') {
-      throw logger.error('Variable\'s key can not be empty');
+      throw new BadParametersError({name: 'Update an Variable', message: 'Variable\'s key can not be empty', metadata: key});
     }
 
     const variable = await Variable.findOne({
@@ -26,12 +25,12 @@ export default async function getValue(key: string): Promise<VariableType> {
     });
 
     if (variable === null) {
-      throw logger.error('Variable not found');
+      throw new NotFoundError({name: 'Get value of an Variable', message: 'Variable not found', metadata: key});
     }
 
     let variableToReturn = <VariableType>variable.get({ plain: true });
     return variableToReturn;
   } catch (e) {
-    throw logger.error(e);
+    throw error({name: e.name, message: e.message, cause: e, metadata: key});
   }
 }

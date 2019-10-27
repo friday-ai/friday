@@ -8,7 +8,7 @@ import Device from './device';
 import Plugin from './plugin';
 
 /**
- * Scene model
+ * State model
  */
 @DefaultScope({
   attributes: ['id', 'owner', 'ownerType', 'value']
