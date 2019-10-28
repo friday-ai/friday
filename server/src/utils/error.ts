@@ -1,4 +1,4 @@
-'use strict';
+import { ValidationError, UniqueConstraintError } from 'sequelize';
 
 interface ErrorType {
   name: string;
@@ -99,17 +99,21 @@ export class BadParametersError extends Error {
 
 /**
  * Create an error instance
- * @param {ErrorType} options - Options of error like name, message, cause and metadata.
+ * @param {ErrorType} err - Options of error like name, message, cause and metadata.
  * @returns {Error} Resolve with an error instance.
  */
-export default function error(options: ErrorType): Error {
+export default function error(err: ErrorType): Error {
 
-  switch (options.name) {
-    case 'SequelizeValidationError':
-      return new DatabaseValidationError(options);
-    case 'SequelizeUniqueConstraintError':
-      return new DatabaseUniqueConstraintError(options);
+  switch (err.cause!.constructor) {
+    case ValidationError:
+      return new DatabaseValidationError(err);
+    case UniqueConstraintError:
+      return new DatabaseUniqueConstraintError(err);
+    case BadParametersError:
+      return new BadParametersError(err);
+    case NotFoundError:
+      return new NotFoundError(err);
     default:
-      return new GenericError(options);
+      return new GenericError(err);
   }
 }

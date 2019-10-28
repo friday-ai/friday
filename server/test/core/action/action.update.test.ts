@@ -1,4 +1,5 @@
 import { Action } from '../../../src/core/friday';
+import { NotFoundError } from '../../../src/utils/error';
 
 describe('action.update', () => {
   const action = new Action();
@@ -18,7 +19,7 @@ describe('action.update', () => {
       id: '163c08d4-c707-44b9-8ce0-37a45efeb05d'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Action not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
 
   });

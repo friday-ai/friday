@@ -1,5 +1,6 @@
 import { State } from '../../../src/core/friday';
 import { StateOwner, AvailableState } from '../../../src/utils/constants';
+import { NotFoundError } from '../../../src/utils/error';
 
 describe('state.set', () => {
   const state = new State();
@@ -36,7 +37,7 @@ describe('state.getByOwner', () => {
 
     await state.getByOwner('639cf491-7ff5-4e76-853d-806c81e53f8d')
       .catch((err) => {
-        expect(`${err}`).toContain('State not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
 
   });

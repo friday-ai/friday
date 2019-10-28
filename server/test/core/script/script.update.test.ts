@@ -1,4 +1,5 @@
 import { Script } from '../../../src/core/friday';
+import { NotFoundError } from '../../../src/utils/error';
 
 describe('script.update', () => {
   const script = new Script();
@@ -19,7 +20,7 @@ describe('script.update', () => {
       id: '76fd7e15-22e5-4e0e-904a-619fb062dec1'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Script not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
   });
 });

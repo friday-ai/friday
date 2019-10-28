@@ -1,4 +1,5 @@
 import { House } from '../../../src/core/friday';
+import { DatabaseUniqueConstraintError } from '../../../src/utils/error';
 
 describe('house.create', () => {
   const house = new House();
@@ -26,7 +27,7 @@ describe('house.create', () => {
       longitude: '-118.8067245'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });
 

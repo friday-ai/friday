@@ -1,4 +1,5 @@
 import { Device } from '../../../src/core/friday';
+import { NotFoundError } from '../../../src/utils/error';
 
 describe('device.update', () => {
   const device = new Device();
@@ -18,7 +19,7 @@ describe('device.update', () => {
       id: '449b2033-105f-4c18-91e8-a56ad1831796'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Device not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
 
   });

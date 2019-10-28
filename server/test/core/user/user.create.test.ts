@@ -1,4 +1,5 @@
 import { User } from '../../../src/core/friday';
+import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/error';
 
 describe('user.create', () => {
   const user = new User();
@@ -27,7 +28,7 @@ describe('user.create', () => {
       birthDate: new Date(1996, 12, 20)
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });
 
@@ -42,7 +43,7 @@ describe('user.create', () => {
       birthDate: new Date(1996, 12, 20)
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation isEmail on email failed');
+        expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 
@@ -57,7 +58,7 @@ describe('user.create', () => {
       birthDate: new Date(1996, 12, 20)
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 });

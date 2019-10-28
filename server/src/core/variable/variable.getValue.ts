@@ -15,7 +15,7 @@ export default async function getValue(key: string): Promise<VariableType> {
   try {
 
     if (key === '') {
-      throw new BadParametersError({name: 'Update an Variable', message: 'Variable\'s key can not be empty', metadata: key});
+      throw new BadParametersError({name: 'Get value of an Variable', message: 'Variable\'s key can not be empty', metadata: key});
     }
 
     const variable = await Variable.findOne({

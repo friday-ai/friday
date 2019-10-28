@@ -1,4 +1,5 @@
 import { Script } from '../../../src/core/friday';
+import { DatabaseValidationError } from '../../../src/utils/error';
 
 describe('script.create', () => {
   const script = new Script();
@@ -23,7 +24,7 @@ describe('script.create', () => {
       code: 'console.log(\'Hey ! This script is a test ! :)\')'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 

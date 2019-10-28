@@ -1,4 +1,5 @@
 import { Plugin } from '../../../src/core/friday';
+import { NotFoundError } from '../../../src/utils/error';
 
 describe('plugin.update', () => {
   const plugin = new Plugin();
@@ -18,7 +19,7 @@ describe('plugin.update', () => {
       id: '14c39f7a-fdda-453b-ab0a-7c47d36b90f8'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Plugin not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
 
   });

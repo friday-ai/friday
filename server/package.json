@@ -10,7 +10,7 @@
     "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"cross-env NODE_ENV=production ts-node ./src/server.ts\"",
     "dev": "concurrently -k -n \"TypeScript,Node\" -c \"blue,green\" \"tsc --watch\" \"cross-env NODE_ENV=development nodemon ./src/server.ts\"",
     "test": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --detectOpenHandles\"",
-    "test:watch": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --watch\"",
+    "test:watch": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --watch --detectOpenHandles\"",
     "lint": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force -t stylish -p tsconfig.json -c ../tslint.json\"",
     "lint:fix": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force --fix -t stylish -p tsconfig.json -c ../tslint.json\"",
     "generate-doc": "npm run -s generate-core-doc",

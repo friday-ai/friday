@@ -1,4 +1,5 @@
 import { Variable } from '../../../src/core/friday';
+import { NotFoundError, BadParametersError } from '../../../src/utils/error';
 
 describe('variable.update', () => {
   const variable = new Variable();
@@ -19,7 +20,7 @@ describe('variable.update', () => {
       key: 'key100'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Variable not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
   });
 
@@ -29,7 +30,7 @@ describe('variable.update', () => {
       key: ''
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Variable\'s key must be specified');
+        expect(err).toBeInstanceOf(BadParametersError);
       });
   });
 });

@@ -1,4 +1,5 @@
 import { Satellite } from '../../../src/core/friday';
+import { NotFoundError } from '../../../src/utils/error';
 
 describe('satellite.update', () => {
   const satellite = new Satellite();
@@ -18,7 +19,7 @@ describe('satellite.update', () => {
       id: '4017c89a-8d02-4d9b-9aec-1e1bcb93a3a7'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Satellite not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
 
   });

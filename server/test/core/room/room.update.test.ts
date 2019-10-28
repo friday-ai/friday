@@ -1,4 +1,5 @@
 import { Room } from '../../../src/core/friday';
+import { NotFoundError } from '../../../src/utils/error';
 
 describe('room.update', () => {
   const room = new Room();
@@ -18,7 +19,7 @@ describe('room.update', () => {
       id: '8b513ecf-2c2d-4cc7-aefc-0ac8eba85827'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Room not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
 
   });

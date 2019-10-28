@@ -1,5 +1,6 @@
 import { Variable } from '../../../src/core/friday';
 import { VariableOwner } from '../../../src/utils/constants';
+import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/error';
 
 describe('variable.create', () => {
   const variable = new Variable();
@@ -29,7 +30,7 @@ describe('variable.create', () => {
       ownerType: VariableOwner.USER
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });
 
@@ -43,7 +44,7 @@ describe('variable.create', () => {
       ownerType: VariableOwner.USER
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
 
   });
@@ -57,7 +58,7 @@ describe('variable.create', () => {
       ownerType: VariableOwner.USER
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
 
   });
@@ -71,7 +72,7 @@ describe('variable.create', () => {
       ownerType: VariableOwner.USER
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
 
   });

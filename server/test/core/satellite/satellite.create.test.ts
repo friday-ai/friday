@@ -1,4 +1,5 @@
 import { Satellite } from '../../../src/core/friday';
+import { DatabaseValidationError } from '../../../src/utils/error';
 
 describe('satellite.create', () => {
   const satellite = new Satellite();
@@ -23,7 +24,7 @@ describe('satellite.create', () => {
       roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 
@@ -35,7 +36,7 @@ describe('satellite.create', () => {
       roomId: ''
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 

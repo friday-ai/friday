@@ -1,4 +1,5 @@
 import { Scene } from '../../../src/core/friday';
+import { DatabaseValidationError } from '../../../src/utils/error';
 
 describe('scene.create', () => {
   const scene = new Scene();
@@ -23,7 +24,7 @@ describe('scene.create', () => {
       description: 'A test to create a scene'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 

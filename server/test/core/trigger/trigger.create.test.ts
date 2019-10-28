@@ -1,5 +1,6 @@
 import { Trigger } from '../../../src/core/friday';
 import { AvailableConditions } from '../../../src/utils/constants';
+import { DatabaseValidationError } from '../../../src/utils/error';
 
 describe('trigger.create', () => {
   const trigger = new Trigger();
@@ -36,7 +37,7 @@ describe('trigger.create', () => {
       })
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 

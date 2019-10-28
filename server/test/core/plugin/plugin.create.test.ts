@@ -1,4 +1,5 @@
 import { Plugin } from '../../../src/core/friday';
+import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/error';
 
 describe('plugin.create', () => {
   const plugin = new Plugin();
@@ -31,7 +32,7 @@ describe('plugin.create', () => {
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 
@@ -47,7 +48,7 @@ describe('plugin.create', () => {
       satelliteId: ''
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });
 

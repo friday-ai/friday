@@ -1,4 +1,5 @@
 import { User } from '../../../src/core/friday';
+import { NotFoundError } from '../../../src/utils/error';
 
 describe('user.update', () => {
   const user = new User();
@@ -20,7 +21,7 @@ describe('user.update', () => {
       id: '0cd30aef-9c4e-4a23-81e3-3544971296e5'
     })
       .catch((err) => {
-        expect(`${err}`).toContain('User not found');
+        expect(err).toBeInstanceOf(NotFoundError);
       });
   });
 });

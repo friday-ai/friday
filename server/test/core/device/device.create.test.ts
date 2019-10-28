@@ -1,5 +1,6 @@
 import { Device } from '../../../src/core/friday';
 import { AvailableTypeOfDevice, AvailableSubTypeOfDevice} from '../../../src/utils/constants';
+import { DatabaseUniqueConstraintError } from '../../../src/utils/error';
 
 describe('device.create', () => {
   const device = new Device();
@@ -42,7 +43,7 @@ describe('device.create', () => {
       pluginId: ''
     })
       .catch((err) => {
-        expect(`${err}`).toContain('Validation error');
+         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });
 
