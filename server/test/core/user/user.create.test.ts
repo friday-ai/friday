@@ -1,5 +1,5 @@
-import { User } from '../../../src/core/friday';
-import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/error';
+import User from '../../../src/core/user';
+import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
 
 describe('user.create', () => {
   const user = new User();
@@ -27,7 +27,7 @@ describe('user.create', () => {
       password: 'mysuperpassword',
       birthDate: new Date(1996, 12, 20)
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });
@@ -42,7 +42,7 @@ describe('user.create', () => {
       password: 'mysuperpassword',
       birthDate: new Date(1996, 12, 20)
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
@@ -57,7 +57,7 @@ describe('user.create', () => {
       password: 'test',
       birthDate: new Date(1996, 12, 20)
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });

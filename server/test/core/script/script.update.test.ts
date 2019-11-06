@@ -1,5 +1,5 @@
-import { Script } from '../../../src/core/friday';
-import { NotFoundError } from '../../../src/utils/error';
+import Script from '../../../src/core/script';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('script.update', () => {
   const script = new Script();
@@ -19,7 +19,7 @@ describe('script.update', () => {
     await script.update({
       id: '76fd7e15-22e5-4e0e-904a-619fb062dec1'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
       });
   });

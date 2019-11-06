@@ -1,5 +1,5 @@
-import { House } from '../../../src/core/friday';
-import { DatabaseUniqueConstraintError } from '../../../src/utils/error';
+import House from '../../../src/core/house';
+import { DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
 
 describe('house.create', () => {
   const house = new House();
@@ -26,7 +26,7 @@ describe('house.create', () => {
       latitude: '34.0012295',
       longitude: '-118.8067245'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });

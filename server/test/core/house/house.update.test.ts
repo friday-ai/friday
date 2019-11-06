@@ -1,5 +1,5 @@
-import { House } from '../../../src/core/friday';
-import { NotFoundError } from '../../../src/utils/error';
+import House from '../../../src/core/house';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('house.update', () => {
   const house = new House();
@@ -18,7 +18,7 @@ describe('house.update', () => {
     await house.update({
       id: '1b561f76-9574-461c-b79e-e1906fe33c1a'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
       });
 

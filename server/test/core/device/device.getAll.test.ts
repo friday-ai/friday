@@ -1,4 +1,4 @@
-import { Device } from '../../../src/core/friday';
+import Device from '../../../src/core/device';
 import 'jest-extended';
 
 describe('device.getAll', () => {

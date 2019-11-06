@@ -1,5 +1,5 @@
-import { User } from '../../../src/core/friday';
-import { NotFoundError } from '../../../src/utils/error';
+import User from '../../../src/core/user';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('user.update', () => {
   const user = new User();
@@ -20,7 +20,7 @@ describe('user.update', () => {
     await user.update({
       id: '0cd30aef-9c4e-4a23-81e3-3544971296e5'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
       });
   });

@@ -1,4 +1,4 @@
-import { Plugin } from '../../../src/core/friday';
+import Plugin from '../../../src/core/plugin';
 import 'jest-extended';
 
 describe('plugin.getById', () => {

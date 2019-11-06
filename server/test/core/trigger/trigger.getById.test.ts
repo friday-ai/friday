@@ -1,4 +1,4 @@
-import { Trigger } from '../../../src/core/friday';
+import Trigger from '../../../src/core/trigger';
 import 'jest-extended';
 
 describe('trigger.getById', () => {

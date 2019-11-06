@@ -1,4 +1,4 @@
-import { Script } from '../../../src/core/friday';
+import Script from '../../../src/core/script';
 import 'jest-extended';
 
 describe('scipt.getById', () => {

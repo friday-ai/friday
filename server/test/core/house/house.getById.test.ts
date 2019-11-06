@@ -1,4 +1,4 @@
-import { House } from '../../../src/core/friday';
+import House from '../../../src/core/house';
 import 'jest-extended';
 
 describe('house.getById', () => {

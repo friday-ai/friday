@@ -1,5 +1,5 @@
-import { Variable } from '../../../src/core/friday';
-import { NotFoundError, BadParametersError } from '../../../src/utils/error';
+import Variable from '../../../src/core/variable';
+import { NotFoundError, BadParametersError } from '../../../src/utils/errors/coreError';
 
 describe('variable.update', () => {
   const variable = new Variable();
@@ -19,7 +19,7 @@ describe('variable.update', () => {
     await variable.update({
       key: 'key100'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
       });
   });
@@ -29,7 +29,7 @@ describe('variable.update', () => {
     await variable.update({
       key: ''
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(BadParametersError);
       });
   });

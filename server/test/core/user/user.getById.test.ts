@@ -1,4 +1,4 @@
-import { User } from '../../../src/core/friday';
+import User from '../../../src/core/user';
 import 'jest-extended';
 
 describe('user.getById', () => {

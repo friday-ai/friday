@@ -1,5 +1,5 @@
-import { Plugin } from '../../../src/core/friday';
-import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/error';
+import Plugin from '../../../src/core/plugin';
+import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
 
 describe('plugin.create', () => {
   const plugin = new Plugin();
@@ -31,7 +31,7 @@ describe('plugin.create', () => {
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
@@ -47,7 +47,7 @@ describe('plugin.create', () => {
       enabled: true,
       satelliteId: ''
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });

@@ -1,6 +1,6 @@
-import { Action } from '../../../src/core/friday';
+import Action from '../../../src/core/action';
 import { ActionsType } from '../../../src/utils/constants';
-import { DatabaseUniqueConstraintError } from '../../../src/utils/error';
+import { DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
 
 describe('action.create', () => {
   const action = new Action();
@@ -39,7 +39,7 @@ describe('action.create', () => {
       variableValue: 'action test variable value',
       sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });

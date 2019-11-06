@@ -1,5 +1,5 @@
-import { Plugin } from '../../../src/core/friday';
-import { NotFoundError } from '../../../src/utils/error';
+import Plugin from '../../../src/core/plugin';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('plugin.update', () => {
   const plugin = new Plugin();
@@ -18,7 +18,7 @@ describe('plugin.update', () => {
     await plugin.update({
       id: '14c39f7a-fdda-453b-ab0a-7c47d36b90f8'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
       });
 

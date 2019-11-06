@@ -1,5 +1,5 @@
-import { Scene } from '../../../src/core/friday';
-import { NotFoundError } from '../../../src/utils/error';
+import Scene from '../../../src/core/scene';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('scene.update', () => {
   const scene = new Scene();
@@ -18,7 +18,7 @@ describe('scene.update', () => {
     await scene.update({
       id: 'edfca72c-89bf-4cee-a4b6-fabbef87528a'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
       });
 

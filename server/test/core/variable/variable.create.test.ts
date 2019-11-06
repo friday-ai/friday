@@ -1,6 +1,6 @@
-import { Variable } from '../../../src/core/friday';
+import Variable from '../../../src/core/variable';
 import { VariableOwner } from '../../../src/utils/constants';
-import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/error';
+import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
 
 describe('variable.create', () => {
   const variable = new Variable();
@@ -29,7 +29,7 @@ describe('variable.create', () => {
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
       ownerType: VariableOwner.USER
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });
@@ -43,7 +43,7 @@ describe('variable.create', () => {
       owner: '2f5a9f86-2612-436b-9a3b-7040dae16c0d',
       ownerType: VariableOwner.USER
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
 
@@ -57,7 +57,7 @@ describe('variable.create', () => {
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
       ownerType: VariableOwner.USER
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
 
@@ -71,7 +71,7 @@ describe('variable.create', () => {
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
       ownerType: VariableOwner.USER
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
 

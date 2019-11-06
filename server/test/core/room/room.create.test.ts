@@ -1,5 +1,5 @@
-import { Room } from '../../../src/core/friday';
-import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/error';
+import Room from '../../../src/core/room';
+import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
 
 describe('room.create', () => {
   const room = new Room();
@@ -23,7 +23,7 @@ describe('room.create', () => {
       name: 'A room test',
       houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });
@@ -36,7 +36,7 @@ describe('room.create', () => {
       name: '',
       houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
@@ -48,7 +48,7 @@ describe('room.create', () => {
       name: 'A room test',
       houseId: ''
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });

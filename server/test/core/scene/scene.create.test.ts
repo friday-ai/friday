@@ -1,5 +1,5 @@
-import { Scene } from '../../../src/core/friday';
-import { DatabaseValidationError } from '../../../src/utils/error';
+import Scene from '../../../src/core/scene';
+import { DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
 describe('scene.create', () => {
   const scene = new Scene();
@@ -23,7 +23,7 @@ describe('scene.create', () => {
       name: '',
       description: 'A test to create a scene'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });

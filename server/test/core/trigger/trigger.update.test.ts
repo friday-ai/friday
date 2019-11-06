@@ -1,5 +1,5 @@
-import { Trigger } from '../../../src/core/friday';
-import { NotFoundError } from '../../../src/utils/error';
+import Trigger from '../../../src/core/trigger';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('trigger.update', () => {
   const trigger = new Trigger();
@@ -18,7 +18,7 @@ describe('trigger.update', () => {
     await trigger.update({
       id: '0cd30aef-9c4e-4a23-81e3-3544971296e5'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
       });
 

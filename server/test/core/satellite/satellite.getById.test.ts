@@ -1,4 +1,4 @@
-import { Satellite } from '../../../src/core/friday';
+import Satellite from '../../../src/core/satellite';
 import 'jest-extended';
 
 describe('satellite.getById', () => {

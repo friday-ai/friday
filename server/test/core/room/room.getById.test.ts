@@ -1,4 +1,4 @@
-import { Room } from '../../../src/core/friday';
+import Room from '../../../src/core/room';
 import 'jest-extended';
 
 describe('room.getById', () => {

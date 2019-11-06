@@ -1,5 +1,5 @@
-import { Satellite } from '../../../src/core/friday';
-import { DatabaseValidationError } from '../../../src/utils/error';
+import Satellite from '../../../src/core/satellite';
+import { DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
 describe('satellite.create', () => {
   const satellite = new Satellite();
@@ -23,7 +23,7 @@ describe('satellite.create', () => {
       name: '',
       roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
@@ -35,7 +35,7 @@ describe('satellite.create', () => {
       name: 'Satellite with an room',
       roomId: ''
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });

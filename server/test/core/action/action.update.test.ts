@@ -1,5 +1,5 @@
-import { Action } from '../../../src/core/friday';
-import { NotFoundError } from '../../../src/utils/error';
+import Action from '../../../src/core/action';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('action.update', () => {
   const action = new Action();
@@ -18,7 +18,7 @@ describe('action.update', () => {
     await action.update({
       id: '163c08d4-c707-44b9-8ce0-37a45efeb05d'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
       });
 

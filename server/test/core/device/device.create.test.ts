@@ -1,6 +1,6 @@
-import { Device } from '../../../src/core/friday';
+import Device from '../../../src/core/device';
 import { AvailableTypeOfDevice, AvailableSubTypeOfDevice} from '../../../src/utils/constants';
-import { DatabaseUniqueConstraintError } from '../../../src/utils/error';
+import { DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
 
 describe('device.create', () => {
   const device = new Device();
@@ -42,7 +42,7 @@ describe('device.create', () => {
       roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
       pluginId: ''
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
   });

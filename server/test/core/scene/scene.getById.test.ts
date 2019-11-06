@@ -1,4 +1,4 @@
-import { Scene } from '../../../src/core/friday';
+import Scene from '../../../src/core/scene';
 import 'jest-extended';
 
 describe('scene.getById', () => {

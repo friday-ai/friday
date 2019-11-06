@@ -1,5 +1,5 @@
-import { Script } from '../../../src/core/friday';
-import { DatabaseValidationError } from '../../../src/utils/error';
+import Script from '../../../src/core/script';
+import { DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
 describe('script.create', () => {
   const script = new Script();
@@ -23,7 +23,7 @@ describe('script.create', () => {
       name: '',
       code: 'console.log(\'Hey ! This script is a test ! :)\')'
     })
-      .catch((err) => {
+      .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });

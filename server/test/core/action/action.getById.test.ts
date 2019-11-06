@@ -1,4 +1,4 @@
-import { Action } from '../../../src/core/friday';
+import Action from '../../../src/core/action';
 import 'jest-extended';
 
 describe('action.getAll', () => {
