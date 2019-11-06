@@ -1,6 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Destroy a variable.

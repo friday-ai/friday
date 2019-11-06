@@ -1,5 +1,5 @@
 import Trigger from '../../models/trigger';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Destroy a trigger.

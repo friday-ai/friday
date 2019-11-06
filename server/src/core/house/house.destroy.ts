@@ -1,5 +1,5 @@
 import House from '../../models/house';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Destroy an house.

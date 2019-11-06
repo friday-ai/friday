@@ -1,6 +1,6 @@
 import Satellite from '../../models/satellite';
 import SatelliteType from './satellite.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create a satellite.

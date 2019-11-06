@@ -1,6 +1,6 @@
 import Script from '../../models/script';
 import ScriptType from './script.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Get a script by id.

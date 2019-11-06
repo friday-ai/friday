@@ -1,5 +1,5 @@
 import Action from '../../models/action';
-import { default as error, NotFoundError} from '../../utils/error';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Destroy an action

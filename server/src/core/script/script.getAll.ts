@@ -1,7 +1,7 @@
 import Script from '../../models/script';
 import ScriptType from './script.interface';
-import { GetOptions } from '../../utils/constants';
-import error from '../../utils/error';
+import { GetOptions } from '../../utils/interfaces';
+import error from '../../utils/errors/coreError';
 
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',

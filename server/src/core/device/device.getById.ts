@@ -1,6 +1,6 @@
 import Device from '../../models/device';
 import DeviceType from './device.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Get a device by id.

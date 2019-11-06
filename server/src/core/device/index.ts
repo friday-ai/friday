@@ -10,7 +10,7 @@ import getById from './device.getById';
 export default class Device {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

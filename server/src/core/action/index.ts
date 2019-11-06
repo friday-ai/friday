@@ -10,7 +10,7 @@ import getById from './action.getById';
 export default class Action {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

@@ -1,6 +1,6 @@
 import Scene from '../../models/scene';
 import SceneType from './scene.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Get a scene by id.

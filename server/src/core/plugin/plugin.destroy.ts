@@ -1,5 +1,5 @@
 import Plugin from '../../models/plugin';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Destroy a plugin.

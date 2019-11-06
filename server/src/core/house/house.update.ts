@@ -1,6 +1,6 @@
 import House from '../../models/house';
 import HouseType from './house.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Update an house.

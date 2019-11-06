@@ -1,7 +1,7 @@
 import Device from '../../models/device';
 import DeviceType from './device.interface';
-import error from '../../utils/error';
-import { GetOptions } from '../../utils/constants';
+import error from '../../utils/errors/coreError';
+import { GetOptions } from '../../utils/interfaces';
 
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',

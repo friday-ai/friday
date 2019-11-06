@@ -1,6 +1,6 @@
 import Plugin from '../../models/plugin';
 import PluginType from './plugin.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Get a plugin by id.

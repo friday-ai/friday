@@ -1,6 +1,6 @@
 import Action from '../../models/action';
 import ActionType from './action.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create an action

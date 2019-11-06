@@ -1,6 +1,6 @@
 import State from '../../models/state';
 import StateType from './state.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Get a state by owner.

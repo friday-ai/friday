@@ -9,6 +9,6 @@ import getValue from './variable.getValue';
 export default class Variable {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getValue = getValue;
 }

@@ -1,6 +1,6 @@
 import Device from '../../models/device';
 import DeviceType from './device.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create a device.

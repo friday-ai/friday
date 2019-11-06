@@ -10,7 +10,7 @@ import getById from './satellite.getById';
 export default class Satellite {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

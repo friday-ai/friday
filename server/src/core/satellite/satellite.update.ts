@@ -1,6 +1,6 @@
 import Satellite from '../../models/satellite';
 import SatelliteType from './satellite.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Update a satellite.

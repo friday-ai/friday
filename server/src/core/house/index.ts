@@ -10,7 +10,7 @@ import getById from './house.getById';
 export default class House {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

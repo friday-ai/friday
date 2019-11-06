@@ -1,5 +1,5 @@
 import User from '../../models/user';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Destroy a user.

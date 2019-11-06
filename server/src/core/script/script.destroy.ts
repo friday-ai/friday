@@ -1,5 +1,5 @@
 import Script from '../../models/script';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Destroy a script.

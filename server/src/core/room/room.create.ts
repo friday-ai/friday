@@ -1,6 +1,6 @@
 import Room from '../../models/room';
 import RoomType from './room.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create a room.

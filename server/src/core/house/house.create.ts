@@ -1,6 +1,6 @@
 import House from '../../models/house';
 import HouseType from './house.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create an house.

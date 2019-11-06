@@ -10,7 +10,7 @@ import getById from './room.getById';
 export default class Room {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

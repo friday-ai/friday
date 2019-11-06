@@ -1,6 +1,6 @@
 import User from '../../models/user';
 import UserType from './user.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create a user.

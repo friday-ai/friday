@@ -1,6 +1,6 @@
 import State from '../../models/state';
 import StateType from './state.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Set a state.

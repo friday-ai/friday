@@ -10,7 +10,7 @@ import getById from './script.getById';
 export default class Script {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

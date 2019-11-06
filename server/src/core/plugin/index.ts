@@ -10,7 +10,7 @@ import getById from './plugin.getById';
 export default class Plugin {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

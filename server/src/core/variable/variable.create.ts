@@ -1,6 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create a variable.

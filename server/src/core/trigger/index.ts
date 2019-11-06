@@ -10,7 +10,7 @@ import getById from './trigger.getById';
 export default class Trigger {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

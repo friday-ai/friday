@@ -1,6 +1,6 @@
 import Room from '../../models/room';
 import RoomType from './room.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Update a room.

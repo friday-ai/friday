@@ -1,7 +1,7 @@
 import Satellite from '../../models/satellite';
 import SatelliteType from './satellite.interface';
-import { GetOptions } from '../../utils/constants';
-import error from '../../utils/error';
+import { GetOptions } from '../../utils/interfaces';
+import error from '../../utils/errors/coreError';
 
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',

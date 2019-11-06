@@ -1,6 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import { default as error, NotFoundError, BadParametersError} from '../../utils/error';
+import { default as error, NotFoundError, BadParametersError} from '../../utils/errors/coreError';
 
 /**
  * Update a variable.

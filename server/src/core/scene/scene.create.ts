@@ -1,6 +1,6 @@
 import Scene from '../../models/scene';
 import SceneType from './scene.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create a scene.

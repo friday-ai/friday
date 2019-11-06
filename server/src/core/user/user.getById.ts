@@ -1,6 +1,6 @@
 import User from '../../models/user';
 import UserType from './user.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Get a user by id.

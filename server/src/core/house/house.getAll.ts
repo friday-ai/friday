@@ -1,7 +1,7 @@
 import House from '../../models/house';
-import { GetOptions } from '../../utils/constants';
+import { GetOptions } from '../../utils/interfaces';
 import HouseType from './house.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',

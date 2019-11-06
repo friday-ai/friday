@@ -1,6 +1,6 @@
 import Plugin from '../../models/plugin';
 import PluginType from './plugin.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create a plugin.

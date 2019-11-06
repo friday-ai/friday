@@ -10,7 +10,7 @@ import getById from './user.getById';
 export default class User {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }

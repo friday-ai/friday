@@ -1,7 +1,7 @@
 import Trigger from '../../models/trigger';
 import TriggerType from './trigger.interface';
-import { GetOptions } from '../../utils/constants';
-import error from '../../utils/error';
+import { GetOptions } from '../../utils/interfaces';
+import error from '../../utils/errors/coreError';
 
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',

@@ -1,6 +1,6 @@
 import Script from '../../models/script';
 import ScriptType from './script.interface';
-import error from '../../utils/error';
+import error from '../../utils/errors/coreError';
 
 /**
  * Create a script.

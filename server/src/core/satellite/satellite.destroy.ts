@@ -1,5 +1,5 @@
 import Satellite from '../../models/satellite';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Destroy a satellite.

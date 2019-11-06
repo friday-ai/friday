@@ -1,5 +1,5 @@
 import Scene from '../../models/scene';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Destroy a scene.

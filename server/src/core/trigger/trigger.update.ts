@@ -1,6 +1,6 @@
 import Trigger from '../../models/trigger';
 import TriggerType from './trigger.interface';
-import { default as error, NotFoundError} from '../../utils/error';
+import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Update a trigger.

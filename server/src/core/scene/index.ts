@@ -10,7 +10,7 @@ import getById from './scene.getById';
 export default class Scene {
   create = create;
   update = update;
-  destoy = destroy;
+  destroy = destroy;
   getAll = getAll;
   getById = getById;
 }
