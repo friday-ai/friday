@@ -97,15 +97,6 @@ export enum ActionsType {
   OTHER = 'other'
 }
 
-/**
- * Options for core functions type 'getAll'
- */
-export interface GetOptions {
-  scope?: string;
-  take?: number;
-  skip?: number;
-}
-
 // TODO = Create a Json file with all type of device available
 export enum AvailableTypeOfDevice {
   LIGHT = 'light',

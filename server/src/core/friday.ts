@@ -12,18 +12,22 @@ import User from './user';
 import Variable from './variable';
 import * as Constants from '../utils/constants';
 
-export {
-  Action,
-  Device,
-  House,
-  Plugin,
-  Room,
-  Satellite,
-  Scene,
-  Script,
-  State,
-  Trigger,
-  User,
-  Variable,
-  Constants
-};
+/**
+ * Friday
+ * @returns friday object
+ */
+export default class Friday {
+     public action = new Action();
+     public device = new Device();
+     public house = new House();
+     public plugin = new Plugin();
+     public room = new Room();
+     public satellite = new Satellite();
+     public scene = new Scene();
+     public script = new Script();
+     public state = new State();
+     public trigger = new Trigger();
+     public user = new User();
+     public variable = new Variable();
+     public constants = Constants;
+}

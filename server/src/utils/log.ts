@@ -22,7 +22,10 @@ export default class Log {
    * @memberof Log
    */
   title(text: string) {
-    console.log('\n---\n\n\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase());
+    if (env !== 'test') {
+      // tslint:disable-next-line: no-console
+      console.log('\n---\n\n\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase());
+    }
   }
 
   /**
@@ -31,8 +34,10 @@ export default class Log {
    * @memberof Log
    */
   info(text: string) {
-    // tslint:disable-next-line: no-console
-    console.info('\x1b[36m➡ %s\x1b[0m', text);
+    if (env !== 'test') {
+      // tslint:disable-next-line: no-console
+      console.info('\x1b[36m➡ %s\x1b[0m', text);
+    }
   }
 
   /**
@@ -60,9 +65,7 @@ export default class Log {
    * @memberof Log
    */
   error(text: string) {
-    if (env !== 'test') {
-      // tslint:disable-next-line: no-console
-      console.trace('\x1b[31m✖ %s\x1b[0m', text);
-    }
+    // tslint:disable-next-line: no-console
+    console.trace('\x1b[31m✖ %s\x1b[0m', text);
   }
 }
