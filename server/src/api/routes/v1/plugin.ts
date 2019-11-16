@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 
 /**
- * Action router
+ * Plugin router
  * @export
  * @param {*} friday
  */
-@FridayRouter('/v1/action')
-export default class ActionRouter {
+@FridayRouter('/v1/plugin')
+export default class PluginRouter {
   readonly friday: any;
 
   constructor(friday: any) {
@@ -15,65 +15,65 @@ export default class ActionRouter {
   }
 
   /**
-   * Create an action
+   * Create a plugin
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof PluginRouter
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.create(req.body);
-    res.status(201).json(action);
+    const plugin = await this.friday.plugin.create(req.body);
+    res.status(201).json(plugin);
   }
 
   /**
-   * Update an action
+   * Update a plugin
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof PluginRouter
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.update(req.body);
-    res.json(action);
+    const plugin = await this.friday.plugin.update(req.body);
+    res.json(plugin);
   }
 
   /**
-   * Delete an action
+   * Delete a plugin
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof PluginRouter
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
-    await this.friday.action.destroy(req.params.id);
+    await this.friday.plugin.destroy(req.params.id);
     res.json({
       success: true
     });
   }
 
   /**
-   * Get all actions
+   * Get all plugins
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof PluginRouter
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const actions = await this.friday.action.getAll();
-    res.json(actions);
+    const plugins = await this.friday.plugin.getAll();
+    res.json(plugins);
   }
 
   /**
-   * Get action by id
+   * Get plugin by id
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof PluginRouter
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.getById(req.params.id);
-    res.json(action);
+    const plugin = await this.friday.plugin.getById(req.params.id);
+    res.json(plugin);
   }
 
 }

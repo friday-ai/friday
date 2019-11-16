@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 
 /**
- * Action router
+ * Variable router
  * @export
  * @param {*} friday
  */
-@FridayRouter('/v1/action')
-export default class ActionRouter {
+@FridayRouter('/v1/variable')
+export default class VariableRouter {
   readonly friday: any;
 
   constructor(friday: any) {
@@ -15,65 +15,65 @@ export default class ActionRouter {
   }
 
   /**
-   * Create an action
+   * Create a variable
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof VariableRouter
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.create(req.body);
-    res.status(201).json(action);
+    const variable = await this.friday.variable.create(req.body);
+    res.status(201).json(variable);
   }
 
   /**
-   * Update an action
+   * Update a variable
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof VariableRouter
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.update(req.body);
-    res.json(action);
+    const variable = await this.friday.variable.update(req.body);
+    res.json(variable);
   }
 
   /**
-   * Delete an action
+   * Delete a variable
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof VariableRouter
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
-    await this.friday.action.destroy(req.params.id);
+    await this.friday.variable.destroy(req.params.id);
     res.json({
       success: true
     });
   }
 
   /**
-   * Get all actions
+   * Get all variables
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof VariableRouter
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const actions = await this.friday.action.getAll();
-    res.json(actions);
+    const variables = await this.friday.variable.getAll();
+    res.json(variables);
   }
 
   /**
-   * Get action by id
+   * Get variable by id
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof VariableRouter
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.getById(req.params.id);
-    res.json(action);
+    const variable = await this.friday.variable.getById(req.params.id);
+    res.json(variable);
   }
 
 }

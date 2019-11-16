@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 
 /**
- * Action router
+ * Trigger router
  * @export
  * @param {*} friday
  */
-@FridayRouter('/v1/action')
-export default class ActionRouter {
+@FridayRouter('/v1/trigger')
+export default class TriggerRouter {
   readonly friday: any;
 
   constructor(friday: any) {
@@ -15,65 +15,65 @@ export default class ActionRouter {
   }
 
   /**
-   * Create an action
+   * Create a trigger
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof TriggerRouter
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.create(req.body);
-    res.status(201).json(action);
+    const trigger = await this.friday.trigger.create(req.body);
+    res.status(201).json(trigger);
   }
 
   /**
-   * Update an action
+   * Update a trigger
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof TriggerRouter
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.update(req.body);
-    res.json(action);
+    const trigger = await this.friday.trigger.update(req.body);
+    res.json(trigger);
   }
 
   /**
-   * Delete an action
+   * Delete a trigger
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof TriggerRouter
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
-    await this.friday.action.destroy(req.params.id);
+    await this.friday.trigger.destroy(req.params.id);
     res.json({
       success: true
     });
   }
 
   /**
-   * Get all actions
+   * Get all triggers
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof TriggerRouter
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const actions = await this.friday.action.getAll();
-    res.json(actions);
+    const triggers = await this.friday.trigger.getAll();
+    res.json(triggers);
   }
 
   /**
-   * Get action by id
+   * Get trigger by id
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof TriggerRouter
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.getById(req.params.id);
-    res.json(action);
+    const trigger = await this.friday.trigger.getById(req.params.id);
+    res.json(trigger);
   }
 
 }

@@ -6,8 +6,8 @@ import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 import asyncMiddleware from '../middlewares/asyncMiddleware';
 
 /**
- * Expresse router
- * @description Return express router object.
+ * Express router
+ * @description Create express router object.
  * @param {Object} friday - Friday object.
  * @returns {Object} Return express router object.
  * @example

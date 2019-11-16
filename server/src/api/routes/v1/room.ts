@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 
 /**
- * Action router
+ * Room router
  * @export
  * @param {*} friday
  */
-@FridayRouter('/v1/action')
-export default class ActionRouter {
+@FridayRouter('/v1/room')
+export default class RoomRouter {
   readonly friday: any;
 
   constructor(friday: any) {
@@ -15,65 +15,65 @@ export default class ActionRouter {
   }
 
   /**
-   * Create an action
+   * Create a room
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof RoomRouter
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.create(req.body);
-    res.status(201).json(action);
+    const room = await this.friday.room.create(req.body);
+    res.status(201).json(room);
   }
 
   /**
-   * Update an action
+   * Update a room
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof RoomRouter
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.update(req.body);
-    res.json(action);
+    const room = await this.friday.room.update(req.body);
+    res.json(room);
   }
 
   /**
-   * Delete an action
+   * Delete a room
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof RoomRouter
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
-    await this.friday.action.destroy(req.params.id);
+    await this.friday.room.destroy(req.params.id);
     res.json({
       success: true
     });
   }
 
   /**
-   * Get all actions
+   * Get all rooms
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof RoomRouter
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const actions = await this.friday.action.getAll();
-    res.json(actions);
+    const rooms = await this.friday.room.getAll();
+    res.json(rooms);
   }
 
   /**
-   * Get action by id
+   * Get room by id
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof RoomRouter
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.getById(req.params.id);
-    res.json(action);
+    const room = await this.friday.room.getById(req.params.id);
+    res.json(room);
   }
 
 }

@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 
 /**
- * Action router
+ * User router
  * @export
  * @param {*} friday
  */
-@FridayRouter('/v1/action')
-export default class ActionRouter {
+@FridayRouter('/v1/user')
+export default class UserRouter {
   readonly friday: any;
 
   constructor(friday: any) {
@@ -15,65 +15,65 @@ export default class ActionRouter {
   }
 
   /**
-   * Create an action
+   * Create a user
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof UserRouter
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.create(req.body);
-    res.status(201).json(action);
+    const user = await this.friday.user.create(req.body);
+    res.status(201).json(user);
   }
 
   /**
-   * Update an action
+   * Update a user
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof UserRouter
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.update(req.body);
-    res.json(action);
+    const user = await this.friday.user.update(req.body);
+    res.json(user);
   }
 
   /**
-   * Delete an action
+   * Delete a user
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof UserRouter
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
-    await this.friday.action.destroy(req.params.id);
+    await this.friday.user.destroy(req.params.id);
     res.json({
       success: true
     });
   }
 
   /**
-   * Get all actions
+   * Get all users
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof UserRouter
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const actions = await this.friday.action.getAll();
-    res.json(actions);
+    const users = await this.friday.user.getAll();
+    res.json(users);
   }
 
   /**
-   * Get action by id
+   * Get user by id
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof UserRouter
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.getById(req.params.id);
-    res.json(action);
+    const user = await this.friday.user.getById(req.params.id);
+    res.json(user);
   }
 
 }

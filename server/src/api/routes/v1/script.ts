@@ -2,12 +2,12 @@ import { Request, Response, NextFunction } from 'express';
 import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 
 /**
- * Action router
+ * Script router
  * @export
  * @param {*} friday
  */
-@FridayRouter('/v1/action')
-export default class ActionRouter {
+@FridayRouter('/v1/script')
+export default class ScriptRouter {
   readonly friday: any;
 
   constructor(friday: any) {
@@ -15,65 +15,65 @@ export default class ActionRouter {
   }
 
   /**
-   * Create an action
+   * Create a script
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof ScriptRouter
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.create(req.body);
-    res.status(201).json(action);
+    const script = await this.friday.script.create(req.body);
+    res.status(201).json(script);
   }
 
   /**
-   * Update an action
+   * Update a script
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof ScriptRouter
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.update(req.body);
-    res.json(action);
+    const script = await this.friday.script.update(req.body);
+    res.json(script);
   }
 
   /**
-   * Delete an action
+   * Delete a script
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof ScriptRouter
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
-    await this.friday.action.destroy(req.params.id);
+    await this.friday.script.destroy(req.params.id);
     res.json({
       success: true
     });
   }
 
   /**
-   * Get all actions
+   * Get all scripts
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof ScriptRouter
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const actions = await this.friday.action.getAll();
-    res.json(actions);
+    const scripts = await this.friday.script.getAll();
+    res.json(scripts);
   }
 
   /**
-   * Get action by id
+   * Get script by id
    * @param {Request} req
    * @param {Response} res
-   * @memberof ActionRouter
+   * @memberof ScriptRouter
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.getById(req.params.id);
-    res.json(action);
+    const script = await this.friday.script.getById(req.params.id);
+    res.json(script);
   }
 
 }
