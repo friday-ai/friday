@@ -13,8 +13,9 @@
     "test:watch": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --watch --detectOpenHandles\"",
     "lint": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force -t stylish -p tsconfig.json -c ../tslint.json\"",
     "lint:fix": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force --fix -t stylish -p tsconfig.json -c ../tslint.json\"",
-    "generate-doc": "npm run -s generate-core-doc",
-    "generate-core-doc": "concurrently -k -n \"TypeDoc\" -c \"magenta\" \"typedoc ./src/core\""
+    "generate-doc": "npm run -s generate-doc:core && npm run -s generate-doc:rest",
+    "generate-doc:core": "concurrently -k -n \"TypeDoc\" -c \"magenta\" \"typedoc  --out docs/core/ ./src/core/\"",
+    "generate-doc:rest": "concurrently -k -n \"ApiDoc-MD\" -c \"magenta\" \"apidoc-markdown -i src/api/routes/ -o docs/rest/ -t gitbook\""
   },
   "license": "MIT",
   "repository": {
@@ -47,6 +48,7 @@
     "ws": "^7.2.0"
   },
   "devDependencies": {
+    "@mathieu_andrade/apidoc-markdown": "^1.0.0",
     "@types/jest": "^24.0.13",
     "@types/node": "^12.0.2",
     "jest": "^24.8.0",

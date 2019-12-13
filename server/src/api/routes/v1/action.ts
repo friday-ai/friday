@@ -3,8 +3,14 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
 
 /**
  * Action router
- * @export
- * @param {*} friday
+ * @apiDefine ActionParam
+ * @apiParam {String} name Name of the action.
+ * @apiParam {String} description Description of the action.
+ * @apiParam {ActionsType} type Type of the action.
+ * @apiParam {String} subType SubType of the action.
+ * @apiParam {String} variableKey Name of the object affected by the action.
+ * @apiParam {String} variable Value Value to give to the object affected by the action.
+ * @apiParam {UUIDV4} sceneId Identifier of the scene to which the action belongs.
  */
 @FridayRouter('/v1/action')
 export default class ActionRouter {
@@ -16,9 +22,23 @@ export default class ActionRouter {
 
   /**
    * Create an action
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof ActionRouter
+   * @apiName create
+   * @apiDescription This route allows you to create an action
+   * @api {post} /api/v1/action
+   * @apiGroup Action
+   * @apiUse ActionParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "id": "daff2ca0-5ab8-4e72-8561-c4ed9c7c6901",
+   *   "name": "action example",
+   *   "description": "action example description",
+   *   "type": "light.turn_on",
+   *   "subType": "",
+   *   "variableKey": "action example variable key",
+   *   "variableValue": "action example variable value",
+   *   "sceneId": "2452964a-a225-47dd-9b83-d88d57ed280e"
+   * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,9 +48,23 @@ export default class ActionRouter {
 
   /**
    * Update an action
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof ActionRouter
+   * @apiName update
+   * @apiDescription This route allows you to update an action
+   * @api {patch} /api/v1/action/:id
+   * @apiGroup Action
+   * @apiUse ActionParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "id": "daff2ca0-5ab8-4e72-8561-c4ed9c7c6901",
+   *   "name": "action example",
+   *   "description": "action example description",
+   *   "type": "light.turn_on",
+   *   "subType": "",
+   *   "variableKey": "action example variable key",
+   *   "variableValue": "action example variable value",
+   *   "sceneId": "2452964a-a225-47dd-9b83-d88d57ed280e"
+   * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
@@ -39,10 +73,16 @@ export default class ActionRouter {
   }
 
   /**
-   * Delete an action
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof ActionRouter
+   * Delete an action by id
+   * @apiName destroy
+   * @apiDescription This route allows you to delete an action
+   * @api {delete} /api/v1/action/:id
+   * @apiGroup Action
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,9 +94,22 @@ export default class ActionRouter {
 
   /**
    * Get all actions
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof ActionRouter
+   * @apiName getAll
+   * @apiDescription This route allows you to get all actions
+   * @api {get} /api/v1/action
+   * @apiGroup Action
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * [{
+   *   "id": "daff2ca0-5ab8-4e72-8561-c4ed9c7c6901",
+   *   "name": "action example",
+   *   "description": "action example description",
+   *   "type": "light.turn_on",
+   *   "subType": "",
+   *   "variableKey": "action example variable key",
+   *   "variableValue": "action example variable value",
+   *   "sceneId": "2452964a-a225-47dd-9b83-d88d57ed280e"
+   * }]
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
@@ -65,10 +118,23 @@ export default class ActionRouter {
   }
 
   /**
-   * Get action by id
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof ActionRouter
+   * Get an action by id
+   * @apiName getById
+   * @apiDescription This route allows you to get an action with his identifier
+   * @api {get} /api/v1/action/:id
+   * @apiGroup Action
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "id": "daff2ca0-5ab8-4e72-8561-c4ed9c7c6901",
+   *   "name": "action example",
+   *   "description": "action example description",
+   *   "type": "light.turn_on",
+   *   "subType": "",
+   *   "variableKey": "action example variable key",
+   *   "variableValue": "action example variable value",
+   *   "sceneId": "2452964a-a225-47dd-9b83-d88d57ed280e"
+   * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
