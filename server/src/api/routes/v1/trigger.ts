@@ -3,8 +3,11 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
 
 /**
  * Trigger router
- * @export
- * @param {*} friday
+ * @apiDefine TriggerParam
+ * @apiParam {String} name Name of the trigger.
+ * @apiParam {String} [description] Description of the trigger.
+ * @apiParam {AvailableConditions} type Type of the trigger.
+ * @apiParam {JSON} rules Rules of the trigger.
  */
 @FridayRouter('/v1/trigger')
 export default class TriggerRouter {
@@ -16,9 +19,23 @@ export default class TriggerRouter {
 
   /**
    * Create a trigger
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof TriggerRouter
+   * @apiName create
+   * @apiDescription This route allows you to create a trigger
+   * @api {post} /api/v1/trigger
+   * @apiGroup Trigger
+   * @apiUse TriggerParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
+   *   name: 'Test',
+   *   description: 'A trigger test',
+   *   type: 'device.value',
+   *   rules: {
+   *     device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
+   *     value: '23'
+   *   }
+   * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,9 +45,23 @@ export default class TriggerRouter {
 
   /**
    * Update a trigger
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof TriggerRouter
+   * @apiName create
+   * @apiDescription This route allows you to update a trigger
+   * @api {patch} /api/v1/trigger
+   * @apiGroup Trigger
+   * @apiUse TriggerParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
+   *   name: 'Test',
+   *   description: 'A trigger test',
+   *   type: 'device.value',
+   *   rules: {
+   *     device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
+   *     value: '23'
+   *   }
+   * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
@@ -39,10 +70,16 @@ export default class TriggerRouter {
   }
 
   /**
-   * Delete a trigger
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof TriggerRouter
+   * Delete a trigger by id
+   * @apiName destroy
+   * @apiDescription This route allows you to delete a trigger
+   * @api {delete} /api/v1/trigger/:id
+   * @apiGroup Trigger
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,9 +91,22 @@ export default class TriggerRouter {
 
   /**
    * Get all triggers
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof TriggerRouter
+   * @apiName getAll
+   * @apiDescription This route allows you to get all triggers
+   * @api {get} /api/v1/trigger
+   * @apiGroup Trigger
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * [{
+   *   id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
+   *   name: 'Test',
+   *   description: 'A trigger test',
+   *   type: 'device.value',
+   *   rules: {
+   *     device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
+   *     value: '23'
+   *   }
+   * }]
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
@@ -65,13 +115,26 @@ export default class TriggerRouter {
   }
 
   /**
-   * Get trigger by id
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof TriggerRouter
+   * Get a trigger by id
+   * @apiName getById
+   * @apiDescription This route allows you to get a trigger with his identifier
+   * @api {get} /api/v1/trigger/:id
+   * @apiGroup Trigger
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
+   *   name: 'Test',
+   *   description: 'A trigger test',
+   *   type: 'device.value',
+   *   rules: {
+   *     device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
+   *     value: '23'
+   *   }
+   * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response, next: NextFunction) => {
     const trigger = await this.friday.trigger.getById(req.params.id);
     res.json(trigger);
   }

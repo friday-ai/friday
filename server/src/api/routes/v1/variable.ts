@@ -3,8 +3,11 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
 
 /**
  * Variable router
- * @export
- * @param {*} friday
+ * @apiDefine VariableParam
+ * @apiParam {String} key Key of the variable.
+ * @apiParam {String} value Value of the variable.
+ * @apiParam {String} owner Owner'id of the variable.
+ * @apiParam {VariableOwner} ownerType Owner type of the variable.
  */
 @FridayRouter('/v1/variable')
 export default class VariableRouter {
@@ -16,9 +19,20 @@ export default class VariableRouter {
 
   /**
    * Create a variable
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof VariableRouter
+   * @apiName create
+   * @apiDescription This route allows you to create a variable
+   * @api {post} /api/v1/variable
+   * @apiGroup Variable
+   * @apiUse VariableParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
+   *   key: 'test_key0',
+   *   value: 'test_value0',
+   *   owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+   *   ownerType: 'user'
+   * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,9 +42,20 @@ export default class VariableRouter {
 
   /**
    * Update a variable
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof VariableRouter
+   * @apiName create
+   * @apiDescription This route allows you to update a variable
+   * @api {patch} /api/v1/variable
+   * @apiGroup Variable
+   * @apiUse VariableParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
+   *   key: 'test_key0',
+   *   value: 'test_value0',
+   *   owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+   *   ownerType: 'user'
+   * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
@@ -39,10 +64,16 @@ export default class VariableRouter {
   }
 
   /**
-   * Delete a variable
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof VariableRouter
+   * Delete a variable by id
+   * @apiName destroy
+   * @apiDescription This route allows you to delete a variable
+   * @api {delete} /api/v1/variable/:id
+   * @apiGroup Variable
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,9 +85,19 @@ export default class VariableRouter {
 
   /**
    * Get all variables
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof VariableRouter
+   * @apiName getAll
+   * @apiDescription This route allows you to get all variables
+   * @api {get} /api/v1/variable
+   * @apiGroup Variable
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * [{
+   *   id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
+   *   key: 'test_key0',
+   *   value: 'test_value0',
+   *   owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+   *   ownerType: 'user'
+   * }]
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
@@ -65,10 +106,20 @@ export default class VariableRouter {
   }
 
   /**
-   * Get variable by id
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof VariableRouter
+   * Get a variable by id
+   * @apiName getById
+   * @apiDescription This route allows you to get a variable with his identifier
+   * @api {get} /api/v1/variable/:id
+   * @apiGroup Variable
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
+   *   key: 'test_key0',
+   *   value: 'test_value0',
+   *   owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+   *   ownerType: 'user'
+   * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {

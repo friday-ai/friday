@@ -3,8 +3,10 @@ import { FridayRouter, Get, Patch } from '../../../utils/decorators/route';
 
 /**
  * State router
- * @export
- * @param {*} friday
+ * @apiDefine StateParam
+ * @apiParam {String} owner Owner of the state.
+ * @apiParam {StateOwner} owner Type The type of owner of the state.
+ * @apiParam {AvailableState} value Value of the state.
  */
 @FridayRouter('/v1/state')
 export default class StateRouter {
@@ -16,9 +18,19 @@ export default class StateRouter {
 
   /**
    * Set a state
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof StateRouter
+   * @apiName set
+   * @apiDescription This route allows you to set a state
+   * @api {patch} /api/v1/state
+   * @apiGroup State
+   * @apiUse StateParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: '17ea7282-507b-496b-b496-a6d8ce7fac17',
+   *   owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
+   *   ownerType: 'user',
+   *   value: 'user.at.home'
+   * }
    */
   @Patch({ path: '/', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,13 +39,22 @@ export default class StateRouter {
   }
 
   /**
-   * Get state by owner
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof StateRouter
+   * Get a state by owner
+   * @apiName getByOwner
+   * @apiDescription This route allows you to get a state with his owner's identifier
+   * @api {get} /api/v1/state/:id
+   * @apiGroup State
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: '17ea7282-507b-496b-b496-a6d8ce7fac17',
+   *   owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
+   *   ownerType: 'user',
+   *   value: 'user.at.home'
+   * }
    */
   @Get({ path: '/:owner', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response, next: NextFunction) => {
+  getByOwner = async (req: Request, res: Response, next: NextFunction) => {
     const state = await this.friday.state.getByOwner(req.params.owner);
     res.json(state);
   }

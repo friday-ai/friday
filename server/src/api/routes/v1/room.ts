@@ -3,8 +3,9 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
 
 /**
  * Room router
- * @export
- * @param {*} friday
+ * @apiDefine RoomParam
+ * @apiParam {String} name Name of the house.
+ * @apiParam {UUIDV4} houseId Identifier of the house to which the room belongs.
  */
 @FridayRouter('/v1/room')
 export default class RoomRouter {
@@ -15,10 +16,19 @@ export default class RoomRouter {
   }
 
   /**
-   * Create a room
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof RoomRouter
+   * Create an room
+   * @apiName create
+   * @apiDescription This route allows you to create an room
+   * @api {post} /api/v1/room
+   * @apiGroup Room
+   * @apiUse RoomParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+   *   name: 'Bedroom',
+   *   houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
+   * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,10 +37,19 @@ export default class RoomRouter {
   }
 
   /**
-   * Update a room
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof RoomRouter
+   * Update an room
+   * @apiName create
+   * @apiDescription This route allows you to update an room
+   * @api {patch} /api/v1/room
+   * @apiGroup Room
+   * @apiUse RoomParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+   *   name: 'Bedroom',
+   *   houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
+   * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
@@ -39,10 +58,16 @@ export default class RoomRouter {
   }
 
   /**
-   * Delete a room
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof RoomRouter
+   * Delete an room by id
+   * @apiName destroy
+   * @apiDescription This route allows you to delete an room
+   * @api {delete} /api/v1/room/:id
+   * @apiGroup Room
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,9 +79,17 @@ export default class RoomRouter {
 
   /**
    * Get all rooms
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof RoomRouter
+   * @apiName getAll
+   * @apiDescription This route allows you to get all rooms
+   * @api {get} /api/v1/room
+   * @apiGroup Room
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * [{
+   *   id: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+   *   name: 'Bedroom',
+   *   houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
+   * }]
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
@@ -65,13 +98,21 @@ export default class RoomRouter {
   }
 
   /**
-   * Get room by id
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof RoomRouter
+   * Get an room by id
+   * @apiName getById
+   * @apiDescription This route allows you to get an room with his identifier
+   * @api {get} /api/v1/room/:id
+   * @apiGroup Room
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+   *   name: 'Bedroom',
+   *   houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
+   * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response, next: NextFunction) => {
     const room = await this.friday.room.getById(req.params.id);
     res.json(room);
   }

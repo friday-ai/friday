@@ -3,8 +3,12 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
 
 /**
  * Plugin router
- * @export
- * @param {*} friday
+ * @apiDefine PluginParam
+ * @apiParam {String} name Name of the plugin.
+ * @apiParam {String} version Version of the plugin.
+ * @apiParam {String} url Url of the plugin.
+ * @apiParam {Boolean} [enabled] State of the plugin.
+ * @apiParam {UUIDV4} satelliteId Identifier of the satellite to which the plugin belongs.
  */
 @FridayRouter('/v1/plugin')
 export default class PluginRouter {
@@ -16,9 +20,21 @@ export default class PluginRouter {
 
   /**
    * Create a plugin
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof PluginRouter
+   * @apiName create
+   * @apiDescription This route allows you to create a plugin
+   * @api {post} /api/v1/plugin
+   * @apiGroup Plugin
+   * @apiUse PluginParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+   *   name: 'Zwave',
+   *   version: '1.2.0',
+   *   url: 'fake url',
+   *   enabled: true,
+   *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+   * },
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,9 +44,21 @@ export default class PluginRouter {
 
   /**
    * Update a plugin
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof PluginRouter
+   * @apiName update
+   * @apiDescription This route allows you to update a plugin
+   * @api {post} /api/v1/plugin/:id
+   * @apiGroup Plugin
+   * @apiUse PluginParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+   *   name: 'Zwave',
+   *   version: '1.2.0',
+   *   url: 'fake url',
+   *   enabled: true,
+   *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+   * },
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
@@ -40,9 +68,15 @@ export default class PluginRouter {
 
   /**
    * Delete a plugin
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof PluginRouter
+   * @apiName destroy
+   * @apiDescription This route allows you to delete a plugin
+   * @api {get} /api/v1/plugin/:id
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,9 +88,20 @@ export default class PluginRouter {
 
   /**
    * Get all plugins
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof PluginRouter
+   * @apiName getAll
+   * @apiDescription This route allows you to get all plugins
+   * @api {get} /api/v1/plugin
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * [{
+   *   id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+   *   name: 'Zwave',
+   *   version: '1.2.0',
+   *   url: 'fake url',
+   *   enabled: true,
+   *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+   * }],
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
@@ -65,13 +110,24 @@ export default class PluginRouter {
   }
 
   /**
-   * Get plugin by id
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof PluginRouter
+   * Get a plugin by id
+   * @apiName getById
+   * @apiDescription This route allows you to get a plugin with his identifier
+   * @api {get} /api/v1/plugin/:if
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+   *   name: 'Zwave',
+   *   version: '1.2.0',
+   *   url: 'fake url',
+   *   enabled: true,
+   *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+   * },
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response, next: NextFunction) => {
     const plugin = await this.friday.plugin.getById(req.params.id);
     res.json(plugin);
   }

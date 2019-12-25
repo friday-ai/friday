@@ -3,8 +3,14 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
 
 /**
  * User router
- * @export
- * @param {*} friday
+ * @apiDefine UserParam
+ * @apiParam {String} name Name of the user.
+ * @apiParam {String} firstName Firstname of the user.
+ * @apiParam {String} email Email of the user.
+ * @apiParam {String} password Password of the user.
+ * @apiParam {Date} [birthDate] Birth date of the user
+ * @apiParam {UserRole} [role] Role of the user
+ * @apiParam {AvailableLanguages} [language] Language of the user
  */
 @FridayRouter('/v1/user')
 export default class UserRouter {
@@ -16,9 +22,20 @@ export default class UserRouter {
 
   /**
    * Create a user
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof UserRouter
+   * @apiName create
+   * @apiDescription This route allows you to create a user
+   * @api {post} /api/v1/user
+   * @apiGroup User
+   * @apiUse UserParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+   *   name: 'Pepperwood',
+   *   firstName: 'John',
+   *   email: 'john@pepperwood.com',
+   *   birthDate: new Date(1996, 12, 20)
+   * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,9 +45,20 @@ export default class UserRouter {
 
   /**
    * Update a user
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof UserRouter
+   * @apiName create
+   * @apiDescription This route allows you to update a user
+   * @api {patch} /api/v1/user
+   * @apiGroup User
+   * @apiUse UserParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+   *   name: 'Pepperwood',
+   *   firstName: 'John',
+   *   email: 'john@pepperwood.com',
+   *   birthDate: new Date(1996, 12, 20)
+   * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
@@ -39,10 +67,16 @@ export default class UserRouter {
   }
 
   /**
-   * Delete a user
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof UserRouter
+   * Delete a user by id
+   * @apiName destroy
+   * @apiDescription This route allows you to delete a user
+   * @api {delete} /api/v1/user/:id
+   * @apiGroup User
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,9 +88,19 @@ export default class UserRouter {
 
   /**
    * Get all users
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof UserRouter
+   * @apiName getAll
+   * @apiDescription This route allows you to get all users
+   * @api {get} /api/v1/satellite
+   * @apiGroup User
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * [{
+   *   id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+   *   name: 'Pepperwood',
+   *   firstName: 'John',
+   *   email: 'john@pepperwood.com',
+   *   birthDate: new Date(1996, 12, 20)
+   * }]
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
@@ -65,10 +109,20 @@ export default class UserRouter {
   }
 
   /**
-   * Get user by id
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof UserRouter
+   * Get a user by id
+   * @apiName getById
+   * @apiDescription This route allows you to get a user with his identifier
+   * @api {get} /api/v1/user/:id
+   * @apiGroup User
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+   *   name: 'Pepperwood',
+   *   firstName: 'John',
+   *   email: 'john@pepperwood.com',
+   *   birthDate: new Date(1996, 12, 20)
+   * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {

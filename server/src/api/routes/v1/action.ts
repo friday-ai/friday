@@ -5,7 +5,7 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
  * Action router
  * @apiDefine ActionParam
  * @apiParam {String} name Name of the action.
- * @apiParam {String} description Description of the action.
+ * @apiParam {String} [description] Description of the action.
  * @apiParam {ActionsType} type Type of the action.
  * @apiParam {String} subType SubType of the action.
  * @apiParam {String} variableKey Name of the object affected by the action.
@@ -25,6 +25,7 @@ export default class ActionRouter {
    * @apiName create
    * @apiDescription This route allows you to create an action
    * @api {post} /api/v1/action
+   * @apiSampleRequest http://localhost:3000
    * @apiGroup Action
    * @apiUse ActionParam
    * @apiVersion 1.0.0
@@ -51,6 +52,7 @@ export default class ActionRouter {
    * @apiName update
    * @apiDescription This route allows you to update an action
    * @api {patch} /api/v1/action/:id
+   * @apiSampleRequest http://localhost:3000
    * @apiGroup Action
    * @apiUse ActionParam
    * @apiVersion 1.0.0
@@ -77,6 +79,7 @@ export default class ActionRouter {
    * @apiName destroy
    * @apiDescription This route allows you to delete an action
    * @api {delete} /api/v1/action/:id
+   * @apiSampleRequest http://localhost:3000
    * @apiGroup Action
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response
@@ -97,6 +100,7 @@ export default class ActionRouter {
    * @apiName getAll
    * @apiDescription This route allows you to get all actions
    * @api {get} /api/v1/action
+   * @apiSampleRequest http://localhost:3000
    * @apiGroup Action
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response

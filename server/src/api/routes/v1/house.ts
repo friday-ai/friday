@@ -3,8 +3,10 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
 
 /**
  * House router
- * @export
- * @param {*} friday
+ * @apiDefine HouseParam
+ * @apiParam {String} name Name of the house.
+ * @apiParam {String} latitude Latitude of the house.
+ * @apiParam {String} longitude Longitude of the house.
  */
 @FridayRouter('/v1/house')
 export default class HouseRouter {
@@ -16,9 +18,19 @@ export default class HouseRouter {
 
   /**
    * Create an house
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof HouseRouter
+   * @apiName create
+   * @apiDescription This route allows you to create an house
+   * @api {post} /api/v1/house
+   * @apiGroup House
+   * @apiUse HouseParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
+   *   name: 'Main House',
+   *   latitude: '34.0012295',
+   *   longitude: '-118.8067245'
+   * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
   create = async (req: Request, res: Response, next: NextFunction) => {
@@ -28,9 +40,19 @@ export default class HouseRouter {
 
   /**
    * Update an house
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof HouseRouter
+   * @apiName update
+   * @apiDescription This route allows you to update an house
+   * @api {patch} /api/v1/house/:id
+   * @apiGroup House
+   * @apiUse HouseParam
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
+   *   name: 'Main House',
+   *   latitude: '34.0012295',
+   *   longitude: '-118.8067245'
+   * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
@@ -40,9 +62,15 @@ export default class HouseRouter {
 
   /**
    * Delete an house
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof HouseRouter
+   * @apiName destroy
+   * @apiDescription This route allows you to delete an house
+   * @api {get} /api/v1/house/:id
+   * @apiGroup House
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
   destroy = async (req: Request, res: Response, next: NextFunction) => {
@@ -54,9 +82,18 @@ export default class HouseRouter {
 
   /**
    * Get all houses
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof HouseRouter
+   * @apiName getAll
+   * @apiDescription This route allows you to get all houses
+   * @api {get} /api/v1/hous
+   * @apiGroup House
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * [{
+   *   id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
+   *   name: 'Main House',
+   *   latitude: '34.0012295',
+   *   longitude: '-118.8067245'
+   * }]
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
@@ -65,13 +102,22 @@ export default class HouseRouter {
   }
 
   /**
-   * Get house by id
-   * @param {Request} req
-   * @param {Response} res
-   * @memberof HouseRouter
+   * Get an house by id
+   * @apiName getById
+   * @apiDescription This route allows you to get an house with his identifier
+   * @api {get} /api/v1/house/:id
+   * @apiGroup House
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
+   *   name: 'Main House',
+   *   latitude: '34.0012295',
+   *   longitude: '-118.8067245'
+   * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response, next: NextFunction) => {
     const house = await this.friday.house.getById(req.params.id);
     res.json(house);
   }
