@@ -1,5 +1,6 @@
-import { BadParametersError, NotFoundError, DatabaseUniqueConstraintError, DatabaseValidationError, AuthError} from './coreError';
+import { BadParametersError, NotFoundError, DatabaseUniqueConstraintError, DatabaseValidationError, AuthError, UnauthoriizedError } from './coreError';
 import { ErrorType } from '../interfaces';
+import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtoken';
 
 /**
  * Base http error class
@@ -134,6 +135,12 @@ export default function httpError(err: ErrorType): BaseHttpError {
       return new Error404(err);
     case AuthError:
       return new Error403(err);
+    case UnauthoriizedError:
+    case TokenExpiredError:
+    case NotBeforeError:
+    case JsonWebTokenError:
+    case Error401:
+      return new Error401(err);
     default:
       return new Error500(err);
   }

@@ -34,7 +34,7 @@ export default class UserRouter {
    *   name: 'Pepperwood',
    *   firstName: 'John',
    *   email: 'john@pepperwood.com',
-   *   birthDate: new Date(1996, 12, 20)
+   *   birthDate: 20/12/1996
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
@@ -57,7 +57,7 @@ export default class UserRouter {
    *   name: 'Pepperwood',
    *   firstName: 'John',
    *   email: 'john@pepperwood.com',
-   *   birthDate: new Date(1996, 12, 20)
+   *   birthDate: 20/12/1996
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
@@ -90,7 +90,7 @@ export default class UserRouter {
    * Get all users
    * @apiName getAll
    * @apiDescription This route allows you to get all users
-   * @api {get} /api/v1/satellite
+   * @api {get} /api/v1/user
    * @apiGroup User
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response
@@ -99,7 +99,7 @@ export default class UserRouter {
    *   name: 'Pepperwood',
    *   firstName: 'John',
    *   email: 'john@pepperwood.com',
-   *   birthDate: new Date(1996, 12, 20)
+   *   birthDate: 20/12/1996
    * }]
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
@@ -121,13 +121,31 @@ export default class UserRouter {
    *   name: 'Pepperwood',
    *   firstName: 'John',
    *   email: 'john@pepperwood.com',
-   *   birthDate: new Date(1996, 12, 20)
+   *   birthDate: 20/12/1996
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
     const user = await this.friday.user.getById(req.params.id);
     res.json(user);
+  }
+
+  /**
+   * Login a user
+   * @apiPrivate
+   * @apiName login
+   * @apiDescription This route allows you to login
+   * @api {post} /api/v1/user/login
+   * @apiGroup User
+   * @apiParam {String} email Email of the user
+   * @apiParam {String} password Password of the user
+   * @apiVersion 1.0.0
+   */
+  @Post({ path: '/login', authenticated: false, rateLimit: true })
+  login = async (req: Request, res: Response, next: NextFunction) => {
+    const user = await this.friday.user.login(req.body.email, req.body.password);
+    const session = await this.friday.session.create(user);
+    res.status(201).json(session);
   }
 
 }

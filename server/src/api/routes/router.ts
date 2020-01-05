@@ -4,6 +4,7 @@ import { Router } from 'express';
 import { RouteDefinition } from '../../utils/decorators/route';
 import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 import asyncMiddleware from '../middlewares/asyncMiddleware';
+import authMiddleware from '../middlewares/authMiddleware';
 
 /**
  * Express router
@@ -32,9 +33,9 @@ export default function router(friday: any): Router {
       const routerParams = [];
 
       // if the route is marked as authenticated
-      // if (route.authenticated) {
-      //   routerParams.push(authMiddleware);
-      // }
+      if (route.authenticated) {
+        routerParams.push(authMiddleware(friday));
+      }
       // if the route need rate limit
       if (route.rateLimit) {
         routerParams.push(rateLimitMiddleware);
