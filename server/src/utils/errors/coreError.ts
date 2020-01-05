@@ -1,5 +1,6 @@
 import { ValidationError, UniqueConstraintError } from 'sequelize';
 import { ErrorType } from '../interfaces';
+import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtoken';
 /**
  * Base core error class
  * @class BaseCoreError
@@ -27,6 +28,18 @@ export class BaseCoreError extends Error {
  * @extends {BaseCoreError}
  */
 export class AuthError extends BaseCoreError {
+
+  constructor(err: ErrorType) {
+    super(err);
+  }
+}
+
+/**
+ * Unauthoriized error class
+ * @class UnauthoriizedError
+ * @extends {BaseCoreError}
+ */
+export class UnauthoriizedError extends BaseCoreError {
 
   constructor(err: ErrorType) {
     super(err);
@@ -97,6 +110,13 @@ export default function error(err: ErrorType): BaseCoreError {
       return new BadParametersError(err);
     case NotFoundError:
       return new NotFoundError(err);
+    case UnauthoriizedError:
+    case TokenExpiredError:
+    case NotBeforeError:
+    case JsonWebTokenError:
+      return new UnauthoriizedError(err);
+    case AuthError:
+      return new AuthError(err);
     default:
       return new BaseCoreError(err);
   }
