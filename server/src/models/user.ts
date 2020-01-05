@@ -5,6 +5,7 @@ import Variable from './variable';
 import { UserRole, AvailableLanguages } from '../utils/constants';
 import State from './state';
 import { hash } from '../../src/utils/password';
+import Session from './session';
 
 /**
  * User model
@@ -87,6 +88,12 @@ export default class User extends Model<User> {
     constraints: false
   })
   state?: State;
+
+  @HasMany(() => Session, {
+    foreignKey: 'userId',
+    constraints: false
+  })
+  session?: Session[];
 
   /**
    * Function to hash password before saving in the database

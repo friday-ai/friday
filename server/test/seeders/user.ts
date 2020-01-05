@@ -1,4 +1,5 @@
 import User from '../../src/models/user';
+import { hash } from '../../src/utils/password';
 
 const create = async () => {
   await User.bulkCreate([
@@ -7,7 +8,7 @@ const create = async () => {
       name: 'Pepperwood',
       firstName: 'John',
       email: 'john@pepperwood.com',
-      password: '$2y$10$WWDhMPJTFEA77Al25/x6xecS7FJtk6rInHxmdj7uOiaE2q5L1M.Ym', // mysuperpassword
+      password: await hash('mysuperpassword'),
       birthDate: new Date(1996, 12, 20)
     },
     {
@@ -15,7 +16,7 @@ const create = async () => {
       name: 'Pepperwood',
       firstName: 'Jess',
       email: 'jess@pepperwood.com',
-      password: '$2y$10$qcwZ4pcAv8QfKY034O5dHO5xDSxILb5HtXyX.32FhvbbdkudjiiK.', // mysuperpassword2
+      password: await hash('mysuperpassword2'),
       birthDate: new Date(1996, 12, 20)
     }
   ]);
