@@ -1,8 +1,9 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope, Default } from 'sequelize-typescript';
 import { VariableOwner } from '../utils/constants';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
+import { v4 as uuid } from 'uuid';
 
 /**
  * Variable model
@@ -20,6 +21,7 @@ export default class Variable extends Model<Variable> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
+  @Default(uuid())
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, BelongsTo, Unique, DefaultScope } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, BelongsTo, Unique, DefaultScope, Default } from 'sequelize-typescript';
 import { StateOwner } from '../utils/constants';
 import User from './user';
 import Satellite from './satellite';
@@ -6,6 +6,7 @@ import Room from './room';
 import House from './house';
 import Device from './device';
 import Plugin from './plugin';
+import { v4 as uuid } from 'uuid';
 
 /**
  * State model
@@ -23,6 +24,7 @@ export default class State extends Model<State> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
+  @Default(uuid())
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

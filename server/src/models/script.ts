@@ -1,4 +1,5 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Default } from 'sequelize-typescript';
+import { v4 as uuid } from 'uuid';
 
 /**
  * Script model
@@ -16,6 +17,7 @@ export default class Script extends Model<Script> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
+  @Default(uuid())
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

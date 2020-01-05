@@ -1,10 +1,11 @@
 import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes } from 'sequelize-typescript';
+  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default } from 'sequelize-typescript';
 
 import Plugin from './plugin';
 import Room from './room';
 import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../utils/constants';
 import State from './state';
+import { v4 as uuid } from 'uuid';
 
 /**
  * Device model
@@ -40,6 +41,7 @@ export default class Device extends Model<Device> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
+  @Default(uuid())
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

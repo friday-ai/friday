@@ -1,6 +1,7 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default } from 'sequelize-typescript';
 import Trigger from './trigger';
 import Action from './action';
+import { v4 as uuid } from 'uuid';
 
 /**
  * Scene model
@@ -32,6 +33,7 @@ export default class Scene extends Model<Scene> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
+  @Default(uuid())
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

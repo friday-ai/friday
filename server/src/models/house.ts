@@ -1,6 +1,7 @@
-import { Table, Column, Model, PrimaryKey, DataType, HasMany, HasOne, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, HasMany, HasOne, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default } from 'sequelize-typescript';
 import Room from './room';
 import State from './state';
+import { v4 as uuid } from 'uuid';
 
 /**
  * House model
@@ -32,6 +33,7 @@ export default class House extends Model<House> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
+  @Default(uuid())
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 
