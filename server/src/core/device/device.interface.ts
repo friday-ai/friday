@@ -8,7 +8,7 @@ import PluginType from '../plugin/plugin.interface';
  * Device interface.
  */
 export default interface DeviceType {
-  id: string;
+  id?: string;
   name?: string;
   type?: AvailableTypeOfDevice;
   subType?: AvailableSubTypeOfDevice;

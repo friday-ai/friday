@@ -105,7 +105,7 @@ export default class PluginRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const plugins = await this.friday.plugin.getAll();
+    const plugins = await this.friday.plugin.getAll(req.query);
     res.json(plugins);
   }
 

@@ -13,7 +13,7 @@ import { generateAccessToken } from '../../utils/jwt';
 export default async function getAccessToken(this: SessionClass, refreshToken: string): Promise<SessionType> {
   try {
     const session: SessionType = await this.validateRefreshToken(refreshToken, 'full');
-    session.accessToken = await generateAccessToken(session.user!.id, session.user!.role!, session.id, this.secretJwt);
+    session.accessToken = await generateAccessToken(session.user!.id!, session.user!.role!, session.id!, this.secretJwt);
     session.refreshToken = refreshToken;
     return session;
   } catch (e) {

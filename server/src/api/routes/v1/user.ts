@@ -104,7 +104,7 @@ export default class UserRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const users = await this.friday.user.getAll();
+    const users = await this.friday.user.getAll(req.query);
     res.json(users);
   }
 

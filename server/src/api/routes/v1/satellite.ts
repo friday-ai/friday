@@ -93,7 +93,7 @@ export default class SatelliteRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const satellites = await this.friday.satellite.getAll();
+    const satellites = await this.friday.satellite.getAll(req.query);
     res.json(satellites);
   }
 

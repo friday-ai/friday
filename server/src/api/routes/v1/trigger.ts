@@ -110,7 +110,7 @@ export default class TriggerRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const triggers = await this.friday.trigger.getAll();
+    const triggers = await this.friday.trigger.getAll(req.query);
     res.json(triggers);
   }
 

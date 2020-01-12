@@ -5,7 +5,7 @@ import { AvailableConditions } from '../../utils/constants';
  * Trigger interface.
  */
 export default interface TriggerType {
-  id: string;
+  id?: string;
   name?: string;
   description?: string;
   type?: AvailableConditions;

@@ -93,7 +93,7 @@ export default class ScriptRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const scripts = await this.friday.script.getAll();
+    const scripts = await this.friday.script.getAll(req.query);
     res.json(scripts);
   }
 

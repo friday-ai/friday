@@ -4,7 +4,7 @@ import UserType from '../user/user.interface';
  * Session interface.
  */
 export default interface SessionType {
-  id: string;
+  id?: string;
   refreshToken?: string;
   revoked?: boolean;
   validUntil?: Date;

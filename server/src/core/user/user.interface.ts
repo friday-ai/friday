@@ -6,7 +6,7 @@ import StateType from '../state/state.interface';
  * User interface.
  */
 export default interface UserType {
-  id: string;
+  id?: string;
   name?: string;
   firstName?: string;
   email?: string;

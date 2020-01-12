@@ -10,6 +10,8 @@ import errorMiddleware from './middlewares/errorMiddleware';
 import * as WebSocket from 'ws';
 import WebsocketServer from './websocket/index';
 
+const env = process.env.NODE_ENV || 'production';
+
 /**
  * Server class
  */
@@ -63,10 +65,12 @@ export default class Server {
     // start WebSocket server
     this.websocketServer.start();
 
-    this.server.listen(this.port, () => {
-      logger.title('Friday server initialized !');
-      logger.info(`Friday server is available at localhost:${this.port}`);
-    });
+    if (env !== 'test') {
+      this.server.listen(this.port, () => {
+        logger.title('Friday server initialized !');
+        logger.info(`Friday server is available at localhost:${this.port}`);
+      });
+    }
 
     return this.server;
   }

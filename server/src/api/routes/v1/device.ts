@@ -118,7 +118,7 @@ export default class DeviceRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const devices = await this.friday.device.getAll();
+    const devices = await this.friday.device.getAll(req.query);
     res.json(devices);
   }
 

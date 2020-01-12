@@ -101,7 +101,7 @@ export default class VariableRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const variables = await this.friday.variable.getAll();
+    const variables = await this.friday.variable.getAll(req.query);
     res.json(variables);
   }
 

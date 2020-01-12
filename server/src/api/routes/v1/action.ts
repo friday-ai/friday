@@ -117,7 +117,7 @@ export default class ActionRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const actions = await this.friday.action.getAll();
+    const actions = await this.friday.action.getAll(req.query);
     res.json(actions);
   }
 

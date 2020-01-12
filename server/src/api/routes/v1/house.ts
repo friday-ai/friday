@@ -97,7 +97,7 @@ export default class HouseRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const houses = await this.friday.house.getAll();
+    const houses = await this.friday.house.getAll(req.query);
     res.json(houses);
   }
 

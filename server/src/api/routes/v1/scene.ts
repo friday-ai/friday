@@ -97,7 +97,7 @@ export default class SceneRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const scenes = await this.friday.scene.getAll();
+    const scenes = await this.friday.scene.getAll(req.query);
     res.json(scenes);
   }
 

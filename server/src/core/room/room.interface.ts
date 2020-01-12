@@ -7,7 +7,7 @@ import Devices from '../device/device.interface';
  * Room interface.
  */
 export default interface RoomType {
-  id: string;
+  id?: string;
   name?: string;
   houseId?: string;
   house?: HouseType;

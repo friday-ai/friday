@@ -33,7 +33,7 @@ export default async function create(this: SessionClass, user: UserType): Promis
 
     const createdSession = await Session.create(newSession);
     let sessionToReturn = <SessionType>createdSession.get({ plain: true });
-    sessionToReturn.accessToken = await generateAccessToken(user.id, user.role!, sessionToReturn.id, this.secretJwt);
+    sessionToReturn.accessToken = await generateAccessToken(user.id!, user.role!, sessionToReturn.id!, this.secretJwt);
     sessionToReturn.user = user;
     sessionToReturn.refreshToken = refreshToken;
 

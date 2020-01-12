@@ -18,5 +18,5 @@ export default (friday: Friday) => {
       const responseError = httpError(e);
       res.status(responseError.status).send(responseError);
     }
-  }
+  };
 };

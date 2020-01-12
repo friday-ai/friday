@@ -10,7 +10,7 @@ import SatelliteType from '../satellite/satellite.interface';
  * State interface.
  */
 export default interface StateType {
-  id: string;
+  id?: string;
   owner: string;
   ownerType: StateOwner;
   value: AvailableState;

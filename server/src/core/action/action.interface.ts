@@ -6,7 +6,7 @@ import { ActionsType } from '../../utils/constants';
  * Action interface
  */
 export default interface ActionType {
-  id: string;
+  id?: string;
   name?: string;
   description?: string;
   type?: ActionsType;

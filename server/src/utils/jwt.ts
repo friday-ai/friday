@@ -7,6 +7,7 @@ const refreshTokenValidity = 15 * 24 * 60 * 60; // refresh token is valid 15 day
 const randomBytes = util.promisify(crypto.randomBytes);
 const tokenLenght = 500;
 const apiKeyLenght = 32;
+const env = process.env.NODE_ENV || 'production';
 
 /**
  * Hash a token
@@ -27,6 +28,11 @@ export function hashToken(token: string) {
  * @returns {string} JwtSecret.
  */
 export function generateJwtSecret() {
+
+  if (env === 'test') {
+    return 'secretJwt';
+  }
+
   const jwtSecret = crypto
     .randomBytes(Math.ceil(tokenLenght / 2))
     .toString('hex') // convert to hexadecimal format

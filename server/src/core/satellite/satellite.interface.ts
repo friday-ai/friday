@@ -7,7 +7,7 @@ import PluginType from '../plugin/plugin.interface';
  * Satellite interface.
  */
 export default interface SatelliteType {
-  id: string;
+  id?: string;
   name?: string;
   roomId?: string;
   room?: RoomType;

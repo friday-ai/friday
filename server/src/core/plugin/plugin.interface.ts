@@ -7,7 +7,7 @@ import DeviceType from '../device/device.interface';
  * Plugin interface.
  */
 export default interface PluginType {
-  id: string;
+  id?: string;
   name?: string;
   version?: string;
   url?: string;

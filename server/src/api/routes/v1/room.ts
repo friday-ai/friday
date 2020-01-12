@@ -93,7 +93,7 @@ export default class RoomRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
-    const rooms = await this.friday.room.getAll();
+    const rooms = await this.friday.room.getAll(req.query);
     res.json(rooms);
   }
 

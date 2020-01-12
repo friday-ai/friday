@@ -5,7 +5,7 @@ import StateType from '../state/state.interface';
  * House interface.
  */
 export default interface HouseType {
-  id: string;
+  id?: string;
   name?: string;
   latitude?: string;
   longitude?: string;
