@@ -1,4 +1,4 @@
-import http from 'http';
+import * as http from 'http';
 import express from 'express';
 import helmet from 'helmet';
 import compression from 'compression';
@@ -7,13 +7,15 @@ import router from './routes/router';
 import Log from '../utils/log';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';
 import errorMiddleware from './middlewares/errorMiddleware';
-import { Http2Server } from 'http2';
+import * as WebSocket from 'ws';
+import WebsocketServer from './websocket/index';
 
 /**
  * Server class
  */
 export default class Server {
-  public server!: Http2Server;
+  public server!: any;
+  public websocketServer!: any;
   readonly port: number;
   readonly friday: any;
 
@@ -51,12 +53,22 @@ export default class Server {
     // loading error middleware
     app.use(errorMiddleware);
 
+    // initialize the http server
     this.server = http.createServer(app);
+
+    // initialize the WebSocket server instance
+    const wss = new WebSocket.Server({ server: this.server });
+    this.websocketServer = new WebsocketServer(wss, this.friday);
+
+    // start WebSocket server
+    this.websocketServer.start();
 
     this.server.listen(this.port, () => {
       logger.title('Friday server initialized !');
       logger.info(`Friday server is available at localhost:${this.port}`);
     });
+
+    return this.server;
   }
 
   /**

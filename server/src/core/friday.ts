@@ -11,6 +11,7 @@ import State from './state';
 import Trigger from './trigger';
 import User from './user';
 import Variable from './variable';
+import Event from '../utils/event';
 import * as Constants from '../utils/constants';
 import { generateJwtSecret } from '../utils/jwt';
 
@@ -21,6 +22,7 @@ import { generateJwtSecret } from '../utils/jwt';
 export default class Friday {
   readonly secretJwt: string = generateJwtSecret();
 
+  public event = new Event();
   public action = new Action();
   public device = new Device();
   public house = new House();

@@ -97,6 +97,31 @@ export enum ActionsType {
   OTHER = 'other'
 }
 
+export enum EventsType {
+  // Systeme's  events
+  SYSTEME_STARTED = 'systeme.started',
+  SYSTEME_UPDATED = 'systeme.updated',
+  SYSTEME_SHUTDOWN = 'systeme.shutdown',
+  // Websocket's events
+  WEBSOCKET_SEND = 'websocket.send',
+  WEBSOCKET_SEND_ALL = 'websocket.send.all',
+  WEBSOCKET_SEND_ADMIN = 'websocket.send.admin'
+}
+
+export enum WebsocketMessageTypes {
+  // Authentication
+  AUTHENTICATION = 'authenticate',
+  // Device
+  DEVICE_VALUE = 'device.value',
+  // Mqtt
+  MQTT_CONNECTED = 'mqtt.connected',
+  MQTT_ERROR = 'mqtt.error',
+  // Websocket
+  MESSAGE_SEND = 'message.send',
+  MESSAGE_SEND_ALL = 'message.send.all',
+  MESSAGE_SEND_ADMIN = 'message.send.admin'
+}
+
 // TODO = Create a Json file with all type of device available
 export enum AvailableTypeOfDevice {
   LIGHT = 'light',
