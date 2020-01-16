@@ -56,7 +56,7 @@ export default class SceneRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const scene = await this.friday.scene.update(req.body);
+    const scene = await this.friday.scene.update(req.params.id, req.body);
     res.json(scene);
   }
 
@@ -118,7 +118,7 @@ export default class SceneRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response, next: NextFunction) => {
-    const scene = await this.friday.scene.getById(req.params.id);
+    const scene = await this.friday.scene.getById(req.params.id, req.query.scope);
     res.json(scene);
   }
 
