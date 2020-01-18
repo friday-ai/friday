@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch } from '../../../utils/decorators/route';
+import {FridayRouter, Get, Post} from '../../../utils/decorators/route';
 
 /**
  * State router
@@ -32,8 +32,8 @@ export default class StateRouter {
    *   value: 'user.at.home'
    * }
    */
-  @Patch({ path: '/', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  @Post({ path: '/', authenticated: true, rateLimit: false })
+  create = async (req: Request, res: Response, next: NextFunction) => {
     const state = await this.friday.state.set(req.body);
     res.json(state);
   }
