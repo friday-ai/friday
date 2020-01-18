@@ -38,7 +38,7 @@ export default class SessionRouter {
    */
   @Patch({ path: '/revoke/:id', authenticated: true, rateLimit: false })
   revoke = async (req: Request, res: Response, next: NextFunction) => {
-    const session = await this.friday.session.revoke(req.params.id);
+    const session = await this.friday.session.revoke(req.params.id, req.query.sessionId);
     res.json(session);
   }
 
