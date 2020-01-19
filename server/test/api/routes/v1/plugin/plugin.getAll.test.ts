@@ -125,7 +125,7 @@ describe('plugin.getAll', () => {
       });
   });
 
-  it('should return all houses with state', async () => {
+  it('should return all plugins with state', async () => {
     const server = await new TestServer();
 
     await server

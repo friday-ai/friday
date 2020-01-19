@@ -1,6 +1,6 @@
 import TestServer from "../../../../utils/helper";
 
-describe('house.delete', () => {
+describe('plugin.delete', () => {
   it('should delete a plugin', async () => {
     const server = await new TestServer();
 

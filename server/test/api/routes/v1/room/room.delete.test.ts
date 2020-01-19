@@ -12,11 +12,11 @@ describe('room.delete', () => {
       });
   });
 
-  it('should not found house to delete', async () => {
+  it('should not found room to delete', async () => {
     const server = await new TestServer();
 
     await server
-      .delete('/api/v1/plugin/c97ba085-ba97-4a30-bdd3-b7a62f651333')
+      .delete('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f651333')
       .expect(404);
   });
 

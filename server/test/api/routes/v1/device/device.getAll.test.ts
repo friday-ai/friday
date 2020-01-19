@@ -1,7 +1,7 @@
 import TestServer from "../../../../utils/helper";
 import DeviceType from "../../../../../src/core/device/device.interface";
 
-describe('action.getAll', () => {
+describe('device.getAll', () => {
 
   it('should return all devices', async () => {
 

@@ -17,7 +17,7 @@ describe('trigger.update', () => {
       })
   });
 
-  it('should not found script to update', async () => {
+  it('should not found trigger to update', async () => {
     const server = await new TestServer();
 
     await server

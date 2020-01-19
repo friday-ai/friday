@@ -35,7 +35,7 @@ describe('satellite.create', () => {
     const server = await new TestServer();
 
     await server
-      .post('/api/v1/plugin')
+      .post('/api/v1/satellite')
       .send({
         id: '5218d483-d147-4541-bc56-9ad39a105293',
         name: '',
@@ -49,7 +49,7 @@ describe('satellite.create', () => {
     const server = await new TestServer();
 
     await server
-      .post('/api/v1/plugin')
+      .post('/api/v1/satellite')
       .send({
         id: '7e8913ac-5f87-418a-a483-424a9cbcd942',
         name: 'Satellite with an room',

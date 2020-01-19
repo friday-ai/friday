@@ -35,7 +35,7 @@ describe('room.create', () => {
     const server = await new TestServer();
 
     await server
-      .post('/api/v1/plugin')
+      .post('/api/v1/room')
       .send({
         id: 'af3cc3b1-b4e4-4def-ad7a-38ec70e23e62',
         name: '',
@@ -49,7 +49,7 @@ describe('room.create', () => {
     const server = await new TestServer();
 
     await server
-      .post('/api/v1/plugin')
+      .post('/api/v1/room')
       .send({
         id: '34c490f0-a9f9-4151-84bf-a7321c5f1bea',
         name: 'A room test',

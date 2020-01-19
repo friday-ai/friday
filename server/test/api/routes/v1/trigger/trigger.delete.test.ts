@@ -1,6 +1,6 @@
 import TestServer from "../../../../utils/helper";
 
-describe('script.delete', () => {
+describe('trigger.delete', () => {
   it('should delete a trigger', async () => {
     const server = await new TestServer();
 

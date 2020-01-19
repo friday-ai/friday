@@ -1,6 +1,6 @@
 import TestServer from "../../../../utils/helper";
 
-describe('scipt.getAll', () => {
+describe('script.getAll', () => {
 
   it('should return all script', async () => {
 

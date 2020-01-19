@@ -1,6 +1,6 @@
 import TestServer from "../../../../utils/helper";
 
-describe('device.create', () => {
+describe('house.create', () => {
 
   it('should create a house', async () => {
 
