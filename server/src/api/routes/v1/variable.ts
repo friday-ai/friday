@@ -59,7 +59,7 @@ export default class VariableRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const variable = await this.friday.variable.update(req.body);
+    const variable = await this.friday.variable.update(req.params.id, req.body);
     res.json(variable);
   }
 
@@ -84,32 +84,10 @@ export default class VariableRouter {
   }
 
   /**
-   * Get all variables
-   * @apiName getAll
+   * Get value variables
+   * @apiName getValue
    * @apiDescription This route allows you to get all variables
    * @api {get} /api/v1/variable
-   * @apiGroup Variable
-   * @apiVersion 1.0.0
-   * @apiSuccessExample {json} Success-Response
-   * [{
-   *   id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
-   *   key: 'test_key0',
-   *   value: 'test_value0',
-   *   owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-   *   ownerType: 'user'
-   * }]
-   */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
-  getAll = async (req: Request, res: Response) => {
-    const variables = await this.friday.variable.getAll(req.query);
-    res.json(variables);
-  }
-
-  /**
-   * Get a variable by id
-   * @apiName getById
-   * @apiDescription This route allows you to get a variable with his identifier
-   * @api {get} /api/v1/variable/:id
    * @apiGroup Variable
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response
@@ -121,10 +99,10 @@ export default class VariableRouter {
    *   ownerType: 'user'
    * }
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const variable = await this.friday.variable.getById(req.params.id);
-    res.json(variable);
+  @Get({ path: '/', authenticated: true, rateLimit: false })
+  getValue = async (req: Request, res: Response) => {
+    const variables = await this.friday.variable.getValue(req.query.key);
+    res.json(variables);
   }
 
 }

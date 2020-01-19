@@ -43,7 +43,9 @@ describe('variable.create', () => {
       owner: '2f5a9f86-2612-436b-9a3b-7040dae16c0d',
       ownerType: VariableOwner.USER
     })
+      .then(b => console.log(b))
       .catch((err: Error) => {
+        console.log(err)
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
 

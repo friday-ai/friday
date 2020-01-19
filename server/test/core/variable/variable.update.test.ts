@@ -1,13 +1,12 @@
 import Variable from '../../../src/core/variable';
-import { NotFoundError, BadParametersError } from '../../../src/utils/errors/coreError';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('variable.update', () => {
   const variable = new Variable();
 
   it('should update a variable', async () => {
 
-    const updatedVariable = await variable.update({
-      key: 'test_key0',
+    const updatedVariable = await variable.update('a2b9ba3a-72f1-4a24-b268-e3813c1e8f32', {
       value: 'value_updated'
     });
 
@@ -16,21 +15,11 @@ describe('variable.update', () => {
 
   it('should not found variable to update', async () => {
 
-    await variable.update({
-      key: 'key100'
+    await variable.update('a2b9ba3a-72f1-4a24-b268-e3813c1e8333', {
+      value: 'value_updated'
     })
       .catch((err: Error) => {
         expect(err).toBeInstanceOf(NotFoundError);
-      });
-  });
-
-  it('should not found variable\'s key to update', async () => {
-
-    await variable.update({
-      key: ''
-    })
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(BadParametersError);
       });
   });
 });
