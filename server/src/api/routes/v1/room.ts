@@ -53,7 +53,7 @@ export default class RoomRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const room = await this.friday.room.update(req.body);
+    const room = await this.friday.room.update(req.params.id, req.body);
     res.json(room);
   }
 
@@ -113,7 +113,7 @@ export default class RoomRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response, next: NextFunction) => {
-    const room = await this.friday.room.getById(req.params.id);
+    const room = await this.friday.room.getById(req.params.id, req.query.scope);
     res.json(room);
   }
 

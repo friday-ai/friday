@@ -62,7 +62,7 @@ export default class UserRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const user = await this.friday.user.update(req.body);
+    const user = await this.friday.user.update(req.params.id, req.body);
     res.json(user);
   }
 
@@ -126,7 +126,7 @@ export default class UserRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const user = await this.friday.user.getById(req.params.id);
+    const user = await this.friday.user.getById(req.params.id, req.query.scope);
     res.json(user);
   }
 

@@ -65,7 +65,7 @@ export default class TriggerRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const trigger = await this.friday.trigger.update(req.body);
+    const trigger = await this.friday.trigger.update(req.params.id, req.body);
     res.json(trigger);
   }
 
@@ -135,7 +135,7 @@ export default class TriggerRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response, next: NextFunction) => {
-    const trigger = await this.friday.trigger.getById(req.params.id);
+    const trigger = await this.friday.trigger.getById(req.params.id, req.query.scope);
     res.json(trigger);
   }
 

@@ -69,6 +69,7 @@ export default class Plugin extends Model<Plugin> {
   enabled!: boolean;
 
   @AllowNull(false)
+  @NotEmpty
   @Column(DataType.UUIDV4)
   satelliteId!: string;
 

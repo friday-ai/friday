@@ -4,19 +4,22 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Update a scene.
+ * @param {String} id - Id of scene
  * @param {SceneType} scene - A scene object.
  * @returns {Promise<SceneType>} Resolve with updated scene.
  * @example
  * ````
- * friday.scene.update({
+ * friday.scene.update(
+ * '30967a17-8e13-4460-afa0-1069fa890c4e',
+ * {
  *   id: '30967a17-8e13-4460-afa0-1069fa890c4e'
  *   name: 'scene update'
  * });
  * ````
  */
-export default async function update(scene: SceneType): Promise<SceneType> {
+export default async function update(id: string, scene: SceneType): Promise<SceneType> {
   try {
-    const sceneToUpdate = await Scene.findByPk(scene.id);
+    const sceneToUpdate = await Scene.findByPk(id);
 
     if (sceneToUpdate === null) {
       throw new NotFoundError({name: 'Update an Scene', message: 'Scene not found', metadata: scene.id});

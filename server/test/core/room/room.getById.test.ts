@@ -118,7 +118,7 @@ describe('room.getById', () => {
 
   it('should return a room with satellites', async () => {
 
-    const roomReturned = await room.getById('007d89b5-452e-4b4c-83a2-e6526e09dbf3', 'full');
+    const roomReturned = await room.getById('007d89b5-452e-4b4c-83a2-e6526e09dbf3', 'withSatellites');
 
     expect(roomReturned).toHaveProperty('id');
     expect(roomReturned).toHaveProperty('name');

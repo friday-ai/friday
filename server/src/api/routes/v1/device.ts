@@ -71,7 +71,7 @@ export default class DeviceRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const device = await this.friday.device.update(req.body);
+    const device = await this.friday.device.update(req.params.id, req.body);
     res.json(device);
   }
 
@@ -144,7 +144,7 @@ export default class DeviceRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response, next: NextFunction) => {
-    const device = await this.friday.device.getById(req.params.id);
+    const device = await this.friday.device.getById(req.params.id, req.query.scope);
     res.json(device);
   }
 

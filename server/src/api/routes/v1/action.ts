@@ -70,7 +70,7 @@ export default class ActionRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.update(req.body);
+    const action = await this.friday.action.update(req.params.id, req.body);
     res.json(action);
   }
 
@@ -142,7 +142,7 @@ export default class ActionRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getbyId = async (req: Request, res: Response, next: NextFunction) => {
-    const action = await this.friday.action.getById(req.params.id);
+    const action = await this.friday.action.getById(req.params.id, req.query.scope);
     res.json(action);
   }
 
