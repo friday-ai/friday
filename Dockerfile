@@ -10,4 +10,10 @@ COPY package.json .
 COPY . .
 # Install node_modules
 RUN npm install && npm run install-server && npm run install-client
-
+# Add sudo and user admin
+RUN apt-get update && \
+      apt-get -y install sudo
+RUN adduser --disabled-password --gecos '' admin
+RUN adduser admin sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+USER admin
