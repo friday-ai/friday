@@ -3,6 +3,7 @@
     "strict": true,
     "jsx": "react",
     "target": "es5",
+    "allowJs": true,
     "module": "ESNext",
     "lib": ["dom", "es2015"],
     "jsxFactory": "h",

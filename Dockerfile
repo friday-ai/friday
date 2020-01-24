@@ -1,7 +1,7 @@
 # specify the node base image with your desired version node:<version>
 FROM node:10
 # replace this with your application's default port
-EXPOSE 3005
+EXPOSE 8080 80 443
 # Set the working directory to /usr/app
 WORKDIR /usr/app
 # Copy the package.json file to working directory

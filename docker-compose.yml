@@ -10,4 +10,6 @@ services:
       - /usr/app/client/node_modules
       - /usr/app/server/node_modules
     ports:
-      - "3005:3005"
+      - "8080:8080"
+      - "80:80"
+      - "443:443"
