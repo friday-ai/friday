@@ -3,5 +3,3 @@ version: '2.0'
 services:
   web:
     command: npm run start:dev
-    ports:
-      - "1444:1444"
