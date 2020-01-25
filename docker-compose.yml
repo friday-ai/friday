@@ -3,13 +3,8 @@ version: '2.0'
 services:
   web:
     build: ./
-    command: npm run start:prod
     volumes:
       - .:/usr/app/
       - /usr/app/node_modules
       - /usr/app/client/node_modules
       - /usr/app/server/node_modules
-    ports:
-      - "8080:8080"
-      - "80:80"
-      - "443:443"
