@@ -14,6 +14,11 @@ export default function (config, env, helpers) {
     });
   });
 
+  config.module.loaders.push({
+    test: /\.[tj]sx?$/,
+    loader: "ts-loader"
+  })
+
   // Use any `index` file, not just index.js
   config.resolve.alias["preact-cli-entrypoint"] = resolve(
     process.cwd(),
