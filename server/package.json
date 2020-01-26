@@ -52,17 +52,17 @@
   },
   "devDependencies": {
     "@mathieu_andrade/apidoc-markdown": "^1.0.0",
-    "@types/jest": "^24.0.13",
-    "@types/node": "^12.0.2",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.25",
     "jest": "^24.8.0",
-    "jest-extended": "^0.11.2",
+    "jest-extended": "^0.11.4",
     "nodemon": "^1.19.0",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
     "tslint-consistent-codestyle": "^1.15.1",
-    "typedoc": "^0.15.0",
+    "typedoc": "^0.15.8",
     "typedoc-plugin-external-module-map": "^1.0.0",
     "typedoc-plugin-markdown": "^2.0.9",
-    "typescript": "^3.4.5"
+    "typescript": "^3.7.5"
   }
 }
