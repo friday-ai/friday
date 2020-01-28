@@ -1,8 +1,13 @@
-version: '2.0'
+version: '3'
 
 services:
-  web:
-    build: ./
+  friday:
+    container_name: Friday
+    build:
+      context: ./
+      args:
+        - NODE_ENV=${NODE_ENV}
+    restart: always
     ports:
+      - "1443:1443"
       - "1444:1444"
-      - "3000:3000"

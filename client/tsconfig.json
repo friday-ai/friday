@@ -1,20 +1,12 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "alwaysStrict": true,
     "jsx": "react",
     "target": "es5",
-    "allowJs": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "lib": ["dom", "es2015"],
     "jsxFactory": "h",
     "noEmitHelpers": true,
-    "importHelpers": true,
-    "esModuleInterop": true,
-    "noUnusedLocals": true,
-    "moduleResolution": "node"
-  },
-  "include": [
-    "src/**/*",
-    "test/**/*"
-  ]
+    "importHelpers": true
+  }
 }

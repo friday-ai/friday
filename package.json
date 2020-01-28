@@ -6,6 +6,7 @@
   "scripts": {
     "postinstall": "npm run install-server && npm run install-client",
     "start": "per-env",
+    "start:env": "if-env NODE_ENV=development && npm run start:dev || npm run start:prod",
     "start:prod": "concurrently -k -p \"none\" \"npm run start-server:prod\" \"npm run start-client:prod\"",
     "start:dev": "concurrently -k -p \"none\" \"npm run start-server:dev\" \"npm run start-client:dev\"",
     "test": "npm run test-server && npm run test-client",
@@ -33,6 +34,8 @@
     "url": "https://github.com/friday-ai/friday/issues"
   },
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^5.1.0",
+    "if-env": "^1.0.4",
+    "per-env": "^1.0.2"
   }
 }
