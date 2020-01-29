@@ -17,4 +17,4 @@ RUN apk add --no-cache --virtual .build-deps make gcc g++ make python git libffi
 
 ENV NODE_ENV $NODE_ENV
 
-CMD ["npm" ,"run", "start:env"]
+CMD ["npm" ,"run", "start"]
