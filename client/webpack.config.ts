@@ -76,8 +76,12 @@ module.exports = (env: WebpackEnvironment, argv: { mode: string }) => {
     config.stats = 'verbose';
     config.devServer = {
       contentBase: join(__dirname, 'dist'),
-        compress: true,
-        port: 9000
+      compress: true,
+      port: 9000,
+      watchOptions: {
+        aggregateTimeout: 500,
+        poll: 1000
+      }
     };
   }
 

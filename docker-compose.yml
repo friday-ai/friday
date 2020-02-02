@@ -8,6 +8,11 @@ services:
       args:
         - NODE_ENV=${NODE_ENV}
     restart: always
+    volumes:
+      - .:/src
+      - /src/node_modules
+      - /src/client/node_modules
+      - /src/server/node_modules
     ports:
       - "1443:1443"
       - "1444:1444"
