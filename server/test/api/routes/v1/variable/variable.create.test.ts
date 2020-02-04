@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import {VariableOwner} from "../../../../../src/utils/constants";
+import TestServer from '../../../../utils/testServer';
+import { VariableOwner } from '../../../../../src/utils/constants';
 
 describe('variable.create', () => {
   it('should create a variable', async () => {
@@ -20,7 +20,7 @@ describe('variable.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "key", "value", "owner", "ownerType", "updatedAt", "createdAt"]
+          ['id', 'key', 'value', 'owner', 'ownerType', 'updatedAt', 'createdAt']
         );
         expect(
           body.id === 'a675b2e6-9d1d-40f5-943b-86785e894735' &&

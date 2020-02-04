@@ -45,8 +45,8 @@ describe('variable.create', () => {
     })
       .then(b => console.log(b))
       .catch((err: Error) => {
-        console.log(err)
-         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
+        console.log(err);
+        expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
       });
 
   });

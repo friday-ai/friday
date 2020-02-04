@@ -5,7 +5,7 @@ describe('plugin.update', () => {
   const plugin = new Plugin();
 
   it('should update a plugin', async () => {
-    const updatedPlugin = await plugin.update('33ddf1e2-3c51-4426-93af-3b0453ac0c1e',{
+    const updatedPlugin = await plugin.update('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', {
       id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
       name: 'Plugin update'
     });

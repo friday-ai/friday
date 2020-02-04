@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('variable.getValue', () => {
   it('should return a variable value', async () => {

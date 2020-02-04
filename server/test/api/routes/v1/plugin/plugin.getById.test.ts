@@ -1,6 +1,6 @@
-import TestServer from "../../../../utils/helper";
-import DeviceType from "../../../../../src/core/device/device.interface";
-import VariableType from "../../../../../src/core/variable/variable.interface";
+import TestServer from '../../../../utils/testServer';
+import DeviceType from '../../../../../src/core/device/device.interface';
+import VariableType from '../../../../../src/core/variable/variable.interface';
 
 describe('plugin.getById', () => {
   it('should return a plugin', async () => {
@@ -37,19 +37,19 @@ describe('plugin.getById', () => {
         let plugin = res.body;
         expect(plugin).toBeObject();
         expect(plugin).toContainAllKeys(
-          ["id", "name", "version", "url", "enabled", "satelliteId", "satellite", "state", "devices", "variables"]
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables']
         );
         if (plugin.state !== null) {
           expect(plugin.state).toBeObject();
           expect(plugin.state).toContainAllKeys(
-            ["id", "owner", "ownerType", "value"]
+            ['id', 'owner', 'ownerType', 'value']
           );
         }
 
         if (plugin.satellite !== null) {
           expect(plugin.satellite).toBeObject();
           expect(plugin.satellite).toContainAllKeys(
-            ["id", "name", "roomId"]
+            ['id', 'name', 'roomId']
           );
         }
 
@@ -58,7 +58,7 @@ describe('plugin.getById', () => {
           plugin.devices!.forEach((device: DeviceType) => {
             expect(device).toBeObject();
             expect(device).toContainAllKeys(
-              ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId"]
+              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
             );
           });
         }
@@ -68,7 +68,7 @@ describe('plugin.getById', () => {
           plugin.variables!.forEach((variable: VariableType) => {
             expect(variable).toBeObject();
             expect(variable).toContainAllKeys(
-              ["id", "key", "value", "owner", "ownerType"]
+              ['id', 'key', 'value', 'owner', 'ownerType']
             );
           });
         }
@@ -88,12 +88,12 @@ describe('plugin.getById', () => {
         let plugin = res.body;
         expect(plugin).toBeObject();
         expect(plugin).toContainAllKeys(
-          ["id", "name", "version", "url", "enabled", "satelliteId", "satellite"]
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite']
         );
         if (plugin.satellite !== null) {
           expect(plugin.satellite).toBeObject();
           expect(plugin.satellite).toContainAllKeys(
-            ["id", "name", "roomId"]
+            ['id', 'name', 'roomId']
           );
         }
       });
@@ -112,12 +112,12 @@ describe('plugin.getById', () => {
         let plugin = res.body;
         expect(plugin).toBeObject();
         expect(plugin).toContainAllKeys(
-          ["id", "name", "version", "url", "enabled", "satelliteId", "state"]
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state']
         );
         if (plugin.state !== null) {
           expect(plugin.state).toBeObject();
           expect(plugin.state).toContainAllKeys(
-            ["id", "owner", "ownerType", "value"]
+            ['id', 'owner', 'ownerType', 'value']
           );
         }
       });
@@ -135,14 +135,14 @@ describe('plugin.getById', () => {
         let plugin = res.body;
         expect(plugin).toBeObject();
         expect(plugin).toContainAllKeys(
-          ["id", "name", "version", "url", "enabled", "satelliteId", "devices"]
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices']
         );
         if (plugin.devices !== null) {
           expect(plugin.devices).toBeArray();
           plugin.devices!.forEach((device: DeviceType) => {
             expect(device).toBeObject();
             expect(device).toContainAllKeys(
-              ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId"]
+              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
             );
           });
         }
@@ -161,14 +161,14 @@ describe('plugin.getById', () => {
         let plugin = res.body;
         expect(plugin).toBeObject();
         expect(plugin).toContainAllKeys(
-          ["id", "name", "version", "url", "enabled", "satelliteId", "variables"]
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables']
         );
         if (plugin.variables !== null) {
           expect(plugin.variables).toBeArray();
           plugin.variables!.forEach((variable: VariableType) => {
             expect(variable).toBeObject();
             expect(variable).toContainAllKeys(
-              ["id", "key", "value", "owner", "ownerType"]
+              ['id', 'key', 'value', 'owner', 'ownerType']
             );
           });
         }

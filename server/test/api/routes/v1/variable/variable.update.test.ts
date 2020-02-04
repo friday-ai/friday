@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('variable.update', () => {
   it('should update a variable', async () => {
@@ -14,7 +14,7 @@ describe('variable.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.value).toEqual('Variable update');
-      })
+      });
   });
 
   it('should not found variable to update', async () => {

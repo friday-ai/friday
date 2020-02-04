@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import DeviceType from "../../../../../src/core/device/device.interface";
+import TestServer from '../../../../utils/testServer';
+import DeviceType from '../../../../../src/core/device/device.interface';
 
 describe('device.getAll', () => {
 
@@ -55,9 +55,9 @@ describe('device.getAll', () => {
         devices.forEach((device: DeviceType) => {
           expect(device).toBeObject();
           expect(device).toContainAllKeys(
-            ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "room", "plugin", "state"]
+            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room', 'plugin', 'state']
           );
-          if(device.state !== null) {
+          if (device.state !== null) {
             expect(device.state).toBeObject();
             expect(device.state).toHaveProperty('id');
             expect(device.state).toHaveProperty('owner');
@@ -79,7 +79,7 @@ describe('device.getAll', () => {
             expect(device.plugin).toHaveProperty('enabled');
             expect(device.plugin).toHaveProperty('satelliteId');
           }
-        })
+        });
     });
   });
 
@@ -97,16 +97,16 @@ describe('device.getAll', () => {
         devices.forEach((device: DeviceType) => {
           expect(device).toBeObject();
           expect(device).toContainAllKeys(
-            ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "state"]
+            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'state']
           );
-          if(device.state !== null) {
+          if (device.state !== null) {
             expect(device.state).toBeObject();
             expect(device.state).toHaveProperty('id');
             expect(device.state).toHaveProperty('owner');
             expect(device.state).toHaveProperty('ownerType');
             expect(device.state).toHaveProperty('value');
           }
-        })
+        });
       });
   });
 
@@ -124,14 +124,14 @@ describe('device.getAll', () => {
         devices.forEach((device: DeviceType) => {
           expect(device).toBeObject();
           expect(device).toContainAllKeys(
-            ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "room"]
+            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room']
           );
 
           expect(device.room).toBeObject();
           expect(device.room).toHaveProperty('id');
           expect(device.room).toHaveProperty('name');
           expect(device.room).toHaveProperty('houseId');
-        })
+        });
       });
   });
 
@@ -150,7 +150,7 @@ describe('device.getAll', () => {
         devices.forEach((device: DeviceType) => {
           expect(device).toBeObject();
           expect(device).toContainAllKeys(
-            ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "plugin"]
+            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'plugin']
           );
 
           if (device.plugin !== null) {
@@ -162,7 +162,7 @@ describe('device.getAll', () => {
             expect(device.plugin).toHaveProperty('enabled');
             expect(device.plugin).toHaveProperty('satelliteId');
           }
-        })
+        });
       });
   });
 

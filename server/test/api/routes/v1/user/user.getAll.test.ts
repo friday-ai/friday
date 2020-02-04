@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import UserType from "../../../../../src/core/user/user.interface";
+import TestServer from '../../../../utils/testServer';
+import UserType from '../../../../../src/core/user/user.interface';
 
 describe('user.getAll', () => {
   it('should return all users', async () => {
@@ -33,7 +33,7 @@ describe('user.getAll', () => {
     await server
       .get('/api/v1/user')
       .query({
-        scope: "full"
+        scope: 'full'
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -43,22 +43,22 @@ describe('user.getAll', () => {
         users!.forEach((user: UserType) => {
           expect(user).toBeObject();
           expect(user).toContainAllKeys(
-            ["id", "name", "firstName", "email", "birthDate", "role", "language", "state", "variables"]
+            ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state', 'variables']
           );
           if (user.state !== null) {
             expect(user.state).toBeObject();
             expect(user.state).toContainAllKeys(
-              ["id", "owner", "ownerType", "value"]
+              ['id', 'owner', 'ownerType', 'value']
             );
           }
           expect(user.variables).toBeArray();
           user.variables!.forEach(variable => {
             expect(variable).toBeObject();
             expect(variable).toContainAllKeys(
-              ["id", "key", "value", "owner", "ownerType"]
+              ['id', 'key', 'value', 'owner', 'ownerType']
             );
           });
-        })
+        });
       });
   });
 
@@ -68,7 +68,7 @@ describe('user.getAll', () => {
     await server
       .get('/api/v1/user')
       .query({
-        scope: "withState"
+        scope: 'withState'
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -78,15 +78,15 @@ describe('user.getAll', () => {
         users!.forEach((user: UserType) => {
           expect(user).toBeObject();
           expect(user).toContainAllKeys(
-            ["id", "name", "firstName", "email", "birthDate", "role", "language", "state"]
+            ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state']
           );
           if (user.state !== null) {
             expect(user.state).toBeObject();
             expect(user.state).toContainAllKeys(
-              ["id", "owner", "ownerType", "value"]
+              ['id', 'owner', 'ownerType', 'value']
             );
           }
-        })
+        });
       });
   });
 
@@ -96,7 +96,7 @@ describe('user.getAll', () => {
     await server
       .get('/api/v1/user')
       .query({
-        scope: "withVariables"
+        scope: 'withVariables'
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -106,16 +106,16 @@ describe('user.getAll', () => {
         users!.forEach((user: UserType) => {
           expect(user).toBeObject();
           expect(user).toContainAllKeys(
-            ["id", "name", "firstName", "email", "birthDate", "role", "language", "variables"]
+            ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'variables']
           );
           expect(user.variables).toBeArray();
           user.variables!.forEach(variable => {
             expect(variable).toBeObject();
             expect(variable).toContainAllKeys(
-              ["id", "key", "value", "owner", "ownerType"]
+              ['id', 'key', 'value', 'owner', 'ownerType']
             );
           });
-        })
+        });
       });
   });
 });

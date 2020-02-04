@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('house.update', () => {
   it('should update a house', async () => {
@@ -14,7 +14,7 @@ describe('house.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('House update');
-      })
+      });
   });
 
   it('should not found house to update', async () => {

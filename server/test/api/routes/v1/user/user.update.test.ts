@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('user.update', () => {
   it('should update a user', async () => {
@@ -14,7 +14,7 @@ describe('user.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('User update');
-      })
+      });
   });
 
   it('should not found user to update', async () => {

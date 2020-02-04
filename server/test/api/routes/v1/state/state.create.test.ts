@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import {AvailableState, StateOwner} from "../../../../../src/utils/constants";
+import TestServer from '../../../../utils/testServer';
+import { AvailableState, StateOwner } from '../../../../../src/utils/constants';
 
 describe('state.create', () => {
 
@@ -20,7 +20,7 @@ describe('state.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "owner", "ownerType", "value", "updatedAt", "createdAt"]
+          ['id', 'owner', 'ownerType', 'value', 'updatedAt', 'createdAt']
         );
         expect(
           body.id === '9a05e6c3-e36a-4779-bc66-6f7d015920c7' &&

@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('satellite.create', () => {
 
@@ -19,8 +19,8 @@ describe('satellite.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "name", "roomId", "updatedAt", "createdAt"]
-        )
+          ['id', 'name', 'roomId', 'updatedAt', 'createdAt']
+        );
         expect(
           body.id === '37225fcb-ff7d-40a7-aacc-ee2a041feebd' &&
           body.name === 'Satellite 3' &&

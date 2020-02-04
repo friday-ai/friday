@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import SessionType from "../../../../../src/core/session/session.interface";
+import TestServer from '../../../../utils/testServer';
+import SessionType from '../../../../../src/core/session/session.interface';
 
 describe('session.getAll', () => {
 
@@ -15,10 +15,10 @@ describe('session.getAll', () => {
         expect(sessions).toBeArray();
         sessions.forEach((session: SessionType) => {
           expect(session).toContainAllKeys(
-            ["id", "refreshToken", "validUntil", "userId", "revoked"]
+            ['id', 'refreshToken', 'validUntil', 'userId', 'revoked']
           );
           expect(session.revoked).toEqual(false);
-        })
+        });
       });
   });
 
@@ -28,7 +28,7 @@ describe('session.getAll', () => {
     await server
       .get('/api/v1/session')
       .query({
-        scope: "full"
+        scope: 'full'
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -37,12 +37,12 @@ describe('session.getAll', () => {
         expect(sessions).toBeArray();
         sessions.forEach((session: SessionType) => {
           expect(session).toContainAllKeys(
-            ["id", "refreshToken", "validUntil", "userId", "revoked", "user"]
+            ['id', 'refreshToken', 'validUntil', 'userId', 'revoked', 'user']
           );
           expect(session.revoked).toEqual(false);
           expect(session.user).toBeObject();
           expect(session.user).not.toHaveProperty('password');
-        })
+        });
       });
   });
 });

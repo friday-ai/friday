@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('scene.update', () => {
   it('should update a scene', async () => {
@@ -14,7 +14,7 @@ describe('scene.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('Scene update');
-      })
+      });
   });
 
   it('should not found scene to update', async () => {

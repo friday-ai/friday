@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import SceneType from "../../../../../src/core/scene/scene.interface";
+import TestServer from '../../../../utils/testServer';
+import SceneType from '../../../../../src/core/scene/scene.interface';
 
 describe('scene.getAll', () => {
 
@@ -34,22 +34,22 @@ describe('scene.getAll', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let scene = res.body;
-        expect(scene).toBeArray();
-        scene.forEach((scene: SceneType) => {
+        let scenes = res.body;
+        expect(scenes).toBeArray();
+        scenes.forEach((scene: SceneType) => {
           expect(scene).toBeObject();
           expect(scene).toContainAllKeys(
-            ["id", "name", "description", "triggerId", "trigger", "actions"]
+            ['id', 'name', 'description', 'triggerId', 'trigger', 'actions']
           );
           expect(scene.trigger).toBeObject();
           expect(scene.trigger).toContainAllKeys(
-            ["id", "name", "description", "type", "rules"]
+            ['id', 'name', 'description', 'type', 'rules']
           );
           expect(scene.actions).toBeArray();
           if (scene.actions != null) {
             scene.actions!.forEach(action => {
               expect(action).toContainAllKeys(
-                ["id", "name", "description", "type", "subType", "variableKey", "variableValue", "sceneId"]
+                ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
               );
             });
           }
@@ -67,16 +67,16 @@ describe('scene.getAll', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let scene = res.body;
-        expect(scene).toBeArray();
-        scene.forEach((scene: SceneType) => {
+        let scenes = res.body;
+        expect(scenes).toBeArray();
+        scenes.forEach((scene: SceneType) => {
           expect(scene).toBeObject();
           expect(scene).toContainAllKeys(
-            ["id", "name", "description", "triggerId", "trigger"]
+            ['id', 'name', 'description', 'triggerId', 'trigger']
           );
           expect(scene.trigger).toBeObject();
           expect(scene.trigger).toContainAllKeys(
-            ["id", "name", "description", "type", "rules"]
+            ['id', 'name', 'description', 'type', 'rules']
           );
         });
       });
@@ -92,18 +92,18 @@ describe('scene.getAll', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let scene = res.body;
-        expect(scene).toBeArray();
-        scene.forEach((scene: SceneType) => {
+        let scenes = res.body;
+        expect(scenes).toBeArray();
+        scenes.forEach((scene: SceneType) => {
           expect(scene).toBeObject();
           expect(scene).toContainAllKeys(
-            ["id", "name", "description", "triggerId", "actions"]
+            ['id', 'name', 'description', 'triggerId', 'actions']
           );
           expect(scene.actions).toBeArray();
           if (scene.actions != null) {
             scene.actions!.forEach(action => {
               expect(action).toContainAllKeys(
-                ["id", "name", "description", "type", "subType", "variableKey", "variableValue", "sceneId"]
+                ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
               );
             });
           }

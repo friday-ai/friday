@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('action.update', () => {
   it('should update an action', async () => {
@@ -14,7 +14,7 @@ describe('action.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('Action update');
-      })
+      });
   });
 
   it('should not found action to update', async () => {

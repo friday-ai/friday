@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('plugin.update', () => {
   it('should update a plugin', async () => {
@@ -14,7 +14,7 @@ describe('plugin.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('Plugin update');
-      })
+      });
   });
 
   it('should not found plugin to update', async () => {

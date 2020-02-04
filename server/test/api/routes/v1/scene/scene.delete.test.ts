@@ -1,5 +1,4 @@
-import TestServer from "../../../../utils/helper";
-
+import TestServer from '../../../../utils/testServer';
 describe('scene.delete', () => {
   it('should delete a scene', async () => {
     const server = await new TestServer();

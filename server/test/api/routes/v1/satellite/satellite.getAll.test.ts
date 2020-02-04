@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import SatelliteType from "../../../../../src/core/satellite/satellite.interface";
+import TestServer from '../../../../utils/testServer';
+import SatelliteType from '../../../../../src/core/satellite/satellite.interface';
 
 describe('satellite.getAll', () => {
 
@@ -43,23 +43,23 @@ describe('satellite.getAll', () => {
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).toBeObject();
           expect(satellite).toContainAllKeys(
-            ["id", "name", "roomId", "room", "state", "variables", "plugins"]
+            ['id', 'name', 'roomId', 'room', 'state', 'variables', 'plugins']
           );
           expect(satellite.room).toBeObject();
           expect(satellite.room).toContainAllKeys(
-            ["id", "name", "houseId"]
+            ['id', 'name', 'houseId']
           );
           if (satellite.state !== null) {
             expect(satellite.state).toBeObject();
             expect(satellite.state).toContainAllKeys(
-              ["id", "owner", "ownerType", "value"]
+              ['id', 'owner', 'ownerType', 'value']
             );
           }
           if (satellite.variables !== null) {
             satellite.variables!.forEach(variable => {
               expect(variable).toBeObject();
               expect(variable).toContainAllKeys(
-                ["id", "key", "value", "owner", "ownerType"]
+                ['id', 'key', 'value', 'owner', 'ownerType']
               );
             });
           }
@@ -68,9 +68,9 @@ describe('satellite.getAll', () => {
             satellite.plugins!.forEach(plugin => {
               expect(plugin).toBeObject();
               expect(plugin).toContainAllKeys(
-                ["id", "name", "version", "url", "enabled", "satelliteId"]
+                ['id', 'name', 'version', 'url', 'enabled', 'satelliteId']
               );
-            })
+            });
           }
       });
     });
@@ -91,11 +91,11 @@ describe('satellite.getAll', () => {
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).toBeObject();
           expect(satellite).toContainAllKeys(
-            ["id", "name", "roomId", "room"]
+            ['id', 'name', 'roomId', 'room']
           );
           expect(satellite.room).toBeObject();
           expect(satellite.room).toContainAllKeys(
-            ["id", "name", "houseId"]
+            ['id', 'name', 'houseId']
           );
         });
       });
@@ -116,12 +116,12 @@ describe('satellite.getAll', () => {
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).toBeObject();
           expect(satellite).toContainAllKeys(
-            ["id", "name", "roomId", "state"]
+            ['id', 'name', 'roomId', 'state']
           );
           if (satellite.state !== null) {
             expect(satellite.state).toBeObject();
             expect(satellite.state).toContainAllKeys(
-              ["id", "owner", "ownerType", "value"]
+              ['id', 'owner', 'ownerType', 'value']
             );
           }
         });
@@ -143,13 +143,13 @@ describe('satellite.getAll', () => {
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).toBeObject();
           expect(satellite).toContainAllKeys(
-            ["id", "name", "roomId", "variables"]
+            ['id', 'name', 'roomId', 'variables']
           );
           if (satellite.variables !== null) {
             satellite.variables!.forEach(variable => {
               expect(variable).toBeObject();
               expect(variable).toContainAllKeys(
-                ["id", "key", "value", "owner", "ownerType"]
+                ['id', 'key', 'value', 'owner', 'ownerType']
               );
             });
           }
@@ -172,16 +172,16 @@ describe('satellite.getAll', () => {
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).toBeObject();
           expect(satellite).toContainAllKeys(
-            ["id", "name", "roomId", "plugins"]
+            ['id', 'name', 'roomId', 'plugins']
           );
           if (satellite.plugins !== null) {
             expect(satellite.plugins).toBeArray();
             satellite.plugins!.forEach(plugin => {
               expect(plugin).toBeObject();
               expect(plugin).toContainAllKeys(
-                ["id", "name", "version", "url", "enabled", "satelliteId"]
+                ['id', 'name', 'version', 'url', 'enabled', 'satelliteId']
               );
-            })
+            });
           }
         });
       });

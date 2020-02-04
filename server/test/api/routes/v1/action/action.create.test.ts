@@ -1,5 +1,5 @@
-import {ActionsType} from "../../../../../src/utils/constants";
-import TestServer from "../../../../utils/helper";
+import { ActionsType } from '../../../../../src/utils/constants';
+import TestServer from '../../../../utils/testServer';
 
 describe('action.create', () => {
 
@@ -25,8 +25,8 @@ describe('action.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "name", "description", "type", "subType", "variableKey", "variableValue", "sceneId", "updatedAt", "createdAt"]
-        )
+          ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId', 'updatedAt', 'createdAt']
+        );
         expect(
           body.id === 'b1ed196e-2754-43f0-8c86-728f043c9c07' &&
           body.name === 'action test' &&

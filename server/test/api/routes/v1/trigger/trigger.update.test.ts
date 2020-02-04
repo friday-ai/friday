@@ -1,5 +1,4 @@
-import TestServer from "../../../../utils/helper";
-
+import TestServer from '../../../../utils/testServer';
 describe('trigger.update', () => {
   it('should update a trigger', async () => {
     const server = await new TestServer();
@@ -14,7 +13,7 @@ describe('trigger.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('Trigger update');
-      })
+      });
   });
 
   it('should not found trigger to update', async () => {

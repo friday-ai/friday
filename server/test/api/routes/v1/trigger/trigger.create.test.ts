@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import {AvailableConditions} from "../../../../../src/utils/constants";
+import TestServer from '../../../../utils/testServer';
+import { AvailableConditions } from '../../../../../src/utils/constants';
 
 describe('trigger.create', () => {
   it('should create a trigger', async () => {
@@ -23,7 +23,7 @@ describe('trigger.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "name", "description", "type", "rules", "updatedAt", "createdAt"]
+          ['id', 'name', 'description', 'type', 'rules', 'updatedAt', 'createdAt']
         );
         expect(
           body.id === '28c59bd7-a559-41bb-8b5e-a3670001a7bb' &&

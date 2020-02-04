@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('house.create', () => {
 
@@ -20,8 +20,8 @@ describe('house.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "name", "latitude", "longitude", "updatedAt", "createdAt"]
-        )
+          ['id', 'name', 'latitude', 'longitude', 'updatedAt', 'createdAt']
+        );
         expect(
           body.id === '1e7056cf-f449-471c-a1e5-fb2e5ec7261f' &&
           body.name === 'Second House' &&

@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import PluginType from "../../../../../src/core/plugin/plugin.interface";
+import TestServer from '../../../../utils/testServer';
+import PluginType from '../../../../../src/core/plugin/plugin.interface';
 
 describe('plugin.getAll', () => {
 
@@ -57,19 +57,19 @@ describe('plugin.getAll', () => {
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).toBeObject();
           expect(plugin).toContainAllKeys(
-            ["id", "name", "version", "url", "enabled", "satelliteId", "satellite", "state", "devices", "variables"]
+            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables']
           );
           if (plugin.state !== null) {
             expect(plugin.state).toBeObject();
             expect(plugin.state).toContainAllKeys(
-              ["id", "owner", "ownerType", "value"]
+              ['id', 'owner', 'ownerType', 'value']
             );
           }
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).toBeObject();
             expect(plugin.satellite).toContainAllKeys(
-              ["id", "name", "roomId"]
+              ['id', 'name', 'roomId']
             );
           }
 
@@ -78,7 +78,7 @@ describe('plugin.getAll', () => {
             plugin.devices!.forEach(device => {
               expect(device).toBeObject();
               expect(device).toContainAllKeys(
-                ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId"]
+                ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
               );
             });
           }
@@ -88,7 +88,7 @@ describe('plugin.getAll', () => {
             plugin.variables!.forEach(variable => {
               expect(variable).toBeObject();
               expect(variable).toContainAllKeys(
-                ["id", "key", "value", "owner", "ownerType"]
+                ['id', 'key', 'value', 'owner', 'ownerType']
               );
             });
           }
@@ -111,13 +111,13 @@ describe('plugin.getAll', () => {
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).toBeObject();
           expect(plugin).toContainAllKeys(
-            ["id", "name", "version", "url", "enabled", "satelliteId", "satellite"]
+            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite']
           );
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).toBeObject();
             expect(plugin.satellite).toContainAllKeys(
-              ["id", "name", "roomId"]
+              ['id', 'name', 'roomId']
             );
           }
 
@@ -139,12 +139,12 @@ describe('plugin.getAll', () => {
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).toBeObject();
           expect(plugin).toContainAllKeys(
-            ["id", "name", "version", "url", "enabled", "satelliteId", "state"]
+            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state']
           );
           if (plugin.state !== null) {
             expect(plugin.state).toBeObject();
             expect(plugin.state).toContainAllKeys(
-              ["id", "owner", "ownerType", "value"]
+              ['id', 'owner', 'ownerType', 'value']
             );
           }
         });
@@ -165,7 +165,7 @@ describe('plugin.getAll', () => {
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).toBeObject();
           expect(plugin).toContainAllKeys(
-            ["id", "name", "version", "url", "enabled", "satelliteId", "devices"]
+            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices']
           );
 
           if (plugin.devices !== null) {
@@ -173,7 +173,7 @@ describe('plugin.getAll', () => {
             plugin.devices!.forEach(device => {
               expect(device).toBeObject();
               expect(device).toContainAllKeys(
-                ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId"]
+                ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
               );
             });
           }
@@ -196,14 +196,14 @@ describe('plugin.getAll', () => {
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).toBeObject();
           expect(plugin).toContainAllKeys(
-            ["id", "name", "version", "url", "enabled", "satelliteId", "variables"]
+            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables']
           );
           if (plugin.variables !== null) {
             expect(plugin.variables).toBeArray();
             plugin.variables!.forEach(variable => {
               expect(variable).toBeObject();
               expect(variable).toContainAllKeys(
-                ["id", "key", "value", "owner", "ownerType"]
+                ['id', 'key', 'value', 'owner', 'ownerType']
               );
             });
           }

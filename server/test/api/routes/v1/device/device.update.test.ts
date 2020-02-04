@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('device.update', () => {
   it('should update a device', async () => {
@@ -14,7 +14,7 @@ describe('device.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('Device update');
-      })
+      });
   });
 
   it('should not found device to update', async () => {

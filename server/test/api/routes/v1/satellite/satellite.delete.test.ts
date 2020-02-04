@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('satellite.delete', () => {
   it('should delete a satellite', async () => {

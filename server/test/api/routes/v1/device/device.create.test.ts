@@ -1,5 +1,5 @@
-import {AvailableSubTypeOfDevice, AvailableTypeOfDevice} from "../../../../../src/utils/constants";
-import TestServer from "../../../../utils/helper";
+import { AvailableSubTypeOfDevice, AvailableTypeOfDevice } from '../../../../../src/utils/constants';
+import TestServer from '../../../../utils/testServer';
 
 describe('device.create', () => {
 
@@ -26,8 +26,8 @@ describe('device.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "updatedAt", "createdAt"]
-        )
+          ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'updatedAt', 'createdAt']
+        );
         expect(
           body.id === '890ee886-5e5e-4510-93e5-0556ff5fbef3' &&
           body.name === 'Light 1' &&

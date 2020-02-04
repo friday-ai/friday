@@ -1,6 +1,6 @@
-import TestServer from "../../../../utils/helper";
-import DeviceType from "../../../../../src/core/device/device.interface";
-import SatelliteType from "../../../../../src/core/satellite/satellite.interface";
+import TestServer from '../../../../utils/testServer';
+import DeviceType from '../../../../../src/core/device/device.interface';
+import SatelliteType from '../../../../../src/core/satellite/satellite.interface';
 
 describe('room.getById', () => {
   it('should return a room', async () => {
@@ -34,23 +34,23 @@ describe('room.getById', () => {
         let room = res.body;
         expect(room).toBeObject();
         expect(room).toContainAllKeys(
-          ["id", "name", "houseId", "house", "devices", "satellites", "state"]
+          ['id', 'name', 'houseId', 'house', 'devices', 'satellites', 'state']
         );
         expect(room.house).toBeObject();
         expect(room.house).toContainAllKeys(
-          ["id", "name", "latitude", "longitude"]
+          ['id', 'name', 'latitude', 'longitude']
         );
         if (room.state !== null) {
           expect(room.state).toBeObject();
           expect(room.state).toContainAllKeys(
-            ["id", "owner", "ownerType", "value"]
+            ['id', 'owner', 'ownerType', 'value']
           );
         }
         if (room.devices !== null) {
           room.devices!.forEach((device: DeviceType) => {
             expect(device).toBeObject();
             expect(device).toContainAllKeys(
-              ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId"]
+              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
             );
           });
         }
@@ -59,9 +59,9 @@ describe('room.getById', () => {
           room.satellites!.forEach((satellite: SatelliteType) => {
             expect(satellite).toBeObject();
             expect(satellite).toContainAllKeys(
-              ["id", "name", "roomId"]
+              ['id', 'name', 'roomId']
             );
-          })
+          });
         }
       });
   });
@@ -78,11 +78,11 @@ describe('room.getById', () => {
         let room = res.body;
         expect(room).toBeObject();
         expect(room).toContainAllKeys(
-          ["id", "name", "houseId", "house"]
+          ['id', 'name', 'houseId', 'house']
         );
         expect(room.house).toBeObject();
         expect(room.house).toContainAllKeys(
-          ["id", "name", "latitude", "longitude"]
+          ['id', 'name', 'latitude', 'longitude']
         );
       });
   });
@@ -99,12 +99,12 @@ describe('room.getById', () => {
         let room = res.body;
         expect(room).toBeObject();
         expect(room).toContainAllKeys(
-          ["id", "name", "houseId", "state"]
+          ['id', 'name', 'houseId', 'state']
         );
         if (room.state !== null) {
           expect(room.state).toBeObject();
           expect(room.state).toContainAllKeys(
-            ["id", "owner", "ownerType", "value"]
+            ['id', 'owner', 'ownerType', 'value']
           );
         }
       });
@@ -122,13 +122,13 @@ describe('room.getById', () => {
         let room = res.body;
         expect(room).toBeObject();
         expect(room).toContainAllKeys(
-          ["id", "name", "houseId", "devices"]
+          ['id', 'name', 'houseId', 'devices']
         );
         if (room.devices !== null) {
           room.devices!.forEach((device: DeviceType) => {
             expect(device).toBeObject();
             expect(device).toContainAllKeys(
-              ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId"]
+              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
             );
           });
         }
@@ -147,16 +147,16 @@ describe('room.getById', () => {
         let room = res.body;
         expect(room).toBeObject();
         expect(room).toContainAllKeys(
-          ["id", "name", "houseId", "satellites"]
+          ['id', 'name', 'houseId', 'satellites']
         );
         if (room.satellites !== null) {
           expect(room.satellites).toBeArray();
           room.satellites!.forEach((satellite: SatelliteType) => {
             expect(satellite).toBeObject();
             expect(satellite).toContainAllKeys(
-              ["id", "name", "roomId"]
+              ['id', 'name', 'roomId']
             );
-          })
+          });
         }
       });
   });

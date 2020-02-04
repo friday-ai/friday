@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('session.revoke', () => {
 
@@ -15,7 +15,7 @@ describe('session.revoke', () => {
       .then((res) => {
         let body = res.body;
         expect(body).toContainAllKeys(
-          ["id", "refreshToken", "revoked", "validUntil", "userId"]
+          ['id', 'refreshToken', 'revoked', 'validUntil', 'userId']
         );
         expect(body.revoked).toEqual(true);
       });

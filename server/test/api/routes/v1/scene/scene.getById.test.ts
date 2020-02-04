@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import ActionType from "../../../../../src/core/action/action.interface";
+import TestServer from '../../../../utils/testServer';
+import ActionType from '../../../../../src/core/action/action.interface';
 
 describe('scene.getById', () => {
   it('should return one scene', async () => {
@@ -34,17 +34,17 @@ describe('scene.getById', () => {
         let scene = res.body;
         expect(scene).toBeObject();
         expect(scene).toContainAllKeys(
-          ["id", "name", "description", "triggerId", "trigger", "actions"]
+          ['id', 'name', 'description', 'triggerId', 'trigger', 'actions']
         );
         expect(scene.trigger).toBeObject();
         expect(scene.trigger).toContainAllKeys(
-          ["id", "name", "description", "type", "rules"]
+          ['id', 'name', 'description', 'type', 'rules']
         );
         expect(scene.actions).toBeArray();
         if (scene.actions != null) {
           scene.actions!.forEach((action: ActionType) => {
             expect(action).toContainAllKeys(
-              ["id", "name", "description", "type", "subType", "variableKey", "variableValue", "sceneId"]
+              ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
             );
           });
         }
@@ -63,11 +63,11 @@ describe('scene.getById', () => {
         let scene = res.body;
         expect(scene).toBeObject();
         expect(scene).toContainAllKeys(
-          ["id", "name", "description", "triggerId", "trigger"]
+          ['id', 'name', 'description', 'triggerId', 'trigger']
         );
         expect(scene.trigger).toBeObject();
         expect(scene.trigger).toContainAllKeys(
-          ["id", "name", "description", "type", "rules"]
+          ['id', 'name', 'description', 'type', 'rules']
         );
       });
   });
@@ -84,13 +84,13 @@ describe('scene.getById', () => {
         let scene = res.body;
         expect(scene).toBeObject();
         expect(scene).toContainAllKeys(
-          ["id", "name", "description", "triggerId", "actions"]
+          ['id', 'name', 'description', 'triggerId', 'actions']
         );
         expect(scene.actions).toBeArray();
         if (scene.actions != null) {
           scene.actions!.forEach((action: ActionType) => {
             expect(action).toContainAllKeys(
-              ["id", "name", "description", "type", "subType", "variableKey", "variableValue", "sceneId"]
+              ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
             );
           });
         }

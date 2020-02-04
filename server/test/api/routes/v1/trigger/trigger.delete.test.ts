@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('trigger.delete', () => {
   it('should delete a trigger', async () => {

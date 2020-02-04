@@ -1,5 +1,4 @@
-import TestServer from "../../../../utils/helper";
-
+import TestServer from '../../../../utils/testServer';
 describe('plugin.create', () => {
 
   it('should create a plugin', async () => {
@@ -22,8 +21,8 @@ describe('plugin.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "name", "version", "url", "enabled", "satelliteId", "updatedAt", "createdAt"]
-        )
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'updatedAt', 'createdAt']
+        );
         expect(
           body.id === '3e2cb8cc-60a7-4c40-87d2-b25048b1aa04' &&
           body.name === 'Fake plugin' &&

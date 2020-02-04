@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('device.getById', () => {
   it('should return a device', async () => {
@@ -38,9 +38,9 @@ describe('device.getById', () => {
         let device = res.body;
         expect(device).toBeObject();
         expect(device).toContainAllKeys(
-          ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "room", "plugin", "state"]
+          ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room', 'plugin', 'state']
         );
-        if(device.state !== null) {
+        if (device.state !== null) {
           expect(device.state).toBeObject();
           expect(device.state).toHaveProperty('id');
           expect(device.state).toHaveProperty('owner');
@@ -78,9 +78,9 @@ describe('device.getById', () => {
         let device = res.body;
         expect(device).toBeObject();
         expect(device).toContainAllKeys(
-          ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "state"]
+          ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'state']
         );
-        if(device.state !== null) {
+        if (device.state !== null) {
           expect(device.state).toBeObject();
           expect(device.state).toHaveProperty('id');
           expect(device.state).toHaveProperty('owner');
@@ -103,7 +103,7 @@ describe('device.getById', () => {
         let device = res.body;
         expect(device).toBeObject();
         expect(device).toContainAllKeys(
-          ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "room"]
+          ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room']
         );
 
         expect(device.room).toBeObject();
@@ -126,7 +126,7 @@ describe('device.getById', () => {
         let device = res.body;
         expect(device).toBeObject();
         expect(device).toContainAllKeys(
-          ["id", "name", "type", "subType", "variable", "unit", "value", "roomId", "pluginId", "plugin"]
+          ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'plugin']
         );
 
         if (device.plugin !== null) {

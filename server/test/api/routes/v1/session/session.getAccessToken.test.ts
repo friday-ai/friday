@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('session.getAccessToken', () => {
   it('should get a access token for an session', async () => {
@@ -14,7 +14,7 @@ describe('session.getAccessToken', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "refreshToken", "revoked", "validUntil", "userId", "user", "accessToken"]
+          ['id', 'refreshToken', 'revoked', 'validUntil', 'userId', 'user', 'accessToken']
         );
         expect(body.revoked).toEqual(false);
         expect(body.user).toBeObject();

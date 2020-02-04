@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('script.create', () => {
 
@@ -19,8 +19,8 @@ describe('script.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "name", "code", "updatedAt", "createdAt"]
-        )
+          ['id', 'name', 'code', 'updatedAt', 'createdAt']
+        );
         expect(
           body.id === '9a559e84-6f8f-486c-ae97-e6051b62b7b3' &&
           body.name === 'Test Script 2' &&

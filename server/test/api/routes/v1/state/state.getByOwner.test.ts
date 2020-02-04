@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import {AvailableState, StateOwner} from "../../../../../src/utils/constants";
+import TestServer from '../../../../utils/testServer';
+import { AvailableState, StateOwner } from '../../../../../src/utils/constants';
 
 describe('state.getByOwner', () => {
   it('should return a state of one owner', async () => {
@@ -12,7 +12,7 @@ describe('state.getByOwner', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "owner", "ownerType", "value"]
+          ['id', 'owner', 'ownerType', 'value']
         );
         expect(
           body.id === '17ea7282-507b-496b-b496-a6d8ce7fac17' &&

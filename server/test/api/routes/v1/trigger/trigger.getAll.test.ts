@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('trigger.getAll', () => {
   it('should return all triggers', async () => {
@@ -30,7 +30,7 @@ describe('trigger.getAll', () => {
     await server
       .get('/api/v1/trigger')
       .query({
-        scope: "full"
+        scope: 'full'
       })
       .expect('Content-Type', /json/)
       .expect(200)

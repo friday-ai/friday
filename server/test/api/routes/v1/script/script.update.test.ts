@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('script.update', () => {
   it('should update a script', async () => {
@@ -14,7 +14,7 @@ describe('script.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('Script update');
-      })
+      });
   });
 
   it('should not found script to update', async () => {

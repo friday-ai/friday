@@ -1,5 +1,5 @@
-import TestServer from "../../../../utils/helper";
-import HouseType from "../../../../../src/core/house/house.interface";
+import TestServer from '../../../../utils/testServer';
+import HouseType from '../../../../../src/core/house/house.interface';
 
 describe('house.getAll', () => {
 
@@ -39,13 +39,13 @@ describe('house.getAll', () => {
         houses.forEach((house: HouseType) => {
           expect(house).toBeObject();
           expect(house).toContainAllKeys(
-            ["id", "name", "latitude", "longitude", "rooms", "state"]
+            ['id', 'name', 'latitude', 'longitude', 'rooms', 'state']
           );
 
           if (house.state !== null) {
             expect(house.state).toBeObject();
             expect(house.state).toContainAllKeys(
-              ["id", "owner", "ownerType", "value"]
+              ['id', 'owner', 'ownerType', 'value']
             );
           }
 
@@ -54,7 +54,7 @@ describe('house.getAll', () => {
             house.rooms!.forEach(room => {
               expect(room).toBeObject();
               expect(room).toContainAllKeys(
-                ["id", "name", "houseId"]
+                ['id', 'name', 'houseId']
               );
             });
           }
@@ -76,13 +76,13 @@ describe('house.getAll', () => {
         houses.forEach((house: HouseType) => {
           expect(house).toBeObject();
           expect(house).toContainAllKeys(
-            ["id", "name", "latitude", "longitude", "state"]
+            ['id', 'name', 'latitude', 'longitude', 'state']
           );
 
           if (house.state !== null) {
             expect(house.state).toBeObject();
             expect(house.state).toContainAllKeys(
-              ["id", "owner", "ownerType", "value"]
+              ['id', 'owner', 'ownerType', 'value']
             );
           }
         });
@@ -103,7 +103,7 @@ describe('house.getAll', () => {
         houses.forEach((house: HouseType) => {
           expect(house).toBeObject();
           expect(house).toContainAllKeys(
-            ["id", "name", "latitude", "longitude", "rooms"]
+            ['id', 'name', 'latitude', 'longitude', 'rooms']
           );
 
           if (house.rooms !== null) {
@@ -111,7 +111,7 @@ describe('house.getAll', () => {
             house.rooms!.forEach(room => {
               expect(room).toBeObject();
               expect(room).toContainAllKeys(
-                ["id", "name", "houseId"]
+                ['id', 'name', 'houseId']
               );
             });
           }

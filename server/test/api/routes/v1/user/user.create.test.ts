@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('user.create', () => {
   it('should create a user', async () => {
@@ -20,7 +20,7 @@ describe('user.create', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["role", "language", "id", "name", "firstName", "email", "birthDate", "updatedAt", "createdAt"]
+          ['role', 'language', 'id', 'name', 'firstName', 'email', 'birthDate', 'updatedAt', 'createdAt']
         );
         expect(
           body.id === '0cd30aef-9c4e-4a23-88e3-3547971296e5' &&
@@ -28,7 +28,7 @@ describe('user.create', () => {
           body.firstName === 'John' &&
           body.email === 'test@test.com' &&
           body.birthDate === '1997-01-20'
-        ).toEqual(true)
+        ).toEqual(true);
         expect(body).not.toHaveProperty('password');
       });
   });

@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('action.getAll', () => {
   it('should return all actions', async () => {
@@ -37,11 +37,11 @@ describe('action.getAll', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body).toContainAllKeys(
-          ["id", "name", "description", "type", "subType", "variableKey", "variableValue", "sceneId", "scene"]
+          ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId', 'scene']
         );
         expect(body.scene).toBeObject();
         expect(body.scene).toContainAllKeys(
-          ["id", "name", "description", "triggerId"]
+          ['id', 'name', 'description', 'triggerId']
         );
       });
   });

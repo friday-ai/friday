@@ -1,4 +1,4 @@
-import TestServer from "../../../../utils/helper";
+import TestServer from '../../../../utils/testServer';
 
 describe('satellite.update', () => {
   it('should update a satellite', async () => {
@@ -14,7 +14,7 @@ describe('satellite.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.name).toEqual('Satellite update');
-      })
+      });
   });
 
   it('should not found satellite to update', async () => {
