@@ -4,19 +4,22 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Update a user.
+ * @param {String} id - Id of user
  * @param {UserType} user - A user object.
  * @returns {Promise<UserType>} Resolve with updated user.
  * @example
  * ````
- * friday.user.update({
+ * friday.user.update(
+ * 'f8be3bad-3d46-4009-b965-fe03a4d6d5f1',
+ * {
  *   id: 'f8be3bad-3d46-4009-b965-fe03a4d6d5f1'
  *   name: 'user update'
  * });
  * ````
  */
-export default async function update(user: UserType): Promise<UserType> {
+export default async function update(id: string, user: UserType): Promise<UserType> {
   try {
-    const userToUpdate = await User.findByPk(user.id);
+    const userToUpdate = await User.findByPk(id);
 
     if (userToUpdate === null) {
       throw new NotFoundError({name: 'Update a User', message: 'User not found', metadata: user.id});

@@ -53,7 +53,7 @@ export default class SatelliteRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const satellite = await this.friday.satellite.update(req.body);
+    const satellite = await this.friday.satellite.update(req.params.id, req.body);
     res.json(satellite);
   }
 
@@ -113,7 +113,7 @@ export default class SatelliteRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response, next: NextFunction) => {
-    const satellite = await this.friday.satellite.getById(req.params.id);
+    const satellite = await this.friday.satellite.getById(req.params.id, req.query.scope);
     res.json(satellite);
   }
 

@@ -53,7 +53,7 @@ export default class ScriptRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const script = await this.friday.script.update(req.body);
+    const script = await this.friday.script.update(req.params.id, req.body);
     res.json(script);
   }
 

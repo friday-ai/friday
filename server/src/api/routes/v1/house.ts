@@ -56,7 +56,7 @@ export default class HouseRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const house = await this.friday.house.update(req.body);
+    const house = await this.friday.house.update(req.params.id, req.body);
     res.json(house);
   }
 
@@ -118,7 +118,7 @@ export default class HouseRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response, next: NextFunction) => {
-    const house = await this.friday.house.getById(req.params.id);
+    const house = await this.friday.house.getById(req.params.id, req.query.scope);
     res.json(house);
   }
 

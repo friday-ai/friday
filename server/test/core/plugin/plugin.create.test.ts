@@ -1,5 +1,5 @@
 import Plugin from '../../../src/core/plugin';
-import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
+import { DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
 describe('plugin.create', () => {
   const plugin = new Plugin();
@@ -48,7 +48,7 @@ describe('plugin.create', () => {
       satelliteId: ''
     })
       .catch((err: Error) => {
-         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 

@@ -62,7 +62,7 @@ export default class PluginRouter {
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
   update = async (req: Request, res: Response, next: NextFunction) => {
-    const plugin = await this.friday.plugin.update(req.body);
+    const plugin = await this.friday.plugin.update(req.params.id, req.body);
     res.json(plugin);
   }
 
@@ -128,7 +128,7 @@ export default class PluginRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response, next: NextFunction) => {
-    const plugin = await this.friday.plugin.getById(req.params.id);
+    const plugin = await this.friday.plugin.getById(req.params.id, req.query.scope);
     res.json(plugin);
   }
 
