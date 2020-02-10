@@ -19,6 +19,7 @@ describe('session.getAccessToken', () => {
   });
 
   it('should not get a access token for an session', async () => {
+    expect.assertions(1);
 
     await session.getAccessToken('fake-refresh-token-test-simple')
       .catch((err: Error) => {
@@ -28,6 +29,7 @@ describe('session.getAccessToken', () => {
   });
 
   it('should not get a access token for an revoked session', async () => {
+    expect.assertions(1);
 
     await session.getAccessToken('refresh-token-test-revoked')
       .catch((err: Error) => {

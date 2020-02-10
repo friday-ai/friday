@@ -18,6 +18,7 @@ describe('session.validateAccessToken', () => {
   });
 
   it('should not found a associate session to the access token', async () => {
+    expect.assertions(1);
 
     await session.validateAccessToken(notFoundAccessToken)
     .catch((err: Error) => {
@@ -27,6 +28,7 @@ describe('session.validateAccessToken', () => {
   });
 
   it('should return an error, associate session has revoked', async () => {
+    expect.assertions(1);
 
     await session.validateAccessToken(revokedAccessToken)
     .catch((err: Error) => {
@@ -36,6 +38,7 @@ describe('session.validateAccessToken', () => {
   });
 
   it('should return an error, associate session has expired', async () => {
+    expect.assertions(1);
 
     await session.validateAccessToken(expiredAccessToken)
     .catch((err: Error) => {

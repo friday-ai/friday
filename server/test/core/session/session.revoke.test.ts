@@ -11,6 +11,7 @@ describe('session.revoke', () => {
   });
 
   it('should not revoke an session', async () => {
+    expect.assertions(1);
 
     await session.revoke('', '')
     .catch((err: Error) => {
@@ -20,6 +21,7 @@ describe('session.revoke', () => {
   });
 
   it('should not revoke an session', async () => {
+    expect.assertions(1);
 
     await session.revoke('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'test')
     .catch((err: Error) => {
