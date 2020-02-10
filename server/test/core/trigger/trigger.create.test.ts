@@ -25,6 +25,7 @@ describe('trigger.create', () => {
   });
 
   it('should not create a trigger with an empty name', async () => {
+    expect.assertions(1);
 
     await trigger.create({
       id: '8a1f51d3-b720-48c1-984a-4d188763396f',

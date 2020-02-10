@@ -14,6 +14,7 @@ describe('trigger.update', () => {
   });
 
   it('should not found trigger to update', async () => {
+    expect.assertions(1);
 
     await trigger.update('0cd30aef-9c4e-4a23-81e3-3544971296e5', {
       id: '0cd30aef-9c4e-4a23-81e3-3544971296e5'
