@@ -14,6 +14,7 @@ describe('scene.update', () => {
   });
 
   it('should not found scene to update', async () => {
+    expect.assertions(1);
 
     await scene.update('edfca72c-89bf-4cee-a4b6-fabbef87528a', {
       id: 'edfca72c-89bf-4cee-a4b6-fabbef87528a'

@@ -17,6 +17,7 @@ describe('scene.create', () => {
   });
 
   it('should not create a scene with an empty name', async () => {
+    expect.assertions(1);
 
     await scene.create({
       id: '0d0b207c-7972-4d79-bf71-b0fc6b6a549e',
