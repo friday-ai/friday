@@ -14,6 +14,7 @@ describe('action.update', () => {
   });
 
   it('should not found action to update', async () => {
+    expect.assertions(1);
 
     await action.update('163c08d4-c707-44b9-8ce0-37a45efeb05d', {
       id: '163c08d4-c707-44b9-8ce0-37a45efeb05d'
