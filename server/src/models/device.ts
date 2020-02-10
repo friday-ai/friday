@@ -1,11 +1,12 @@
 import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default } from 'sequelize-typescript';
+  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
 
 import Plugin from './plugin';
 import Room from './room';
 import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../utils/constants';
 import State from './state';
 import { v4 as uuid } from 'uuid';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
  * Device model
@@ -68,6 +69,8 @@ export default class Device extends Model<Device> {
   @Column
   value!: string;
 
+  @NotEmpty
+  @Is('roomId', (value) => isOwnerExisting(value, ['room']))
   @Column(DataType.UUIDV4)
   roomId!: string;
 
@@ -77,6 +80,8 @@ export default class Device extends Model<Device> {
   })
   room!: Room;
 
+  @NotEmpty
+  @Is('pluginId', (value) => isOwnerExisting(value, ['plugin']))
   @Column(DataType.UUIDV4)
   pluginId!: string;
 

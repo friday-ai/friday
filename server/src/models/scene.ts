@@ -1,7 +1,10 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull,
+  NotEmpty, Unique, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
+
 import Trigger from './trigger';
 import Action from './action';
 import { v4 as uuid } from 'uuid';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
  * Scene model
@@ -47,6 +50,11 @@ export default class Scene extends Model<Scene> {
   @Column
   description!: string;
 
+  @Is('triggerId', (value) => {
+    if (value !== undefined) {
+      isOwnerExisting(value, ['trigger']);
+    }
+  })
   @Column(DataType.UUIDV4)
   triggerId!: string;
 

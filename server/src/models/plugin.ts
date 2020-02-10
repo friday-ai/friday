@@ -1,11 +1,12 @@
 import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default } from 'sequelize-typescript';
+  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
 
 import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';
 import Device  from './device';
 import { v4 as uuid } from 'uuid';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
  * Plugin model
@@ -70,6 +71,7 @@ export default class Plugin extends Model<Plugin> {
 
   @AllowNull(false)
   @NotEmpty
+  @Is('satelliteId', (value) => isOwnerExisting(value, ['satellite']))
   @Column(DataType.UUIDV4)
   satelliteId!: string;
 

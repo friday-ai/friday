@@ -1,6 +1,9 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default, IsDate } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull,
+  Unique, NotEmpty, DefaultScope, Scopes, Default, IsDate, Is } from 'sequelize-typescript';
+
 import User from './user';
 import { v4 as uuid } from 'uuid';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
  * Session model
@@ -42,9 +45,11 @@ export default class Session extends Model<Session> {
   @AllowNull(false)
   @NotEmpty
   @IsDate
-  @Column({ type: DataType.DATEONLY })
+  @Column({ type: DataType.DATE })
   validUntil!: Date;
 
+  @NotEmpty
+  @Is('userId', (value) => isOwnerExisting(value, ['user']))
   @Column(DataType.UUIDV4)
   userId!: string;
 

@@ -1,11 +1,12 @@
 import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasMany, HasOne,
-  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default } from 'sequelize-typescript';
+  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
 
 import House from './house';
 import Satellite from './satellite';
 import Device from './device';
 import State from './state';
 import { v4 as uuid } from 'uuid';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
  * Room model
@@ -57,6 +58,7 @@ export default class Room extends Model<Room> {
 
   @AllowNull(false)
   @NotEmpty
+  @Is('houseId', (value) => isOwnerExisting(value, ['house']))
   @Column(DataType.UUIDV4)
   houseId!: string;
 

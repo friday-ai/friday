@@ -1,9 +1,10 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope, Default } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope, Default, Is } from 'sequelize-typescript';
 import { VariableOwner } from '../utils/constants';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
 import { v4 as uuid } from 'uuid';
+import { isOwnerExisting } from '../../src/utils/databaseValidation';
 
 /**
  * Variable model
@@ -37,6 +38,8 @@ export default class Variable extends Model<Variable> {
   value!: string;
 
   @AllowNull(false)
+  @NotEmpty
+  @Is('owner', (value) => isOwnerExisting(value, ['user', 'satellite', 'plugin']))
   @Column(DataType.UUIDV4)
   owner!: string;
 

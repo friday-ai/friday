@@ -1,7 +1,8 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
 import Scene from './scene';
 import { ActionsType } from '../utils/constants';
 import { v4 as uuid } from 'uuid';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
  * Action model
@@ -53,6 +54,8 @@ export default class Action extends Model<Action> {
   @Column
   variableValue!: string;
 
+  @NotEmpty
+  @Is('sceneId', (value) => isOwnerExisting(value, ['scene']))
   @Column(DataType.UUIDV4)
   sceneId!: string;
 
