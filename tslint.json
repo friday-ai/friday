@@ -49,12 +49,7 @@
       true,
       170
     ],
-    "member-ordering": [
-      true,
-      "public-before-private",
-      "static-before-instance",
-      "variables-before-functions"
-    ],
+    "member-ordering": false,
     "no-any": false,
     "no-arg": true,
     "no-bitwise": true,
@@ -86,7 +81,6 @@
     ],
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-var-requires": false,
     "one-line": [

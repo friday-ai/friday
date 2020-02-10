@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "description": "Server and web app of the Friday assistant",
   "main": "index.js",
+  "per-env": {
+    "production": {
+      "env": "prod"
+    },
+    "development": {
+      "env": "dev"
+    }
+  },
   "scripts": {
     "postinstall": "npm run install-server && npm run install-client",
     "start": "per-env",
-    "start:prod": "concurrently -k -p \"none\" \"npm run start-server:prod\" \"npm run start-client:prod\"",
-    "start:dev": "concurrently -k -p \"none\" \"npm run start-server:dev\" \"npm run start-client:dev\"",
+    "start:": "npm run start:production",
+    "start:production": "concurrently -k -p \"none\" \"npm run start-server:prod\" \"npm run start-client:prod\"",
+    "start:development": "concurrently -k -p \"none\" \"npm run start-server:dev\" \"npm run start-client:dev\"",
     "test": "npm run test-server && npm run test-client",
     "lint": "npm run lint-server && npm run lint-client",
     "lint:fix": "npm run lint-server:fix && npm run lint-client:fix",
@@ -33,6 +42,7 @@
     "url": "https://github.com/friday-ai/friday/issues"
   },
   "dependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^5.1.0",
+    "per-env": "^1.0.2"
   }
 }
