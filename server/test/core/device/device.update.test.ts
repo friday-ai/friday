@@ -14,6 +14,7 @@ describe('device.update', () => {
   });
 
   it('should not found device to update', async () => {
+    expect.assertions(1);
 
     await device.update('449b2033-105f-4c18-91e8-a56ad1831796', {
       id: '449b2033-105f-4c18-91e8-a56ad1831796'
