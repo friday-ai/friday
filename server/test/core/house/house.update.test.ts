@@ -14,6 +14,7 @@ describe('house.update', () => {
   });
 
   it('should not found house to update', async () => {
+    expect.assertions(1);
 
     await house.update('1b561f76-9574-461c-b79e-e1906fe33c1a', {
       id: '1b561f76-9574-461c-b79e-e1906fe33c1a'

@@ -1,5 +1,5 @@
 import House from '../../../src/core/house';
-import { DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
+import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
 describe('house.create', () => {
   const house = new House();
@@ -19,6 +19,7 @@ describe('house.create', () => {
   });
 
   it('should not create a house with an existing name', async () => {
+    expect.assertions(1);
 
     await house.create({
       id: 'd9abed7e-c35b-4a2b-bb6a-5cd2e2ad556e',
@@ -28,6 +29,20 @@ describe('house.create', () => {
     })
       .catch((err: Error) => {
          expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
+      });
+  });
+
+  it('should not create a house with an empty name', async () => {
+    expect.assertions(1);
+
+    await house.create({
+      id: 'b54a8587-d921-4c7d-be2d-5cefc264542c',
+      name: '',
+      latitude: '34.0012295',
+      longitude: '-118.8067245'
+    })
+      .catch((err: Error) => {
+         expect(err).toBeInstanceOf(DatabaseValidationError);
       });
   });
 
