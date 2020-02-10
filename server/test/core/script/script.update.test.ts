@@ -15,8 +15,9 @@ describe('script.update', () => {
   });
 
   it('should not found script to update', async () => {
+    expect.assertions(1);
 
-    await script.update('d354cede-3895-4dac-8a90-73d970b4617c', {
+    await script.update('4783ca07-e03c-4bc7-ae7c-da51025f23cc', {
       id: '76fd7e15-22e5-4e0e-904a-619fb062dec1'
     })
       .catch((err: Error) => {

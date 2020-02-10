@@ -17,6 +17,7 @@ describe('script.create', () => {
   });
 
   it('should not create a script with an empty name', async () => {
+    expect.assertions(1);
 
     await script.create({
       id: 'b9c7b560-8eb6-4d0e-989f-2a2f363590a3',
