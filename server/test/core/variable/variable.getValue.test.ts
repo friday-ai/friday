@@ -18,6 +18,7 @@ describe('variable.getValue', () => {
   });
 
   it('should not found variable to return', async () => {
+    expect.assertions(1);
 
     await variable.getValue('key100')
       .catch((err: Error) => {
@@ -26,6 +27,7 @@ describe('variable.getValue', () => {
   });
 
   it('should not found variable with empty key', async () => {
+    expect.assertions(1);
 
     await variable.getValue('')
       .catch((err: Error) => {

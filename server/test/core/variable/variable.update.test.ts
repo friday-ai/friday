@@ -14,6 +14,7 @@ describe('variable.update', () => {
   });
 
   it('should not found variable to update', async () => {
+    expect.assertions(1);
 
     await variable.update('a2b9ba3a-72f1-4a24-b268-e3813c1e8333', {
       value: 'value_updated'
