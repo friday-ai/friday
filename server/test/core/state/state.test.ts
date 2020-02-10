@@ -1,6 +1,6 @@
 import State from '../../../src/core/state';
 import { StateOwner, AvailableState } from '../../../src/utils/constants';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import { NotFoundError, DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
 describe('state.set', () => {
   const state = new State();
@@ -19,6 +19,36 @@ describe('state.set', () => {
     expect(createdState).toHaveProperty('value');
   });
 
+  it('should not create a state with a empty owner id', async () => {
+    expect.assertions(1);
+
+    await state.set({
+      id: '43b55c29-70d9-4213-9cce-a5f3c74ff38c',
+      owner: '',
+      ownerType: StateOwner.USER,
+      value: AvailableState.USER_AT_HOME
+    })
+      .catch((err: Error) => {
+        expect(err).toBeInstanceOf(DatabaseValidationError);
+      });
+
+  });
+
+  it('should not create a state with a wrong owner id', async () => {
+    expect.assertions(1);
+
+    await state.set({
+      id: '9a05e6c3-e36a-4779-bc66-6f7d015920c7',
+      owner: '246291a1-9f31-4201-8996-0a938c54a8bf',
+      ownerType: StateOwner.USER,
+      value: AvailableState.USER_AT_HOME
+    })
+      .catch((err: Error) => {
+        expect(err).toBeInstanceOf(DatabaseValidationError);
+      });
+
+  });
+
 });
 
 describe('state.getByOwner', () => {
@@ -34,6 +64,7 @@ describe('state.getByOwner', () => {
   });
 
   it('should not found state', async () => {
+    expect.assertions(1);
 
     await state.getByOwner('639cf491-7ff5-4e76-853d-806c81e53f8d')
       .catch((err: Error) => {
