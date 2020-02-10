@@ -17,6 +17,7 @@ describe('satellite.create', () => {
   });
 
   it('should not create a satellite with an empty name', async () => {
+    expect.assertions(1);
 
     await satellite.create({
       id: '5218d483-d147-4541-bc56-9ad39a105293',
@@ -29,6 +30,7 @@ describe('satellite.create', () => {
   });
 
   it('should not create a satellite  with an empty room', async () => {
+    expect.assertions(1);
 
     await satellite.create({
       id: '7e8913ac-5f87-418a-a483-424a9cbcd942',
