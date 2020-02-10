@@ -14,8 +14,9 @@ describe('plugin.update', () => {
   });
 
   it('should not found plugin to update', async () => {
+    expect.assertions(1);
 
-    await plugin.update('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', {
+    await plugin.update('580efda9-6fa1-4bef-865f-d4ef04ea57d6', {
       id: '14c39f7a-fdda-453b-ab0a-7c47d36b90f8'
     })
       .catch((err: Error) => {
