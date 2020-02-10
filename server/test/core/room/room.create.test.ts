@@ -17,6 +17,7 @@ describe('room.create', () => {
   });
 
   it('should not create a room with an existing name', async () => {
+    expect.assertions(1);
 
     await room.create({
       id: 'e841fbab-6e0d-4bc4-8467-7889d5cec52e',
@@ -28,8 +29,8 @@ describe('room.create', () => {
       });
   });
 
-
   it('should not create a room with an empty name', async () => {
+    expect.assertions(1);
 
     await room.create({
       id: 'af3cc3b1-b4e4-4def-ad7a-38ec70e23e62',
@@ -42,6 +43,7 @@ describe('room.create', () => {
   });
 
   it('should not create a room  with an empty house', async () => {
+    expect.assertions(1);
 
     await room.create({
       id: '34c490f0-a9f9-4151-84bf-a7321c5f1bea',

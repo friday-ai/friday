@@ -14,6 +14,7 @@ describe('room.update', () => {
   });
 
   it('should not found room to update', async () => {
+    expect.assertions(1);
 
     await room.update('8b513ecf-2c2d-4cc7-aefc-0ac8eba85827', {
       id: '8b513ecf-2c2d-4cc7-aefc-0ac8eba85827'
