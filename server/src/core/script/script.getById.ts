@@ -12,7 +12,7 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  * friday.script.getById('e16be2ff-9ee3-4373-8b40-9f0a2ff04ed3', 'full');
  * ````
  */
-export default async function getById(id: string, scope?: string): Promise<ScriptType> {
+export default async function getById(id: string): Promise<ScriptType> {
   try {
 
     let script;

@@ -50,7 +50,7 @@ export default class SessionRouter {
    * @apiGroup Session
    * @apiVersion 1.0.0
    */
-  @Get({ path: '/', authenticated: false, rateLimit: false })
+  @Get({ path: '/', authenticated: true, rateLimit: false })
   getAll = async (req: Request, res: Response) => {
     const sessions = await this.friday.session.getAll(req.query);
     res.json(sessions);
