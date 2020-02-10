@@ -30,6 +30,20 @@ describe('room.create', () => {
 
   });
 
+  it('should not create a room with a existing name', async () => {
+
+    const server = await new TestServer();
+
+    await server
+      .post('/api/v1/room')
+      .send({
+        id: '4f015db8-f3bf-454e-b9f4-3f8cd1a5b22a',
+        name: 'A room test',
+        houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
+      })
+      .expect(409);
+  });
+
   it('should not create a room with an empty name', async () => {
 
     const server = await new TestServer();

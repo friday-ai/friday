@@ -46,4 +46,19 @@ describe('house.create', () => {
       })
       .expect(409);
   });
+
+  it('should not create a house with an empty name', async () => {
+
+    const server = await new TestServer();
+
+    await server
+      .post('/api/v1/house')
+      .send({
+        id: 'd3f40fca-3dd3-45ba-9147-28124d1a5024',
+        name: '',
+        latitude: '34.0012295',
+        longitude: '-118.8067245'
+      })
+      .expect(422);
+  });
 });

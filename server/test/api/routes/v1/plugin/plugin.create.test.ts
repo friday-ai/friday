@@ -52,7 +52,7 @@ describe('plugin.create', () => {
       .expect(422);
   });
 
-  it('should not create a plugin with an empty satellite id', async () => {
+  it('should not create a plugin with a empty satellite id', async () => {
 
     const server = await new TestServer();
 
@@ -65,6 +65,40 @@ describe('plugin.create', () => {
         url: 'fake url',
         enabled: true,
         satelliteId: ''
+      })
+      .expect(422);
+  });
+
+  it('should not create a plugin with a wrong satellite id', async () => {
+
+    const server = await new TestServer();
+
+    await server
+      .post('/api/v1/plugin')
+      .send({
+        id: 'a25ba37b-e70f-4d60-8d59-e91bc7584be0',
+        name: 'Fake plugin',
+        version: '1.0.0',
+        url: 'fake url',
+        enabled: true,
+        satelliteId: '1fad4e9b-a001-4fcc-9eec-34502793828b'
+      })
+      .expect(422);
+  });
+
+  it('should not create a plugin with a empty name', async () => {
+
+    const server = await new TestServer();
+
+    await server
+      .post('/api/v1/plugin')
+      .send({
+        id: '7b280206-c676-496a-b8f7-f8dc530983f5',
+        name: '',
+        version: '1.0.0',
+        url: 'fake url',
+        enabled: true,
+        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
       })
       .expect(422);
   });
