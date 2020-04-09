@@ -110,6 +110,20 @@ export default class UserRouter {
   }
 
   /**
+   * Get user count
+   * @apiName getUsersCount
+   * @apiDescription This route allows you to know the number of registered users
+   * @api {post} /api/v1/user/count
+   * @apiGroup User
+   * @apiVersion 1.0.0
+   */
+  @Get({ path: '/count', authenticated: true, rateLimit: true })
+  getUsersCount = async (req: Request, res: Response, next: NextFunction) => {
+    const count = await this.friday.user.getCount();
+    res.status(200).json(count);
+  }
+
+  /**
    * Get a user by id
    * @apiName getById
    * @apiDescription This route allows you to get a user with his identifier
