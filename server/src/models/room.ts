@@ -5,7 +5,6 @@ import House from './house';
 import Satellite from './satellite';
 import Device from './device';
 import State from './state';
-import { v4 as uuid } from 'uuid';
 import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
@@ -46,7 +45,7 @@ export default class Room extends Model<Room> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

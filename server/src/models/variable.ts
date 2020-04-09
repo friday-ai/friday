@@ -3,7 +3,6 @@ import { VariableOwner } from '../utils/constants';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
-import { v4 as uuid } from 'uuid';
 import { isOwnerExisting } from '../../src/utils/databaseValidation';
 
 /**
@@ -22,7 +21,7 @@ export default class Variable extends Model<Variable> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

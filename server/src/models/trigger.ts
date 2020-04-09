@@ -1,7 +1,6 @@
 import { Table, Column, Model, PrimaryKey, HasMany, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default } from 'sequelize-typescript';
 import Scene from './scene';
 import { AvailableConditions } from '../utils/constants';
-import { v4 as uuid } from 'uuid';
 
 /**
  * Trigger model
@@ -25,7 +24,7 @@ export default class Trigger extends Model<Trigger> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

@@ -2,7 +2,6 @@ import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNul
   Unique, NotEmpty, DefaultScope, Scopes, Default, IsDate, Is } from 'sequelize-typescript';
 
 import User from './user';
-import { v4 as uuid } from 'uuid';
 import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
@@ -27,7 +26,7 @@ export default class Session extends Model<Session> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

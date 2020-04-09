@@ -5,7 +5,6 @@ import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';
 import Device  from './device';
-import { v4 as uuid } from 'uuid';
 import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
@@ -46,7 +45,7 @@ export default class Plugin extends Model<Plugin> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

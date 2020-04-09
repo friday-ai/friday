@@ -1,7 +1,6 @@
 import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
 import Scene from './scene';
 import { ActionsType } from '../utils/constants';
-import { v4 as uuid } from 'uuid';
 import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
@@ -26,7 +25,7 @@ export default class Action extends Model<Action> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

@@ -5,7 +5,6 @@ import Plugin from './plugin';
 import Room from './room';
 import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../utils/constants';
 import State from './state';
-import { v4 as uuid } from 'uuid';
 import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
@@ -42,7 +41,7 @@ export default class Device extends Model<Device> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

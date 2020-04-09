@@ -3,7 +3,6 @@ import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID,
 
 import Trigger from './trigger';
 import Action from './action';
-import { v4 as uuid } from 'uuid';
 import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
@@ -36,7 +35,7 @@ export default class Scene extends Model<Scene> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 

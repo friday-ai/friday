@@ -6,7 +6,6 @@ import { UserRole, AvailableLanguages } from '../utils/constants';
 import State from './state';
 import { hash } from '../../src/utils/password';
 import Session from './session';
-import { v4 as uuid } from 'uuid';
 
 /**
  * User model
@@ -38,7 +37,7 @@ export default class User extends Model<User> {
   @AllowNull(false)
   @PrimaryKey
   @Unique
-  @Default(uuid())
+  @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
 
