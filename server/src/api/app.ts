@@ -9,6 +9,7 @@ import notFoundMiddleware from './middlewares/notFoundMiddleware';
 import errorMiddleware from './middlewares/errorMiddleware';
 import * as WebSocket from 'ws';
 import WebsocketServer from './websocket/index';
+import Friday from '../../src/core/friday';
 
 const env = process.env.NODE_ENV || 'production';
 
@@ -21,7 +22,7 @@ export default class Server {
   readonly port: number;
   readonly friday: any;
 
-  constructor(port: number, friday: any) {
+  constructor(port: number, friday: Friday) {
     this.port = port;
     this.friday = friday;
   }

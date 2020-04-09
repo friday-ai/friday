@@ -5,6 +5,7 @@ import { RouteDefinition } from '../../utils/decorators/route';
 import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 import asyncMiddleware from '../middlewares/asyncMiddleware';
 import authMiddleware from '../middlewares/authMiddleware';
+import Friday from '../../../src/core/friday';
 
 /**
  * Express router
@@ -14,7 +15,7 @@ import authMiddleware from '../middlewares/authMiddleware';
  * @example
  * router(friday);
  */
-export default function router(friday: any): Router {
+export default function router(friday: Friday): Router {
   const routerObject = Router();
 
   const routers = Glob

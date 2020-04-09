@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
+import Friday from '../../../../src/core/friday';
 
 /**
  * User router
@@ -14,9 +15,9 @@ import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorator
  */
 @FridayRouter('/v1/user')
 export default class UserRouter {
-  readonly friday: any;
+  readonly friday: Friday;
 
-  constructor(friday: any) {
+  constructor(friday: Friday) {
     this.friday = friday;
   }
 

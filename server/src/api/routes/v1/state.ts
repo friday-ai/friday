@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import {FridayRouter, Get, Post} from '../../../utils/decorators/route';
+import Friday from '../../../../src/core/friday';
 
 /**
  * State router
@@ -10,9 +11,9 @@ import {FridayRouter, Get, Post} from '../../../utils/decorators/route';
  */
 @FridayRouter('/v1/state')
 export default class StateRouter {
-  readonly friday: any;
+  readonly friday: Friday;
 
-  constructor(friday: any) {
+  constructor(friday: Friday) {
     this.friday = friday;
   }
 

@@ -1,14 +1,15 @@
 import { Request, Response, NextFunction } from 'express';
 import { FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
+import Friday from '../../../../src/core/friday';
 
 /**
  * Session router
  */
 @FridayRouter('/v1/session')
 export default class SessionRouter {
-  readonly friday: any;
+  readonly friday: Friday;
 
-  constructor(friday: any) {
+  constructor(friday: Friday) {
     this.friday = friday;
   }
 
