@@ -1,7 +1,7 @@
 import TestServer from '../../../../utils/testServer';
 
 describe('variable.update', () => {
-  it('should update a variable', async () => {
+  it('should update a variable with a id', async () => {
     const server = await new TestServer();
 
     await server
@@ -14,6 +14,22 @@ describe('variable.update', () => {
         let body = res.body;
         expect(body).toBeObject();
         expect(body.value).toEqual('Variable update');
+      });
+  });
+
+  it('should update a variable with a key', async () => {
+    const server = await new TestServer();
+
+    await server
+      .patch('/api/v1/variable/test_key0')
+      .send({
+        value: 'Variable update2'
+      })
+      .expect(200)
+      .then((res) => {
+        let body = res.body;
+        expect(body).toBeObject();
+        expect(body.value).toEqual('Variable update2');
       });
   });
 

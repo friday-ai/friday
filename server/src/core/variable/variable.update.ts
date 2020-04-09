@@ -17,17 +17,26 @@ import { default as error, NotFoundError, BadParametersError} from '../../utils/
  * });
  * ````
  */
-export default async function update(id: string, variable: VariableType): Promise<VariableType> {
+export default async function update(idOrKey: string, variable: VariableType): Promise<VariableType> {
   try {
 
-    if (!id || id === '') {
-      throw new BadParametersError({name: 'Update an Variable', message: 'Variable\'s id must be specified', metadata: id});
+    if (!idOrKey || idOrKey === '') {
+      throw new BadParametersError({name: 'Update an Variable', message: 'Variable\'s id or key must be specified', metadata: variable});
     }
 
-    const variableToUpdate = await Variable.findByPk(id);
+    let variableToUpdate = await Variable.findByPk(idOrKey);
+
+    // If variable is not found with id, search by key
+    if (variableToUpdate === null) {
+      variableToUpdate = await Variable.findOne({
+        where: {
+          key: idOrKey
+        }
+      });
+    }
 
     if (variableToUpdate === null) {
-      throw new NotFoundError({name: 'Update an Variable', message: 'Variable not found', metadata: id});
+      throw new NotFoundError({name: 'Update an Variable', message: 'Variable not found', metadata: variable});
     }
 
     variableToUpdate.update(variable);
