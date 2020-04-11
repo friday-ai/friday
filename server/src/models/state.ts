@@ -42,6 +42,12 @@ export default class State extends Model<State> {
   @Column
   value!: string;
 
+  @AllowNull(false)
+  @NotEmpty
+  @Default(true)
+  @Column
+  last!: boolean;
+
   @BelongsTo(() => User, {
     foreignKey: 'owner',
     constraints: false

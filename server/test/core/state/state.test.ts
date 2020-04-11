@@ -1,9 +1,13 @@
 import State from '../../../src/core/state';
+import Variable from '../../../src/core/variable';
+import Event from '../../../src/utils/event';
 import { StateOwner, AvailableState } from '../../../src/utils/constants';
 import { NotFoundError, DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
 describe('state.set', () => {
-  const state = new State();
+  const variable = new Variable();
+  const event = new Event();
+  const state = new State(event, variable);
 
   it('should create a state', async () => {
     const createdState = await state.set({
@@ -52,7 +56,9 @@ describe('state.set', () => {
 });
 
 describe('state.getByOwner', () => {
-  const state = new State();
+  const variable = new Variable();
+  const event = new Event();
+  const state = new State(event, variable);
 
   it('should return a state of one owner', async () => {
     const stateRetruned = await state.getByOwner('c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a');

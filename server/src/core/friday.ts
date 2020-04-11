@@ -36,5 +36,6 @@ export default class Friday {
   public trigger = new Trigger();
   public user = new User();
   public variable = new Variable();
+  public state = new State(this.event, this.variable);
   public constants = Constants;
 }

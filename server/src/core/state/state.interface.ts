@@ -14,6 +14,7 @@ export default interface StateType {
   owner: string;
   ownerType: StateOwner;
   value: AvailableState;
+  last?: boolean;
   user?: UserType;
   room?: RoomType;
   house?: HouseType;

@@ -102,6 +102,9 @@ export enum EventsType {
   SYSTEME_STARTED = 'systeme.started',
   SYSTEME_UPDATED = 'systeme.updated',
   SYSTEME_SHUTDOWN = 'systeme.shutdown',
+  // State's events
+  STATES_PURGE = 'states.purge',
+  STATE_SET = 'state.set',
   // Websocket's events
   WEBSOCKET_SEND = 'websocket.send',
   WEBSOCKET_SEND_ALL = 'websocket.send.all',
