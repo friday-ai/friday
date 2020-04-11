@@ -98,13 +98,15 @@ export enum ActionsType {
 }
 
 export enum EventsType {
-  // Systeme's  events
-  SYSTEME_STARTED = 'systeme.started',
-  SYSTEME_UPDATED = 'systeme.updated',
-  SYSTEME_SHUTDOWN = 'systeme.shutdown',
   // State's events
   STATES_PURGE = 'states.purge',
   STATE_SET = 'state.set',
+  // System's  events
+  SYSTEM_STARTED = 'systeme.started',
+  SYSTEM_UPDATED = 'systeme.updated',
+  SYSTEM_SHUTDOWN = 'systeme.shutdown',
+  SYSTEM_CHECK_UPDATE = 'systeme.check_update',
+  SYSTEM_BACKUP = 'systeme.backup',
   // Websocket's events
   WEBSOCKET_SEND = 'websocket.send',
   WEBSOCKET_SEND_ALL = 'websocket.send.all',
@@ -123,6 +125,12 @@ export enum WebsocketMessageTypes {
   MESSAGE_SEND = 'message.send',
   MESSAGE_SEND_ALL = 'message.send.all',
   MESSAGE_SEND_ADMIN = 'message.send.admin'
+}
+
+export enum SystemVariablesNames {
+  FRIDAY_VERSION = 'friday_version',
+  HISTORY_STATE_IN_DAYS = 'history_state_in_days',
+  NUMBER_OF_BACKUPS = 'number_of_backups'
 }
 
 // TODO = Create a Json file with all type of device available

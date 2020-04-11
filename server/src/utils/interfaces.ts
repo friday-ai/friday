@@ -1,4 +1,4 @@
-import { WebsocketMessageTypes } from './constants';
+import { WebsocketMessageTypes, EventsType } from './constants';
 
 /**
  * Options for core functions type 'getAll'
@@ -36,4 +36,13 @@ export interface WebsocketMessagePayload {
   receiver?: string;
   accessToken?: string;
   message?: string;
+}
+
+/**
+ * Interface for jobs scheduler
+ */
+export interface JobsInterface {
+  name: string;
+  rule: string;
+  event: EventsType;
 }

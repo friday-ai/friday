@@ -1,13 +1,17 @@
 import Server from './api/app';
-import * as database from './config/database';
 import Friday from './core/friday';
 
 const port = parseInt(process.env.SERVER_PORT!, 10) || 3000;
 
 (async () => {
 
-  await database.init();
+  // Create Friday object
   const friday = new Friday();
+
+  // Start Friday core
+  friday.start();
+
+  // Start Friday server
   new Server(port, friday).start();
 
 })();
