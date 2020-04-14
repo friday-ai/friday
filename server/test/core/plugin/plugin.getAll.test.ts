@@ -1,15 +1,15 @@
+import { expect, assert } from 'chai';
 import Plugin from '../../../src/core/plugin';
-import 'jest-extended';
 
-describe('plugin.getAll', () => {
+describe('Plugin.getAll', () => {
   const plugin = new Plugin();
 
   it('should return all plugins', async () => {
 
     const plugins = await plugin.getAll();
 
-    expect(plugins).toEqual([
-      {
+    expect(plugins).to.be.an('array');
+    assert.deepEqual(plugins, [{
         id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
         name: 'Zwave',
         version: '1.2.0',
@@ -41,54 +41,54 @@ describe('plugin.getAll', () => {
 
     const plugins = await plugin.getAll({ scope: 'full' });
 
-    expect(plugins).toBeArray();
+    expect(plugins).to.be.an('array');
     plugins.forEach(p => {
-      expect(p).toHaveProperty('id');
-      expect(p).toHaveProperty('name');
-      expect(p).toHaveProperty('version');
-      expect(p).toHaveProperty('url');
-      expect(p).toHaveProperty('enabled');
-      expect(p).toHaveProperty('satelliteId');
+      expect(p).to.have.property('id');
+      expect(p).to.have.property('name');
+      expect(p).to.have.property('version');
+      expect(p).to.have.property('url');
+      expect(p).to.have.property('enabled');
+      expect(p).to.have.property('satelliteId');
 
       // TODO: The state cannot must be null
       if (p.state !== null) {
-        expect(p.state).toBeObject();
-        expect(p.state).toHaveProperty('id');
-        expect(p.state).toHaveProperty('owner');
-        expect(p.state).toHaveProperty('ownerType');
-        expect(p.state).toHaveProperty('value');
+        expect(p.state).to.be.an('object');
+        expect(p.state).to.have.property('id');
+        expect(p.state).to.have.property('owner');
+        expect(p.state).to.have.property('ownerType');
+        expect(p.state).to.have.property('value');
       }
 
       if (p.satellite !== null) {
-        expect(p.satellite).toBeObject();
-        expect(p.satellite).toHaveProperty('id');
-        expect(p.satellite).toHaveProperty('name');
-        expect(p.satellite).toHaveProperty('roomId');
+        expect(p.satellite).to.be.an('object');
+        expect(p.satellite).to.have.property('id');
+        expect(p.satellite).to.have.property('name');
+        expect(p.satellite).to.have.property('roomId');
       }
 
       if (p.devices !== null) {
-        expect(p.devices).toBeArray();
+        expect(p.devices).to.be.an('array');
         p.devices!.forEach(d => {
-          expect(d).toBeObject();
-          expect(d).toHaveProperty('id');
-          expect(d).toHaveProperty('name');
-          expect(d).toHaveProperty('type');
-          expect(d).toHaveProperty('subType');
-          expect(d).toHaveProperty('variable');
-          expect(d).toHaveProperty('unit');
-          expect(d).toHaveProperty('value');
+          expect(d).to.be.an('object');
+          expect(d).to.have.property('id');
+          expect(d).to.have.property('name');
+          expect(d).to.have.property('type');
+          expect(d).to.have.property('subType');
+          expect(d).to.have.property('variable');
+          expect(d).to.have.property('unit');
+          expect(d).to.have.property('value');
         });
       }
 
       if (p.variables !== null) {
-        expect(p.variables).toBeArray();
+        expect(p.variables).to.be.an('array');
         p.variables!.forEach(v => {
-          expect(v).toBeObject();
-          expect(v).toHaveProperty('id');
-          expect(v).toHaveProperty('key');
-          expect(v).toHaveProperty('value');
-          expect(v).toHaveProperty('owner');
-          expect(v).toHaveProperty('ownerType');
+          expect(v).to.be.an('object');
+          expect(v).to.have.property('id');
+          expect(v).to.have.property('key');
+          expect(v).to.have.property('value');
+          expect(v).to.have.property('owner');
+          expect(v).to.have.property('ownerType');
         });
       }
 
@@ -100,20 +100,20 @@ describe('plugin.getAll', () => {
 
     const plugins = await plugin.getAll({ scope: 'withSatellite' });
 
-    expect(plugins).toBeArray();
+    expect(plugins).to.be.an('array');
     plugins.forEach(p => {
-      expect(p).toHaveProperty('id');
-      expect(p).toHaveProperty('name');
-      expect(p).toHaveProperty('version');
-      expect(p).toHaveProperty('url');
-      expect(p).toHaveProperty('enabled');
-      expect(p).toHaveProperty('satelliteId');
+      expect(p).to.have.property('id');
+      expect(p).to.have.property('name');
+      expect(p).to.have.property('version');
+      expect(p).to.have.property('url');
+      expect(p).to.have.property('enabled');
+      expect(p).to.have.property('satelliteId');
 
       if (p.satellite !== null) {
-        expect(p.satellite).toBeObject();
-        expect(p.satellite).toHaveProperty('id');
-        expect(p.satellite).toHaveProperty('name');
-        expect(p.satellite).toHaveProperty('roomId');
+        expect(p.satellite).to.be.an('object');
+        expect(p.satellite).to.have.property('id');
+        expect(p.satellite).to.have.property('name');
+        expect(p.satellite).to.have.property('roomId');
       }
 
     });
@@ -124,22 +124,22 @@ describe('plugin.getAll', () => {
 
     const plugins = await plugin.getAll({ scope: 'withState' });
 
-    expect(plugins).toBeArray();
+    expect(plugins).to.be.an('array');
     plugins.forEach(p => {
-      expect(p).toHaveProperty('id');
-      expect(p).toHaveProperty('name');
-      expect(p).toHaveProperty('version');
-      expect(p).toHaveProperty('url');
-      expect(p).toHaveProperty('enabled');
-      expect(p).toHaveProperty('satelliteId');
+      expect(p).to.have.property('id');
+      expect(p).to.have.property('name');
+      expect(p).to.have.property('version');
+      expect(p).to.have.property('url');
+      expect(p).to.have.property('enabled');
+      expect(p).to.have.property('satelliteId');
 
       // TODO: The state cannot must be null
       if (p.state !== null) {
-        expect(p.state).toBeObject();
-        expect(p.state).toHaveProperty('id');
-        expect(p.state).toHaveProperty('owner');
-        expect(p.state).toHaveProperty('ownerType');
-        expect(p.state).toHaveProperty('value');
+        expect(p.state).to.be.an('object');
+        expect(p.state).to.have.property('id');
+        expect(p.state).to.have.property('owner');
+        expect(p.state).to.have.property('ownerType');
+        expect(p.state).to.have.property('value');
       }
     });
 
@@ -149,26 +149,26 @@ describe('plugin.getAll', () => {
 
     const plugins = await plugin.getAll({ scope: 'withDevices' });
 
-    expect(plugins).toBeArray();
+    expect(plugins).to.be.an('array');
     plugins.forEach(p => {
-      expect(p).toHaveProperty('id');
-      expect(p).toHaveProperty('name');
-      expect(p).toHaveProperty('version');
-      expect(p).toHaveProperty('url');
-      expect(p).toHaveProperty('enabled');
-      expect(p).toHaveProperty('satelliteId');
+      expect(p).to.have.property('id');
+      expect(p).to.have.property('name');
+      expect(p).to.have.property('version');
+      expect(p).to.have.property('url');
+      expect(p).to.have.property('enabled');
+      expect(p).to.have.property('satelliteId');
 
       if (p.devices !== null) {
-        expect(p.devices).toBeArray();
+        expect(p.devices).to.be.an('array');
         p.devices!.forEach(d => {
-          expect(d).toBeObject();
-          expect(d).toHaveProperty('id');
-          expect(d).toHaveProperty('name');
-          expect(d).toHaveProperty('type');
-          expect(d).toHaveProperty('subType');
-          expect(d).toHaveProperty('variable');
-          expect(d).toHaveProperty('unit');
-          expect(d).toHaveProperty('value');
+          expect(d).to.be.an('object');
+          expect(d).to.have.property('id');
+          expect(d).to.have.property('name');
+          expect(d).to.have.property('type');
+          expect(d).to.have.property('subType');
+          expect(d).to.have.property('variable');
+          expect(d).to.have.property('unit');
+          expect(d).to.have.property('value');
         });
       }
 
@@ -180,24 +180,24 @@ describe('plugin.getAll', () => {
 
     const plugins = await plugin.getAll({ scope: 'withVariables' });
 
-    expect(plugins).toBeArray();
+    expect(plugins).to.be.an('array');
     plugins.forEach(p => {
-      expect(p).toHaveProperty('id');
-      expect(p).toHaveProperty('name');
-      expect(p).toHaveProperty('version');
-      expect(p).toHaveProperty('url');
-      expect(p).toHaveProperty('enabled');
-      expect(p).toHaveProperty('satelliteId');
+      expect(p).to.have.property('id');
+      expect(p).to.have.property('name');
+      expect(p).to.have.property('version');
+      expect(p).to.have.property('url');
+      expect(p).to.have.property('enabled');
+      expect(p).to.have.property('satelliteId');
 
       if (p.variables !== null) {
-        expect(p.variables).toBeArray();
+        expect(p.variables).to.be.an('array');
         p.variables!.forEach(v => {
-          expect(v).toBeObject();
-          expect(v).toHaveProperty('id');
-          expect(v).toHaveProperty('key');
-          expect(v).toHaveProperty('value');
-          expect(v).toHaveProperty('owner');
-          expect(v).toHaveProperty('ownerType');
+          expect(v).to.be.an('object');
+          expect(v).to.have.property('id');
+          expect(v).to.have.property('key');
+          expect(v).to.have.property('value');
+          expect(v).to.have.property('owner');
+          expect(v).to.have.property('ownerType');
         });
       }
 

@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import Plugin from '../../../src/core/plugin';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('plugin.update', () => {
+describe('Plugin.update', () => {
   const plugin = new Plugin();
 
   it('should update a plugin', async () => {
@@ -10,19 +11,15 @@ describe('plugin.update', () => {
       name: 'Plugin update'
     });
 
-    expect(updatedPlugin.name).toEqual('Plugin update');
+    expect(updatedPlugin.name).to.equal('Plugin update');
   });
 
   it('should not found plugin to update', async () => {
-    expect.assertions(1);
-
-    await plugin.update('580efda9-6fa1-4bef-865f-d4ef04ea57d6', {
+    const promise = plugin.update('580efda9-6fa1-4bef-865f-d4ef04ea57d6', {
       id: '14c39f7a-fdda-453b-ab0a-7c47d36b90f8'
-    })
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(NotFoundError);
-      });
+    });
 
+    await assert.isRejected(promise, NotFoundError);
   });
 
 });
