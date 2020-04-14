@@ -1,8 +1,8 @@
-import TestServer from '../../../../utils/testServer';
+import { expect } from 'chai';
+import server from '../../../../utils/request';
 
-describe('session.getAccessToken', () => {
+describe('POST /api/v1/session/access_token', () => {
   it('should get a access token for an session', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/session/access_token')
@@ -12,18 +12,17 @@ describe('session.getAccessToken', () => {
       .expect(200)
       .then((res) => {
         let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
+        expect(body).to.be.an('object');
+        expect(body).to.have.all.keys(
           ['id', 'refreshToken', 'revoked', 'validUntil', 'userId', 'user', 'accessToken']
         );
-        expect(body.revoked).toEqual(false);
-        expect(body.user).toBeObject();
-        expect(body.user).not.toHaveProperty('password');
+        expect(body.revoked).to.equal(false);
+        expect(body.user).to.be.an('object');
+        expect(body.user).not.to.have.property('password');
       });
   });
 
   it('should not get a access token for an session', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/session/access_token')
@@ -34,7 +33,6 @@ describe('session.getAccessToken', () => {
   });
 
   it('should not get a access token for an revoked session', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/session/access_token')
@@ -45,7 +43,6 @@ describe('session.getAccessToken', () => {
   });
 
   it('should not get a access token for an expired session', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/session/access_token')

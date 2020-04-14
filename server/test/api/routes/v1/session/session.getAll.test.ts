@@ -1,10 +1,9 @@
-import TestServer from '../../../../utils/testServer';
+import { expect } from 'chai';
+import server from '../../../../utils/request';
 import SessionType from '../../../../../src/core/session/session.interface';
 
-describe('session.getAll', () => {
-
+describe('GET /api/v1/session', () => {
   it('should return all sessions', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/session')
@@ -12,18 +11,17 @@ describe('session.getAll', () => {
       .expect(200)
       .then((res) => {
         let sessions = res.body;
-        expect(sessions).toBeArray();
+        expect(sessions).to.be.an('array');
         sessions.forEach((session: SessionType) => {
-          expect(session).toContainAllKeys(
+          expect(session).to.have.all.keys(
             ['id', 'refreshToken', 'validUntil', 'userId', 'revoked']
           );
-          expect(session.revoked).toEqual(false);
+          expect(session.revoked).to.equal(false);
         });
       });
   });
 
   it('should return all sessions with full scope', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/session')
@@ -34,14 +32,14 @@ describe('session.getAll', () => {
       .expect(200)
       .then((res) => {
         let sessions = res.body;
-        expect(sessions).toBeArray();
+        expect(sessions).to.be.an('array');
         sessions.forEach((session: SessionType) => {
-          expect(session).toContainAllKeys(
+          expect(session).to.have.all.keys(
             ['id', 'refreshToken', 'validUntil', 'userId', 'revoked', 'user']
           );
-          expect(session.revoked).toEqual(false);
-          expect(session.user).toBeObject();
-          expect(session.user).not.toHaveProperty('password');
+          expect(session.revoked).to.equal(false);
+          expect(session.user).to.be.an('object');
+          expect(session.user).not.to.have.property('password');
         });
       });
   });
