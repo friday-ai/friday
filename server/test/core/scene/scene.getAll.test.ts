@@ -1,14 +1,15 @@
+import { expect, assert } from 'chai';
 import Scene from '../../../src/core/scene';
-import 'jest-extended';
 
-describe('scene.getAll', () => {
+describe('Scene.getAll', () => {
   const scene = new Scene();
 
   it('should return all scenes', async () => {
 
     const scenes = await scene.getAll();
-    expect(scenes).toEqual([
-      {
+
+    expect(scenes).to.be.an('array');
+    assert.deepEqual(scenes, [{
         id: '2452964a-a225-47dd-9b83-d88d57ed280e',
         name: 'Test scene',
         description: 'A scene for the tests ;) ',
@@ -22,32 +23,32 @@ describe('scene.getAll', () => {
 
     const scenes = await scene.getAll({ scope: 'full' });
 
-    expect(scenes).toBeArray();
+    expect(scenes).to.be.an('array');
 
     scenes.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('name');
-      expect(s).toHaveProperty('description');
-      expect(s).toHaveProperty('triggerId');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('name');
+      expect(s).to.have.property('description');
+      expect(s).to.have.property('triggerId');
 
-      expect(s.trigger).toBeObject();
-      expect(s.trigger).toHaveProperty('id');
-      expect(s.trigger).toHaveProperty('name');
-      expect(s.trigger).toHaveProperty('description');
-      expect(s.trigger).toHaveProperty('type');
-      expect(s.trigger).toHaveProperty('rules');
+      expect(s.trigger).to.be.an('object');
+      expect(s.trigger).to.have.property('id');
+      expect(s.trigger).to.have.property('name');
+      expect(s.trigger).to.have.property('description');
+      expect(s.trigger).to.have.property('type');
+      expect(s.trigger).to.have.property('rules');
 
-      expect(s.actions).toBeArray();
+      expect(s.actions).to.be.an('array');
       if (s.actions != null) {
         s.actions!.forEach(a => {
-          expect(a).toHaveProperty('id');
-          expect(a).toHaveProperty('name');
-          expect(a).toHaveProperty('description');
-          expect(a).toHaveProperty('type');
-          expect(a).toHaveProperty('subType');
-          expect(a).toHaveProperty('variableKey');
-          expect(a).toHaveProperty('variableValue');
-          expect(a).toHaveProperty('sceneId');
+          expect(a).to.have.property('id');
+          expect(a).to.have.property('name');
+          expect(a).to.have.property('description');
+          expect(a).to.have.property('type');
+          expect(a).to.have.property('subType');
+          expect(a).to.have.property('variableKey');
+          expect(a).to.have.property('variableValue');
+          expect(a).to.have.property('sceneId');
         });
       }
 
@@ -59,20 +60,20 @@ describe('scene.getAll', () => {
 
     const scenes = await scene.getAll({ scope: 'withTrigger' });
 
-    expect(scenes).toBeArray();
+    expect(scenes).to.be.an('array');
 
     scenes.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('name');
-      expect(s).toHaveProperty('description');
-      expect(s).toHaveProperty('triggerId');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('name');
+      expect(s).to.have.property('description');
+      expect(s).to.have.property('triggerId');
 
-      expect(s.trigger).toBeObject();
-      expect(s.trigger).toHaveProperty('id');
-      expect(s.trigger).toHaveProperty('name');
-      expect(s.trigger).toHaveProperty('description');
-      expect(s.trigger).toHaveProperty('type');
-      expect(s.trigger).toHaveProperty('rules');
+      expect(s.trigger).to.be.an('object');
+      expect(s.trigger).to.have.property('id');
+      expect(s.trigger).to.have.property('name');
+      expect(s.trigger).to.have.property('description');
+      expect(s.trigger).to.have.property('type');
+      expect(s.trigger).to.have.property('rules');
 
     });
 
@@ -82,25 +83,25 @@ describe('scene.getAll', () => {
 
     const scenes = await scene.getAll({ scope: 'withActions' });
 
-    expect(scenes).toBeArray();
+    expect(scenes).to.be.an('array');
 
     scenes.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('name');
-      expect(s).toHaveProperty('description');
-      expect(s).toHaveProperty('triggerId');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('name');
+      expect(s).to.have.property('description');
+      expect(s).to.have.property('triggerId');
 
-      expect(s.actions).toBeArray();
+      expect(s.actions).to.be.an('array');
       if (s.actions != null) {
         s.actions!.forEach(a => {
-          expect(a).toHaveProperty('id');
-          expect(a).toHaveProperty('name');
-          expect(a).toHaveProperty('description');
-          expect(a).toHaveProperty('type');
-          expect(a).toHaveProperty('subType');
-          expect(a).toHaveProperty('variableKey');
-          expect(a).toHaveProperty('variableValue');
-          expect(a).toHaveProperty('sceneId');
+          expect(a).to.have.property('id');
+          expect(a).to.have.property('name');
+          expect(a).to.have.property('description');
+          expect(a).to.have.property('type');
+          expect(a).to.have.property('subType');
+          expect(a).to.have.property('variableKey');
+          expect(a).to.have.property('variableValue');
+          expect(a).to.have.property('sceneId');
         });
       }
 

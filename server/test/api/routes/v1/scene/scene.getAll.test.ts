@@ -1,19 +1,17 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 import SceneType from '../../../../../src/core/scene/scene.interface';
 
-describe('scene.getAll', () => {
-
+describe('GET /api/v1/scene', () => {
   it('should return all scenes', async () => {
-
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/scene')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toEqual([
-          {
+        expect(res.body).to.be.an('array');
+        assert.deepEqual(res.body, [{
             id: '2452964a-a225-47dd-9b83-d88d57ed280e',
             name: 'Test scene',
             description: 'A scene for the tests ;) ',
@@ -26,8 +24,6 @@ describe('scene.getAll', () => {
 
   it('should return all scenes with full scope', async () => {
 
-    const server = await new TestServer();
-
     await server
       .get('/api/v1/scene')
       .query({'scope' : 'full'})
@@ -35,20 +31,20 @@ describe('scene.getAll', () => {
       .expect(200)
       .then((res) => {
         let scenes = res.body;
-        expect(scenes).toBeArray();
+        expect(scenes).to.be.an('array');
         scenes.forEach((scene: SceneType) => {
-          expect(scene).toBeObject();
-          expect(scene).toContainAllKeys(
+          expect(scene).to.be.an('object');
+          expect(scene).to.have.all.keys(
             ['id', 'name', 'description', 'triggerId', 'trigger', 'actions']
           );
-          expect(scene.trigger).toBeObject();
-          expect(scene.trigger).toContainAllKeys(
+          expect(scene.trigger).to.be.an('object');
+          expect(scene.trigger).to.have.all.keys(
             ['id', 'name', 'description', 'type', 'rules']
           );
-          expect(scene.actions).toBeArray();
+          expect(scene.actions).to.be.an('array');
           if (scene.actions != null) {
             scene.actions!.forEach(action => {
-              expect(action).toContainAllKeys(
+              expect(action).to.have.all.keys(
                 ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
               );
             });
@@ -59,8 +55,6 @@ describe('scene.getAll', () => {
 
   it('should return all scenes with trigger', async () => {
 
-    const server = await new TestServer();
-
     await server
       .get('/api/v1/scene')
       .query({'scope' : 'withTrigger'})
@@ -68,14 +62,14 @@ describe('scene.getAll', () => {
       .expect(200)
       .then((res) => {
         let scenes = res.body;
-        expect(scenes).toBeArray();
+        expect(scenes).to.be.an('array');
         scenes.forEach((scene: SceneType) => {
-          expect(scene).toBeObject();
-          expect(scene).toContainAllKeys(
+          expect(scene).to.be.an('object');
+          expect(scene).to.have.all.keys(
             ['id', 'name', 'description', 'triggerId', 'trigger']
           );
-          expect(scene.trigger).toBeObject();
-          expect(scene.trigger).toContainAllKeys(
+          expect(scene.trigger).to.be.an('object');
+          expect(scene.trigger).to.have.all.keys(
             ['id', 'name', 'description', 'type', 'rules']
           );
         });
@@ -84,8 +78,6 @@ describe('scene.getAll', () => {
 
   it('should return all scenes with actions', async () => {
 
-    const server = await new TestServer();
-
     await server
       .get('/api/v1/scene')
       .query({'scope' : 'withActions'})
@@ -93,16 +85,16 @@ describe('scene.getAll', () => {
       .expect(200)
       .then((res) => {
         let scenes = res.body;
-        expect(scenes).toBeArray();
+        expect(scenes).to.be.an('array');
         scenes.forEach((scene: SceneType) => {
-          expect(scene).toBeObject();
-          expect(scene).toContainAllKeys(
+          expect(scene).to.be.an('object');
+          expect(scene).to.have.all.keys(
             ['id', 'name', 'description', 'triggerId', 'actions']
           );
-          expect(scene.actions).toBeArray();
+          expect(scene.actions).to.be.an('array');
           if (scene.actions != null) {
             scene.actions!.forEach(action => {
-              expect(action).toContainAllKeys(
+              expect(action).to.have.all.keys(
                 ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
               );
             });

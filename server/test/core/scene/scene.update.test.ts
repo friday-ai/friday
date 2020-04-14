@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import Scene from '../../../src/core/scene';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('scene.update', () => {
+describe('Scene.update', () => {
   const scene = new Scene();
 
   it('should update a scene', async () => {
@@ -10,19 +11,15 @@ describe('scene.update', () => {
       name: 'Scene update'
     });
 
-    expect(updatedScene.name).toEqual('Scene update');
+    expect(updatedScene.name).to.equal('Scene update');
   });
 
   it('should not found scene to update', async () => {
-    expect.assertions(1);
-
-    await scene.update('edfca72c-89bf-4cee-a4b6-fabbef87528a', {
+    const promise = scene.update('edfca72c-89bf-4cee-a4b6-fabbef87528a', {
       id: 'edfca72c-89bf-4cee-a4b6-fabbef87528a'
-    })
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(NotFoundError);
-      });
+    });
 
+    await assert.isRejected(promise, NotFoundError);
   });
 
 });

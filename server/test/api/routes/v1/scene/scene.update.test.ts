@@ -1,8 +1,8 @@
-import TestServer from '../../../../utils/testServer';
+import { expect } from 'chai';
+import server from '../../../../utils/request';
 
-describe('scene.update', () => {
+describe('PATCH /api/v1/scene/:id', () => {
   it('should update a scene', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/scene/2452964a-a225-47dd-9b83-d88d57ed280e')
@@ -11,14 +11,12 @@ describe('scene.update', () => {
       })
       .expect(200)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body.name).toEqual('Scene update');
+        expect(res.body).to.be.an('object');
+        expect(res.body.name).to.equal('Scene update');
       });
   });
 
   it('should not found scene to update', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/scene/2452964a-a225-47dd-9b83-d88d57ed2333')
