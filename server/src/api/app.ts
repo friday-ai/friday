@@ -11,8 +11,6 @@ import * as WebSocket from 'ws';
 import WebsocketServer from './websocket/index';
 import Friday from '../../src/core/friday';
 
-const env = process.env.NODE_ENV || 'production';
-
 /**
  * Server class
  */
@@ -66,12 +64,10 @@ export default class Server {
     // start WebSocket server
     this.websocketServer.start();
 
-    if (env !== 'test') {
-      this.server.listen(this.port, () => {
-        logger.title('Friday server initialized !');
-        logger.info(`Friday server is available at localhost:${this.port}`);
-      });
-    }
+    this.server.listen(this.port, () => {
+      logger.title('Friday server initialized !');
+      logger.info(`Friday server is available at localhost:${this.port}`);
+    });
 
     return this.server;
   }

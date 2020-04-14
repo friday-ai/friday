@@ -11,7 +11,7 @@ const DATABASE_NAME: {[x: string]: any} = {
 let database: Sequelize;
 
 const init = async () => {
-  database = await new Sequelize({
+  database = new Sequelize({
     dialect: 'sqlite',
     pool: {
       max: 5,
