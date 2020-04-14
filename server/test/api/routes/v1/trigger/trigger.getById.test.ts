@@ -1,18 +1,16 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('trigger.getById', () => {
+describe('GET /api/v1/trigger/:id', () => {
   it('should return a trigger', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/trigger/a0f02b72-73e0-4cfd-a049-5caaa0b80514')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let trigger = res.body;
-        expect(trigger).toBeObject();
-        expect(trigger).toEqual(
-          {
+        expect(res.body).to.be.an('object');
+        assert.deepEqual(res.body, {
             id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
             name: 'Test',
             description: 'A trigger test',
@@ -26,7 +24,6 @@ describe('trigger.getById', () => {
   });
 
   it('should return a trigger with full scope', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/trigger/a0f02b72-73e0-4cfd-a049-5caaa0b80514')
@@ -36,10 +33,8 @@ describe('trigger.getById', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let trigger = res.body;
-        expect(trigger).toBeObject();
-        expect(trigger).toEqual(
-          {
+        expect(res.body).to.be.an('object');
+        assert.deepEqual(res.body, {
             id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
             name: 'Test',
             description: 'A trigger test',
