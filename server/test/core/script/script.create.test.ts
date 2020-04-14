@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import Script from '../../../src/core/script';
 import { DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
-describe('script.create', () => {
+describe('Script.create', () => {
   const script = new Script();
 
   it('should create a script', async () => {
@@ -11,22 +12,20 @@ describe('script.create', () => {
       code: 'console.log(\'Hey ! This script is a test ! :)\')'
     });
 
-    expect(createdScript).toHaveProperty('id');
-    expect(createdScript).toHaveProperty('name');
-    expect(createdScript).toHaveProperty('code');
+    expect(createdScript).to.have.property('id');
+    expect(createdScript).to.have.property('name');
+    expect(createdScript).to.have.property('code');
   });
 
   it('should not create a script with an empty name', async () => {
-    expect.assertions(1);
 
-    await script.create({
+    const promise = script.create({
       id: 'b9c7b560-8eb6-4d0e-989f-2a2f363590a3',
       name: '',
       code: 'console.log(\'Hey ! This script is a test ! :)\')'
-    })
-      .catch((err: Error) => {
-         expect(err).toBeInstanceOf(DatabaseValidationError);
-      });
+    });
+
+    await assert.isRejected(promise, DatabaseValidationError);
   });
 
 });
