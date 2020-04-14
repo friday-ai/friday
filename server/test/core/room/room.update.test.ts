@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import Room from '../../../src/core/room';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('room.update', () => {
+describe('Room.update', () => {
   const room = new Room();
 
   it('should update a room', async () => {
@@ -10,19 +11,15 @@ describe('room.update', () => {
       name: 'Room update'
     });
 
-    expect(updatedRoom.name).toEqual('Room update');
+    expect(updatedRoom.name).to.equal('Room update');
   });
 
   it('should not found room to update', async () => {
-    expect.assertions(1);
-
-    await room.update('8b513ecf-2c2d-4cc7-aefc-0ac8eba85827', {
+    const promise = room.update('8b513ecf-2c2d-4cc7-aefc-0ac8eba85827', {
       id: '8b513ecf-2c2d-4cc7-aefc-0ac8eba85827'
-    })
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(NotFoundError);
-      });
+    });
 
+    await assert.isRejected(promise, NotFoundError);
   });
 
 });

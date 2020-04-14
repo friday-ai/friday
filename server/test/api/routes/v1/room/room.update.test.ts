@@ -1,8 +1,8 @@
-import TestServer from '../../../../utils/testServer';
+import { expect } from 'chai';
+import server from '../../../../utils/request';
 
-describe('room.update', () => {
+describe('PATCH /api/v1/room/:id', () => {
   it('should update a room', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f6514dc')
@@ -11,14 +11,12 @@ describe('room.update', () => {
       })
       .expect(200)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body.name).toEqual('Room update');
+        expect(res.body).to.be.an('object');
+        expect(res.body.name).to.equal('Room update');
       });
   });
 
   it('should not found room to update', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/room/8b513ecf-2c2d-4cc7-aefc-0ac8eba85333')

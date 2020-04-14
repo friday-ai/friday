@@ -1,15 +1,15 @@
+import { expect, assert } from 'chai';
 import Room from '../../../src/core/room';
-import 'jest-extended';
 
-describe('room.getAll', () => {
+describe('Room.getAll', () => {
   const room = new Room();
 
   it('should return all rooms', async () => {
 
     const rooms = await room.getAll();
 
-    expect(rooms).toEqual([
-      {
+    expect(rooms).to.be.an('array');
+    assert.deepEqual(rooms, [{
         id: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
         name: 'Bedroom',
         houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
@@ -37,46 +37,46 @@ describe('room.getAll', () => {
 
     const rooms = await room.getAll({ scope: 'full' });
 
-    expect(rooms).toBeArray();
+    expect(rooms).to.be.an('array');
     rooms.forEach(r => {
-      expect(r).toHaveProperty('id');
-      expect(r).toHaveProperty('name');
-      expect(r).toHaveProperty('houseId');
+      expect(r).to.have.property('id');
+      expect(r).to.have.property('name');
+      expect(r).to.have.property('houseId');
 
-      expect(r.house).toBeObject();
-      expect(r.house).toHaveProperty('id');
-      expect(r.house).toHaveProperty('name');
-      expect(r.house).toHaveProperty('latitude');
-      expect(r.house).toHaveProperty('longitude');
+      expect(r.house).to.be.an('object');
+      expect(r.house).to.have.property('id');
+      expect(r.house).to.have.property('name');
+      expect(r.house).to.have.property('latitude');
+      expect(r.house).to.have.property('longitude');
 
       // TODO: The state cannot must be null
       if (r.state !== null) {
-        expect(r.state).toBeObject();
-        expect(r.state).toHaveProperty('id');
-        expect(r.state).toHaveProperty('owner');
-        expect(r.state).toHaveProperty('ownerType');
-        expect(r.state).toHaveProperty('value');
+        expect(r.state).to.be.an('object');
+        expect(r.state).to.have.property('id');
+        expect(r.state).to.have.property('owner');
+        expect(r.state).to.have.property('ownerType');
+        expect(r.state).to.have.property('value');
       }
 
       if (r.devices !== null) {
-        expect(r.devices).toBeArray();
+        expect(r.devices).to.be.an('array');
         r.devices!.forEach(d => {
-          expect(d).toHaveProperty('id');
-          expect(d).toHaveProperty('name');
-          expect(d).toHaveProperty('type');
-          expect(d).toHaveProperty('subType');
-          expect(d).toHaveProperty('variable');
-          expect(d).toHaveProperty('unit');
-          expect(d).toHaveProperty('value');
+          expect(d).to.have.property('id');
+          expect(d).to.have.property('name');
+          expect(d).to.have.property('type');
+          expect(d).to.have.property('subType');
+          expect(d).to.have.property('variable');
+          expect(d).to.have.property('unit');
+          expect(d).to.have.property('value');
         });
       }
 
       if (r.satellites !== null) {
-        expect(r.satellites).toBeArray();
+        expect(r.satellites).to.be.an('array');
         r.satellites!.forEach(s => {
-          expect(s).toHaveProperty('id');
-          expect(s).toHaveProperty('name');
-          expect(s).toHaveProperty('roomId');
+          expect(s).to.have.property('id');
+          expect(s).to.have.property('name');
+          expect(s).to.have.property('roomId');
         });
       }
 
@@ -88,16 +88,16 @@ describe('room.getAll', () => {
 
     const rooms = await room.getAll({ scope: 'withHouse' });
 
-    expect(rooms).toBeArray();
+    expect(rooms).to.be.an('array');
     rooms.forEach(r => {
-      expect(r).toHaveProperty('id');
-      expect(r).toHaveProperty('name');
-      expect(r).toHaveProperty('houseId');
+      expect(r).to.have.property('id');
+      expect(r).to.have.property('name');
+      expect(r).to.have.property('houseId');
 
-      expect(r.house).toHaveProperty('id');
-      expect(r.house).toHaveProperty('name');
-      expect(r.house).toHaveProperty('latitude');
-      expect(r.house).toHaveProperty('longitude');
+      expect(r.house).to.have.property('id');
+      expect(r.house).to.have.property('name');
+      expect(r.house).to.have.property('latitude');
+      expect(r.house).to.have.property('longitude');
 
     });
 
@@ -107,19 +107,19 @@ describe('room.getAll', () => {
 
     const rooms = await room.getAll({ scope: 'withState' });
 
-    expect(rooms).toBeArray();
+    expect(rooms).to.be.an('array');
     rooms.forEach(r => {
-      expect(r).toHaveProperty('id');
-      expect(r).toHaveProperty('name');
-      expect(r).toHaveProperty('houseId');
+      expect(r).to.have.property('id');
+      expect(r).to.have.property('name');
+      expect(r).to.have.property('houseId');
 
       // TODO: The state cannot must be null
       if (r.state !== null) {
-        expect(r.state).toBeObject();
-        expect(r.state).toHaveProperty('id');
-        expect(r.state).toHaveProperty('owner');
-        expect(r.state).toHaveProperty('ownerType');
-        expect(r.state).toHaveProperty('value');
+        expect(r.state).to.be.an('object');
+        expect(r.state).to.have.property('id');
+        expect(r.state).to.have.property('owner');
+        expect(r.state).to.have.property('ownerType');
+        expect(r.state).to.have.property('value');
       }
     });
 
@@ -129,22 +129,22 @@ describe('room.getAll', () => {
 
     const rooms = await room.getAll({ scope: 'withDevices' });
 
-    expect(rooms).toBeArray();
+    expect(rooms).to.be.an('array');
     rooms.forEach(r => {
-      expect(r).toHaveProperty('id');
-      expect(r).toHaveProperty('name');
-      expect(r).toHaveProperty('houseId');
+      expect(r).to.have.property('id');
+      expect(r).to.have.property('name');
+      expect(r).to.have.property('houseId');
 
       if (r.devices !== null) {
-        expect(r.devices).toBeArray();
+        expect(r.devices).to.be.an('array');
         r.devices!.forEach(d => {
-          expect(d).toHaveProperty('id');
-          expect(d).toHaveProperty('name');
-          expect(d).toHaveProperty('type');
-          expect(d).toHaveProperty('subType');
-          expect(d).toHaveProperty('variable');
-          expect(d).toHaveProperty('unit');
-          expect(d).toHaveProperty('value');
+          expect(d).to.have.property('id');
+          expect(d).to.have.property('name');
+          expect(d).to.have.property('type');
+          expect(d).to.have.property('subType');
+          expect(d).to.have.property('variable');
+          expect(d).to.have.property('unit');
+          expect(d).to.have.property('value');
         });
       }
 
@@ -156,18 +156,18 @@ describe('room.getAll', () => {
 
     const rooms = await room.getAll({ scope: 'withSatellites' });
 
-    expect(rooms).toBeArray();
+    expect(rooms).to.be.an('array');
     rooms.forEach(r => {
-      expect(r).toHaveProperty('id');
-      expect(r).toHaveProperty('name');
-      expect(r).toHaveProperty('houseId');
+      expect(r).to.have.property('id');
+      expect(r).to.have.property('name');
+      expect(r).to.have.property('houseId');
 
       if (r.satellites !== null) {
-        expect(r.satellites).toBeArray();
+        expect(r.satellites).to.be.an('array');
         r.satellites!.forEach(s => {
-          expect(s).toHaveProperty('id');
-          expect(s).toHaveProperty('name');
-          expect(s).toHaveProperty('roomId');
+          expect(s).to.have.property('id');
+          expect(s).to.have.property('name');
+          expect(s).to.have.property('roomId');
         });
       }
 
