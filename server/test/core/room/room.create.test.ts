@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import Room from '../../../src/core/room';
 import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/errors/coreError';
 
-describe('room.create', () => {
+describe('Room.create', () => {
   const room = new Room();
 
   it('should create a room', async () => {
@@ -11,48 +12,42 @@ describe('room.create', () => {
       houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
     });
 
-    expect(createdRoom).toHaveProperty('id');
-    expect(createdRoom).toHaveProperty('name');
-    expect(createdRoom).toHaveProperty('houseId');
+    expect(createdRoom).to.have.property('id');
+    expect(createdRoom).to.have.property('name');
+    expect(createdRoom).to.have.property('houseId');
   });
 
   it('should not create a room with an existing name', async () => {
-    expect.assertions(1);
 
-    await room.create({
+    const promise = room.create({
       id: 'e841fbab-6e0d-4bc4-8467-7889d5cec52e',
-      name: 'A room test',
+      name: 'Bedroom',
       houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
-    })
-      .catch((err: Error) => {
-         expect(err).toBeInstanceOf(DatabaseUniqueConstraintError);
-      });
+    });
+
+    await assert.isRejected(promise, DatabaseUniqueConstraintError);
   });
 
   it('should not create a room with an empty name', async () => {
-    expect.assertions(1);
 
-    await room.create({
+    const promise = room.create({
       id: 'af3cc3b1-b4e4-4def-ad7a-38ec70e23e62',
       name: '',
       houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
-    })
-      .catch((err: Error) => {
-         expect(err).toBeInstanceOf(DatabaseValidationError);
-      });
+    });
+
+    await assert.isRejected(promise, DatabaseValidationError);
   });
 
   it('should not create a room  with an empty house', async () => {
-    expect.assertions(1);
 
-    await room.create({
+    const promise = room.create({
       id: '34c490f0-a9f9-4151-84bf-a7321c5f1bea',
       name: 'A room test',
       houseId: ''
-    })
-      .catch((err: Error) => {
-         expect(err).toBeInstanceOf(DatabaseValidationError);
-      });
+    });
+
+    await assert.isRejected(promise, DatabaseValidationError);
   });
 
 });

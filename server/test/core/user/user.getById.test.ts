@@ -1,14 +1,15 @@
+import { expect, assert } from 'chai';
 import User from '../../../src/core/user';
-import 'jest-extended';
 
-describe('user.getById', () => {
+describe('User.getById', () => {
   const user = new User();
 
   it('should return user', async () => {
 
     const userRetruned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5');
-    expect(userRetruned).toEqual(
-      {
+
+    expect(userRetruned).to.be.an('object');
+    assert.deepEqual(userRetruned, {
         id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
         name: 'Pepperwood',
         firstName: 'John',
@@ -23,24 +24,24 @@ describe('user.getById', () => {
 
     const userRetruned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'full');
 
-    expect(userRetruned).toHaveProperty('state');
-    expect(userRetruned).toHaveProperty('variables');
-    expect(userRetruned.variables).toBeArray();
+    expect(userRetruned).to.have.property('state');
+    expect(userRetruned).to.have.property('variables');
+    expect(userRetruned.variables).to.be.an('array');
 
     // TODO: The state cannot must be null
     if (userRetruned.state !== null) {
-      expect(userRetruned.state).toBeObject();
-      expect(userRetruned.state).toHaveProperty('id');
-      expect(userRetruned.state).toHaveProperty('owner');
-      expect(userRetruned.state).toHaveProperty('ownerType');
-      expect(userRetruned.state).toHaveProperty('value');
+      expect(userRetruned.state).to.be.an('object');
+      expect(userRetruned.state).to.have.property('id');
+      expect(userRetruned.state).to.have.property('owner');
+      expect(userRetruned.state).to.have.property('ownerType');
+      expect(userRetruned.state).to.have.property('value');
     }
 
     userRetruned.variables!.forEach(v => {
-      expect(v).toHaveProperty('key');
-      expect(v).toHaveProperty('value');
-      expect(v).toHaveProperty('owner');
-      expect(v).toHaveProperty('ownerType');
+      expect(v).to.have.property('key');
+      expect(v).to.have.property('value');
+      expect(v).to.have.property('owner');
+      expect(v).to.have.property('ownerType');
     });
 
   });
@@ -49,18 +50,18 @@ describe('user.getById', () => {
 
     const userRetruned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'withState');
 
-    expect(userRetruned).toHaveProperty('id');
-    expect(userRetruned).toHaveProperty('name');
-    expect(userRetruned).toHaveProperty('role');
-    expect(userRetruned).toHaveProperty('state');
+    expect(userRetruned).to.have.property('id');
+    expect(userRetruned).to.have.property('name');
+    expect(userRetruned).to.have.property('role');
+    expect(userRetruned).to.have.property('state');
 
     // TODO: The state cannot must be null
     if (userRetruned.state !== null) {
-      expect(userRetruned.state).toBeObject();
-      expect(userRetruned.state).toHaveProperty('id');
-      expect(userRetruned.state).toHaveProperty('owner');
-      expect(userRetruned.state).toHaveProperty('ownerType');
-      expect(userRetruned.state).toHaveProperty('value');
+      expect(userRetruned.state).to.be.an('object');
+      expect(userRetruned.state).to.have.property('id');
+      expect(userRetruned.state).to.have.property('owner');
+      expect(userRetruned.state).to.have.property('ownerType');
+      expect(userRetruned.state).to.have.property('value');
     }
 
   });
@@ -69,17 +70,17 @@ describe('user.getById', () => {
 
     const userRetruned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'withVariables');
 
-    expect(userRetruned).toHaveProperty('id');
-    expect(userRetruned).toHaveProperty('name');
-    expect(userRetruned).toHaveProperty('role');
-    expect(userRetruned).toHaveProperty('variables');
-    expect(userRetruned.variables).toBeArray();
+    expect(userRetruned).to.have.property('id');
+    expect(userRetruned).to.have.property('name');
+    expect(userRetruned).to.have.property('role');
+    expect(userRetruned).to.have.property('variables');
+    expect(userRetruned.variables).to.be.an('array');
 
     userRetruned.variables!.forEach(v => {
-      expect(v).toHaveProperty('key');
-      expect(v).toHaveProperty('value');
-      expect(v).toHaveProperty('owner');
-      expect(v).toHaveProperty('ownerType');
+      expect(v).to.have.property('key');
+      expect(v).to.have.property('value');
+      expect(v).to.have.property('owner');
+      expect(v).to.have.property('ownerType');
     });
 
   });

@@ -26,7 +26,6 @@ import jobs from '../config/jobs';
  */
 export default class Friday {
   readonly secretJwt: string = generateJwtSecret();
-  readonly db = database.init();
 
   public event = new Event();
   public scheduler = new Scheduler(this.event, jobs);
@@ -45,13 +44,14 @@ export default class Friday {
   public state = new State(this.event, this.variable);
   public constants = Constants;
 
-  private _system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.scheduler, this.db);
+  private _system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.scheduler, database);
 
   /**
    * Starts friday
    */
-  start() {
-    this._system.start();
+  async start() {
+    await database.init();
+    await this._system.start();
   }
 
   /**

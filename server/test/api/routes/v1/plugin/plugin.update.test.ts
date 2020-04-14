@@ -1,8 +1,8 @@
-import TestServer from '../../../../utils/testServer';
+import { expect } from 'chai';
+import server from '../../../../utils/request';
 
-describe('plugin.update', () => {
+describe('PATCH /api/v1/plugin/:id', () => {
   it('should update a plugin', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e')
@@ -12,13 +12,12 @@ describe('plugin.update', () => {
       .expect(200)
       .then((res) => {
         let body = res.body;
-        expect(body).toBeObject();
-        expect(body.name).toEqual('Plugin update');
+        expect(body).to.be.an('object');
+        expect(res.body.name).to.equal('Plugin update');
       });
   });
 
   it('should not found plugin to update', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0333')

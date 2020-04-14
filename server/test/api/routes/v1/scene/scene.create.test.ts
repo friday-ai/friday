@@ -1,38 +1,31 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('scene.create', () => {
-
+describe('POST /api/v1/scene', () => {
   it('should create a scene', async () => {
 
-    const server = await new TestServer();
+    const scene = {
+      id: '46e6a6e2-db6f-4f72-a2e9-4d41c420da33',
+      name: 'Test Scene 2',
+      description: 'A test to create a scene'
+    };
 
     await server
       .post('/api/v1/scene')
-      .send({
-        id: '46e6a6e2-db6f-4f72-a2e9-4d41c420da33',
-        name: 'Test Scene 2',
-        description: 'A test to create a scene'
-      })
+      .send(scene)
       .expect('Content-Type', /json/)
       .expect(201)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
-          ['id', 'name', 'description', 'updatedAt', 'createdAt']
-        );
-        expect(
-          body.id === '46e6a6e2-db6f-4f72-a2e9-4d41c420da33' &&
-          body.name === 'Test Scene 2' &&
-          body.description === 'A test to create a scene'
-        ).toEqual(true);
+        expect(res.body).to.be.an('object');
+        // See issue, https://github.com/sequelize/sequelize/issues/11566
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+        assert.deepEqual(res.body, scene);
       });
 
   });
 
   it('should not create a scene with an empty name', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/scene')

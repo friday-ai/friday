@@ -1,38 +1,31 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('satellite.create', () => {
-
+describe('POST /api/v1/satellite', () => {
   it('should create a satellite', async () => {
 
-    const server = await new TestServer();
+    const satellite = {
+      id: '37225fcb-ff7d-40a7-aacc-ee2a041feebd',
+      name: 'Satellite 3',
+      roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc'
+    };
 
     await server
       .post('/api/v1/satellite')
-      .send({
-        id: '37225fcb-ff7d-40a7-aacc-ee2a041feebd',
-        name: 'Satellite 3',
-        roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc'
-      })
+      .send(satellite)
       .expect('Content-Type', /json/)
       .expect(201)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
-          ['id', 'name', 'roomId', 'updatedAt', 'createdAt']
-        );
-        expect(
-          body.id === '37225fcb-ff7d-40a7-aacc-ee2a041feebd' &&
-          body.name === 'Satellite 3' &&
-          body.roomId === 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc'
-        ).toEqual(true);
+        expect(res.body).to.be.an('object');
+        // See issue, https://github.com/sequelize/sequelize/issues/11566
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+        assert.deepEqual(res.body, satellite);
       });
 
   });
 
   it('should not create a satellite with an empty name', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/satellite')
@@ -45,8 +38,6 @@ describe('satellite.create', () => {
   });
 
   it('should not create a satellite  with an empty room', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/satellite')

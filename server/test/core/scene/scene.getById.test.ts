@@ -1,13 +1,15 @@
+import { expect, assert } from 'chai';
 import Scene from '../../../src/core/scene';
-import 'jest-extended';
 
-describe('scene.getById', () => {
+describe('Scene.getById', () => {
   const scene = new Scene();
 
   it('should return one scene', async () => {
 
     const sceneReturned = await scene.getById('2452964a-a225-47dd-9b83-d88d57ed280e');
-    expect(sceneReturned).toEqual({
+
+    expect(sceneReturned).to.be.an('object');
+    assert.deepEqual(sceneReturned, {
       id: '2452964a-a225-47dd-9b83-d88d57ed280e',
       name: 'Test scene',
       description: 'A scene for the tests ;) ',
@@ -20,31 +22,31 @@ describe('scene.getById', () => {
 
     const sceneReturned = await scene.getById('2452964a-a225-47dd-9b83-d88d57ed280e', 'full' );
 
-    expect(sceneReturned).toBeObject();
+    expect(sceneReturned).to.be.an('object');
 
-    expect(sceneReturned).toHaveProperty('id');
-    expect(sceneReturned).toHaveProperty('name');
-    expect(sceneReturned).toHaveProperty('description');
-    expect(sceneReturned).toHaveProperty('triggerId');
+    expect(sceneReturned).to.have.property('id');
+    expect(sceneReturned).to.have.property('name');
+    expect(sceneReturned).to.have.property('description');
+    expect(sceneReturned).to.have.property('triggerId');
 
-    expect(sceneReturned.trigger).toBeObject();
-    expect(sceneReturned.trigger).toHaveProperty('id');
-    expect(sceneReturned.trigger).toHaveProperty('name');
-    expect(sceneReturned.trigger).toHaveProperty('description');
-    expect(sceneReturned.trigger).toHaveProperty('type');
-    expect(sceneReturned.trigger).toHaveProperty('rules');
+    expect(sceneReturned.trigger).to.be.an('object');
+    expect(sceneReturned.trigger).to.have.property('id');
+    expect(sceneReturned.trigger).to.have.property('name');
+    expect(sceneReturned.trigger).to.have.property('description');
+    expect(sceneReturned.trigger).to.have.property('type');
+    expect(sceneReturned.trigger).to.have.property('rules');
 
-    expect(sceneReturned.actions).toBeArray();
+    expect(sceneReturned.actions).to.be.an('array');
     if (sceneReturned.actions != null) {
       sceneReturned.actions!.forEach(a => {
-        expect(a).toHaveProperty('id');
-        expect(a).toHaveProperty('name');
-        expect(a).toHaveProperty('description');
-        expect(a).toHaveProperty('type');
-        expect(a).toHaveProperty('subType');
-        expect(a).toHaveProperty('variableKey');
-        expect(a).toHaveProperty('variableValue');
-        expect(a).toHaveProperty('sceneId');
+        expect(a).to.have.property('id');
+        expect(a).to.have.property('name');
+        expect(a).to.have.property('description');
+        expect(a).to.have.property('type');
+        expect(a).to.have.property('subType');
+        expect(a).to.have.property('variableKey');
+        expect(a).to.have.property('variableValue');
+        expect(a).to.have.property('sceneId');
       });
     }
 
@@ -54,19 +56,19 @@ describe('scene.getById', () => {
 
     const sceneReturned = await scene.getById('2452964a-a225-47dd-9b83-d88d57ed280e', 'withTrigger' );
 
-    expect(sceneReturned).toBeObject();
+    expect(sceneReturned).to.be.an('object');
 
-    expect(sceneReturned).toHaveProperty('id');
-    expect(sceneReturned).toHaveProperty('name');
-    expect(sceneReturned).toHaveProperty('description');
-    expect(sceneReturned).toHaveProperty('triggerId');
+    expect(sceneReturned).to.have.property('id');
+    expect(sceneReturned).to.have.property('name');
+    expect(sceneReturned).to.have.property('description');
+    expect(sceneReturned).to.have.property('triggerId');
 
-    expect(sceneReturned.trigger).toBeObject();
-    expect(sceneReturned.trigger).toHaveProperty('id');
-    expect(sceneReturned.trigger).toHaveProperty('name');
-    expect(sceneReturned.trigger).toHaveProperty('description');
-    expect(sceneReturned.trigger).toHaveProperty('type');
-    expect(sceneReturned.trigger).toHaveProperty('rules');
+    expect(sceneReturned.trigger).to.be.an('object');
+    expect(sceneReturned.trigger).to.have.property('id');
+    expect(sceneReturned.trigger).to.have.property('name');
+    expect(sceneReturned.trigger).to.have.property('description');
+    expect(sceneReturned.trigger).to.have.property('type');
+    expect(sceneReturned.trigger).to.have.property('rules');
 
   });
 
@@ -74,24 +76,24 @@ describe('scene.getById', () => {
 
     const sceneReturned = await scene.getById('2452964a-a225-47dd-9b83-d88d57ed280e', 'withActions' );
 
-    expect(sceneReturned).toBeObject();
+    expect(sceneReturned).to.be.an('object');
 
-    expect(sceneReturned).toHaveProperty('id');
-    expect(sceneReturned).toHaveProperty('name');
-    expect(sceneReturned).toHaveProperty('description');
-    expect(sceneReturned).toHaveProperty('triggerId');
+    expect(sceneReturned).to.have.property('id');
+    expect(sceneReturned).to.have.property('name');
+    expect(sceneReturned).to.have.property('description');
+    expect(sceneReturned).to.have.property('triggerId');
 
-    expect(sceneReturned.actions).toBeArray();
+    expect(sceneReturned.actions).to.be.an('array');
     if (sceneReturned.actions != null) {
       sceneReturned.actions!.forEach(a => {
-        expect(a).toHaveProperty('id');
-        expect(a).toHaveProperty('name');
-        expect(a).toHaveProperty('description');
-        expect(a).toHaveProperty('type');
-        expect(a).toHaveProperty('subType');
-        expect(a).toHaveProperty('variableKey');
-        expect(a).toHaveProperty('variableValue');
-        expect(a).toHaveProperty('sceneId');
+        expect(a).to.have.property('id');
+        expect(a).to.have.property('name');
+        expect(a).to.have.property('description');
+        expect(a).to.have.property('type');
+        expect(a).to.have.property('subType');
+        expect(a).to.have.property('variableKey');
+        expect(a).to.have.property('variableValue');
+        expect(a).to.have.property('sceneId');
       });
     }
 

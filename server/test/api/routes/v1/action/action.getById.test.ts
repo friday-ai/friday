@@ -1,18 +1,16 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('action.getAll', () => {
+describe('GET /api/v1/action/:id', () => {
   it('should return all actions', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/action/33ab56b0-4064-40d0-b1f4-1e426bff1ea3')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toEqual(
-          {
+        expect(res.body).to.be.an('object');
+        assert.deepEqual(res.body, {
             id: '33ab56b0-4064-40d0-b1f4-1e426bff1ea3',
             name: 'action1',
             description: 'action1 description',
@@ -26,7 +24,6 @@ describe('action.getAll', () => {
   });
 
   it('should return an action with full scope', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/action/33ab56b0-4064-40d0-b1f4-1e426bff1ea3')
@@ -34,13 +31,11 @@ describe('action.getAll', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.all.keys(
           ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId', 'scene']
         );
-        expect(body.scene).toBeObject();
-        expect(body.scene).toContainAllKeys(
+        expect(res.body.scene).to.have.all.keys(
           ['id', 'name', 'description', 'triggerId']
         );
       });

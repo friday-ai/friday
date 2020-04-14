@@ -1,14 +1,15 @@
+import { expect, assert } from 'chai';
 import Satellite from '../../../src/core/satellite';
-import 'jest-extended';
 
-describe('satellite.getAll', () => {
+describe('Satellite.getAll', () => {
   const satellite = new Satellite();
 
   it('should return all satellites', async () => {
 
     const satellites = await satellite.getAll();
-    expect(satellites).toEqual([
-      {
+
+    expect(satellites).to.be.an('array');
+    assert.deepEqual(satellites, [{
         id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
         name: 'Main satellite',
         roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3'
@@ -26,53 +27,53 @@ describe('satellite.getAll', () => {
 
     const satellites = await satellite.getAll({ scope: 'full' });
 
-    expect(satellites).toBeArray();
+    expect(satellites).to.be.an('array');
 
     satellites.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('name');
-      expect(s).toHaveProperty('roomId');
-      expect(s).toHaveProperty('room');
-      expect(s).toHaveProperty('state');
-      expect(s).toHaveProperty('variables');
-      expect(s).toHaveProperty('plugins');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('name');
+      expect(s).to.have.property('roomId');
+      expect(s).to.have.property('room');
+      expect(s).to.have.property('state');
+      expect(s).to.have.property('variables');
+      expect(s).to.have.property('plugins');
 
-      expect(s.room).toBeObject();
-      expect(s.room).toHaveProperty('id');
-      expect(s.room).toHaveProperty('name');
-      expect(s.room).toHaveProperty('houseId');
+      expect(s.room).to.be.an('object');
+      expect(s.room).to.have.property('id');
+      expect(s.room).to.have.property('name');
+      expect(s.room).to.have.property('houseId');
 
       // TODO: The state cannot must be null
       if (s.state !== null) {
-        expect(s.state).toBeObject();
-        expect(s.state).toHaveProperty('id');
-        expect(s.state).toHaveProperty('owner');
-        expect(s.state).toHaveProperty('ownerType');
-        expect(s.state).toHaveProperty('value');
+        expect(s.state).to.be.an('object');
+        expect(s.state).to.have.property('id');
+        expect(s.state).to.have.property('owner');
+        expect(s.state).to.have.property('ownerType');
+        expect(s.state).to.have.property('value');
       }
 
       if (s.variables !== null) {
-        expect(s.variables).toBeArray();
+        expect(s.variables).to.be.an('array');
         s.variables!.forEach(v => {
-          expect(v).toBeObject();
-          expect(v).toHaveProperty('id');
-          expect(v).toHaveProperty('key');
-          expect(v).toHaveProperty('value');
-          expect(v).toHaveProperty('owner');
-          expect(v).toHaveProperty('ownerType');
+          expect(v).to.be.an('object');
+          expect(v).to.have.property('id');
+          expect(v).to.have.property('key');
+          expect(v).to.have.property('value');
+          expect(v).to.have.property('owner');
+          expect(v).to.have.property('ownerType');
         });
       }
 
       if (s.plugins !== null) {
-        expect(s.plugins).toBeArray();
+        expect(s.plugins).to.be.an('array');
         s.plugins!.forEach(p => {
-          expect(p).toBeObject();
-          expect(p).toHaveProperty('id');
-          expect(p).toHaveProperty('name');
-          expect(p).toHaveProperty('version');
-          expect(p).toHaveProperty('url');
-          expect(p).toHaveProperty('enabled');
-          expect(p).toHaveProperty('satelliteId');
+          expect(p).to.be.an('object');
+          expect(p).to.have.property('id');
+          expect(p).to.have.property('name');
+          expect(p).to.have.property('version');
+          expect(p).to.have.property('url');
+          expect(p).to.have.property('enabled');
+          expect(p).to.have.property('satelliteId');
         });
       }
     });
@@ -83,18 +84,18 @@ describe('satellite.getAll', () => {
 
     const satellites = await satellite.getAll({ scope: 'withRoom' });
 
-    expect(satellites).toBeArray();
+    expect(satellites).to.be.an('array');
 
     satellites.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('name');
-      expect(s).toHaveProperty('roomId');
-      expect(s).toHaveProperty('room');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('name');
+      expect(s).to.have.property('roomId');
+      expect(s).to.have.property('room');
 
-      expect(s.room).toBeObject();
-      expect(s.room).toHaveProperty('id');
-      expect(s.room).toHaveProperty('name');
-      expect(s.room).toHaveProperty('houseId');
+      expect(s.room).to.be.an('object');
+      expect(s.room).to.have.property('id');
+      expect(s.room).to.have.property('name');
+      expect(s.room).to.have.property('houseId');
 
     });
 
@@ -104,21 +105,21 @@ describe('satellite.getAll', () => {
 
     const satellites = await satellite.getAll({ scope: 'withState' });
 
-    expect(satellites).toBeArray();
+    expect(satellites).to.be.an('array');
 
     satellites.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('name');
-      expect(s).toHaveProperty('roomId');
-      expect(s).toHaveProperty('state');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('name');
+      expect(s).to.have.property('roomId');
+      expect(s).to.have.property('state');
 
       // TODO: The state cannot must be null
       if (s.state !== null) {
-        expect(s.state).toBeObject();
-        expect(s.state).toHaveProperty('id');
-        expect(s.state).toHaveProperty('owner');
-        expect(s.state).toHaveProperty('ownerType');
-        expect(s.state).toHaveProperty('value');
+        expect(s.state).to.be.an('object');
+        expect(s.state).to.have.property('id');
+        expect(s.state).to.have.property('owner');
+        expect(s.state).to.have.property('ownerType');
+        expect(s.state).to.have.property('value');
       }
     });
 
@@ -128,23 +129,23 @@ describe('satellite.getAll', () => {
 
     const satellites = await satellite.getAll({ scope: 'withVariables' });
 
-    expect(satellites).toBeArray();
+    expect(satellites).to.be.an('array');
 
     satellites.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('name');
-      expect(s).toHaveProperty('roomId');
-      expect(s).toHaveProperty('variables');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('name');
+      expect(s).to.have.property('roomId');
+      expect(s).to.have.property('variables');
 
       if (s.variables !== null) {
-        expect(s.variables).toBeArray();
+        expect(s.variables).to.be.an('array');
         s.variables!.forEach(v => {
-          expect(v).toBeObject();
-          expect(v).toHaveProperty('id');
-          expect(v).toHaveProperty('key');
-          expect(v).toHaveProperty('value');
-          expect(v).toHaveProperty('owner');
-          expect(v).toHaveProperty('ownerType');
+          expect(v).to.be.an('object');
+          expect(v).to.have.property('id');
+          expect(v).to.have.property('key');
+          expect(v).to.have.property('value');
+          expect(v).to.have.property('owner');
+          expect(v).to.have.property('ownerType');
         });
       }
 
@@ -156,24 +157,24 @@ describe('satellite.getAll', () => {
 
     const satellites = await satellite.getAll({ scope: 'withPlugins' });
 
-    expect(satellites).toBeArray();
+    expect(satellites).to.be.an('array');
 
     satellites.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('name');
-      expect(s).toHaveProperty('roomId');
-      expect(s).toHaveProperty('plugins');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('name');
+      expect(s).to.have.property('roomId');
+      expect(s).to.have.property('plugins');
 
       if (s.plugins !== null) {
-        expect(s.plugins).toBeArray();
+        expect(s.plugins).to.be.an('array');
         s.plugins!.forEach(p => {
-          expect(p).toBeObject();
-          expect(p).toHaveProperty('id');
-          expect(p).toHaveProperty('name');
-          expect(p).toHaveProperty('version');
-          expect(p).toHaveProperty('url');
-          expect(p).toHaveProperty('enabled');
-          expect(p).toHaveProperty('satelliteId');
+          expect(p).to.be.an('object');
+          expect(p).to.have.property('id');
+          expect(p).to.have.property('name');
+          expect(p).to.have.property('version');
+          expect(p).to.have.property('url');
+          expect(p).to.have.property('enabled');
+          expect(p).to.have.property('satelliteId');
         });
       }
     });

@@ -1,7 +1,7 @@
+import { expect } from 'chai';
 import Session from '../../../src/core/session';
-import 'jest-extended';
 
-describe('session.getAll', () => {
+describe('Session.getAll', () => {
   const session = new Session('secretJwt');
 
   it('should return all sessions', async () => {
@@ -9,11 +9,11 @@ describe('session.getAll', () => {
     const sessions = await session.getAll();
 
     sessions.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('refreshToken');
-      expect(s).toHaveProperty('validUntil');
-      expect(s).toHaveProperty('userId');
-      expect(s.revoked).toEqual(false);
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('refreshToken');
+      expect(s).to.have.property('validUntil');
+      expect(s).to.have.property('userId');
+      expect(s.revoked).to.equal(false);
     });
   });
 
@@ -22,13 +22,13 @@ describe('session.getAll', () => {
     const sessions = await session.getAll({ scope: 'full' });
 
     sessions.forEach(s => {
-      expect(s).toHaveProperty('id');
-      expect(s).toHaveProperty('refreshToken');
-      expect(s).toHaveProperty('validUntil');
-      expect(s).toHaveProperty('userId');
-      expect(s.revoked).toEqual(false);
-      expect(s.user).toBeObject();
-      expect(s.user).not.toHaveProperty('password');
+      expect(s).to.have.property('id');
+      expect(s).to.have.property('refreshToken');
+      expect(s).to.have.property('validUntil');
+      expect(s).to.have.property('userId');
+      expect(s.revoked).to.equal(false);
+      expect(s.user).to.be.an('object');
+      expect(s.user).not.to.have.property('password');
     });
   });
 

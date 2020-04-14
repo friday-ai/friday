@@ -1,19 +1,17 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 import PluginType from '../../../../../src/core/plugin/plugin.interface';
 
-describe('plugin.getAll', () => {
-
+describe('GET /api/v1/plugin', () => {
   it('should return all plugins', async () => {
-
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/plugin')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toEqual([
-          {
+        expect(res.body).to.be.an('array');
+        assert.deepEqual(res.body, [{
             id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
             name: 'Zwave',
             version: '1.2.0',
@@ -44,8 +42,6 @@ describe('plugin.getAll', () => {
 
   it('should return all plugins with full scope', async () => {
 
-    const server = await new TestServer();
-
     await server
       .get('/api/v1/plugin')
       .query({'scope' : 'full'})
@@ -53,41 +49,41 @@ describe('plugin.getAll', () => {
       .expect(200)
       .then((res) => {
         let plugins = res.body;
-        expect(plugins).toBeArray();
+        expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
-          expect(plugin).toBeObject();
-          expect(plugin).toContainAllKeys(
+          expect(plugin).to.be.an('object');
+          expect(plugin).to.have.all.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables']
           );
           if (plugin.state !== null) {
-            expect(plugin.state).toBeObject();
-            expect(plugin.state).toContainAllKeys(
+            expect(plugin.state).to.be.an('object');
+            expect(plugin.state).to.have.all.keys(
               ['id', 'owner', 'ownerType', 'value']
             );
           }
 
           if (plugin.satellite !== null) {
-            expect(plugin.satellite).toBeObject();
-            expect(plugin.satellite).toContainAllKeys(
+            expect(plugin.satellite).to.be.an('object');
+            expect(plugin.satellite).to.have.all.keys(
               ['id', 'name', 'roomId']
             );
           }
 
           if (plugin.devices !== null) {
-            expect(plugin.devices).toBeArray();
+            expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach(device => {
-              expect(device).toBeObject();
-              expect(device).toContainAllKeys(
+              expect(device).to.be.an('object');
+              expect(device).to.have.all.keys(
                 ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
               );
             });
           }
 
           if (plugin.variables !== null) {
-            expect(plugin.variables).toBeArray();
+            expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach(variable => {
-              expect(variable).toBeObject();
-              expect(variable).toContainAllKeys(
+              expect(variable).to.be.an('object');
+              expect(variable).to.have.all.keys(
                 ['id', 'key', 'value', 'owner', 'ownerType']
               );
             });
@@ -98,8 +94,6 @@ describe('plugin.getAll', () => {
 
   it('should return all plugins with satellites', async () => {
 
-    const server = await new TestServer();
-
     await server
       .get('/api/v1/plugin')
       .query({'scope' : 'withSatellite'})
@@ -107,16 +101,16 @@ describe('plugin.getAll', () => {
       .expect(200)
       .then((res) => {
         let plugins = res.body;
-        expect(plugins).toBeArray();
+        expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
-          expect(plugin).toBeObject();
-          expect(plugin).toContainAllKeys(
+          expect(plugin).to.be.an('object');
+          expect(plugin).to.have.all.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite']
           );
 
           if (plugin.satellite !== null) {
-            expect(plugin.satellite).toBeObject();
-            expect(plugin.satellite).toContainAllKeys(
+            expect(plugin.satellite).to.be.an('object');
+            expect(plugin.satellite).to.have.all.keys(
               ['id', 'name', 'roomId']
             );
           }
@@ -126,7 +120,6 @@ describe('plugin.getAll', () => {
   });
 
   it('should return all plugins with state', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/plugin')
@@ -135,15 +128,15 @@ describe('plugin.getAll', () => {
       .expect(200)
       .then((res) => {
         let plugins = res.body;
-        expect(plugins).toBeArray();
+        expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
-          expect(plugin).toBeObject();
-          expect(plugin).toContainAllKeys(
+          expect(plugin).to.be.an('object');
+          expect(plugin).to.have.all.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state']
           );
           if (plugin.state !== null) {
-            expect(plugin.state).toBeObject();
-            expect(plugin.state).toContainAllKeys(
+            expect(plugin.state).to.be.an('object');
+            expect(plugin.state).to.have.all.keys(
               ['id', 'owner', 'ownerType', 'value']
             );
           }
@@ -152,7 +145,6 @@ describe('plugin.getAll', () => {
   });
 
   it('should return all plugins with devices', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/plugin')
@@ -161,18 +153,18 @@ describe('plugin.getAll', () => {
       .expect(200)
       .then((res) => {
         let plugins = res.body;
-        expect(plugins).toBeArray();
+        expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
-          expect(plugin).toBeObject();
-          expect(plugin).toContainAllKeys(
+          expect(plugin).to.be.an('object');
+          expect(plugin).to.have.all.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices']
           );
 
           if (plugin.devices !== null) {
-            expect(plugin.devices).toBeArray();
+            expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach(device => {
-              expect(device).toBeObject();
-              expect(device).toContainAllKeys(
+              expect(device).to.be.an('object');
+              expect(device).to.have.all.keys(
                 ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
               );
             });
@@ -183,8 +175,6 @@ describe('plugin.getAll', () => {
 
   it('should return all plugins with variables', async () => {
 
-    const server = await new TestServer();
-
     await server
       .get('/api/v1/plugin')
       .query({'scope' : 'withVariables'})
@@ -192,17 +182,17 @@ describe('plugin.getAll', () => {
       .expect(200)
       .then((res) => {
         let plugins = res.body;
-        expect(plugins).toBeArray();
+        expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
-          expect(plugin).toBeObject();
-          expect(plugin).toContainAllKeys(
+          expect(plugin).to.be.an('object');
+          expect(plugin).to.have.all.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables']
           );
           if (plugin.variables !== null) {
-            expect(plugin.variables).toBeArray();
+            expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach(variable => {
-              expect(variable).toBeObject();
-              expect(variable).toContainAllKeys(
+              expect(variable).to.be.an('object');
+              expect(variable).to.have.all.keys(
                 ['id', 'key', 'value', 'owner', 'ownerType']
               );
             });

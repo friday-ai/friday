@@ -9,7 +9,8 @@
     "start:dev": "npm run -s dev",
     "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"cross-env NODE_ENV=production SERVER_PORT=1443 ts-node ./src/server.ts\"",
     "dev": "concurrently -k -n \"TypeScript,Node\" -c \"blue,green\" \"tsc --watch\" \"cross-env NODE_ENV=development nodemon ./src/server.ts\"",
-    "test": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --detectOpenHandles\"",
+    "test": "concurrently -k -n \"Mocha\" -c \"red\" \"cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/**/*.test.ts -exit\"",
+    "coverage": "nyc npm test",
     "test:watch": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --watch --detectOpenHandles\"",
     "lint": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force -t stylish -p tsconfig.json -c ../tslint.json\"",
     "lint:fix": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force --fix -t stylish -p tsconfig.json -c ../tslint.json\"",
@@ -21,6 +22,17 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/friday-ai/friday.git"
+  },
+  "nyc": {
+    "exclude": [
+      "src/api/routes/router.ts",
+      "src/core/**/index.ts",
+      "src/core/friday.ts"
+    ],
+    "include": [
+      "src/api/routes/**/*.ts",
+      "src/core/**/*.ts"
+    ]
   },
   "dependencies": {
     "@types/bcrypt": "^3.0.0",
@@ -58,13 +70,16 @@
   },
   "devDependencies": {
     "@mathieu_andrade/apidoc-markdown": "^1.0.1",
-    "@types/jest": "^25.1.0",
+    "@types/chai": "^4.2.11",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/mocha": "^7.0.2",
     "@types/supertest": "^2.0.8",
-    "jest": "^25.1.0",
-    "jest-extended": "^0.11.5",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^7.1.1",
     "nodemon": "^2.0.2",
+    "nyc": "^15.0.1",
     "supertest": "^4.0.2",
-    "ts-jest": "^25.0.0",
     "tslint": "^6.0.0",
     "tslint-consistent-codestyle": "^1.16.0",
     "typedoc": "^0.16.9",

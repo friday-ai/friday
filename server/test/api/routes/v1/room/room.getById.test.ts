@@ -1,20 +1,18 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 import DeviceType from '../../../../../src/core/device/device.interface';
 import SatelliteType from '../../../../../src/core/satellite/satellite.interface';
 
-describe('room.getById', () => {
+describe('GET /api/v1/room/:id', () => {
   it('should return a room', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f6514dc')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let plugin = res.body;
-        expect(plugin).toBeObject();
-        expect(plugin).toEqual(
-          {
+        expect(res.body).to.be.an('object');
+        assert.deepEqual(res.body, {
             id: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
             name: 'Bedroom',
             houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c'
@@ -23,7 +21,6 @@ describe('room.getById', () => {
   });
 
   it('should return a room with full scope', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f6514dc')
@@ -32,33 +29,33 @@ describe('room.getById', () => {
       .expect(200)
       .then((res) => {
         let room = res.body;
-        expect(room).toBeObject();
-        expect(room).toContainAllKeys(
+        expect(room).to.be.an('object');
+        expect(room).to.have.all.keys(
           ['id', 'name', 'houseId', 'house', 'devices', 'satellites', 'state']
         );
-        expect(room.house).toBeObject();
-        expect(room.house).toContainAllKeys(
+        expect(room.house).to.be.an('object');
+        expect(room.house).to.have.all.keys(
           ['id', 'name', 'latitude', 'longitude']
         );
         if (room.state !== null) {
-          expect(room.state).toBeObject();
-          expect(room.state).toContainAllKeys(
+          expect(room.state).to.be.an('object');
+          expect(room.state).to.have.all.keys(
             ['id', 'owner', 'ownerType', 'value']
           );
         }
         if (room.devices !== null) {
           room.devices!.forEach((device: DeviceType) => {
-            expect(device).toBeObject();
-            expect(device).toContainAllKeys(
+            expect(device).to.be.an('object');
+            expect(device).to.have.all.keys(
               ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
             );
           });
         }
         if (room.satellites !== null) {
-          expect(room.satellites).toBeArray();
+          expect(room.satellites).to.be.an('array');
           room.satellites!.forEach((satellite: SatelliteType) => {
-            expect(satellite).toBeObject();
-            expect(satellite).toContainAllKeys(
+            expect(satellite).to.be.an('object');
+            expect(satellite).to.have.all.keys(
               ['id', 'name', 'roomId']
             );
           });
@@ -67,7 +64,6 @@ describe('room.getById', () => {
   });
 
   it('should return a room with house', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f6514dc')
@@ -76,19 +72,18 @@ describe('room.getById', () => {
       .expect(200)
       .then((res) => {
         let room = res.body;
-        expect(room).toBeObject();
-        expect(room).toContainAllKeys(
+        expect(room).to.be.an('object');
+        expect(room).to.have.all.keys(
           ['id', 'name', 'houseId', 'house']
         );
-        expect(room.house).toBeObject();
-        expect(room.house).toContainAllKeys(
+        expect(room.house).to.be.an('object');
+        expect(room.house).to.have.all.keys(
           ['id', 'name', 'latitude', 'longitude']
         );
       });
   });
 
   it('should return a room with state', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f6514dc')
@@ -97,13 +92,13 @@ describe('room.getById', () => {
       .expect(200)
       .then((res) => {
         let room = res.body;
-        expect(room).toBeObject();
-        expect(room).toContainAllKeys(
+        expect(room).to.be.an('object');
+        expect(room).to.have.all.keys(
           ['id', 'name', 'houseId', 'state']
         );
         if (room.state !== null) {
-          expect(room.state).toBeObject();
-          expect(room.state).toContainAllKeys(
+          expect(room.state).to.be.an('object');
+          expect(room.state).to.have.all.keys(
             ['id', 'owner', 'ownerType', 'value']
           );
         }
@@ -111,7 +106,7 @@ describe('room.getById', () => {
   });
 
   it('should return a room with devices', async () => {
-    const server = await new TestServer();
+
 
     await server
       .get('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f6514dc')
@@ -120,14 +115,14 @@ describe('room.getById', () => {
       .expect(200)
       .then((res) => {
         let room = res.body;
-        expect(room).toBeObject();
-        expect(room).toContainAllKeys(
+        expect(room).to.be.an('object');
+        expect(room).to.have.all.keys(
           ['id', 'name', 'houseId', 'devices']
         );
         if (room.devices !== null) {
           room.devices!.forEach((device: DeviceType) => {
-            expect(device).toBeObject();
-            expect(device).toContainAllKeys(
+            expect(device).to.be.an('object');
+            expect(device).to.have.all.keys(
               ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
             );
           });
@@ -136,7 +131,7 @@ describe('room.getById', () => {
   });
 
   it('should return a room with satellites', async () => {
-    const server = await new TestServer();
+
 
     await server
       .get('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f6514dc')
@@ -145,15 +140,15 @@ describe('room.getById', () => {
       .expect(200)
       .then((res) => {
         let room = res.body;
-        expect(room).toBeObject();
-        expect(room).toContainAllKeys(
+        expect(room).to.be.an('object');
+        expect(room).to.have.all.keys(
           ['id', 'name', 'houseId', 'satellites']
         );
         if (room.satellites !== null) {
-          expect(room.satellites).toBeArray();
+          expect(room.satellites).to.be.an('array');
           room.satellites!.forEach((satellite: SatelliteType) => {
-            expect(satellite).toBeObject();
-            expect(satellite).toContainAllKeys(
+            expect(satellite).to.be.an('object');
+            expect(satellite).to.have.all.keys(
               ['id', 'name', 'roomId']
             );
           });

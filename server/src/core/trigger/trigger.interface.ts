@@ -1,4 +1,4 @@
-import Scene from '../scene/scene.interface';
+import SceneType from '../scene/scene.interface';
 import { AvailableConditions } from '../../utils/constants';
 
 /**
@@ -10,5 +10,5 @@ export default interface TriggerType {
   description?: string;
   type?: AvailableConditions;
   rules?: any;
-  scenes?: Array<Scene[]>;
+  scenes?: Array<SceneType>;
 }

@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import House from '../../../src/core/house';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('house.update', () => {
+describe('House.update', () => {
   const house = new House();
 
   it('should update a house', async () => {
@@ -10,19 +11,15 @@ describe('house.update', () => {
       name: 'House update'
     });
 
-    expect(updatedHouse.name).toEqual('House update');
+    expect(updatedHouse.name).to.equal('House update');
   });
 
   it('should not found house to update', async () => {
-    expect.assertions(1);
-
-    await house.update('1b561f76-9574-461c-b79e-e1906fe33c1a', {
+    const promise = house.update('1b561f76-9574-461c-b79e-e1906fe33c1a', {
       id: '1b561f76-9574-461c-b79e-e1906fe33c1a'
-    })
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(NotFoundError);
-      });
+    });
 
+    await assert.isRejected(promise, NotFoundError);
   });
 
 });

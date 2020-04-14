@@ -1,30 +1,23 @@
+import { expect, assert } from 'chai';
 import User from '../../../src/core/user';
 import { NotFoundError, AuthError } from '../../../src/utils/errors/coreError';
 
-describe('user.login', () => {
+describe('User.login', () => {
   const user = new User();
 
   it('should log a user', async () => {
     const logedUser = await user.login('john@pepperwood.com', 'mysuperpassword');
 
-    expect(logedUser).not.toHaveProperty('password');
+    expect(logedUser).not.to.have.property('password');
   });
 
   it('should not log a user with an false email', async () => {
-    expect.assertions(1);
-
-    await user.login('test@test.fr', 'mysuperpassword')
-      .catch((err: Error) => {
-         expect(err).toBeInstanceOf(NotFoundError);
-      });
+    const promise = user.login('test@test.fr', 'mysuperpassword');
+    await assert.isRejected(promise, NotFoundError);
   });
 
   it('should not log a user with an wrong password', async () => {
-    expect.assertions(1);
-
-    await user.login('john@pepperwood.com', 'mysuperpassword2')
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(AuthError);
-      });
+    const promise = user.login('john@pepperwood.com', 'mysuperpassword2');
+    await assert.isRejected(promise, AuthError);
   });
 });

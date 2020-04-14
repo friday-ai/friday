@@ -1,20 +1,18 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 import VariableType from '../../../../../src/core/variable/variable.interface';
 import PluginType from '../../../../../src/core/plugin/plugin.interface';
 
-describe('satellite.getById', () => {
+describe('GET /api/v1/satellite/:id', () => {
   it('should return a satellite', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894d8f')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let plugin = res.body;
-        expect(plugin).toBeObject();
-        expect(plugin).toEqual(
-          {
+        expect(res.body).to.be.an('object');
+        assert.deepEqual(res.body, {
             id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
             name: 'Main satellite',
             roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3'
@@ -23,7 +21,6 @@ describe('satellite.getById', () => {
   });
 
   it('should return a satellite with full scope', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894d8f')
@@ -32,33 +29,33 @@ describe('satellite.getById', () => {
       .expect(200)
       .then((res) => {
         let satellite = res.body;
-        expect(satellite).toBeObject();
-        expect(satellite).toContainAllKeys(
+        expect(satellite).to.be.an('object');
+        expect(satellite).to.have.all.keys(
           ['id', 'name', 'roomId', 'room', 'state', 'variables', 'plugins']
         );
-        expect(satellite.room).toBeObject();
-        expect(satellite.room).toContainAllKeys(
+        expect(satellite.room).to.be.an('object');
+        expect(satellite.room).to.have.all.keys(
           ['id', 'name', 'houseId']
         );
         if (satellite.state !== null) {
-          expect(satellite.state).toBeObject();
-          expect(satellite.state).toContainAllKeys(
+          expect(satellite.state).to.be.an('object');
+          expect(satellite.state).to.have.all.keys(
             ['id', 'owner', 'ownerType', 'value']
           );
         }
         if (satellite.variables !== null) {
           satellite.variables!.forEach((variable: VariableType) => {
-            expect(variable).toBeObject();
-            expect(variable).toContainAllKeys(
+            expect(variable).to.be.an('object');
+            expect(variable).to.have.all.keys(
               ['id', 'key', 'value', 'owner', 'ownerType']
             );
           });
         }
         if (satellite.plugins !== null) {
-          expect(satellite.plugins).toBeArray();
+          expect(satellite.plugins).to.be.an('array');
           satellite.plugins!.forEach((plugin: PluginType) => {
-            expect(plugin).toBeObject();
-            expect(plugin).toContainAllKeys(
+            expect(plugin).to.be.an('object');
+            expect(plugin).to.have.all.keys(
               ['id', 'name', 'version', 'url', 'enabled', 'satelliteId']
             );
           });
@@ -67,7 +64,6 @@ describe('satellite.getById', () => {
   });
 
   it('should return a satellite with room', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894d8f')
@@ -76,19 +72,18 @@ describe('satellite.getById', () => {
       .expect(200)
       .then((res) => {
         let satellite = res.body;
-        expect(satellite).toBeObject();
-        expect(satellite).toContainAllKeys(
+        expect(satellite).to.be.an('object');
+        expect(satellite).to.have.all.keys(
           ['id', 'name', 'roomId', 'room']
         );
-        expect(satellite.room).toBeObject();
-        expect(satellite.room).toContainAllKeys(
+        expect(satellite.room).to.be.an('object');
+        expect(satellite.room).to.have.all.keys(
           ['id', 'name', 'houseId']
         );
       });
   });
 
   it('should return a satellite with state', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894d8f')
@@ -97,13 +92,13 @@ describe('satellite.getById', () => {
       .expect(200)
       .then((res) => {
         let satellite = res.body;
-        expect(satellite).toBeObject();
-        expect(satellite).toContainAllKeys(
+        expect(satellite).to.be.an('object');
+        expect(satellite).to.have.all.keys(
           ['id', 'name', 'roomId', 'state']
         );
         if (satellite.state !== null) {
-          expect(satellite.state).toBeObject();
-          expect(satellite.state).toContainAllKeys(
+          expect(satellite.state).to.be.an('object');
+          expect(satellite.state).to.have.all.keys(
             ['id', 'owner', 'ownerType', 'value']
           );
         }
@@ -111,7 +106,6 @@ describe('satellite.getById', () => {
   });
 
   it('should return a satellite with variables', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894d8f')
@@ -120,14 +114,14 @@ describe('satellite.getById', () => {
       .expect(200)
       .then((res) => {
         let satellite = res.body;
-        expect(satellite).toBeObject();
-        expect(satellite).toContainAllKeys(
+        expect(satellite).to.be.an('object');
+        expect(satellite).to.have.all.keys(
           ['id', 'name', 'roomId', 'variables']
         );
         if (satellite.variables !== null) {
           satellite.variables!.forEach((variable: VariableType) => {
-            expect(variable).toBeObject();
-            expect(variable).toContainAllKeys(
+            expect(variable).to.be.an('object');
+            expect(variable).to.have.all.keys(
               ['id', 'key', 'value', 'owner', 'ownerType']
             );
           });
@@ -136,7 +130,6 @@ describe('satellite.getById', () => {
   });
 
   it('should return a satellite with plugins', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894d8f')
@@ -145,15 +138,15 @@ describe('satellite.getById', () => {
       .expect(200)
       .then((res) => {
         let satellite = res.body;
-        expect(satellite).toBeObject();
-        expect(satellite).toContainAllKeys(
+        expect(satellite).to.be.an('object');
+        expect(satellite).to.have.all.keys(
           ['id', 'name', 'roomId', 'plugins']
         );
         if (satellite.plugins !== null) {
-          expect(satellite.plugins).toBeArray();
+          expect(satellite.plugins).to.be.an('array');
           satellite.plugins!.forEach((plugin: PluginType) => {
-            expect(plugin).toBeObject();
-            expect(plugin).toContainAllKeys(
+            expect(plugin).to.be.an('object');
+            expect(plugin).to.have.all.keys(
               ['id', 'name', 'version', 'url', 'enabled', 'satelliteId']
             );
           });

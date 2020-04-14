@@ -1,16 +1,16 @@
+import { expect } from 'chai';
 import Session from '../../../src/core/session';
-import 'jest-extended';
 
-describe('session.getById', () => {
+describe('Session.getById', () => {
   const session = new Session('secretJwt');
 
   it('should return an session', async () => {
 
     const sessionRetruned = await session.getById('894b93df-a7ab-494c-92f6-7d88ae9164b3');
-    expect(sessionRetruned).toHaveProperty('id');
-    expect(sessionRetruned).toHaveProperty('refreshToken');
-    expect(sessionRetruned).toHaveProperty('validUntil');
-    expect(sessionRetruned).toHaveProperty('userId');
+    expect(sessionRetruned).to.have.property('id');
+    expect(sessionRetruned).to.have.property('refreshToken');
+    expect(sessionRetruned).to.have.property('validUntil');
+    expect(sessionRetruned).to.have.property('userId');
 
   });
 
@@ -18,12 +18,12 @@ describe('session.getById', () => {
 
     const sessionRetruned = await session.getById('894b93df-a7ab-494c-92f6-7d88ae9164b3', 'full');
 
-    expect(sessionRetruned).toHaveProperty('id');
-    expect(sessionRetruned).toHaveProperty('refreshToken');
-    expect(sessionRetruned).toHaveProperty('validUntil');
-    expect(sessionRetruned).toHaveProperty('userId');
-    expect(sessionRetruned.user).toBeObject();
-    expect(sessionRetruned.user).not.toHaveProperty('password');
+    expect(sessionRetruned).to.have.property('id');
+    expect(sessionRetruned).to.have.property('refreshToken');
+    expect(sessionRetruned).to.have.property('validUntil');
+    expect(sessionRetruned).to.have.property('userId');
+    expect(sessionRetruned.user).to.be.an('object');
+    expect(sessionRetruned.user).not.to.have.property('password');
 
   });
 

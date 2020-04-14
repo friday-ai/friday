@@ -1,55 +1,43 @@
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 import { ActionsType } from '../../../../../src/utils/constants';
-import TestServer from '../../../../utils/testServer';
 
-describe('action.create', () => {
-
+describe('POST /api/v1/action', () => {
   it('should return Created', async () => {
 
-    const server = await new TestServer();
+    const action = {
+      id: 'b1ed196e-2754-43f0-8c86-728f043c9c07',
+      name: 'action test',
+      description: 'action test description',
+      type: ActionsType.LIGHT_TURN_ON,
+      subType: '',
+      variableKey: 'action test variable key',
+      variableValue: 'action test variable value',
+      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e'
+    };
 
     await server
       .post('/api/v1/action')
-      .send({
-        id: 'b1ed196e-2754-43f0-8c86-728f043c9c07',
-        name: 'action test',
-        description: 'action test description',
-        type: ActionsType.LIGHT_TURN_ON,
-        subType: '',
-        variableKey: 'action test variable key',
-        variableValue: 'action test variable value',
-        sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e'
-      })
+      .send(action)
       .expect('Content-Type', /json/)
       .expect(201)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
-          ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId', 'updatedAt', 'createdAt']
-        );
-        expect(
-          body.id === 'b1ed196e-2754-43f0-8c86-728f043c9c07' &&
-          body.name === 'action test' &&
-          body.description === 'action test description' &&
-          body.type === ActionsType.LIGHT_TURN_ON &&
-          body.subType === '' &&
-          body.variableKey === 'action test variable key' &&
-          body.variableValue === 'action test variable value' &&
-          body.sceneId === '2452964a-a225-47dd-9b83-d88d57ed280e'
-        ).toEqual(true);
+        expect(res.body).to.be.an('object');
+        // See issue, https://github.com/sequelize/sequelize/issues/11566
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+        assert.deepEqual(res.body, action);
       });
 
   });
 
   it('should not create a action with an existing name', async () => {
 
-    const server = await new TestServer();
-
     await server
       .post('/api/v1/action')
       .send({
         id: 'b1ed196e-2754-43f0-8c86-728f043c9c07',
-        name: 'action test',
+        name: 'action1',
         description: 'action test description',
         type: ActionsType.LIGHT_TURN_ON,
         subType: '',
@@ -61,8 +49,6 @@ describe('action.create', () => {
   });
 
   it('should not create a action with an empty name', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/action')
@@ -81,8 +67,6 @@ describe('action.create', () => {
 
   it('should not create a action with an empty scene', async () => {
 
-    const server = await new TestServer();
-
     await server
       .post('/api/v1/action')
       .send({
@@ -99,8 +83,6 @@ describe('action.create', () => {
   });
 
   it('should not create a action with a wrong scene', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/action')

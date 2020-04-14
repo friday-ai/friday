@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import Action from '../../../src/core/action';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('action.update', () => {
+describe('Action.update', () => {
   const action = new Action();
 
   it('should update an action', async () => {
@@ -10,19 +11,15 @@ describe('action.update', () => {
       name: 'Action update'
     });
 
-    expect(updatedAction.name).toEqual('Action update');
+    expect(updatedAction.name).to.equal('Action update');
   });
 
   it('should not found action to update', async () => {
-    expect.assertions(1);
-
-    await action.update('163c08d4-c707-44b9-8ce0-37a45efeb05d', {
+    const promise = action.update('163c08d4-c707-44b9-8ce0-37a45efeb05d', {
       id: '163c08d4-c707-44b9-8ce0-37a45efeb05d'
-    })
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(NotFoundError);
-      });
+    });
 
+    await assert.isRejected(promise, NotFoundError);
   });
 
 });

@@ -1,8 +1,8 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('device.update', () => {
+describe('PATCH /api/v1/device/:id', () => {
   it('should update a device', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/device/22b5b9ce-cd9e-404a-8c31-97350d684fd3')
@@ -11,14 +11,12 @@ describe('device.update', () => {
       })
       .expect(200)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body.name).toEqual('Device update');
+        expect(res.body).to.be.an('object');
+        assert.deepEqual(res.body.name, 'Device update');
       });
   });
 
   it('should not found device to update', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/device/449b2033-105f-4c18-91e8-a56ad1831796')

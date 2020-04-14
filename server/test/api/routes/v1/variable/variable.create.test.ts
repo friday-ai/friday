@@ -1,39 +1,33 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 import { VariableOwner } from '../../../../../src/utils/constants';
 
-describe('variable.create', () => {
+describe('POST /api/v1/variable', () => {
   it('should create a variable', async () => {
-    const server = await new TestServer();
+
+    const variable = {
+      id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
+      key: 'key_test',
+      value: 'value_test',
+      owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
+      ownerType: VariableOwner.USER
+    };
 
     await server
       .post('/api/v1/variable')
-      .send({
-        id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
-        key: 'key_test',
-        value: 'value_test',
-        owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
-        ownerType: VariableOwner.USER
-      })
+      .send(variable)
       .expect('Content-Type', /json/)
       .expect(201)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
-          ['id', 'key', 'value', 'owner', 'ownerType', 'updatedAt', 'createdAt']
-        );
-        expect(
-          body.id === 'a675b2e6-9d1d-40f5-943b-86785e894735' &&
-          body.key === 'key_test' &&
-          body.value === 'value_test' &&
-          body.owner === 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a' &&
-          body.ownerType === VariableOwner.USER
-        ).toEqual(true);
+        expect(res.body).to.be.an('object');
+        // See issue, https://github.com/sequelize/sequelize/issues/11566
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+        assert.deepEqual(res.body, variable);
       });
   });
 
   it('should not create a variable with an existing key', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/variable')
@@ -49,7 +43,6 @@ describe('variable.create', () => {
   });
 
   it('should not create variable with wrong owner', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/variable')
@@ -65,7 +58,6 @@ describe('variable.create', () => {
   });
 
   it('should not create variable with empty key', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/variable')
@@ -81,7 +73,6 @@ describe('variable.create', () => {
   });
 
   it('should not create variable with a empty owner id', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/variable')
@@ -97,7 +88,6 @@ describe('variable.create', () => {
   });
 
   it('should not create variable with empty value', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/variable')

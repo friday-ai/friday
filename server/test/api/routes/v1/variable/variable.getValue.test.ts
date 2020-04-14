@@ -1,8 +1,8 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('variable.getValue', () => {
+describe('GET /api/v1/variable/:key', () => {
   it('should return a variable value', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/variable')
@@ -12,7 +12,8 @@ describe('variable.getValue', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toEqual({
+        expect(res.body).to.be.an('object');
+        assert.deepEqual(res.body, {
           id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
           key: 'test_key0',
           value: 'test_value0',
@@ -23,7 +24,6 @@ describe('variable.getValue', () => {
   });
 
   it('should not found variable to return', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/variable')

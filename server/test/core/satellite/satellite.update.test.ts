@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import Satellite from '../../../src/core/satellite';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('satellite.update', () => {
+describe('Satellite.update', () => {
   const satellite = new Satellite();
 
   it('should update a satellite', async () => {
@@ -10,19 +11,15 @@ describe('satellite.update', () => {
       name: 'Satellite update'
     });
 
-    expect(updatedSatellite.name).toEqual('Satellite update');
+    expect(updatedSatellite.name).to.equal('Satellite update');
   });
 
   it('should not found satellite to update', async () => {
-    expect.assertions(1);
-
-    await satellite.update('4017c89a-8d02-4d9b-9aec-1e1bcb93a3a7', {
+    const promise = satellite.update('4017c89a-8d02-4d9b-9aec-1e1bcb93a3a7', {
       id: '4017c89a-8d02-4d9b-9aec-1e1bcb93a3a7'
-    })
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(NotFoundError);
-      });
+    });
 
+    await assert.isRejected(promise, NotFoundError);
   });
 
 });

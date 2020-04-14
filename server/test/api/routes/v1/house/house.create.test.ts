@@ -1,40 +1,32 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('house.create', () => {
-
+describe('POST /api/v1/house', () => {
   it('should create a house', async () => {
 
-    const server = await new TestServer();
+    const house = {
+      id: '1e7056cf-f449-471c-a1e5-fb2e5ec7261f',
+      name: 'Second House',
+      latitude: '34.0012295',
+      longitude: '-118.8067245'
+    };
 
     await server
       .post('/api/v1/house')
-      .send({
-        id: '1e7056cf-f449-471c-a1e5-fb2e5ec7261f',
-        name: 'Second House',
-        latitude: '34.0012295',
-        longitude: '-118.8067245'
-      })
+      .send(house)
       .expect('Content-Type', /json/)
       .expect(201)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
-          ['id', 'name', 'latitude', 'longitude', 'updatedAt', 'createdAt']
-        );
-        expect(
-          body.id === '1e7056cf-f449-471c-a1e5-fb2e5ec7261f' &&
-          body.name === 'Second House' &&
-          body.latitude === '34.0012295' &&
-          body.longitude === '-118.8067245'
-        ).toEqual(true);
+        expect(res.body).to.be.an('object');
+        // See issue, https://github.com/sequelize/sequelize/issues/11566
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+        assert.deepEqual(res.body, house);
       });
 
   });
 
   it('should not create a house with an existing name', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/house')
@@ -48,8 +40,6 @@ describe('house.create', () => {
   });
 
   it('should not create a house with an empty name', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/house')

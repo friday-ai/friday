@@ -1,8 +1,8 @@
-import TestServer from '../../../../utils/testServer';
+import { expect } from 'chai';
+import server from '../../../../utils/request';
 
-describe('satellite.update', () => {
+describe('PATCH /api/v1/satellite/:id', () => {
   it('should update a satellite', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894d8f')
@@ -11,14 +11,12 @@ describe('satellite.update', () => {
       })
       .expect(200)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body.name).toEqual('Satellite update');
+        expect(res.body).to.be.an('object');
+        expect(res.body.name).to.equal('Satellite update');
       });
   });
 
   it('should not found satellite to update', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894333')

@@ -1,18 +1,16 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('action.getAll', () => {
-
+describe('GET /api/v1/action', () => {
   it('should return all actions', async () => {
-
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/action')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toEqual([
-          {
+        expect(res.body).to.be.an('array');
+        assert.deepEqual(res.body, [{
             id: '33ab56b0-4064-40d0-b1f4-1e426bff1ea3',
             name: 'action1',
             description: 'action1 description',

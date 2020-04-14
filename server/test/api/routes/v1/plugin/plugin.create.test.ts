@@ -1,43 +1,34 @@
-import TestServer from '../../../../utils/testServer';
-describe('plugin.create', () => {
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
+describe('POST /api/v1/plugin', () => {
   it('should create a plugin', async () => {
 
-    const server = await new TestServer();
+    const plugin = {
+      id: '3e2cb8cc-60a7-4c40-87d2-b25048b1aa04',
+      name: 'Fake plugin',
+      version: '1.0.0',
+      url: 'fake url',
+      enabled: true,
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+    };
 
     await server
       .post('/api/v1/plugin')
-      .send({
-        id: '3e2cb8cc-60a7-4c40-87d2-b25048b1aa04',
-        name: 'Fake plugin',
-        version: '1.0.0',
-        url: 'fake url',
-        enabled: true,
-        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
-      })
+      .send(plugin)
       .expect('Content-Type', /json/)
       .expect(201)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'updatedAt', 'createdAt']
-        );
-        expect(
-          body.id === '3e2cb8cc-60a7-4c40-87d2-b25048b1aa04' &&
-          body.name === 'Fake plugin' &&
-          body.version === '1.0.0' &&
-          body.url === 'fake url' &&
-          body.enabled === true &&
-          body.satelliteId === 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
-        ).toEqual(true);
+        expect(res.body).to.be.an('object');
+        // See issue, https://github.com/sequelize/sequelize/issues/11566
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+        assert.deepEqual(res.body, plugin);
       });
 
   });
 
   it('should not create a plugin with an empty url', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/plugin')
@@ -54,8 +45,6 @@ describe('plugin.create', () => {
 
   it('should not create a plugin with a empty satellite id', async () => {
 
-    const server = await new TestServer();
-
     await server
       .post('/api/v1/plugin')
       .send({
@@ -71,8 +60,6 @@ describe('plugin.create', () => {
 
   it('should not create a plugin with a wrong satellite id', async () => {
 
-    const server = await new TestServer();
-
     await server
       .post('/api/v1/plugin')
       .send({
@@ -87,8 +74,6 @@ describe('plugin.create', () => {
   });
 
   it('should not create a plugin with a empty name', async () => {
-
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/plugin')

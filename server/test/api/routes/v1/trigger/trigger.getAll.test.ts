@@ -1,16 +1,16 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('trigger.getAll', () => {
+describe('GET /api/v1/trigger', () => {
   it('should return all triggers', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/trigger')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toEqual([
-          {
+        expect(res.body).to.be.an('array');
+        assert.deepEqual(res.body, [{
             id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
             name: 'Test',
             description: 'A trigger test',
@@ -25,7 +25,6 @@ describe('trigger.getAll', () => {
   });
 
   it('should return all triggers with full scope', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/trigger')
@@ -35,8 +34,8 @@ describe('trigger.getAll', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toEqual([
-          {
+        expect(res.body).to.be.an('array');
+        assert.deepEqual(res.body, [{
             id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
             name: 'Test',
             description: 'A trigger test',
