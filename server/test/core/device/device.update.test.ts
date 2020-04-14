@@ -1,7 +1,8 @@
+import { expect, assert } from 'chai';
 import Device from '../../../src/core/device';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('device.update', () => {
+describe('Device.update', () => {
   const device = new Device();
 
   it('should update a device', async () => {
@@ -10,19 +11,15 @@ describe('device.update', () => {
       name: 'Device update'
     });
 
-    expect(updatedDevice.name).toEqual('Device update');
+    expect(updatedDevice.name).to.equal('Device update');
   });
 
   it('should not found device to update', async () => {
-    expect.assertions(1);
-
-    await device.update('449b2033-105f-4c18-91e8-a56ad1831796', {
+    const promise = device.update('449b2033-105f-4c18-91e8-a56ad1831796', {
       id: '449b2033-105f-4c18-91e8-a56ad1831796'
-    })
-      .catch((err: Error) => {
-        expect(err).toBeInstanceOf(NotFoundError);
-      });
+    });
 
+    await assert.isRejected(promise, NotFoundError);
   });
 
 });

@@ -1,19 +1,20 @@
+import { expect, assert } from 'chai';
 import Device from '../../../src/core/device';
-import 'jest-extended';
+import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../../../src/utils/constants';
 
-describe('device.getById', () => {
+describe('Device.getById', () => {
   const device = new Device();
 
   it('should return a device', async () => {
 
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3');
 
-    expect(deviceReturned).toEqual(
-      {
+    expect(deviceReturned).to.be.an('object');
+    assert.deepEqual(deviceReturned, {
         id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
         name: 'Light',
-        type: 'light',
-        subType: 'light_rgb',
+        type: AvailableTypeOfDevice.LIGHT,
+        subType: AvailableSubTypeOfDevice.LIGHT_RGB,
         variable: '',
         unit: '',
         value: 'on',
@@ -27,39 +28,38 @@ describe('device.getById', () => {
 
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3', 'full');
 
-
-    expect(deviceReturned).toHaveProperty('id');
-    expect(deviceReturned).toHaveProperty('name');
-    expect(deviceReturned).toHaveProperty('type');
-    expect(deviceReturned).toHaveProperty('subType');
-    expect(deviceReturned).toHaveProperty('variable');
-    expect(deviceReturned).toHaveProperty('unit');
-    expect(deviceReturned).toHaveProperty('value');
-    expect(deviceReturned).toHaveProperty('roomId');
-    expect(deviceReturned).toHaveProperty('pluginId');
+    expect(deviceReturned).to.have.property('id');
+    expect(deviceReturned).to.have.property('name');
+    expect(deviceReturned).to.have.property('type');
+    expect(deviceReturned).to.have.property('subType');
+    expect(deviceReturned).to.have.property('variable');
+    expect(deviceReturned).to.have.property('unit');
+    expect(deviceReturned).to.have.property('value');
+    expect(deviceReturned).to.have.property('roomId');
+    expect(deviceReturned).to.have.property('pluginId');
 
     // TODO: The state cannot must be null
     if (deviceReturned.state !== null) {
-      expect(deviceReturned.state).toBeObject();
-      expect(deviceReturned.state).toHaveProperty('id');
-      expect(deviceReturned.state).toHaveProperty('owner');
-      expect(deviceReturned.state).toHaveProperty('ownerType');
-      expect(deviceReturned.state).toHaveProperty('value');
+      expect(deviceReturned.state).to.be.an('object');
+      expect(deviceReturned.state).to.have.property('id');
+      expect(deviceReturned.state).to.have.property('owner');
+      expect(deviceReturned.state).to.have.property('ownerType');
+      expect(deviceReturned.state).to.have.property('value');
     }
 
-    expect(deviceReturned.room).toBeObject();
-    expect(deviceReturned.room).toHaveProperty('id');
-    expect(deviceReturned.room).toHaveProperty('name');
-    expect(deviceReturned.room).toHaveProperty('houseId');
+    expect(deviceReturned.room).to.be.an('object');
+    expect(deviceReturned.room).to.have.property('id');
+    expect(deviceReturned.room).to.have.property('name');
+    expect(deviceReturned.room).to.have.property('houseId');
 
     if (deviceReturned.plugin !== null) {
-      expect(deviceReturned.plugin).toBeObject();
-      expect(deviceReturned.plugin).toHaveProperty('id');
-      expect(deviceReturned.plugin).toHaveProperty('name');
-      expect(deviceReturned.plugin).toHaveProperty('version');
-      expect(deviceReturned.plugin).toHaveProperty('url');
-      expect(deviceReturned.plugin).toHaveProperty('enabled');
-      expect(deviceReturned.plugin).toHaveProperty('satelliteId');
+      expect(deviceReturned.plugin).to.be.an('object');
+      expect(deviceReturned.plugin).to.have.property('id');
+      expect(deviceReturned.plugin).to.have.property('name');
+      expect(deviceReturned.plugin).to.have.property('version');
+      expect(deviceReturned.plugin).to.have.property('url');
+      expect(deviceReturned.plugin).to.have.property('enabled');
+      expect(deviceReturned.plugin).to.have.property('satelliteId');
     }
 
   });
@@ -68,23 +68,23 @@ describe('device.getById', () => {
 
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3', 'withState');
 
-    expect(deviceReturned).toHaveProperty('id');
-    expect(deviceReturned).toHaveProperty('name');
-    expect(deviceReturned).toHaveProperty('type');
-    expect(deviceReturned).toHaveProperty('subType');
-    expect(deviceReturned).toHaveProperty('variable');
-    expect(deviceReturned).toHaveProperty('unit');
-    expect(deviceReturned).toHaveProperty('value');
-    expect(deviceReturned).toHaveProperty('roomId');
-    expect(deviceReturned).toHaveProperty('pluginId');
+    expect(deviceReturned).to.have.property('id');
+    expect(deviceReturned).to.have.property('name');
+    expect(deviceReturned).to.have.property('type');
+    expect(deviceReturned).to.have.property('subType');
+    expect(deviceReturned).to.have.property('variable');
+    expect(deviceReturned).to.have.property('unit');
+    expect(deviceReturned).to.have.property('value');
+    expect(deviceReturned).to.have.property('roomId');
+    expect(deviceReturned).to.have.property('pluginId');
 
     // TODO: The state cannot must be null
     if (deviceReturned.state !== null) {
-      expect(deviceReturned.state).toBeObject();
-      expect(deviceReturned.state).toHaveProperty('id');
-      expect(deviceReturned.state).toHaveProperty('owner');
-      expect(deviceReturned.state).toHaveProperty('ownerType');
-      expect(deviceReturned.state).toHaveProperty('value');
+      expect(deviceReturned.state).to.be.an('object');
+      expect(deviceReturned.state).to.have.property('id');
+      expect(deviceReturned.state).to.have.property('owner');
+      expect(deviceReturned.state).to.have.property('ownerType');
+      expect(deviceReturned.state).to.have.property('value');
     }
 
 
@@ -94,46 +94,44 @@ describe('device.getById', () => {
 
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3', 'withRoom');
 
-    expect(deviceReturned).toHaveProperty('id');
-    expect(deviceReturned).toHaveProperty('name');
-    expect(deviceReturned).toHaveProperty('type');
-    expect(deviceReturned).toHaveProperty('subType');
-    expect(deviceReturned).toHaveProperty('variable');
-    expect(deviceReturned).toHaveProperty('unit');
-    expect(deviceReturned).toHaveProperty('value');
-    expect(deviceReturned).toHaveProperty('roomId');
-    expect(deviceReturned).toHaveProperty('pluginId');
+    expect(deviceReturned).to.have.property('id');
+    expect(deviceReturned).to.have.property('name');
+    expect(deviceReturned).to.have.property('type');
+    expect(deviceReturned).to.have.property('subType');
+    expect(deviceReturned).to.have.property('variable');
+    expect(deviceReturned).to.have.property('unit');
+    expect(deviceReturned).to.have.property('value');
+    expect(deviceReturned).to.have.property('roomId');
+    expect(deviceReturned).to.have.property('pluginId');
 
-    expect(deviceReturned.room).toBeObject();
-    expect(deviceReturned.room).toHaveProperty('id');
-    expect(deviceReturned.room).toHaveProperty('name');
-    expect(deviceReturned.room).toHaveProperty('houseId');
-
-
+    expect(deviceReturned.room).to.be.an('object');
+    expect(deviceReturned.room).to.have.property('id');
+    expect(deviceReturned.room).to.have.property('name');
+    expect(deviceReturned.room).to.have.property('houseId');
   });
 
   it('should return all Devices with plugin', async () => {
 
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3', 'withPlugin');
 
-    expect(deviceReturned).toHaveProperty('id');
-    expect(deviceReturned).toHaveProperty('name');
-    expect(deviceReturned).toHaveProperty('type');
-    expect(deviceReturned).toHaveProperty('subType');
-    expect(deviceReturned).toHaveProperty('variable');
-    expect(deviceReturned).toHaveProperty('unit');
-    expect(deviceReturned).toHaveProperty('value');
-    expect(deviceReturned).toHaveProperty('roomId');
-    expect(deviceReturned).toHaveProperty('pluginId');
+    expect(deviceReturned).to.have.property('id');
+    expect(deviceReturned).to.have.property('name');
+    expect(deviceReturned).to.have.property('type');
+    expect(deviceReturned).to.have.property('subType');
+    expect(deviceReturned).to.have.property('variable');
+    expect(deviceReturned).to.have.property('unit');
+    expect(deviceReturned).to.have.property('value');
+    expect(deviceReturned).to.have.property('roomId');
+    expect(deviceReturned).to.have.property('pluginId');
 
     if (deviceReturned.plugin !== null) {
-      expect(deviceReturned.plugin).toBeObject();
-      expect(deviceReturned.plugin).toHaveProperty('id');
-      expect(deviceReturned.plugin).toHaveProperty('name');
-      expect(deviceReturned.plugin).toHaveProperty('version');
-      expect(deviceReturned.plugin).toHaveProperty('url');
-      expect(deviceReturned.plugin).toHaveProperty('enabled');
-      expect(deviceReturned.plugin).toHaveProperty('satelliteId');
+      expect(deviceReturned.plugin).to.be.an('object');
+      expect(deviceReturned.plugin).to.have.property('id');
+      expect(deviceReturned.plugin).to.have.property('name');
+      expect(deviceReturned.plugin).to.have.property('version');
+      expect(deviceReturned.plugin).to.have.property('url');
+      expect(deviceReturned.plugin).to.have.property('enabled');
+      expect(deviceReturned.plugin).to.have.property('satelliteId');
     }
 
   });
