@@ -1,15 +1,15 @@
+import { expect, assert } from 'chai';
 import House from '../../../src/core/house';
-import 'jest-extended';
 
-describe('house.getAll', () => {
+describe('House.getAll', () => {
   const house = new House();
 
   it('should return all houses', async () => {
 
     const houses = await house.getAll();
 
-    expect(houses).toEqual([
-      {
+    expect(houses).to.be.an('array');
+    assert.deepEqual(houses, [{
         id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
         name: 'Main House',
         latitude: '34.0012295',
@@ -23,29 +23,29 @@ describe('house.getAll', () => {
 
     const houses = await house.getAll({ scope: 'full' });
 
-    expect(houses).toBeArray();
+    expect(houses).to.be.an('array');
     houses.forEach(h => {
-      expect(h).toHaveProperty('id');
-      expect(h).toHaveProperty('name');
-      expect(h).toHaveProperty('latitude');
-      expect(h).toHaveProperty('longitude');
+      expect(h).to.have.property('id');
+      expect(h).to.have.property('name');
+      expect(h).to.have.property('latitude');
+      expect(h).to.have.property('longitude');
 
       // TODO: The state cannot must be null
       if (h.state !== null) {
-        expect(h.state).toBeObject();
-        expect(h.state).toHaveProperty('id');
-        expect(h.state).toHaveProperty('owner');
-        expect(h.state).toHaveProperty('ownerType');
-        expect(h.state).toHaveProperty('value');
+        expect(h.state).to.be.an('object');
+        expect(h.state).to.have.property('id');
+        expect(h.state).to.have.property('owner');
+        expect(h.state).to.have.property('ownerType');
+        expect(h.state).to.have.property('value');
       }
 
       if (h.rooms !== null) {
-        expect(h.rooms).toBeArray();
+        expect(h.rooms).to.be.an('array');
         h.rooms!.forEach(r => {
-          expect(r).toBeObject();
-          expect(r).toHaveProperty('id');
-          expect(r).toHaveProperty('name');
-          expect(r).toHaveProperty('houseId');
+          expect(r).to.be.an('object');
+          expect(r).to.have.property('id');
+          expect(r).to.have.property('name');
+          expect(r).to.have.property('houseId');
         });
       }
 
@@ -57,20 +57,20 @@ describe('house.getAll', () => {
 
     const houses = await house.getAll({ scope: 'withState' });
 
-    expect(houses).toBeArray();
+    expect(houses).to.be.an('array');
     houses.forEach(h => {
-      expect(h).toHaveProperty('id');
-      expect(h).toHaveProperty('name');
-      expect(h).toHaveProperty('latitude');
-      expect(h).toHaveProperty('longitude');
+      expect(h).to.have.property('id');
+      expect(h).to.have.property('name');
+      expect(h).to.have.property('latitude');
+      expect(h).to.have.property('longitude');
 
       // TODO: The state cannot must be null
       if (h.state !== null) {
-        expect(h.state).toBeObject();
-        expect(h.state).toHaveProperty('id');
-        expect(h.state).toHaveProperty('owner');
-        expect(h.state).toHaveProperty('ownerType');
-        expect(h.state).toHaveProperty('value');
+        expect(h.state).to.be.an('object');
+        expect(h.state).to.have.property('id');
+        expect(h.state).to.have.property('owner');
+        expect(h.state).to.have.property('ownerType');
+        expect(h.state).to.have.property('value');
       }
 
     });
@@ -81,20 +81,20 @@ describe('house.getAll', () => {
 
     const houses = await house.getAll({ scope: 'withRooms' });
 
-    expect(houses).toBeArray();
+    expect(houses).to.be.an('array');
     houses.forEach(h => {
-      expect(h).toHaveProperty('id');
-      expect(h).toHaveProperty('name');
-      expect(h).toHaveProperty('latitude');
-      expect(h).toHaveProperty('longitude');
+      expect(h).to.have.property('id');
+      expect(h).to.have.property('name');
+      expect(h).to.have.property('latitude');
+      expect(h).to.have.property('longitude');
 
       if (h.rooms !== null) {
-        expect(h.rooms).toBeArray();
+        expect(h.rooms).to.be.an('array');
         h.rooms!.forEach(r => {
-          expect(r).toBeObject();
-          expect(r).toHaveProperty('id');
-          expect(r).toHaveProperty('name');
-          expect(r).toHaveProperty('houseId');
+          expect(r).to.be.an('object');
+          expect(r).to.have.property('id');
+          expect(r).to.have.property('name');
+          expect(r).to.have.property('houseId');
         });
       }
 
