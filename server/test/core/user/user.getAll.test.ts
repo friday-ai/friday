@@ -1,3 +1,4 @@
+import { expect, assert } from 'chai';
 import User from '../../../src/core/user';
 
 describe('user.getAll', () => {
@@ -6,8 +7,9 @@ describe('user.getAll', () => {
   it('should return all users', async () => {
 
     const users = await user.getAll();
-    expect(users).toEqual(
-      [{
+
+    expect(users).to.be.an('array');
+    assert.deepEqual(users, [{
         id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
         name: 'Pepperwood',
         firstName: 'John',
@@ -29,30 +31,30 @@ describe('user.getAll', () => {
 
     const users = await user.getAll({ scope: 'full' });
 
-    expect(users).toBeArray();
+    expect(users).to.be.an('array');
 
     users.forEach(u => {
-      expect(u).toHaveProperty('id');
-      expect(u).toHaveProperty('name');
-      expect(u).toHaveProperty('role');
-      expect(u).toHaveProperty('state');
-      expect(u).toHaveProperty('variables');
-      expect(u.variables).toBeArray();
+      expect(u).to.have.property('id');
+      expect(u).to.have.property('name');
+      expect(u).to.have.property('role');
+      expect(u).to.have.property('state');
+      expect(u).to.have.property('variables');
+      expect(u.variables).to.be.an('array');
 
       // TODO: The state cannot must be null
       if (u.state !== null) {
-        expect(u.state).toBeObject();
-        expect(u.state).toHaveProperty('id');
-        expect(u.state).toHaveProperty('owner');
-        expect(u.state).toHaveProperty('ownerType');
-        expect(u.state).toHaveProperty('value');
+        expect(u.state).to.be.an('object');
+        expect(u.state).to.have.property('id');
+        expect(u.state).to.have.property('owner');
+        expect(u.state).to.have.property('ownerType');
+        expect(u.state).to.have.property('value');
       }
 
       u.variables!.forEach(v => {
-        expect(v).toHaveProperty('key');
-        expect(v).toHaveProperty('value');
-        expect(v).toHaveProperty('owner');
-        expect(v).toHaveProperty('ownerType');
+        expect(v).to.have.property('key');
+        expect(v).to.have.property('value');
+        expect(v).to.have.property('owner');
+        expect(v).to.have.property('ownerType');
       });
     });
 
@@ -62,21 +64,21 @@ describe('user.getAll', () => {
 
     const users = await user.getAll({ scope: 'withState' });
 
-    expect(users).toBeArray();
+    expect(users).to.be.an('array');
 
     users.forEach(u => {
-      expect(u).toHaveProperty('id');
-      expect(u).toHaveProperty('name');
-      expect(u).toHaveProperty('role');
-      expect(u).toHaveProperty('state');
+      expect(u).to.have.property('id');
+      expect(u).to.have.property('name');
+      expect(u).to.have.property('role');
+      expect(u).to.have.property('state');
 
       // TODO: The state cannot must be null
       if (u.state !== null) {
-        expect(u.state).toBeObject();
-        expect(u.state).toHaveProperty('id');
-        expect(u.state).toHaveProperty('owner');
-        expect(u.state).toHaveProperty('ownerType');
-        expect(u.state).toHaveProperty('value');
+        expect(u.state).to.be.an('object');
+        expect(u.state).to.have.property('id');
+        expect(u.state).to.have.property('owner');
+        expect(u.state).to.have.property('ownerType');
+        expect(u.state).to.have.property('value');
       }
     });
 
@@ -86,20 +88,20 @@ describe('user.getAll', () => {
 
     const users = await user.getAll({ scope: 'withVariables' });
 
-    expect(users).toBeArray();
+    expect(users).to.be.an('array');
 
     users.forEach(u => {
-      expect(u).toHaveProperty('id');
-      expect(u).toHaveProperty('name');
-      expect(u).toHaveProperty('role');
-      expect(u).toHaveProperty('variables');
-      expect(u.variables).toBeArray();
+      expect(u).to.have.property('id');
+      expect(u).to.have.property('name');
+      expect(u).to.have.property('role');
+      expect(u).to.have.property('variables');
+      expect(u.variables).to.be.an('array');
 
       u.variables!.forEach(v => {
-        expect(v).toHaveProperty('key');
-        expect(v).toHaveProperty('value');
-        expect(v).toHaveProperty('owner');
-        expect(v).toHaveProperty('ownerType');
+        expect(v).to.have.property('key');
+        expect(v).to.have.property('value');
+        expect(v).to.have.property('owner');
+        expect(v).to.have.property('ownerType');
       });
     });
 

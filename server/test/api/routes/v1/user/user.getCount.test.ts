@@ -1,16 +1,15 @@
-import TestServer from '../../../../utils/testServer';
+import { expect } from 'chai';
+import server from '../../../../utils/request';
 
-describe('user.getCount', () => {
+describe('GET /api/v1/user/count', () => {
   it('should return the number of registered users', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/user/count')
       .expect(200)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeNumber();
-        expect(body).toEqual(2);
+        expect(res.body).to.be.an('number');
+        expect(res.body).to.equal(2);
       });
   });
 });

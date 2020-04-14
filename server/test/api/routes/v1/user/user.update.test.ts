@@ -1,8 +1,8 @@
-import TestServer from '../../../../utils/testServer';
+import { expect } from 'chai';
+import server from '../../../../utils/request';
 
-describe('user.update', () => {
+describe('PATCH /api/v1/user/:id', () => {
   it('should update a user', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/user/0cd30aef-9c4e-4a23-81e3-3547971296e5')
@@ -12,13 +12,12 @@ describe('user.update', () => {
       .expect(200)
       .then((res) => {
         let body = res.body;
-        expect(body).toBeObject();
-        expect(body.name).toEqual('User update');
+        expect(body).to.be.an('object');
+        expect(body.name).to.equal('User update');
       });
   });
 
   it('should not found user to update', async () => {
-    const server = await new TestServer();
 
     await server
       .patch('/api/v1/scene/0cd30aef-9c4e-4a23-81e3-354797129333')

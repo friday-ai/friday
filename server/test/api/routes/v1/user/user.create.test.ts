@@ -1,40 +1,41 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 
-describe('user.create', () => {
+describe('POST /api/v1/user', () => {
   it('should create a user', async () => {
-    const server = await new TestServer();
+
+    const user = {
+      id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
+      name: 'Pepperwood',
+      firstName: 'John',
+      email: 'test@test.com',
+      password: 'mysuperpassword',
+      birthDate: new Date(1996, 12, 20)
+    };
 
     await server
       .post('/api/v1/user')
-      .send({
-        id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-        name: 'Pepperwood',
-        firstName: 'John',
-        email: 'test@test.com',
-        password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20)
-      })
+      .send(user)
       .expect('Content-Type', /json/)
       .expect(201)
       .then((res) => {
-        let body = res.body;
-        expect(body).toBeObject();
-        expect(body).toContainAllKeys(
-          ['role', 'language', 'id', 'name', 'firstName', 'email', 'birthDate', 'updatedAt', 'createdAt']
-        );
-        expect(
-          body.id === '0cd30aef-9c4e-4a23-88e3-3547971296e5' &&
-          body.name === 'Pepperwood' &&
-          body.firstName === 'John' &&
-          body.email === 'test@test.com' &&
-          body.birthDate === '1997-01-20'
-        ).toEqual(true);
-        expect(body).not.toHaveProperty('password');
+        expect(res.body).to.be.an('object');
+        // See issue, https://github.com/sequelize/sequelize/issues/11566
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+        assert.deepEqual(res.body, {
+          id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
+          name: 'Pepperwood',
+          firstName: 'John',
+          email: 'test@test.com',
+          birthDate: '1997-01-20',
+          language: 'en',
+          role: 'habitant'
+        });
       });
   });
 
   it('should not create a user with an existing email', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/user')
@@ -51,7 +52,6 @@ describe('user.create', () => {
   });
 
   it('should not create user with wrong email', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/user')
@@ -68,7 +68,6 @@ describe('user.create', () => {
   });
 
   it('should not create user with password too small', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/user')
@@ -85,7 +84,6 @@ describe('user.create', () => {
   });
 
   it('should not create a user with a empty name', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/user')
@@ -102,7 +100,6 @@ describe('user.create', () => {
   });
 
   it('should not create a user with a empty password', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/user')
@@ -119,7 +116,6 @@ describe('user.create', () => {
   });
 
   it('should not create a user with a empty email', async () => {
-    const server = await new TestServer();
 
     await server
       .post('/api/v1/user')

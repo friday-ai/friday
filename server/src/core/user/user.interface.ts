@@ -11,7 +11,7 @@ export default interface UserType {
   firstName?: string;
   email?: string;
   password?: string;
-  birthDate?: Date;
+  birthDate?: Date | string;
   role?: UserRole;
   language?: AvailableLanguages;
   state?: StateType;

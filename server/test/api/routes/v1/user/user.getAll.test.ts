@@ -1,16 +1,17 @@
-import TestServer from '../../../../utils/testServer';
+import { expect, assert } from 'chai';
+import server from '../../../../utils/request';
 import UserType from '../../../../../src/core/user/user.interface';
 
-describe('user.getAll', () => {
+describe('GET /api/v1/user', () => {
   it('should return all users', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/user')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).toEqual([{
+        expect(res.body).to.be.an('array');
+        assert.deepEqual(res.body, [{
           id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
           name: 'Pepperwood',
           firstName: 'John',
@@ -28,7 +29,6 @@ describe('user.getAll', () => {
   });
 
   it('should return all users with full scope', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/user')
@@ -39,22 +39,22 @@ describe('user.getAll', () => {
       .expect(200)
       .then((res) => {
         let users = res.body;
-        expect(users).toBeArray();
+        expect(users).to.be.an('array');
         users!.forEach((user: UserType) => {
-          expect(user).toBeObject();
-          expect(user).toContainAllKeys(
+          expect(user).to.be.an('object');
+          expect(user).to.have.all.keys(
             ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state', 'variables']
           );
           if (user.state !== null) {
-            expect(user.state).toBeObject();
-            expect(user.state).toContainAllKeys(
+            expect(user.state).to.be.an('object');
+            expect(user.state).to.have.all.keys(
               ['id', 'owner', 'ownerType', 'value']
             );
           }
-          expect(user.variables).toBeArray();
+          expect(user.variables).to.be.an('array');
           user.variables!.forEach(variable => {
-            expect(variable).toBeObject();
-            expect(variable).toContainAllKeys(
+            expect(variable).to.be.an('object');
+            expect(variable).to.have.all.keys(
               ['id', 'key', 'value', 'owner', 'ownerType']
             );
           });
@@ -63,7 +63,6 @@ describe('user.getAll', () => {
   });
 
   it('should return all users with state', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/user')
@@ -74,15 +73,15 @@ describe('user.getAll', () => {
       .expect(200)
       .then((res) => {
         let users = res.body;
-        expect(users).toBeArray();
+        expect(users).to.be.an('array');
         users!.forEach((user: UserType) => {
-          expect(user).toBeObject();
-          expect(user).toContainAllKeys(
+          expect(user).to.be.an('object');
+          expect(user).to.have.all.keys(
             ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state']
           );
           if (user.state !== null) {
-            expect(user.state).toBeObject();
-            expect(user.state).toContainAllKeys(
+            expect(user.state).to.be.an('object');
+            expect(user.state).to.have.all.keys(
               ['id', 'owner', 'ownerType', 'value']
             );
           }
@@ -91,7 +90,6 @@ describe('user.getAll', () => {
   });
 
   it('should return all users with variables', async () => {
-    const server = await new TestServer();
 
     await server
       .get('/api/v1/user')
@@ -102,16 +100,16 @@ describe('user.getAll', () => {
       .expect(200)
       .then((res) => {
         let users = res.body;
-        expect(users).toBeArray();
+        expect(users).to.be.an('array');
         users!.forEach((user: UserType) => {
-          expect(user).toBeObject();
-          expect(user).toContainAllKeys(
+          expect(user).to.be.an('object');
+          expect(user).to.have.all.keys(
             ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'variables']
           );
-          expect(user.variables).toBeArray();
+          expect(user.variables).to.be.an('array');
           user.variables!.forEach(variable => {
-            expect(variable).toBeObject();
-            expect(variable).toContainAllKeys(
+            expect(variable).to.be.an('object');
+            expect(variable).to.have.all.keys(
               ['id', 'key', 'value', 'owner', 'ownerType']
             );
           });
