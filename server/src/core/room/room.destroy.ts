@@ -1,5 +1,5 @@
 import Room from '../../models/room';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 
 /**
@@ -16,11 +16,13 @@ export default async function destroy(id: string): Promise<void> {
     const roomToDelete = await Room.findByPk(id);
 
     if (roomToDelete === null) {
-      throw new NotFoundError({name: 'Destroy an Room', message: 'Room not found', metadata: id});
+      throw new NotFoundError({ name: 'Destroy an Room', message: 'Room not found', metadata: id });
     }
 
     await roomToDelete.destroy();
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

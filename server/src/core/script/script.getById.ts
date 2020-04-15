@@ -1,6 +1,6 @@
 import Script from '../../models/script';
 import ScriptType from './script.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a script by id.
@@ -14,19 +14,18 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string): Promise<ScriptType> {
   try {
-
-    let script;
-
-    script = await Script.findByPk(id);
+    const script = await Script.findByPk(id);
 
     if (script === null) {
-      throw new NotFoundError({name: 'Get Script by Id', message: 'Script not found', metadata: id});
+      throw new NotFoundError({ name: 'Get Script by Id', message: 'Script not found', metadata: id });
     }
 
-    let scripteToReturn = <ScriptType>script.get({ plain: true });
+    const scripteToReturn = <ScriptType>script.get({ plain: true });
 
     return scripteToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

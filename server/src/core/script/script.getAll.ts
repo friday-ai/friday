@@ -6,7 +6,7 @@ import error from '../../utils/errors/coreError';
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
-  skip: 0
+  skip: 0,
 };
 
 /**
@@ -24,13 +24,11 @@ const DEFAULT_OPTIONS: GetOptions = {
  */
 export default async function getAll(options?: GetOptions): Promise<ScriptType[]> {
   try {
-    options = Object.assign({}, DEFAULT_OPTIONS, options);
+    const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
 
-    let scripts;
-
-    scripts = await Script.findAll({
-      limit: options.take,
-      offset: options.skip
+    const scripts = await Script.findAll({
+      limit: mergedOptions.take,
+      offset: mergedOptions.skip,
     });
 
     const scriptsPlain = <ScriptType[]>scripts.map((script) => {
@@ -40,6 +38,8 @@ export default async function getAll(options?: GetOptions): Promise<ScriptType[]
 
     return scriptsPlain;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: options});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: options,
+    });
   }
 }

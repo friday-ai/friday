@@ -1,5 +1,5 @@
 import Plugin from '../../models/plugin';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Destroy a plugin.
@@ -15,11 +15,13 @@ export default async function destroy(id: string): Promise<void> {
     const pluginToDelete = await Plugin.findByPk(id);
 
     if (pluginToDelete === null) {
-      throw new NotFoundError({name: 'Destroy a Plugin', message: 'Plugin not found', metadata: id});
+      throw new NotFoundError({ name: 'Destroy a Plugin', message: 'Plugin not found', metadata: id });
     }
 
     await pluginToDelete.destroy();
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

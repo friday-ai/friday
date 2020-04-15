@@ -1,5 +1,5 @@
 import Script from '../../models/script';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Destroy a script.
@@ -15,11 +15,13 @@ export default async function destroy(id: string): Promise<void> {
     const scriptToDelete = await Script.findByPk(id);
 
     if (scriptToDelete === null) {
-      throw new NotFoundError({name: 'Destroy a Script', message: 'Script not found', metadata: id});
+      throw new NotFoundError({ name: 'Destroy a Script', message: 'Script not found', metadata: id });
     }
 
     await scriptToDelete.destroy();
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

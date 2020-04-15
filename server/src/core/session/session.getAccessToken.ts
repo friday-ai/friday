@@ -17,6 +17,8 @@ export default async function getAccessToken(this: SessionClass, refreshToken: s
     session.refreshToken = refreshToken;
     return session;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: refreshToken});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: refreshToken,
+    });
   }
 }

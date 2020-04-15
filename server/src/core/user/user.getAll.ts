@@ -6,7 +6,7 @@ import error from '../../utils/errors/coreError';
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
-  skip: 0
+  skip: 0,
 };
 
 /**
@@ -24,19 +24,19 @@ const DEFAULT_OPTIONS: GetOptions = {
  */
 export default async function getAll(options?: GetOptions): Promise<UserType[]> {
   try {
-    options = Object.assign({}, DEFAULT_OPTIONS, options);
+    const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
 
     let users;
 
-    if (options.scope !== '' && options.scope !== null && options.scope !== undefined) {
-      users = await User.scope(options.scope).findAll({
-        limit: options.take,
-        offset: options.skip
+    if (mergedOptions.scope !== '' && mergedOptions.scope !== null && mergedOptions.scope !== undefined) {
+      users = await User.scope(mergedOptions.scope).findAll({
+        limit: mergedOptions.take,
+        offset: mergedOptions.skip,
       });
     } else {
       users = await User.findAll({
-        limit: options.take,
-        offset: options.skip
+        limit: mergedOptions.take,
+        offset: mergedOptions.skip,
       });
     }
 
@@ -46,8 +46,9 @@ export default async function getAll(options?: GetOptions): Promise<UserType[]> 
     });
 
     return usersPlain;
-
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: options});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: options,
+    });
   }
 }

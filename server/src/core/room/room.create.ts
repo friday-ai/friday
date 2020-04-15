@@ -18,9 +18,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(room: RoomType): Promise<RoomType> {
   try {
     const createdRoom = await Room.create(room);
-    let roomToReturn = <RoomType>createdRoom.get({ plain: true });
+    const roomToReturn = <RoomType>createdRoom.get({ plain: true });
     return roomToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: room});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: room,
+    });
   }
 }

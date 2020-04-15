@@ -1,8 +1,8 @@
+import { Op } from 'sequelize';
 import State from '../../models/state';
 import StateClass from '.';
 import error, { BaseCoreError } from '../../utils/errors/coreError';
 import { SystemVariablesNames } from '../../utils/constants';
-import { Op } from 'sequelize';
 
 /**
  * Purge states.
@@ -17,7 +17,7 @@ export default async function purge(this: StateClass) {
     const stateHistoryInDays = parseInt(value!, 10);
 
     if (Number.isNaN(stateHistoryInDays)) {
-      throw new BaseCoreError({name: 'Purging states', message: 'History value is not a number', metadata: stateHistoryInDays});
+      throw new BaseCoreError({ name: 'Purging states', message: 'History value is not a number', metadata: stateHistoryInDays });
     }
 
     const now = new Date().getTime();
@@ -26,13 +26,12 @@ export default async function purge(this: StateClass) {
     await State.destroy({
       where: {
         updated_at: {
-          [Op.lte]: new Date(timstampLimit)
+          [Op.lte]: new Date(timstampLimit),
         },
-        last: false
-      }
+        last: false,
+      },
     });
-
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e});
+    throw error({ name: e.name, message: e.message, cause: e });
   }
 }

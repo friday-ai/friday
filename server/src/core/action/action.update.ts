@@ -1,6 +1,6 @@
 import Action from '../../models/action';
 import ActionType from './action.interface';
-import { default as error, NotFoundError } from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Update an action
@@ -19,7 +19,6 @@ import { default as error, NotFoundError } from '../../utils/errors/coreError';
  */
 export default async function update(id: string, action: ActionType): Promise<ActionType> {
   try {
-
     const actionToUpdate = await Action.findByPk(id);
 
     if (actionToUpdate === null) {
@@ -27,10 +26,11 @@ export default async function update(id: string, action: ActionType): Promise<Ac
     }
 
     actionToUpdate.update(action);
-    let actionToReturn = <ActionType>actionToUpdate.get({ plain: true });
+    const actionToReturn = <ActionType>actionToUpdate.get({ plain: true });
     return actionToReturn;
-
   } catch (e) {
-    throw error({ name: e.name, message: e.message, cause: e, metadata: action });
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: action,
+    });
   }
 }

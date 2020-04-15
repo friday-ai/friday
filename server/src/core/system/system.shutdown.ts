@@ -11,6 +11,6 @@ export default async function shutdown(this: System) {
     // exit
     process.exit();
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e});
+    throw error({ name: e.name, message: e.message, cause: e });
   }
 }

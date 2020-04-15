@@ -1,5 +1,5 @@
 import Satellite from '../../models/satellite';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Destroy a satellite.
@@ -15,11 +15,13 @@ export default async function destroy(id: string): Promise<void> {
     const satelliteToDelete = await Satellite.findByPk(id);
 
     if (satelliteToDelete === null) {
-      throw new NotFoundError({name: 'Destroy a Satellite', message: 'Satellite not found', metadata: id});
+      throw new NotFoundError({ name: 'Destroy a Satellite', message: 'Satellite not found', metadata: id });
     }
 
     await satelliteToDelete.destroy();
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

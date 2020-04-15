@@ -1,6 +1,6 @@
 import User from '../../models/user';
 import UserType from './user.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Update a user.
@@ -22,14 +22,16 @@ export default async function update(id: string, user: UserType): Promise<UserTy
     const userToUpdate = await User.findByPk(id);
 
     if (userToUpdate === null) {
-      throw new NotFoundError({name: 'Update a User', message: 'User not found', metadata: user.id});
+      throw new NotFoundError({ name: 'Update a User', message: 'User not found', metadata: user.id });
     }
     userToUpdate.update(user);
-    let userToReturn = <UserType>userToUpdate.get({ plain: true });
+    const userToReturn = <UserType>userToUpdate.get({ plain: true });
     delete userToReturn.password;
     return userToReturn;
   } catch (e) {
     delete user.password;
-    throw error({name: e.name, message: e.message, cause: e, metadata: user});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: user,
+    });
   }
 }

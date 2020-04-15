@@ -28,7 +28,8 @@ export default class System {
   public scheduler: SchedulerClass;
   public database: any;
 
-  constructor(variable: VariableClass, house: HouseClass, room: RoomClass, satellite: SatelliteClass, user: UserClass, scheduler: SchedulerClass, database: any) {
+  constructor(variable: VariableClass, house: HouseClass, room: RoomClass, satellite: SatelliteClass,
+    user: UserClass, scheduler: SchedulerClass, database: any) {
     this.variable = variable;
     this.house = house;
     this.room = room;

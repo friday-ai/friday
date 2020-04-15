@@ -14,7 +14,6 @@ import error, { NotFoundError } from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<ActionType> {
   try {
-
     let action;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
@@ -24,13 +23,15 @@ export default async function getById(id: string, scope?: string): Promise<Actio
     }
 
     if (action === null) {
-      throw new NotFoundError({name: 'Get Action by Id', message: 'Action not found', metadata: id});
+      throw new NotFoundError({ name: 'Get Action by Id', message: 'Action not found', metadata: id });
     }
 
-    let actionToReturn = <ActionType>action.get({ plain: true });
+    const actionToReturn = <ActionType>action.get({ plain: true });
 
     return actionToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

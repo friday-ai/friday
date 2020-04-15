@@ -28,17 +28,19 @@ export default async function create(this: SessionClass, user: UserType): Promis
     const newSession: {} = {
       refreshToken: refreshTokenHash,
       validUntil: new Date(Date.now() + refreshTokenValidity * 1000),
-      userId: user.id
+      userId: user.id,
     };
 
     const createdSession = await Session.create(newSession);
-    let sessionToReturn = <SessionType>createdSession.get({ plain: true });
+    const sessionToReturn = <SessionType>createdSession.get({ plain: true });
     sessionToReturn.accessToken = await generateAccessToken(user.id!, user.role!, sessionToReturn.id!, this.secretJwt);
     sessionToReturn.user = user;
     sessionToReturn.refreshToken = refreshToken;
 
     return sessionToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: user});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: user,
+    });
   }
 }

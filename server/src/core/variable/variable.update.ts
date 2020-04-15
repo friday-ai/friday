@@ -1,6 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import { default as error, NotFoundError, BadParametersError} from '../../utils/errors/coreError';
+import error, { NotFoundError, BadParametersError } from '../../utils/errors/coreError';
 
 /**
  * Update a variable.
@@ -19,9 +19,8 @@ import { default as error, NotFoundError, BadParametersError} from '../../utils/
  */
 export default async function update(idOrKey: string, variable: VariableType): Promise<VariableType> {
   try {
-
     if (!idOrKey || idOrKey === '') {
-      throw new BadParametersError({name: 'Update an Variable', message: 'Variable\'s id or key must be specified', metadata: variable});
+      throw new BadParametersError({ name: 'Update an Variable', message: 'Variable\'s id or key must be specified', metadata: variable });
     }
 
     let variableToUpdate = await Variable.findByPk(idOrKey);
@@ -30,19 +29,21 @@ export default async function update(idOrKey: string, variable: VariableType): P
     if (variableToUpdate === null) {
       variableToUpdate = await Variable.findOne({
         where: {
-          key: idOrKey
-        }
+          key: idOrKey,
+        },
       });
     }
 
     if (variableToUpdate === null) {
-      throw new NotFoundError({name: 'Update an Variable', message: 'Variable not found', metadata: variable});
+      throw new NotFoundError({ name: 'Update an Variable', message: 'Variable not found', metadata: variable });
     }
 
     variableToUpdate.update(variable);
-    let variableToReturn = <VariableType>variableToUpdate.get({ plain: true });
+    const variableToReturn = <VariableType>variableToUpdate.get({ plain: true });
     return variableToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: variable});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: variable,
+    });
   }
 }

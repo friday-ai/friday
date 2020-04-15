@@ -1,6 +1,6 @@
 import Trigger from '../../models/trigger';
 import TriggerType from './trigger.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Update a trigger.
@@ -22,12 +22,14 @@ export default async function update(id: string, trigger: TriggerType): Promise<
     const triggerToUpdate = await Trigger.findByPk(id);
 
     if (triggerToUpdate === null) {
-      throw new NotFoundError({name: 'Update a Trigger', message: 'Trigger not found', metadata: trigger.id});
+      throw new NotFoundError({ name: 'Update a Trigger', message: 'Trigger not found', metadata: trigger.id });
     }
     triggerToUpdate.update(trigger);
-    let triggerToReturn = <TriggerType>triggerToUpdate.get({ plain: true });
+    const triggerToReturn = <TriggerType>triggerToUpdate.get({ plain: true });
     return triggerToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: trigger});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: trigger,
+    });
   }
 }

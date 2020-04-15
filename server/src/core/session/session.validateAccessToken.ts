@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import SessionClass from './index';
-import { default as error, NotFoundError, UnauthoriizedError } from '../../utils/errors/coreError';
+import error, { NotFoundError, UnauthoriizedError } from '../../utils/errors/coreError';
 import SessionType, { AccessTokenType } from './session.interface';
 
 /**
@@ -14,25 +14,27 @@ export default async function validateAccessToken(this: SessionClass, accessToke
   try {
     const decoded = <AccessTokenType>jwt.verify(accessToken, this.secretJwt, {
       issuer: 'friday',
-      audience: 'user'
+      audience: 'user',
     });
 
     const session: SessionType = await this.getById(decoded.session);
 
     if (session === null) {
-      throw new NotFoundError({name: 'Validate access token', message: 'Access token session not found.', metadata: accessToken});
+      throw new NotFoundError({ name: 'Validate access token', message: 'Access token session not found.', metadata: accessToken });
     }
 
-    if (session.revoked === true ) {
-      throw new UnauthoriizedError({name: 'Validate access token', message: 'Session was revoked.', metadata: accessToken});
+    if (session.revoked === true) {
+      throw new UnauthoriizedError({ name: 'Validate access token', message: 'Session was revoked.', metadata: accessToken });
     }
 
-    if (session.validUntil! < new Date() ) {
-      throw new UnauthoriizedError({name: 'Validate access token', message: 'Session has expired.', metadata: accessToken});
+    if (session.validUntil! < new Date()) {
+      throw new UnauthoriizedError({ name: 'Validate access token', message: 'Session has expired.', metadata: accessToken });
     }
 
     return decoded;
   } catch (e) {
-    throw error({ name: e.name, message: e.message, cause: e, metadata: accessToken });
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: accessToken,
+    });
   }
 }

@@ -1,6 +1,6 @@
 import Device from '../../models/device';
 import DeviceType from './device.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Update a device.
@@ -19,17 +19,17 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function update(id: string, device: DeviceType): Promise<DeviceType> {
   try {
-
     const deviceToUpdate = await Device.findByPk(id);
 
     if (deviceToUpdate === null) {
-      throw new NotFoundError({name: 'Update a Device', message: 'Device not found', metadata: device.id});
+      throw new NotFoundError({ name: 'Update a Device', message: 'Device not found', metadata: device.id });
     }
     deviceToUpdate.update(device);
-    let deviceToReturn = <DeviceType>deviceToUpdate.get({ plain: true });
+    const deviceToReturn = <DeviceType>deviceToUpdate.get({ plain: true });
     return deviceToReturn;
-
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: device});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: device,
+    });
   }
 }

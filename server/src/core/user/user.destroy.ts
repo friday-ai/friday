@@ -1,5 +1,5 @@
 import User from '../../models/user';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Destroy a user.
@@ -15,11 +15,13 @@ export default async function destroy(id: string): Promise<void> {
     const userToDelete = await User.findByPk(id);
 
     if (userToDelete === null) {
-      throw new NotFoundError({name: 'Destroy a User', message: 'User not found', metadata: id});
+      throw new NotFoundError({ name: 'Destroy a User', message: 'User not found', metadata: id });
     }
 
     await userToDelete.destroy();
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

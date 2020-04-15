@@ -1,6 +1,6 @@
 import Satellite from '../../models/satellite';
 import SatelliteType from './satellite.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a satellite by id.
@@ -14,7 +14,6 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<SatelliteType> {
   try {
-
     let satellite;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
@@ -24,13 +23,15 @@ export default async function getById(id: string, scope?: string): Promise<Satel
     }
 
     if (satellite === null) {
-      throw new NotFoundError({name: 'Get Satellite by Id', message: 'Satellite not found', metadata: id});
+      throw new NotFoundError({ name: 'Get Satellite by Id', message: 'Satellite not found', metadata: id });
     }
 
-    let satelliteToReturn = <SatelliteType>satellite.get({ plain: true });
+    const satelliteToReturn = <SatelliteType>satellite.get({ plain: true });
 
     return satelliteToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

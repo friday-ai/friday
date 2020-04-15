@@ -1,4 +1,4 @@
-import { default as error, NotFoundError, UnauthoriizedError } from '../../utils/errors/coreError';
+import error, { NotFoundError, UnauthoriizedError } from '../../utils/errors/coreError';
 import SessionType from './session.interface';
 import Session from '../../models/session';
 import { hashToken } from '../../utils/jwt';
@@ -13,39 +13,40 @@ import { hashToken } from '../../utils/jwt';
  */
 export default async function validateRefeshToken(refreshToken: string, scope?: string): Promise<SessionType> {
   try {
-
     let session;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
       session = await Session.scope(scope).findOne({
         where: {
-          refreshToken: hashToken(refreshToken)
-        }
+          refreshToken: hashToken(refreshToken),
+        },
       });
     } else {
       session = await Session.findOne({
         where: {
-          refreshToken: hashToken(refreshToken)
-        }
+          refreshToken: hashToken(refreshToken),
+        },
       });
     }
 
     if (session === null) {
-      throw new NotFoundError({name: 'Validate refress token', message: 'Refresh token session not found.', metadata: refreshToken});
+      throw new NotFoundError({ name: 'Validate refress token', message: 'Refresh token session not found.', metadata: refreshToken });
     }
 
     const sessionToReturn = <SessionType>session.get({ plain: true });
 
-    if (sessionToReturn.revoked === true ) {
-      throw new UnauthoriizedError({name: 'Validate refress token', message: 'Session was revoked.', metadata: refreshToken});
+    if (sessionToReturn.revoked === true) {
+      throw new UnauthoriizedError({ name: 'Validate refress token', message: 'Session was revoked.', metadata: refreshToken });
     }
 
     if (sessionToReturn.validUntil! < new Date()) {
-      throw new UnauthoriizedError({name: 'Validate refress token', message: 'Session has expired.', metadata: refreshToken});
+      throw new UnauthoriizedError({ name: 'Validate refress token', message: 'Session has expired.', metadata: refreshToken });
     }
 
     return sessionToReturn;
   } catch (e) {
-    throw error({ name: e.name, message: e.message, cause: e, metadata: refreshToken });
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: refreshToken,
+    });
   }
 }

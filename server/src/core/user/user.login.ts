@@ -1,6 +1,6 @@
 import User from '../../models/user';
 import UserType from './user.interface';
-import { default as error, NotFoundError, AuthError} from '../../utils/errors/coreError';
+import error, { NotFoundError, AuthError } from '../../utils/errors/coreError';
 import { compare } from '../../utils/password';
 
 /**
@@ -15,29 +15,29 @@ import { compare } from '../../utils/password';
  */
 export default async function login(email: string, password: string): Promise<UserType> {
   try {
-
     const user = await User.findOne({
       where: {
-        email: email
+        email,
       },
-      attributes: ['password']
+      attributes: ['password'],
     });
 
     if (user === null) {
-      throw new NotFoundError({name: 'User login', message: 'User not found', metadata: email});
+      throw new NotFoundError({ name: 'User login', message: 'User not found', metadata: email });
     }
 
-    let userToReturn = <UserType>user.get({ plain: true });
+    const userToReturn = <UserType>user.get({ plain: true });
     const passwordMatches = await compare(password, userToReturn.password!);
 
     if (passwordMatches !== true) {
-      throw new AuthError({name: 'User login', message: 'Password not matches.', metadata: email});
+      throw new AuthError({ name: 'User login', message: 'Password not matches.', metadata: email });
     }
 
     delete userToReturn.password;
     return userToReturn;
-
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: email});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: email,
+    });
   }
 }
