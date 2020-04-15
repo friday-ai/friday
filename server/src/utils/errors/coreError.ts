@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-useless-constructor */
+/* eslint-disable max-classes-per-file */
 import { ValidationError, UniqueConstraintError } from 'sequelize';
-import { ErrorType } from '../interfaces';
 import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtoken';
+import { ErrorType } from '../interfaces';
 /**
  * Base core error class
  * @class BaseCoreError
  * @extends {Error}
  */
 export class BaseCoreError extends Error {
-
   public name: string;
   public message: string;
   public cause?: Error;
@@ -28,7 +29,6 @@ export class BaseCoreError extends Error {
  * @extends {BaseCoreError}
  */
 export class AuthError extends BaseCoreError {
-
   constructor(err: ErrorType) {
     super(err);
   }
@@ -40,7 +40,6 @@ export class AuthError extends BaseCoreError {
  * @extends {BaseCoreError}
  */
 export class UnauthoriizedError extends BaseCoreError {
-
   constructor(err: ErrorType) {
     super(err);
   }
@@ -52,7 +51,6 @@ export class UnauthoriizedError extends BaseCoreError {
  * @extends {BaseCoreError}
  */
 export class NotFoundError extends BaseCoreError {
-
   constructor(err: ErrorType) {
     super(err);
   }
@@ -64,7 +62,6 @@ export class NotFoundError extends BaseCoreError {
  * @extends {BaseCoreError}
  */
 export class DatabaseUniqueConstraintError extends BaseCoreError {
-
   constructor(err: ErrorType) {
     super(err);
   }
@@ -76,7 +73,6 @@ export class DatabaseUniqueConstraintError extends BaseCoreError {
  * @extends {BaseCoreError}
  */
 export class DatabaseValidationError extends BaseCoreError {
-
   constructor(err: ErrorType) {
     super(err);
   }
@@ -88,7 +84,6 @@ export class DatabaseValidationError extends BaseCoreError {
  * @extends {BaseCoreError}
  */
 export class BadParametersError extends BaseCoreError {
-
   constructor(err: ErrorType) {
     super(err);
   }
@@ -100,7 +95,6 @@ export class BadParametersError extends BaseCoreError {
  * @returns {BaseCoreError} Resolve with an error instance.
  */
 export default function error(err: ErrorType): BaseCoreError {
-
   switch (err.cause!.constructor) {
     case ValidationError:
       return new DatabaseValidationError(err);

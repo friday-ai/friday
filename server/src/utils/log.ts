@@ -1,4 +1,5 @@
-'use strict';
+/* eslint-disable no-console */
+/* eslint-disable class-methods-use-this */
 
 const env = process.env.NODE_ENV || 'production';
 /**
@@ -6,7 +7,6 @@ const env = process.env.NODE_ENV || 'production';
  * @class Log
  */
 export default class Log {
-
   /**
    * Default style log
    * @param {string} text

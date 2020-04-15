@@ -22,12 +22,12 @@ export default class Scheduler {
     this.jobs.forEach((job) => {
       this.run(job);
     });
-  }
+  };
 
-  run = async(job: JobsInterface) => {
+  run = async (job: JobsInterface) => {
     schedule.scheduleJob(job.rule, () => {
       logger.info(`Running job "${job.name}"`);
       this.event.emit(job.event);
     });
-  }
+  };
 }
