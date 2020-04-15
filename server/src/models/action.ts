@@ -1,4 +1,8 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID,
+  AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default, Is,
+} from 'sequelize-typescript';
+
 import Scene from './scene';
 import { ActionsType } from '../utils/constants';
 import { isOwnerExisting } from '../utils/databaseValidation';
@@ -7,20 +11,19 @@ import { isOwnerExisting } from '../utils/databaseValidation';
  * Action model
  */
 @DefaultScope({
-  attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']
+  attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
-    include: [() => Scene]
-  }
+    include: [() => Scene],
+  },
 })
 @Table({
   tableName: 'action',
-  underscored: false
+  underscored: false,
 })
 export default class Action extends Model<Action> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -60,8 +63,7 @@ export default class Action extends Model<Action> {
 
   @BelongsTo(() => Scene, {
     foreignKey: 'sceneId',
-    constraints: false
+    constraints: false,
   })
   scene!: Scene;
-
 }

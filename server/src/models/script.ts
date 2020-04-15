@@ -1,17 +1,19 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, DefaultScope, Default } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, DataType, IsUUID,
+  AllowNull, Unique, NotEmpty, DefaultScope, Default,
+} from 'sequelize-typescript';
 
 /**
  * Script model
  */
 @DefaultScope({
-  attributes: ['id', 'name', 'code']
+  attributes: ['id', 'name', 'code'],
 })
 @Table({
   tableName: 'script',
-  underscored: true
+  underscored: true,
 })
 export default class Script extends Model<Script> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

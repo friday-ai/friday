@@ -1,5 +1,7 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull,
-  Unique, NotEmpty, DefaultScope, Scopes, Default, IsDate, Is } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull,
+  Unique, NotEmpty, DefaultScope, Scopes, Default, IsDate, Is,
+} from 'sequelize-typescript';
 
 import User from './user';
 import { isOwnerExisting } from '../utils/databaseValidation';
@@ -8,20 +10,19 @@ import { isOwnerExisting } from '../utils/databaseValidation';
  * Session model
  */
 @DefaultScope({
-  attributes: ['id', 'refreshToken', 'revoked', 'validUntil', 'userId']
+  attributes: ['id', 'refreshToken', 'revoked', 'validUntil', 'userId'],
 })
 @Scopes({
   full: {
     attributes: ['id', 'refreshToken', 'revoked', 'validUntil', 'userId'],
-    include: [() => User]
-  }
+    include: [() => User],
+  },
 })
 @Table({
   tableName: 'session',
-  underscored: false
+  underscored: false,
 })
 export default class Session extends Model<Session> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -54,8 +55,7 @@ export default class Session extends Model<Session> {
 
   @BelongsTo(() => User, {
     foreignKey: 'userId',
-    constraints: false
+    constraints: false,
   })
   user!: User;
-
 }

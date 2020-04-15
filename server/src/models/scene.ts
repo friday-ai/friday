@@ -1,5 +1,7 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull,
-  NotEmpty, Unique, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull,
+  NotEmpty, Unique, DefaultScope, Scopes, Default, Is,
+} from 'sequelize-typescript';
 
 import Trigger from './trigger';
 import Action from './action';
@@ -9,28 +11,27 @@ import { isOwnerExisting } from '../utils/databaseValidation';
  * Scene model
  */
 @DefaultScope({
-  attributes: ['id', 'name', 'description', 'triggerId']
+  attributes: ['id', 'name', 'description', 'triggerId'],
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'description', 'triggerId'],
-    include: [() => Trigger, () => Action]
+    include: [() => Trigger, () => Action],
   },
   withActions: {
     attributes: ['id', 'name', 'description', 'triggerId'],
-    include: [() => Action]
+    include: [() => Action],
   },
   withTrigger: {
     attributes: ['id', 'name', 'description', 'triggerId'],
-    include: [() => Trigger]
-  }
+    include: [() => Trigger],
+  },
 })
 @Table({
   tableName: 'scene',
-  underscored: false
+  underscored: false,
 })
 export default class Scene extends Model<Scene> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -59,14 +60,13 @@ export default class Scene extends Model<Scene> {
 
   @BelongsTo(() => Trigger, {
     foreignKey: 'triggerId',
-    constraints: false
+    constraints: false,
   })
   trigger!: Trigger;
 
   @HasMany(() => Action, {
     foreignKey: 'sceneId',
-    constraints: false
+    constraints: false,
   })
   actions!: Action[];
-
 }

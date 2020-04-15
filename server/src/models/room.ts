@@ -1,5 +1,7 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasMany, HasOne,
-  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasMany, HasOne,
+  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is,
+} from 'sequelize-typescript';
 
 import House from './house';
 import Satellite from './satellite';
@@ -11,36 +13,35 @@ import { isOwnerExisting } from '../utils/databaseValidation';
  * Room model
  */
 @DefaultScope({
-  attributes: ['id', 'name', 'houseId']
+  attributes: ['id', 'name', 'houseId'],
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => House, () => Device, () => Satellite, () => State]
+    include: [() => House, () => Device, () => Satellite, () => State],
   },
   withHouse: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => House]
+    include: [() => House],
   },
   withState: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => State]
+    include: [() => State],
   },
   withDevices: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => Device]
+    include: [() => Device],
   },
   withSatellites: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => Satellite]
-  }
+    include: [() => Satellite],
+  },
 })
 @Table({
   tableName: 'room',
-  underscored: false
+  underscored: false,
 })
 export default class Room extends Model<Room> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -63,26 +64,25 @@ export default class Room extends Model<Room> {
 
   @BelongsTo(() => House, {
     foreignKey: 'houseId',
-    constraints: false
+    constraints: false,
   })
   house!: House;
 
   @HasMany(() => Device, {
     foreignKey: 'roomId',
-    constraints: false
+    constraints: false,
   })
   devices!: Device[];
 
   @HasMany(() => Satellite, {
     foreignKey: 'roomId',
-    constraints: false
+    constraints: false,
   })
   satellites!: Satellite[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   state!: State;
-
 }

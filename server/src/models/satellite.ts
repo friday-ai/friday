@@ -1,5 +1,7 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, HasMany, DefaultScope, Scopes, NotEmpty, Unique, Default, Is } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
+  IsUUID, AllowNull, HasMany, DefaultScope, Scopes, NotEmpty, Unique, Default, Is,
+} from 'sequelize-typescript';
 
 import Room from './room';
 import State from './state';
@@ -11,36 +13,35 @@ import { isOwnerExisting } from '../utils/databaseValidation';
  * Satellite model
  */
 @DefaultScope({
-  attributes: ['id', 'name', 'roomId']
+  attributes: ['id', 'name', 'roomId'],
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => Room, () => Plugin, () => State, () => Variable]
+    include: [() => Room, () => Plugin, () => State, () => Variable],
   },
   withRoom: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => Room]
+    include: [() => Room],
   },
   withState: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => State]
+    include: [() => State],
   },
   withVariables: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => Variable]
+    include: [() => Variable],
   },
   withPlugins: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => Plugin]
-  }
+    include: [() => Plugin],
+  },
 })
 @Table({
   tableName: 'satellite',
-  underscored: false
+  underscored: false,
 })
 export default class Satellite extends Model<Satellite> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -63,25 +64,25 @@ export default class Satellite extends Model<Satellite> {
 
   @BelongsTo(() => Room, {
     foreignKey: 'roomId',
-    constraints: false
+    constraints: false,
   })
   room!: Room;
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   variables?: Variable[];
 
   @HasMany(() => Plugin, {
     foreignKey: 'satelliteId',
-    constraints: false
+    constraints: false,
   })
   plugins?: Plugin[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   state!: State;
 }

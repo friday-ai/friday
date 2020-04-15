@@ -1,4 +1,8 @@
-import { Table, Column, Model, PrimaryKey, DataType, HasMany, HasOne, IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, DataType, HasMany, HasOne, IsUUID,
+  AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default,
+} from 'sequelize-typescript';
+
 import Room from './room';
 import State from './state';
 
@@ -6,28 +10,27 @@ import State from './state';
  * House model
  */
 @DefaultScope({
-  attributes: ['id', 'name', 'latitude', 'longitude']
+  attributes: ['id', 'name', 'latitude', 'longitude'],
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
-    include: [() => Room, () => State]
+    include: [() => Room, () => State],
   },
   withRooms: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
-    include: [() => Room]
+    include: [() => Room],
   },
   withState: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
-    include: [() => State]
-  }
+    include: [() => State],
+  },
 })
 @Table({
   tableName: 'house',
-  underscored: false
+  underscored: false,
 })
 export default class House extends Model<House> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -52,13 +55,13 @@ export default class House extends Model<House> {
 
   @HasMany(() => Room, {
     foreignKey: 'houseId',
-    constraints: false
+    constraints: false,
   })
   rooms!: Room[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   state!: State;
 }
