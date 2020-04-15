@@ -12,8 +12,6 @@
     "test": "concurrently -k -n \"Mocha\" -c \"red\" \"cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/**/*.test.ts -exit\"",
     "coverage": "nyc npm test",
     "test:watch": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --watch --detectOpenHandles\"",
-    "lint": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force -t stylish -p tsconfig.json -c ../tslint.json\"",
-    "lint:fix": "concurrently -k -n \"TS-Lint\" -c \"blue\" \"tslint --force --fix -t stylish -p tsconfig.json -c ../tslint.json\"",
     "lint": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx ./\"",
     "lint:fix": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx ./ --fix\"",
     "generate-doc": "npm run -s generate-doc:core && npm run -s generate-doc:rest",

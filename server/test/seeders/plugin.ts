@@ -8,7 +8,7 @@ const create = async () => {
       version: '1.2.0',
       url: 'fake url',
       enabled: true,
-      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
     },
     {
       id: '88b48273-15e6-4729-9199-0682677475f4',
@@ -16,7 +16,7 @@ const create = async () => {
       version: '1.0.0',
       url: 'fake url',
       enabled: true,
-      satelliteId: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1'
+      satelliteId: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1',
     },
     {
       id: '3a6b4974-6159-4792-a327-c3656f8bb9af',
@@ -24,16 +24,16 @@ const create = async () => {
       version: '1.5.0',
       url: 'fake url',
       enabled: true,
-      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
-    }
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+    },
   ]);
 };
 
 const destroy = async () => {
-  Plugin.destroy({where: {}});
+  Plugin.destroy({ where: {} });
 };
 
 export {
   create,
-  destroy
+  destroy,
 };

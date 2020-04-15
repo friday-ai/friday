@@ -32,5 +32,4 @@ describe('Session.validateAccessToken', () => {
     const promise = session.validateAccessToken(expiredAccessToken);
     await assert.isRejected(promise, UnauthoriizedError);
   });
-
 });

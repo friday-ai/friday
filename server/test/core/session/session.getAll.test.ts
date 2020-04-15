@@ -5,10 +5,9 @@ describe('Session.getAll', () => {
   const session = new Session('secretJwt');
 
   it('should return all sessions', async () => {
-
     const sessions = await session.getAll();
 
-    sessions.forEach(s => {
+    sessions.forEach((s) => {
       expect(s).to.have.property('id');
       expect(s).to.have.property('refreshToken');
       expect(s).to.have.property('validUntil');
@@ -18,10 +17,9 @@ describe('Session.getAll', () => {
   });
 
   it('should return all sessions with full scope', async () => {
-
     const sessions = await session.getAll({ scope: 'full' });
 
-    sessions.forEach(s => {
+    sessions.forEach((s) => {
       expect(s).to.have.property('id');
       expect(s).to.have.property('refreshToken');
       expect(s).to.have.property('validUntil');
@@ -31,5 +29,4 @@ describe('Session.getAll', () => {
       expect(s.user).not.to.have.property('password');
     });
   });
-
 });

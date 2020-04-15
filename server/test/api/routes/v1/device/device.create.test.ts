@@ -4,7 +4,6 @@ import { AvailableSubTypeOfDevice, AvailableTypeOfDevice } from '../../../../../
 
 describe('POST /api/v1/device', () => {
   it('should create a device', async () => {
-
     const device = {
       id: '890ee886-5e5e-4510-93e5-0556ff5fbef3',
       name: 'Light 1',
@@ -14,7 +13,7 @@ describe('POST /api/v1/device', () => {
       unit: '',
       value: 'on',
       roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-      pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
+      pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
     };
 
     await server
@@ -29,11 +28,9 @@ describe('POST /api/v1/device', () => {
         delete res.body.updatedAt;
         assert.deepEqual(res.body, device);
       });
-
   });
 
   it('should not create a device with an existing name', async () => {
-
     await server
       .post('/api/v1/device')
       .send({
@@ -45,13 +42,12 @@ describe('POST /api/v1/device', () => {
         unit: '',
         value: 'on',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-        pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
+        pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
       })
       .expect(409);
   });
 
   it('should not create a device with an empty name', async () => {
-
     await server
       .post('/api/v1/device')
       .send({
@@ -63,13 +59,12 @@ describe('POST /api/v1/device', () => {
         unit: '',
         value: 'on',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-        pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
+        pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
       })
       .expect(422);
   });
 
   it('should not create a device with an empty room', async () => {
-
     await server
       .post('/api/v1/device')
       .send({
@@ -81,13 +76,12 @@ describe('POST /api/v1/device', () => {
         unit: '',
         value: 'on',
         roomId: '',
-        pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
+        pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
       })
       .expect(422);
   });
 
   it('should not create a device with an empty plugin', async () => {
-
     await server
       .post('/api/v1/device')
       .send({
@@ -99,13 +93,12 @@ describe('POST /api/v1/device', () => {
         unit: '',
         value: 'on',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-        pluginId: ''
+        pluginId: '',
       })
       .expect(422);
   });
 
   it('should not create a device with a wrong room', async () => {
-
     await server
       .post('/api/v1/device')
       .send({
@@ -117,13 +110,12 @@ describe('POST /api/v1/device', () => {
         unit: '',
         value: 'on',
         roomId: 'e2b6bfd9-60cf-40f7-beee-cc02afa25748',
-        pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
+        pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
       })
       .expect(422);
   });
 
   it('should not create a device with a wrong plugin', async () => {
-
     await server
       .post('/api/v1/device')
       .send({
@@ -135,7 +127,7 @@ describe('POST /api/v1/device', () => {
         unit: '',
         value: 'on',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-        pluginId: '8d2257ac-da9d-496b-973c-2b5087af434d'
+        pluginId: '8d2257ac-da9d-496b-973c-2b5087af434d',
       })
       .expect(422);
   });

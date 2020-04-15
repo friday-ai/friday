@@ -4,7 +4,6 @@ import { ActionsType } from '../../../../../src/utils/constants';
 
 describe('POST /api/v1/action', () => {
   it('should return Created', async () => {
-
     const action = {
       id: 'b1ed196e-2754-43f0-8c86-728f043c9c07',
       name: 'action test',
@@ -13,7 +12,7 @@ describe('POST /api/v1/action', () => {
       subType: '',
       variableKey: 'action test variable key',
       variableValue: 'action test variable value',
-      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e'
+      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
     };
 
     await server
@@ -28,11 +27,9 @@ describe('POST /api/v1/action', () => {
         delete res.body.updatedAt;
         assert.deepEqual(res.body, action);
       });
-
   });
 
   it('should not create a action with an existing name', async () => {
-
     await server
       .post('/api/v1/action')
       .send({
@@ -43,13 +40,12 @@ describe('POST /api/v1/action', () => {
         subType: '',
         variableKey: 'action test variable key',
         variableValue: 'action test variable value',
-        sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e'
+        sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
       })
       .expect(409);
   });
 
   it('should not create a action with an empty name', async () => {
-
     await server
       .post('/api/v1/action')
       .send({
@@ -60,13 +56,12 @@ describe('POST /api/v1/action', () => {
         subType: '',
         variableKey: 'action test variable key',
         variableValue: 'action test variable value',
-        sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e'
+        sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
       })
       .expect(422);
   });
 
   it('should not create a action with an empty scene', async () => {
-
     await server
       .post('/api/v1/action')
       .send({
@@ -77,13 +72,12 @@ describe('POST /api/v1/action', () => {
         subType: '',
         variableKey: 'action test variable key',
         variableValue: 'action test variable value',
-        sceneId: ''
+        sceneId: '',
       })
       .expect(422);
   });
 
   it('should not create a action with a wrong scene', async () => {
-
     await server
       .post('/api/v1/action')
       .send({
@@ -94,7 +88,7 @@ describe('POST /api/v1/action', () => {
         subType: '',
         variableKey: 'action test variable key',
         variableValue: 'action test variable value',
-        sceneId: 'bfa8d83b-774b-4203-8a2d-2f738a8a6d0a'
+        sceneId: 'bfa8d83b-774b-4203-8a2d-2f738a8a6d0a',
       })
       .expect(422);
   });

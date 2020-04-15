@@ -4,17 +4,16 @@ import SessionType from '../../../../../src/core/session/session.interface';
 
 describe('GET /api/v1/session', () => {
   it('should return all sessions', async () => {
-
     await server
       .get('/api/v1/session')
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let sessions = res.body;
+        const sessions = res.body;
         expect(sessions).to.be.an('array');
         sessions.forEach((session: SessionType) => {
           expect(session).to.have.all.keys(
-            ['id', 'refreshToken', 'validUntil', 'userId', 'revoked']
+            ['id', 'refreshToken', 'validUntil', 'userId', 'revoked'],
           );
           expect(session.revoked).to.equal(false);
         });
@@ -22,20 +21,19 @@ describe('GET /api/v1/session', () => {
   });
 
   it('should return all sessions with full scope', async () => {
-
     await server
       .get('/api/v1/session')
       .query({
-        scope: 'full'
+        scope: 'full',
       })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let sessions = res.body;
+        const sessions = res.body;
         expect(sessions).to.be.an('array');
         sessions.forEach((session: SessionType) => {
           expect(session).to.have.all.keys(
-            ['id', 'refreshToken', 'validUntil', 'userId', 'revoked', 'user']
+            ['id', 'refreshToken', 'validUntil', 'userId', 'revoked', 'user'],
           );
           expect(session.revoked).to.equal(false);
           expect(session.user).to.be.an('object');

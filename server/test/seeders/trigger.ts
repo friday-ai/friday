@@ -10,17 +10,17 @@ const create = async () => {
       type: AvailableConditions.DEVICE_VALUE,
       rules: JSON.stringify({
         device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
-        value: '23'
-      })
-    }
+        value: '23',
+      }),
+    },
   ]);
 };
 
 const destroy = async () => {
-  Trigger.destroy({where: {}});
+  Trigger.destroy({ where: {} });
 };
 
 export {
   create,
-  destroy
+  destroy,
 };

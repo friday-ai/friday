@@ -3,7 +3,6 @@ import server from '../../../../utils/request';
 
 describe('GET /api/v1/user/count', () => {
   it('should return the number of registered users', async () => {
-
     await server
       .get('/api/v1/user/count')
       .expect(200)

@@ -14,8 +14,8 @@ describe('Trigger.create', () => {
       type: AvailableConditions.DEVICE_VALUE,
       rules: JSON.stringify({
         device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
-        value: '23'
-      })
+        value: '23',
+      }),
     });
 
     expect(createdTrigger).to.have.property('id');
@@ -26,7 +26,6 @@ describe('Trigger.create', () => {
   });
 
   it('should not create a trigger with an empty name', async () => {
-
     const promise = trigger.create({
       id: '8a1f51d3-b720-48c1-984a-4d188763396f',
       name: '',
@@ -34,11 +33,10 @@ describe('Trigger.create', () => {
       type: AvailableConditions.DEVICE_VALUE,
       rules: JSON.stringify({
         device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
-        value: '23'
-      })
+        value: '23',
+      }),
     });
 
     await assert.isRejected(promise, DatabaseValidationError);
   });
-
 });

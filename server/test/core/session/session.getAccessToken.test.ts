@@ -8,7 +8,6 @@ describe('Session.getAccessToken', () => {
   const session = new Session('secretJwt');
 
   it('should get a access token for an session', async () => {
-
     const sessionReturned = await session.getAccessToken('refresh-token-test-simple');
 
     expect(sessionReturned).to.have.property('refreshToken');
@@ -33,5 +32,4 @@ describe('Session.getAccessToken', () => {
     const promise = session.getAccessToken('refresh-token-test-expired');
     await assert.isRejected(promise, UnauthoriizedError);
   });
-
 });

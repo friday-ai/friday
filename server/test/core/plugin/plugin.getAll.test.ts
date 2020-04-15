@@ -5,44 +5,41 @@ describe('Plugin.getAll', () => {
   const plugin = new Plugin();
 
   it('should return all plugins', async () => {
-
     const plugins = await plugin.getAll();
 
     expect(plugins).to.be.an('array');
     assert.deepEqual(plugins, [{
-        id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
-        name: 'Zwave',
-        version: '1.2.0',
-        url: 'fake url',
-        enabled: true,
-        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
-      },
-      {
-        id: '88b48273-15e6-4729-9199-0682677475f4',
-        name: 'Xiaomi',
-        version: '1.0.0',
-        url: 'fake url',
-        enabled: true,
-        satelliteId: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1'
-      },
-      {
-        id: '3a6b4974-6159-4792-a327-c3656f8bb9af',
-        name: 'Philips Hue',
-        version: '1.5.0',
-        url: 'fake url',
-        enabled: true,
-        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
-      }
+      id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+      name: 'Zwave',
+      version: '1.2.0',
+      url: 'fake url',
+      enabled: true,
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+    },
+    {
+      id: '88b48273-15e6-4729-9199-0682677475f4',
+      name: 'Xiaomi',
+      version: '1.0.0',
+      url: 'fake url',
+      enabled: true,
+      satelliteId: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1',
+    },
+    {
+      id: '3a6b4974-6159-4792-a327-c3656f8bb9af',
+      name: 'Philips Hue',
+      version: '1.5.0',
+      url: 'fake url',
+      enabled: true,
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+    },
     ]);
-
   });
 
   it('should return all plugins with full scope', async () => {
-
     const plugins = await plugin.getAll({ scope: 'full' });
 
     expect(plugins).to.be.an('array');
-    plugins.forEach(p => {
+    plugins.forEach((p) => {
       expect(p).to.have.property('id');
       expect(p).to.have.property('name');
       expect(p).to.have.property('version');
@@ -68,7 +65,7 @@ describe('Plugin.getAll', () => {
 
       if (p.devices !== null) {
         expect(p.devices).to.be.an('array');
-        p.devices!.forEach(d => {
+        p.devices!.forEach((d) => {
           expect(d).to.be.an('object');
           expect(d).to.have.property('id');
           expect(d).to.have.property('name');
@@ -82,7 +79,7 @@ describe('Plugin.getAll', () => {
 
       if (p.variables !== null) {
         expect(p.variables).to.be.an('array');
-        p.variables!.forEach(v => {
+        p.variables!.forEach((v) => {
           expect(v).to.be.an('object');
           expect(v).to.have.property('id');
           expect(v).to.have.property('key');
@@ -91,17 +88,14 @@ describe('Plugin.getAll', () => {
           expect(v).to.have.property('ownerType');
         });
       }
-
     });
-
   });
 
   it('should return all plugins with satellites', async () => {
-
     const plugins = await plugin.getAll({ scope: 'withSatellite' });
 
     expect(plugins).to.be.an('array');
-    plugins.forEach(p => {
+    plugins.forEach((p) => {
       expect(p).to.have.property('id');
       expect(p).to.have.property('name');
       expect(p).to.have.property('version');
@@ -115,17 +109,14 @@ describe('Plugin.getAll', () => {
         expect(p.satellite).to.have.property('name');
         expect(p.satellite).to.have.property('roomId');
       }
-
     });
-
   });
 
   it('should return all plugins with state', async () => {
-
     const plugins = await plugin.getAll({ scope: 'withState' });
 
     expect(plugins).to.be.an('array');
-    plugins.forEach(p => {
+    plugins.forEach((p) => {
       expect(p).to.have.property('id');
       expect(p).to.have.property('name');
       expect(p).to.have.property('version');
@@ -142,15 +133,13 @@ describe('Plugin.getAll', () => {
         expect(p.state).to.have.property('value');
       }
     });
-
   });
 
   it('should return all plugins with devices', async () => {
-
     const plugins = await plugin.getAll({ scope: 'withDevices' });
 
     expect(plugins).to.be.an('array');
-    plugins.forEach(p => {
+    plugins.forEach((p) => {
       expect(p).to.have.property('id');
       expect(p).to.have.property('name');
       expect(p).to.have.property('version');
@@ -160,7 +149,7 @@ describe('Plugin.getAll', () => {
 
       if (p.devices !== null) {
         expect(p.devices).to.be.an('array');
-        p.devices!.forEach(d => {
+        p.devices!.forEach((d) => {
           expect(d).to.be.an('object');
           expect(d).to.have.property('id');
           expect(d).to.have.property('name');
@@ -171,17 +160,14 @@ describe('Plugin.getAll', () => {
           expect(d).to.have.property('value');
         });
       }
-
     });
-
   });
 
   it('should return all plugins with variables', async () => {
-
     const plugins = await plugin.getAll({ scope: 'withVariables' });
 
     expect(plugins).to.be.an('array');
-    plugins.forEach(p => {
+    plugins.forEach((p) => {
       expect(p).to.have.property('id');
       expect(p).to.have.property('name');
       expect(p).to.have.property('version');
@@ -191,7 +177,7 @@ describe('Plugin.getAll', () => {
 
       if (p.variables !== null) {
         expect(p.variables).to.be.an('array');
-        p.variables!.forEach(v => {
+        p.variables!.forEach((v) => {
           expect(v).to.be.an('object');
           expect(v).to.have.property('id');
           expect(v).to.have.property('key');
@@ -200,9 +186,6 @@ describe('Plugin.getAll', () => {
           expect(v).to.have.property('ownerType');
         });
       }
-
     });
-
   });
-
 });

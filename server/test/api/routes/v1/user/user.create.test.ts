@@ -3,14 +3,13 @@ import server from '../../../../utils/request';
 
 describe('POST /api/v1/user', () => {
   it('should create a user', async () => {
-
     const user = {
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
       name: 'Pepperwood',
       firstName: 'John',
       email: 'test@test.com',
       password: 'mysuperpassword',
-      birthDate: new Date(1996, 12, 20)
+      birthDate: new Date(1996, 12, 20),
     };
 
     await server
@@ -30,13 +29,12 @@ describe('POST /api/v1/user', () => {
           email: 'test@test.com',
           birthDate: '1997-01-20',
           language: 'en',
-          role: 'habitant'
+          role: 'habitant',
         });
       });
   });
 
   it('should not create a user with an existing email', async () => {
-
     await server
       .post('/api/v1/user')
       .send({
@@ -45,14 +43,13 @@ describe('POST /api/v1/user', () => {
         firstName: 'John',
         email: 'john@pepperwood.com',
         password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20)
+        birthDate: new Date(1996, 12, 20),
       })
       .expect('Content-Type', /json/)
       .expect(409);
   });
 
   it('should not create user with wrong email', async () => {
-
     await server
       .post('/api/v1/user')
       .send({
@@ -61,14 +58,13 @@ describe('POST /api/v1/user', () => {
         firstName: 'John',
         email: 'johnpepperwood',
         password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20)
+        birthDate: new Date(1996, 12, 20),
       })
       .expect('Content-Type', /json/)
       .expect(422);
   });
 
   it('should not create user with password too small', async () => {
-
     await server
       .post('/api/v1/user')
       .send({
@@ -77,14 +73,13 @@ describe('POST /api/v1/user', () => {
         firstName: 'John',
         email: 'test2@test2.com',
         password: 'test',
-        birthDate: new Date(1996, 12, 20)
+        birthDate: new Date(1996, 12, 20),
       })
       .expect('Content-Type', /json/)
       .expect(422);
   });
 
   it('should not create a user with a empty name', async () => {
-
     await server
       .post('/api/v1/user')
       .send({
@@ -93,14 +88,13 @@ describe('POST /api/v1/user', () => {
         firstName: 'John',
         email: 'test3@test3.com',
         password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20)
+        birthDate: new Date(1996, 12, 20),
       })
       .expect('Content-Type', /json/)
       .expect(422);
   });
 
   it('should not create a user with a empty password', async () => {
-
     await server
       .post('/api/v1/user')
       .send({
@@ -109,14 +103,13 @@ describe('POST /api/v1/user', () => {
         firstName: 'John',
         email: 'test3@test3.com',
         password: '',
-        birthDate: new Date(1996, 12, 20)
+        birthDate: new Date(1996, 12, 20),
       })
       .expect('Content-Type', /json/)
       .expect(422);
   });
 
   it('should not create a user with a empty email', async () => {
-
     await server
       .post('/api/v1/user')
       .send({
@@ -125,7 +118,7 @@ describe('POST /api/v1/user', () => {
         firstName: 'John',
         email: '',
         password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20)
+        birthDate: new Date(1996, 12, 20),
       })
       .expect('Content-Type', /json/)
       .expect(422);

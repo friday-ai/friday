@@ -11,7 +11,7 @@ const create = async () => {
       subType: '',
       variableKey: 'action1 variable key',
       variableValue: 'action1 variable value',
-      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e'
+      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
     },
     {
       id: '0e7219cf-690d-4224-a29d-dcaf3642c569',
@@ -21,16 +21,16 @@ const create = async () => {
       subType: '',
       variableKey: 'action2 variable key',
       variableValue: 'action2 variable value',
-      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e'
-    }
+      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
+    },
   ]);
 };
 
 const destroy = async () => {
-  Action.destroy({where: {}});
+  Action.destroy({ where: {} });
 };
 
 export {
   create,
-  destroy
+  destroy,
 };

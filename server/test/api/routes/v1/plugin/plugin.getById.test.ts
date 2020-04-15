@@ -5,7 +5,6 @@ import VariableType from '../../../../../src/core/variable/variable.interface';
 
 describe('GET /api/v1/plugin/:id', () => {
   it('should return a plugin', async () => {
-
     await server
       .get('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e')
       .expect('Content-Type', /json/)
@@ -13,40 +12,39 @@ describe('GET /api/v1/plugin/:id', () => {
       .then((res) => {
         expect(res.body).to.be.an('object');
         assert.deepEqual(res.body, {
-            id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
-            name: 'Zwave',
-            version: '1.2.0',
-            url: 'fake url',
-            enabled: true,
-            satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
-          });
+          id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+          name: 'Zwave',
+          version: '1.2.0',
+          url: 'fake url',
+          enabled: true,
+          satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+        });
       });
   });
 
   it('should return a plugin with full scope', async () => {
-
     await server
       .get('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e')
-      .query({'scope' : 'full'})
+      .query({ scope: 'full' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let plugin = res.body;
+        const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables']
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables'],
         );
         if (plugin.state !== null) {
           expect(plugin.state).to.be.an('object');
           expect(plugin.state).to.have.all.keys(
-            ['id', 'owner', 'ownerType', 'value']
+            ['id', 'owner', 'ownerType', 'value'],
           );
         }
 
         if (plugin.satellite !== null) {
           expect(plugin.satellite).to.be.an('object');
           expect(plugin.satellite).to.have.all.keys(
-            ['id', 'name', 'roomId']
+            ['id', 'name', 'roomId'],
           );
         }
 
@@ -55,7 +53,7 @@ describe('GET /api/v1/plugin/:id', () => {
           plugin.devices!.forEach((device: DeviceType) => {
             expect(device).to.be.an('object');
             expect(device).to.have.all.keys(
-              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
+              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
             );
           });
         }
@@ -65,7 +63,7 @@ describe('GET /api/v1/plugin/:id', () => {
           plugin.variables!.forEach((variable: VariableType) => {
             expect(variable).to.be.an('object');
             expect(variable).to.have.all.keys(
-              ['id', 'key', 'value', 'owner', 'ownerType']
+              ['id', 'key', 'value', 'owner', 'ownerType'],
             );
           });
         }
@@ -73,68 +71,65 @@ describe('GET /api/v1/plugin/:id', () => {
   });
 
   it('should return a plugin with satellite', async () => {
-
     await server
       .get('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e')
-      .query({'scope' : 'withSatellite'})
+      .query({ scope: 'withSatellite' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let plugin = res.body;
+        const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite']
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite'],
         );
         if (plugin.satellite !== null) {
           expect(plugin.satellite).to.be.an('object');
           expect(plugin.satellite).to.have.all.keys(
-            ['id', 'name', 'roomId']
+            ['id', 'name', 'roomId'],
           );
         }
       });
   });
 
   it('should return a plugin with state', async () => {
-
     await server
       .get('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e')
-      .query({'scope' : 'withState'})
+      .query({ scope: 'withState' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let plugin = res.body;
+        const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state']
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state'],
         );
         if (plugin.state !== null) {
           expect(plugin.state).to.be.an('object');
           expect(plugin.state).to.have.all.keys(
-            ['id', 'owner', 'ownerType', 'value']
+            ['id', 'owner', 'ownerType', 'value'],
           );
         }
       });
   });
 
   it('should return a plugin with devices', async () => {
-
     await server
       .get('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e')
-      .query({'scope' : 'withDevices'})
+      .query({ scope: 'withDevices' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let plugin = res.body;
+        const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices']
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices'],
         );
         if (plugin.devices !== null) {
           expect(plugin.devices).to.be.an('array');
           plugin.devices!.forEach((device: DeviceType) => {
             expect(device).to.be.an('object');
             expect(device).to.have.all.keys(
-              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId']
+              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
             );
           });
         }
@@ -142,24 +137,23 @@ describe('GET /api/v1/plugin/:id', () => {
   });
 
   it('should return a plugin with variables', async () => {
-
     await server
       .get('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e')
-      .query({'scope' : 'withVariables'})
+      .query({ scope: 'withVariables' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let plugin = res.body;
+        const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables']
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables'],
         );
         if (plugin.variables !== null) {
           expect(plugin.variables).to.be.an('array');
           plugin.variables!.forEach((variable: VariableType) => {
             expect(variable).to.be.an('object');
             expect(variable).to.have.all.keys(
-              ['id', 'key', 'value', 'owner', 'ownerType']
+              ['id', 'key', 'value', 'owner', 'ownerType'],
             );
           });
         }

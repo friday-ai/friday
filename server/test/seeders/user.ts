@@ -9,7 +9,7 @@ const create = async () => {
       firstName: 'John',
       email: 'john@pepperwood.com',
       password: await hash('mysuperpassword'),
-      birthDate: new Date(1996, 12, 20)
+      birthDate: new Date(1996, 12, 20),
     },
     {
       id: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
@@ -17,16 +17,16 @@ const create = async () => {
       firstName: 'Jess',
       email: 'jess@pepperwood.com',
       password: await hash('mysuperpassword2'),
-      birthDate: new Date(1996, 12, 20)
-    }
+      birthDate: new Date(1996, 12, 20),
+    },
   ]);
 };
 
 const destroy = async () => {
-  User.destroy({where: {}});
+  User.destroy({ where: {} });
 };
 
 export {
   create,
-  destroy
+  destroy,
 };
