@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * Device router
@@ -44,10 +46,10 @@ export default class DeviceRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const device = await this.friday.device.create(req.body);
     res.status(201).json(device);
-  }
+  };
 
   /**
    * Update a device
@@ -71,10 +73,10 @@ export default class DeviceRouter {
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const device = await this.friday.device.update(req.params.id, req.body);
     res.json(device);
-  }
+  };
 
   /**
    * Delete a device
@@ -89,12 +91,12 @@ export default class DeviceRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.device.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
 
   /**
@@ -121,7 +123,7 @@ export default class DeviceRouter {
   getAll = async (req: Request, res: Response) => {
     const devices = await this.friday.device.getAll(req.query);
     res.json(devices);
-  }
+  };
 
   /**
    * Get a device by id
@@ -144,9 +146,8 @@ export default class DeviceRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getById = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response) => {
     const device = await this.friday.device.getById(req.params.id, req.query.scope);
     res.json(device);
-  }
-
+  };
 }

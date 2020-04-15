@@ -1,8 +1,9 @@
 import * as WebSocket from 'ws';
-import { WebsocketMessagePayload } from '../../../src/utils/interfaces';
+import { WebsocketMessagePayload } from '../../utils/interfaces';
 import WebsocketServer from '.';
 import Log from '../../utils/log';
-import { BadParametersError } from '../../../src/utils/errors/coreError';
+import { BadParametersError } from '../../utils/errors/coreError';
+
 const logger = new Log();
 
 /**
@@ -10,13 +11,12 @@ const logger = new Log();
  */
 export default async function clientConnected(this: WebsocketServer, message: WebsocketMessagePayload, ws: WebSocket) {
   try {
-
     if (message.accessToken === null) {
-      throw new BadParametersError({name: 'Websocket authentication', message: 'Access token not found', metadata: message});
+      throw new BadParametersError({ name: 'Websocket authentication', message: 'Access token not found', metadata: message });
     }
 
     await this.friday.session.validateAccessToken(message.accessToken!);
-    const user =  await this.friday.user.getById(message.sender);
+    const user = await this.friday.user.getById(message.sender);
 
     if (!this.clients[user.id!]) {
       this.clients[user.id!] = [];
@@ -26,7 +26,7 @@ export default async function clientConnected(this: WebsocketServer, message: We
     if (connectionIndex === -1) {
       this.clients[user.id!].push({
         user,
-        ws
+        ws,
       });
     }
 
@@ -34,7 +34,7 @@ export default async function clientConnected(this: WebsocketServer, message: We
     this.isAuthenticated = true;
     logger.info(`User ${user.firstName} connected in websocket.`);
   } catch (e) {
-    logger.error(`Websocket authentication failed.`);
+    logger.error('Websocket authentication failed.');
     ws.close(4000, 'Auth failed');
   }
 }

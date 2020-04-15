@@ -1,8 +1,9 @@
 import * as WebSocket from 'ws';
-import { WebsocketMessagePayload } from '../../../src/utils/interfaces';
+import { WebsocketMessagePayload } from '../../utils/interfaces';
 import { WebsocketMessageTypes } from '../../utils/constants';
 import Log from '../../utils/log';
 import WebsocketServer from '.';
+
 const logger = new Log();
 
 /**
@@ -17,10 +18,10 @@ export default function handleMessage(this: WebsocketServer, message: WebsocketM
       this.sendMessage(message);
       break;
     case WebsocketMessageTypes.MESSAGE_SEND_ALL:
-      this.sendMessage(message, {sendAll: true});
+      this.sendMessage(message, { sendAll: true });
       break;
     case WebsocketMessageTypes.MESSAGE_SEND_ADMIN:
-      this.sendMessage(message, {sendAdmins: true});
+      this.sendMessage(message, { sendAdmins: true });
       break;
     default:
       logger.error(`Websocket message type not handled: ${message.type}`);

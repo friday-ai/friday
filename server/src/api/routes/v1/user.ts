@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * User router
@@ -39,10 +41,10 @@ export default class UserRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const user = await this.friday.user.create(req.body);
     res.status(201).json(user);
-  }
+  };
 
   /**
    * Update a user
@@ -62,10 +64,10 @@ export default class UserRouter {
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const user = await this.friday.user.update(req.params.id, req.body);
     res.json(user);
-  }
+  };
 
   /**
    * Delete a user by id
@@ -80,12 +82,12 @@ export default class UserRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.user.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
   /**
    * Get all users
@@ -107,7 +109,7 @@ export default class UserRouter {
   getAll = async (req: Request, res: Response) => {
     const users = await this.friday.user.getAll(req.query);
     res.json(users);
-  }
+  };
 
   /**
    * Get user count
@@ -118,10 +120,10 @@ export default class UserRouter {
    * @apiVersion 1.0.0
    */
   @Get({ path: '/count', authenticated: true, rateLimit: true })
-  getUsersCount = async (req: Request, res: Response, next: NextFunction) => {
+  getUsersCount = async (req: Request, res: Response) => {
     const count = await this.friday.user.getCount();
     res.status(200).json(count);
-  }
+  };
 
   /**
    * Get a user by id
@@ -140,10 +142,10 @@ export default class UserRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response, next: NextFunction) => {
+  getbyId = async (req: Request, res: Response) => {
     const user = await this.friday.user.getById(req.params.id, req.query.scope);
     res.json(user);
-  }
+  };
 
   /**
    * Login a user
@@ -157,10 +159,9 @@ export default class UserRouter {
    * @apiVersion 1.0.0
    */
   @Post({ path: '/login', authenticated: false, rateLimit: true })
-  login = async (req: Request, res: Response, next: NextFunction) => {
+  login = async (req: Request, res: Response) => {
     const user = await this.friday.user.login(req.body.email, req.body.password);
     const session = await this.friday.session.create(user);
     res.status(201).json(session);
-  }
-
+  };
 }

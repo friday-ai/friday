@@ -1,6 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+
+import Friday from '../../../core/friday';
 
 /**
  * Action router
@@ -43,10 +46,10 @@ export default class ActionRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const action = await this.friday.action.create(req.body);
     res.status(201).json(action);
-  }
+  };
 
   /**
    * Update an action
@@ -70,10 +73,10 @@ export default class ActionRouter {
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const action = await this.friday.action.update(req.params.id, req.body);
     res.json(action);
-  }
+  };
 
   /**
    * Delete an action by id
@@ -89,12 +92,12 @@ export default class ActionRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.action.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
   /**
    * Get all actions
@@ -120,7 +123,7 @@ export default class ActionRouter {
   getAll = async (req: Request, res: Response) => {
     const actions = await this.friday.action.getAll(req.query);
     res.json(actions);
-  }
+  };
 
   /**
    * Get an action by id
@@ -142,9 +145,8 @@ export default class ActionRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response, next: NextFunction) => {
+  getbyId = async (req: Request, res: Response) => {
     const action = await this.friday.action.getById(req.params.id, req.query.scope);
     res.json(action);
-  }
-
+  };
 }

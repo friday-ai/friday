@@ -1,6 +1,7 @@
 import * as WebSocket from 'ws';
 import WebsocketServer from '.';
 import Log from '../../utils/log';
+
 const logger = new Log();
 
 /**

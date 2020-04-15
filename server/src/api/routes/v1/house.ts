@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * House router
@@ -34,10 +36,10 @@ export default class HouseRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const house = await this.friday.house.create(req.body);
     res.status(201).json(house);
-  }
+  };
 
   /**
    * Update an house
@@ -56,10 +58,10 @@ export default class HouseRouter {
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const house = await this.friday.house.update(req.params.id, req.body);
     res.json(house);
-  }
+  };
 
   /**
    * Delete an house
@@ -74,12 +76,12 @@ export default class HouseRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.house.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
   /**
    * Get all houses
@@ -100,7 +102,7 @@ export default class HouseRouter {
   getAll = async (req: Request, res: Response) => {
     const houses = await this.friday.house.getAll(req.query);
     res.json(houses);
-  }
+  };
 
   /**
    * Get an house by id
@@ -118,9 +120,8 @@ export default class HouseRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getById = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response) => {
     const house = await this.friday.house.getById(req.params.id, req.query.scope);
     res.json(house);
-  }
-
+  };
 }
