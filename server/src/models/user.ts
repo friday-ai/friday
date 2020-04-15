@@ -1,38 +1,39 @@
-import { Table, Column, Model, PrimaryKey, DataType, HasOne, IsDate, IsUUID,
-  Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate, Scopes, HasMany } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, DataType, HasOne, IsDate, IsUUID,
+  Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate, Scopes, HasMany,
+} from 'sequelize-typescript';
 
 import Variable from './variable';
 import { UserRole, AvailableLanguages } from '../utils/constants';
 import State from './state';
-import { hash } from '../../src/utils/password';
+import { hash } from '../utils/password';
 import Session from './session';
 
 /**
  * User model
  */
 @DefaultScope({
-  attributes: ['id', 'name', 'firstName', 'email', 'birthDate']
+  attributes: ['id', 'name', 'firstName', 'email', 'birthDate'],
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
-    include: [() => State, () => Variable]
+    include: [() => State, () => Variable],
   },
   withState: {
     attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
-    include: [() => State]
+    include: [() => State],
   },
   withVariables: {
     attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
-    include: [() => Variable]
-  }
+    include: [() => Variable],
+  },
 })
 @Table({
   tableName: 'user',
-  underscored: false
+  underscored: false,
 })
 export default class User extends Model<User> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -80,19 +81,19 @@ export default class User extends Model<User> {
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   variables?: Variable[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   state?: State;
 
   @HasMany(() => Session, {
     foreignKey: 'userId',
-    constraints: false
+    constraints: false,
   })
   session?: Session[];
 

@@ -13,8 +13,7 @@ const authenticatedRequest = (methode: Methodes, url: string) => {
   const header = `Bearer ${accessToken}`;
 
   // @ts-ignore
-  return request(global.TEST_SERVER)
-    [methode](url)
+  return request(global.TEST_SERVER)[methode](url)
     .set('Accept', 'application/json')
     .set('Authorization', header);
 };
@@ -23,5 +22,5 @@ export default {
   get: (url: string) => authenticatedRequest(Methodes.GET, url),
   post: (url: string) => authenticatedRequest(Methodes.POST, url),
   patch: (url: string) => authenticatedRequest(Methodes.PATCH, url),
-  delete: (url: string) => authenticatedRequest(Methodes.DELETE, url)
+  delete: (url: string) => authenticatedRequest(Methodes.DELETE, url),
 };

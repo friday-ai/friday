@@ -5,23 +5,20 @@ describe('Plugin.getById', () => {
   const plugin = new Plugin();
 
   it('should return a plugin', async () => {
-
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
 
     expect(pluginReturned).to.be.an('object');
     assert.deepEqual(pluginReturned, {
-        id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
-        name: 'Zwave',
-        version: '1.2.0',
-        url: 'fake url',
-        enabled: true,
-        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
-      });
-
+      id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+      name: 'Zwave',
+      version: '1.2.0',
+      url: 'fake url',
+      enabled: true,
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+    });
   });
 
   it('should return a plugin with full scope', async () => {
-
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'full');
 
     expect(pluginReturned).to.have.property('id');
@@ -49,7 +46,7 @@ describe('Plugin.getById', () => {
 
     if (pluginReturned.devices !== null) {
       expect(pluginReturned.devices).to.be.an('array');
-      pluginReturned.devices!.forEach(d => {
+      pluginReturned.devices!.forEach((d) => {
         expect(d).to.be.an('object');
         expect(d).to.have.property('id');
         expect(d).to.have.property('name');
@@ -63,7 +60,7 @@ describe('Plugin.getById', () => {
 
     if (pluginReturned.variables !== null) {
       expect(pluginReturned.variables).to.be.an('array');
-      pluginReturned.variables!.forEach(v => {
+      pluginReturned.variables!.forEach((v) => {
         expect(v).to.be.an('object');
         expect(v).to.have.property('id');
         expect(v).to.have.property('key');
@@ -72,11 +69,9 @@ describe('Plugin.getById', () => {
         expect(v).to.have.property('ownerType');
       });
     }
-
   });
 
   it('should return a plugin with satellite', async () => {
-
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'withSatellite');
 
     expect(pluginReturned).to.have.property('id');
@@ -92,11 +87,9 @@ describe('Plugin.getById', () => {
       expect(pluginReturned.satellite).to.have.property('name');
       expect(pluginReturned.satellite).to.have.property('roomId');
     }
-
   });
 
   it('should return a plugin with state', async () => {
-
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'withState');
 
     expect(pluginReturned).to.have.property('id');
@@ -114,11 +107,9 @@ describe('Plugin.getById', () => {
       expect(pluginReturned.state).to.have.property('ownerType');
       expect(pluginReturned.state).to.have.property('value');
     }
-
   });
 
   it('should return a plugin with devices', async () => {
-
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'withDevices');
 
     expect(pluginReturned).to.have.property('id');
@@ -130,7 +121,7 @@ describe('Plugin.getById', () => {
 
     if (pluginReturned.devices !== null) {
       expect(pluginReturned.devices).to.be.an('array');
-      pluginReturned.devices!.forEach(d => {
+      pluginReturned.devices!.forEach((d) => {
         expect(d).to.be.an('object');
         expect(d).to.have.property('id');
         expect(d).to.have.property('name');
@@ -141,11 +132,9 @@ describe('Plugin.getById', () => {
         expect(d).to.have.property('value');
       });
     }
-
   });
 
   it('should return a plugin with variables', async () => {
-
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'withVariables');
 
     expect(pluginReturned).to.have.property('id');
@@ -157,7 +146,7 @@ describe('Plugin.getById', () => {
 
     if (pluginReturned.variables !== null) {
       expect(pluginReturned.variables).to.be.an('array');
-      pluginReturned.variables!.forEach(v => {
+      pluginReturned.variables!.forEach((v) => {
         expect(v).to.be.an('object');
         expect(v).to.have.property('id');
         expect(v).to.have.property('key');
@@ -166,7 +155,5 @@ describe('Plugin.getById', () => {
         expect(v).to.have.property('ownerType');
       });
     }
-
   });
-
 });

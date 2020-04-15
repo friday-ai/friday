@@ -1,6 +1,6 @@
 import User from '../../models/user';
 import UserType from './user.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a user by id.
@@ -14,27 +14,27 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<UserType> {
   try {
-
     let user;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
       user = await User.scope(scope).findByPk(id);
     } else {
       user = await User.findByPk(id, {
-        attributes: ['id', 'name', 'firstName', 'email', 'birthDate']
+        attributes: ['id', 'name', 'firstName', 'email', 'birthDate'],
       });
     }
 
     if (user === null) {
-      throw new NotFoundError({name: 'Get User by Id', message: 'User not found', metadata: id});
+      throw new NotFoundError({ name: 'Get User by Id', message: 'User not found', metadata: id });
     }
 
-    let userToReturn = <UserType>user.get({ plain: true });
+    const userToReturn = <UserType>user.get({ plain: true });
     delete userToReturn.password;
 
     return userToReturn;
-
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

@@ -44,20 +44,20 @@ export default class Friday {
   public state = new State(this.event, this.variable);
   public constants = Constants;
 
-  private _system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.scheduler, database);
+  private system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.scheduler, database);
 
   /**
    * Starts friday
    */
   async start() {
     await database.init();
-    await this._system.start();
+    await this.system.start();
   }
 
   /**
    * Gets version
    */
   getVersion() {
-    return this._system.getVersion();
+    return this.system.getVersion();
   }
 }

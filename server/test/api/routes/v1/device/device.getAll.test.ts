@@ -4,7 +4,6 @@ import DeviceType from '../../../../../src/core/device/device.interface';
 
 describe('GET /api/v1/device', () => {
   it('should return all devices', async () => {
-
     await server
       .get('/api/v1/device')
       .expect('Content-Type', /json/)
@@ -12,46 +11,44 @@ describe('GET /api/v1/device', () => {
       .then((res) => {
         expect(res.body).to.be.an('array');
         assert.deepEqual(res.body, [{
-            id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
-            name: 'Light',
-            type: 'light',
-            subType: 'light_rgb',
-            variable: '',
-            unit: '',
-            value: 'on',
-            roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-            pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
-          },
-          {
-            id: 'cc306435-eb0f-455c-b79d-a684b171e04d',
-            name: 'Temperature',
-            type: 'sensor',
-            subType: 'sensor_temperature',
-            variable: '',
-            unit: '°C',
-            value: '23',
-            roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-            pluginId: '88b48273-15e6-4729-9199-0682677475f4'
-          }
+          id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
+          name: 'Light',
+          type: 'light',
+          subType: 'light_rgb',
+          variable: '',
+          unit: '',
+          value: 'on',
+          roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+          pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+        },
+        {
+          id: 'cc306435-eb0f-455c-b79d-a684b171e04d',
+          name: 'Temperature',
+          type: 'sensor',
+          subType: 'sensor_temperature',
+          variable: '',
+          unit: '°C',
+          value: '23',
+          roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+          pluginId: '88b48273-15e6-4729-9199-0682677475f4',
+        },
         ]);
       });
-
   });
 
   it('should return all devices with full scope', async () => {
-
     await server
       .get('/api/v1/device')
-      .query({'scope' : 'full'})
+      .query({ scope: 'full' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let devices = res.body;
+        const devices = res.body;
         expect(devices).to.be.an('array');
         devices.forEach((device: DeviceType) => {
           expect(device).to.be.an('object');
           expect(device).to.have.all.keys(
-            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room', 'plugin', 'state']
+            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room', 'plugin', 'state'],
           );
           if (device.state !== null) {
             expect(device.state).to.be.an('object');
@@ -76,23 +73,22 @@ describe('GET /api/v1/device', () => {
             expect(device.plugin).to.have.property('satelliteId');
           }
         });
-    });
+      });
   });
 
   it('should return all devices with state', async () => {
-
     await server
       .get('/api/v1/device')
-      .query({'scope' : 'withState'})
+      .query({ scope: 'withState' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let devices = res.body;
+        const devices = res.body;
         expect(devices).to.be.an('array');
         devices.forEach((device: DeviceType) => {
           expect(device).to.be.an('object');
           expect(device).to.have.all.keys(
-            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'state']
+            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'state'],
           );
           if (device.state !== null) {
             expect(device.state).to.be.an('object');
@@ -106,19 +102,18 @@ describe('GET /api/v1/device', () => {
   });
 
   it('should return all Devices with room', async () => {
-
     await server
       .get('/api/v1/device')
-      .query({'scope' : 'withRoom'})
+      .query({ scope: 'withRoom' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let devices = res.body;
+        const devices = res.body;
         expect(devices).to.be.an('array');
         devices.forEach((device: DeviceType) => {
           expect(device).to.be.an('object');
           expect(device).to.have.all.keys(
-            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room']
+            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room'],
           );
 
           expect(device.room).to.be.an('object');
@@ -130,19 +125,18 @@ describe('GET /api/v1/device', () => {
   });
 
   it('should return all Devices with plugin', async () => {
-
     await server
       .get('/api/v1/device')
-      .query({'scope' : 'withPlugin'})
+      .query({ scope: 'withPlugin' })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        let devices = res.body;
+        const devices = res.body;
         expect(devices).to.be.an('array');
         devices.forEach((device: DeviceType) => {
           expect(device).to.be.an('object');
           expect(device).to.have.all.keys(
-            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'plugin']
+            ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'plugin'],
           );
 
           if (device.plugin !== null) {
@@ -157,5 +151,4 @@ describe('GET /api/v1/device', () => {
         });
       });
   });
-
 });

@@ -1,46 +1,47 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default, Is } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
+  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default, Is,
+} from 'sequelize-typescript';
 
 import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';
-import Device  from './device';
+import Device from './device';
 import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
  * Plugin model
  */
 @DefaultScope({
-  attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId']
+  attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
 })
 @Scopes({
   full: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => Satellite, () => State, () => Device, () => Variable]
+    include: [() => Satellite, () => State, () => Device, () => Variable],
   },
   withSatellite: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => Satellite]
+    include: [() => Satellite],
   },
   withState: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => State]
+    include: [() => State],
   },
   withDevices: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => Device]
+    include: [() => Device],
   },
   withVariables: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => Variable]
-  }
+    include: [() => Variable],
+  },
 })
 @Table({
   tableName: 'plugin',
-  underscored: false
+  underscored: false,
 })
 export default class Plugin extends Model<Plugin> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -76,25 +77,25 @@ export default class Plugin extends Model<Plugin> {
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'satelliteId',
-    constraints: false
+    constraints: false,
   })
   satellite!: Satellite;
 
   @HasMany(() => Device, {
     foreignKey: 'pluginId',
-    constraints: false
+    constraints: false,
   })
   devices!: Device[];
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   variables?: Variable[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   state?: State;
 }

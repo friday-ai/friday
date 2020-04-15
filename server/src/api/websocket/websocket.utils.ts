@@ -1,4 +1,5 @@
-import { WebsocketMessageTypes } from '../../../src/utils/constants';
+/* eslint-disable import/prefer-default-export */
+import { WebsocketMessageTypes } from '../../utils/constants';
 
 /**
  * Format websocket message
@@ -8,5 +9,5 @@ import { WebsocketMessageTypes } from '../../../src/utils/constants';
  * formatWebsocketMessage('message.new', { text: 'test' });
  */
 export function formatWebsocketMessage(type: WebsocketMessageTypes, payload: string) {
-  return JSON.stringify({type, payload});
+  return JSON.stringify({ type, payload });
 }

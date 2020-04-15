@@ -3,12 +3,11 @@ import server from '../../../../utils/request';
 
 describe('POST /api/v1/user/login', () => {
   it('should login an user', async () => {
-
     await server
       .post('/api/v1/user/login')
       .send({
         email: 'john@pepperwood.com',
-        password: 'mysuperpassword'
+        password: 'mysuperpassword',
       })
       .expect('Content-Type', /json/)
       .expect(201)
@@ -19,12 +18,11 @@ describe('POST /api/v1/user/login', () => {
   });
 
   it('should not login an user with bad password', async () => {
-
     await server
       .post('/api/v1/user/login')
       .send({
         email: 'john@pepperwood.com',
-        password: 'mysuperpasword'
+        password: 'mysuperpasword',
       })
       .expect('Content-Type', /json/)
       .expect(403);

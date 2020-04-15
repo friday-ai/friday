@@ -28,7 +28,6 @@ export function hashToken(token: string) {
  * @returns {string} JwtSecret.
  */
 export function generateJwtSecret() {
-
   if (env === 'test') {
     return 'secretJwt';
   }
@@ -55,7 +54,7 @@ export function generateAccessToken(userId: string, role: string, sessionId: str
     algorithm: 'HS256',
     audience: 'user',
     issuer: 'friday',
-    expiresIn: accessTokenValidity
+    expiresIn: accessTokenValidity,
   });
 }
 
@@ -73,7 +72,7 @@ export async function generateRefreshToken() {
   return {
     refreshToken,
     refreshTokenHash,
-    refreshTokenValidity
+    refreshTokenValidity,
   };
 }
 
@@ -88,6 +87,6 @@ export async function generateApiKey() {
 
   return {
     apiKey,
-    apiKeyHash
+    apiKeyHash,
   };
 }

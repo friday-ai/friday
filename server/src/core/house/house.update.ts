@@ -1,6 +1,6 @@
 import House from '../../models/house';
 import HouseType from './house.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Update an house.
@@ -19,17 +19,17 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function update(id: string, house: HouseType): Promise<HouseType> {
   try {
-
     const houseToUpdate = await House.findByPk(id);
 
     if (houseToUpdate === null) {
-      throw new NotFoundError({name: 'Update an House', message: 'House not found', metadata: house.id});
+      throw new NotFoundError({ name: 'Update an House', message: 'House not found', metadata: house.id });
     }
     houseToUpdate.update(house);
-    let houseToReturn = <HouseType>houseToUpdate.get({ plain: true });
+    const houseToReturn = <HouseType>houseToUpdate.get({ plain: true });
     return houseToReturn;
-
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: house});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: house,
+    });
   }
 }

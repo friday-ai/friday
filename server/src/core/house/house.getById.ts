@@ -1,6 +1,6 @@
 import House from '../../models/house';
 import HouseType from './house.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a house by id.
@@ -14,7 +14,6 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<HouseType> {
   try {
-
     let house;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
@@ -24,13 +23,15 @@ export default async function getById(id: string, scope?: string): Promise<House
     }
 
     if (house === null) {
-      throw new NotFoundError({name: 'Get House by Id', message: 'House not found', metadata: id});
+      throw new NotFoundError({ name: 'Get House by Id', message: 'House not found', metadata: id });
     }
 
-    let houseToReturn = <HouseType>house.get({ plain: true });
+    const houseToReturn = <HouseType>house.get({ plain: true });
 
     return houseToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

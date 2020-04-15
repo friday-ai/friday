@@ -1,6 +1,6 @@
 import Session from '../../models/session';
 import SessionType from './session.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get an session by id.
@@ -14,7 +14,6 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<SessionType> {
   try {
-
     let session;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
@@ -24,14 +23,15 @@ export default async function getById(id: string, scope?: string): Promise<Sessi
     }
 
     if (session === null) {
-      throw new NotFoundError({name: 'Get Session by Id', message: 'Session not found', metadata: id});
+      throw new NotFoundError({ name: 'Get Session by Id', message: 'Session not found', metadata: id });
     }
 
-    let sessionToReturn = <SessionType>session.get({ plain: true });
+    const sessionToReturn = <SessionType>session.get({ plain: true });
 
     return sessionToReturn;
-
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

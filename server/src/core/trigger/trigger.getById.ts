@@ -1,6 +1,6 @@
 import Trigger from '../../models/trigger';
 import TriggerType from './trigger.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a trigger by id.
@@ -14,7 +14,6 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<TriggerType> {
   try {
-
     let trigger;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
@@ -24,13 +23,15 @@ export default async function getById(id: string, scope?: string): Promise<Trigg
     }
 
     if (trigger === null) {
-      throw new NotFoundError({name: 'Get Trigger by Id', message: 'Trigger not found', metadata: id});
+      throw new NotFoundError({ name: 'Get Trigger by Id', message: 'Trigger not found', metadata: id });
     }
 
-    let triggerToReturn = <TriggerType>trigger.get({ plain: true });
+    const triggerToReturn = <TriggerType>trigger.get({ plain: true });
 
     return triggerToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

@@ -1,6 +1,6 @@
 import State from '../../models/state';
 import StateType from './state.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a state by owner.
@@ -13,21 +13,20 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getByOwner(owner: string): Promise<StateType> {
   try {
-
-    let state;
-
-    state = await State.findOne({
-      where: { owner: owner}
+    const state = await State.findOne({
+      where: { owner },
     });
 
     if (state === null) {
-      throw new NotFoundError({name: 'Get State by owner', message: 'State not found', metadata: owner});
+      throw new NotFoundError({ name: 'Get State by owner', message: 'State not found', metadata: owner });
     }
 
-    let stateToReturn = <StateType>state.get({ plain: true });
+    const stateToReturn = <StateType>state.get({ plain: true });
 
     return stateToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: owner});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: owner,
+    });
   }
 }

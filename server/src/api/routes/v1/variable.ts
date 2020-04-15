@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * Variable router
@@ -36,10 +38,10 @@ export default class VariableRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const variable = await this.friday.variable.create(req.body);
     res.status(201).json(variable);
-  }
+  };
 
   /**
    * Update a variable
@@ -59,10 +61,10 @@ export default class VariableRouter {
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const variable = await this.friday.variable.update(req.params.id, req.body);
     res.json(variable);
-  }
+  };
 
   /**
    * Delete a variable by id
@@ -77,12 +79,12 @@ export default class VariableRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.variable.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
   /**
    * Get value variables
@@ -104,6 +106,5 @@ export default class VariableRouter {
   getValue = async (req: Request, res: Response) => {
     const variables = await this.friday.variable.getValue(req.query.key);
     res.json(variables);
-  }
-
+  };
 }

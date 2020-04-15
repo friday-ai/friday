@@ -1,5 +1,5 @@
 import Device from '../../models/device';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Destroy a device.
@@ -15,11 +15,13 @@ export default async function destroy(id: string): Promise<void> {
     const deviceToDelete = await Device.findByPk(id);
 
     if (deviceToDelete === null) {
-      throw new NotFoundError({name: 'Destoy a device', message: 'Device not found', metadata: id});
+      throw new NotFoundError({ name: 'Destoy a device', message: 'Device not found', metadata: id });
     }
 
     await deviceToDelete.destroy();
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * Trigger router
@@ -39,10 +41,10 @@ export default class TriggerRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const trigger = await this.friday.trigger.create(req.body);
     res.status(201).json(trigger);
-  }
+  };
 
   /**
    * Update a trigger
@@ -65,10 +67,10 @@ export default class TriggerRouter {
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const trigger = await this.friday.trigger.update(req.params.id, req.body);
     res.json(trigger);
-  }
+  };
 
   /**
    * Delete a trigger by id
@@ -83,12 +85,12 @@ export default class TriggerRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.trigger.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
   /**
    * Get all triggers
@@ -113,7 +115,7 @@ export default class TriggerRouter {
   getAll = async (req: Request, res: Response) => {
     const triggers = await this.friday.trigger.getAll(req.query);
     res.json(triggers);
-  }
+  };
 
   /**
    * Get a trigger by id
@@ -135,9 +137,8 @@ export default class TriggerRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getById = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response) => {
     const trigger = await this.friday.trigger.getById(req.params.id, req.query.scope);
     res.json(trigger);
-  }
-
+  };
 }

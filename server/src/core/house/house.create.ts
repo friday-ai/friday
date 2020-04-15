@@ -19,9 +19,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(house: HouseType): Promise<HouseType> {
   try {
     const createdHouse = await House.create(house);
-    let houseToReturn = <HouseType>createdHouse.get({ plain: true });
+    const houseToReturn = <HouseType>createdHouse.get({ plain: true });
     return houseToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: house});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: house,
+    });
   }
 }

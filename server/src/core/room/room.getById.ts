@@ -1,6 +1,6 @@
 import Room from '../../models/room';
 import RoomType from './room.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a room by id.
@@ -14,7 +14,6 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<RoomType> {
   try {
-
     let room;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
@@ -24,13 +23,15 @@ export default async function getById(id: string, scope?: string): Promise<RoomT
     }
 
     if (room === null) {
-      throw new NotFoundError({name: 'Get Room by Id', message: 'Room not found', metadata: id});
+      throw new NotFoundError({ name: 'Get Room by Id', message: 'Room not found', metadata: id });
     }
 
-    let roomToReturn = <RoomType>room.get({ plain: true });
+    const roomToReturn = <RoomType>room.get({ plain: true });
 
     return roomToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

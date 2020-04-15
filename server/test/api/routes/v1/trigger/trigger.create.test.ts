@@ -4,7 +4,6 @@ import { AvailableConditions } from '../../../../../src/utils/constants';
 
 describe('POST /api/v1/trigger', () => {
   it('should create a trigger', async () => {
-
     const trigger = {
       id: '28c59bd7-a559-41bb-8b5e-a3670001a7bb',
       name: 'Test Trigger 2',
@@ -12,8 +11,8 @@ describe('POST /api/v1/trigger', () => {
       type: AvailableConditions.DEVICE_VALUE,
       rules: JSON.stringify({
         device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
-        value: '23'
-      })
+        value: '23',
+      }),
     };
 
     await server
@@ -31,7 +30,6 @@ describe('POST /api/v1/trigger', () => {
   });
 
   it('should not create a trigger with an empty name', async () => {
-
     await server
       .post('/api/v1/trigger')
       .send({
@@ -41,8 +39,8 @@ describe('POST /api/v1/trigger', () => {
         type: AvailableConditions.DEVICE_VALUE,
         rules: JSON.stringify({
           device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
-          value: '23'
-        })
+          value: '23',
+        }),
       })
       .expect('Content-Type', /json/)
       .expect(422);

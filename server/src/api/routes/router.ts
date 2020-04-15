@@ -1,3 +1,5 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 import Glob from 'glob';
 import 'reflect-metadata';
 import { Router } from 'express';
@@ -5,7 +7,7 @@ import { RouteDefinition } from '../../utils/decorators/route';
 import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 import asyncMiddleware from '../middlewares/asyncMiddleware';
 import authMiddleware from '../middlewares/authMiddleware';
-import Friday from '../../../src/core/friday';
+import Friday from '../../core/friday';
 
 /**
  * Express router
@@ -20,17 +22,16 @@ export default function router(friday: Friday): Router {
 
   const routers = Glob
     .sync('**/*.ts', { cwd: `${__dirname}/` })
-    .map(filename => require(`./${filename}`).default)
-    .filter(routerClass => routerClass !== undefined)
-    .filter(routerClass => Reflect.hasOwnMetadata('prefix', routerClass) === true);
+    .map((filename) => require(`./${filename}`).default)
+    .filter((routerClass) => routerClass !== undefined)
+    .filter((routerClass) => Reflect.hasOwnMetadata('prefix', routerClass) === true);
 
-  routers.forEach(routerClass => {
+  routers.forEach((RouterClass) => {
+    const instance = new RouterClass(friday);
+    const prefix = Reflect.getMetadata('prefix', RouterClass);
+    const routes = <RouteDefinition[]>Reflect.getMetadata('routes', RouterClass);
 
-    const instance = new routerClass(friday);
-    const prefix = Reflect.getMetadata('prefix', routerClass);
-    const routes = <RouteDefinition[]>Reflect.getMetadata('routes', routerClass);
-
-    routes.forEach(route => {
+    routes.forEach((route) => {
       const routerParams = [];
 
       // if the route is marked as authenticated
@@ -48,7 +49,6 @@ export default function router(friday: Friday): Router {
 
       routerObject[route.requestMethod](`/api${prefix}${route.path}`, ...routerParams);
     });
-
   });
 
   return routerObject;

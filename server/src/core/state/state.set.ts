@@ -18,27 +18,28 @@ import error from '../../utils/errors/coreError';
  */
 export default async function set(state: StateType): Promise<StateType> {
   try {
-
     // Check if old state exist
     const stateToUpdate = await State.findOne({
       where: {
         owner: state.owner,
-        last: true
-      }
+        last: true,
+      },
     });
 
     // If old state exist, update it
     if (stateToUpdate !== null) {
-      const plainStateToUpdate = <StateType>stateToUpdate.get({ plain: true});
+      const plainStateToUpdate = <StateType>stateToUpdate.get({ plain: true });
       plainStateToUpdate.last = false;
       await stateToUpdate.update(plainStateToUpdate);
     }
 
     // And then, create the new state
     const createdState = await State.create(state);
-    let stateToReturn = <StateType>createdState.get({ plain: true });
+    const stateToReturn = <StateType>createdState.get({ plain: true });
     return stateToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: state});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: state,
+    });
   }
 }

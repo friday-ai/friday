@@ -23,9 +23,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(trigger: TriggerType): Promise<TriggerType> {
   try {
     const createdTrigger = await Trigger.create(trigger);
-    let triggerToReturn = <TriggerType>createdTrigger.get({ plain: true });
+    const triggerToReturn = <TriggerType>createdTrigger.get({ plain: true });
     return triggerToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: trigger});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: trigger,
+    });
   }
 }

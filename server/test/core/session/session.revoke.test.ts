@@ -19,5 +19,4 @@ describe('Session.revoke', () => {
     const promise = session.revoke('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'test');
     await assert.isRejected(promise, NotFoundError);
   });
-
 });

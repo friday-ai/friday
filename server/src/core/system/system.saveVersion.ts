@@ -1,7 +1,7 @@
 import System from '.';
-import error from '../../../src/utils/errors/coreError';
+import error from '../../utils/errors/coreError';
 import VariableType from '../variable/variable.interface';
-import { SystemVariablesNames } from '../../../src/utils/constants';
+import { SystemVariablesNames } from '../../utils/constants';
 /**
  * Saves actual version of friday
  * @param {String} version The version to save
@@ -9,8 +9,8 @@ import { SystemVariablesNames } from '../../../src/utils/constants';
  */
 export default async function saveVersion(this: System, version: string): Promise<VariableType> {
   try {
-    return await this.variable.update(SystemVariablesNames.FRIDAY_VERSION, {value: version});
+    return await this.variable.update(SystemVariablesNames.FRIDAY_VERSION, { value: version });
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e});
+    throw error({ name: e.name, message: e.message, cause: e });
   }
 }

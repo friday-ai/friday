@@ -3,13 +3,13 @@ import express from 'express';
 import helmet from 'helmet';
 import compression from 'compression';
 import * as bodyParser from 'body-parser';
+import * as WebSocket from 'ws';
 import router from './routes/router';
 import Log from '../utils/log';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';
 import errorMiddleware from './middlewares/errorMiddleware';
-import * as WebSocket from 'ws';
 import WebsocketServer from './websocket/index';
-import Friday from '../../src/core/friday';
+import Friday from '../core/friday';
 
 /**
  * Server class

@@ -21,9 +21,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(plugin: PluginType): Promise<PluginType> {
   try {
     const createdPlugin = await Plugin.create(plugin);
-    let pluginToReturn = <PluginType>createdPlugin.get({ plain: true });
+    const pluginToReturn = <PluginType>createdPlugin.get({ plain: true });
     return pluginToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: plugin});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: plugin,
+    });
   }
 }

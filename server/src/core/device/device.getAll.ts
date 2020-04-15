@@ -6,7 +6,7 @@ import { GetOptions } from '../../utils/interfaces';
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
-  skip: 0
+  skip: 0,
 };
 
 /**
@@ -24,19 +24,19 @@ const DEFAULT_OPTIONS: GetOptions = {
  */
 export default async function getAll(options?: GetOptions): Promise<DeviceType[]> {
   try {
-    options = Object.assign({}, DEFAULT_OPTIONS, options);
+    const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
 
     let devices;
 
-    if (options.scope !== '' && options.scope !== null && options.scope !== undefined) {
-      devices = await Device.scope(options.scope).findAll({
-        limit: options.take,
-        offset: options.skip
+    if (mergedOptions.scope !== '' && mergedOptions.scope !== null && mergedOptions.scope !== undefined) {
+      devices = await Device.scope(mergedOptions.scope).findAll({
+        limit: mergedOptions.take,
+        offset: mergedOptions.skip,
       });
     } else {
       devices = await Device.findAll({
-        limit: options.take,
-        offset: options.skip
+        limit: mergedOptions.take,
+        offset: mergedOptions.skip,
       });
     }
 
@@ -47,6 +47,8 @@ export default async function getAll(options?: GetOptions): Promise<DeviceType[]
 
     return devicesPlain;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: options});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: options,
+    });
   }
 }

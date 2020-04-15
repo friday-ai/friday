@@ -21,11 +21,13 @@ import error from '../../utils/errors/coreError';
 export default async function create(user: UserType): Promise<UserType> {
   try {
     const createdUser = await User.create(user);
-    let userToReturn = <UserType>createdUser.get({ plain: true });
+    const userToReturn = <UserType>createdUser.get({ plain: true });
     delete userToReturn.password;
     return userToReturn;
   } catch (e) {
     delete user.password;
-    throw error({name: e.name, message: e.message, cause: e, metadata: user});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: user,
+    });
   }
 }

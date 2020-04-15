@@ -23,9 +23,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(action: ActionType): Promise<ActionType> {
   try {
     const createdAction = await Action.create(action);
-    let actionToReturn = <ActionType>createdAction.get({ plain: true });
+    const actionToReturn = <ActionType>createdAction.get({ plain: true });
     return actionToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: action});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: action,
+    });
   }
 }

@@ -1,6 +1,6 @@
 import Session from '../../models/session';
 import SessionType from './session.interface';
-import { default as error, NotFoundError, BadParametersError} from '../../utils/errors/coreError';
+import error, { NotFoundError, BadParametersError } from '../../utils/errors/coreError';
 
 /**
  * Revoke an session.
@@ -14,28 +14,29 @@ import { default as error, NotFoundError, BadParametersError} from '../../utils/
  */
 export default async function revoke(userId: string, sessionId: string): Promise<SessionType> {
   try {
-
     if (userId === '' || userId === null || userId === undefined || sessionId === '' || sessionId === null || sessionId === undefined) {
-      throw new BadParametersError({name: 'Revoke an Session', message: 'Incorrect params', metadata: {userId, sessionId}});
+      throw new BadParametersError({ name: 'Revoke an Session', message: 'Incorrect params', metadata: { userId, sessionId } });
     }
 
     const session = await Session.findOne({
       where: {
         id: sessionId,
-        userId: userId
-      }
+        userId,
+      },
     });
 
     if (session === null) {
-      throw new NotFoundError({name: 'Revoke an Session', message: 'Session not found', metadata: {userId, sessionId}});
+      throw new NotFoundError({ name: 'Revoke an Session', message: 'Session not found', metadata: { userId, sessionId } });
     }
 
-    let sessionToReturn = <SessionType>session.get({ plain: true });
+    const sessionToReturn = <SessionType>session.get({ plain: true });
     sessionToReturn.revoked = true;
     session.update(sessionToReturn);
 
     return sessionToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: sessionId});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: sessionId,
+    });
   }
 }

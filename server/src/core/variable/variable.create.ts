@@ -20,9 +20,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(variable: VariableType): Promise<VariableType> {
   try {
     const createdVariable = await Variable.create(variable);
-    let variableToReturn = <VariableType>createdVariable.get({ plain: true });
+    const variableToReturn = <VariableType>createdVariable.get({ plain: true });
     return variableToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: variable});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: variable,
+    });
   }
 }

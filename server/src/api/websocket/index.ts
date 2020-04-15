@@ -1,11 +1,11 @@
 import * as WebSocket from 'ws';
-import Friday from '../../../src/core/friday';
+import Friday from '../../core/friday';
 import handleMessage from './websocket.handleMessage';
 import clientConnected from './websocket.clientConnected';
 import clientDisconnected from './websocket.clientDisconnected';
 import sendMessage from './websocket.sendMessage';
-import UserType from '../../../src/core/user/user.interface';
-import { EventsType } from '../../../src/utils/constants';
+import UserType from '../../core/user/user.interface';
+import { EventsType } from '../../utils/constants';
 
 /**
  * Web socket manager
@@ -25,8 +25,8 @@ export default class WebsocketServer {
     this.wss = wss;
     this.friday = friday;
     this.friday.event.on(EventsType.WEBSOCKET_SEND, (event) => this.sendMessage(event));
-    this.friday.event.on(EventsType.WEBSOCKET_SEND_ALL, (event) => this.sendMessage(event, {sendAll: true}));
-    this.friday.event.on(EventsType.WEBSOCKET_SEND_ADMIN, (event) => this.sendMessage(event, {sendAdmins: true}));
+    this.friday.event.on(EventsType.WEBSOCKET_SEND_ALL, (event) => this.sendMessage(event, { sendAll: true }));
+    this.friday.event.on(EventsType.WEBSOCKET_SEND_ADMIN, (event) => this.sendMessage(event, { sendAdmins: true }));
   }
 
   /**
@@ -53,6 +53,5 @@ export default class WebsocketServer {
       // tslint:disable-next-line: align
       }, 5000);
     });
-
   }
 }

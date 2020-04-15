@@ -1,22 +1,25 @@
-import { Table, Column, Model, PrimaryKey, DataType, IsUUID, AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope, Default, Is } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, DataType, IsUUID,
+  AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope, Default, Is,
+} from 'sequelize-typescript';
+
 import { VariableOwner } from '../utils/constants';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
-import { isOwnerExisting } from '../../src/utils/databaseValidation';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
 /**
  * Variable model
  */
 @DefaultScope({
-  attributes: ['id', 'key', 'value', 'owner', 'ownerType']
+  attributes: ['id', 'key', 'value', 'owner', 'ownerType'],
 })
 @Table({
   tableName: 'variable',
-  underscored: false
+  underscored: false,
 })
 export default class Variable extends Model<Variable> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
@@ -48,20 +51,19 @@ export default class Variable extends Model<Variable> {
 
   @BelongsTo(() => User, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   user?: User;
 
   @BelongsTo(() => Plugin, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   plugin?: Plugin;
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'owner',
-    constraints: false
+    constraints: false,
   })
   satellite?: Satellite;
-
 }

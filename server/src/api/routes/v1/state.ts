@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
-import {FridayRouter, Get, Post} from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * State router
@@ -34,10 +34,10 @@ export default class StateRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const state = await this.friday.state.set(req.body);
     res.json(state);
-  }
+  };
 
   /**
    * Get a state by owner
@@ -55,9 +55,8 @@ export default class StateRouter {
    * }
    */
   @Get({ path: '/:owner', authenticated: true, rateLimit: false })
-  getByOwner = async (req: Request, res: Response, next: NextFunction) => {
+  getByOwner = async (req: Request, res: Response) => {
     const state = await this.friday.state.getByOwner(req.params.owner);
     res.json(state);
-  }
-
+  };
 }

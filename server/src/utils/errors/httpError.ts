@@ -1,6 +1,12 @@
-import { BadParametersError, NotFoundError, DatabaseUniqueConstraintError, DatabaseValidationError, AuthError, UnauthoriizedError } from './coreError';
-import { ErrorType } from '../interfaces';
+/* eslint-disable @typescript-eslint/no-useless-constructor */
+/* eslint-disable max-classes-per-file */
 import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtoken';
+import {
+  BadParametersError, NotFoundError, DatabaseUniqueConstraintError,
+  DatabaseValidationError, AuthError, UnauthoriizedError,
+} from './coreError';
+
+import { ErrorType } from '../interfaces';
 
 /**
  * Base http error class
@@ -8,7 +14,6 @@ import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtok
  * @extends {Error}
  */
 export class BaseHttpError extends Error {
-
   public status: number = 500;
   public code: string = 'SERVER_ERROR';
   public cause?: Error;
@@ -28,7 +33,6 @@ export class BaseHttpError extends Error {
  * @extends {BaseHttpError}
  */
 export class Error400 extends BaseHttpError {
-
   constructor(err: ErrorType) {
     super(err);
     this.status = 400;
@@ -41,7 +45,6 @@ export class Error400 extends BaseHttpError {
  * @extends {BaseHttpError}
  */
 export class Error401 extends BaseHttpError {
-
   constructor(err: ErrorType) {
     super(err);
     this.status = 401;
@@ -54,7 +57,6 @@ export class Error401 extends BaseHttpError {
  * @extends {BaseHttpError}
  */
 export class Error403 extends BaseHttpError {
-
   constructor(err: ErrorType) {
     super(err);
     this.status = 403;
@@ -68,7 +70,6 @@ export class Error403 extends BaseHttpError {
  * @extends {BaseHttpError}
  */
 export class Error404 extends BaseHttpError {
-
   constructor(err: ErrorType) {
     super(err);
     this.status = 404;
@@ -81,7 +82,6 @@ export class Error404 extends BaseHttpError {
  * @extends {BaseHttpError}
  */
 export class Error409 extends BaseHttpError {
-
   constructor(err: ErrorType) {
     super(err);
     this.status = 409;
@@ -94,7 +94,6 @@ export class Error409 extends BaseHttpError {
  * @extends {BaseHttpError}
  */
 export class Error422 extends BaseHttpError {
-
   constructor(err: ErrorType) {
     super(err);
     this.status = 422;
@@ -108,7 +107,6 @@ export class Error422 extends BaseHttpError {
  * @extends {BaseHttpError}
  */
 export class Error500 extends BaseHttpError {
-
   constructor(err: ErrorType) {
     super(err);
     this.status = 500;
@@ -122,7 +120,6 @@ export class Error500 extends BaseHttpError {
  * @returns {BaseHttpError} Resolve with an http error instance.
  */
 export default function httpError(err: ErrorType): BaseHttpError {
-
   switch (err.constructor) {
     case DatabaseValidationError:
       return new Error422(err);

@@ -18,9 +18,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(satellite: SatelliteType): Promise<SatelliteType> {
   try {
     const createdSatellite = await Satellite.create(satellite);
-    let satelliteToReturn = <SatelliteType>createdSatellite.get({ plain: true });
+    const satelliteToReturn = <SatelliteType>createdSatellite.get({ plain: true });
     return satelliteToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: satellite});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: satellite,
+    });
   }
 }

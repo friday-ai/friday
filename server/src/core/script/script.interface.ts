@@ -7,4 +7,3 @@ export default interface ScriptType {
   name?: string;
   code?: Object;
 }
-

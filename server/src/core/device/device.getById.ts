@@ -1,6 +1,6 @@
 import Device from '../../models/device';
 import DeviceType from './device.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a device by id.
@@ -14,7 +14,6 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<DeviceType> {
   try {
-
     let device;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
@@ -24,13 +23,15 @@ export default async function getById(id: string, scope?: string): Promise<Devic
     }
 
     if (device === null) {
-      throw new NotFoundError({name: 'Get Device by Id', message: 'Device not found', metadata: id});
+      throw new NotFoundError({ name: 'Get Device by Id', message: 'Device not found', metadata: id });
     }
 
-    let deviceToReturn = <DeviceType>device.get({ plain: true });
+    const deviceToReturn = <DeviceType>device.get({ plain: true });
 
     return deviceToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

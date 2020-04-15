@@ -17,6 +17,6 @@ export default async function start(this: System) {
 
     this.scheduler.init();
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e});
+    throw error({ name: e.name, message: e.message, cause: e });
   }
 }

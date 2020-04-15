@@ -13,5 +13,4 @@ describe('Trigger.destoy', () => {
     const promise = trigger.destroy('a58c31cc-61d2-4c18-b9f6-b8ba8609d12e');
     await assert.isRejected(promise, NotFoundError);
   });
-
 });

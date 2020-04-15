@@ -14,6 +14,6 @@ export default async function getCount(): Promise<number> {
     const users = await User.findAndCountAll();
     return users.count;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e});
+    throw error({ name: e.name, message: e.message, cause: e });
   }
 }

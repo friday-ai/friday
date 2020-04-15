@@ -3,14 +3,13 @@ import server from '../../../../utils/request';
 
 describe('POST /api/v1/plugin', () => {
   it('should create a plugin', async () => {
-
     const plugin = {
       id: '3e2cb8cc-60a7-4c40-87d2-b25048b1aa04',
       name: 'Fake plugin',
       version: '1.0.0',
       url: 'fake url',
       enabled: true,
-      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
     };
 
     await server
@@ -25,11 +24,9 @@ describe('POST /api/v1/plugin', () => {
         delete res.body.updatedAt;
         assert.deepEqual(res.body, plugin);
       });
-
   });
 
   it('should not create a plugin with an empty url', async () => {
-
     await server
       .post('/api/v1/plugin')
       .send({
@@ -38,13 +35,12 @@ describe('POST /api/v1/plugin', () => {
         version: '1.0.0',
         url: '',
         enabled: true,
-        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
       })
       .expect(422);
   });
 
   it('should not create a plugin with a empty satellite id', async () => {
-
     await server
       .post('/api/v1/plugin')
       .send({
@@ -53,13 +49,12 @@ describe('POST /api/v1/plugin', () => {
         version: '1.0.0',
         url: 'fake url',
         enabled: true,
-        satelliteId: ''
+        satelliteId: '',
       })
       .expect(422);
   });
 
   it('should not create a plugin with a wrong satellite id', async () => {
-
     await server
       .post('/api/v1/plugin')
       .send({
@@ -68,13 +63,12 @@ describe('POST /api/v1/plugin', () => {
         version: '1.0.0',
         url: 'fake url',
         enabled: true,
-        satelliteId: '1fad4e9b-a001-4fcc-9eec-34502793828b'
+        satelliteId: '1fad4e9b-a001-4fcc-9eec-34502793828b',
       })
       .expect(422);
   });
 
   it('should not create a plugin with a empty name', async () => {
-
     await server
       .post('/api/v1/plugin')
       .send({
@@ -83,7 +77,7 @@ describe('POST /api/v1/plugin', () => {
         version: '1.0.0',
         url: 'fake url',
         enabled: true,
-        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+        satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
       })
       .expect(422);
   });

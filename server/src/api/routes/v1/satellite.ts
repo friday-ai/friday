@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * Satellite router
@@ -32,10 +34,10 @@ export default class SatelliteRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const satellite = await this.friday.satellite.create(req.body);
     res.status(201).json(satellite);
-  }
+  };
 
   /**
    * Update a satellite
@@ -53,10 +55,10 @@ export default class SatelliteRouter {
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const satellite = await this.friday.satellite.update(req.params.id, req.body);
     res.json(satellite);
-  }
+  };
 
   /**
    * Delete a satellite by id
@@ -71,12 +73,12 @@ export default class SatelliteRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.satellite.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
   /**
    * Get all satellites
@@ -96,7 +98,7 @@ export default class SatelliteRouter {
   getAll = async (req: Request, res: Response) => {
     const satellites = await this.friday.satellite.getAll(req.query);
     res.json(satellites);
-  }
+  };
 
   /**
    * Get a satellite by id
@@ -113,9 +115,8 @@ export default class SatelliteRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getById = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response) => {
     const satellite = await this.friday.satellite.getById(req.params.id, req.query.scope);
     res.json(satellite);
-  }
-
+  };
 }

@@ -18,9 +18,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(scene: SceneType): Promise<SceneType> {
   try {
     const createdScene = await Scene.create(scene);
-    let sceneToReturn = <SceneType>createdScene.get({ plain: true });
+    const sceneToReturn = <SceneType>createdScene.get({ plain: true });
     return sceneToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: scene});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: scene,
+    });
   }
 }

@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * Plugin router
@@ -38,10 +40,10 @@ export default class PluginRouter {
    * },
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const plugin = await this.friday.plugin.create(req.body);
     res.status(201).json(plugin);
-  }
+  };
 
   /**
    * Update a plugin
@@ -62,10 +64,10 @@ export default class PluginRouter {
    * },
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const plugin = await this.friday.plugin.update(req.params.id, req.body);
     res.json(plugin);
-  }
+  };
 
   /**
    * Delete a plugin
@@ -80,12 +82,12 @@ export default class PluginRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.plugin.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
   /**
    * Get all plugins
@@ -108,7 +110,7 @@ export default class PluginRouter {
   getAll = async (req: Request, res: Response) => {
     const plugins = await this.friday.plugin.getAll(req.query);
     res.json(plugins);
-  }
+  };
 
   /**
    * Get a plugin by id
@@ -128,9 +130,8 @@ export default class PluginRouter {
    * },
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getById = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response) => {
     const plugin = await this.friday.plugin.getById(req.params.id, req.query.scope);
     res.json(plugin);
-  }
-
+  };
 }

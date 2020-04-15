@@ -5,27 +5,24 @@ describe('Scene.getAll', () => {
   const scene = new Scene();
 
   it('should return all scenes', async () => {
-
     const scenes = await scene.getAll();
 
     expect(scenes).to.be.an('array');
     assert.deepEqual(scenes, [{
-        id: '2452964a-a225-47dd-9b83-d88d57ed280e',
-        name: 'Test scene',
-        description: 'A scene for the tests ;) ',
-        triggerId: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514'
-      }
+      id: '2452964a-a225-47dd-9b83-d88d57ed280e',
+      name: 'Test scene',
+      description: 'A scene for the tests ;) ',
+      triggerId: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
+    },
     ]);
-
   });
 
   it('should return all scenes with full scope', async () => {
-
     const scenes = await scene.getAll({ scope: 'full' });
 
     expect(scenes).to.be.an('array');
 
-    scenes.forEach(s => {
+    scenes.forEach((s) => {
       expect(s).to.have.property('id');
       expect(s).to.have.property('name');
       expect(s).to.have.property('description');
@@ -40,7 +37,7 @@ describe('Scene.getAll', () => {
 
       expect(s.actions).to.be.an('array');
       if (s.actions != null) {
-        s.actions!.forEach(a => {
+        s.actions!.forEach((a) => {
           expect(a).to.have.property('id');
           expect(a).to.have.property('name');
           expect(a).to.have.property('description');
@@ -51,18 +48,15 @@ describe('Scene.getAll', () => {
           expect(a).to.have.property('sceneId');
         });
       }
-
     });
-
   });
 
   it('should return all scenes with trigger', async () => {
-
     const scenes = await scene.getAll({ scope: 'withTrigger' });
 
     expect(scenes).to.be.an('array');
 
-    scenes.forEach(s => {
+    scenes.forEach((s) => {
       expect(s).to.have.property('id');
       expect(s).to.have.property('name');
       expect(s).to.have.property('description');
@@ -74,18 +68,15 @@ describe('Scene.getAll', () => {
       expect(s.trigger).to.have.property('description');
       expect(s.trigger).to.have.property('type');
       expect(s.trigger).to.have.property('rules');
-
     });
-
   });
 
   it('should return all scenes with actions', async () => {
-
     const scenes = await scene.getAll({ scope: 'withActions' });
 
     expect(scenes).to.be.an('array');
 
-    scenes.forEach(s => {
+    scenes.forEach((s) => {
       expect(s).to.have.property('id');
       expect(s).to.have.property('name');
       expect(s).to.have.property('description');
@@ -93,7 +84,7 @@ describe('Scene.getAll', () => {
 
       expect(s.actions).to.be.an('array');
       if (s.actions != null) {
-        s.actions!.forEach(a => {
+        s.actions!.forEach((a) => {
           expect(a).to.have.property('id');
           expect(a).to.have.property('name');
           expect(a).to.have.property('description');
@@ -104,9 +95,6 @@ describe('Scene.getAll', () => {
           expect(a).to.have.property('sceneId');
         });
       }
-
     });
-
   });
-
 });

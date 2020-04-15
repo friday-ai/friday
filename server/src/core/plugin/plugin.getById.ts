@@ -1,6 +1,6 @@
 import Plugin from '../../models/plugin';
 import PluginType from './plugin.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a plugin by id.
@@ -14,7 +14,6 @@ import { default as error, NotFoundError} from '../../utils/errors/coreError';
  */
 export default async function getById(id: string, scope?: string): Promise<PluginType> {
   try {
-
     let plugin;
 
     if (scope !== '' && scope !== null && scope !== undefined) {
@@ -24,13 +23,15 @@ export default async function getById(id: string, scope?: string): Promise<Plugi
     }
 
     if (plugin === null) {
-      throw new NotFoundError({name: 'Get Plugin by Id', message: 'Plugin not found', metadata: id});
+      throw new NotFoundError({ name: 'Get Plugin by Id', message: 'Plugin not found', metadata: id });
     }
 
-    let pluginToReturn = <PluginType>plugin.get({ plain: true });
+    const pluginToReturn = <PluginType>plugin.get({ plain: true });
 
     return pluginToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: id});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: id,
+    });
   }
 }

@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post, Delete,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * Scene router
@@ -34,10 +36,10 @@ export default class SceneRouter {
    * }
    */
   @Post({ path: '/', authenticated: true, rateLimit: false })
-  create = async (req: Request, res: Response, next: NextFunction) => {
+  create = async (req: Request, res: Response) => {
     const scene = await this.friday.scene.create(req.body);
     res.status(201).json(scene);
-  }
+  };
 
   /**
    * Update an scene
@@ -56,10 +58,10 @@ export default class SceneRouter {
    * }
    */
   @Patch({ path: '/:id', authenticated: true, rateLimit: false })
-  update = async (req: Request, res: Response, next: NextFunction) => {
+  update = async (req: Request, res: Response) => {
     const scene = await this.friday.scene.update(req.params.id, req.body);
     res.json(scene);
-  }
+  };
 
   /**
    * Delete an scene by id
@@ -74,12 +76,12 @@ export default class SceneRouter {
    * }
    */
   @Delete({ path: '/:id', authenticated: true, rateLimit: false })
-  destroy = async (req: Request, res: Response, next: NextFunction) => {
+  destroy = async (req: Request, res: Response) => {
     await this.friday.scene.destroy(req.params.id);
     res.json({
-      success: true
+      success: true,
     });
-  }
+  };
 
   /**
    * Get all scenes
@@ -100,7 +102,7 @@ export default class SceneRouter {
   getAll = async (req: Request, res: Response) => {
     const scenes = await this.friday.scene.getAll(req.query);
     res.json(scenes);
-  }
+  };
 
   /**
    * Get an scene by id
@@ -118,9 +120,8 @@ export default class SceneRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getById = async (req: Request, res: Response, next: NextFunction) => {
+  getById = async (req: Request, res: Response) => {
     const scene = await this.friday.scene.getById(req.params.id, req.query.scope);
     res.json(scene);
-  }
-
+  };
 }

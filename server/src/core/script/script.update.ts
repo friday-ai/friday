@@ -1,6 +1,6 @@
 import Script from '../../models/script';
 import ScriptType from './script.interface';
-import { default as error, NotFoundError} from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Update a script.
@@ -22,12 +22,14 @@ export default async function update(id: string, script: ScriptType): Promise<Sc
     const scriptToUpdate = await Script.findByPk(id);
 
     if (scriptToUpdate === null) {
-      throw new NotFoundError({name: 'Update a Script', message: 'Script not found', metadata: script.id});
+      throw new NotFoundError({ name: 'Update a Script', message: 'Script not found', metadata: script.id });
     }
     scriptToUpdate.update(script);
-    let scriptToReturn = <ScriptType>scriptToUpdate.get({ plain: true });
+    const scriptToReturn = <ScriptType>scriptToUpdate.get({ plain: true });
     return scriptToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: script});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: script,
+    });
   }
 }

@@ -5,7 +5,7 @@ const env = process.env.NODE_ENV || 'production';
 const DATABASE_NAME: {[x: string]: any} = {
   production: './friday.db',
   development: './friday-development.db',
-  test: './friday-test.db'
+  test: './friday-test.db',
 };
 
 let database: Sequelize;
@@ -16,20 +16,19 @@ const init = async () => {
     pool: {
       max: 5,
       min: 0,
-      idle: 10000
+      idle: 10000,
     },
     logging: false,
     storage: DATABASE_NAME[env],
-    models: [__dirname + '/../models']
+    models: [`${__dirname}/../models`],
   });
 
   if (env === 'test') {
     // If exist, drop tables for tests
-    await database.sync({force: true});
+    await database.sync({ force: true });
   } else {
     await database.sync();
   }
-
 };
 
 const closeConnection = async () => {
@@ -38,5 +37,5 @@ const closeConnection = async () => {
 
 export {
   init,
-  closeConnection
+  closeConnection,
 };

@@ -13,12 +13,11 @@ describe('Session.create', () => {
       name: 'Pepperwood',
       firstName: 'John',
       email: 'john@pepperwood.com',
-      role: UserRole.HABITANT
+      role: UserRole.HABITANT,
     });
 
     expect(createdSession).to.have.property('refreshToken');
     expect(createdSession).to.have.property('accessToken');
     expect(createdSession).to.have.property('id');
   });
-
 });

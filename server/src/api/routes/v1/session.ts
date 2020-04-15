@@ -1,6 +1,8 @@
-import { Request, Response, NextFunction } from 'express';
-import { FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
-import Friday from '../../../../src/core/friday';
+import { Request, Response } from 'express';
+import {
+  FridayRouter, Get, Patch, Post,
+} from '../../../utils/decorators/route';
+import Friday from '../../../core/friday';
 
 /**
  * Session router
@@ -24,10 +26,10 @@ export default class SessionRouter {
    * @apiVersion 1.0.0
    */
   @Post({ path: '/access_token', authenticated: false, rateLimit: true })
-  getAccessToken = async (req: Request, res: Response, next: NextFunction) => {
+  getAccessToken = async (req: Request, res: Response) => {
     const session = await this.friday.session.getAccessToken(req.body.refreshToken);
     res.json(session);
-  }
+  };
 
   /**
    * Revoke an session
@@ -38,10 +40,10 @@ export default class SessionRouter {
    * @apiVersion 1.0.0
    */
   @Patch({ path: '/revoke/:id', authenticated: true, rateLimit: false })
-  revoke = async (req: Request, res: Response, next: NextFunction) => {
+  revoke = async (req: Request, res: Response) => {
     const session = await this.friday.session.revoke(req.params.id, req.query.sessionId);
     res.json(session);
-  }
+  };
 
   /**
    * Get all sessions
@@ -55,6 +57,5 @@ export default class SessionRouter {
   getAll = async (req: Request, res: Response) => {
     const sessions = await this.friday.session.getAll(req.query);
     res.json(sessions);
-  }
-
+  };
 }

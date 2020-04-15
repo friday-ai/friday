@@ -7,7 +7,6 @@ describe('Variable.getValue', () => {
   const variable = new Variable();
 
   it('should return a variable', async () => {
-
     const variableReturned = await variable.getValue('test_key0');
 
     expect(variableReturned).to.be.an('object');
@@ -16,7 +15,7 @@ describe('Variable.getValue', () => {
       key: 'test_key0',
       value: 'test_value0',
       owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      ownerType: VariableOwner.USER
+      ownerType: VariableOwner.USER,
     });
   });
 

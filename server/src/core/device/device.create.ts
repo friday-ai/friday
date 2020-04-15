@@ -24,9 +24,11 @@ import error from '../../utils/errors/coreError';
 export default async function create(device: DeviceType): Promise<DeviceType> {
   try {
     const createdDevice = await Device.create(device);
-    let deviceToReturn = <DeviceType>createdDevice.get({ plain: true });
+    const deviceToReturn = <DeviceType>createdDevice.get({ plain: true });
     return deviceToReturn;
   } catch (e) {
-    throw error({name: e.name, message: e.message, cause: e, metadata: device});
+    throw error({
+      name: e.name, message: e.message, cause: e, metadata: device,
+    });
   }
 }
