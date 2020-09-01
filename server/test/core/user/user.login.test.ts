@@ -6,9 +6,9 @@ describe('User.login', () => {
   const user = new User();
 
   it('should log a user', async () => {
-    const logedUser = await user.login('john@pepperwood.com', 'mysuperpassword');
+    const loggedUser = await user.login('john@pepperwood.com', 'mysuperpassword');
 
-    expect(logedUser).not.to.have.property('password');
+    expect(loggedUser).not.to.have.property('password');
   });
 
   it('should not log a user with an false email', async () => {

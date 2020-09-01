@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import Script from '../../../src/core/script';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('Script.destoy', () => {
+describe('Script.destroy', () => {
   const script = new Script();
 
   it('should destroy a script', async () => {

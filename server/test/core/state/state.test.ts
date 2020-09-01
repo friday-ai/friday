@@ -52,12 +52,12 @@ describe('State.getByOwner', () => {
   const state = new State(event, variable);
 
   it('should return a state of one owner', async () => {
-    const stateRetruned = await state.getByOwner('c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a');
+    const stateReturned = await state.getByOwner('c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a');
 
-    expect(stateRetruned).to.have.property('id');
-    expect(stateRetruned).to.have.property('owner');
-    expect(stateRetruned).to.have.property('ownerType');
-    expect(stateRetruned).to.have.property('value');
+    expect(stateReturned).to.have.property('id');
+    expect(stateReturned).to.have.property('owner');
+    expect(stateReturned).to.have.property('ownerType');
+    expect(stateReturned).to.have.property('value');
   });
 
   it('should not found state', async () => {

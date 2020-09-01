@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import Trigger from '../../../src/core/trigger';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('Trigger.destoy', () => {
+describe('Trigger.destroy', () => {
   const trigger = new Trigger();
 
   it('should destroy a trigger', async () => {

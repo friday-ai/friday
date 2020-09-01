@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import User from '../../../src/core/user';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('User.destoy', () => {
+describe('User.destroy', () => {
   const user = new User();
 
   it('should destroy a user', async () => {

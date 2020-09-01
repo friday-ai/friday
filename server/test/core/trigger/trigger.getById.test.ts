@@ -6,11 +6,11 @@ describe('Trigger.getById', () => {
   const trigger = new Trigger();
 
   it('should return a trigger', async () => {
-    const triggerRetruned = await trigger.getById('a0f02b72-73e0-4cfd-a049-5caaa0b80514');
+    const triggerReturned = await trigger.getById('a0f02b72-73e0-4cfd-a049-5caaa0b80514');
 
-    expect(triggerRetruned).to.be.an('object');
+    expect(triggerReturned).to.be.an('object');
 
-    assert.deepEqual(triggerRetruned, {
+    assert.deepEqual(triggerReturned, {
       id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
       name: 'Test',
       description: 'A trigger test',
@@ -23,10 +23,10 @@ describe('Trigger.getById', () => {
   });
 
   it('should return a trigger with full scope', async () => {
-    const triggerRetruned = await trigger.getById('a0f02b72-73e0-4cfd-a049-5caaa0b80514', 'full');
+    const triggerReturned = await trigger.getById('a0f02b72-73e0-4cfd-a049-5caaa0b80514', 'full');
 
-    expect(triggerRetruned).to.be.an('object');
-    assert.deepEqual(triggerRetruned, {
+    expect(triggerReturned).to.be.an('object');
+    assert.deepEqual(triggerReturned, {
       id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
       name: 'Test',
       description: 'A trigger test',

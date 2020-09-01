@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import Device from '../../../src/core/device';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('Device.destoy', () => {
+describe('Device.destroy', () => {
   const device = new Device();
 
   it('should destroy a device', async () => {

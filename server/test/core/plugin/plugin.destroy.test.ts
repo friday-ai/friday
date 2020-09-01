@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import Plugin from '../../../src/core/plugin';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('Plugin.destoy', () => {
+describe('Plugin.destroy', () => {
   const plugin = new Plugin();
 
   it('should destroy a plugin', async () => {

@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import House from '../../../src/core/house';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('House.destoy', () => {
+describe('House.destroy', () => {
   const house = new House();
 
   it('should destroy an house', async () => {

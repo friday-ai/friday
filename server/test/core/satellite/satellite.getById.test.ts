@@ -5,10 +5,10 @@ describe('Satellite.getById', () => {
   const satellite = new Satellite();
 
   it('should return a satellite', async () => {
-    const satelliteRturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f');
+    const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f');
 
-    expect(satelliteRturned).to.be.an('object');
-    assert.deepEqual(satelliteRturned, {
+    expect(satelliteReturned).to.be.an('object');
+    assert.deepEqual(satelliteReturned, {
       id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
       name: 'Main satellite',
       roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3',
@@ -16,35 +16,35 @@ describe('Satellite.getById', () => {
   });
 
   it('should return a satellite with full scope', async () => {
-    const satelliteRturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'full');
+    const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'full');
 
-    expect(satelliteRturned).to.be.an('object');
+    expect(satelliteReturned).to.be.an('object');
 
-    expect(satelliteRturned).to.have.property('id');
-    expect(satelliteRturned).to.have.property('name');
-    expect(satelliteRturned).to.have.property('roomId');
-    expect(satelliteRturned).to.have.property('room');
-    expect(satelliteRturned).to.have.property('state');
-    expect(satelliteRturned).to.have.property('variables');
-    expect(satelliteRturned).to.have.property('plugins');
+    expect(satelliteReturned).to.have.property('id');
+    expect(satelliteReturned).to.have.property('name');
+    expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('room');
+    expect(satelliteReturned).to.have.property('state');
+    expect(satelliteReturned).to.have.property('variables');
+    expect(satelliteReturned).to.have.property('plugins');
 
-    expect(satelliteRturned.room).to.be.an('object');
-    expect(satelliteRturned.room).to.have.property('id');
-    expect(satelliteRturned.room).to.have.property('name');
-    expect(satelliteRturned.room).to.have.property('houseId');
+    expect(satelliteReturned.room).to.be.an('object');
+    expect(satelliteReturned.room).to.have.property('id');
+    expect(satelliteReturned.room).to.have.property('name');
+    expect(satelliteReturned.room).to.have.property('houseId');
 
     // TODO: The state cannot must be null
-    if (satelliteRturned.state !== null) {
-      expect(satelliteRturned.state).to.be.an('object');
-      expect(satelliteRturned.state).to.have.property('id');
-      expect(satelliteRturned.state).to.have.property('owner');
-      expect(satelliteRturned.state).to.have.property('ownerType');
-      expect(satelliteRturned.state).to.have.property('value');
+    if (satelliteReturned.state !== null) {
+      expect(satelliteReturned.state).to.be.an('object');
+      expect(satelliteReturned.state).to.have.property('id');
+      expect(satelliteReturned.state).to.have.property('owner');
+      expect(satelliteReturned.state).to.have.property('ownerType');
+      expect(satelliteReturned.state).to.have.property('value');
     }
 
-    if (satelliteRturned.variables !== null) {
-      expect(satelliteRturned.variables).to.be.an('array');
-      satelliteRturned.variables!.forEach((v) => {
+    if (satelliteReturned.variables !== null) {
+      expect(satelliteReturned.variables).to.be.an('array');
+      satelliteReturned.variables!.forEach((v) => {
         expect(v).to.be.an('object');
         expect(v).to.have.property('id');
         expect(v).to.have.property('key');
@@ -54,9 +54,9 @@ describe('Satellite.getById', () => {
       });
     }
 
-    if (satelliteRturned.plugins !== null) {
-      expect(satelliteRturned.plugins).to.be.an('array');
-      satelliteRturned.plugins!.forEach((p) => {
+    if (satelliteReturned.plugins !== null) {
+      expect(satelliteReturned.plugins).to.be.an('array');
+      satelliteReturned.plugins!.forEach((p) => {
         expect(p).to.be.an('object');
         expect(p).to.have.property('id');
         expect(p).to.have.property('name');
@@ -69,58 +69,58 @@ describe('Satellite.getById', () => {
   });
 
   it('should return a satellite with room', async () => {
-    const satelliteRturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withRoom');
+    const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withRoom');
 
 
-    expect(satelliteRturned).to.be.an('object');
+    expect(satelliteReturned).to.be.an('object');
 
-    expect(satelliteRturned).to.have.property('id');
-    expect(satelliteRturned).to.have.property('name');
-    expect(satelliteRturned).to.have.property('roomId');
-    expect(satelliteRturned).to.have.property('room');
+    expect(satelliteReturned).to.have.property('id');
+    expect(satelliteReturned).to.have.property('name');
+    expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('room');
 
-    expect(satelliteRturned.room).to.be.an('object');
-    expect(satelliteRturned.room).to.have.property('id');
-    expect(satelliteRturned.room).to.have.property('name');
-    expect(satelliteRturned.room).to.have.property('houseId');
+    expect(satelliteReturned.room).to.be.an('object');
+    expect(satelliteReturned.room).to.have.property('id');
+    expect(satelliteReturned.room).to.have.property('name');
+    expect(satelliteReturned.room).to.have.property('houseId');
   });
 
   it('should return a satellite with state', async () => {
-    const satelliteRturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withState');
+    const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withState');
 
 
-    expect(satelliteRturned).to.be.an('object');
+    expect(satelliteReturned).to.be.an('object');
 
-    expect(satelliteRturned).to.have.property('id');
-    expect(satelliteRturned).to.have.property('name');
-    expect(satelliteRturned).to.have.property('roomId');
-    expect(satelliteRturned).to.have.property('state');
+    expect(satelliteReturned).to.have.property('id');
+    expect(satelliteReturned).to.have.property('name');
+    expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('state');
 
     // TODO: The state cannot must be null
-    if (satelliteRturned.state !== null) {
-      expect(satelliteRturned.state).to.be.an('object');
-      expect(satelliteRturned.state).to.have.property('id');
-      expect(satelliteRturned.state).to.have.property('owner');
-      expect(satelliteRturned.state).to.have.property('ownerType');
-      expect(satelliteRturned.state).to.have.property('value');
+    if (satelliteReturned.state !== null) {
+      expect(satelliteReturned.state).to.be.an('object');
+      expect(satelliteReturned.state).to.have.property('id');
+      expect(satelliteReturned.state).to.have.property('owner');
+      expect(satelliteReturned.state).to.have.property('ownerType');
+      expect(satelliteReturned.state).to.have.property('value');
     }
   });
 
   it('should return a satellite with variables', async () => {
-    const satelliteRturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withVariables');
+    const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withVariables');
 
 
-    expect(satelliteRturned).to.be.an('object');
+    expect(satelliteReturned).to.be.an('object');
 
-    expect(satelliteRturned).to.have.property('id');
-    expect(satelliteRturned).to.have.property('name');
-    expect(satelliteRturned).to.have.property('roomId');
-    expect(satelliteRturned).to.have.property('variables');
+    expect(satelliteReturned).to.have.property('id');
+    expect(satelliteReturned).to.have.property('name');
+    expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('variables');
 
 
-    if (satelliteRturned.variables !== null) {
-      expect(satelliteRturned.variables).to.be.an('array');
-      satelliteRturned.variables!.forEach((v) => {
+    if (satelliteReturned.variables !== null) {
+      expect(satelliteReturned.variables).to.be.an('array');
+      satelliteReturned.variables!.forEach((v) => {
         expect(v).to.be.an('object');
         expect(v).to.have.property('id');
         expect(v).to.have.property('key');
@@ -132,18 +132,18 @@ describe('Satellite.getById', () => {
   });
 
   it('should return a satellite with plugins', async () => {
-    const satelliteRturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withPlugins');
+    const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withPlugins');
 
-    expect(satelliteRturned).to.be.an('object');
+    expect(satelliteReturned).to.be.an('object');
 
-    expect(satelliteRturned).to.have.property('id');
-    expect(satelliteRturned).to.have.property('name');
-    expect(satelliteRturned).to.have.property('roomId');
-    expect(satelliteRturned).to.have.property('plugins');
+    expect(satelliteReturned).to.have.property('id');
+    expect(satelliteReturned).to.have.property('name');
+    expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('plugins');
 
-    if (satelliteRturned.plugins !== null) {
-      expect(satelliteRturned.plugins).to.be.an('array');
-      satelliteRturned.plugins!.forEach((p) => {
+    if (satelliteReturned.plugins !== null) {
+      expect(satelliteReturned.plugins).to.be.an('array');
+      satelliteReturned.plugins!.forEach((p) => {
         expect(p).to.be.an('object');
         expect(p).to.have.property('id');
         expect(p).to.have.property('name');

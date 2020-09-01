@@ -1,7 +1,7 @@
 import { expect, assert } from 'chai';
 import User from '../../../src/core/user';
 
-describe('user.getAll', () => {
+describe('User.getAll', () => {
   const user = new User();
 
   it('should return all users', async () => {

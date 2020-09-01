@@ -1,7 +1,7 @@
 import { expect, assert } from 'chai';
 import Script from '../../../src/core/script';
 
-describe('scipt.getAll', () => {
+describe('Script.getAll', () => {
   const script = new Script();
 
   it('should return all script', async () => {

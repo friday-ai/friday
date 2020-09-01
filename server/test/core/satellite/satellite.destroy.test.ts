@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import Satellite from '../../../src/core/satellite';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('Satellite.destoy', () => {
+describe('Satellite.destroy', () => {
   const satellite = new Satellite();
 
   it('should destroy a satellite', async () => {

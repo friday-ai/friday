@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import Action from '../../../src/core/action';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('Action.destoy', () => {
+describe('Action.destroy', () => {
   const action = new Action();
 
   it('should destroy an action', async () => {

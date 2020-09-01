@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import Scene from '../../../src/core/scene';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('Scene.destoy', () => {
+describe('Scene.destroy', () => {
   const scene = new Scene();
 
   it('should destroy an scene', async () => {

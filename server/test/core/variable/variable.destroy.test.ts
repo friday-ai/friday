@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import Variable from '../../../src/core/variable';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 
-describe('Variable.destoy', () => {
+describe('Variable.destroy', () => {
   const variable = new Variable();
 
   it('should destroy a variable', async () => {
