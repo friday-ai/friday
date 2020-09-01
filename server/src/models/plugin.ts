@@ -12,31 +12,31 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * Plugin model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => Satellite, () => State, () => Device, () => Variable],
+    include: [Satellite, State, Device, Variable],
   },
   withSatellite: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => Satellite],
+    include: [Satellite],
   },
   withState: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => State],
+    include: [State],
   },
   withDevices: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => Device],
+    include: [Device],
   },
   withVariables: {
     attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
-    include: [() => Variable],
+    include: [Variable],
   },
-})
+}))
 @Table({
   tableName: 'plugin',
   underscored: false,

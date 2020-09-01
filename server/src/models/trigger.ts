@@ -9,15 +9,15 @@ import { AvailableConditions } from '../utils/constants';
 /**
  * Trigger model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'description', 'type', 'rules'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'description', 'type', 'rules'],
-    include: [() => Scene],
+    include: [Scene],
   },
-})
+}))
 @Table({
   tableName: 'trigger',
   underscored: false,

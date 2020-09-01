@@ -12,31 +12,31 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * Satellite model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'roomId'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => Room, () => Plugin, () => State, () => Variable],
+    include: [Room, Plugin, State, Variable],
   },
   withRoom: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => Room],
+    include: [Room],
   },
   withState: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => State],
+    include: [State],
   },
   withVariables: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => Variable],
+    include: [Variable],
   },
   withPlugins: {
     attributes: ['id', 'name', 'roomId'],
-    include: [() => Plugin],
+    include: [Plugin],
   },
-})
+}))
 @Table({
   tableName: 'satellite',
   underscored: false,

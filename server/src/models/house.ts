@@ -9,23 +9,23 @@ import State from './state';
 /**
  * House model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'latitude', 'longitude'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
-    include: [() => Room, () => State],
+    include: [Room, State],
   },
   withRooms: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
-    include: [() => Room],
+    include: [Room],
   },
   withState: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
-    include: [() => State],
+    include: [State],
   },
-})
+}))
 @Table({
   tableName: 'house',
   underscored: false,

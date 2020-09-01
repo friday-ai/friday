@@ -12,9 +12,9 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * Variable model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'key', 'value', 'owner', 'ownerType'],
-})
+}))
 @Table({
   tableName: 'variable',
   underscored: false,

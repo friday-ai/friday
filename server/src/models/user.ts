@@ -12,23 +12,23 @@ import Session from './session';
 /**
  * User model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'firstName', 'email', 'birthDate'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
-    include: [() => State, () => Variable],
+    include: [State, Variable],
   },
   withState: {
     attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
-    include: [() => State],
+    include: [State],
   },
   withVariables: {
     attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
-    include: [() => Variable],
+    include: [Variable],
   },
-})
+}))
 @Table({
   tableName: 'user',
   underscored: false,

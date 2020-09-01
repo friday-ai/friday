@@ -10,15 +10,15 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * Action model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
-    include: [() => Scene],
+    include: [Scene],
   },
-})
+}))
 @Table({
   tableName: 'action',
   underscored: false,

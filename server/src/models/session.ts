@@ -9,15 +9,15 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * Session model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'refreshToken', 'revoked', 'validUntil', 'userId'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'refreshToken', 'revoked', 'validUntil', 'userId'],
-    include: [() => User],
+    include: [User],
   },
-})
+}))
 @Table({
   tableName: 'session',
   underscored: false,

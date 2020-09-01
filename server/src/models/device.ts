@@ -12,27 +12,27 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * Device model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-    include: [() => Room, () => Plugin, () => State],
+    include: [Room, Plugin, State],
   },
   withRoom: {
     attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-    include: [() => Room],
+    include: [Room],
   },
   withPlugin: {
     attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-    include: [() => Plugin],
+    include: [Plugin],
   },
   withState: {
     attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-    include: [() => State],
+    include: [State],
   },
-})
+}))
 @Table({
   tableName: 'device',
   underscored: false,

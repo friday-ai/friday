@@ -6,9 +6,9 @@ import {
 /**
  * Script model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'code'],
-})
+}))
 @Table({
   tableName: 'script',
   underscored: false,

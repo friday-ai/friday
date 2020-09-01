@@ -15,9 +15,9 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * State model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'owner', 'ownerType', 'value'],
-})
+}))
 @Table({
   tableName: 'state',
   underscored: false,

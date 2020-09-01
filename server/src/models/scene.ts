@@ -10,23 +10,23 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * Scene model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'description', 'triggerId'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'description', 'triggerId'],
-    include: [() => Trigger, () => Action],
+    include: [Trigger, Action],
   },
   withActions: {
     attributes: ['id', 'name', 'description', 'triggerId'],
-    include: [() => Action],
+    include: [Action],
   },
   withTrigger: {
     attributes: ['id', 'name', 'description', 'triggerId'],
-    include: [() => Trigger],
+    include: [Trigger],
   },
-})
+}))
 @Table({
   tableName: 'scene',
   underscored: false,
@@ -50,9 +50,9 @@ export default class Scene extends Model<Scene> {
   @Column
   description!: string;
 
-  @Is('triggerId', (value) => {
+  @Is('triggerId', async (value) => {
     if (value !== undefined) {
-      isOwnerExisting(value, ['trigger']);
+      await isOwnerExisting(value, ['trigger']);
     }
   })
   @Column(DataType.UUIDV4)

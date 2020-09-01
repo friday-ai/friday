@@ -12,31 +12,31 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 /**
  * Room model
  */
-@DefaultScope({
+@DefaultScope(() => ({
   attributes: ['id', 'name', 'houseId'],
-})
-@Scopes({
+}))
+@Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => House, () => Device, () => Satellite, () => State],
+    include: [House, Device, Satellite, State],
   },
   withHouse: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => House],
+    include: [House],
   },
   withState: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => State],
+    include: [State],
   },
   withDevices: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => Device],
+    include: [Device],
   },
   withSatellites: {
     attributes: ['id', 'name', 'houseId'],
-    include: [() => Satellite],
+    include: [Satellite],
   },
-})
+}))
 @Table({
   tableName: 'room',
   underscored: false,
