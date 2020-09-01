@@ -29,7 +29,7 @@ describe('POST /api/v1/house', () => {
       .post('/api/v1/house')
       .send({
         id: 'd9abed7e-c35b-4a2b-bb6a-5cd2e2ad556e',
-        name: 'Main House',
+        name: 'Main House test',
         latitude: '34.0012295',
         longitude: '-118.8067245',
       })

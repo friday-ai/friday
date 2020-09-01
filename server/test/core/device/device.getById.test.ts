@@ -14,7 +14,7 @@ describe('Device.getById', () => {
       name: 'Light',
       type: AvailableTypeOfDevice.LIGHT,
       subType: AvailableSubTypeOfDevice.LIGHT_RGB,
-      variable: '',
+      variable: {},
       unit: '',
       value: 'on',
       roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',

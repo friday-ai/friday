@@ -14,10 +14,10 @@ describe('GET /api/v1/trigger', () => {
           name: 'Test',
           description: 'A trigger test',
           type: 'device.value',
-          rules: JSON.stringify({
+          rules: {
             device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
             value: '23',
-          }),
+          },
         },
         ]);
       });
@@ -38,10 +38,10 @@ describe('GET /api/v1/trigger', () => {
           name: 'Test',
           description: 'A trigger test',
           type: 'device.value',
-          rules: JSON.stringify({
+          rules: {
             device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
             value: '23',
-          }),
+          },
           scenes: [
             {
               id: '2452964a-a225-47dd-9b83-d88d57ed280e',

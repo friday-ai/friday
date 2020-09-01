@@ -12,7 +12,7 @@ describe('GET /api/v1/house', () => {
         expect(res.body).to.be.an('array');
         assert.deepEqual(res.body, [{
           id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
-          name: 'Main House',
+          name: 'Main House test',
           latitude: '34.0012295',
           longitude: '-118.8067245',
         },

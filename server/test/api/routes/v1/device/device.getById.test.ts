@@ -14,7 +14,7 @@ describe('GET /api/v1/device/:id', () => {
           name: 'Light',
           type: 'light',
           subType: 'light_rgb',
-          variable: '',
+          variable: {},
           unit: '',
           value: 'on',
           roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',

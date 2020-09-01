@@ -13,14 +13,14 @@ describe('user.getAll', () => {
       name: 'Pepperwood',
       firstName: 'John',
       email: 'john@pepperwood.com',
-      birthDate: '1997-01-20',
+      birthDate: '1997-01-19 23:00:00.000 +00:00',
     },
     {
       id: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
       name: 'Pepperwood',
       firstName: 'Jess',
       email: 'jess@pepperwood.com',
-      birthDate: '1997-01-20',
+      birthDate: '1997-01-19 23:00:00.000 +00:00',
     }]);
   });
 
