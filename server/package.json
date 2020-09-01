@@ -10,6 +10,7 @@
     "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"cross-env NODE_ENV=production SERVER_PORT=1443 ts-node ./src/server.ts\"",
     "dev": "concurrently -k -n \"TypeScript,Node\" -c \"blue,green\" \"tsc --watch\" \"cross-env NODE_ENV=development nodemon ./src/server.ts\"",
     "test": "concurrently -k -n \"Mocha\" -c \"red\" \"cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/**/*.test.ts -exit\"",
+    "testcore": "concurrently -k -n \"Mocha\" -c \"red\" \"cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/core/**/script.*.test.ts -exit\"",
     "coverage": "nyc npm test",
     "test:watch": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --watch --detectOpenHandles\"",
     "lint": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx ./\"",
@@ -46,6 +47,7 @@
     "@types/node": "^13.5.1",
     "@types/node-schedule": "^1.3.0",
     "@types/sequelize": "^4.28.8",
+    "@types/umzug": "^2.2.3",
     "@types/uuid": "^3.4.7",
     "@types/ws": "^7.2.0",
     "bcrypt": "^3.0.7",
@@ -67,6 +69,7 @@
     "sqlite3": "^4.1.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5",
+    "umzug": "^2.3.0",
     "ws": "^7.2.1"
   },
   "devDependencies": {

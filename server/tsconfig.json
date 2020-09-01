@@ -24,6 +24,9 @@
   },
   "include": [
     "src/**/*",
+    "src/models/*",
+    "seeders/*",
+    "migrations/*",
     "test/**/*"
   ]
 }
