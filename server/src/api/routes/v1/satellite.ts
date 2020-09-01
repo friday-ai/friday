@@ -116,7 +116,8 @@ export default class SatelliteRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response) => {
-    const satellite = await this.friday.satellite.getById(req.params.id, req.query.scope);
+    const scope = req.query.scope as string;
+    const satellite = await this.friday.satellite.getById(req.params.id, scope);
     res.json(satellite);
   };
 }

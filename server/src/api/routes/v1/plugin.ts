@@ -131,7 +131,8 @@ export default class PluginRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response) => {
-    const plugin = await this.friday.plugin.getById(req.params.id, req.query.scope);
+    const scope = req.query.scope as string;
+    const plugin = await this.friday.plugin.getById(req.params.id, scope);
     res.json(plugin);
   };
 }

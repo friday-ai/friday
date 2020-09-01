@@ -138,7 +138,8 @@ export default class TriggerRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response) => {
-    const trigger = await this.friday.trigger.getById(req.params.id, req.query.scope);
+    const scope = req.query.scope as string;
+    const trigger = await this.friday.trigger.getById(req.params.id, scope);
     res.json(trigger);
   };
 }

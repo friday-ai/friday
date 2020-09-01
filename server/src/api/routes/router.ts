@@ -24,7 +24,7 @@ export default function router(friday: Friday): Router {
     .sync('**/*.ts', { cwd: `${__dirname}/` })
     .map((filename) => require(`./${filename}`).default)
     .filter((routerClass) => routerClass !== undefined)
-    .filter((routerClass) => Reflect.hasOwnMetadata('prefix', routerClass) === true);
+    .filter((routerClass) => Reflect.hasOwnMetadata('prefix', routerClass));
 
   routers.forEach((RouterClass) => {
     const instance = new RouterClass(friday);

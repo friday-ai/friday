@@ -115,7 +115,7 @@ export default class ScriptRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response) => {
+  getById = async (req: Request, res: Response) => {
     const script = await this.friday.script.getById(req.params.id);
     res.json(script);
   };

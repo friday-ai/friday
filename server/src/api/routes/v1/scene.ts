@@ -121,7 +121,8 @@ export default class SceneRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response) => {
-    const scene = await this.friday.scene.getById(req.params.id, req.query.scope);
+    const scope = req.query.scope as string;
+    const scene = await this.friday.scene.getById(req.params.id, scope);
     res.json(scene);
   };
 }

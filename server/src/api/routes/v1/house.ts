@@ -87,7 +87,7 @@ export default class HouseRouter {
    * Get all houses
    * @apiName getAll
    * @apiDescription This route allows you to get all houses
-   * @api {get} /api/v1/hous
+   * @api {get} /api/v1/house
    * @apiGroup House
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response
@@ -121,7 +121,8 @@ export default class HouseRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response) => {
-    const house = await this.friday.house.getById(req.params.id, req.query.scope);
+    const scope = req.query.scope as string;
+    const house = await this.friday.house.getById(req.params.id, scope);
     res.json(house);
   };
 }

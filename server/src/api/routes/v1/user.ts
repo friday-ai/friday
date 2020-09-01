@@ -142,8 +142,9 @@ export default class UserRouter {
    * }
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
-  getbyId = async (req: Request, res: Response) => {
-    const user = await this.friday.user.getById(req.params.id, req.query.scope);
+  getById = async (req: Request, res: Response) => {
+    const scope = req.query.scope as string;
+    const user = await this.friday.user.getById(req.params.id, scope);
     res.json(user);
   };
 

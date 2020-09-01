@@ -98,7 +98,6 @@ export default class DeviceRouter {
     });
   };
 
-
   /**
    * Get all devices
    * @apiName getAll
@@ -147,7 +146,8 @@ export default class DeviceRouter {
    */
   @Get({ path: '/:id', authenticated: true, rateLimit: false })
   getById = async (req: Request, res: Response) => {
-    const device = await this.friday.device.getById(req.params.id, req.query.scope);
+    const scope = req.query.scope as string;
+    const device = await this.friday.device.getById(req.params.id, scope);
     res.json(device);
   };
 }

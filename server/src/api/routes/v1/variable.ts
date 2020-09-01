@@ -9,7 +9,7 @@ import Friday from '../../../core/friday';
  * @apiDefine VariableParam
  * @apiParam {String} key Key of the variable.
  * @apiParam {String} value Value of the variable.
- * @apiParam {String} owner Owner'id of the variable.
+ * @apiParam {String} owner Owner's id of the variable.
  * @apiParam {VariableOwner} ownerType Owner type of the variable.
  */
 @FridayRouter('/v1/variable')
@@ -104,7 +104,8 @@ export default class VariableRouter {
    */
   @Get({ path: '/', authenticated: true, rateLimit: false })
   getValue = async (req: Request, res: Response) => {
-    const variables = await this.friday.variable.getValue(req.query.key);
+    const key = req.query.key as string;
+    const variables = await this.friday.variable.getValue(key);
     res.json(variables);
   };
 }

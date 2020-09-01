@@ -47,7 +47,7 @@ export default class WebsocketServer {
       });
 
       setTimeout(() => {
-        if (this.isAuthenticated === false) {
+        if (!this.isAuthenticated) {
           ws.terminate();
         }
       // tslint:disable-next-line: align
