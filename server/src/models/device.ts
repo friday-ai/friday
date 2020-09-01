@@ -60,12 +60,15 @@ export default class Device extends Model<Device> {
   @Column
   subType!: AvailableSubTypeOfDevice;
 
+  @Default({})
   @Column(DataType.JSON)
   variable: any;
 
+  @Default('')
   @Column
   unit!: string;
 
+  @Default('')
   @Column
   value!: string;
 

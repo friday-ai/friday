@@ -11,7 +11,7 @@ import {
 })
 @Table({
   tableName: 'script',
-  underscored: true,
+  underscored: false,
 })
 export default class Script extends Model<Script> {
   @IsUUID(4)
@@ -29,6 +29,7 @@ export default class Script extends Model<Script> {
   name!: string;
 
   @AllowNull(false)
-  @Column(DataType.JSON)
-  code: any;
+  @Default('')
+  @Column
+  code!: string;
 }

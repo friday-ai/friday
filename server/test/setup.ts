@@ -1,15 +1,18 @@
 import chai from 'chai';
-import chaiAsPormised from 'chai-as-promised';
+import chaiAsPromised from 'chai-as-promised';
 import Server from '../src/api/app';
 import Friday from '../src/core/friday';
 import { seedDb, cleanDb } from './utils/seed';
+import { umzug } from '../src/config/database';
+import Log from '../src/utils/log';
 
 const port = parseInt(process.env.SERVER_PORT!, 10) || 3500;
+const log = new Log();
 
-chai.use(chaiAsPormised);
+chai.use(chaiAsPromised);
 
 before(async function before() {
-  this.timeout(8000);
+  this.timeout(16000);
 
   // Create Friday core object
   const friday = new Friday();
@@ -19,6 +22,19 @@ before(async function before() {
 
   // @ts-ignore
   global.TEST_SERVER = new Server(port, friday).start();
+
+  try {
+    await cleanDb();
+  } catch (e) {
+    log.warning('Impossible to clean database, ignoring error');
+  }
+  try {
+    await umzug.up();
+    await seedDb();
+  } catch (e) {
+    log.error(e);
+    throw e;
+  }
 });
 
 beforeEach(async function beforeEach() {
