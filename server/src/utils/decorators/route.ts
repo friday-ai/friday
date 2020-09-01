@@ -10,7 +10,7 @@
 /**
  * Route methode enumerator
  */
-enum Methodes {
+enum Methods {
   GET = 'get',
   POST = 'post',
   PATCH = 'patch',
@@ -22,7 +22,7 @@ enum Methodes {
  */
 export interface RouteDefinition {
   path: string;
-  requestMethod: Methodes;
+  requestMethod: Methods;
   methodName: string;
   authenticated: boolean;
   rateLimit: boolean;
@@ -41,13 +41,13 @@ export interface RouteParam {
  * Function to build metadata routes
  * @param {*} target
  * @param {string} propertyKey
- * @param {Methodes} requestMethode
+ * @param {Methods} requestMethode
  * @param {RouteParam} options
  * @returns {Promise<RouteDefinition[]>} Resolve with route array.
  * @example
- * buildMetadataRoutes(target, propertyKey, Methodes.GET, options);
+ * buildMetadataRoutes(target, propertyKey, Methods.GET, options);
  */
-function buildMetadataRoutes(target: any, propertyKey: string, requestMethode: Methodes, options: RouteParam) {
+function buildMetadataRoutes(target: any, propertyKey: string, requestMethode: Methods, options: RouteParam) {
   // In case this is the first route to be registered the `routes` metadata is likely to be undefined at this point.
   // To prevent any further validation simply set it to an empty array here.
   if (!Reflect.hasMetadata('routes', target.constructor)) {
@@ -68,14 +68,12 @@ function buildMetadataRoutes(target: any, propertyKey: string, requestMethode: M
   return routes;
 }
 
-
 //      ____                                        __                                   ____                  __                    _
 //     / __ \  ___   _____  ____    _____  ____ _  / /_  ____    _____   _____          / __/  ____ _  _____  / /_  ____    _____   (_)  ___    _____
 //    / / / / / _ \ / ___/ / __ \  / ___/ / __ `/ / __/ / __ \  / ___/  / ___/         / /_   / __ `/ / ___/ / __/ / __ \  / ___/  / /  / _ \  / ___/
 //   / /_/ / /  __// /__  / /_/ / / /    / /_/ / / /_  / /_/ / / /     (__  )         / __/  / /_/ / / /__  / /_  / /_/ / / /     / /  /  __/ (__  )
 //  /_____/  \___/ \___/  \____/ /_/     \__,_/  \__/  \____/ /_/     /____/         /_/     \__,_/  \___/  \__/  \____/ /_/     /_/   \___/ /____/
 //
-
 
 /**
  * Decorator factory for '@FridayRouter'
@@ -101,7 +99,7 @@ export const FridayRouter = (prefix: string = ''): ClassDecorator => (target: an
  */
 // tslint:disable-next-line: naming-convention
 export const Get = (options: RouteParam) => (target: any, propertyKey: string): void => {
-  const routes = buildMetadataRoutes(target, propertyKey, Methodes.GET, options);
+  const routes = buildMetadataRoutes(target, propertyKey, Methods.GET, options);
   Reflect.defineMetadata('routes', routes, target.constructor);
 };
 
@@ -113,7 +111,7 @@ export const Get = (options: RouteParam) => (target: any, propertyKey: string): 
  */
 // tslint:disable-next-line: naming-convention
 export const Post = (options: RouteParam) => (target: any, propertyKey: string): void => {
-  const routes = buildMetadataRoutes(target, propertyKey, Methodes.POST, options);
+  const routes = buildMetadataRoutes(target, propertyKey, Methods.POST, options);
   Reflect.defineMetadata('routes', routes, target.constructor);
 };
 
@@ -125,7 +123,7 @@ export const Post = (options: RouteParam) => (target: any, propertyKey: string):
  */
 // tslint:disable-next-line: naming-convention
 export const Patch = (options: RouteParam) => (target: any, propertyKey: string): void => {
-  const routes = buildMetadataRoutes(target, propertyKey, Methodes.PATCH, options);
+  const routes = buildMetadataRoutes(target, propertyKey, Methods.PATCH, options);
   Reflect.defineMetadata('routes', routes, target.constructor);
 };
 
@@ -137,6 +135,6 @@ export const Patch = (options: RouteParam) => (target: any, propertyKey: string)
  */
 // tslint:disable-next-line: naming-convention
 export const Delete = (options: RouteParam) => (target: any, propertyKey: string): void => {
-  const routes = buildMetadataRoutes(target, propertyKey, Methodes.DELETE, options);
+  const routes = buildMetadataRoutes(target, propertyKey, Methods.DELETE, options);
   Reflect.defineMetadata('routes', routes, target.constructor);
 };

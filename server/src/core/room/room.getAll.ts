@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS: GetOptions = {
 
 /**
  * Get all rooms.
- * @param {Getoptions} options - Options of the query.
+ * @param {GetOptions} options - Options of the query.
  * @returns {Promise<RoomType[]>} Resolve with room array.
  * @example
  * ````

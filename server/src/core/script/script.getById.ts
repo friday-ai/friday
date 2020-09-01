@@ -5,7 +5,6 @@ import error, { NotFoundError } from '../../utils/errors/coreError';
 /**
  * Get a script by id.
  * @param {String} id - Id of script.
- * @param {String} scope - Scope option. (Optional)
  * @returns {Promise<ScriptType>} Resolve with script.
  * @example
  * ````
@@ -20,9 +19,9 @@ export default async function getById(id: string): Promise<ScriptType> {
       throw new NotFoundError({ name: 'Get Script by Id', message: 'Script not found', metadata: id });
     }
 
-    const scripteToReturn = <ScriptType>script.get({ plain: true });
+    const scriptToReturn = <ScriptType>script.get({ plain: true });
 
-    return scripteToReturn;
+    return scriptToReturn;
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e, metadata: id,

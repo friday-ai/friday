@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS: GetOptions = {
 
 /**
  * Get all scripts.
- * @param {Getoptions} options - Options of the query.
+ * @param {GetOptions} options - Options of the query.
  * @returns {Promise<ScriptType[]>} Resolve with script array.
  * @example
  * ````

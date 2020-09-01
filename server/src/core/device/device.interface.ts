@@ -1,4 +1,3 @@
-
 import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../../utils/constants';
 import RoomType from '../room/room.interface';
 import StateType from '../state/state.interface';

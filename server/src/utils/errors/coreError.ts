@@ -24,7 +24,7 @@ export class BaseCoreError extends Error {
 }
 
 /**
- * Authentification error class
+ * Authentication error class
  * @class AuthError
  * @extends {BaseCoreError}
  */
@@ -35,11 +35,11 @@ export class AuthError extends BaseCoreError {
 }
 
 /**
- * Unauthoriized error class
- * @class UnauthoriizedError
+ * Unauthorized error class
+ * @class UnauthorizedError
  * @extends {BaseCoreError}
  */
-export class UnauthoriizedError extends BaseCoreError {
+export class UnauthorizedError extends BaseCoreError {
   constructor(err: ErrorType) {
     super(err);
   }
@@ -104,11 +104,11 @@ export default function error(err: ErrorType): BaseCoreError {
       return new BadParametersError(err);
     case NotFoundError:
       return new NotFoundError(err);
-    case UnauthoriizedError:
+    case UnauthorizedError:
     case TokenExpiredError:
     case NotBeforeError:
     case JsonWebTokenError:
-      return new UnauthoriizedError(err);
+      return new UnauthorizedError(err);
     case AuthError:
       return new AuthError(err);
     default:

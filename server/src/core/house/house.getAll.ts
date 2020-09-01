@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS: GetOptions = {
 
 /**
  * Get all houses.
- * @param {Getoptions} options - Options of the query.
+ * @param {GetOptions} options - Options of the query.
  * @returns {Promise<HouseType[]>} Resolve with house array.
  * @example
  * ````

@@ -4,7 +4,7 @@ import error, { NotFoundError, BadParametersError } from '../../utils/errors/cor
 
 /**
  * Revoke an session.
- * @param {String} id - Id of user.
+ * @param {String} userId - Id of user.
  * @param {String} sessionId - Id of session.
  * @returns {Promise<SessionType>} Resolve with session revoked.
  * @example

@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS: GetOptions = {
 
 /**
  * GEt all users.
- * @param {Getoptions} options - Options of the query.
+ * @param {GetOptions} options - Options of the query.
  * @returns {Promise<UserType[]>} Resolve with user array.
  * @example
  * ````

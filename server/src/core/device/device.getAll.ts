@@ -11,7 +11,7 @@ const DEFAULT_OPTIONS: GetOptions = {
 
 /**
  * Get all devices.
- * @param {Getoptions} options - Options of the query.
+ * @param {GetOptions} options - Options of the query.
  * @returns {Promise<DeviceType[]>} Resolve with device array.
  * @example
  * ````

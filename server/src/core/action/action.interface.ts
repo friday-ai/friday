@@ -1,4 +1,3 @@
-
 import Scene from '../scene/scene.interface';
 import { ActionsType } from '../../utils/constants';
 

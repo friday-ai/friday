@@ -4,7 +4,7 @@ import error, { NotFoundError, BadParametersError } from '../../utils/errors/cor
 
 /**
  * Update a variable.
- * @param {String} id - Id of variable
+ * @param {String} idOrKey - Id or key of variable
  * @param {VariableType} variable - A variable object.
  * @returns {Promise<VariableType>} Resolve with updated variable.
  * @example

@@ -29,7 +29,7 @@ export default async function login(email: string, password: string): Promise<Us
     const userToReturn = <UserType>user.get({ plain: true });
     const passwordMatches = await compare(password, userToReturn.password!);
 
-    if (passwordMatches !== true) {
+    if (!passwordMatches) {
       throw new AuthError({ name: 'User login', message: 'Password not matches.', metadata: email });
     }
 

@@ -8,7 +8,7 @@ import { generateAccessToken } from '../../utils/jwt';
  * @param {string} refreshToken - The refresh token to verify.
  * @returns {Promise<SessionType>} Resolve with an session object.
  * @example
- * friday.session.validateRefeshToken('test');
+ * friday.session.getAccessToken('test');
  */
 export default async function getAccessToken(this: SessionClass, refreshToken: string): Promise<SessionType> {
   try {

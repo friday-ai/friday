@@ -22,7 +22,7 @@ export default async function update(id: string, satellite: SatelliteType): Prom
     const satelliteToUpdate = await Satellite.findByPk(id);
 
     if (satelliteToUpdate === null) {
-      throw new NotFoundError({ name: 'Update a Stallite', message: 'Satellite not found', metadata: satellite.id });
+      throw new NotFoundError({ name: 'Update a Satellite', message: 'Satellite not found', metadata: satellite.id });
     }
     satelliteToUpdate.update(satellite);
     const satelliteToReturn = <SatelliteType>satelliteToUpdate.get({ plain: true });

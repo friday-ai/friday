@@ -3,7 +3,7 @@
 import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtoken';
 import {
   BadParametersError, NotFoundError, DatabaseUniqueConstraintError,
-  DatabaseValidationError, AuthError, UnauthoriizedError,
+  DatabaseValidationError, AuthError, UnauthorizedError,
 } from './coreError';
 
 import { ErrorType } from '../interfaces';
@@ -132,7 +132,7 @@ export default function httpError(err: ErrorType): BaseHttpError {
       return new Error404(err);
     case AuthError:
       return new Error403(err);
-    case UnauthoriizedError:
+    case UnauthorizedError:
     case TokenExpiredError:
     case NotBeforeError:
     case JsonWebTokenError:

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import SessionClass from './index';
-import error, { NotFoundError, UnauthoriizedError } from '../../utils/errors/coreError';
+import error, { NotFoundError, UnauthorizedError } from '../../utils/errors/coreError';
 import SessionType, { AccessTokenType } from './session.interface';
 
 /**
@@ -24,11 +24,11 @@ export default async function validateAccessToken(this: SessionClass, accessToke
     }
 
     if (session.revoked === true) {
-      throw new UnauthoriizedError({ name: 'Validate access token', message: 'Session was revoked.', metadata: accessToken });
+      throw new UnauthorizedError({ name: 'Validate access token', message: 'Session was revoked.', metadata: accessToken });
     }
 
     if (session.validUntil! < new Date()) {
-      throw new UnauthoriizedError({ name: 'Validate access token', message: 'Session has expired.', metadata: accessToken });
+      throw new UnauthorizedError({ name: 'Validate access token', message: 'Session has expired.', metadata: accessToken });
     }
 
     return decoded;

@@ -15,7 +15,7 @@ export default async function destroy(id: string): Promise<void> {
     const deviceToDelete = await Device.findByPk(id);
 
     if (deviceToDelete === null) {
-      throw new NotFoundError({ name: 'Destoy a device', message: 'Device not found', metadata: id });
+      throw new NotFoundError({ name: 'Destroy a device', message: 'Device not found', metadata: id });
     }
 
     await deviceToDelete.destroy();

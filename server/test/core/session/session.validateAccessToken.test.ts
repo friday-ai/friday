@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import Session from '../../../src/core/session';
-import { NotFoundError, UnauthoriizedError } from '../../../src/utils/errors/coreError';
+import { NotFoundError, UnauthorizedError } from '../../../src/utils/errors/coreError';
 import { generateAccessToken } from '../../../src/utils/jwt';
 
 describe('Session.validateAccessToken', () => {
@@ -25,11 +25,11 @@ describe('Session.validateAccessToken', () => {
 
   it('should return an error, associate session has revoked', async () => {
     const promise = session.validateAccessToken(revokedAccessToken);
-    await assert.isRejected(promise, UnauthoriizedError);
+    await assert.isRejected(promise, UnauthorizedError);
   });
 
   it('should return an error, associate session has expired', async () => {
     const promise = session.validateAccessToken(expiredAccessToken);
-    await assert.isRejected(promise, UnauthoriizedError);
+    await assert.isRejected(promise, UnauthorizedError);
   });
 });

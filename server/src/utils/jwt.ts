@@ -5,8 +5,8 @@ import util from 'util';
 const accessTokenValidity = 24 * 60 * 60; // access token is valid 24 hours
 const refreshTokenValidity = 15 * 24 * 60 * 60; // refresh token is valid 15 days
 const randomBytes = util.promisify(crypto.randomBytes);
-const tokenLenght = 500;
-const apiKeyLenght = 32;
+const tokenLength = 500;
+const apiKeyLength = 32;
 const env = process.env.NODE_ENV || 'production';
 
 /**
@@ -33,9 +33,9 @@ export function generateJwtSecret() {
   }
 
   const jwtSecret = crypto
-    .randomBytes(Math.ceil(tokenLenght / 2))
+    .randomBytes(Math.ceil(tokenLength / 2))
     .toString('hex') // convert to hexadecimal format
-    .slice(0, tokenLenght); // return required number of characters
+    .slice(0, tokenLength); // return required number of characters
 
   return jwtSecret;
 }
@@ -64,9 +64,9 @@ export function generateAccessToken(userId: string, role: string, sessionId: str
  * @returns {Promise} Resolving with refreshToken, refreshTokenHash and refreshTokenValidity.
  */
 export async function generateRefreshToken() {
-  const refreshToken = (await randomBytes(Math.ceil(tokenLenght / 2)))
+  const refreshToken = (await randomBytes(Math.ceil(tokenLength / 2)))
     .toString('hex')
-    .slice(0, tokenLenght);
+    .slice(0, tokenLength);
   const refreshTokenHash = hashToken(refreshToken);
 
   return {
@@ -82,7 +82,7 @@ export async function generateRefreshToken() {
  * @returns {Promise} Resolving with apiKey and apiKeyHash.
  */
 export async function generateApiKey() {
-  const apiKey = (await randomBytes(Math.ceil(apiKeyLenght / 2))).toString('hex').slice(0, apiKeyLenght);
+  const apiKey = (await randomBytes(Math.ceil(apiKeyLength / 2))).toString('hex').slice(0, apiKeyLength);
   const apiKeyHash = hashToken(apiKey);
 
   return {

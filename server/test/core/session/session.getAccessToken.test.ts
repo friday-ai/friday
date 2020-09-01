@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import Session from '../../../src/core/session';
-import { NotFoundError, UnauthoriizedError } from '../../../src/utils/errors/coreError';
+import { NotFoundError, UnauthorizedError } from '../../../src/utils/errors/coreError';
 
 // tokenHash: 'c090007e57736654afa0b637f0e6e7a6d7dddbe476e2892c0d62fdd601d0807d', // hash of 'refresh-token-test-create'
 
@@ -25,11 +25,11 @@ describe('Session.getAccessToken', () => {
 
   it('should not get a access token for an revoked session', async () => {
     const promise = session.getAccessToken('refresh-token-test-revoked');
-    await assert.isRejected(promise, UnauthoriizedError);
+    await assert.isRejected(promise, UnauthorizedError);
   });
 
   it('should not get a access token for an expired session', async () => {
     const promise = session.getAccessToken('refresh-token-test-expired');
-    await assert.isRejected(promise, UnauthoriizedError);
+    await assert.isRejected(promise, UnauthorizedError);
   });
 });

@@ -1,4 +1,3 @@
-
 export enum UserRole {
   ADMIN = 'admin',
   HABITANT = 'habitant',
@@ -26,7 +25,7 @@ export enum StateOwner {
 }
 
 export enum AvailableState {
-  // User's states
+  // User states
   USER_AS_SLEEP = 'user.as.sleep',
   USER_AT_WORK = 'user.at.work',
   USER_GO_TO_WORK = 'user.go.to.work',
@@ -34,26 +33,26 @@ export enum AvailableState {
   USER_IN_ROOM = 'user.in.room',
   USER_BACK_TO_HOME = 'user.back.to.home',
   USER_LEFT_HOME = 'user.left.home',
-  // Plugin's states
+  // Plugin states
   PLUGIN_INSTALLED = 'plugin.installed',
   PLUGIN_ERRORED = 'plugin.errored',
   PLUGIN_WAITING_INSTALLATION = 'plugin.waiting.installation',
-  PLUGIN_STOPED = 'plugin.stoped',
-  PLUGIN_RUNING = 'plugin.running',
+  PLUGIN_STOPPED = 'plugin.stopped',
+  PLUGIN_RUNNING = 'plugin.running',
   PLUGIN_WAITING_CONFIGURATION = 'plugin.waiting.configuration',
-  // House's states
-  HOUSE_EMTPY = 'house.empty',
+  // House states
+  HOUSE_EMPTY = 'house.empty',
   HOUSE_NOT_EMPTY = 'house.not.empty',
-  // Room's states
-  ROOM_EMTPY = 'room.empty',
+  // Room states
+  ROOM_EMPTY = 'room.empty',
   ROOM_NOT_EMPTY = 'room.not.empty',
-  // Satellite's states
+  // Satellite states
   SATELLITE_CONNECTED = 'satellite.connected',
   SATELLITE_DISCONNECTED = 'satellite.disconnected',
   SATELLITE_STANDBY = 'satellite.standby',
   SATELLITE_ERRORED = 'satellite.errored',
   SATELLITE_WAITING_CONFIGURATION = 'satellite.waiting.configuration',
-  // Device's states
+  // Device states
   DEVICE_CONNECTED = 'device.connected',
   DEVICE_DISCONNECTED = 'device.disconnected',
   DEVICE_STANDBY = 'device.standby',
@@ -62,35 +61,35 @@ export enum AvailableState {
 }
 
 export enum AvailableConditions {
-  // User's conditions
+  // User conditions
   USER_IS_AS_SLEEP = 'user.is.as.sleep',
   USER_IS_AS_AT_HOME = 'user.is.at.home',
-  // Sun's conditions
+  // Sun conditions
   SUNSET = 'sunset',
   SUNRISE = 'sunrise',
-  // Device's conditions
+  // Device conditions
   DEVICE_VALUE = 'device.value',
-  // Home's conditions
+  // Home conditions
   HOUSE_IS_EMPTY = 'house.is.empty'
 }
 
 export enum ActionsType {
-  // Light's actions
+  // Light actions
   LIGHT_TURN_ON = 'light.turn_on',
   LIGHT_TURN_OFF = 'light.turn_off',
-  // State's actions
+  // State actions
   STATE_SET = 'state.set',
-  // Scrip's actions
+  // Scrip actions
   SCRIPT_START = 'script.start',
-  // Notification's actions
+  // Notification actions
   NOTIFICATION_SEND = 'notification.send',
-  // Music's actions
+  // Music actions
   MUSIC_PLAY = 'music.play',
   MUSIC_PAUSE = 'music.pause',
   MUSIC_STOP = 'music.stop',
   MUSIC_NEXT = 'music.next',
   MUSIC_PREVIOUS = 'music.previous',
-  // Time's actions
+  // Time actions
   TIME_DELAY = 'time.delay',
   TIME_AT_DATE = 'time.at.date',
   // No action
@@ -98,16 +97,16 @@ export enum ActionsType {
 }
 
 export enum EventsType {
-  // State's events
+  // State events
   STATES_PURGE = 'states.purge',
   STATE_SET = 'state.set',
-  // System's  events
-  SYSTEM_STARTED = 'systeme.started',
-  SYSTEM_UPDATED = 'systeme.updated',
-  SYSTEM_SHUTDOWN = 'systeme.shutdown',
-  SYSTEM_CHECK_UPDATE = 'systeme.check_update',
-  SYSTEM_BACKUP = 'systeme.backup',
-  // Websocket's events
+  // System events
+  SYSTEM_STARTED = 'system.started',
+  SYSTEM_UPDATED = 'system.updated',
+  SYSTEM_SHUTDOWN = 'system.shutdown',
+  SYSTEM_CHECK_UPDATE = 'system.check_update',
+  SYSTEM_BACKUP = 'system.backup',
+  // Websocket events
   WEBSOCKET_SEND = 'websocket.send',
   WEBSOCKET_SEND_ALL = 'websocket.send.all',
   WEBSOCKET_SEND_ADMIN = 'websocket.send.admin'

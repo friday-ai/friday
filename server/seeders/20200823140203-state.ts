@@ -39,7 +39,7 @@ module.exports = {
       id: '9027a374-978c-4874-9dcb-278138a4c125',
       owner: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
       ownerType: StateOwner.ROOM,
-      value: AvailableState.ROOM_EMTPY,
+      value: AvailableState.ROOM_EMPTY,
       createdAt: new Date(),
       updatedAt: new Date(),
     },

@@ -1,7 +1,6 @@
 import Room from '../../models/room';
 import error, { NotFoundError } from '../../utils/errors/coreError';
 
-
 /**
  * Destroy a room.
  * @param {String} id - Id of room.
