@@ -18,7 +18,7 @@ const room: RoomType = {
 };
 
 const satellite: SatelliteType = {
-  name: 'Main Satellite',
+  name: 'Master',
   roomId: '',
 };
 

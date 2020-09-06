@@ -8,7 +8,7 @@ const port = parseInt(process.env.SERVER_PORT!, 10) || 3000;
   const friday = new Friday();
 
   // Start Friday core
-  friday.start();
+  await friday.start();
 
   // Start Friday server
   new Server(port, friday).start();

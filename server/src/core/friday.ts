@@ -57,7 +57,9 @@ export default class Friday {
   /**
    * Gets version
    */
-  getVersion() {
-    return this.system.getVersion();
+  async getVersion() {
+    const version = await this.system.getVersion();
+    // Return only package version
+    return version[0];
   }
 }

@@ -71,7 +71,6 @@ describe('Satellite.getById', () => {
   it('should return a satellite with room', async () => {
     const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withRoom');
 
-
     expect(satelliteReturned).to.be.an('object');
 
     expect(satelliteReturned).to.have.property('id');
@@ -87,7 +86,6 @@ describe('Satellite.getById', () => {
 
   it('should return a satellite with state', async () => {
     const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withState');
-
 
     expect(satelliteReturned).to.be.an('object');
 
@@ -109,14 +107,12 @@ describe('Satellite.getById', () => {
   it('should return a satellite with variables', async () => {
     const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', 'withVariables');
 
-
     expect(satelliteReturned).to.be.an('object');
 
     expect(satelliteReturned).to.have.property('id');
     expect(satelliteReturned).to.have.property('name');
     expect(satelliteReturned).to.have.property('roomId');
     expect(satelliteReturned).to.have.property('variables');
-
 
     if (satelliteReturned.variables !== null) {
       expect(satelliteReturned.variables).to.be.an('array');

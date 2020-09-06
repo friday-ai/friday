@@ -10,7 +10,7 @@ export default async function start(this: System) {
   try {
     const userCount = await this.user.getCount();
 
-    // If is the first start and its not test env, run init funciton
+    // If is the first start and its not test env, run init function
     if (userCount < 1 && env !== 'test') {
       await this.init();
     }

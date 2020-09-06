@@ -1,8 +1,7 @@
 import error, { NotFoundError } from '../../utils/errors/coreError';
 import System from '.';
 import { SystemVariablesNames } from '../../utils/constants';
-
-const actualVersion: string = process.env.npm_package_version!;
+import { version as packageVersion } from '../../../package.json';
 
 /**
  * Get actual version and last saved version of Friday
@@ -13,10 +12,10 @@ export default async function getVersion(this: System): Promise<Array<String>> {
   try {
     const variable = await this.variable.getValue(SystemVariablesNames.FRIDAY_VERSION);
     savedVersion = variable.value!;
-    return [actualVersion, savedVersion];
+    return [packageVersion, savedVersion];
   } catch (e) {
     if (e.constructor === NotFoundError) {
-      return [actualVersion, savedVersion];
+      return [packageVersion, savedVersion];
     }
     throw error({ name: e.name, message: e.message, cause: e });
   }
