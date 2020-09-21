@@ -8,7 +8,8 @@ import State from './state';
 import Variable from './variable';
 import Device from './device';
 import { isOwnerExisting } from '../utils/databaseValidation';
-
+import Friday from '../core/friday';
+import {DatabaseValidationError} from '../utils/errors/coreError';
 /**
  * Plugin model
  */
@@ -40,6 +41,20 @@ import { isOwnerExisting } from '../utils/databaseValidation';
 @Table({
   tableName: 'plugin',
   underscored: false,
+  validate: {
+    async isNotAlreadyInstall(this: Plugin) {
+      const friday = new Friday();
+      // Check plugin isn't already install;
+      let satellite = await friday.satellite.getById(this.satelliteId, 'withPlugins');
+      if(satellite !== null && typeof satellite.plugins !== 'undefined') {
+        satellite.plugins.forEach(plugin => {
+          if((plugin as any).name === this.name) {
+            throw new DatabaseValidationError({message:'plugin already install on this satellite', name: 'plugin.already.install'});
+          }
+        });
+      }
+    }
+  }
 })
 export default class Plugin extends Model<Plugin> {
   @IsUUID(4)
@@ -51,7 +66,6 @@ export default class Plugin extends Model<Plugin> {
   id!: string;
 
   @AllowNull(false)
-  @Unique
   @NotEmpty
   @Column
   name!: string;
