@@ -14,8 +14,6 @@ jobs:
     - name: Install modules
       run: yarn
     - name: Run ESLint
-      uses: ninosaurus/eslint-check@v5
-        with:
-          eslint-config-path: './.eslintrc.js'
-          custom-directory: './'
-          github-token: ${{secrets.GITHUB_TOKEN}}
+    - uses: reviewdog/action-eslint@v1.0.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
