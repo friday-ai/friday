@@ -18,4 +18,4 @@ jobs:
       with:
         eslint-config-path: ".eslintrc.json"
         custom-directory: "./"
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
