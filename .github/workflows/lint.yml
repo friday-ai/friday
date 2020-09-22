@@ -1,32 +1,20 @@
-name: Lint
+name: Pull Request Tasks
 
-on: [pull_request]
+on: pull_request
 
 jobs:
-  run-linters:
-    name: Run linters
+  lint:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./server
-
+      defaults:
+        run:
+          working-directory: ./server
+          
     steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      
-      - name: Install Node.js dependencies
-        run: yarn
-
-      - name: Run linters
-        uses: wearerequired/lint-action@v1
+      - uses: actions/checkout@v2
+      - name: 'Reviewdog: ESLint'
+        uses: reviewdog/action-eslint@v1
         with:
           github_token: ${{ secrets.github_token }}
-          # Enable linters
-          eslint: true
-          eslint_dir: server/
-          eslint_extensions: js,jsx,ts,tsx
+          reporter: 'github-pr-review'
+          fail_on_error: true
+          eslint_flags: '--ext .js,.jsx,.ts,.tsx'
