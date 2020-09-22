@@ -11,7 +11,9 @@ jobs:
         working-directory: ./server
         
     steps:
-    - uses: actions/checkout@v2
-    - uses: bradennapier/eslint-plus-action@v3.4.2
+      - name: Update eslint 
+      - run: yarn add --dev eslint@6.8.0
+      - uses: actions/checkout@v2
+      - uses: bradennapier/eslint-plus-action@v3.4.2
           
           
