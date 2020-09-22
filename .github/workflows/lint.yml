@@ -18,10 +18,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-
-      # ESLint and Prettier must be in `package.json`
+      
       - name: Install Node.js dependencies
         run: yarn
+      
+      - name: Install ESLint globaly
+        run: yarn add eslint -D
 
       - name: Run linters
         uses: wearerequired/lint-action@v1
