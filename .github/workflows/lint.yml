@@ -13,5 +13,5 @@ jobs:
         uses: reviewdog/action-eslint@v1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          eslint_flags: '--ext .js,.jsx,.ts,.tsx ./server'
+          eslint_flags: '--ext .js,.jsx,.ts,.tsx server/'
     
