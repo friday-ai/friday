@@ -12,8 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Install modules
-    - run: yarn
+      run: yarn
     - name: Run ESLint
-    - uses: reviewdog/action-eslint@v1.0.0
+      uses: reviewdog/action-eslint@v1.0.0
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
