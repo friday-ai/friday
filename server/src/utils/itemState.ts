@@ -3,7 +3,7 @@ import { AvailableState, StateOwner } from './constants';
 import Friday from '../core/friday';
 import error from './errors/coreError';
 
-export default function setItemState(itemId: string, owner: string, OwnerType: StateOwner, availableState: AvailableState): void {
+function setItemState(itemId: string, owner: string, OwnerType: StateOwner, availableState: AvailableState): void {
   try {
     const friday = new Friday();
     const state: StateType = {
@@ -22,4 +22,8 @@ export default function setItemState(itemId: string, owner: string, OwnerType: S
       },
     });
   }
+}
+
+export {
+ setItemState
 }
