@@ -1,8 +1,8 @@
 import Satellite from '../../models/satellite';
 import SatelliteType from './satellite.interface';
 import error from '../../utils/errors/coreError';
-import {setItemState} from '../../utils/itemState';
-import {AvailableState, StateOwner} from '../../utils/constants';
+import setItemState from '../../utils/itemState';
+import { AvailableState, StateOwner } from '../../utils/constants';
 
 /**
  * Create a satellite.
@@ -22,10 +22,10 @@ export default async function create(satellite: SatelliteType): Promise<Satellit
     const createdSatellite = await Satellite.create(satellite);
     const satelliteToReturn = <SatelliteType>createdSatellite.get({ plain: true });
     setItemState(
-        satelliteToReturn.id!,
-        satelliteToReturn.id!,
-        StateOwner.SATELLITE,
-        AvailableState.SATELLITE_WAITING_CONFIGURATION
+      satelliteToReturn.id!,
+      satelliteToReturn.id!,
+      StateOwner.SATELLITE,
+      AvailableState.SATELLITE_WAITING_CONFIGURATION,
     );
     return satelliteToReturn;
   } catch (e) {

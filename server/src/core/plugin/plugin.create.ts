@@ -1,8 +1,8 @@
 import Plugin from '../../models/plugin';
 import PluginType from './plugin.interface';
 import error from '../../utils/errors/coreError';
-import {setItemState} from '../../utils/itemState';
-import {AvailableState, StateOwner} from '../../utils/constants';
+import setItemState from '../../utils/itemState';
+import { AvailableState, StateOwner } from '../../utils/constants';
 
 /**
  * Create a plugin.
@@ -25,10 +25,10 @@ export default async function create(plugin: PluginType): Promise<PluginType> {
     const createdPlugin = await Plugin.create(plugin);
     const pluginToReturn = <PluginType>createdPlugin.get({ plain: true });
     setItemState(
-        pluginToReturn.id!,
-        pluginToReturn.id!,
-        StateOwner.PLUGIN,
-        AvailableState.PLUGIN_WAITING_CONFIGURATION
+      pluginToReturn.id!,
+      pluginToReturn.id!,
+      StateOwner.PLUGIN,
+      AvailableState.PLUGIN_WAITING_CONFIGURATION,
     );
     return pluginToReturn;
   } catch (e) {

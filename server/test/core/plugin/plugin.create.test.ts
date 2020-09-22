@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import Plugin from '../../../src/core/plugin';
-import {DatabaseValidationError} from '../../../src/utils/errors/coreError';
+import { DatabaseValidationError } from '../../../src/utils/errors/coreError';
 
 describe('Plugin.create', () => {
   const plugin = new Plugin();

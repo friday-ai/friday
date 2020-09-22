@@ -1,8 +1,8 @@
 import Room from '../../models/room';
 import RoomType from './room.interface';
 import error from '../../utils/errors/coreError';
-import {setItemState} from '../../utils/itemState';
-import {AvailableState, StateOwner} from '../../utils/constants';
+import setItemState from '../../utils/itemState';
+import { AvailableState, StateOwner } from '../../utils/constants';
 
 /**
  * Create a room.
@@ -22,10 +22,10 @@ export default async function create(room: RoomType): Promise<RoomType> {
     const createdRoom = await Room.create(room);
     const roomToReturn = <RoomType>createdRoom.get({ plain: true });
     setItemState(
-        roomToReturn.id!,
-        roomToReturn.id!,
-        StateOwner.ROOM,
-        AvailableState.ROOM_EMPTY
+      roomToReturn.id!,
+      roomToReturn.id!,
+      StateOwner.ROOM,
+      AvailableState.ROOM_EMPTY,
     );
     return roomToReturn;
   } catch (e) {
