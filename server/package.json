@@ -14,6 +14,7 @@
     "test:watch": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --watch --detectOpenHandles\"",
     "lint": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx ./\"",
     "lint:fix": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx ./ --fix\"",
+    "lint:report": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .ts --output-file eslint_report.json --format json ./\"",
     "generate-doc": "npm run -s generate-doc:core && npm run -s generate-doc:rest",
     "generate-doc:core": "concurrently -k -n \"TypeDoc\" -c \"magenta\" \"typedoc  --out docs/core/ ./src/core/\"",
     "generate-doc:rest": "concurrently -k -n \"ApiDoc-MD\" -c \"magenta\" \"apidoc-markdown -i src/api/routes/ -o docs/rest/ -t gitbook\""
