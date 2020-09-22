@@ -1,13 +1,27 @@
-{ 
+{
   "linterOptions": {
-  "exclude": [
-    "**/build/**",
-    "**/dist/**",
-    "**/node_modules/**",
-    "**/coverage/**"
-  ]
-},
+    "exclude": [
+      "**/build/**",
+      "**/dist/**",
+      "**/node_modules/**",
+      "**/coverage/**"
+    ]
+  },
+  "extends": ["tslint-consistent-codestyle"],
   "rules": {
+    "completed-docs": [true, {
+      "classes": {"visibilities": ["exported"]},
+      "functions": {"visibilities": ["exported"]},
+      "interfaces": {"visibilities": ["exported"], "properties": false},
+      "methods": {"privacies": ["protected", "public"]},
+      "namespaces": {"visibilities": ["exported"]},
+      "types": {"visibilities": ["exported"]},
+      "variables": {"visibilities": ["exported"]},
+      "tags": {
+        "content": {},
+        "exists": ["inheritDoc"]
+      }
+    }],
     "align": [
       true,
       "parameters",
@@ -25,7 +39,8 @@
     "forin": true,
     "indent": [
       true,
-      "spaces"
+      "spaces",
+      2
     ],
     "interface-name": false,
     "jsdoc-format": true,
@@ -34,12 +49,7 @@
       true,
       170
     ],
-    "member-ordering": [
-      true,
-      "public-before-private",
-      "static-before-instance",
-      "variables-before-functions"
-    ],
+    "member-ordering": false,
     "no-any": false,
     "no-arg": true,
     "no-bitwise": true,
@@ -71,7 +81,6 @@
     ],
     "no-trailing-whitespace": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-var-requires": false,
     "one-line": [
@@ -124,6 +133,22 @@
       "check-operator",
       "check-separator",
       "check-type"
+    ],
+    "naming-convention": [
+      true,
+      {"type": "default", "format": "camelCase", "leadingUnderscore": "forbid", "trailingUnderscore": "forbid"},
+      {"type": "variable", "modifiers": ["global", "const"], "format": ["camelCase","UPPER_CASE"]},
+      {"type": "variable", "modifiers": ["export", "const"], "format": "UPPER_CASE"},
+      {"type": "functionVariable", "modifiers": ["export", "const"], "format": "camelCase"},
+      {"type": "parameter", "modifiers": "unused", "leadingUnderscore": "allow"},
+      {"type": "member", "modifiers": "private", "leadingUnderscore": "require"},
+      {"type": "member", "modifiers": "protected", "leadingUnderscore": "require"},
+      {"type": "method", "filter": "^toJSON$", "format": null},
+      {"type": "property", "modifiers": ["public", "static", "const"], "format": "UPPER_CASE"},
+      {"type": "type", "format": "PascalCase"},
+      {"type": "class", "modifiers": "abstract", "prefix": "Abstract"},
+      {"type": "genericTypeParameter", "prefix": "T"},
+      {"type": "enumMember", "leadingUnderscore": "allow"}
     ]
   }
 }

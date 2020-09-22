@@ -1,5 +1,7 @@
 # Force Unix line endings for most file formats (except binary files)
 *.js         text eol=lf
+*.ts         text eol=lf
+*.tsx        text eol=lf
 *.jsm        text eol=lf
 *.css        text eol=lf
 *.html       text eol=lf

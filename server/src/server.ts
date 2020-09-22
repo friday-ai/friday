@@ -1,29 +1,15 @@
-import {Request, Response} from 'express';
-import express from 'express';
-import Log from './utils/log';
+import Server from './api/app';
+import Friday from './core/friday';
 
-export default class Server {
-    readonly port: number;
+const port = parseInt(process.env.SERVER_PORT!, 10) || 3000;
 
-    constructor(port: number) {
-        this.port = port;
-    }
+(async () => {
+  // Create Friday object
+  const friday = new Friday();
 
-    start () {
-        const app = express();
-        const logger = new Log();
+  // Start Friday core
+  await friday.start();
 
-        app.get('/', function(req: Request, res: Response) {
-            res.sendStatus(200);
-            logger.info('This query gives nothing.. finally for the moment ;)');
-        });
-
-        app.listen(this.port, function () {
-            logger.title('Friday server initialized !');
-            logger.info('Friday server is available at localhost:4000');
-        });
-    }
-}
-
-const server = new Server(4000);
-server.start();
+  // Start Friday server
+  new Server(port, friday).start();
+})();

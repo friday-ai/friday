@@ -1,37 +1,69 @@
-import { Table, Column, Model, PrimaryKey, DataType, ForeignKey, IsUUID, AllowNull } from 'sequelize-typescript';
-import { Variable_owner } from '../utils/constants';
+import {
+  Table, Column, Model, PrimaryKey, DataType, IsUUID,
+  AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope, Default, Is,
+} from 'sequelize-typescript';
+
+import { VariableOwner } from '../utils/constants';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
+/**
+ * Variable model
+ */
+@DefaultScope(() => ({
+  attributes: ['id', 'key', 'value', 'owner', 'ownerType'],
+}))
 @Table({
   tableName: 'variable',
-  underscored: true
+  underscored: false,
 })
 export default class Variable extends Model<Variable> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Unique
+  @Default(DataType.UUIDV4)
+  @Column({ type: DataType.UUIDV4 })
+  id!: string;
+
+  @AllowNull(false)
+  @Unique
+  @NotEmpty
+  @Column
+  key!: string;
+
+  @AllowNull(false)
+  @NotEmpty
+  @Column
+  value!: string;
+
+  @AllowNull(false)
+  @NotEmpty
+  @Is('owner', (value) => isOwnerExisting(value, ['user', 'satellite', 'plugin']))
+  @Column(DataType.UUIDV4)
+  owner!: string;
 
   @AllowNull(false)
   @Column
-  key: string;
+  ownerType!: VariableOwner;
 
-  @AllowNull(false)
-  @Column
-  value: string;
+  @BelongsTo(() => User, {
+    foreignKey: 'owner',
+    constraints: false,
+  })
+  user?: User;
 
-  @AllowNull(false)
-  @ForeignKey(() => User)
-  @ForeignKey(() => Plugin)
-  @ForeignKey(() => Satellite)
-  @Column(DataType.INTEGER)
-  owner: number;
+  @BelongsTo(() => Plugin, {
+    foreignKey: 'owner',
+    constraints: false,
+  })
+  plugin?: Plugin;
 
-  @AllowNull(false)
-  @Column
-  ownerType: Variable_owner;
+  @BelongsTo(() => Satellite, {
+    foreignKey: 'owner',
+    constraints: false,
+  })
+  satellite?: Satellite;
 }

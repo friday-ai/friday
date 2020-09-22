@@ -1,45 +1,69 @@
-import { Table, Column, Model, PrimaryKey, DataType, BelongsTo, ForeignKey, IsUUID, AllowNull } from 'sequelize-typescript';
-import Scene from './scene';
+import {
+  Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID,
+  AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default, Is,
+} from 'sequelize-typescript';
 
+import Scene from './scene';
+import { ActionsType } from '../utils/constants';
+import { isOwnerExisting } from '../utils/databaseValidation';
+
+/**
+ * Action model
+ */
+@DefaultScope(() => ({
+  attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
+}))
+@Scopes(() => ({
+  full: {
+    attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
+    include: [Scene],
+  },
+}))
 @Table({
   tableName: 'action',
-  underscored: true
+  underscored: false,
 })
 export default class Action extends Model<Action> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Unique
+  @Default(DataType.UUIDV4)
+  @Column({ type: DataType.UUIDV4 })
+  id!: string;
+
+  @AllowNull(false)
+  @Unique
+  @NotEmpty
+  @Column
+  name!: string;
 
   @AllowNull(false)
   @Column
-  name: string;
+  description!: string;
 
   @AllowNull(false)
   @Column
-  description: string;
+  type!: ActionsType;
 
   @AllowNull(false)
   @Column
-  type: string;
-
-  @AllowNull(false)
-  @Column
-  sub_type: string;
+  subType!: string;
 
   @Column
-  variable_key: string;
+  variableKey!: string;
 
   @Column
-  variable_value: string;
+  variableValue!: string;
 
-  @ForeignKey(() => Scene)
-  @Column(DataType.INTEGER)
-  scene_id: number;
+  @NotEmpty
+  @Is('sceneId', (value) => isOwnerExisting(value, ['scene']))
+  @Column(DataType.UUIDV4)
+  sceneId!: string;
 
-  @BelongsTo(() => Scene)
-  scene: Scene;
-
+  @BelongsTo(() => Scene, {
+    foreignKey: 'sceneId',
+    constraints: false,
+  })
+  scene!: Scene;
 }

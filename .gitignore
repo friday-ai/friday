@@ -46,4 +46,11 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
+# Build files
 dist/
+
+# IDE folder
+.idea
+
+# Package lock
+package-lock.json

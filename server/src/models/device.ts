@@ -1,60 +1,102 @@
-import { Table, Column, Model, PrimaryKey, BelongsTo, ForeignKey, DataType, HasOne, IsUUID, AllowNull } from 'sequelize-typescript';
+import {
+  Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
+  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is,
+} from 'sequelize-typescript';
+
 import Plugin from './plugin';
 import Room from './room';
-import { Available_type_of_device, Available_sub_type_of_device } from '../utils/constants';
+import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../utils/constants';
 import State from './state';
+import { isOwnerExisting } from '../utils/databaseValidation';
 
+/**
+ * Device model
+ */
+@DefaultScope(() => ({
+  attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+}))
+@Scopes(() => ({
+  full: {
+    attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+    include: [Room, Plugin, State],
+  },
+  withRoom: {
+    attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+    include: [Room],
+  },
+  withPlugin: {
+    attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+    include: [Plugin],
+  },
+  withState: {
+    attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+    include: [State],
+  },
+}))
 @Table({
   tableName: 'device',
-  underscored: true
+  underscored: false,
 })
 export default class Device extends Model<Device> {
-
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
-  @Column({type: DataType.INTEGER})
-  id: number;
+  @Unique
+  @Default(DataType.UUIDV4)
+  @Column({ type: DataType.UUIDV4 })
+  id!: string;
+
+  @AllowNull(false)
+  @Unique
+  @NotEmpty
+  @Column
+  name!: string;
 
   @AllowNull(false)
   @Column
-  name: string;
+  type!: AvailableTypeOfDevice;
 
   @AllowNull(false)
   @Column
-  type: Available_type_of_device;
+  subType!: AvailableSubTypeOfDevice;
 
-  @AllowNull(false)
-  @Column
-  sub_type: Available_sub_type_of_device;
-
+  @Default({})
   @Column(DataType.JSON)
   variable: any;
 
+  @Default('')
   @Column
-  variable_value: string;
+  unit!: string;
 
+  @Default('')
   @Column
-  unit: string;
+  value!: string;
 
-  @Column
-  value: string;
+  @NotEmpty
+  @Is('roomId', (value) => isOwnerExisting(value, ['room']))
+  @Column(DataType.UUIDV4)
+  roomId!: string;
 
-  @ForeignKey(() => Room)
-  @Column(DataType.INTEGER)
-  room_id: number;
+  @BelongsTo(() => Room, {
+    foreignKey: 'roomId',
+    constraints: false,
+  })
+  room!: Room;
 
-  @BelongsTo(() => Room)
-  room: Room;
+  @NotEmpty
+  @Is('pluginId', (value) => isOwnerExisting(value, ['plugin']))
+  @Column(DataType.UUIDV4)
+  pluginId!: string;
 
-  @ForeignKey(() => Plugin)
-  @Column(DataType.INTEGER)
-  plugin_id: number;
+  @BelongsTo(() => Plugin, {
+    foreignKey: 'pluginId',
+    constraints: false,
+  })
+  plugin!: Plugin;
 
-  @BelongsTo(() => Plugin)
-  plugin: Plugin;
-
-  @HasOne(() => State)
-  state: State;
-
+  @HasOne(() => State, {
+    foreignKey: 'owner',
+    constraints: false,
+  })
+  state!: State;
 }
