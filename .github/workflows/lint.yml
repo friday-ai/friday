@@ -32,3 +32,4 @@ jobs:
           # Enable linters
           eslint: true
           eslint_dir: server/
+          eslint_extensions: js,jsx,ts,tsx
