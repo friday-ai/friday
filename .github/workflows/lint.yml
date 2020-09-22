@@ -1,16 +1,20 @@
-name: Run linter
+name: Lint
 
-on: [ pull_request ]
+on:
+  [pull_request]
 
 jobs:
-  lint:
-    name: runner / eslint
+  eslint:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./server
-        
     steps:
-      - uses: getsentry/action-eslint-fix@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
         with:
+          node-version: '14'
+      - run: npm ci # or yarn install
+      - uses: sibiraj-s/action-eslint@v1
+        with:
+          eslintArgs: '--ignore-path .gitignore --quite'
+          extensions: 'js, jsx, ts, tsx'
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
