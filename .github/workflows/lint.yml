@@ -13,11 +13,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: Install modules
       run: yarn
-    - name: where I am
-      run: pwd
     - name: Run ESLint
       uses: ninosaurus/eslint-check@v5
       with:
-        eslint-config-path: "./server/.eslintrc.json"
+        eslint-config-path: "./server/.eslintrc.js"
         custom-directory: "./server"
         repo-token: ${{ secrets.GITHUB_TOKEN }}
