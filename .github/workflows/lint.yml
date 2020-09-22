@@ -21,9 +21,6 @@ jobs:
       
       - name: Install Node.js dependencies
         run: yarn
-      
-      - name: Install ESLint globaly
-        run: yarn global add eslint
 
       - name: Run linters
         uses: wearerequired/lint-action@v1
