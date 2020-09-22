@@ -12,6 +12,9 @@ jobs:
         
     steps:
       - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: Run ESLint
       - uses: bradennapier/eslint-plus-action@v3.4.2
           
           
