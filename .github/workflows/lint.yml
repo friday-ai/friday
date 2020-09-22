@@ -1,18 +1,17 @@
 name: reviewdog
 on: [pull_request]
 jobs:
-  eslint:
+  # TODO: change `linter_name`.
+  linter_name:
     name: runner / eslint
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./server
     steps:
-      - uses: actions/checkout@v1
-      - name: Where i am
-        run: pwd
-      - name: eslint
-        uses: reviewdog/action-eslint@v1
+      - uses: actions/checkout@v2
+      - uses: reviewdog/action-template@v1
         with:
+          github_token: ${{ secrets.github_token }}
+          # Change reviewdog reporter if you need [github-pr-check,github-check,github-pr-review].
           reporter: github-pr-review
-          eslint_flags: 'server/'
+          # Change reporter level if you need.
+          # GitHub Status Check won't become failure with warning.
+          level: warning
