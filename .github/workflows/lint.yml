@@ -11,9 +11,9 @@ jobs:
         working-directory: ./server
         
     steps:
-      - uses: actions/checkout@v2
-      - uses: bradennapier/eslint-plus-action@v3.4.2
-        with: 
-          npmInstall: true
+      - uses: getsentry/action-eslint-fix@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          dry: true
           
           
