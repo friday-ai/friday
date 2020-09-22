@@ -16,7 +16,7 @@ jobs:
         run: yarn
 
       - name: 'Run Mocha/Chai unit tests'
-        run: npm run test-server
+        run: npm run coverage-server
 
       - name: 'Upload coverage to Codecov'
         uses: codecov/codecov-action@v1
