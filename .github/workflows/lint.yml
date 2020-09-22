@@ -5,9 +5,9 @@ on: pull_request
 jobs:
   lint:
     runs-on: ubuntu-latest
-      defaults:
-        run:
-          working-directory: ./server
+    defaults:
+      run:
+        working-directory: ./server
           
     steps:
       - uses: actions/checkout@v2
