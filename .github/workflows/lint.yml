@@ -7,7 +7,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Where i am
-        run: PWD
+        run: pwd
       - name: eslint
         uses: reviewdog/action-eslint@v1
         with:
