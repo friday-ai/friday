@@ -6,10 +6,12 @@ jobs:
   lint:
     name: runner / eslint
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./server
 
     steps:
       - uses: actions/checkout@v2
-      - run: cd ./server
       - name: Lint server
         uses: reviewdog/action-eslint@v1.0.0
         with:
