@@ -23,7 +23,7 @@ jobs:
         run: yarn
       
       - name: Install ESLint globaly
-        run: yarn add eslint -D
+        run: yarn global add eslint
 
       - name: Run linters
         uses: wearerequired/lint-action@v1
