@@ -16,7 +16,14 @@ jobs:
         run: yarn
 
       - name: 'Run Mocha/Chai unit tests'
-        run: npm run coverage-server
+        run: npm run coverage-server:junit
+
+      - name: 'Publish Unit Test Results'
+        uses: EnricoMi/publish-unit-test-result-action@v1.1
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: server/test-results.xml
 
       - name: 'Upload coverage to Codecov'
         uses: codecov/codecov-action@v1
