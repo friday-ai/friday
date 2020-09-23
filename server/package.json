@@ -10,6 +10,7 @@
     "serve": "concurrently -k -n \"Friday\" -c \"blue\" \"cross-env NODE_ENV=production SERVER_PORT=1443 ts-node ./src/server.ts\"",
     "dev": "concurrently -k -n \"TypeScript,Node\" -c \"blue,green\" \"tsc --watch\" \"cross-env NODE_ENV=development nodemon ./src/server.ts\"",
     "test": "concurrently -k -n \"Mocha\" -c \"red\" \"cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/**/*.test.ts -exit\"",
+    "test2": "concurrently -k -n \"Mocha\" -c \"red\" \"cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/**/user.*.test.ts -exit\"",
     "coverage": "nyc --reporter=lcov npm test",
     "test:watch": "concurrently -k -n \"Jest\" -c \"red\" \"cross-env NODE_ENV=test jest --runInBand --watch --detectOpenHandles\"",
     "lint": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx ./\"",
