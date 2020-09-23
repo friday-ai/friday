@@ -24,6 +24,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: ./server/test-results.xml
+          log_level: DEBUG
 
       - name: 'Upload coverage to Codecov'
         uses: codecov/codecov-action@v1
