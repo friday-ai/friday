@@ -1,0 +1,27 @@
+name: codecov
+
+on: [pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: 'Run Mocha/Chai unit tests'
+        run: npm run coverage-server
+
+      - name: 'Upload coverage to Codecov'
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          fail_ci_if_error: true
+          directory: ./server/
