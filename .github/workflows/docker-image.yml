@@ -2,31 +2,73 @@ name: Docker Image CI
 
 on: push
 
+env:
+  PLATFORM: linux/amd64
+  DOCKER_CACHE_TAG: _cache
+  DOCKER_REPO: fridayai/friday
+  CACHE_VERSION: v2
+  BUILDX_VERSION: v0.3.1
+
 jobs:
-  path-context:
+  local_cache:
     runs-on: ubuntu-latest
+
+    timeout-minutes: 20
+
     steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      -
-        name: Login to DockerHub
-        uses: docker/login-action@v1
+      - name: Set up Docker Buildx ${{ env.BUILDX_VERSION }}
+        uses: crazy-max/ghaction-docker-buildx@v1
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v2
+          version: ${{ env.BUILDX_VERSION }}
+
+      - uses: actions/checkout@v2
+
+      - name: Cache docker layer
+        id: docker_cache
+        uses: actions/cache@v1
         with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/386
-          push: true
-          tags: user/app:latest
+          path: tmp/docker
+          key: docker_cache-${{ env.CACHE_VERSION }}-${{ hashFiles('Dockerfile*') }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            docker_cache-${{ env.CACHE_VERSION }}-
+      - name: Prepare docker cache
+        if: steps.docker_cache.outputs.cache-hit != 'true'
+        run: docker buildx bake -f buildx.hcl base
+
+      - name: Build the Docker images
+        run: |
+          docker buildx bake -f buildx.hcl --set cache.output=type=docker
+      - name: Test the Docker full image
+        run: |
+          docker run --rm -t ${DOCKER_REPO} yarn --version
+      - name: Test the Docker slim image
+        run: |
+          docker run --rm -t ${DOCKER_REPO}:slim yarn --version
+      - name: Image history
+        run: docker history ${DOCKER_REPO}
+      - name: Image size
+        run: docker image ls | grep ${DOCKER_REPO}
+
+  no_cache:
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 20
+
+    steps:
+      - name: Set up Docker Buildx ${{ env.BUILDX_VERSION }}
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: ${{ env.BUILDX_VERSION }}
+
+      - uses: actions/checkout@v2
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Build the Docker images
+        continue-on-error: true
+        run: |
+          docker buildx bake -f test.hcl \
+            --set test.tags=docker.pkg.github.com/${{ github.repository }}/no-cache \
+            --set test.output=type=registry \
+            test
