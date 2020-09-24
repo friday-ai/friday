@@ -15,14 +15,14 @@ describe('GET /api/v1/user', () => {
           name: 'Pepperwood',
           firstName: 'John',
           email: 'john@pepperwood.com',
-          birthDate: '1997-01-21 00:00:00.000 +00:00',
+          birthDate: '1997-01-20 00:00:00.000 +00:00',
         },
         {
           id: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
           name: 'Pepperwood',
           firstName: 'Jess',
           email: 'jess@pepperwood.com',
-          birthDate: '1997-01-21 00:00:00.000 +00:00',
+          birthDate: '1997-01-20 00:00:00.000 +00:00',
         }]);
       });
   });
