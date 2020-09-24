@@ -1,6 +1,6 @@
 name: codecov
 
-on: [pull_request]
+on: [pull_request, pull_request_target]
 
 jobs:
   test:
@@ -19,7 +19,7 @@ jobs:
         run: npm run coverage-server:junit
 
       - name: 'Publish Unit Test Results'
-        uses: EnricoMi/publish-unit-test-result-action@v1.1
+        uses: EnricoMi/publish-unit-test-result-action@master
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
