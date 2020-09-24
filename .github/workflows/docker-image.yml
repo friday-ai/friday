@@ -7,7 +7,7 @@ env:
   DOCKER_CACHE_TAG: _cache
   DOCKER_REPO: fridayai/friday
   CACHE_VERSION: v2
-  BUILDX_VERSION: v0.3.1
+  BUILDX_VERSION: v0.4.2
 
 jobs:
   local_cache:
