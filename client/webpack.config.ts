@@ -65,9 +65,11 @@ module.exports = (env: WebpackEnvironment, argv: { mode: string }) => {
         filename: 'index.html',
         inject: 'body'
       }),
-      new CopyPlugin([
-        { from: './assets', to: '../dist/assets' }
-      ]),
+      new CopyPlugin({
+        patterns: [
+          { from: './assets', to: '../dist/assets' }
+        ]
+      }),
       new HotModuleReplacementPlugin()
     ]
   };
