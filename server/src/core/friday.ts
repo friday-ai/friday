@@ -19,6 +19,7 @@ import Scheduler from '../utils/scheduler';
 import * as Constants from '../utils/constants';
 import { generateJwtSecret } from '../utils/jwt';
 import jobs from '../config/jobs';
+import error from '../utils/errors/coreError';
 
 /**
  * Friday
@@ -50,8 +51,12 @@ export default class Friday {
    * Starts friday
    */
   async start() {
-    await database.init();
-    await this.system.start();
+    try {
+      await database.init();
+      await this.system.start();
+    } catch (e) {
+      throw error(e);
+    }
   }
 
   /**

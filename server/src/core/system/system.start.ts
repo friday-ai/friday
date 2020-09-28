@@ -1,5 +1,7 @@
 import System from '.';
 import error from '../../utils/errors/coreError';
+import { SystemVariablesNames } from '../../utils/constants';
+import Variable from '../../models/variable';
 
 const env = process.env.NODE_ENV || 'production';
 
@@ -10,13 +12,19 @@ export default async function start(this: System) {
   try {
     const userCount = await this.user.getCount();
 
+    const fridayVersion = await Variable.findOne({
+      where: {
+        key: SystemVariablesNames.FRIDAY_VERSION,
+      },
+    });
+
     // If is the first start and its not test env, run init function
-    if (userCount < 1 && env !== 'test') {
+    if (userCount < 1 && fridayVersion === null && env !== 'test') {
       await this.init();
     }
 
-    this.scheduler.init();
+    await this.scheduler.init();
   } catch (e) {
-    throw error({ name: e.name, message: e.message, cause: e });
+    throw error(e);
   }
 }
