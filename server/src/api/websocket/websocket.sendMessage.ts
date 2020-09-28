@@ -1,3 +1,4 @@
+import * as WebSocket from 'ws';
 import { WebsocketMessagePayload, WebsocketSendOptions } from '../../utils/interfaces';
 import WebSocketServer from './index';
 import error, { BadParametersError, NotFoundError } from '../../utils/errors/coreError';
