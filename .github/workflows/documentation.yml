@@ -1,0 +1,41 @@
+name: Generate documentation
+
+push:
+  tags:
+    - 'v*.*.*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Install dependencies
+        run: yarn
+      - uses: actions/checkout@v2
+        with:
+          repository: friday-ai/friday-docs
+          ref: master
+          path: 'doc'
+      - name: creates documentation
+        run: npm run generate-doc
+      - name: create structure
+        run: |
+          mv -v ./server/docs/core/modules/* ./server/docs/core/
+          rm ./server/docs/core/globals.md
+          rm -r ./server/docs/core/modules
+          rsync -pr ./server/docs/core/* ./doc/node-js-api-1
+          rsync -pr  ./server/docs/rest/* ./doc/rest-api-1
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'doc'
+          destination-github-username: 'friday-ai'
+          destination-repository-name: 'friday-docs'
+          user-email: ${{ secrets.EMAIL_DOC }}
+          target-branch: 'master'
