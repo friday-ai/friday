@@ -1,8 +1,9 @@
 name: Generate documentation
 
-push:
-  tags:
-    - 'v*.*.*'
+on:
+  push:
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
