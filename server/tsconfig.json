@@ -27,6 +27,7 @@
     "src/models/*",
     "seeders/*",
     "migrations/*",
-    "test/**/*"
+    "test/**/*",
+    ".eslintrc.js"
   ]
 }

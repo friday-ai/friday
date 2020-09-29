@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'production';
 const DATABASE_NAME: {[x: string]: string} = {
   production: './friday.db',
   development: './friday-development.db',
-  test: './friday-test.db',
+  test: ':memory:',
 };
 
 const database = new Sequelize({
