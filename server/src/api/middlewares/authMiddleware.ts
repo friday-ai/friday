@@ -8,7 +8,9 @@ export default (friday: Friday) => async (req: Request, res: Response, next: Nex
 
     if (authHeader && authHeader.startsWith('Bearer ')) {
       const token = authHeader.substring(7, authHeader.length);
-      await friday.session.validateAccessToken(token);
+      const { role } = await friday.session.validateAccessToken(token);
+      // Save user role for the next middleware
+      req.userRole = role;
       next();
     } else {
       throw new Error401({ name: 'UNAUTHORIZED', message: 'No authorization header found.' });
