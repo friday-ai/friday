@@ -8,6 +8,7 @@ import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 import asyncMiddleware from '../middlewares/asyncMiddleware';
 import authMiddleware from '../middlewares/authMiddleware';
 import Friday from '../../core/friday';
+import aclMiddleware from '../middlewares/aclMiddleware';
 
 /**
  * Express router
@@ -33,6 +34,8 @@ export default function router(friday: Friday): Router {
 
     routes.forEach((route) => {
       const routerParams = [];
+
+      routerParams.push(aclMiddleware(route.aclMethod, route.aclResource));
 
       // if the route is marked as authenticated
       if (route.authenticated) {

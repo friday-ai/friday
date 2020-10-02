@@ -11,11 +11,9 @@ const Methods: {[key: string]: string} = {
   delete: 'delete',
 };
 
-export default async (error: Error, req: Request, res: Response, next: NextFunction) => {
+export default (action: string, resource: string) => async (error: Error, req: Request, res: Response, next: NextFunction) => {
   try {
-    const resource = 'action';
-    const action = Methods[req.method];
-    const permission = await ac.can(req.userRole).execute(action).on(resource);
+    const permission = await ac.can(req.userRole).execute(Methods[action]).on(resource);
     if (permission.granted) {
       next();
     } else {
