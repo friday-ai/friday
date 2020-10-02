@@ -40,6 +40,8 @@ export default function router(friday: Friday): Router {
       // if the route is marked as authenticated
       if (route.authenticated) {
         routerParams.push(authMiddleware(friday));
+        // add acl middleware after auth middleware
+        routerParams.push(aclMiddleware(route.aclMethod, route.aclResource));
       }
       // if the route need rate limit
       if (route.rateLimit) {
