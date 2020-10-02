@@ -4,16 +4,10 @@ import httpError, { Error403 } from '../../utils/errors/httpError';
 import grants from '../../config/acl';
 
 const ac = new AccessControl(grants);
-const Methods: {[key: string]: string} = {
-  get: 'read',
-  post: 'create',
-  patch: 'update',
-  delete: 'delete',
-};
 
 export default (action: string, resource: string) => async (error: Error, req: Request, res: Response, next: NextFunction) => {
   try {
-    const permission = await ac.can(req.userRole).execute(Methods[action]).on(resource);
+    const permission = await ac.can(req.userRole).execute(action).on(resource);
     if (permission.granted) {
       next();
     } else {
