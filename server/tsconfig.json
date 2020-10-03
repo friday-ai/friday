@@ -14,13 +14,11 @@
     "emitDecoratorMetadata": true,
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "node_modules/*",
-        "src/types/*"
-      ]
-    }
+    "baseUrl": "./src",
+    "typeRoots": [
+      "./src/types",
+      "./node_modules/@types"
+    ]
   },
   "include": [
     "src/**/*",
@@ -29,5 +27,8 @@
     "migrations/*",
     "test/**/*",
     ".eslintrc.js"
+  ],
+  "exclude": [
+    "src/node_modules"
   ]
 }
