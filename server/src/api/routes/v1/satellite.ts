@@ -33,7 +33,9 @@ export default class SatelliteRouter {
    *   roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3'
    * }
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'satellite',
+  })
   create = async (req: Request, res: Response) => {
     const satellite = await this.friday.satellite.create(req.body);
     res.status(201).json(satellite);
@@ -54,7 +56,9 @@ export default class SatelliteRouter {
    *   roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3'
    * }
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'satellite',
+  })
   update = async (req: Request, res: Response) => {
     const satellite = await this.friday.satellite.update(req.params.id, req.body);
     res.json(satellite);
@@ -72,7 +76,9 @@ export default class SatelliteRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'satellite',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.satellite.destroy(req.params.id);
     res.json({
@@ -94,7 +100,9 @@ export default class SatelliteRouter {
    *   roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3'
    * }]
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'satellite',
+  })
   getAll = async (req: Request, res: Response) => {
     const satellites = await this.friday.satellite.getAll(req.query);
     res.json(satellites);
@@ -114,7 +122,9 @@ export default class SatelliteRouter {
    *   roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3'
    * }
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'satellite',
+  })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
     const satellite = await this.friday.satellite.getById(req.params.id, scope);

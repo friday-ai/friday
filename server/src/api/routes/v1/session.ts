@@ -25,7 +25,9 @@ export default class SessionRouter {
    * @apiGroup Session
    * @apiVersion 1.0.0
    */
-  @Post({ path: '/access_token', authenticated: false, rateLimit: true })
+  @Post({
+    path: '/access_token', authenticated: false, rateLimit: true, aclMethod: 'create', aclResource: 'session',
+  })
   getAccessToken = async (req: Request, res: Response) => {
     const session = await this.friday.session.getAccessToken(req.body.refreshToken);
     res.json(session);
@@ -39,7 +41,9 @@ export default class SessionRouter {
    * @apiGroup Session
    * @apiVersion 1.0.0
    */
-  @Patch({ path: '/revoke/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/revoke/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'session',
+  })
   revoke = async (req: Request, res: Response) => {
     const sessionId = req.query.sessionId as string;
     const session = await this.friday.session.revoke(req.params.id, sessionId);
@@ -54,7 +58,9 @@ export default class SessionRouter {
    * @apiGroup Session
    * @apiVersion 1.0.0
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'session',
+  })
   getAll = async (req: Request, res: Response) => {
     const sessions = await this.friday.session.getAll(req.query);
     res.json(sessions);

@@ -26,7 +26,9 @@ export default class SystemRouter {
    *   "1.0.0",
    * }
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+  })
   getVersion = async (req: Request, res: Response) => {
     const version = await this.friday.getVersion();
     res.json(version);

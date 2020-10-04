@@ -33,7 +33,9 @@ export default class ScriptRouter {
    *   code: 'console.log(\'Hey ! This script is a test ! :)\')'
    * }
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'script',
+  })
   create = async (req: Request, res: Response) => {
     const script = await this.friday.script.create(req.body);
     res.status(201).json(script);
@@ -54,7 +56,9 @@ export default class ScriptRouter {
    *   code: 'console.log(\'Hey ! This script is a test ! :)\')'
    * }
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'script',
+  })
   update = async (req: Request, res: Response) => {
     const script = await this.friday.script.update(req.params.id, req.body);
     res.json(script);
@@ -72,7 +76,9 @@ export default class ScriptRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'script',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.script.destroy(req.params.id);
     res.json({
@@ -94,7 +100,9 @@ export default class ScriptRouter {
    *   code: 'console.log(\'Hey ! This script is a test ! :)\')'
    * }]
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'script',
+  })
   getAll = async (req: Request, res: Response) => {
     const scripts = await this.friday.script.getAll(req.query);
     res.json(scripts);
@@ -114,7 +122,9 @@ export default class ScriptRouter {
    *   code: 'console.log(\'Hey ! This script is a test ! :)\')'
    * }
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'script',
+  })
   getById = async (req: Request, res: Response) => {
     const script = await this.friday.script.getById(req.params.id);
     res.json(script);

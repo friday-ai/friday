@@ -35,7 +35,9 @@ export default class SceneRouter {
    *    triggerId: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514'
    * }
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'scene',
+  })
   create = async (req: Request, res: Response) => {
     const scene = await this.friday.scene.create(req.body);
     res.status(201).json(scene);
@@ -57,7 +59,9 @@ export default class SceneRouter {
    *    triggerId: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514'
    * }
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'scene',
+  })
   update = async (req: Request, res: Response) => {
     const scene = await this.friday.scene.update(req.params.id, req.body);
     res.json(scene);
@@ -75,7 +79,9 @@ export default class SceneRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'scene',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.scene.destroy(req.params.id);
     res.json({
@@ -98,7 +104,9 @@ export default class SceneRouter {
    *    triggerId: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514'
    * }]
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'scene',
+  })
   getAll = async (req: Request, res: Response) => {
     const scenes = await this.friday.scene.getAll(req.query);
     res.json(scenes);
@@ -119,7 +127,9 @@ export default class SceneRouter {
    *    triggerId: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514'
    * }
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'scene',
+  })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
     const scene = await this.friday.scene.getById(req.params.id, scope);

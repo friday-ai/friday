@@ -40,7 +40,9 @@ export default class UserRouter {
    *   birthDate: 20/12/1996
    * }
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'user',
+  })
   create = async (req: Request, res: Response) => {
     const user = await this.friday.user.create(req.body);
     res.status(201).json(user);
@@ -63,7 +65,9 @@ export default class UserRouter {
    *   birthDate: 20/12/1996
    * }
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'user',
+  })
   update = async (req: Request, res: Response) => {
     const user = await this.friday.user.update(req.params.id, req.body);
     res.json(user);
@@ -81,7 +85,9 @@ export default class UserRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'user',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.user.destroy(req.params.id);
     res.json({
@@ -105,7 +111,9 @@ export default class UserRouter {
    *   birthDate: 20/12/1996
    * }]
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'user',
+  })
   getAll = async (req: Request, res: Response) => {
     const users = await this.friday.user.getAll(req.query);
     res.json(users);
@@ -119,7 +127,9 @@ export default class UserRouter {
    * @apiGroup User
    * @apiVersion 1.0.0
    */
-  @Get({ path: '/count', authenticated: true, rateLimit: true })
+  @Get({
+    path: '/count', authenticated: true, rateLimit: true, aclMethod: 'read', aclResource: 'user',
+  })
   getUsersCount = async (req: Request, res: Response) => {
     const count = await this.friday.user.getCount();
     res.status(200).json(count);
@@ -141,7 +151,9 @@ export default class UserRouter {
    *   birthDate: 20/12/1996
    * }
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'user',
+  })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
     const user = await this.friday.user.getById(req.params.id, scope);
@@ -159,7 +171,9 @@ export default class UserRouter {
    * @apiParam {String} password Password of the user
    * @apiVersion 1.0.0
    */
-  @Post({ path: '/login', authenticated: false, rateLimit: true })
+  @Post({
+    path: '/login', authenticated: false, rateLimit: true, aclMethod: 'login', aclResource: 'user',
+  })
   login = async (req: Request, res: Response) => {
     const user = await this.friday.user.login(req.body.email, req.body.password);
     const session = await this.friday.session.create(user);
