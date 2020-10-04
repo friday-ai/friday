@@ -11,41 +11,23 @@ export default {
   [UserRole.ADMIN]: {
     grants: [
       {
-        resource: '*', action: '*', attributes: ['*'],
+        resource: ['*', '!variable'], action: '*', attributes: ['*'],
       },
       {
-        resource: 'variable', action: '!create', attributes: ['*'],
-      },
-      {
-        resource: 'variable', action: '!update', attributes: ['*'],
-      },
-      {
-        resource: 'variable', action: '!delete', attributes: ['*'],
+        resource: 'variable', action: ['*', '!create', '!update', '!delete'], attributes: ['*'],
       },
     ],
   },
   [UserRole.HABITANT]: {
     grants: [
       {
-        resource: '*', action: '*', attributes: ['*'],
+        resource: ['*', '!variable', '!plugin'], action: '*', attributes: ['*'],
       },
       {
-        resource: 'variable', action: '!create', attributes: ['*'],
+        resource: 'variable', action: ['*', '!create', '!update', '!delete'], attributes: ['*'],
       },
       {
-        resource: 'variable', action: '!update', attributes: ['*'],
-      },
-      {
-        resource: 'variable', action: '!delete', attributes: ['*'],
-      },
-      {
-        resource: 'plugin', action: '!create', attributes: ['*'],
-      },
-      {
-        resource: 'plugin', action: '!update', attributes: ['*'],
-      },
-      {
-        resource: 'plugin', action: '!delete', attributes: ['*'],
+        resource: 'plugin', action: ['*', '!create', '!update', '!delete'], attributes: ['*'],
       },
     ],
   },
