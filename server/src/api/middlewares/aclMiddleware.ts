@@ -5,7 +5,7 @@ import grants from '../../config/acl';
 
 const ac = new AccessControl(grants);
 
-export default (action: string, resource: string) => async (error: Error, req: Request, res: Response, next: NextFunction) => {
+export default (action: string, resource: string) => async (req: Request, res: Response, next: NextFunction) => {
   try {
     const permission = await ac.can(req.userRole).execute(action).on(resource);
     if (permission.granted) {
