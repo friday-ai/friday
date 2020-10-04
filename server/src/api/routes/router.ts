@@ -35,8 +35,6 @@ export default function router(friday: Friday): Router {
     routes.forEach((route) => {
       const routerParams = [];
 
-      routerParams.push(aclMiddleware(route.aclMethod, route.aclResource));
-
       // if the route is marked as authenticated
       if (route.authenticated) {
         routerParams.push(authMiddleware(friday));
@@ -47,7 +45,6 @@ export default function router(friday: Friday): Router {
       if (route.rateLimit) {
         routerParams.push(rateLimitMiddleware);
       }
-
       // add the controller at the end of the array
       // wrapped on async middleware
       routerParams.push(asyncMiddleware(instance[route.methodName]));
