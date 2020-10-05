@@ -127,17 +127,23 @@ export default function httpError(err: ErrorType): BaseHttpError {
       return new Error409(err);
     case BadParametersError:
       return new Error400(err);
-    case Error404:
-    case NotFoundError:
-      return new Error404(err);
-    case AuthError:
-      return new Error403(err);
     case UnauthorizedError:
     case TokenExpiredError:
     case NotBeforeError:
     case JsonWebTokenError:
-    case Error401:
       return new Error401(err);
+    case AuthError:
+      return new Error403(err);
+    case NotFoundError:
+      return new Error404(err);
+    case Error400:
+    case Error401:
+    case Error403:
+    case Error404:
+    case Error409:
+    case Error422:
+    case Error500:
+      return <BaseHttpError>err;
     default:
       return new Error500(err);
   }

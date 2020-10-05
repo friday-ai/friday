@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { generateAccessToken } from '../../src/utils/jwt';
+import { superadmin } from './apiToken';
 
 enum Methods {
   GET = 'get',
@@ -8,9 +8,13 @@ enum Methods {
   DELETE = 'delete'
 }
 
-const authenticatedRequest = (methode: Methods, url: string) => {
-  const accessToken = generateAccessToken('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'HABITANT', '894b93df-a7ab-494c-92f6-7d88ae9164b3', 'secretJwt');
-  const header = `Bearer ${accessToken}`;
+const authenticatedRequest = (methode: Methods, url: string, token?: string) => {
+  const accessToken = superadmin;
+  let header = `Bearer ${accessToken}`;
+
+  if (token !== undefined) {
+    header = `Bearer ${token}`;
+  }
 
   // @ts-ignore
   return request(global.TEST_SERVER)[methode](url)
@@ -19,8 +23,8 @@ const authenticatedRequest = (methode: Methods, url: string) => {
 };
 
 export default {
-  get: (url: string) => authenticatedRequest(Methods.GET, url),
-  post: (url: string) => authenticatedRequest(Methods.POST, url),
-  patch: (url: string) => authenticatedRequest(Methods.PATCH, url),
-  delete: (url: string) => authenticatedRequest(Methods.DELETE, url),
+  get: (url: string, token?: string) => authenticatedRequest(Methods.GET, url, token),
+  post: (url: string, token?: string) => authenticatedRequest(Methods.POST, url, token),
+  patch: (url: string, token?: string) => authenticatedRequest(Methods.PATCH, url, token),
+  delete: (url: string, token?: string) => authenticatedRequest(Methods.DELETE, url, token),
 };
