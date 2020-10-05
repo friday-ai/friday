@@ -9,8 +9,7 @@ enum Methods {
 }
 
 const authenticatedRequest = (methode: Methods, url: string, token?: string) => {
-  const accessToken = superadmin;
-  let header = `Bearer ${accessToken}`;
+  let header = `Bearer ${superadmin}`;
 
   if (token !== undefined) {
     header = `Bearer ${token}`;
