@@ -21,13 +21,16 @@ export default {
   [UserRole.HABITANT]: {
     grants: [
       {
-        resource: ['*', '!variable', '!plugin'], action: '*', attributes: ['*'],
+        resource: ['*', '!variable', '!plugin', '!user'], action: '*', attributes: ['*'],
       },
       {
         resource: 'variable', action: ['*', '!create', '!update', '!delete'], attributes: ['*'],
       },
       {
-        resource: 'plugin', action: ['*', '!create', '!update', '!delete'], attributes: ['*'],
+        resource: 'plugin', action: ['read', 'create', 'login', '!create', '!update', '!delete'], attributes: ['*'],
+      },
+      {
+        resource: 'user', action: ['*', '!create', '!update', '!delete'], attributes: ['*'],
       },
     ],
   },

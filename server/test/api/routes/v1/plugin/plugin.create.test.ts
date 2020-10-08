@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import { admin, habitant } from '../../../../utils/apiToken';
+import { admin, guest, habitant } from '../../../../utils/apiToken';
 
 describe('POST /api/v1/plugin', () => {
   it('should create a plugin', async () => {
@@ -15,6 +15,30 @@ describe('POST /api/v1/plugin', () => {
 
     await server
       .post('/api/v1/plugin')
+      .send(plugin)
+      .expect('Content-Type', /json/)
+      .expect(201)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        // See issue, https://github.com/sequelize/sequelize/issues/11566
+        delete res.body.createdAt;
+        delete res.body.updatedAt;
+        assert.deepEqual(res.body, plugin);
+      });
+  });
+
+  it('admin should have access to create a plugin', async () => {
+    const plugin = {
+      id: '3e2cb8cc-60a7-4c40-87d2-b25048b1aa04',
+      name: 'Fake plugin',
+      version: '1.0.0',
+      url: 'fake url',
+      enabled: true,
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+    };
+
+    await server
+      .post('/api/v1/plugin', admin)
       .send(plugin)
       .expect('Content-Type', /json/)
       .expect(201)
@@ -44,7 +68,7 @@ describe('POST /api/v1/plugin', () => {
       .expect(403);
   });
 
-  it('admin should have access to create a plugin', async () => {
+  it('guest shouldn\'t have access to create a plugin', async () => {
     const plugin = {
       id: '3e2cb8cc-60a7-4c40-87d2-b25048b1aa04',
       name: 'Fake plugin',
@@ -55,17 +79,10 @@ describe('POST /api/v1/plugin', () => {
     };
 
     await server
-      .post('/api/v1/plugin', admin)
+      .post('/api/v1/plugin', guest)
       .send(plugin)
       .expect('Content-Type', /json/)
-      .expect(201)
-      .then((res) => {
-        expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, plugin);
-      });
+      .expect(403);
   });
 
   it('should not create same plugin on same satellite', async () => {

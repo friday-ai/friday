@@ -1,6 +1,7 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
 import PluginType from '../../../../../src/core/plugin/plugin.interface';
+import { admin, habitant } from '../../../../utils/apiToken';
 
 describe('GET /api/v1/plugin', () => {
   it('should return all plugins', async () => {
@@ -41,6 +42,108 @@ describe('GET /api/v1/plugin', () => {
   it('should return all plugins with full scope', async () => {
     await server
       .get('/api/v1/plugin')
+      .query({ scope: 'full' })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((res) => {
+        const plugins = res.body;
+        expect(plugins).to.be.an('array');
+        plugins.forEach((plugin: PluginType) => {
+          expect(plugin).to.be.an('object');
+          expect(plugin).to.have.all.keys(
+            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables'],
+          );
+          if (plugin.state !== null) {
+            expect(plugin.state).to.be.an('object');
+            expect(plugin.state).to.have.all.keys(
+              ['id', 'owner', 'ownerType', 'value'],
+            );
+          }
+
+          if (plugin.satellite !== null) {
+            expect(plugin.satellite).to.be.an('object');
+            expect(plugin.satellite).to.have.all.keys(
+              ['id', 'name', 'roomId'],
+            );
+          }
+
+          if (plugin.devices !== null) {
+            expect(plugin.devices).to.be.an('array');
+            plugin.devices!.forEach((device) => {
+              expect(device).to.be.an('object');
+              expect(device).to.have.all.keys(
+                ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+              );
+            });
+          }
+
+          if (plugin.variables !== null) {
+            expect(plugin.variables).to.be.an('array');
+            plugin.variables!.forEach((variable) => {
+              expect(variable).to.be.an('object');
+              expect(variable).to.have.all.keys(
+                ['id', 'key', 'value', 'owner', 'ownerType'],
+              );
+            });
+          }
+        });
+      });
+  });
+
+  it('admin should have to read all plugins with full scope', async () => {
+    await server
+      .get('/api/v1/plugin', admin)
+      .query({ scope: 'full' })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((res) => {
+        const plugins = res.body;
+        expect(plugins).to.be.an('array');
+        plugins.forEach((plugin: PluginType) => {
+          expect(plugin).to.be.an('object');
+          expect(plugin).to.have.all.keys(
+            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables'],
+          );
+          if (plugin.state !== null) {
+            expect(plugin.state).to.be.an('object');
+            expect(plugin.state).to.have.all.keys(
+              ['id', 'owner', 'ownerType', 'value'],
+            );
+          }
+
+          if (plugin.satellite !== null) {
+            expect(plugin.satellite).to.be.an('object');
+            expect(plugin.satellite).to.have.all.keys(
+              ['id', 'name', 'roomId'],
+            );
+          }
+
+          if (plugin.devices !== null) {
+            expect(plugin.devices).to.be.an('array');
+            plugin.devices!.forEach((device) => {
+              expect(device).to.be.an('object');
+              expect(device).to.have.all.keys(
+                ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
+              );
+            });
+          }
+
+          if (plugin.variables !== null) {
+            expect(plugin.variables).to.be.an('array');
+            plugin.variables!.forEach((variable) => {
+              expect(variable).to.be.an('object');
+              expect(variable).to.have.all.keys(
+                ['id', 'key', 'value', 'owner', 'ownerType'],
+              );
+            });
+          }
+        });
+      });
+  });
+
+  it('habitant should have to read all plugins with full scope', async () => {
+    await server
+      .get('/api/v1/plugin', habitant)
       .query({ scope: 'full' })
       .expect('Content-Type', /json/)
       .expect(200)
