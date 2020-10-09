@@ -39,7 +39,9 @@ export default class PluginRouter {
    *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
    * },
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'plugin',
+  })
   create = async (req: Request, res: Response) => {
     const plugin = await this.friday.plugin.create(req.body);
     res.status(201).json(plugin);
@@ -63,7 +65,9 @@ export default class PluginRouter {
    *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
    * },
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'plugin',
+  })
   update = async (req: Request, res: Response) => {
     const plugin = await this.friday.plugin.update(req.params.id, req.body);
     res.json(plugin);
@@ -81,7 +85,9 @@ export default class PluginRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'plugin',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.plugin.destroy(req.params.id);
     res.json({
@@ -106,7 +112,9 @@ export default class PluginRouter {
    *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
    * }],
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'plugin',
+  })
   getAll = async (req: Request, res: Response) => {
     const plugins = await this.friday.plugin.getAll(req.query);
     res.json(plugins);
@@ -129,7 +137,9 @@ export default class PluginRouter {
    *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
    * },
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'plugin',
+  })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
     const plugin = await this.friday.plugin.getById(req.params.id, scope);

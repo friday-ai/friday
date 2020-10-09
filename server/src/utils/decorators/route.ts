@@ -26,6 +26,8 @@ export interface RouteDefinition {
   methodName: string;
   authenticated: boolean;
   rateLimit: boolean;
+  aclMethod: string,
+  aclResource: string,
 }
 
 /**
@@ -35,6 +37,8 @@ export interface RouteParam {
   path: string;
   authenticated: boolean;
   rateLimit: boolean;
+  aclMethod: string,
+  aclResource: string,
 }
 
 /**
@@ -63,6 +67,8 @@ function buildMetadataRoutes(target: any, propertyKey: string, requestMethode: M
     methodName: propertyKey,
     authenticated: options.authenticated,
     rateLimit: options.rateLimit,
+    aclMethod: options.aclMethod,
+    aclResource: options.aclResource,
   });
 
   return routes;

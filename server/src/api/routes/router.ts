@@ -8,6 +8,7 @@ import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
 import asyncMiddleware from '../middlewares/asyncMiddleware';
 import authMiddleware from '../middlewares/authMiddleware';
 import Friday from '../../core/friday';
+import aclMiddleware from '../middlewares/aclMiddleware';
 
 /**
  * Express router
@@ -37,12 +38,13 @@ export default function router(friday: Friday): Router {
       // if the route is marked as authenticated
       if (route.authenticated) {
         routerParams.push(authMiddleware(friday));
+        // add acl middleware after auth middleware
+        routerParams.push(aclMiddleware(route.aclMethod, route.aclResource));
       }
       // if the route need rate limit
       if (route.rateLimit) {
         routerParams.push(rateLimitMiddleware);
       }
-
       // add the controller at the end of the array
       // wrapped on async middleware
       routerParams.push(asyncMiddleware(instance[route.methodName]));

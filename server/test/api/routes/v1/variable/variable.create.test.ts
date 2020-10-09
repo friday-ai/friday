@@ -1,6 +1,7 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
 import { VariableOwner } from '../../../../../src/utils/constants';
+import { admin, guest, habitant } from '../../../../utils/apiToken';
 
 describe('POST /api/v1/variable', () => {
   it('should create a variable', async () => {
@@ -24,6 +25,54 @@ describe('POST /api/v1/variable', () => {
         delete res.body.updatedAt;
         assert.deepEqual(res.body, variable);
       });
+  });
+
+  it('admin should\'t have to create a variable', async () => {
+    const variable = {
+      id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
+      key: 'key_test',
+      value: 'value_test',
+      owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
+      ownerType: VariableOwner.USER,
+    };
+
+    await server
+      .post('/api/v1/variable', admin)
+      .send(variable)
+      .expect('Content-Type', /json/)
+      .expect(403);
+  });
+
+  it('habitant should\'t have to create a variable', async () => {
+    const variable = {
+      id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
+      key: 'key_test',
+      value: 'value_test',
+      owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
+      ownerType: VariableOwner.USER,
+    };
+
+    await server
+      .post('/api/v1/variable', habitant)
+      .send(variable)
+      .expect('Content-Type', /json/)
+      .expect(403);
+  });
+
+  it('guest should\'t have to create a variable', async () => {
+    const variable = {
+      id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
+      key: 'key_test',
+      value: 'value_test',
+      owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
+      ownerType: VariableOwner.USER,
+    };
+
+    await server
+      .post('/api/v1/variable', guest)
+      .send(variable)
+      .expect('Content-Type', /json/)
+      .expect(403);
   });
 
   it('should not create a variable with an existing key', async () => {

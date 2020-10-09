@@ -45,7 +45,9 @@ export default class DeviceRouter {
    *   pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
    * }
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'device',
+  })
   create = async (req: Request, res: Response) => {
     const device = await this.friday.device.create(req.body);
     res.status(201).json(device);
@@ -72,7 +74,9 @@ export default class DeviceRouter {
    *   pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
    * }
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'device',
+  })
   update = async (req: Request, res: Response) => {
     const device = await this.friday.device.update(req.params.id, req.body);
     res.json(device);
@@ -90,7 +94,9 @@ export default class DeviceRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'device',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.device.destroy(req.params.id);
     res.json({
@@ -118,7 +124,9 @@ export default class DeviceRouter {
    *   pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
    * }]
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'device',
+  })
   getAll = async (req: Request, res: Response) => {
     const devices = await this.friday.device.getAll(req.query);
     res.json(devices);
@@ -144,7 +152,9 @@ export default class DeviceRouter {
    *   pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e'
    * }
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'device',
+  })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
     const device = await this.friday.device.getById(req.params.id, scope);

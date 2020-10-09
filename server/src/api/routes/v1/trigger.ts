@@ -40,7 +40,9 @@ export default class TriggerRouter {
    *   }
    * }
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'trigger',
+  })
   create = async (req: Request, res: Response) => {
     const trigger = await this.friday.trigger.create(req.body);
     res.status(201).json(trigger);
@@ -66,7 +68,9 @@ export default class TriggerRouter {
    *   }
    * }
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'trigger',
+  })
   update = async (req: Request, res: Response) => {
     const trigger = await this.friday.trigger.update(req.params.id, req.body);
     res.json(trigger);
@@ -84,7 +88,9 @@ export default class TriggerRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'trigger',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.trigger.destroy(req.params.id);
     res.json({
@@ -111,7 +117,9 @@ export default class TriggerRouter {
    *   }
    * }]
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'trigger',
+  })
   getAll = async (req: Request, res: Response) => {
     const triggers = await this.friday.trigger.getAll(req.query);
     res.json(triggers);
@@ -136,7 +144,9 @@ export default class TriggerRouter {
    *   }
    * }
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'trigger',
+  })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
     const trigger = await this.friday.trigger.getById(req.params.id, scope);

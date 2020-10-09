@@ -35,7 +35,9 @@ export default class HouseRouter {
    *   longitude: '-118.8067245'
    * }
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'house',
+  })
   create = async (req: Request, res: Response) => {
     const house = await this.friday.house.create(req.body);
     res.status(201).json(house);
@@ -57,7 +59,9 @@ export default class HouseRouter {
    *   longitude: '-118.8067245'
    * }
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'house',
+  })
   update = async (req: Request, res: Response) => {
     const house = await this.friday.house.update(req.params.id, req.body);
     res.json(house);
@@ -75,7 +79,9 @@ export default class HouseRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'house',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.house.destroy(req.params.id);
     res.json({
@@ -98,7 +104,9 @@ export default class HouseRouter {
    *   longitude: '-118.8067245'
    * }]
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'house',
+  })
   getAll = async (req: Request, res: Response) => {
     const houses = await this.friday.house.getAll(req.query);
     res.json(houses);
@@ -119,7 +127,9 @@ export default class HouseRouter {
    *   longitude: '-118.8067245'
    * }
    */
-  @Get({ path: '/:id', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'house',
+  })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
     const house = await this.friday.house.getById(req.params.id, scope);

@@ -37,7 +37,9 @@ export default class VariableRouter {
    *   ownerType: 'user'
    * }
    */
-  @Post({ path: '/', authenticated: true, rateLimit: false })
+  @Post({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'variable',
+  })
   create = async (req: Request, res: Response) => {
     const variable = await this.friday.variable.create(req.body);
     res.status(201).json(variable);
@@ -60,7 +62,9 @@ export default class VariableRouter {
    *   ownerType: 'user'
    * }
    */
-  @Patch({ path: '/:id', authenticated: true, rateLimit: false })
+  @Patch({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'variable',
+  })
   update = async (req: Request, res: Response) => {
     const variable = await this.friday.variable.update(req.params.id, req.body);
     res.json(variable);
@@ -78,7 +82,9 @@ export default class VariableRouter {
    *   "success": "true",
    * }
    */
-  @Delete({ path: '/:id', authenticated: true, rateLimit: false })
+  @Delete({
+    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'variable',
+  })
   destroy = async (req: Request, res: Response) => {
     await this.friday.variable.destroy(req.params.id);
     res.json({
@@ -102,7 +108,9 @@ export default class VariableRouter {
    *   ownerType: 'user'
    * }
    */
-  @Get({ path: '/', authenticated: true, rateLimit: false })
+  @Get({
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'variable',
+  })
   getValue = async (req: Request, res: Response) => {
     const key = req.query.key as string;
     const variables = await this.friday.variable.getValue(key);
