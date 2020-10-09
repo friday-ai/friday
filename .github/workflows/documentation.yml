@@ -1,6 +1,7 @@
 name: Generate documentation
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - 'v*.*.*'
