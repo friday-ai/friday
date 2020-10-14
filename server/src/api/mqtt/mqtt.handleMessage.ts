@@ -1,6 +1,5 @@
 import MqttServer from '.';
 import Log from '../../utils/log';
-import friday from '../../core/friday';
 
 const logger = new Log();
 
@@ -8,7 +7,6 @@ export default function handleMessage(this: MqttServer, topic: string, message: 
   const json = JSON.parse(message);
   logger.info(`Receive message on topic ${topic} (${message})`);
   switch (topic) {
-    // @Todo Add topic
     case 'friday/master/satelitte/heartbeat':
       // this.friday.satellite
       break;
