@@ -1,6 +1,7 @@
 import { Client } from 'mqtt';
 import Friday from '../../core/friday';
 import handleMessage from './mqtt.handleMessage';
+import sendMessage from './mqtt.sendMessage';
 
 /**
  * Web socket manager
@@ -9,6 +10,7 @@ export default class MqttServer {
   public friday: Friday;
   public MqttClient: Client;
   public handleMessage = handleMessage;
+  public sendMessage = sendMessage;
 
   constructor(mqttClient: Client, friday: Friday) {
     this.MqttClient = mqttClient;
