@@ -147,3 +147,21 @@ export enum AvailableSubTypeOfDevice {
   SENSOR_TEMPERATURE = 'sensor_temperature',
   SENSOR_HUMIDITY = 'sensor_humidity'
 }
+
+export enum TopicToSubscribe {
+  'friday/master/satelitte/heartbeat',
+  'friday/master/satelitte/discoverme',
+  'friday/master/plugin/heartbeat',
+  'friday/master/plugin/discoverme',
+  'friday/master/device/set',
+  'friday/master/device/delete',
+  'friday/master/state/set',
+}
+
+export enum TopicToPublish {
+  'friday/satellite/+/plugin/install',
+  'friday/satellite/+/plugin/stop',
+  'friday/satellite/+/plugin/restart',
+  'friday/satellite/+/plugin/delete',
+  'friday/satellite/+/plugin/exec',
+}

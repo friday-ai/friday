@@ -2,6 +2,7 @@ import { Client } from 'mqtt';
 import Friday from '../../core/friday';
 import handleMessage from './mqtt.handleMessage';
 import sendMessage from './mqtt.sendMessage';
+import { TopicToSubscribe } from '../../utils/constants';
 
 /**
  * Web socket manager
@@ -19,6 +20,9 @@ export default class MqttServer {
 
   start() {
     this.MqttClient.on('connect', () => {
+      Object.keys(TopicToSubscribe).forEach((topic) => {
+        this.MqttClient.subscribe(topic);
+      });
       this.MqttClient.on('message', (topic, message) => {
         this.handleMessage(
           topic,
