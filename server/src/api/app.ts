@@ -4,12 +4,14 @@ import helmet from 'helmet';
 import compression from 'compression';
 import * as bodyParser from 'body-parser';
 import * as WebSocket from 'ws';
+import { connect } from 'mqtt';
 import router from './routes/router';
 import Log from '../utils/log';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';
 import errorMiddleware from './middlewares/errorMiddleware';
 import WebsocketServer from './websocket/index';
 import Friday from '../core/friday';
+import MqttServer from './mqtt';
 
 /**
  * Server class
@@ -17,6 +19,7 @@ import Friday from '../core/friday';
 export default class Server {
   public server!: any;
   public websocketServer!: any;
+  public mqttServer!: any;
   readonly port: number;
   readonly friday: any;
 
@@ -63,6 +66,13 @@ export default class Server {
 
     // start WebSocket server
     this.websocketServer.start();
+
+    // initialize the Mqtt server instance
+    const mqttClient = connect('mqtt://localhost:1883');
+    this.mqttServer = new MqttServer(mqttClient, this.friday);
+
+    // start Mqtt server
+    this.mqttServer.start();
 
     this.server.listen(this.port, () => {
       logger.title('Friday server initialized !');

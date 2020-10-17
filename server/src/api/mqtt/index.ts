@@ -3,6 +3,9 @@ import Friday from '../../core/friday';
 import handleMessage from './mqtt.handleMessage';
 import sendMessage from './mqtt.sendMessage';
 import { TopicToSubscribe } from '../../utils/constants';
+import Log from '../../utils/log';
+
+const logger = new Log();
 
 /**
  * Web socket manager
@@ -20,9 +23,8 @@ export default class MqttServer {
 
   start() {
     this.MqttClient.on('connect', () => {
-      Object.keys(TopicToSubscribe).forEach((topic) => {
-        this.MqttClient.subscribe(topic);
-      });
+      logger.info('connect on brocker');
+      this.MqttClient.subscribe(Object.keys(TopicToSubscribe));
       this.MqttClient.on('message', (topic, message) => {
         this.handleMessage(
           topic,
