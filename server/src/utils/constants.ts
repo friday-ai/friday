@@ -149,10 +149,12 @@ export enum AvailableSubTypeOfDevice {
 }
 
 export enum TopicToSubscribe {
-  'friday/master/satelitte/heartbeat',
-  'friday/master/satelitte/discoverme',
+  'friday/master/satellite/heartbeat',
+  'friday/master/satellite/discoverme',
+  'friday/master/satellite/init',
   'friday/master/plugin/heartbeat',
   'friday/master/plugin/discoverme',
+  'friday/master/plugin/init',
   'friday/master/device/set',
   'friday/master/device/delete',
   'friday/master/state/set',
