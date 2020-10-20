@@ -1,50 +1,58 @@
+/* eslint-disable global-require,import/no-dynamic-require */
 import { Client } from 'mqtt';
-import { glob } from 'glob';
+import { glob as Glob } from 'glob';
 import Friday from '../../core/friday';
 import sendMessage from './mqtt.sendMessage';
-import { TopicToSubscribe } from '../../utils/constants';
+import { TopicToSubscribe as Topics, TopicHeader } from '../../utils/constants';
 import Log from '../../utils/log';
+import { KVArr } from '../../utils/interfaces';
 
 const logger = new Log();
 
 /**
- * Web socket manager
+ * MQTT manager
  */
 export default class MqttServer {
   public friday: Friday;
   public MqttClient: Client;
   public sendMessage = sendMessage;
-  public handleMessages = {};
+  public handlers: KVArr<Function> = {};
 
   constructor(mqttClient: Client, friday: Friday) {
     this.MqttClient = mqttClient;
     this.friday = friday;
-    glob
+
+    Glob
       .sync('**/*.ts', { cwd: `${__dirname}/handlers/` })
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-      .map((filename) => ({ [filename]: require(`./handlers/${filename}`).default }))
-      .forEach((a) => {
-        // @ts-ignore
-        // eslint-disable-next-line prefer-destructuring
-        this.handleMessages[Object.entries(a)[0][0]] = Object.entries(a)[0][1];
+      .forEach((filename) => {
+        const topic = filename.replace('.ts', '');
+        this.handlers[topic] = require(`./handlers/${filename}`).default;
       });
   }
 
   start() {
     this.MqttClient.on('connect', () => {
-      logger.info('Connected on message broker');
-      this.MqttClient.subscribe(Object.keys(TopicToSubscribe));
+      logger.info('Connected on mqtt broker');
+
+      logger.info('Subscribing to friday\'s topics... ');
+      Object.keys(Topics)
+        .filter((element) => Number.isNaN(Number(element)))
+        .forEach((topic) => {
+          this.MqttClient.subscribe(`${TopicHeader}${topic}`);
+        });
+
       this.MqttClient.on('message', (topic, message) => {
-        logger.info(`Receive message on topic ${topic} (${message.toString()})`);
-        const resourceMethod = this.checkTopic(topic);
-        // @ts-ignore
-        this.handleMessages[resourceMethod](message.toString());
+        this.handleMessage(topic, message.toString());
       });
     });
   }
 
-  private checkTopic = (topic: string) => {
-    const list = topic.split('/');
-    return `${list[list.length - 2]}/${list[list.length - 1]}.ts`;
-  };
+  handleMessage(topic: string, message: string) {
+    const finalTopic = topic.replace(TopicHeader, '');
+
+    if (Object.values(Topics).includes(finalTopic)) {
+      logger.info(`Received message on topic ${topic} (${message})`);
+      this.handlers[finalTopic](message);
+    }
+  }
 }

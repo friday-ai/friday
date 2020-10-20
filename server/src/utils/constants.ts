@@ -148,22 +148,24 @@ export enum AvailableSubTypeOfDevice {
   SENSOR_HUMIDITY = 'sensor_humidity'
 }
 
+export const TopicHeader = 'friday/master/';
+
 export enum TopicToSubscribe {
-  'friday/master/satellite/heartbeat',
-  'friday/master/satellite/discoverme',
-  'friday/master/satellite/init',
-  'friday/master/plugin/heartbeat',
-  'friday/master/plugin/discoverme',
-  'friday/master/plugin/init',
-  'friday/master/device/set',
-  'friday/master/device/delete',
-  'friday/master/state/set',
+  'device/destroy',
+  'device/set',
+  'plugin/discoverme',
+  'plugin/heartbeat',
+  'plugin/init',
+  'satellite/discoverme',
+  'satellite/heartbeat',
+  'satellite/init',
+  'state/set',
 }
 
-export enum TopicToPublish {
-  'friday/satellite/+/plugin/install',
-  'friday/satellite/+/plugin/stop',
-  'friday/satellite/+/plugin/restart',
-  'friday/satellite/+/plugin/delete',
-  'friday/satellite/+/plugin/exec',
+export enum TopicsTypes {
+  PLUGIN_DELETE = 'plugin/delete',
+  PLUGIN_EXEC = 'plugin/exec',
+  PLUGIN_INSTALL = 'plugin/install',
+  PLUGIN_RESTART = 'plugin/restart',
+  PLUGIN_STOP = 'plugin/stop',
 }
