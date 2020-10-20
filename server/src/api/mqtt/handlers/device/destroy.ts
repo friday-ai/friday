@@ -1,9 +1,9 @@
 import Log from '../../../../utils/log';
 import MqttServer from '../../index';
 
-export default function destroy(this: MqttServer, message: string) {
-  const logger = new Log();
-  const json = JSON.parse(message);
-  logger.info(`Device destroy ${json.deviceId}`);
-  this.friday.device.destroy(json.deviceId);
+const logger = new Log();
+
+export default async function destroy(this: MqttServer, payload: { deviceId: string }) {
+  logger.info(`Device destroy ${payload.deviceId}`);
+  await this.friday.device.destroy(payload.deviceId);
 }

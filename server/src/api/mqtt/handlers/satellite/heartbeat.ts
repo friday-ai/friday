@@ -1,9 +1,9 @@
 import Log from '../../../../utils/log';
 import MqttServer from '../../index';
 
-export default function heartbeat(this: MqttServer, message: string) {
-  const logger = new Log();
-  const json = JSON.parse(message);
-  logger.info(`Satellite heartbeat ${json.satelliteId}`);
-  // this.friday.satellite.heartbeat();
+const logger = new Log();
+
+export default async function heartbeat(this: MqttServer, payload: { satelliteId: string }) {
+  logger.info(`Satellite heartbeat ${payload.satelliteId}`);
+  // await this.friday.satellite.heartbeat();
 }

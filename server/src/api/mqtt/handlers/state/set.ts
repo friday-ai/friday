@@ -1,9 +1,10 @@
 import Log from '../../../../utils/log';
 import MqttServer from '../../index';
+import StateType from '../../../../core/state/state.interface';
 
-export default function set(this: MqttServer, message: string) {
-  const logger = new Log();
-  const json = JSON.parse(message);
-  logger.info(`State set ${json.stateId} on ${json.deviceId}`);
-  this.friday.state.set(json.state);
+const logger = new Log();
+
+export default async function set(this: MqttServer, payload: { stateId: string, deviceId: string, state: StateType }) {
+  logger.info(`State set ${payload.stateId} on ${payload.deviceId}`);
+  await this.friday.state.set(payload.state);
 }

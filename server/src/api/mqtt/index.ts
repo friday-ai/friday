@@ -3,9 +3,12 @@ import { Client } from 'mqtt';
 import { glob as Glob } from 'glob';
 import Friday from '../../core/friday';
 import sendMessage from './mqtt.sendMessage';
-import { TopicToSubscribe as Topics, TopicHeader } from '../../utils/constants';
+import {
+  EventsType, TopicHeaderSub, TopicToSubscribe as Topics,
+} from '../../utils/constants';
 import Log from '../../utils/log';
 import { KVArr } from '../../utils/interfaces';
+import error from '../../utils/errors/coreError';
 
 const logger = new Log();
 
@@ -21,6 +24,8 @@ export default class MqttServer {
   constructor(mqttClient: Client, friday: Friday) {
     this.MqttClient = mqttClient;
     this.friday = friday;
+    this.friday.event.on(EventsType.MQTT_PUBLISH, (event) => this.sendMessage(event));
+    this.friday.event.on(EventsType.MQTT_PUBLISH_ALL, (event) => this.sendMessage(event, { sendAll: true }));
 
     Glob
       .sync('**/*.ts', { cwd: `${__dirname}/handlers/` })
@@ -38,7 +43,7 @@ export default class MqttServer {
       Object.keys(Topics)
         .filter((element) => Number.isNaN(Number(element)))
         .forEach((topic) => {
-          this.MqttClient.subscribe(`${TopicHeader}${topic}`);
+          this.MqttClient.subscribe(`${TopicHeaderSub}${topic}`);
         });
 
       this.MqttClient.on('message', (topic, message) => {
@@ -48,11 +53,17 @@ export default class MqttServer {
   }
 
   handleMessage(topic: string, message: string) {
-    const finalTopic = topic.replace(TopicHeader, '');
+    try {
+      const finalTopic = topic.replace(TopicHeaderSub, '');
 
-    if (Object.values(Topics).includes(finalTopic)) {
-      logger.info(`Received message on topic ${topic} (${message})`);
-      this.handlers[finalTopic](message);
+      if (Object.values(Topics).includes(finalTopic)) {
+        logger.info(`Received message on topic ${topic} (${message})`);
+        this.handlers[finalTopic](JSON.parse(message));
+      }
+    } catch (e) {
+      throw error({
+        name: e.name, message: e.message, cause: e, metadata: { topic, message },
+      });
     }
   }
 }

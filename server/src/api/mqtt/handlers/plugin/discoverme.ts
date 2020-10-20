@@ -1,9 +1,10 @@
 import Log from '../../../../utils/log';
 import MqttServer from '../../index';
+import PluginType from '../../../../core/plugin/plugin.interface';
 
-export default function discoverme(this: MqttServer, message: string) {
-  const logger = new Log();
-  const json = JSON.parse(message);
-  logger.info(`Plugin discoverme ${json.pluginName}`);
-  this.friday.plugin.create(json.plugin);
+const logger = new Log();
+
+export default async function discoverme(this: MqttServer, payload: {pluginName: string, plugin: PluginType}) {
+  logger.info(`Plugin discoverme ${payload.pluginName}`);
+  await this.friday.plugin.create(payload.plugin);
 }

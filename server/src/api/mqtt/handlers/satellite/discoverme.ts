@@ -1,9 +1,10 @@
 import Log from '../../../../utils/log';
 import MqttServer from '../../index';
+import SatelliteType from '../../../../core/satellite/satellite.interface';
 
-export default function discoverme(this: MqttServer, message: string) {
-  const logger = new Log();
-  const json = JSON.parse(message);
-  logger.info(`Satellite discover ${json.satelliteName}`);
-  this.friday.satellite.create(json.satellite);
+const logger = new Log();
+
+export default async function discoverme(this: MqttServer, payload: { satelliteName: string, satellite: SatelliteType }) {
+  logger.info(`Satellite discover ${payload.satelliteName}`);
+  await this.friday.satellite.create(payload.satellite);
 }

@@ -1,4 +1,6 @@
-import { WebsocketMessageTypes, EventsType } from './constants';
+import {
+  WebsocketMessageTypes, MqttMessageTypes, EventsType,
+} from './constants';
 
 /**
  * Options for core functions type 'getAll'
@@ -52,4 +54,22 @@ export interface JobsInterface {
  */
 export interface KVArr<T> {
   [Key: string]: T;
+}
+
+/**
+ * Options for sending mqtt message
+ */
+export interface MqttSendOptions {
+  sendAll?: boolean;
+}
+
+/**
+ * Interface for mqtt message
+ */
+export interface MqttMessagePayload {
+  type: MqttMessageTypes;
+  sender: string;
+  topic: string;
+  message: string;
+  receiver?: string;
 }

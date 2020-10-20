@@ -1,9 +1,9 @@
 import Log from '../../../../utils/log';
 import MqttServer from '../../index';
+import DeviceType from '../../../../core/device/device.interface';
 
-export default function set(this: MqttServer, message: string) {
+export default async function set(this: MqttServer, payload: {deviceName: string, device: DeviceType}) {
   const logger = new Log();
-  const json = JSON.parse(message);
-  logger.info(`Device set ${json.deviceName}`);
-  this.friday.device.create(json.device);
+  logger.info(`Device set ${payload.deviceName}`);
+  await this.friday.device.create(payload.device);
 }

@@ -1,9 +1,10 @@
 import Log from '../../../../utils/log';
 import MqttServer from '../../index';
+import SatelliteType from '../../../../core/satellite/satellite.interface';
 
-export default function init(this: MqttServer, message: string) {
-  const logger = new Log();
-  const json = JSON.parse(message);
-  logger.info(`Satellite init ${json.satelliteId}`);
-  this.friday.satellite.update(json.satelliteId, json.satellite);
+const logger = new Log();
+
+export default async function init(this: MqttServer, payload: { satelliteId: string, satellite: SatelliteType }) {
+  logger.info(`Satellite init ${payload.satelliteId}`);
+  await this.friday.satellite.update(payload.satelliteId, payload.satellite);
 }

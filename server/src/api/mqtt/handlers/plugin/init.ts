@@ -1,9 +1,10 @@
 import Log from '../../../../utils/log';
 import MqttServer from '../../index';
+import PluginType from '../../../../core/plugin/plugin.interface';
 
-export default function init(this: MqttServer, message: string) {
-  const logger = new Log();
-  const json = JSON.parse(message);
-  logger.info(`Plugin init ${json.pluginId}`);
-  this.friday.plugin.update(json.pluginId, json.plugin);
+const logger = new Log();
+
+export default async function init(this: MqttServer, payload: { pluginId: string, plugin: PluginType}) {
+  logger.info(`Plugin init ${payload.pluginId}`);
+  await this.friday.plugin.update(payload.pluginId, payload.plugin);
 }
