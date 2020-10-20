@@ -46,3 +46,10 @@ export interface JobsInterface {
   rule: string;
   event: EventsType;
 }
+
+/**
+ * Interface for array with key/value pair
+ */
+export interface KVArr<T> {
+  [Key: string]: T;
+}
