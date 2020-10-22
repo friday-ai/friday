@@ -3,12 +3,12 @@ import { Client } from 'mqtt';
 import { glob as Glob } from 'glob';
 import Friday from '../../core/friday';
 import sendMessage from './mqtt.sendMessage';
+import handleMessage from './mqtt.handleMessage';
 import {
   EventsType, TopicHeaderSub, TopicToSubscribe as Topics,
 } from '../../utils/constants';
 import Log from '../../utils/log';
 import { KVArr } from '../../utils/interfaces';
-import error from '../../utils/errors/coreError';
 
 const logger = new Log();
 
@@ -20,6 +20,7 @@ export default class MqttServer {
   public MqttClient: Client;
   public sendMessage = sendMessage;
   public handlers: KVArr<Function> = {};
+  public handleMessage = handleMessage;
 
   constructor(mqttClient: Client, friday: Friday) {
     this.MqttClient = mqttClient;
@@ -50,20 +51,5 @@ export default class MqttServer {
         this.handleMessage(topic, message.toString());
       });
     });
-  }
-
-  handleMessage(topic: string, message: string) {
-    try {
-      const finalTopic = topic.replace(TopicHeaderSub, '');
-
-      if (Object.values(Topics).includes(finalTopic)) {
-        logger.info(`Received message on topic ${topic} (${message})`);
-        this.handlers[finalTopic](JSON.parse(message));
-      }
-    } catch (e) {
-      throw error({
-        name: e.name, message: e.message, cause: e, metadata: { topic, message },
-      });
-    }
   }
 }
