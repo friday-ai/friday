@@ -1,3 +1,4 @@
+import { QoS } from 'mqtt-packet';
 import {
   WebsocketMessageTypes, MqttMessageTypes, EventsType,
 } from './constants';
@@ -54,6 +55,18 @@ export interface JobsInterface {
  */
 export interface KVArr<T> {
   [Key: string]: T;
+}
+
+export interface MqttOptions {
+  port: number;
+  host?: string;
+  hostname?: string
+  path?: string
+  protocol?: 'wss' | 'ws' | 'mqtt' | 'mqtts' | 'tcp' | 'ssl' | 'wx' | 'wxs';
+  keepalive: number;
+  username?: string;
+  password?: string;
+  qos?: QoS;
 }
 
 /**

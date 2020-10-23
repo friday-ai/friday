@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import compression from 'compression';
 import * as bodyParser from 'body-parser';
 import * as WebSocket from 'ws';
-import { connect } from 'mqtt';
 import router from './routes/router';
 import Log from '../utils/log';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';
@@ -67,11 +66,8 @@ export default class Server {
     // start WebSocket server
     this.websocketServer.start();
 
-    // initialize the Mqtt server instance
-    const mqttClient = connect('mqtt://localhost:1883');
-    this.mqttServer = new MqttServer(mqttClient, this.friday);
-
-    // start Mqtt server
+    // initialize and start the Mqtt server instance
+    this.mqttServer = new MqttServer(this.friday);
     this.mqttServer.start();
 
     this.server.listen(this.port, () => {
