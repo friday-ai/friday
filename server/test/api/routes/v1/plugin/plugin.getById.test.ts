@@ -19,6 +19,7 @@ describe('GET /api/v1/plugin/:id', () => {
           url: 'fake url',
           enabled: true,
           satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+          lastHeartbeat: '2020-04-08T22:00:00.000Z',
         });
       });
   });
@@ -33,7 +34,7 @@ describe('GET /api/v1/plugin/:id', () => {
         const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables'],
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
         );
         if (plugin.state !== null) {
           expect(plugin.state).to.be.an('object');
@@ -81,7 +82,7 @@ describe('GET /api/v1/plugin/:id', () => {
         const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables'],
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
         );
         if (plugin.state !== null) {
           expect(plugin.state).to.be.an('object');
@@ -129,7 +130,7 @@ describe('GET /api/v1/plugin/:id', () => {
         const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables'],
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
         );
         if (plugin.state !== null) {
           expect(plugin.state).to.be.an('object');
@@ -185,7 +186,7 @@ describe('GET /api/v1/plugin/:id', () => {
         const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite'],
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'lastHeartbeat'],
         );
         if (plugin.satellite !== null) {
           expect(plugin.satellite).to.be.an('object');
@@ -206,7 +207,7 @@ describe('GET /api/v1/plugin/:id', () => {
         const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state'],
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state', 'lastHeartbeat'],
         );
         if (plugin.state !== null) {
           expect(plugin.state).to.be.an('object');
@@ -227,7 +228,7 @@ describe('GET /api/v1/plugin/:id', () => {
         const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices'],
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices', 'lastHeartbeat'],
         );
         if (plugin.devices !== null) {
           expect(plugin.devices).to.be.an('array');
@@ -251,7 +252,7 @@ describe('GET /api/v1/plugin/:id', () => {
         const plugin = res.body;
         expect(plugin).to.be.an('object');
         expect(plugin).to.have.all.keys(
-          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables'],
+          ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables', 'lastHeartbeat'],
         );
         if (plugin.variables !== null) {
           expect(plugin.variables).to.be.an('array');

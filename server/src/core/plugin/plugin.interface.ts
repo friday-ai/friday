@@ -17,4 +17,5 @@ export default interface PluginType {
   state?: StateType;
   devices?: Array<DeviceType[]>;
   variables?: Array<VariableType[]>;
+  lastHeartbeat?: Date;
 }

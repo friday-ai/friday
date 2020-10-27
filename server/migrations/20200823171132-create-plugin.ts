@@ -45,6 +45,10 @@ module.exports = {
         allowNull: false,
         type: DataType.DATE,
       },
+      lastHeartbeat: {
+        allowNull: false,
+        type: DataType.DATE,
+      },
     });
   },
   down: (queryInterface: QueryInterface) => queryInterface.dropTable('plugin'),

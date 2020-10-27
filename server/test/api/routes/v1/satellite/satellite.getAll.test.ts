@@ -63,7 +63,7 @@ describe('GET /api/v1/satellite', () => {
             satellite.plugins!.forEach((plugin) => {
               expect(plugin).to.be.an('object');
               expect(plugin).to.have.all.keys(
-                ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+                ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
               );
             });
           }
@@ -162,7 +162,7 @@ describe('GET /api/v1/satellite', () => {
             satellite.plugins!.forEach((plugin) => {
               expect(plugin).to.be.an('object');
               expect(plugin).to.have.all.keys(
-                ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+                ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
               );
             });
           }

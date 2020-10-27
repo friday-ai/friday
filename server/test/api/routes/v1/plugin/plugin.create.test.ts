@@ -11,6 +11,7 @@ describe('POST /api/v1/plugin', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: '2020-10-27T23:43:23.025Z',
     };
 
     await server
@@ -35,6 +36,7 @@ describe('POST /api/v1/plugin', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: '2020-10-27T23:43:23.552Z',
     };
 
     await server
@@ -59,6 +61,7 @@ describe('POST /api/v1/plugin', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: '2020-10-27T23:43:23.552Z',
     };
 
     await server
@@ -76,6 +79,7 @@ describe('POST /api/v1/plugin', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: '2020-10-27T23:43:23.552Z',
     };
 
     await server
@@ -93,6 +97,7 @@ describe('POST /api/v1/plugin', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: '2020-10-27T23:43:23.552Z',
     };
 
     await server
@@ -123,6 +128,7 @@ describe('POST /api/v1/plugin', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: '2020-10-27T23:43:23.552Z',
     };
 
     await server

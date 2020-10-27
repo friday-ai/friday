@@ -15,6 +15,7 @@ describe('Plugin.getById', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: new Date('2020-04-08T22:00:00.000Z'),
     });
   });
 
@@ -27,6 +28,7 @@ describe('Plugin.getById', () => {
     expect(pluginReturned).to.have.property('url');
     expect(pluginReturned).to.have.property('enabled');
     expect(pluginReturned).to.have.property('satelliteId');
+    expect(pluginReturned).to.have.property('lastHeartbeat');
 
     // TODO: The state cannot must be null
     if (pluginReturned.state !== null) {
@@ -80,6 +82,7 @@ describe('Plugin.getById', () => {
     expect(pluginReturned).to.have.property('url');
     expect(pluginReturned).to.have.property('enabled');
     expect(pluginReturned).to.have.property('satelliteId');
+    expect(pluginReturned).to.have.property('lastHeartbeat');
 
     if (pluginReturned.satellite !== null) {
       expect(pluginReturned.satellite).to.be.an('object');
@@ -98,6 +101,7 @@ describe('Plugin.getById', () => {
     expect(pluginReturned).to.have.property('url');
     expect(pluginReturned).to.have.property('enabled');
     expect(pluginReturned).to.have.property('satelliteId');
+    expect(pluginReturned).to.have.property('lastHeartbeat');
 
     // TODO: The state cannot must be null
     if (pluginReturned.state !== null) {
@@ -118,6 +122,7 @@ describe('Plugin.getById', () => {
     expect(pluginReturned).to.have.property('url');
     expect(pluginReturned).to.have.property('enabled');
     expect(pluginReturned).to.have.property('satelliteId');
+    expect(pluginReturned).to.have.property('lastHeartbeat');
 
     if (pluginReturned.devices !== null) {
       expect(pluginReturned.devices).to.be.an('array');
@@ -143,6 +148,7 @@ describe('Plugin.getById', () => {
     expect(pluginReturned).to.have.property('url');
     expect(pluginReturned).to.have.property('enabled');
     expect(pluginReturned).to.have.property('satelliteId');
+    expect(pluginReturned).to.have.property('lastHeartbeat');
 
     if (pluginReturned.variables !== null) {
       expect(pluginReturned.variables).to.be.an('array');

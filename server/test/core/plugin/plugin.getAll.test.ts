@@ -15,6 +15,7 @@ describe('Plugin.getAll', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: new Date('2020-04-08T22:00:00.000Z'),
     },
     {
       id: '88b48273-15e6-4729-9199-0682677475f4',
@@ -23,6 +24,7 @@ describe('Plugin.getAll', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1',
+      lastHeartbeat: new Date('1992-05-07T22:00:00.000Z'),
     },
     {
       id: '3a6b4974-6159-4792-a327-c3656f8bb9af',
@@ -31,6 +33,7 @@ describe('Plugin.getAll', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: new Date('2001-01-24T23:00:00.000Z'),
     },
     ]);
   });
@@ -46,6 +49,7 @@ describe('Plugin.getAll', () => {
       expect(p).to.have.property('url');
       expect(p).to.have.property('enabled');
       expect(p).to.have.property('satelliteId');
+      expect(p).to.have.property('lastHeartbeat');
 
       // TODO: The state cannot must be null
       if (p.state !== null) {
@@ -102,6 +106,7 @@ describe('Plugin.getAll', () => {
       expect(p).to.have.property('url');
       expect(p).to.have.property('enabled');
       expect(p).to.have.property('satelliteId');
+      expect(p).to.have.property('lastHeartbeat');
 
       if (p.satellite !== null) {
         expect(p.satellite).to.be.an('object');
@@ -123,6 +128,7 @@ describe('Plugin.getAll', () => {
       expect(p).to.have.property('url');
       expect(p).to.have.property('enabled');
       expect(p).to.have.property('satelliteId');
+      expect(p).to.have.property('lastHeartbeat');
 
       // TODO: The state cannot must be null
       if (p.state !== null) {
@@ -146,6 +152,7 @@ describe('Plugin.getAll', () => {
       expect(p).to.have.property('url');
       expect(p).to.have.property('enabled');
       expect(p).to.have.property('satelliteId');
+      expect(p).to.have.property('lastHeartbeat');
 
       if (p.devices !== null) {
         expect(p.devices).to.be.an('array');
@@ -174,6 +181,7 @@ describe('Plugin.getAll', () => {
       expect(p).to.have.property('url');
       expect(p).to.have.property('enabled');
       expect(p).to.have.property('satelliteId');
+      expect(p).to.have.property('lastHeartbeat');
 
       if (p.variables !== null) {
         expect(p.variables).to.be.an('array');
