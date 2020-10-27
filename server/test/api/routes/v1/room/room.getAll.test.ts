@@ -71,7 +71,7 @@ describe('GET /api/v1/room', () => {
             room.satellites!.forEach((satellite) => {
               expect(satellite).to.be.an('object');
               expect(satellite).to.have.all.keys(
-                ['id', 'name', 'roomId'],
+                ['id', 'name', 'roomId', 'lastHeartbeat'],
               );
             });
           }
@@ -170,7 +170,7 @@ describe('GET /api/v1/room', () => {
             room.satellites!.forEach((satellite) => {
               expect(satellite).to.be.an('object');
               expect(satellite).to.have.all.keys(
-                ['id', 'name', 'roomId'],
+                ['id', 'name', 'roomId', 'lastHeartbeat'],
               );
             });
           }

@@ -63,7 +63,7 @@ describe('GET /api/v1/plugin', () => {
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
             expect(plugin.satellite).to.have.all.keys(
-              ['id', 'name', 'roomId'],
+              ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           }
 
@@ -114,7 +114,7 @@ describe('GET /api/v1/plugin', () => {
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
             expect(plugin.satellite).to.have.all.keys(
-              ['id', 'name', 'roomId'],
+              ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           }
 
@@ -165,7 +165,7 @@ describe('GET /api/v1/plugin', () => {
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
             expect(plugin.satellite).to.have.all.keys(
-              ['id', 'name', 'roomId'],
+              ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           }
 
@@ -210,7 +210,7 @@ describe('GET /api/v1/plugin', () => {
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
             expect(plugin.satellite).to.have.all.keys(
-              ['id', 'name', 'roomId'],
+              ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           }
         });

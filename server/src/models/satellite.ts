@@ -1,6 +1,6 @@
 import {
   Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, HasMany, DefaultScope, Scopes, NotEmpty, Unique, Default, Is,
+  IsUUID, AllowNull, HasMany, DefaultScope, Scopes, NotEmpty, Unique, Default, Is, IsDate,
 } from 'sequelize-typescript';
 
 import Room from './room';
@@ -13,27 +13,27 @@ import { isOwnerExisting } from '../utils/databaseValidation';
  * Satellite model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'roomId'],
+  attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'roomId'],
+    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
     include: [Room, Plugin, State, Variable],
   },
   withRoom: {
-    attributes: ['id', 'name', 'roomId'],
+    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
     include: [Room],
   },
   withState: {
-    attributes: ['id', 'name', 'roomId'],
+    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
     include: [State],
   },
   withVariables: {
-    attributes: ['id', 'name', 'roomId'],
+    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
     include: [Variable],
   },
   withPlugins: {
-    attributes: ['id', 'name', 'roomId'],
+    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
     include: [Plugin],
   },
 }))
@@ -61,6 +61,13 @@ export default class Satellite extends Model<Satellite> {
   @Is('roomId', (value) => isOwnerExisting(value, ['room']))
   @Column(DataType.UUIDV4)
   roomId!: string;
+
+  @AllowNull(false)
+  @IsDate
+  @NotEmpty
+  @Default(new Date())
+  @Column({ type: DataType.DATE })
+  lastHeartbeat!: Date;
 
   @BelongsTo(() => Room, {
     foreignKey: 'roomId',
