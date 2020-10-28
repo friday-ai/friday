@@ -5,5 +5,5 @@ const logger = new Log();
 
 export default async function heartbeat(this: MqttServer, payload: { satelliteId: string }) {
   logger.info(`Satellite heartbeat ${payload.satelliteId}`);
-  // await this.friday.satellite.heartbeat();
+  await this.friday.satellite.heartbeat(payload.satelliteId);
 }
