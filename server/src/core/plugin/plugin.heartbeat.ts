@@ -1,5 +1,4 @@
 import error, { NotFoundError } from '../../utils/errors/coreError';
-import Satellite from '../../models/satellite';
 import Plugin from '../../models/plugin';
 import PluginType from './plugin.interface';
 
