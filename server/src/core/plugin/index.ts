@@ -3,6 +3,7 @@ import update from './plugin.update';
 import destroy from './plugin.destroy';
 import getAll from './plugin.getAll';
 import getById from './plugin.getById';
+import heartbeat from './plugin.heartbeat';
 
 /**
  * Plugin
@@ -13,4 +14,5 @@ export default class Plugin {
   destroy = destroy;
   getAll = getAll;
   getById = getById;
+  heartbeat = heartbeat;
 }

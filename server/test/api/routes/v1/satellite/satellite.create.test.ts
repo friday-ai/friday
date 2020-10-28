@@ -7,7 +7,7 @@ describe('POST /api/v1/satellite', () => {
       id: '37225fcb-ff7d-40a7-aacc-ee2a041feebd',
       name: 'Satellite 3',
       roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-      lastHeartbeat: new Date(),
+      lastHeartbeat: '2020-10-28T21:08:00.535Z',
     };
 
     await server

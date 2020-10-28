@@ -151,6 +151,7 @@ describe('POST /api/v1/plugin', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1',
+      lastHeartbeat: '2020-10-27T23:43:23.552Z',
     };
 
     await server
