@@ -1,33 +1,36 @@
 import net from 'net';
 import MqttStream from 'mqtt-connection';
 
+const mqttPort = parseInt(process.env.MQTT_PORT!, 10) || 1884;
+
 export default class MqtTBroker {
   public isConnected = false;
   public topicsSubscribed: Array<string> = [];
+  public broker: MqttStream | undefined;
 
   start() {
     const server = new net.Server();
 
     server.on('connection', (stream) => {
-      const client = new MqttStream(stream);
+      this.broker = new MqttStream(stream);
 
       // client connected
-      client.on('connect', () => {
+      this.broker.on('connect', () => {
         // acknowledge the connect packet
-        client.connack({ returnCode: 0 });
+        this.broker!.connack({ returnCode: 0 });
         this.isConnected = true;
       });
 
       // client published
-      client.on('publish', (packet) => {
+      this.broker.on('publish', (packet) => {
         // send a puback with messageId (for QoS > 0)
-        client.puback({ messageId: packet.messageId });
+        this.broker!.puback({ messageId: packet.messageId });
       });
 
       // client subscribed
-      client.on('subscribe', (packet) => {
+      this.broker.on('subscribe', (packet) => {
         // send a suback with messageId and granted QoS level
-        client.suback({ granted: [packet.qos], messageId: packet.messageId });
+        this.broker!.suback({ granted: [packet.qos], messageId: packet.messageId });
         this.topicsSubscribed.push(packet.subscriptions[0].topic);
       });
 
@@ -35,22 +38,22 @@ export default class MqtTBroker {
       stream.setTimeout(1000 * 60 * 5);
 
       // connection error handling
-      client.on('close', () => {
-        client.destroy();
+      this.broker.on('close', () => {
+        this.broker!.destroy();
       });
-      client.on('error', () => {
-        client.destroy();
+      this.broker.on('error', () => {
+        this.broker!.destroy();
       });
-      client.on('disconnect', () => {
-        client.destroy();
+      this.broker.on('disconnect', () => {
+        this.broker!.destroy();
       });
 
       // stream timeout
       stream.on('timeout', () => {
-        client.destroy();
+        this.broker!.destroy();
       });
     });
 
-    server.listen(1884);
+    server.listen(mqttPort);
   }
 }

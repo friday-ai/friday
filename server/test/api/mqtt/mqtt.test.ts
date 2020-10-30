@@ -1,11 +1,8 @@
-import { expect } from 'chai';
-// import sinon from 'sinon';
+import { assert } from 'chai';
 import MqttBroker from '../../utils/mqttBroker';
 import MqttServer from '../../../src/api/mqtt';
 import { MqttOptions } from '../../../src/utils/interfaces';
-// import { BaseCoreError } from '../../../src/utils/errors/coreError';
 
-// const { assert } = sinon;
 let mqttServer: MqttServer;
 const mqttBroker = new MqttBroker();
 
@@ -19,7 +16,10 @@ describe('Mqtt.connection', () => {
 
   it('should connect to MQTT Broker', async () => {
     await mqttServer.start();
-    expect(mqttBroker.isConnected).equal(true);
+
+    mqttBroker.broker!.on('connect', () => {
+      assert(true);
+    });
   });
 
   /*
@@ -28,8 +28,7 @@ describe('Mqtt.connection', () => {
    */
 
   // eslint-disable-next-line func-names
-  it('should not connect to MQTT Broker', async function (done) {
-    this.timeout(3000);
+  it('should not connect to MQTT Broker', async () => {
     mqttServer.stop();
 
     const mqttOptions: MqttOptions = {
@@ -40,26 +39,9 @@ describe('Mqtt.connection', () => {
     // @ts-ignore
     const mqttClient = await new MqttServer(global.FRIDAY, mqttOptions).start();
 
-    // const eventSpy = sinon.fake();
-    // do something that should trigger the event
     mqttClient.on('error', () => {
-      done();
+      assert(true);
     });
-    /*
-    mqttClient.on('error', () => {
-      console.log('test');
-      eventSpy();
-    });
-
-     */
-    /*
-    setTimeout(() => {
-      done();
-    }, 2500);
-    assert.called(eventSpy);
-    */
-
-    // await assert.isRejected(promise, BaseCoreError);
   });
 });
 
