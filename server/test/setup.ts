@@ -5,8 +5,17 @@ import Friday from '../src/core/friday';
 import { seedDb, cleanDb } from './utils/seed';
 import { umzug } from '../src/config/database';
 import Log from '../src/utils/log';
+import { MqttOptions } from '../src/utils/interfaces';
 
 const port = parseInt(process.env.SERVER_PORT!, 10) || 3500;
+const mqttPort = parseInt(process.env.MQTT_PORT!, 10) || 1883;
+const mqttAddress = process.env.MQTT_ADDRESS! || 'localhost';
+
+const mqttOptions: MqttOptions = {
+  port: mqttPort,
+  host: mqttAddress,
+};
+
 const log = new Log();
 
 chai.use(chaiAsPromised);
@@ -20,8 +29,14 @@ before(async function before() {
   // Start Friday core
   await friday.start();
 
+  const server = new Server(port, friday, mqttOptions);
+
   // @ts-ignore
-  global.TEST_SERVER = new Server(port, friday).start();
+  global.FRIDAY = friday;
+  // @ts-ignore
+  global.TEST_SERVER = await server.start();
+  // @ts-ignore
+  global.MQTT_TEST_SERVER = server.mqttServer;
 
   try {
     await cleanDb();

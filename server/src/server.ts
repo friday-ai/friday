@@ -14,7 +14,7 @@ const logger = new Log();
     await friday.start();
 
     // Start Friday server
-    new Server(port, friday).start();
+    await new Server(port, friday).start();
   } catch (e) {
     logger.error(e);
   }

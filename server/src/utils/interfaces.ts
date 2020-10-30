@@ -63,7 +63,7 @@ export interface MqttOptions {
   hostname?: string
   path?: string
   protocol?: 'wss' | 'ws' | 'mqtt' | 'mqtts' | 'tcp' | 'ssl' | 'wx' | 'wxs';
-  keepalive: number;
+  keepalive?: number;
   username?: string;
   password?: string;
   qos?: QoS;
