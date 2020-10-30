@@ -21,6 +21,7 @@ const defaultConnect: MqttOptions = {
 
 /**
  * MQTT manager
+ * @routePrefix('mqtt')
  */
 export default class MqttServer {
   public friday: Friday;
