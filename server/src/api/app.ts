@@ -76,8 +76,8 @@ export default class Server {
     this.websocketServer.start();
 
     // initialize and start the Mqtt server instance
-    this.mqttServer = new MqttServer(this.friday, this.mqttOptions);
-    await this.mqttServer.start();
+    this.mqttServer = new MqttServer(this.friday);
+    await this.mqttServer.start(this.mqttOptions);
 
     this.server.listen(this.port, () => {
       logger.title('Friday server initialized !');

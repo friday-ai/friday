@@ -1,10 +1,10 @@
 import net from 'net';
 import MqttStream from 'mqtt-connection';
+import events from 'events';
 
 const mqttPort = parseInt(process.env.MQTT_PORT!, 10) || 1884;
 
-export default class MqtTBroker {
-  public isConnected = false;
+export default class MqttBroker extends events.EventEmitter {
   public topicsSubscribed: Array<string> = [];
   public broker: MqttStream | undefined;
 
@@ -18,7 +18,7 @@ export default class MqtTBroker {
       this.broker.on('connect', () => {
         // acknowledge the connect packet
         this.broker!.connack({ returnCode: 0 });
-        this.isConnected = true;
+        this.emit('connected', stream);
       });
 
       // client published
@@ -32,6 +32,7 @@ export default class MqtTBroker {
         // send a suback with messageId and granted QoS level
         this.broker!.suback({ granted: [packet.qos], messageId: packet.messageId });
         this.topicsSubscribed.push(packet.subscriptions[0].topic);
+        this.emit('subscribe', packet.subscriptions[0].topic);
       });
 
       // timeout idle streams after 5 minutes

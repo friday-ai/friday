@@ -18,13 +18,12 @@ const logger = new Log();
  */
 export default class MqttServer {
   public friday: Friday;
-  public MqttClient: Client;
+  public MqttClient!: Client;
   public sendMessage = sendMessage;
   public handlers: KVArr<Function> = {};
   public handleMessage = handleMessage;
 
-  constructor(friday: Friday, mqttOptions: MqttOptions) {
-    this.MqttClient = connect(mqttOptions);
+  constructor(friday: Friday) {
     this.friday = friday;
     this.friday.event.on(EventsType.MQTT_PUBLISH, (event) => this.sendMessage(event));
     this.friday.event.on(EventsType.MQTT_PUBLISH_ALL, (event) => this.sendMessage(event, { sendAll: true }));
@@ -37,7 +36,8 @@ export default class MqttServer {
       });
   }
 
-  async start() {
+  async start(mqttOptions: MqttOptions) {
+    this.MqttClient = connect(mqttOptions);
     this.MqttClient.on('connect', () => {
       logger.info('Connected on mqtt broker');
 
