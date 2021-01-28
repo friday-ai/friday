@@ -1,6 +1,5 @@
-import { QoS } from 'mqtt-packet';
 import {
-  WebsocketMessageTypes, MqttMessageTypes, EventsType,
+  WebsocketMessageTypes, MqttMessageTypes, EventsType, TopicsTypes,
 } from './constants';
 
 /**
@@ -66,7 +65,7 @@ export interface MqttOptions {
   keepalive?: number;
   username?: string;
   password?: string;
-  qos?: QoS;
+  qos?: 0 | 1 | 2;
 }
 
 /**
@@ -82,7 +81,7 @@ export interface MqttSendOptions {
 export interface MqttMessagePayload {
   type: MqttMessageTypes;
   sender: string;
-  topic: string;
+  topic: TopicsTypes;
   message: string;
   receiver?: string;
 }

@@ -1,12 +1,19 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
+import Friday from '../../../src/core/friday';
 import MqttBroker from '../../utils/mqttBroker';
 import MqttServer from '../../../src/api/mqtt';
 import wait from '../../utils/timer';
-import { MqttOptions } from '../../../src/utils/interfaces';
-import { TopicHeaderSub, TopicToSubscribe as Topics } from '../../../src/utils/constants';
+import { MqttMessagePayload, MqttOptions } from '../../../src/utils/interfaces';
+import {
+  EventsType,
+  MqttMessageTypes,
+  TopicHeaderSub,
+  TopicsTypes,
+  TopicToSubscribe as Topics,
+} from '../../../src/utils/constants';
 
-const broker = new MqttBroker();
+const fakeBroker = new MqttBroker();
 const mqttPort = parseInt(process.env.MQTT_PORT!, 10) || 1884;
 const mqttOptions: MqttOptions = {
   port: mqttPort,
@@ -14,19 +21,30 @@ const mqttOptions: MqttOptions = {
 };
 
 let mqttClient: MqttServer;
+let friday: Friday;
+
+const fakeMsg: MqttMessagePayload = {
+  message: 'this is a test ;)',
+  topic: TopicsTypes.PLUGIN_EXEC,
+  type: MqttMessageTypes.MESSAGE_SEND,
+  sender: '',
+  receiver: 'test',
+};
 
 describe('Mqtt.connection', () => {
   before(async () => {
     // @ts-ignore
     mqttClient = global.MQTT_TEST_SERVER;
+    // @ts-ignore
+    friday = global.FRIDAY;
     // Start fake broker
-    broker.start();
+    fakeBroker.start();
   });
 
   it('should connect to MQTT Broker', async () => {
     const listener = sinon.spy();
 
-    broker.on('connected', listener);
+    fakeBroker.on('connected', listener);
     await mqttClient.start(mqttOptions);
     await wait(20);
 
@@ -57,7 +75,7 @@ describe('Mqtt.connection', () => {
         topicsToSubscribe.push(`${TopicHeaderSub}${topic}`);
       });
 
-    broker.on('subscribe', (topic) => {
+    fakeBroker.on('subscribe', (topic) => {
       topicsSubscribed.push(topic);
     });
 
@@ -68,20 +86,66 @@ describe('Mqtt.connection', () => {
   });
 });
 
-/*
-describe('Mqtt.receive', () => {
-  it('should send message', async () => {
+describe('Mqtt.publish', () => {
+  it('should publish a message', async () => {
+    let msgReceived = {};
+
+    await mqttClient.start(mqttOptions);
+
+    fakeBroker.on('message', (message) => {
+      msgReceived = { message };
+    });
+
+    // Wait until subscribe messages passed
+    await wait(20);
+    friday.event.emit(EventsType.MQTT_PUBLISH, fakeMsg);
+    await wait(20);
+
+    expect(msgReceived).deep.equal({ message: 'this is a test ;)' });
   });
 
   it('should not send message', async () => {
+    const spy = sinon.spy(mqttClient, 'sendMessage');
+    await mqttClient.start(mqttOptions);
+
+    const incorrectMsg: MqttMessagePayload = {
+      message: 'this is a test ;)',
+      topic: TopicsTypes.PLUGIN_EXEC,
+      type: MqttMessageTypes.MESSAGE_SEND,
+      sender: '',
+    };
+
+    try {
+      // Wait until subscribe messages passed
+      await wait(20);
+      friday.event.emit(EventsType.MQTT_PUBLISH, incorrectMsg);
+      await wait(20);
+    } catch (e) {
+      return;
+    }
+
+    expect(spy.callCount).equal(1);
+    expect(spy.threw()).to.equal(true);
   });
 });
 
-describe('Mqtt.send', () => {
-  it('should send message', async () => {
-  });
+describe('Mqtt.handleMessage', () => {
+  it('should handle a message', async () => {
+    const spy = sinon.spy(mqttClient, 'handleMessage');
+    await mqttClient.start(mqttOptions);
 
-  it('should not send message', async () => {
+    fakeBroker.client!.publish({
+      cmd: 'publish',
+      dup: false,
+      qos: 2,
+      retain: false,
+      payload: Buffer.from('this is a test ;)'),
+      topic: TopicsTypes.PLUGIN_EXEC,
+    }, () => {});
+
+    await wait(20);
+
+    expect(spy.callCount).equal(1);
+    expect(spy.calledWith(TopicsTypes.PLUGIN_EXEC, 'this is a test ;)')).to.equal(true);
   });
 });
-*/
