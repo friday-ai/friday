@@ -1,5 +1,7 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import chaiLike from 'chai-like';
+import chaiThings from 'chai-things';
 import Server from '../src/api/app';
 import Friday from '../src/core/friday';
 import { seedDb, cleanDb } from './utils/seed';
@@ -18,6 +20,8 @@ const mqttOptions: MqttOptions = {
 
 const log = new Log();
 
+chai.use(chaiLike);
+chai.use(chaiThings);
 chai.use(chaiAsPromised);
 
 before(async function before() {
