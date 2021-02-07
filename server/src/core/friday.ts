@@ -2,6 +2,7 @@ import * as database from '../config/database';
 import Action from './action';
 import Device from './device';
 import House from './house';
+import Docker from './docker';
 import Plugin from './plugin';
 import Room from './room';
 import Satellite from './satellite';
@@ -34,6 +35,7 @@ export default class Friday {
   public device = new Device();
   public house = new House();
   public plugin = new Plugin();
+  public docker = new Docker();
   public room = new Room();
   public satellite = new Satellite();
   public scene = new Scene();

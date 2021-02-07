@@ -90,6 +90,17 @@ export class BadParametersError extends BaseCoreError {
 }
 
 /**
+ * Platform not compatible error class
+ * @class PlatformNotCompatible
+ * @extends {BaseCoreError}
+ */
+export class PlatformNotCompatible extends BaseCoreError {
+  constructor(err: ErrorType) {
+    super(err);
+  }
+}
+
+/**
  * Create an error instance
  * @param {ErrorType} err - Options of error like name, message, cause and metadata.
  * @returns {BaseCoreError} Resolve with an error instance.
@@ -111,6 +122,8 @@ export default function error(err: ErrorType): BaseCoreError {
       return new UnauthorizedError(err);
     case AuthError:
       return new AuthError(err);
+    case PlatformNotCompatible:
+      return new PlatformNotCompatible(err);
     default:
       return new BaseCoreError(err);
   }
