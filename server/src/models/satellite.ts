@@ -41,7 +41,7 @@ import { isOwnerExisting } from '../utils/databaseValidation';
   tableName: 'satellite',
   underscored: false,
 })
-export default class Satellite extends Model<Satellite> {
+export default class Satellite extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

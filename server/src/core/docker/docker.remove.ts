@@ -19,7 +19,7 @@ export default async function remove(this: Docker, id: string) {
       await container.stop();
     }
 
-    return container.remove();
+    return await container.remove();
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e, metadata: id,

@@ -37,7 +37,7 @@ import { isOwnerExisting } from '../utils/databaseValidation';
   tableName: 'device',
   underscored: false,
 })
-export default class Device extends Model<Device> {
+export default class Device extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

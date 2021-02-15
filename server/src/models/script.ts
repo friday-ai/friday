@@ -13,7 +13,7 @@ import {
   tableName: 'script',
   underscored: false,
 })
-export default class Script extends Model<Script> {
+export default class Script extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

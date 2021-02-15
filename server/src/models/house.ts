@@ -30,7 +30,7 @@ import State from './state';
   tableName: 'house',
   underscored: false,
 })
-export default class House extends Model<House> {
+export default class House extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

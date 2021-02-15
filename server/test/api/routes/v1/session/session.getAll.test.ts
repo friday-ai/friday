@@ -12,7 +12,7 @@ describe('GET /api/v1/session', () => {
         const sessions = res.body;
         expect(sessions).to.be.an('array');
         sessions.forEach((session: SessionType) => {
-          expect(session).to.have.all.keys(
+          expect(session).to.contains.keys(
             ['id', 'refreshToken', 'validUntil', 'userId', 'revoked'],
           );
           expect(session.revoked).to.equal(false);
@@ -32,7 +32,7 @@ describe('GET /api/v1/session', () => {
         const sessions = res.body;
         expect(sessions).to.be.an('array');
         sessions.forEach((session: SessionType) => {
-          expect(session).to.have.all.keys(
+          expect(session).to.contains.keys(
             ['id', 'refreshToken', 'validUntil', 'userId', 'revoked', 'user'],
           );
           expect(session.revoked).to.equal(false);

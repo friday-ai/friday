@@ -2,18 +2,18 @@ export enum UserRole {
   SUPERADMIN = 'superadmin',
   ADMIN = 'admin',
   HABITANT = 'habitant',
-  GUEST = 'guest'
+  GUEST = 'guest',
 }
 
 export enum AvailableLanguages {
   EN = 'en',
-  FR = 'fr'
+  FR = 'fr',
 }
 
 export enum VariableOwner {
   USER = 'user',
   PLUGIN = 'plugin',
-  SATELLITE = 'satellite'
+  SATELLITE = 'satellite',
 }
 
 export enum StateOwner {
@@ -22,7 +22,7 @@ export enum StateOwner {
   ROOM = 'room',
   PLUGIN = 'plugin',
   SATELLITE = 'satellite',
-  DEVICE = 'device'
+  DEVICE = 'device',
 }
 
 export enum AvailableState {
@@ -58,7 +58,7 @@ export enum AvailableState {
   DEVICE_DISCONNECTED = 'device.disconnected',
   DEVICE_STANDBY = 'device.standby',
   DEVICE_ERRORED = 'device.errored',
-  DEVICE_WAITING_CONFIGURATION = 'device.waiting.configuration'
+  DEVICE_WAITING_CONFIGURATION = 'device.waiting.configuration',
 }
 
 export enum AvailableConditions {
@@ -71,7 +71,7 @@ export enum AvailableConditions {
   // Device conditions
   DEVICE_VALUE = 'device.value',
   // Home conditions
-  HOUSE_IS_EMPTY = 'house.is.empty'
+  HOUSE_IS_EMPTY = 'house.is.empty',
 }
 
 export enum ActionsType {
@@ -94,7 +94,7 @@ export enum ActionsType {
   TIME_DELAY = 'time.delay',
   TIME_AT_DATE = 'time.at.date',
   // No action
-  OTHER = 'other'
+  OTHER = 'other',
 }
 
 export enum EventsType {
@@ -127,7 +127,7 @@ export enum WebsocketMessageTypes {
   // Websocket
   MESSAGE_SEND = 'message.send',
   MESSAGE_SEND_ALL = 'message.send.all',
-  MESSAGE_SEND_ADMIN = 'message.send.admin'
+  MESSAGE_SEND_ADMIN = 'message.send.admin',
 }
 
 export enum MqttMessageTypes {
@@ -141,13 +141,13 @@ export enum MqttMessageTypes {
 export enum SystemVariablesNames {
   FRIDAY_VERSION = 'friday_version',
   HISTORY_STATE_IN_DAYS = 'history_state_in_days',
-  NUMBER_OF_BACKUPS = 'number_of_backups'
+  NUMBER_OF_BACKUPS = 'number_of_backups',
 }
 
 // TODO = Create a Json file with all type of device available
 export enum AvailableTypeOfDevice {
   LIGHT = 'light',
-  SENSOR = 'sensor'
+  SENSOR = 'sensor',
 }
 
 // TODO = Create a Json file with all sub type of device available
@@ -156,7 +156,7 @@ export enum AvailableSubTypeOfDevice {
   LIGHT_RGB = 'light_rgb',
   LIGHT_RGBW = 'light_rgbw',
   SENSOR_TEMPERATURE = 'sensor_temperature',
-  SENSOR_HUMIDITY = 'sensor_humidity'
+  SENSOR_HUMIDITY = 'sensor_humidity',
 }
 
 export const TopicHeaderSub = 'friday/master/';

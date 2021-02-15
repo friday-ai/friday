@@ -22,7 +22,7 @@ import { AvailableConditions } from '../utils/constants';
   tableName: 'trigger',
   underscored: false,
 })
-export default class Trigger extends Model<Trigger> {
+export default class Trigger extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

@@ -12,7 +12,7 @@ describe('POST /api/v1/session/access_token', () => {
       .then((res) => {
         const { body } = res;
         expect(body).to.be.an('object');
-        expect(body).to.have.all.keys(
+        expect(body).to.contains.keys(
           ['id', 'refreshToken', 'revoked', 'validUntil', 'userId', 'user', 'accessToken'],
         );
         expect(body.revoked).to.equal(false);

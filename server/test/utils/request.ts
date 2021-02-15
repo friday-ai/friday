@@ -5,7 +5,7 @@ enum Methods {
   GET = 'get',
   POST = 'post',
   PATCH = 'patch',
-  DELETE = 'delete'
+  DELETE = 'delete',
 }
 
 const authenticatedRequest = (methode: Methods, url: string, token?: string) => {

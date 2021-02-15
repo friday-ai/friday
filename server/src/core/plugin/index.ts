@@ -27,7 +27,7 @@ export default class Plugin {
   public state: StateClass;
 
   constructor(masterId: string, docker: DockerClass, state: StateClass) {
-    this.masterId = masterId,
+    this.masterId = masterId;
     this.docker = docker;
     this.state = state;
   }

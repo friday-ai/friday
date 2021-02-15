@@ -13,7 +13,7 @@ export default async function restart(this: Docker, id: string): Promise<any> {
     }
 
     const container = await this.getContainer(id);
-    return container.restart();
+    return await container.restart();
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e, metadata: id,

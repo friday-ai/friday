@@ -37,23 +37,23 @@ describe('GET /api/v1/satellite', () => {
         expect(satellites).to.be.an('array');
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).to.be.an('object');
-          expect(satellite).to.have.all.keys(
+          expect(satellite).to.contains.keys(
             ['id', 'name', 'roomId', 'lastHeartbeat', 'room', 'state', 'variables', 'plugins'],
           );
           expect(satellite.room).to.be.an('object');
-          expect(satellite.room).to.have.all.keys(
+          expect(satellite.room).to.contains.keys(
             ['id', 'name', 'houseId'],
           );
           if (satellite.state !== null) {
             expect(satellite.state).to.be.an('object');
-            expect(satellite.state).to.have.all.keys(
+            expect(satellite.state).to.contains.keys(
               ['id', 'owner', 'ownerType', 'value'],
             );
           }
           if (satellite.variables !== null) {
             satellite.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.have.all.keys(
+              expect(variable).to.contains.keys(
                 ['id', 'key', 'value', 'owner', 'ownerType'],
               );
             });
@@ -62,7 +62,7 @@ describe('GET /api/v1/satellite', () => {
             expect(satellite.plugins).to.be.an('array');
             satellite.plugins!.forEach((plugin) => {
               expect(plugin).to.be.an('object');
-              expect(plugin).to.have.all.keys(
+              expect(plugin).to.contains.keys(
                 ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
               );
             });
@@ -82,11 +82,11 @@ describe('GET /api/v1/satellite', () => {
         expect(satellites).to.be.an('array');
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).to.be.an('object');
-          expect(satellite).to.have.all.keys(
+          expect(satellite).to.contains.keys(
             ['id', 'name', 'roomId', 'lastHeartbeat', 'room'],
           );
           expect(satellite.room).to.be.an('object');
-          expect(satellite.room).to.have.all.keys(
+          expect(satellite.room).to.contains.keys(
             ['id', 'name', 'houseId'],
           );
         });
@@ -104,12 +104,12 @@ describe('GET /api/v1/satellite', () => {
         expect(satellites).to.be.an('array');
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).to.be.an('object');
-          expect(satellite).to.have.all.keys(
+          expect(satellite).to.contains.keys(
             ['id', 'name', 'roomId', 'lastHeartbeat', 'state'],
           );
           if (satellite.state !== null) {
             expect(satellite.state).to.be.an('object');
-            expect(satellite.state).to.have.all.keys(
+            expect(satellite.state).to.contains.keys(
               ['id', 'owner', 'ownerType', 'value'],
             );
           }
@@ -128,13 +128,13 @@ describe('GET /api/v1/satellite', () => {
         expect(satellites).to.be.an('array');
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).to.be.an('object');
-          expect(satellite).to.have.all.keys(
+          expect(satellite).to.contains.keys(
             ['id', 'name', 'roomId', 'lastHeartbeat', 'variables'],
           );
           if (satellite.variables !== null) {
             satellite.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.have.all.keys(
+              expect(variable).to.contains.keys(
                 ['id', 'key', 'value', 'owner', 'ownerType'],
               );
             });
@@ -154,14 +154,14 @@ describe('GET /api/v1/satellite', () => {
         expect(satellites).to.be.an('array');
         satellites.forEach((satellite: SatelliteType) => {
           expect(satellite).to.be.an('object');
-          expect(satellite).to.have.all.keys(
+          expect(satellite).to.contains.keys(
             ['id', 'name', 'roomId', 'lastHeartbeat', 'plugins'],
           );
           if (satellite.plugins !== null) {
             expect(satellite.plugins).to.be.an('array');
             satellite.plugins!.forEach((plugin) => {
               expect(plugin).to.be.an('object');
-              expect(plugin).to.have.all.keys(
+              expect(plugin).to.contains.keys(
                 ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
               );
             });

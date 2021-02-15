@@ -23,7 +23,7 @@ import { isOwnerExisting } from '../utils/databaseValidation';
   tableName: 'action',
   underscored: false,
 })
-export default class Action extends Model<Action> {
+export default class Action extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

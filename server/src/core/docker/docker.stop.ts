@@ -13,7 +13,7 @@ export default async function stop(this: Docker, id: string): Promise<any> {
     }
 
     const container = await this.getContainer(id);
-    return container.stop();
+    return await container.stop();
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e, metadata: id,

@@ -13,6 +13,7 @@ describe('GET /api/v1/plugin', () => {
         expect(res.body).to.be.an('array');
         assert.deepEqual(res.body, [{
           id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+          dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
           name: 'Zwave',
           version: '1.2.0',
           url: 'fake url',
@@ -22,6 +23,7 @@ describe('GET /api/v1/plugin', () => {
         },
         {
           id: '88b48273-15e6-4729-9199-0682677475f4',
+          dockerId: 'cceb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
           name: 'Xiaomi',
           version: '1.0.0',
           url: 'fake url',
@@ -31,6 +33,7 @@ describe('GET /api/v1/plugin', () => {
         },
         {
           id: '3a6b4974-6159-4792-a327-c3656f8bb9af',
+          dockerId: 'dceb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
           name: 'Philips Hue',
           version: '1.5.0',
           url: 'fake url',
@@ -53,19 +56,19 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.have.all.keys(
+          expect(plugin).to.contains.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
           );
           if (plugin.state !== null) {
             expect(plugin.state).to.be.an('object');
-            expect(plugin.state).to.have.all.keys(
+            expect(plugin.state).to.contains.keys(
               ['id', 'owner', 'ownerType', 'value'],
             );
           }
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
-            expect(plugin.satellite).to.have.all.keys(
+            expect(plugin.satellite).to.contains.keys(
               ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           }
@@ -74,7 +77,7 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.have.all.keys(
+              expect(device).to.contains.keys(
                 ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
               );
             });
@@ -84,7 +87,7 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.have.all.keys(
+              expect(variable).to.contains.keys(
                 ['id', 'key', 'value', 'owner', 'ownerType'],
               );
             });
@@ -104,19 +107,19 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.have.all.keys(
+          expect(plugin).to.contains.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
           );
           if (plugin.state !== null) {
             expect(plugin.state).to.be.an('object');
-            expect(plugin.state).to.have.all.keys(
+            expect(plugin.state).to.contains.keys(
               ['id', 'owner', 'ownerType', 'value'],
             );
           }
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
-            expect(plugin.satellite).to.have.all.keys(
+            expect(plugin.satellite).to.contains.keys(
               ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           }
@@ -125,7 +128,7 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.have.all.keys(
+              expect(device).to.contains.keys(
                 ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
               );
             });
@@ -135,7 +138,7 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.have.all.keys(
+              expect(variable).to.contains.keys(
                 ['id', 'key', 'value', 'owner', 'ownerType'],
               );
             });
@@ -155,19 +158,19 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.have.all.keys(
+          expect(plugin).to.contains.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
           );
           if (plugin.state !== null) {
             expect(plugin.state).to.be.an('object');
-            expect(plugin.state).to.have.all.keys(
+            expect(plugin.state).to.contains.keys(
               ['id', 'owner', 'ownerType', 'value'],
             );
           }
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
-            expect(plugin.satellite).to.have.all.keys(
+            expect(plugin.satellite).to.contains.keys(
               ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           }
@@ -176,7 +179,7 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.have.all.keys(
+              expect(device).to.contains.keys(
                 ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
               );
             });
@@ -186,7 +189,7 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.have.all.keys(
+              expect(variable).to.contains.keys(
                 ['id', 'key', 'value', 'owner', 'ownerType'],
               );
             });
@@ -206,13 +209,13 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.have.all.keys(
+          expect(plugin).to.contains.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'lastHeartbeat'],
           );
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
-            expect(plugin.satellite).to.have.all.keys(
+            expect(plugin.satellite).to.contains.keys(
               ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           }
@@ -231,12 +234,12 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.have.all.keys(
+          expect(plugin).to.contains.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state', 'lastHeartbeat'],
           );
           if (plugin.state !== null) {
             expect(plugin.state).to.be.an('object');
-            expect(plugin.state).to.have.all.keys(
+            expect(plugin.state).to.contains.keys(
               ['id', 'owner', 'ownerType', 'value'],
             );
           }
@@ -255,7 +258,7 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.have.all.keys(
+          expect(plugin).to.contains.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices', 'lastHeartbeat'],
           );
 
@@ -263,7 +266,7 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.have.all.keys(
+              expect(device).to.contains.keys(
                 ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
               );
             });
@@ -283,14 +286,14 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.have.all.keys(
+          expect(plugin).to.contains.keys(
             ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables', 'lastHeartbeat'],
           );
           if (plugin.variables !== null) {
             expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.have.all.keys(
+              expect(variable).to.contains.keys(
                 ['id', 'key', 'value', 'owner', 'ownerType'],
               );
             });

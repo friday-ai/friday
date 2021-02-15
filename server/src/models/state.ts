@@ -22,7 +22,7 @@ import { isOwnerExisting } from '../utils/databaseValidation';
   tableName: 'state',
   underscored: false,
 })
-export default class State extends Model<State> {
+export default class State extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

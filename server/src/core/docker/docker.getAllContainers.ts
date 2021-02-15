@@ -14,7 +14,7 @@ export default async function getAllContainers(this: Docker): Promise<ContainerI
       throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'Friday not running on Docker' });
     }
 
-    return this.dockerode.listContainers({ all: true });
+    return await this.dockerode.listContainers({ all: true });
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e,
