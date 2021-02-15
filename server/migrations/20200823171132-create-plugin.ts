@@ -10,6 +10,11 @@ module.exports = {
         primaryKey: true,
         type: DataType.UUIDV4,
       },
+      dockerId: {
+        unique: true,
+        allowNull: false,
+        type: DataType.STRING,
+      },
       name: {
         unique: true,
         allowNull: false,
@@ -42,6 +47,10 @@ module.exports = {
         type: DataType.DATE,
       },
       updated_at: {
+        allowNull: false,
+        type: DataType.DATE,
+      },
+      lastHeartbeat: {
         allowNull: false,
         type: DataType.DATE,
       },

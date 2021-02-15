@@ -2,17 +2,22 @@ version: '3'
 
 services:
   friday:
-    container_name: Friday
-    build:
-      context: ./
-      args:
-        - NODE_ENV=${NODE_ENV}
+    image: fridayai/friday:edge
     restart: always
-    volumes:
-      - .:/src
-      - /src/node_modules
-      - /src/client/node_modules
-      - /src/server/node_modules
     ports:
       - "1443:1443"
       - "1444:1444"
+  broker:
+    image: eclipse-mosquitto:latest
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    environment:
+      - TZ=Europe/Paris
+  watchtower:
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup

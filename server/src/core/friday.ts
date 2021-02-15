@@ -2,6 +2,7 @@ import * as database from '../config/database';
 import Action from './action';
 import Device from './device';
 import House from './house';
+import Docker from './docker';
 import Plugin from './plugin';
 import Room from './room';
 import Satellite from './satellite';
@@ -27,13 +28,14 @@ import error from '../utils/errors/coreError';
  */
 export default class Friday {
   readonly secretJwt: string = generateJwtSecret();
+  public masterId: string = '';
 
   public event = new Event();
   public scheduler = new Scheduler(this.event, jobs);
   public action = new Action();
   public device = new Device();
   public house = new House();
-  public plugin = new Plugin();
+  public docker = new Docker();
   public room = new Room();
   public satellite = new Satellite();
   public scene = new Scene();
@@ -43,6 +45,7 @@ export default class Friday {
   public user = new User();
   public variable = new Variable();
   public state = new State(this.event, this.variable);
+  public plugin = new Plugin(this.masterId, this.docker, this.state);
   public constants = Constants;
 
   private system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.scheduler, database);
@@ -53,7 +56,7 @@ export default class Friday {
   async start() {
     try {
       await database.init();
-      await this.system.start();
+      this.masterId = await this.system.start();
     } catch (e) {
       throw error(e);
     }

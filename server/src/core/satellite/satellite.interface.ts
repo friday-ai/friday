@@ -14,4 +14,5 @@ export default interface SatelliteType {
   plugins?: Array<PluginType[]>;
   variables?: Array<VariableType[]>;
   state?: StateType;
+  lastHeartbeat?: Date;
 }

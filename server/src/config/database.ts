@@ -1,10 +1,11 @@
 import { Sequelize } from 'sequelize-typescript';
 import Umzug from 'umzug';
 import path from 'path';
+import { KVArr } from '../utils/interfaces';
 
 const env = process.env.NODE_ENV || 'production';
 
-const DATABASE_NAME: {[x: string]: string} = {
+const DATABASE_NAME: KVArr<string> = {
   production: './friday.db',
   development: './friday-development.db',
   test: ':memory:',

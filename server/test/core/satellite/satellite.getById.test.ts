@@ -12,6 +12,7 @@ describe('Satellite.getById', () => {
       id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
       name: 'Main satellite',
       roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3',
+      lastHeartbeat: new Date('2020-04-08T22:00:00.000Z'),
     });
   });
 
@@ -23,6 +24,7 @@ describe('Satellite.getById', () => {
     expect(satelliteReturned).to.have.property('id');
     expect(satelliteReturned).to.have.property('name');
     expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('lastHeartbeat');
     expect(satelliteReturned).to.have.property('room');
     expect(satelliteReturned).to.have.property('state');
     expect(satelliteReturned).to.have.property('variables');
@@ -76,6 +78,7 @@ describe('Satellite.getById', () => {
     expect(satelliteReturned).to.have.property('id');
     expect(satelliteReturned).to.have.property('name');
     expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('lastHeartbeat');
     expect(satelliteReturned).to.have.property('room');
 
     expect(satelliteReturned.room).to.be.an('object');
@@ -92,6 +95,7 @@ describe('Satellite.getById', () => {
     expect(satelliteReturned).to.have.property('id');
     expect(satelliteReturned).to.have.property('name');
     expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('lastHeartbeat');
     expect(satelliteReturned).to.have.property('state');
 
     // TODO: The state cannot must be null
@@ -112,6 +116,7 @@ describe('Satellite.getById', () => {
     expect(satelliteReturned).to.have.property('id');
     expect(satelliteReturned).to.have.property('name');
     expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('lastHeartbeat');
     expect(satelliteReturned).to.have.property('variables');
 
     if (satelliteReturned.variables !== null) {
@@ -135,6 +140,7 @@ describe('Satellite.getById', () => {
     expect(satelliteReturned).to.have.property('id');
     expect(satelliteReturned).to.have.property('name');
     expect(satelliteReturned).to.have.property('roomId');
+    expect(satelliteReturned).to.have.property('lastHeartbeat');
     expect(satelliteReturned).to.have.property('plugins');
 
     if (satelliteReturned.plugins !== null) {

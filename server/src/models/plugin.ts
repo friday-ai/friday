@@ -1,6 +1,6 @@
 import {
   Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default, Is,
+  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default, Is, IsDate,
 } from 'sequelize-typescript';
 
 import Satellite from './satellite';
@@ -14,27 +14,27 @@ import { DatabaseValidationError } from '../utils/errors/coreError';
  * Plugin model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+  attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [Satellite, State, Device, Variable],
   },
   withSatellite: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [Satellite],
   },
   withState: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [State],
   },
   withDevices: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [Device],
   },
   withVariables: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [Variable],
   },
 }))
@@ -66,6 +66,12 @@ export default class Plugin extends Model<Plugin> {
   id!: string;
 
   @AllowNull(false)
+  @Unique
+  @NotEmpty
+  @Column
+  dockerId!: string;
+
+  @AllowNull(false)
   @NotEmpty
   @Column
   name!: string;
@@ -88,6 +94,13 @@ export default class Plugin extends Model<Plugin> {
   @Is('satelliteId', (value) => isOwnerExisting(value, ['satellite']))
   @Column(DataType.UUIDV4)
   satelliteId!: string;
+
+  @AllowNull(false)
+  @IsDate
+  @NotEmpty
+  @Default(new Date())
+  @Column({ type: DataType.DATE })
+  lastHeartbeat!: Date;
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'satelliteId',

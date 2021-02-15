@@ -15,6 +15,7 @@ describe('GET /api/v1/satellite/:id', () => {
           id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
           name: 'Main satellite',
           roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3',
+          lastHeartbeat: '2020-04-08T22:00:00.000Z',
         });
       });
   });
@@ -29,7 +30,7 @@ describe('GET /api/v1/satellite/:id', () => {
         const satellite = res.body;
         expect(satellite).to.be.an('object');
         expect(satellite).to.have.all.keys(
-          ['id', 'name', 'roomId', 'room', 'state', 'variables', 'plugins'],
+          ['id', 'name', 'roomId', 'lastHeartbeat', 'room', 'state', 'variables', 'plugins'],
         );
         expect(satellite.room).to.be.an('object');
         expect(satellite.room).to.have.all.keys(
@@ -54,7 +55,7 @@ describe('GET /api/v1/satellite/:id', () => {
           satellite.plugins!.forEach((plugin: PluginType) => {
             expect(plugin).to.be.an('object');
             expect(plugin).to.have.all.keys(
-              ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+              ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
             );
           });
         }
@@ -71,7 +72,7 @@ describe('GET /api/v1/satellite/:id', () => {
         const satellite = res.body;
         expect(satellite).to.be.an('object');
         expect(satellite).to.have.all.keys(
-          ['id', 'name', 'roomId', 'room'],
+          ['id', 'name', 'roomId', 'lastHeartbeat', 'room'],
         );
         expect(satellite.room).to.be.an('object');
         expect(satellite.room).to.have.all.keys(
@@ -90,7 +91,7 @@ describe('GET /api/v1/satellite/:id', () => {
         const satellite = res.body;
         expect(satellite).to.be.an('object');
         expect(satellite).to.have.all.keys(
-          ['id', 'name', 'roomId', 'state'],
+          ['id', 'name', 'roomId', 'lastHeartbeat', 'state'],
         );
         if (satellite.state !== null) {
           expect(satellite.state).to.be.an('object');
@@ -111,7 +112,7 @@ describe('GET /api/v1/satellite/:id', () => {
         const satellite = res.body;
         expect(satellite).to.be.an('object');
         expect(satellite).to.have.all.keys(
-          ['id', 'name', 'roomId', 'variables'],
+          ['id', 'name', 'roomId', 'lastHeartbeat', 'variables'],
         );
         if (satellite.variables !== null) {
           satellite.variables!.forEach((variable: VariableType) => {
@@ -134,14 +135,14 @@ describe('GET /api/v1/satellite/:id', () => {
         const satellite = res.body;
         expect(satellite).to.be.an('object');
         expect(satellite).to.have.all.keys(
-          ['id', 'name', 'roomId', 'plugins'],
+          ['id', 'name', 'roomId', 'lastHeartbeat', 'plugins'],
         );
         if (satellite.plugins !== null) {
           expect(satellite.plugins).to.be.an('array');
           satellite.plugins!.forEach((plugin: PluginType) => {
             expect(plugin).to.be.an('object');
             expect(plugin).to.have.all.keys(
-              ['id', 'name', 'version', 'url', 'enabled', 'satelliteId'],
+              ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
             );
           });
         }

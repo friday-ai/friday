@@ -10,6 +10,14 @@ import notFoundMiddleware from './middlewares/notFoundMiddleware';
 import errorMiddleware from './middlewares/errorMiddleware';
 import WebsocketServer from './websocket/index';
 import Friday from '../core/friday';
+import MqttServer from './mqtt';
+import { MqttOptions } from '../utils/interfaces';
+
+const defaultMqttOptions: MqttOptions = {
+  port: 1883,
+  host: 'localhost',
+  protocol: 'mqtt',
+};
 
 /**
  * Server class
@@ -17,11 +25,14 @@ import Friday from '../core/friday';
 export default class Server {
   public server!: any;
   public websocketServer!: any;
+  public mqttServer!: MqttServer;
   readonly port: number;
+  readonly mqttOptions: MqttOptions;
   readonly friday: any;
 
-  constructor(port: number, friday: Friday) {
+  constructor(port: number, friday: Friday, mqttOptions?: MqttOptions) {
     this.port = port;
+    this.mqttOptions = mqttOptions || defaultMqttOptions;
     this.friday = friday;
   }
 
@@ -29,7 +40,7 @@ export default class Server {
    * Start function of server
    * @memberof Server
    */
-  start() {
+  async start() {
     const app = express();
     const logger = new Log();
 
@@ -63,6 +74,10 @@ export default class Server {
 
     // start WebSocket server
     this.websocketServer.start();
+
+    // initialize and start the Mqtt server instance
+    this.mqttServer = new MqttServer(this.friday);
+    await this.mqttServer.start(this.mqttOptions);
 
     this.server.listen(this.port, () => {
       logger.title('Friday server initialized !');

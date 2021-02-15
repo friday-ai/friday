@@ -110,7 +110,10 @@ export enum EventsType {
   // Websocket events
   WEBSOCKET_SEND = 'websocket.send',
   WEBSOCKET_SEND_ALL = 'websocket.send.all',
-  WEBSOCKET_SEND_ADMIN = 'websocket.send.admin'
+  WEBSOCKET_SEND_ADMIN = 'websocket.send.admin',
+  // Mqtt events
+  MQTT_PUBLISH = 'mqtt.publish',
+  MQTT_PUBLISH_ALL = 'mqtt.publish.all',
 }
 
 export enum WebsocketMessageTypes {
@@ -125,6 +128,14 @@ export enum WebsocketMessageTypes {
   MESSAGE_SEND = 'message.send',
   MESSAGE_SEND_ALL = 'message.send.all',
   MESSAGE_SEND_ADMIN = 'message.send.admin'
+}
+
+export enum MqttMessageTypes {
+  // Mqtt
+  MQTT_CONNECTED = 'mqtt.connected',
+  MQTT_ERROR = 'mqtt.error',
+  MESSAGE_SEND = 'message.send',
+  MESSAGE_SEND_ALL = 'message.send.all',
 }
 
 export enum SystemVariablesNames {
@@ -146,4 +157,27 @@ export enum AvailableSubTypeOfDevice {
   LIGHT_RGBW = 'light_rgbw',
   SENSOR_TEMPERATURE = 'sensor_temperature',
   SENSOR_HUMIDITY = 'sensor_humidity'
+}
+
+export const TopicHeaderSub = 'friday/master/';
+export const TopicHeaderPub = 'friday/satellite/';
+
+export enum TopicToSubscribe {
+  'device/destroy',
+  'device/set',
+  'plugin/discoverme',
+  'plugin/heartbeat',
+  'plugin/init',
+  'satellite/discoverme',
+  'satellite/heartbeat',
+  'satellite/init',
+  'state/set',
+}
+
+export enum TopicsTypes {
+  PLUGIN_DELETE = 'plugin/delete',
+  PLUGIN_EXEC = 'plugin/exec',
+  PLUGIN_INSTALL = 'plugin/install',
+  PLUGIN_RESTART = 'plugin/restart',
+  PLUGIN_STOP = 'plugin/stop',
 }

@@ -8,6 +8,7 @@ import DeviceType from '../device/device.interface';
  */
 export default interface PluginType {
   id?: string;
+  dockerId?: string;
   name?: string;
   version?: string;
   url?: string;
@@ -17,4 +18,5 @@ export default interface PluginType {
   state?: StateType;
   devices?: Array<DeviceType[]>;
   variables?: Array<VariableType[]>;
+  lastHeartbeat?: Date;
 }

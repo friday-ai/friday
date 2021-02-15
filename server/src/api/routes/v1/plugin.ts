@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import {
-  FridayRouter, Get, Patch, Post, Delete,
+  FridayRouter, Get, Patch, Delete,
 } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
@@ -39,6 +39,7 @@ export default class PluginRouter {
    *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
    * },
    */
+  /*
   @Post({
     path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'plugin',
   })
@@ -46,6 +47,8 @@ export default class PluginRouter {
     const plugin = await this.friday.plugin.create(req.body);
     res.status(201).json(plugin);
   };
+
+   */
 
   /**
    * Update a plugin

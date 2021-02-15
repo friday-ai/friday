@@ -54,7 +54,7 @@ describe('GET /api/v1/room/:id', () => {
           room.satellites!.forEach((satellite: SatelliteType) => {
             expect(satellite).to.be.an('object');
             expect(satellite).to.have.all.keys(
-              ['id', 'name', 'roomId'],
+              ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           });
         }
@@ -141,7 +141,7 @@ describe('GET /api/v1/room/:id', () => {
           room.satellites!.forEach((satellite: SatelliteType) => {
             expect(satellite).to.be.an('object');
             expect(satellite).to.have.all.keys(
-              ['id', 'name', 'roomId'],
+              ['id', 'name', 'roomId', 'lastHeartbeat'],
             );
           });
         }
