@@ -10,6 +10,11 @@ module.exports = {
         primaryKey: true,
         type: DataType.UUIDV4,
       },
+      dockerId: {
+        unique: true,
+        allowNull: false,
+        type: DataType.STRING,
+      },
       name: {
         unique: true,
         allowNull: false,

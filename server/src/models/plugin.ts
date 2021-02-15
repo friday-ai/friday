@@ -14,27 +14,27 @@ import { DatabaseValidationError } from '../utils/errors/coreError';
  * Plugin model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+  attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [Satellite, State, Device, Variable],
   },
   withSatellite: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [Satellite],
   },
   withState: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [State],
   },
   withDevices: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [Device],
   },
   withVariables: {
-    attributes: ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
     include: [Variable],
   },
 }))
@@ -64,6 +64,12 @@ export default class Plugin extends Model<Plugin> {
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
   id!: string;
+
+  @AllowNull(false)
+  @Unique
+  @NotEmpty
+  @Column
+  dockerId!: string;
 
   @AllowNull(false)
   @NotEmpty

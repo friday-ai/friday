@@ -1,12 +1,13 @@
 import Plugin from '../../models/plugin';
 import PluginType from './plugin.interface';
+import PluginClass from './index';
 import error from '../../utils/errors/coreError';
-import setItemState from '../../utils/itemState';
 import { AvailableState, StateOwner } from '../../utils/constants';
 
 /**
  * Create a plugin.
  * @param {PluginType} plugin - A plugin object.
+ * @param {AvailableState} state - A state of plugin
  * @returns {Promise<PluginType>} Resolve with created plugin.
  * @example
  * ````
@@ -17,19 +18,20 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  *    url: 'sample url',
  *    enabled: true,
  *    satelliteId: '384f3c02-0eec-4497-8a83-c900f1df4db5'
- * });
+ * }, AvailableState.PLUGIN_RUNNING);
  * ````
  */
-export default async function create(plugin: PluginType): Promise<PluginType> {
+export default async function create(this: PluginClass, plugin: PluginType, state: AvailableState): Promise<PluginType> {
   try {
     const createdPlugin = await Plugin.create(plugin);
     const pluginToReturn = <PluginType>createdPlugin.get({ plain: true });
-    setItemState(
-      pluginToReturn.id!,
-      pluginToReturn.id!,
-      StateOwner.PLUGIN,
-      AvailableState.PLUGIN_WAITING_CONFIGURATION,
-    );
+
+    await this.state.set({
+      owner: plugin.id!,
+      ownerType: StateOwner.PLUGIN,
+      value: state,
+    });
+
     return pluginToReturn;
   } catch (e) {
     throw error({

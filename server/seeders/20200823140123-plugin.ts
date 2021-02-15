@@ -4,6 +4,7 @@ module.exports = {
   up: (queryInterface: QueryInterface) => queryInterface.bulkInsert('plugin', [
     {
       id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+      dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
       name: 'Zwave',
       version: '1.2.0',
       url: 'fake url',
@@ -15,6 +16,7 @@ module.exports = {
     },
     {
       id: '88b48273-15e6-4729-9199-0682677475f4',
+      dockerId: 'cceb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
       name: 'Xiaomi',
       version: '1.0.0',
       url: 'fake url',
@@ -26,6 +28,7 @@ module.exports = {
     },
     {
       id: '3a6b4974-6159-4792-a327-c3656f8bb9af',
+      dockerId: 'dceb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
       name: 'Philips Hue',
       version: '1.5.0',
       url: 'fake url',

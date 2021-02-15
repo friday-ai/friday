@@ -85,3 +85,12 @@ export interface MqttMessagePayload {
   message: string;
   receiver?: string;
 }
+
+/**
+ * Interface for plugin container
+ */
+export interface PluginInstallOptions {
+  name: string,
+  repoTag: string;
+  version: string;
+}
