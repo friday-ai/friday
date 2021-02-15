@@ -33,7 +33,7 @@ import Session from './session';
   tableName: 'user',
   underscored: false,
 })
-export default class User extends Model<User> {
+export default class User extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

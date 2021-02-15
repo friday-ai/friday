@@ -56,7 +56,7 @@ import { DatabaseValidationError } from '../utils/errors/coreError';
     },
   },
 })
-export default class Plugin extends Model<Plugin> {
+export default class Plugin extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

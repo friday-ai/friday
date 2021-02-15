@@ -45,23 +45,23 @@ describe('GET /api/v1/room', () => {
         expect(rooms).to.be.an('array');
         rooms.forEach((room: RoomType) => {
           expect(room).to.be.an('object');
-          expect(room).to.have.all.keys(
+          expect(room).to.contains.keys(
             ['id', 'name', 'houseId', 'house', 'devices', 'satellites', 'state'],
           );
           expect(room.house).to.be.an('object');
-          expect(room.house).to.have.all.keys(
+          expect(room.house).to.contains.keys(
             ['id', 'name', 'latitude', 'longitude'],
           );
           if (room.state !== null) {
             expect(room.state).to.be.an('object');
-            expect(room.state).to.have.all.keys(
+            expect(room.state).to.contains.keys(
               ['id', 'owner', 'ownerType', 'value'],
             );
           }
           if (room.devices !== null) {
             room.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.have.all.keys(
+              expect(device).to.contains.keys(
                 ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
               );
             });
@@ -70,7 +70,7 @@ describe('GET /api/v1/room', () => {
             expect(room.satellites).to.be.an('array');
             room.satellites!.forEach((satellite) => {
               expect(satellite).to.be.an('object');
-              expect(satellite).to.have.all.keys(
+              expect(satellite).to.contains.keys(
                 ['id', 'name', 'roomId', 'lastHeartbeat'],
               );
             });
@@ -90,11 +90,11 @@ describe('GET /api/v1/room', () => {
         expect(rooms).to.be.an('array');
         rooms.forEach((room: RoomType) => {
           expect(room).to.be.an('object');
-          expect(room).to.have.all.keys(
+          expect(room).to.contains.keys(
             ['id', 'name', 'houseId', 'house'],
           );
           expect(room.house).to.be.an('object');
-          expect(room.house).to.have.all.keys(
+          expect(room.house).to.contains.keys(
             ['id', 'name', 'latitude', 'longitude'],
           );
         });
@@ -112,12 +112,12 @@ describe('GET /api/v1/room', () => {
         expect(rooms).to.be.an('array');
         rooms.forEach((room: RoomType) => {
           expect(room).to.be.an('object');
-          expect(room).to.have.all.keys(
+          expect(room).to.contains.keys(
             ['id', 'name', 'houseId', 'state'],
           );
           if (room.state !== null) {
             expect(room.state).to.be.an('object');
-            expect(room.state).to.have.all.keys(
+            expect(room.state).to.contains.keys(
               ['id', 'owner', 'ownerType', 'value'],
             );
           }
@@ -136,13 +136,13 @@ describe('GET /api/v1/room', () => {
         expect(rooms).to.be.an('array');
         rooms.forEach((room: RoomType) => {
           expect(room).to.be.an('object');
-          expect(room).to.have.all.keys(
+          expect(room).to.contains.keys(
             ['id', 'name', 'houseId', 'devices'],
           );
           if (room.devices !== null) {
             room.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.have.all.keys(
+              expect(device).to.contains.keys(
                 ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
               );
             });
@@ -162,14 +162,14 @@ describe('GET /api/v1/room', () => {
         expect(rooms).to.be.an('array');
         rooms.forEach((room: RoomType) => {
           expect(room).to.be.an('object');
-          expect(room).to.have.all.keys(
+          expect(room).to.contains.keys(
             ['id', 'name', 'houseId', 'satellites'],
           );
           if (room.satellites !== null) {
             expect(room.satellites).to.be.an('array');
             room.satellites!.forEach((satellite) => {
               expect(satellite).to.be.an('object');
-              expect(satellite).to.have.all.keys(
+              expect(satellite).to.contains.keys(
                 ['id', 'name', 'roomId', 'lastHeartbeat'],
               );
             });

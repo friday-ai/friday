@@ -30,10 +30,10 @@ describe('GET /api/v1/action/:id', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.all.keys(
+        expect(res.body).to.contains.keys(
           ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId', 'scene'],
         );
-        expect(res.body.scene).to.have.all.keys(
+        expect(res.body.scene).to.contains.keys(
           ['id', 'name', 'description', 'triggerId'],
         );
       });

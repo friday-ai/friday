@@ -31,19 +31,19 @@ describe('GET /api/v1/user/:id', () => {
       .then((res) => {
         const user = res.body;
         expect(user).to.be.an('object');
-        expect(user).to.have.all.keys(
+        expect(user).to.contains.keys(
           ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state', 'variables'],
         );
         if (user.state !== null) {
           expect(user.state).to.be.an('object');
-          expect(user.state).to.have.all.keys(
+          expect(user.state).to.contains.keys(
             ['id', 'owner', 'ownerType', 'value'],
           );
         }
         expect(user.variables).to.be.an('array');
         user.variables!.forEach((variable: VariableType) => {
           expect(variable).to.be.an('object');
-          expect(variable).to.have.all.keys(
+          expect(variable).to.contains.keys(
             ['id', 'key', 'value', 'owner', 'ownerType'],
           );
         });
@@ -61,12 +61,12 @@ describe('GET /api/v1/user/:id', () => {
       .then((res) => {
         const user = res.body;
         expect(user).to.be.an('object');
-        expect(user).to.have.all.keys(
+        expect(user).to.contains.keys(
           ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state'],
         );
         if (user.state !== null) {
           expect(user.state).to.be.an('object');
-          expect(user.state).to.have.all.keys(
+          expect(user.state).to.contains.keys(
             ['id', 'owner', 'ownerType', 'value'],
           );
         }
@@ -84,13 +84,13 @@ describe('GET /api/v1/user/:id', () => {
       .then((res) => {
         const user = res.body;
         expect(user).to.be.an('object');
-        expect(user).to.have.all.keys(
+        expect(user).to.contains.keys(
           ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'variables'],
         );
         expect(user.variables).to.be.an('array');
         user.variables!.forEach((variable: VariableType) => {
           expect(variable).to.be.an('object');
-          expect(variable).to.have.all.keys(
+          expect(variable).to.contains.keys(
             ['id', 'key', 'value', 'owner', 'ownerType'],
           );
         });

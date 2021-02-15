@@ -45,8 +45,6 @@ describe('Plugin.destroy', () => {
 
   it('should destroy a plugin', async function () {
     this.timeout(30000);
-    const updatedPlugin = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
-    console.log(updatedPlugin);
     await plugin.destroy('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
   });
 

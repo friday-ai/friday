@@ -31,7 +31,7 @@ import { isOwnerExisting } from '../utils/databaseValidation';
   tableName: 'scene',
   underscored: false,
 })
-export default class Scene extends Model<Scene> {
+export default class Scene extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

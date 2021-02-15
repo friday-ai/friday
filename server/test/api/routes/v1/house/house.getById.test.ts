@@ -28,13 +28,13 @@ describe('GET /api/v1/house/:id', () => {
       .then((res) => {
         const house = res.body;
         expect(house).to.be.an('object');
-        expect(house).to.have.all.keys(
+        expect(house).to.contains.keys(
           ['id', 'name', 'latitude', 'longitude', 'rooms', 'state'],
         );
 
         if (house.state !== null) {
           expect(house.state).to.be.an('object');
-          expect(house.state).to.have.all.keys(
+          expect(house.state).to.contains.keys(
             ['id', 'owner', 'ownerType', 'value'],
           );
         }
@@ -43,7 +43,7 @@ describe('GET /api/v1/house/:id', () => {
           expect(house.rooms).to.be.an('array');
           house.rooms!.forEach((room: RoomType) => {
             expect(room).to.be.an('object');
-            expect(room).to.have.all.keys(
+            expect(room).to.contains.keys(
               ['id', 'name', 'houseId'],
             );
           });
@@ -60,13 +60,13 @@ describe('GET /api/v1/house/:id', () => {
       .then((res) => {
         const house = res.body;
         expect(house).to.be.an('object');
-        expect(house).to.have.all.keys(
+        expect(house).to.contains.keys(
           ['id', 'name', 'latitude', 'longitude', 'state'],
         );
 
         if (house.state !== null) {
           expect(house.state).to.be.an('object');
-          expect(house.state).to.have.all.keys(
+          expect(house.state).to.contains.keys(
             ['id', 'owner', 'ownerType', 'value'],
           );
         }
@@ -82,7 +82,7 @@ describe('GET /api/v1/house/:id', () => {
       .then((res) => {
         const house = res.body;
         expect(house).to.be.an('object');
-        expect(house).to.have.all.keys(
+        expect(house).to.contains.keys(
           ['id', 'name', 'latitude', 'longitude', 'rooms'],
         );
 
@@ -90,7 +90,7 @@ describe('GET /api/v1/house/:id', () => {
           expect(house.rooms).to.be.an('array');
           house.rooms!.forEach((room: RoomType) => {
             expect(room).to.be.an('object');
-            expect(room).to.have.all.keys(
+            expect(room).to.contains.keys(
               ['id', 'name', 'houseId'],
             );
           });

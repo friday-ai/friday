@@ -31,17 +31,17 @@ describe('GET /api/v1/scene', () => {
         expect(scenes).to.be.an('array');
         scenes.forEach((scene: SceneType) => {
           expect(scene).to.be.an('object');
-          expect(scene).to.have.all.keys(
+          expect(scene).to.contains.keys(
             ['id', 'name', 'description', 'triggerId', 'trigger', 'actions'],
           );
           expect(scene.trigger).to.be.an('object');
-          expect(scene.trigger).to.have.all.keys(
+          expect(scene.trigger).to.contains.keys(
             ['id', 'name', 'description', 'type', 'rules'],
           );
           expect(scene.actions).to.be.an('array');
           if (scene.actions != null) {
             scene.actions!.forEach((action) => {
-              expect(action).to.have.all.keys(
+              expect(action).to.contains.keys(
                 ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
               );
             });
@@ -61,11 +61,11 @@ describe('GET /api/v1/scene', () => {
         expect(scenes).to.be.an('array');
         scenes.forEach((scene: SceneType) => {
           expect(scene).to.be.an('object');
-          expect(scene).to.have.all.keys(
+          expect(scene).to.contains.keys(
             ['id', 'name', 'description', 'triggerId', 'trigger'],
           );
           expect(scene.trigger).to.be.an('object');
-          expect(scene.trigger).to.have.all.keys(
+          expect(scene.trigger).to.contains.keys(
             ['id', 'name', 'description', 'type', 'rules'],
           );
         });
@@ -83,13 +83,13 @@ describe('GET /api/v1/scene', () => {
         expect(scenes).to.be.an('array');
         scenes.forEach((scene: SceneType) => {
           expect(scene).to.be.an('object');
-          expect(scene).to.have.all.keys(
+          expect(scene).to.contains.keys(
             ['id', 'name', 'description', 'triggerId', 'actions'],
           );
           expect(scene.actions).to.be.an('array');
           if (scene.actions != null) {
             scene.actions!.forEach((action) => {
-              expect(action).to.have.all.keys(
+              expect(action).to.contains.keys(
                 ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
               );
             });

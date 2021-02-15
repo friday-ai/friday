@@ -32,7 +32,7 @@ describe('GET /api/v1/device/:id', () => {
       .then((res) => {
         const device = res.body;
         expect(device).to.be.an('object');
-        expect(device).to.have.all.keys(
+        expect(device).to.contains.keys(
           ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room', 'plugin', 'state'],
         );
         if (device.state !== null) {
@@ -69,7 +69,7 @@ describe('GET /api/v1/device/:id', () => {
       .then((res) => {
         const device = res.body;
         expect(device).to.be.an('object');
-        expect(device).to.have.all.keys(
+        expect(device).to.contains.keys(
           ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'state'],
         );
         if (device.state !== null) {
@@ -91,7 +91,7 @@ describe('GET /api/v1/device/:id', () => {
       .then((res) => {
         const device = res.body;
         expect(device).to.be.an('object');
-        expect(device).to.have.all.keys(
+        expect(device).to.contains.keys(
           ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'room'],
         );
 
@@ -111,7 +111,7 @@ describe('GET /api/v1/device/:id', () => {
       .then((res) => {
         const device = res.body;
         expect(device).to.be.an('object');
-        expect(device).to.have.all.keys(
+        expect(device).to.contains.keys(
           ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId', 'plugin'],
         );
 

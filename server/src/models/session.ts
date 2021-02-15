@@ -22,7 +22,7 @@ import { isOwnerExisting } from '../utils/databaseValidation';
   tableName: 'session',
   underscored: false,
 })
-export default class Session extends Model<Session> {
+export default class Session extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

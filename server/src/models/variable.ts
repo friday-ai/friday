@@ -19,7 +19,7 @@ import { isOwnerExisting } from '../utils/databaseValidation';
   tableName: 'variable',
   underscored: false,
 })
-export default class Variable extends Model<Variable> {
+export default class Variable extends Model {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey

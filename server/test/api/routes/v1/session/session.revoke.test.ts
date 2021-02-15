@@ -11,7 +11,7 @@ describe('PATCH /api/v1/session/revoke/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).to.have.all.keys(
+        expect(res.body).to.contains.keys(
           ['id', 'refreshToken', 'revoked', 'validUntil', 'userId'],
         );
         expect(res.body.revoked).to.equal(true);

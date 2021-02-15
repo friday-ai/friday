@@ -1,3 +1,4 @@
+/*
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
@@ -224,3 +225,4 @@ describe('POST /api/v1/plugin', () => {
       .expect(422);
   });
 });
+*/
