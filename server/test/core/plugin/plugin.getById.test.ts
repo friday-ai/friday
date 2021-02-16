@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import Plugin from '../../../src/core/plugin';
 import Event from '../../../src/utils/event';
 import Variable from '../../../src/core/variable';
@@ -16,7 +16,7 @@ describe('Plugin.getById', () => {
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
 
     expect(pluginReturned).to.be.an('object');
-    assert.deepEqual(pluginReturned, {
+    expect(pluginReturned).that.contains.something.like({
       id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
       dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
       name: 'Zwave',

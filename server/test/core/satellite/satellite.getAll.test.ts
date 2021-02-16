@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import Satellite from '../../../src/core/satellite';
 
 describe('Satellite.getAll', () => {
@@ -8,19 +8,20 @@ describe('Satellite.getAll', () => {
     const satellites = await satellite.getAll();
 
     expect(satellites).to.be.an('array');
-    assert.deepEqual(satellites, [{
+    expect(satellites).that.contains.something.like({
       id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
       name: 'Main satellite',
       roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3',
       lastHeartbeat: new Date('2020-04-08T22:00:00.000Z'),
-    },
-    {
-      id: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1',
-      name: 'Satellite 2',
-      roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
-      lastHeartbeat: new Date('1992-05-07T22:00:00.000Z'),
-    },
-    ]);
+    });
+    expect(satellites).that.contains.something.like(
+      {
+        id: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1',
+        name: 'Satellite 2',
+        roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+        lastHeartbeat: new Date('1992-05-07T22:00:00.000Z'),
+      },
+    );
   });
 
   it('should return all satellites with full scope', async () => {

@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import Plugin from '../../../src/core/plugin';
 import Event from '../../../src/utils/event';
 import Variable from '../../../src/core/variable';
@@ -16,7 +16,7 @@ describe('Plugin.getAll', () => {
     const plugins = await plugin.getAll();
 
     expect(plugins).to.be.an('array');
-    assert.deepEqual(plugins, [{
+    expect(plugins).that.contains.something.like({
       id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
       name: 'Zwave',
       dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
@@ -25,8 +25,8 @@ describe('Plugin.getAll', () => {
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
       lastHeartbeat: new Date('2020-04-08T22:00:00.000Z'),
-    },
-    {
+    });
+    expect(plugins).that.contains.something.like({
       id: '88b48273-15e6-4729-9199-0682677475f4',
       dockerId: 'cceb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
       name: 'Xiaomi',
@@ -35,8 +35,8 @@ describe('Plugin.getAll', () => {
       enabled: true,
       satelliteId: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1',
       lastHeartbeat: new Date('1992-05-07T22:00:00.000Z'),
-    },
-    {
+    })
+    expect(plugins).that.contains.something.like({
       id: '3a6b4974-6159-4792-a327-c3656f8bb9af',
       dockerId: 'dceb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
       name: 'Philips Hue',
@@ -45,8 +45,7 @@ describe('Plugin.getAll', () => {
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
       lastHeartbeat: new Date('2001-01-24T23:00:00.000Z'),
-    },
-    ]);
+    });
   });
 
   it('should return all plugins with full scope', async () => {

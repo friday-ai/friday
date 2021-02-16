@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
 import VariableType from '../../../../../src/core/variable/variable.interface';
 import PluginType from '../../../../../src/core/plugin/plugin.interface';
@@ -11,7 +11,7 @@ describe('GET /api/v1/satellite/:id', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
+        expect(res.body).that.contains.something.like({
           id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
           name: 'Main satellite',
           roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3',

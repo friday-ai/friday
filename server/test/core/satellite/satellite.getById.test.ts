@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import Satellite from '../../../src/core/satellite';
 
 describe('Satellite.getById', () => {
@@ -8,7 +8,7 @@ describe('Satellite.getById', () => {
     const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f');
 
     expect(satelliteReturned).to.be.an('object');
-    assert.deepEqual(satelliteReturned, {
+    expect(satelliteReturned).that.contains.something.like({
       id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
       name: 'Main satellite',
       roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3',
