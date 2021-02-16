@@ -11,17 +11,11 @@ describe('GET /api/v1/plugin/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).to.be.an('object');
-        expect(res.body).that.contains.something.like({
-          id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
-          dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
-          name: 'Zwave',
-          version: '1.2.0',
-          url: 'fake url',
-          enabled: true,
-          satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
-          lastHeartbeat: '2020-04-08T22:00:00.000Z',
-        });
+        const plugin = res.body;
+        expect(plugin).to.be.an('object');
+        expect(plugin).to.contains.keys(
+          ['id', 'name', 'dockerId', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'lastHeartbeat'],
+        );
       });
   });
 
