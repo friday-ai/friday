@@ -16,7 +16,8 @@ jobs:
         run: yarn
 
       - name: 'Run Mocha/Chai unit tests'
-        run: npm run coverage-server:junit
+      - uses: docker-practice/actions-setup-docker@master
+      - run: npm run coverage-server:junit
 
       - name: 'Publish Unit Test Results'
         uses: EnricoMi/publish-unit-test-result-action@v1.3
