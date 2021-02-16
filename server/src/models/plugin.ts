@@ -1,6 +1,6 @@
 import {
   Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default, Is, IsDate,
+  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default, Is, IsDate, Validate,
 } from 'sequelize-typescript';
 
 import Satellite from './satellite';
@@ -8,8 +8,9 @@ import State from './state';
 import Variable from './variable';
 import Device from './device';
 import { isOwnerExisting } from '../utils/databaseValidation';
-import Friday from '../core/friday';
 import { DatabaseValidationError } from '../utils/errors/coreError';
+import PluginType from '../core/plugin/plugin.interface';
+
 /**
  * Plugin model
  */
@@ -41,20 +42,6 @@ import { DatabaseValidationError } from '../utils/errors/coreError';
 @Table({
   tableName: 'plugin',
   underscored: false,
-  validate: {
-    async isNotAlreadyInstall(this: Plugin) {
-      const friday = new Friday();
-      // Check plugin isn't already install;
-      const satellite = await friday.satellite.getById(this.satelliteId, 'withPlugins');
-      if (satellite !== null && typeof satellite.plugins !== 'undefined') {
-        satellite.plugins.forEach((plugin) => {
-          if ((plugin as any).name === this.name) {
-            throw new DatabaseValidationError({ message: 'plugin already install on this satellite', name: 'plugin.already.install' });
-          }
-        });
-      }
-    },
-  },
 })
 export default class Plugin extends Model {
   @IsUUID(4)
@@ -92,6 +79,22 @@ export default class Plugin extends Model {
   @AllowNull(false)
   @NotEmpty
   @Is('satelliteId', (value) => isOwnerExisting(value, ['satellite']))
+  @Validate({
+    async isNotAlreadyInstall(this: Plugin) {
+      // Check plugin isn't already install;
+      const satellite = await Satellite.scope('withPlugins').findByPk(this.satelliteId);
+      if (satellite !== null && typeof satellite.plugins !== 'undefined') {
+        satellite.get({ plain: true }).plugins.forEach((plugin: PluginType) => {
+          if (plugin.name === this.name) {
+            throw new DatabaseValidationError({
+              message: 'plugin already install on this satellite',
+              name: 'plugin.already.install',
+            });
+          }
+        });
+      }
+    },
+  })
   @Column(DataType.UUIDV4)
   satelliteId!: string;
 

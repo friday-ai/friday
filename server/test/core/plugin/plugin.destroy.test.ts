@@ -1,8 +1,8 @@
 /* eslint-disable func-names */
-// import { assert } from 'chai';
+import { assert } from 'chai';
 import { Container } from 'dockerode';
 import Plugin from '../../../src/core/plugin';
-// import { NotFoundError } from '../../../src/utils/errors/coreError';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 import Event from '../../../src/utils/event';
 import Variable from '../../../src/core/variable';
 import State from '../../../src/core/state';
@@ -33,25 +33,16 @@ describe('Plugin.destroy', () => {
 
     await plugin.update('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', {
       dockerId: container.id,
-      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
     });
   });
-
-  /*
-  after((done) => {
-    container.remove(done);
-  });
-   */
 
   it('should destroy a plugin', async function () {
     this.timeout(30000);
     await plugin.destroy('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
   });
 
-  /*
   it('should not found a plugin to destroy', async () => {
     const promise = plugin.destroy('a58c31cc-61d2-4c18-b9f6-b8ba8609d12e');
     await assert.isRejected(promise, NotFoundError);
   });
-   */
 });

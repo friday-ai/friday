@@ -14,6 +14,7 @@ describe('GET /api/v1/plugin/:id', () => {
         expect(res.body).to.be.an('object');
         assert.deepEqual(res.body, {
           id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
+          dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
           name: 'Zwave',
           version: '1.2.0',
           url: 'fake url',
