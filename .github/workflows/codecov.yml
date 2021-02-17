@@ -7,8 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ubuntu:latest
-      volumes:
-        - ${{ github.workspace }}:/src
       
     steps:
       - uses: actions/checkout@v2
@@ -19,6 +17,7 @@ jobs:
           node-version: '12'
           
       - name: Install dependencies
+        working-directory: ./server
         run: npm install
 
       - name: 'Run Mocha/Chai unit tests'
