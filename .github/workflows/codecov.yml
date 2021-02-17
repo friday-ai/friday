@@ -17,7 +17,7 @@ jobs:
           node-version: '12'
           
       - name: Install dependencies
-        run: yarn
+        run: npm install
 
       - name: 'Run Mocha/Chai unit tests'
         run: npm run coverage-server:junit
