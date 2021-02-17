@@ -4,14 +4,18 @@ on: [pull_request, workflow_dispatch]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     container:
-      image: node:alpine
-      volumes:
-      - ${{ github.workspace }}:/src
+      image: ubuntu:latest
+      
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+          
       - name: Install dependencies
         run: yarn
 
