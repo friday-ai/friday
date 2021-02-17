@@ -15,7 +15,7 @@ describe('GET /api/v1/plugin', () => {
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
           expect(plugin).to.contains.keys(
-            ['id', 'name', 'dockerId', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'lastHeartbeat'],
+            ['id', 'name', 'dockerId', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
           );
         });
       });
