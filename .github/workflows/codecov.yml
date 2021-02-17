@@ -4,7 +4,7 @@ on: [pull_request, workflow_dispatch]
 
 jobs:
   test:
-    runs-on: self-hosted
+    runs-on: linux
     container:
       image: ubuntu:latest
       
