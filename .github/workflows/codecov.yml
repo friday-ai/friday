@@ -7,11 +7,16 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:alpine
+      volumes:
+      - ${{ github.workspace }}:/src
+      - /src/node_modules
+      - /src/client/node_modules
+      - /src/server/node_modules
     steps:
       - uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: sudo yarn
+        run: yarn
 
       - name: 'Run Mocha/Chai unit tests'
         run: npm run coverage-server:junit
