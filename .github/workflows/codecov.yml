@@ -5,9 +5,10 @@ on: [pull_request, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
+    container:
+      image: node:alpine
     steps:
       - uses: actions/checkout@v2
-      - uses: docker-practice/actions-setup-docker@master
       - name: Setup node
         uses: actions/setup-node@v1
         with:
