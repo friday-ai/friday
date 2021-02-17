@@ -20,7 +20,6 @@ jobs:
         run: npm install yarn -g
           
       - name: Install dependencies
-        working-directory: ./server
         run: yarn
 
       - name: 'Run Mocha/Chai unit tests'
