@@ -15,10 +15,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12'
+      
+      - name: Install Yarn
+        run: npm install yarn -g
           
       - name: Install dependencies
         working-directory: ./server
-        run: npm install
+        run: yarn
 
       - name: 'Run Mocha/Chai unit tests'
         run: npm run coverage-server:junit
