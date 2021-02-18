@@ -20,10 +20,15 @@ jobs:
         run: npm install yarn -g
           
       - name: Install dependencies
+        working-directory: ./server
         run: yarn
 
       - name: 'Run Mocha/Chai unit tests'
         run: npm run coverage-server:junit
+        
+      - name: 'Inspect folder'
+        working-directory: ./server
+        run: ls
 
       - name: 'Publish Unit Test Results'
         uses: EnricoMi/publish-unit-test-result-action@v1.3
