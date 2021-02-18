@@ -16,10 +16,8 @@ jobs:
         with:
           node-version: '12'
       
-      - name: Install essentials package
+      - name: Install Prerequisites
         run: |
-            apt install curl
-            apt install bash
             npm install yarn -g
           
       - name: Install dependencies
