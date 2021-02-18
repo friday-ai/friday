@@ -18,10 +18,10 @@ jobs:
       
       - name: Install essentials package
         run: |
-            sudo apt update
-            sudo apt upgrade
-            sudo apt install curl
-            sudo apt install bash
+            apt -y update
+            apt -y upgrade
+            apt install curl
+            apt install bash
             npm install yarn -g
           
       - name: Install dependencies
