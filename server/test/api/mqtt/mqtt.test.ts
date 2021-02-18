@@ -129,7 +129,6 @@ describe('Mqtt.publish', () => {
   });
 });
 
-/*
 describe('Mqtt.handleMessage', () => {
   it('should handle a message', async () => {
     const spy = sinon.spy(mqttClient, 'handleMessage');
@@ -150,4 +149,3 @@ describe('Mqtt.handleMessage', () => {
     expect(spy.calledWith(TopicsTypes.PLUGIN_EXEC, 'this is a test ;)')).to.equal(true);
   });
 });
-*/
