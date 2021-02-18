@@ -18,8 +18,8 @@ jobs:
       
       - name: Install essentials package
         run: |
-            apt-get install curl
-            apt-get install bash
+            apt install curl
+            apt install bash
             npm install yarn -g
           
       - name: Install dependencies
