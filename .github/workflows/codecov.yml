@@ -18,8 +18,10 @@ jobs:
       
       - name: Install essentials package
         run: |
-            apk add curl
-            apk add bash
+            apt update
+            apt upgrade
+            apt install curl
+            apt install bash
             npm install yarn -g
           
       - name: Install dependencies
@@ -37,7 +39,7 @@ jobs:
           files: ./server/test-results.xml
 
       - name: 'Upload coverage to Codecov'
-        uses: codecov/codecov-action@v1.0.13
+        uses: codecov/codecov-action@v1.2.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
