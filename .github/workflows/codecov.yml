@@ -18,8 +18,8 @@ jobs:
       
       - name: Install essentials package
         run: |
-            apt -y update
-            apt -y upgrade
+            yes | apt update
+            yes | apt update
             apt install curl
             apt install bash
             npm install yarn -g
