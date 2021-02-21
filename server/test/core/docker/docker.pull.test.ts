@@ -6,9 +6,9 @@ describe('Docker.pull', () => {
   const docker = new Docker();
 
   it('should pull an image', async () => {
-    await docker.pull('ubuntu:latest');
+    await docker.pull('alpine:latest');
     const images = await docker.dockerode?.listImages();
-    expect(images).that.contains.something.like({ RepoTags: ['ubuntu:latest'] });
+    expect(images).that.contains.something.like({ RepoTags: ['alpine:latest'] });
   });
 
   it('should not pull an image', async () => {

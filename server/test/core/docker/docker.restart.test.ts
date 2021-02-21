@@ -13,12 +13,11 @@ describe('Docker.restart', () => {
   before(async function () {
     this.timeout(15000);
     container = await docker.createContainer({
-      Image: 'ubuntu',
+      Image: 'alpine',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: true,
-      Cmd: ['/bin/bash', '-c', 'tail -f /etc/resolv.conf'],
       OpenStdin: false,
       StdinOnce: false,
     });

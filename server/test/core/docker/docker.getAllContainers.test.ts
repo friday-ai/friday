@@ -13,12 +13,11 @@ describe('Docker.getAllContainers', () => {
     this.timeout(15000);
     container1 = await docker.createContainer({
       name: 'friday_test_container1',
-      Image: 'ubuntu',
+      Image: 'alpine',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: true,
-      Cmd: ['/bin/bash', '-c', 'tail -f /etc/resolv.conf'],
       OpenStdin: false,
       StdinOnce: false,
     });
