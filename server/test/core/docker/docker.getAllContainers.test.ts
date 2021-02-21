@@ -13,7 +13,7 @@ describe('Docker.getAllContainers', () => {
     this.timeout(15000);
     container1 = await docker.createContainer({
       name: 'friday_test_container1',
-      Image: 'ubuntu',
+      Image: 'hello-world',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
@@ -25,7 +25,7 @@ describe('Docker.getAllContainers', () => {
 
     container2 = await docker.createContainer({
       name: 'friday_test_container2',
-      Image: 'ubuntu',
+      Image: 'hello-world',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,

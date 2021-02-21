@@ -12,7 +12,7 @@ describe('Docker.getContainer', () => {
   before(async function () {
     this.timeout(15000);
     container = await docker.createContainer({
-      Image: 'ubuntu',
+      Image: 'hello-world',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
@@ -31,7 +31,7 @@ describe('Docker.getContainer', () => {
     const containerObj = await docker.getContainer(container.id);
     const containerInfos = await containerObj.inspect();
     expect(containerObj).to.be.instanceOf(Container);
-    expect(containerInfos.Config.Image).to.equal('ubuntu');
+    expect(containerInfos.Config.Image).to.equal('hello-world');
   });
 
   it('should not return a container', async () => {

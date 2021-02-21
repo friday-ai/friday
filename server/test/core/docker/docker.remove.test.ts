@@ -12,7 +12,7 @@ describe('Docker.remove', () => {
   before(async function () {
     this.timeout(15000);
     container = await docker.createContainer({
-      Image: 'ubuntu',
+      Image: 'hello-world',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
