@@ -12,7 +12,8 @@ jobs:
       - uses: actions/checkout@v1
       
       - name: Install Prerequisites
-        run: apk add --no-cache bash curl git /
+        run: |
+          apk add --no-cache bash curl git
           docker pull alpine
          
       - name: Install dependencies
