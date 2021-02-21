@@ -6,11 +6,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: node:current-alpine3.13
+      image: mathieuandrade/test-container:latest
       
     steps:
       - uses: actions/checkout@v2
-                   
+         
       - name: Install dependencies
         working-directory: ./server
         run: yarn
