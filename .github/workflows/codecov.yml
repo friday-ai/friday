@@ -9,7 +9,7 @@ jobs:
       image: mathieuandrade/test-container:latest
       
     steps:
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
          
       - name: Install dependencies
         working-directory: ./server
