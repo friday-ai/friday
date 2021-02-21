@@ -2,7 +2,7 @@
 import { expect, assert } from 'chai';
 import { Container } from 'dockerode';
 import Docker from '../../../src/core/docker';
-import {NotFoundError, PlatformNotCompatible} from '../../../src/utils/errors/coreError';
+import { NotFoundError, PlatformNotCompatible } from '../../../src/utils/errors/coreError';
 
 let container: Container;
 
