@@ -5,28 +5,36 @@ on: [pull_request, workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
+    container:
+      image: node:current-alpine
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12'
+      - uses: actions/checkout@v1
+
+      - name: Install Prerequisites
+        run: |
+          apk add --no-cache bash curl git
+          apk add docker
+          addgroup root docker
+          docker pull alpine
 
       - name: Install dependencies
+        working-directory: ./server
         run: yarn
 
       - name: 'Run Mocha/Chai unit tests'
         run: npm run coverage-server:junit
 
       - name: 'Publish Unit Test Results'
-        uses: EnricoMi/publish-unit-test-result-action@v1.3
+        uses: EnricoMi/publish-unit-test-result-action@v1.9
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: ./server/test-results.xml
 
       - name: 'Upload coverage to Codecov'
-        uses: codecov/codecov-action@v1.0.13
+        uses: codecov/codecov-action@v1.2.1
+        if: always()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
