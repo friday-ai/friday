@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: mathieuandrade/test-container:latest
-      options: --user root -v ${{ github.workspace }}:/friday/:friday
+      options: --user root -v ${{ github.workspace }}:/friday
       
     steps:
       - uses: actions/checkout@v2
