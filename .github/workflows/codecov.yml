@@ -10,11 +10,7 @@ jobs:
       
     steps:
       - uses: actions/checkout@v2
-          
-      - name: Install Prerequisites
-        run: |
-            npm install yarn -g
-         
+                   
       - name: Install dependencies
         working-directory: ./server
         run: yarn
