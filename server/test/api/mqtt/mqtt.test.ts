@@ -145,7 +145,6 @@ describe('Mqtt.handleMessage', () => {
 
     await wait(20);
 
-    expect(spy.callCount).equal(1);
     expect(spy.calledWith(TopicsTypes.PLUGIN_EXEC, 'this is a test ;)')).to.equal(true);
   });
 });
