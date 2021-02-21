@@ -9,7 +9,7 @@ export default async function heartbeat(id: string): Promise<PluginType> {
       throw new NotFoundError({ name: 'Update a Plugin', message: 'Plugin not found', metadata: id });
     }
     pluginToUpdate.lastHeartbeat = new Date();
-    pluginToUpdate.update(pluginToUpdate);
+    await pluginToUpdate.update(pluginToUpdate);
     const pluginToReturn = <PluginType>pluginToUpdate.get({ plain: true });
     return pluginToReturn;
   } catch (e) {

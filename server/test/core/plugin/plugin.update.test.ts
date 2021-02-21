@@ -1,6 +1,6 @@
-import { expect } from 'chai';
+import { expect, assert } from 'chai';
 import Plugin from '../../../src/core/plugin';
-// import { NotFoundError } from '../../../src/utils/errors/coreError';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 import Event from '../../../src/utils/event';
 import Variable from '../../../src/core/variable';
 import State from '../../../src/core/state';
@@ -24,14 +24,11 @@ describe('Plugin.update', () => {
     expect(updatedPlugin.name).to.equal('dceb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5');
   });
 
-  /*
   it('should not found plugin to update', async () => {
     const promise = plugin.update('580efda9-6fa1-4bef-865f-d4ef04ea57d6', {
-      id: '14c39f7a-fdda-453b-ab0a-7c47d36b90f8',
+      name: '14c39f7a-fdda-453b-ab0a-7c47d36b90f8',
     });
 
     await assert.isRejected(promise, NotFoundError);
   });
-
-   */
 });
