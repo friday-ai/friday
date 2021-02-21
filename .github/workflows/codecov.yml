@@ -6,15 +6,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: mathieuandrade/test-container:latest
+      image: node:current-alpine3.13
       
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Setup node
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12'
           
       - name: Install Prerequisites
         run: |
