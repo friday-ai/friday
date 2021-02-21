@@ -6,10 +6,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: mathieuandrade/test-container:latest
+      image: alpine:latest
       
     steps:
       - uses: actions/checkout@v1
+      
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+
+      - name: Install Yarn
+        run: npm install yarn -g
          
       - name: Install dependencies
         working-directory: ./server
