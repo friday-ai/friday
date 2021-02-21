@@ -10,6 +10,9 @@ jobs:
       
     steps:
       - uses: actions/checkout@v1
+      
+      - name: Install Prerequisites
+        run: apk add --no-cache bash curl git
          
       - name: Install dependencies
         working-directory: ./server
