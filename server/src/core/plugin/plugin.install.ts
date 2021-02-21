@@ -25,12 +25,12 @@ export default async function install(this: PluginClass, options: PluginInstallO
       Image: options.repoTag,
     });
 
-    // TODO: Get url of plugin
+    // TODO: Create a plugin registry (with version and url)
     const plugin = await this.create({
       name: options.name,
       dockerId: container.id,
       enabled: true,
-      url: '',
+      url: 'TODO',
       version: options.version,
       satelliteId: this.masterId,
     }, AvailableState.PLUGIN_INSTALLED);

@@ -2,7 +2,7 @@
 import { assert, expect } from 'chai';
 import { Container } from 'dockerode';
 import Docker from '../../../src/core/docker';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import { NotFoundError, PlatformNotCompatible } from '../../../src/utils/errors/coreError';
 
 let container: Container;
 
@@ -40,5 +40,12 @@ describe('Docker.exec', () => {
   it('should not run exec on container', async () => {
     const promise = docker.exec('71501a8ab0f8', { Cmd: ['echo', 'foo'] });
     await assert.isRejected(promise, NotFoundError);
+  });
+
+  it('should not run exec on container', async () => {
+    // Override object to force throw for tests
+    docker.dockerode = null;
+    const promise = docker.exec(container.id, { Cmd: ['echo', 'foo'] });
+    await assert.isRejected(promise, PlatformNotCompatible);
   });
 });

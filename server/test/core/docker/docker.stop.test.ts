@@ -2,7 +2,7 @@
 import { expect, assert } from 'chai';
 import { Container } from 'dockerode';
 import Docker from '../../../src/core/docker';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import {NotFoundError, PlatformNotCompatible} from '../../../src/utils/errors/coreError';
 
 let container: Container;
 
@@ -39,5 +39,13 @@ describe('Docker.stop', () => {
   it('should not stop a container', async () => {
     const promise = docker.stop('71501a8ab0f8');
     await assert.isRejected(promise, NotFoundError);
+  });
+
+  it('should not stop a container', async () => {
+    // Override object to force throw for tests
+    docker.dockerode = null;
+
+    const promise = docker.stop(container.id);
+    await assert.isRejected(promise, PlatformNotCompatible);
   });
 });
