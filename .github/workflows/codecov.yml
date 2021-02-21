@@ -14,6 +14,8 @@ jobs:
       - name: Install Prerequisites
         run: |
           apk add --no-cache bash curl git
+          apk add docker
+          addgroup username docker
           docker pull alpine
          
       - name: Install dependencies
