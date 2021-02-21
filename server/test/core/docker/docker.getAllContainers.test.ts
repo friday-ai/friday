@@ -24,12 +24,11 @@ describe('Docker.getAllContainers', () => {
 
     container2 = await docker.createContainer({
       name: 'friday_test_container2',
-      Image: 'ubuntu',
+      Image: 'alpine',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: true,
-      Cmd: ['/bin/bash', '-c', 'tail -f /etc/resolv.conf'],
       OpenStdin: false,
       StdinOnce: false,
     });
