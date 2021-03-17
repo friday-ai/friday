@@ -39,6 +39,12 @@ describe('Plugin.stop', () => {
     await container.start();
   });
 
+  after(async function () {
+    this.timeout(15000);
+    await container.stop();
+    await container.remove();
+  });
+
   it('should stop a plugin', async function () {
     this.timeout(15000);
     const result = await plugin.stop('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');

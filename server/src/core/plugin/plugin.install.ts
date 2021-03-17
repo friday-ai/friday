@@ -1,6 +1,6 @@
 import PluginClass from './index';
 import PluginType from './plugin.interface';
-import error from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 import { PluginInstallOptions } from '../../utils/interfaces';
 import { AvailableState } from '../../utils/constants';
 
@@ -39,6 +39,11 @@ export default async function install(this: PluginClass, options: PluginInstallO
 
     return plugin;
   } catch (e) {
+    if (e.message.includes('HTTP code 404')) {
+      throw new NotFoundError({
+        name: e.name, message: e.message, cause: e, metadata: options,
+      });
+    }
     throw error({
       name: e.name, message: e.message, cause: e, metadata: options,
     });
