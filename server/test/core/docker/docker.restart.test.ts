@@ -2,7 +2,7 @@
 import { expect, assert } from 'chai';
 import { Container } from 'dockerode';
 import Docker from '../../../src/core/docker';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import { NotFoundError, PlatformNotCompatible } from '../../../src/utils/errors/coreError';
 import wait from '../../utils/timer';
 
 let container: Container;
@@ -13,12 +13,11 @@ describe('Docker.restart', () => {
   before(async function () {
     this.timeout(15000);
     container = await docker.createContainer({
-      Image: 'ubuntu',
+      Image: 'alpine',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: true,
-      Cmd: ['/bin/bash', '-c', 'tail -f /etc/resolv.conf'],
       OpenStdin: false,
       StdinOnce: false,
     });
@@ -52,5 +51,13 @@ describe('Docker.restart', () => {
   it('should not restart a container', async () => {
     const promise = docker.restart('71501a8ab0f8');
     await assert.isRejected(promise, NotFoundError);
+  });
+
+  it('should not restart a container', async () => {
+    // Override object to force throw for tests
+    docker.dockerode = null;
+
+    const promise = docker.restart(container.id);
+    await assert.isRejected(promise, PlatformNotCompatible);
   });
 });

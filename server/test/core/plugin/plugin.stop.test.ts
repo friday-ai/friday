@@ -1,5 +1,5 @@
 /* eslint-disable func-names */
-import { assert } from 'chai';
+import { expect, assert } from 'chai';
 import { Container } from 'dockerode';
 import Plugin from '../../../src/core/plugin';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
@@ -10,7 +10,7 @@ import Docker from '../../../src/core/docker';
 
 let container: Container;
 
-describe('Plugin.destroy', () => {
+describe('Plugin.stop', () => {
   const event = new Event();
   const variable = new Variable();
   const state = new State(event, variable);
@@ -34,15 +34,25 @@ describe('Plugin.destroy', () => {
       dockerId: container.id,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
     });
+
+    // Start container for test
+    await container.start();
   });
 
-  it('should destroy a plugin', async function () {
-    this.timeout(30000);
-    await plugin.destroy('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
+  after(async function () {
+    this.timeout(15000);
+    await container.stop();
+    await container.remove();
   });
 
-  it('should not found a plugin to destroy', async () => {
-    const promise = plugin.destroy('a58c31cc-61d2-4c18-b9f6-b8ba8609d12e');
+  it('should stop a plugin', async function () {
+    this.timeout(15000);
+    const result = await plugin.stop('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
+    expect(result).to.equal(true);
+  });
+
+  it('should not found a plugin to stop', async () => {
+    const promise = plugin.stop('580efda9-6fa1-4bef-865f-d4ef04ea57d6');
     await assert.isRejected(promise, NotFoundError);
   });
 });

@@ -27,6 +27,7 @@ export default class System {
   public user: UserClass;
   public scheduler: SchedulerClass;
   public database: any;
+  public env = process.env.NODE_ENV || 'production';
 
   constructor(variable: VariableClass, house: HouseClass, room: RoomClass, satellite: SatelliteClass,
     user: UserClass, scheduler: SchedulerClass, database: any) {

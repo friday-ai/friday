@@ -27,7 +27,7 @@ export default async function create(this: PluginClass, plugin: PluginType, stat
     const pluginToReturn = <PluginType>createdPlugin.get({ plain: true });
 
     await this.state.set({
-      owner: plugin.id!,
+      owner: pluginToReturn.id!,
       ownerType: StateOwner.PLUGIN,
       value: state,
     });

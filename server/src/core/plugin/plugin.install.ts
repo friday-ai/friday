@@ -1,6 +1,6 @@
 import PluginClass from './index';
 import PluginType from './plugin.interface';
-import error from '../../utils/errors/coreError';
+import error, { NotFoundError } from '../../utils/errors/coreError';
 import { PluginInstallOptions } from '../../utils/interfaces';
 import { AvailableState } from '../../utils/constants';
 
@@ -25,9 +25,12 @@ export default async function install(this: PluginClass, options: PluginInstallO
       Image: options.repoTag,
     });
 
+    // TODO: Create a plugin registry (with version and url)
     const plugin = await this.create({
       name: options.name,
       dockerId: container.id,
+      enabled: true,
+      url: 'TODO',
       version: options.version,
       satelliteId: this.masterId,
     }, AvailableState.PLUGIN_INSTALLED);
@@ -36,6 +39,11 @@ export default async function install(this: PluginClass, options: PluginInstallO
 
     return plugin;
   } catch (e) {
+    if (e.message.includes('HTTP code 404')) {
+      throw new NotFoundError({
+        name: e.name, message: e.message, cause: e, metadata: options,
+      });
+    }
     throw error({
       name: e.name, message: e.message, cause: e, metadata: options,
     });

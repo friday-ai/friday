@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
 import DeviceType from '../../../../../src/core/device/device.interface';
 import VariableType from '../../../../../src/core/variable/variable.interface';
@@ -11,16 +11,11 @@ describe('GET /api/v1/plugin/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
-          id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
-          name: 'Zwave',
-          version: '1.2.0',
-          url: 'fake url',
-          enabled: true,
-          satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
-          lastHeartbeat: '2020-04-08T22:00:00.000Z',
-        });
+        const plugin = res.body;
+        expect(plugin).to.be.an('object');
+        expect(plugin).to.contains.keys(
+          ['id', 'name', 'dockerId', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+        );
       });
   });
 

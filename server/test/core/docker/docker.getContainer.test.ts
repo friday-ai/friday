@@ -2,7 +2,7 @@
 import { expect, assert } from 'chai';
 import { Container } from 'dockerode';
 import Docker from '../../../src/core/docker';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import { NotFoundError, PlatformNotCompatible } from '../../../src/utils/errors/coreError';
 
 let container: Container;
 
@@ -12,12 +12,11 @@ describe('Docker.getContainer', () => {
   before(async function () {
     this.timeout(15000);
     container = await docker.createContainer({
-      Image: 'ubuntu',
+      Image: 'alpine',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: true,
-      Cmd: ['/bin/bash', '-c', 'tail -f /etc/resolv.conf'],
       OpenStdin: false,
       StdinOnce: false,
     });
@@ -31,11 +30,19 @@ describe('Docker.getContainer', () => {
     const containerObj = await docker.getContainer(container.id);
     const containerInfos = await containerObj.inspect();
     expect(containerObj).to.be.instanceOf(Container);
-    expect(containerInfos.Config.Image).to.equal('ubuntu');
+    expect(containerInfos.Config.Image).to.equal('alpine');
   });
 
   it('should not return a container', async () => {
     const promise = docker.getContainer('71501a8ab0f8');
     await assert.isRejected(promise, NotFoundError);
+  });
+
+  it('should not return a container', async () => {
+    // Override object to force throw for tests
+    docker.dockerode = null;
+
+    const promise = docker.getContainer(container.id);
+    await assert.isRejected(promise, PlatformNotCompatible);
   });
 });

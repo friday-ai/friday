@@ -3,8 +3,6 @@ import error, { NotFoundError } from '../../utils/errors/coreError';
 import { SystemVariablesNames } from '../../utils/constants';
 import Variable from '../../models/variable';
 
-const env = process.env.NODE_ENV || 'production';
-
 /**
  * Start function fo Friday system
  */
@@ -19,7 +17,7 @@ export default async function start(this: System): Promise<string> {
     });
 
     // If is the first start and its not test env, run init function
-    if (userCount < 1 && fridayVersion === null && env !== 'test') {
+    if (userCount < 1 && fridayVersion === null && this.env !== 'test') {
       await this.init();
     }
 
@@ -30,12 +28,12 @@ export default async function start(this: System): Promise<string> {
     const master = satellites.filter((s) => s.name === 'Master');
 
     // In test env, do not throw
-    if (master.length === 0 && env !== 'test') {
+    if (master.length === 0 && this.env !== 'test') {
       throw new NotFoundError({ name: 'System start', message: 'Master satellite not found' });
     }
 
     // In test env return blank string
-    if (env === 'test') {
+    if (this.env === 'test') {
       return '';
     }
 

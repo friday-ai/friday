@@ -1,7 +1,8 @@
 /* eslint-disable func-names */
-import { expect } from 'chai';
+import { assert, expect } from 'chai';
 import { Container } from 'dockerode';
 import Docker from '../../../src/core/docker';
+import { PlatformNotCompatible } from '../../../src/utils/errors/coreError';
 
 let container1: Container;
 let container2: Container;
@@ -13,24 +14,22 @@ describe('Docker.getAllContainers', () => {
     this.timeout(15000);
     container1 = await docker.createContainer({
       name: 'friday_test_container1',
-      Image: 'ubuntu',
+      Image: 'alpine',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: true,
-      Cmd: ['/bin/bash', '-c', 'tail -f /etc/resolv.conf'],
       OpenStdin: false,
       StdinOnce: false,
     });
 
     container2 = await docker.createContainer({
       name: 'friday_test_container2',
-      Image: 'ubuntu',
+      Image: 'alpine',
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: true,
-      Cmd: ['/bin/bash', '-c', 'tail -f /etc/resolv.conf'],
       OpenStdin: false,
       StdinOnce: false,
     });
@@ -47,5 +46,13 @@ describe('Docker.getAllContainers', () => {
     expect(containers).to.be.an('array');
     expect(containers).that.contains.something.like({ Names: ['/friday_test_container1'] });
     expect(containers).that.contains.something.like({ Names: ['/friday_test_container2'] });
+  });
+
+  it('should not return containers', async () => {
+    // Override object to force throw for tests
+    docker.dockerode = null;
+
+    const promise = docker.getAllContainers();
+    await assert.isRejected(promise, PlatformNotCompatible);
   });
 });
