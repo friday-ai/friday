@@ -1,12 +1,20 @@
 {
   "compilerOptions": {
-    "alwaysStrict": true,
-    "jsx": "react",
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["dom", "es2015"],
-    "jsxFactory": "h",
-    "noEmitHelpers": true,
-    "importHelpers": true
-  }
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["vite/client"],
+    "allowJs": false,
+    "skipLibCheck": false,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react"
+  },
+  "include": ["./src"]
 }
