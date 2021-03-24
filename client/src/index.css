@@ -1,0 +1,53 @@
+@import 'tailwindcss/base';
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
+
+.background::before{
+  content: '';
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url(./assets/geometric.svg);
+  bottom: 0;
+  right: 0;
+  width: 551px;
+  height: 748px;
+}
+
+.background::after{
+  content: '';
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url(./assets/geometric.svg);
+  -webkit-transform: scaleX(-1) scaleY(-1);
+  transform: scaleX(-1) scaleY(-1);
+  top: 0;
+  left: 0;
+  width: 551px;
+  height: 748px;
+}
+
+@media (max-width: 900px) and (max-height: 900px) {
+  .background::before{
+    width: 275px;
+    height: 374px;
+  }
+
+  .background::after{
+    width: 275px;
+    height: 374px;
+  }
+}
+
+@media (max-width: 600px) and (max-height: 600px) {
+  .background::before{
+    display: none;
+  }
+
+  .background::after{
+    display: none;
+  }
+}

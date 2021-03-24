@@ -1,0 +1,14 @@
+# don't ever lint node_modules
+node_modules
+# don't lint build output (make sure it's set to your correct build folder name)
+dist
+# don't lint nyc coverage output
+coverage
+.nyc_output
+# don't lint docs
+docs
+# don't lint config files
+.eslintrc.js
+vite.config.ts
+tailwind.config.js
+postcss.config.js
