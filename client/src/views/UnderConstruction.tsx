@@ -1,7 +1,7 @@
 import React from 'react';
 import underConstruction from '../assets/undraw_under_construction.svg';
 
-const UnderConstruction = (): React.ReactElement => {
+const UnderConstruction: React.FunctionComponent = () => {
   return (
     <div className="background flex flex-col content-center justify-center items-center h-full ">
       <img className="self-center" src={underConstruction} alt="under construction" width={500} height={500} />
