@@ -23,6 +23,7 @@ const DEVICE_SUBTYPE_LIST = {
     SMOKE: 'smoke',
     MOTION: 'motion',
     FLOOD: 'flood',
+    BATTERY: 'battery',
   },
   BATTERY: {
     ELECTRICITY_CONCUMPTION: 'electricity-consumption',
@@ -31,6 +32,7 @@ const DEVICE_SUBTYPE_LIST = {
     IP: 'ip',
     USB: 'usb',
     RPI: 'RPI',
+    BATTERY: 'battery',
   },
   COVER: {
     AWNING: 'awning',
@@ -68,6 +70,7 @@ const DEVICE_SUBTYPE_LIST = {
     UV: 'uv',
     OTHER: 'other',
     TRACKER: 'tracker',
+    BATTERY: 'battery',
   },
   SWITCH: {
     SIMPLE: 'simple',
@@ -77,6 +80,7 @@ const DEVICE_SUBTYPE_LIST = {
     ELECTRICITY_CONCUMPTION: 'electricity-concumption',
     TEMPERATURE: 'temperature',
     HUMIDITY: 'humidity',
+    BATTERY: 'battery',
   },
   UNKNOWN: {
     UNKNOWN: 'unknown',
