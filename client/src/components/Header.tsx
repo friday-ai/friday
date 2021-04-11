@@ -12,7 +12,7 @@ const Header: React.FunctionComponent = () => {
     <header className="flex-shrink-0 border-b bg-white">
       <div className="flex items-center justify-between p-2">
         <div className="flex items-center space-x-3">
-          <button type="button" className="p-2 rounded-md focus:outline-none focus:ring" onClick={() => dispatch(toggleDrawer())}>
+          <button type="button" className="p-2 rounded-md focus:outline-none" onClick={() => dispatch(toggleDrawer())}>
             <HiChevronDoubleRight className={`w-6 h-6 text-blue-500 ${isSidebarOpen ? 'transform transition-transform -rotate-180' : ''}`}/>
           </button>
         </div>
