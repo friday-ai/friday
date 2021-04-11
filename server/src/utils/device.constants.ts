@@ -1,9 +1,7 @@
 const DEVICE_TYPE_LIST = {
   ALARM: 'alarm',
-  BATTERY: 'battery',
   CAMERA: 'camera',
   COVER: 'cover',
-  ELECTRICITY_CONCUMPTION: 'electricity-concumption',
   LIGHT: 'light',
   MEDIA: 'media',
   NOTIFICATION: 'notification',
@@ -23,28 +21,23 @@ const DEVICE_SUBTYPE_LIST = {
     SMOKE: 'smoke',
     MOTION: 'motion',
     FLOOD: 'flood',
-    BATTERY: 'battery',
-  },
-  BATTERY: {
-    ELECTRICITY_CONCUMPTION: 'electricity-consumption',
   },
   CAMERA: {
     IP: 'ip',
     USB: 'usb',
     RPI: 'RPI',
-    BATTERY: 'battery',
   },
   COVER: {
     AWNING: 'awning',
-    BLING: 'blind',
-  },
-  ELECTRICITY_CONCUMPTION: {
-    RANGE_EXTENDER: 'range-extender',
+    BLIND: 'blind',
   },
   LIGHT: {
+    SIMPLE: 'simple',
     DIMMABLE: 'dimmable',
     RGB: 'rgb',
     RGBW: 'rgbw',
+    RGBWW: 'rgbww',
+    RGBWCCT: 'rgbwcct',
   },
   MEDIA: {
     AUDIO: 'audio',
@@ -52,7 +45,6 @@ const DEVICE_SUBTYPE_LIST = {
     VIDEO: 'video',
   },
   OUTLET: {
-    ELECTRICITY_CONCUMPTION: 'electricity-consumption',
     SIMPLE: 'simple',
   },
   SENSOR: {
@@ -70,19 +62,123 @@ const DEVICE_SUBTYPE_LIST = {
     UV: 'uv',
     OTHER: 'other',
     TRACKER: 'tracker',
-    BATTERY: 'battery',
   },
   SWITCH: {
     SIMPLE: 'simple',
     MULTIPLE_CHOICE: 'multiple-choice',
   },
   THERMOSTAT: {
-    ELECTRICITY_CONCUMPTION: 'electricity-concumption',
     TEMPERATURE: 'temperature',
     HUMIDITY: 'humidity',
-    BATTERY: 'battery',
   },
   UNKNOWN: {
     UNKNOWN: 'unknown',
+  },
+};
+
+const DEVICE_SUBTYPE_FEATURE_LIST = {
+  ALARM: {
+    CO2: {
+      STATE: 'state',
+      BATTERY: 'battery',
+    },
+    DOOR: {
+      STATE: 'state',
+      BATTERY: 'battery',
+    },
+    DOOR_LOCK: {
+      STATE: 'state',
+      BATTERY: 'battery',
+    },
+    WINDOW: {
+      STATE: 'state',
+      BATTERY: 'battery',
+    },
+    SMOKE: {
+      STATE: 'state',
+      BATTERY: 'battery',
+    },
+    MOTION: {
+      MOVEMENT: 'movement',
+      BATTERY: 'battery',
+    },
+    FLOOD: {
+      STATE: 'state',
+      BATTERY: 'battery',
+    },
+  },
+  CAMERA: {
+    IP: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      BATTERY: 'battery',
+      IMAGE: 'image',
+      MOVEMENT: 'movement',
+      FACE_RECOGNITION: 'face-recognition',
+    },
+    USB: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      IMAGE: 'image',
+      MOVEMENT: 'movement',
+      FACE_RECOGNITION: 'face-recognition',
+    },
+    RPI: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      IMAGE: 'image',
+      MOVEMENT: 'movement',
+      FACE_RECOGNITION: 'face-recognition',
+    },
+  },
+  COVER: {
+    AWNING: {
+      OPEN: 'open',
+      CLOSE: 'close',
+      STATE: 'state',
+    },
+    BLIND: {
+      OPEN: 'open',
+      CLOSE: 'close',
+      STATE: 'state',
+    },
+  },
+  LIGHT: {
+    SIMPLE: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+    },
+    DIMMABLE: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      DIMMABLE: 'dimmable',
+    },
+    RGB: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      DIMMABLE: 'dimmable',
+      HUE: 'hue',
+    },
+    RGBW: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      DIMMABLE: 'dimmable',
+      HUE: 'hue',
+      WHITE: 'white',
+    },
+    RGBWW: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      DIMMABLE: 'dimmable',
+      HUE: 'hue',
+      WARM_WHITE: 'warm-white',
+    },
+    RGBWCCT: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      DIMMABLE: 'dimmable',
+      HUE: 'hue',
+      WARM_COLD_WHITE: 'warm-cold-white',
+    },
   },
 };
