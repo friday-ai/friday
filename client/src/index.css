@@ -4,6 +4,10 @@
 
 @import 'tailwindcss/utilities';
 
+.background {
+  position: relative;
+}
+
 .background::before{
   content: '';
   position: fixed;
@@ -11,7 +15,7 @@
   pointer-events: none;
   background-image: url(./assets/geometric.svg);
   bottom: 0;
-  right: 0;
+  right: -20px;
   width: 551px;
   height: 748px;
 }
@@ -25,7 +29,7 @@
   -webkit-transform: scaleX(-1) scaleY(-1);
   transform: scaleX(-1) scaleY(-1);
   top: 0;
-  left: 0;
+  left: -20px;
   width: 551px;
   height: 748px;
 }

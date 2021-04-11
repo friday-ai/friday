@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { hasRoles, isAuth } from '../services/security';
-import Unauthorized from '../views/Unauthorized';
+import Unauthorized from '../routes/Errors/Unauthorized';
 import { getPath } from '../utils/routes';
 
 type RouteProps = {

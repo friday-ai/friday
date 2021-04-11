@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { v4 } from 'uuid';
 
-import Login from '../views/Login';
-import Dashboard from '../views/Dashboard';
-import NotFound from '../views/NotFound';
-import UnderConstruction from '../views/UnderConstruction';
+import Login from '../routes/Login';
+import Dashboard from '../routes/Dashboard';
+import NotFound from '../routes/Errors/NotFound';
+import UnderConstruction from '../routes/Errors/UnderConstruction';
 
 const routes = [
   {

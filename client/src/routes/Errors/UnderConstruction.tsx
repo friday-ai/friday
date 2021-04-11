@@ -1,5 +1,5 @@
 import React from 'react';
-import underConstruction from '../assets/undraw_under_construction.svg';
+import underConstruction from '../../assets/undraw_under_construction.svg';
 
 const UnderConstruction: React.FunctionComponent = () => {
   return (
