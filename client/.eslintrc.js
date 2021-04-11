@@ -5,6 +5,7 @@ module.exports = {
     parser: "@typescript-eslint/parser",
   },
   rules: {
+    "no-param-reassign": ["error", {"props": false}],
     "prettier/prettier": [
       "error",
       {
