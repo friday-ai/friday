@@ -1,17 +1,3 @@
-const DEVICE_TYPE_LIST = {
-  ALARM: 'alarm',
-  CAMERA: 'camera',
-  COVER: 'cover',
-  LIGHT: 'light',
-  MEDIA: 'media',
-  NOTIFICATION: 'notification',
-  OUTLET: 'outlet',
-  SENSOR: 'sensor',
-  SWITCH: 'switch',
-  THERMOSTAT: 'thermostat',
-  UNKNOWN: 'unknown',
-};
-
 const DEVICE_SUBTYPE_LIST = {
   ALARM: {
     CO2: 'co2',
@@ -93,7 +79,7 @@ const DEVICE_SUBTYPE_LIST = {
   },
 };
 
-const DEVICE_TYPE_FEATURE_LIST = {
+const DEVICE_TYPE_COMMON_FEATURE = {
   ALARM: {
     STATE: 'state',
     BATTERY: 'battery',
