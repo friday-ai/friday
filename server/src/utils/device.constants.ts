@@ -28,8 +28,22 @@ const DEVICE_SUBTYPE_LIST = {
     RPI: 'RPI',
   },
   COVER: {
+    // Auvent
     AWNING: 'awning',
+    // Stores
     BLIND: 'blind',
+    // Rideaux
+    CURTAIN: 'curtain',
+    // Porte
+    DOOR: 'door',
+    // Porte de garage
+    GARAGE: 'garage',
+    // Portail
+    GATE: 'gate',
+    // Volet
+    SHUTTER: 'shutter',
+    // Fenêtre
+    WINDOW: 'window',
   },
   LIGHT: {
     SIMPLE: 'simple',
@@ -44,8 +58,10 @@ const DEVICE_SUBTYPE_LIST = {
     CONSOLE: 'console',
     VIDEO: 'video',
   },
+  // Prise
   OUTLET: {
     SIMPLE: 'simple',
+    MULTIPLE: 'multiple',
   },
   SENSOR: {
     CO2: 'co2',
@@ -66,6 +82,7 @@ const DEVICE_SUBTYPE_LIST = {
   SWITCH: {
     SIMPLE: 'simple',
     MULTIPLE_CHOICE: 'multiple-choice',
+    PUSH: 'push',
   },
   THERMOSTAT: {
     TEMPERATURE: 'temperature',
@@ -76,109 +93,181 @@ const DEVICE_SUBTYPE_LIST = {
   },
 };
 
+const DEVICE_TYPE_FEATURE_LIST = {
+  ALARM: {
+    STATE: 'state',
+    BATTERY: 'battery',
+  },
+  CAMERA: {
+    POWER_OFF: 'power-off',
+    POWER_ON: 'power-on',
+    IMAGE: 'image',
+    MOVEMENT: 'movement',
+    FACE_RECOGNITION: 'face-recognition',
+  },
+  COVER: {
+    OPEN: 'open',
+    CLOSE: 'close',
+    STATE: 'state',
+    STOP: 'stop',
+  },
+  LIGHT: {
+    POWER_OFF: 'power-off',
+    POWER_ON: 'power-on',
+  },
+  MEDIA: {
+    STATE: 'state',
+  },
+  NOTIFICATION: {},
+  OUTLET: {
+    STATUS: 'status',
+    POWER_OFF: 'power-off',
+    POWER_ON: 'power-on',
+  },
+  SENSOR: {
+    STATE: 'state',
+    BATTERY: 'battery',
+  },
+  SWITCH: {
+    STATE: 'state',
+  },
+  THERMOSTAT: {
+    BATTERY: 'battery',
+    SETPOINT: 'setpoint',
+    STATE: 'state',
+    MODE: 'mode',
+    PLANING: 'planing',
+  },
+  UNKNOWN: {
+    UNKNOWN: 'unknown',
+  },
+};
+
 const DEVICE_SUBTYPE_FEATURE_LIST = {
   ALARM: {
-    CO2: {
-      STATE: 'state',
-      BATTERY: 'battery',
-    },
-    DOOR: {
-      STATE: 'state',
-      BATTERY: 'battery',
-    },
-    DOOR_LOCK: {
-      STATE: 'state',
-      BATTERY: 'battery',
-    },
-    WINDOW: {
-      STATE: 'state',
-      BATTERY: 'battery',
-    },
-    SMOKE: {
-      STATE: 'state',
-      BATTERY: 'battery',
-    },
-    MOTION: {
-      MOVEMENT: 'movement',
-      BATTERY: 'battery',
-    },
-    FLOOD: {
-      STATE: 'state',
-      BATTERY: 'battery',
-    },
+    CO2: {},
+    DOOR: {},
+    DOOR_LOCK: {},
+    WINDOW: {},
+    SMOKE: {},
+    MOTION: {},
+    FLOOD: {},
   },
   CAMERA: {
     IP: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
       BATTERY: 'battery',
-      IMAGE: 'image',
-      MOVEMENT: 'movement',
-      FACE_RECOGNITION: 'face-recognition',
     },
-    USB: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
-      IMAGE: 'image',
-      MOVEMENT: 'movement',
-      FACE_RECOGNITION: 'face-recognition',
-    },
-    RPI: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
-      IMAGE: 'image',
-      MOVEMENT: 'movement',
-      FACE_RECOGNITION: 'face-recognition',
-    },
+    USB: {},
+    RPI: {},
   },
   COVER: {
-    AWNING: {
-      OPEN: 'open',
-      CLOSE: 'close',
-      STATE: 'state',
-    },
-    BLIND: {
-      OPEN: 'open',
-      CLOSE: 'close',
-      STATE: 'state',
-    },
+    AWNING: {},
+    BLIND: {},
+    CURTAIN: {},
+    DOOR: {},
+    GARAGE: {},
+    GATE: {},
+    SHUTTER: {},
+    WINDOW: {},
   },
   LIGHT: {
-    SIMPLE: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
-    },
+    SIMPLE: {},
     DIMMABLE: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
       DIMMABLE: 'dimmable',
     },
     RGB: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
       DIMMABLE: 'dimmable',
       HUE: 'hue',
     },
     RGBW: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
       DIMMABLE: 'dimmable',
       HUE: 'hue',
       WHITE: 'white',
     },
     RGBWW: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
       DIMMABLE: 'dimmable',
       HUE: 'hue',
       WARM_WHITE: 'warm-white',
     },
     RGBWCCT: {
-      POWER_OFF: 'power-off',
-      POWER_ON: 'power-on',
       DIMMABLE: 'dimmable',
       HUE: 'hue',
       WARM_COLD_WHITE: 'warm-cold-white',
     },
+  },
+  MEDIA: {
+    AUDIO: {
+      PLAY: 'play',
+      PAUSE: 'pause',
+      NEXT: 'next',
+      FAST_FORWARD: 'fast-forward',
+      PREVIOUS: 'previous',
+      REWIND: 'rewind',
+      TITLE: 'title',
+      PLAYLIST: 'playlist',
+      METADATA: 'metadata',
+      VOLUME_UP: 'volume-up',
+      VOLUME_DOWN: 'volume-down',
+    },
+    CONSOLE: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      LAUNCH_GAME: 'launch-game',
+    },
+    VIDEO: {
+      POWER_OFF: 'power-off',
+      POWER_ON: 'power-on',
+      PLAY: 'play',
+      PAUSE: 'pause',
+      STOP: 'stop',
+      RECORD: 'record',
+      CHANNEL: 'channel',
+      PUSH_BUTTON: 'push-button',
+      METADATA: 'metadata',
+      VOLUME_UP: 'volume-up',
+      VOLUME_DOWN: 'volume-down',
+    },
+  },
+  OUTLET: {
+    SIMPLE: {},
+    MULTIPLE: {
+      SWITCH_OUTLET: 'switch-outlet',
+    },
+  },
+  SENSOR: {
+    CO2: {},
+    CO: {},
+    DUST: {},
+    GAZ: {},
+    TEMPERATURE: {},
+    HYGROMETRY: {},
+    PRESSURE: {},
+    LUMINANCE: {},
+    WIND: {},
+    RAIN: {},
+    NOISE: {},
+    UV: {},
+    OTHER: {},
+    TRACKER: {},
+  },
+  SWITCH: {
+    SIMPLE: {
+      OPEN: 'open',
+      CLOSE: 'close',
+    },
+    MULTIPLE_CHOICE: {
+      OPEN: 'open',
+      CLOSE: 'close',
+    },
+    PUSH: {
+      PUSH: 'push',
+    },
+  },
+  THERMOSTAT: {
+    TEMPERATURE: {},
+    HUMIDITY: {},
+  },
+  UNKNOWN: {
+    UNKNOWN: {},
   },
 };
