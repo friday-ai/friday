@@ -1,4 +1,4 @@
-const DEVICE_SUBTYPE_LIST = {
+const DEVICE_SUBTYPE_LIST: { [key: string]: { [key: string]: string; } } = {
   ALARM: {
     CO2: 'co2',
     DOOR: 'door',
@@ -79,7 +79,7 @@ const DEVICE_SUBTYPE_LIST = {
   },
 };
 
-const DEVICE_TYPE_COMMON_FEATURE = {
+const DEVICE_TYPE_COMMON_FEATURE: { [key: string]: { [key: string]: string; } } = {
   ALARM: {
     STATE: 'state',
     BATTERY: 'battery',
@@ -129,7 +129,7 @@ const DEVICE_TYPE_COMMON_FEATURE = {
   },
 };
 
-const DEVICE_SUBTYPE_FEATURE_LIST = {
+const DEVICE_SUBTYPE_FEATURE_LIST: { [key: string]: { [key: string]: { [key: string]: string; } } } = {
   ALARM: {
     CO2: {},
     DOOR: {},
@@ -256,4 +256,10 @@ const DEVICE_SUBTYPE_FEATURE_LIST = {
   UNKNOWN: {
     UNKNOWN: {},
   },
+};
+
+export {
+  DEVICE_SUBTYPE_FEATURE_LIST,
+  DEVICE_SUBTYPE_LIST,
+  DEVICE_TYPE_COMMON_FEATURE,
 };
