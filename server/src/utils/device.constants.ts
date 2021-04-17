@@ -108,7 +108,7 @@ const DEVICE_TYPE_COMMON_FEATURE: DeviceTypeCommonFeature = {
   },
   NOTIFICATION: {},
   OUTLET: {
-    STATUS: 'status',
+    STATE: 'state',
     POWER_OFF: 'power-off',
     POWER_ON: 'power-on',
   },

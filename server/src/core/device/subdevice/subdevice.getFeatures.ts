@@ -1,22 +1,23 @@
 import { DEVICE_TYPE_COMMON_FEATURE, DEVICE_SUBTYPE_FEATURE_LIST, DEVICE_SUBTYPE_LIST } from '../../../utils/device.constants';
 import error from '../../../utils/errors/coreError';
+import { KVArr } from '../../../utils/interfaces';
 
 /**
- * Récupère la liste des features par rapport a un device et a un subdevice donnée
+ * Get features list by device and subdevice
  *
  * @param device
  * @param subdevice
  *
- * @return {[key: string]: string}
+ * @return KVArr<string>
  */
-const getFeatures = (device: string, subdevice: string): { [key: string]: string; } => {
+export default function getFeatures(device: string, subdevice: string): KVArr<string> {
   try {
     if (!(device in DEVICE_SUBTYPE_LIST)) {
-      throw new Error(`${device} ne fais pas partie des devices présent`);
+      throw new Error(`${device} is not part of the available devices`);
     }
 
     if (!(subdevice in DEVICE_SUBTYPE_LIST[device])) {
-      throw new Error(`${subdevice} ne fais pas partie des subdevices présent dans le device ${device}`);
+      throw new Error(`${subdevice} is not part of the subdevices available in the device ${device}`);
     }
 
     const deviceFeature = DEVICE_TYPE_COMMON_FEATURE[device];
@@ -27,8 +28,4 @@ const getFeatures = (device: string, subdevice: string): { [key: string]: string
       name: e.name, message: e.message, cause: e, metadata: { device, subdevice },
     });
   }
-};
-
-export default {
-  getFeatures,
-};
+}
