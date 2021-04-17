@@ -1,4 +1,6 @@
-const DEVICE_SUBTYPE_LIST: { [key: string]: { [key: string]: string; } } = {
+import { DeviceSubtypeFeatureList, DeviceSubtypeList, DeviceTypeCommonFeature } from './interfaces';
+
+const DEVICE_SUBTYPE_LIST: DeviceSubtypeList = {
   ALARM: {
     CO2: 'co2',
     DOOR: 'door',
@@ -79,7 +81,7 @@ const DEVICE_SUBTYPE_LIST: { [key: string]: { [key: string]: string; } } = {
   },
 };
 
-const DEVICE_TYPE_COMMON_FEATURE: { [key: string]: { [key: string]: string; } } = {
+const DEVICE_TYPE_COMMON_FEATURE: DeviceTypeCommonFeature = {
   ALARM: {
     STATE: 'state',
     BATTERY: 'battery',
@@ -129,7 +131,7 @@ const DEVICE_TYPE_COMMON_FEATURE: { [key: string]: { [key: string]: string; } } 
   },
 };
 
-const DEVICE_SUBTYPE_FEATURE_LIST: { [key: string]: { [key: string]: { [key: string]: string; } } } = {
+const DEVICE_SUBTYPE_FEATURE_LIST: DeviceSubtypeFeatureList = {
   ALARM: {
     CO2: {},
     DOOR: {},

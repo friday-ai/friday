@@ -94,3 +94,11 @@ export interface PluginInstallOptions {
   repoTag: string;
   version: string;
 }
+
+export type NestedObjects = KVArr<string>;
+
+export type DeviceSubtypeList = KVArr<NestedObjects>;
+
+export type DeviceTypeCommonFeature = KVArr<NestedObjects>;
+
+export type DeviceSubtypeFeatureList = KVArr<KVArr<NestedObjects>>;
