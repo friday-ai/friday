@@ -144,21 +144,6 @@ export enum SystemVariablesNames {
   NUMBER_OF_BACKUPS = 'number_of_backups',
 }
 
-// TODO = Create a Json file with all type of device available
-export enum AvailableTypeOfDevice {
-  LIGHT = 'light',
-  SENSOR = 'sensor',
-}
-
-// TODO = Create a Json file with all sub type of device available
-export enum AvailableSubTypeOfDevice {
-  LIGHT_W = 'light_w',
-  LIGHT_RGB = 'light_rgb',
-  LIGHT_RGBW = 'light_rgbw',
-  SENSOR_TEMPERATURE = 'sensor_temperature',
-  SENSOR_HUMIDITY = 'sensor_humidity',
-}
-
 export const TopicHeaderSub = 'friday/master/';
 export const TopicHeaderPub = 'friday/satellite/';
 

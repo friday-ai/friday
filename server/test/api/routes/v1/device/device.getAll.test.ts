@@ -13,8 +13,8 @@ describe('GET /api/v1/device', () => {
         assert.deepEqual(res.body, [{
           id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
           name: 'Light',
-          type: 'light',
-          subType: 'light_rgb',
+          type: 'LIGHT',
+          subType: 'RGB',
           variable: {},
           unit: '',
           value: 'on',
@@ -24,8 +24,8 @@ describe('GET /api/v1/device', () => {
         {
           id: 'cc306435-eb0f-455c-b79d-a684b171e04d',
           name: 'Temperature',
-          type: 'sensor',
-          subType: 'sensor_temperature',
+          type: 'SENSOR',
+          subType: 'TEMPERATURE',
           variable: {},
           unit: '°C',
           value: '23',

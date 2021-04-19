@@ -1,13 +1,14 @@
 import {
   Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is,
+  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is, Validate,
 } from 'sequelize-typescript';
 
 import Plugin from './plugin';
 import Room from './room';
-import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../utils/constants';
 import State from './state';
 import { isOwnerExisting } from '../utils/databaseValidation';
+import { DEVICE_SUBTYPE_LIST } from '../utils/device.constants';
+import { DatabaseValidationError } from '../utils/errors/coreError';
 
 /**
  * Device model
@@ -53,12 +54,32 @@ export default class Device extends Model {
   name!: string;
 
   @AllowNull(false)
+  @Validate({
+    async checkSubtypeInstall(this: Device) {
+      if (!(this.type in DEVICE_SUBTYPE_LIST)) {
+        throw new DatabaseValidationError({
+          message: `${this.type} is not part of the available devices`,
+          name: 'device.type.not.exist',
+        });
+      }
+    },
+  })
   @Column
-  type!: AvailableTypeOfDevice;
+  type!: string;
 
   @AllowNull(false)
+  @Validate({
+    async checkSubtypeInstall(this: Device) {
+      if (!(this.subType in DEVICE_SUBTYPE_LIST[this.type])) {
+        throw new DatabaseValidationError({
+          message: `${this.subType} is not part of the subdevices available in the device ${this.type}`,
+          name: 'device.subtype.not.in.type',
+        });
+      }
+    },
+  })
   @Column
-  subType!: AvailableSubTypeOfDevice;
+  subType!: string;
 
   @Default({})
   @Column(DataType.JSON)

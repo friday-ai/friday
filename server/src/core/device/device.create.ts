@@ -13,8 +13,8 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  * friday.device.create({
  *    id: '8ae2dc77-a733-45b9-bbe6-69d837222dce',
  *    name: 'Light sample',
- *    type: AvailableTypeOfDevice.LIGHT,
- *    subType: AvailableSubTypeOfDevice.LIGHT_RGB,
+ *    type: 'LIGHT',
+ *    subType: 'RGB',
  *    variable: '',
  *    unit: '',
  *    value: 'on',

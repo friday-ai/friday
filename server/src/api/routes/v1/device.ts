@@ -8,8 +8,8 @@ import Friday from '../../../core/friday';
  * Device router
  * @apiDefine DeviceParam
  * @apiParam {String} name Name of the device.
- * @apiParam {AvailableTypeOfDevice} type Type of the device.
- * @apiParam {AvailableSubTypeOfDevice} subType Subtype of the device.
+ * @apiParam {String} type Type of the device.
+ * @apiParam {String} subType Subtype of the device.
  * @apiParam {Any} [variable] Variable attached of device.
  * @apiParam {String} [unit] Unit of device.
  * @apiParam {String} [value] Value of device.
@@ -36,8 +36,8 @@ export default class DeviceRouter {
    * {
    *   id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
    *   name: 'Light',
-   *   type: AvailableTypeOfDevice.LIGHT,
-   *   subType: AvailableSubTypeOfDevice.LIGHT_RGB,
+   *   type: 'LIGHT',
+   *   subType: 'RGB',
    *   variable: '',
    *   unit: '',
    *   value: 'on',
@@ -65,8 +65,8 @@ export default class DeviceRouter {
    * {
    *   id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
    *   name: 'Light',
-   *   type: AvailableTypeOfDevice.LIGHT,
-   *   subType: AvailableSubTypeOfDevice.LIGHT_RGB,
+   *   type: 'LIGHT',
+   *   subType: 'RGB',
    *   variable: '',
    *   unit: '',
    *   value: 'on',
@@ -115,8 +115,8 @@ export default class DeviceRouter {
    * [{
    *   id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
    *   name: 'Light',
-   *   type: AvailableTypeOfDevice.LIGHT,
-   *   subType: AvailableSubTypeOfDevice.LIGHT_RGB,
+   *   type: 'LIGHT',
+   *   subType: 'RGB',
    *   variable: '',
    *   unit: '',
    *   value: 'on',
@@ -143,8 +143,8 @@ export default class DeviceRouter {
    * {
    *   id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
    *   name: 'Light',
-   *   type: AvailableTypeOfDevice.LIGHT,
-   *   subType: AvailableSubTypeOfDevice.LIGHT_RGB,
+   *   type: 'LIGHT',
+   *   subType: 'RGB',
    *   variable: '',
    *   unit: '',
    *   value: 'on',

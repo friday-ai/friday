@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import Device from '../../../src/core/device';
-import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../../../src/utils/constants';
+import { DEVICE_SUBTYPE_LIST } from '../../../src/utils/device.constants';
 
 describe('Device.getAll', () => {
   const device = new Device();
@@ -12,8 +12,8 @@ describe('Device.getAll', () => {
     assert.deepEqual(devices, [{
       id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
       name: 'Light',
-      type: AvailableTypeOfDevice.LIGHT,
-      subType: AvailableSubTypeOfDevice.LIGHT_RGB,
+      type: 'LIGHT',
+      subType: DEVICE_SUBTYPE_LIST.LIGHT.RGB,
       variable: {},
       unit: '',
       value: 'on',
@@ -23,8 +23,8 @@ describe('Device.getAll', () => {
     {
       id: 'cc306435-eb0f-455c-b79d-a684b171e04d',
       name: 'Temperature',
-      type: AvailableTypeOfDevice.SENSOR,
-      subType: AvailableSubTypeOfDevice.SENSOR_TEMPERATURE,
+      type: 'SENSOR',
+      subType: DEVICE_SUBTYPE_LIST.SENSOR.TEMPERATURE,
       variable: {},
       unit: '°C',
       value: '23',
