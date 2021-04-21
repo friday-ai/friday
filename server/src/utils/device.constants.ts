@@ -35,7 +35,7 @@ const DEVICE_SUBTYPE_LIST: DeviceSubtypeList = {
   },
   LIGHT: {
     SIMPLE: 'SIMPLE',
-    DIMMABLE: 'DIMMABLE',
+    BRIGHTNESS: 'BRIGHTNESS',
     RGB: 'RGB',
     RGBW: 'RGBW',
     RGBWW: 'RGBWW',
@@ -160,25 +160,25 @@ const DEVICE_SUBTYPE_FEATURE_LIST: DeviceSubtypeFeatureList = {
   },
   LIGHT: {
     SIMPLE: {},
-    DIMMABLE: {
-      DIMMABLE: 'dimmable',
+    BRIGHTNESS: {
+      BRIGHTNESS: 'brightness',
     },
     RGB: {
-      DIMMABLE: 'dimmable',
+      BRIGHTNESS: 'brightness',
       HUE: 'hue',
     },
     RGBW: {
-      DIMMABLE: 'dimmable',
+      BRIGHTNESS: 'brightness',
       HUE: 'hue',
       WHITE: 'white',
     },
     RGBWW: {
-      DIMMABLE: 'dimmable',
+      BRIGHTNESS: 'brightness',
       HUE: 'hue',
       WARM_WHITE: 'warm-white',
     },
     RGBWCCT: {
-      DIMMABLE: 'dimmable',
+      BRIGHTNESS: 'brightness',
       HUE: 'hue',
       WARM_COLD_WHITE: 'warm-cold-white',
     },

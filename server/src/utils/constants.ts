@@ -56,9 +56,15 @@ export enum AvailableState {
   // Device states
   DEVICE_CONNECTED = 'device.connected',
   DEVICE_DISCONNECTED = 'device.disconnected',
+  DEVICE_POWER_ON = 'device.power.on',
+  DEVICE_POWER_OFF = 'device.power.off',
   DEVICE_STANDBY = 'device.standby',
   DEVICE_ERRORED = 'device.errored',
   DEVICE_WAITING_CONFIGURATION = 'device.waiting.configuration',
+  DEVICE_MEDIA_PLAY = 'device.media.play',
+  DEVICE_MEDIA_STOP = 'device.media.stop',
+  DEVICE_MEDIA_START_RECORD = 'device.media.start.record',
+  DEVICE_MEDIA_STOP_RECORD = 'device.media.stop.record',
 }
 
 export enum AvailableConditions {

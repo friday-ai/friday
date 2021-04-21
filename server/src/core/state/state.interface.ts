@@ -13,7 +13,7 @@ export default interface StateType {
   id?: string;
   owner: string;
   ownerType: StateOwner;
-  value: AvailableState;
+  value: AvailableState|number;
   last?: boolean;
   user?: UserType;
   room?: RoomType;

@@ -1,24 +1,26 @@
-import DeviceType from '../../device.interface';
 import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
 import { KVArr } from '../../../../utils/interfaces';
+import DeviceClass from '../../index';
 
-function setPlaylist(device: DeviceType, playlist: KVArr<string>) {
+async function setPlaylist(this: DeviceClass, id: string, playlist: KVArr<string>) {
   try {
+    const device = await this.getById(id);
     checkAvailableFeature(device, 'PLAYLIST');
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { device, playlist },
+      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, playlist },
     });
   }
 }
 
-function getPlaylist(device: DeviceType) {
+async function getPlaylist(this: DeviceClass, id: string) {
   try {
+    const device = await this.getById(id);
     checkAvailableFeature(device, 'PLAYLIST');
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { device },
+      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id },
     });
   }
 }

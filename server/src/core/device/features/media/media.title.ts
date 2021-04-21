@@ -1,28 +1,14 @@
-import DeviceType from '../../device.interface';
 import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
+import DeviceClass from '../../index';
 
-function setTitle(device: DeviceType, title: string) {
+export default async function getTitle(this: DeviceClass, id: string, title: string) {
   try {
+    const device = await this.getById(id);
     checkAvailableFeature(device, 'TITLE');
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { device, title },
+      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, title },
     });
   }
 }
-
-function getTitle(device: DeviceType) {
-  try {
-    checkAvailableFeature(device, 'TITLE');
-  } catch (e) {
-    throw error({
-      name: e.name, message: e.message, cause: e, metadata: { device },
-    });
-  }
-}
-
-export default {
-  setTitle,
-  getTitle,
-};
