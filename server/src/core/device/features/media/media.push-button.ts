@@ -1,14 +1,12 @@
-import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
 import DeviceClass from '../../index';
 
 export default async function pushButton(this: DeviceClass, id: string, button: string) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'PUSH_BUTTON');
+    await this.sendCommand('PUSH_BUTTON', id, [button]);
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, button },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'PUSH_BUTTON', id, button },
     });
   }
 }

@@ -14,7 +14,7 @@ async function setChannel(this: DeviceClass, id: string, channel: number) {
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, channel },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'CHANNEL', id, channel },
     });
   }
 }
@@ -27,12 +27,12 @@ async function getChannel(this: DeviceClass, id: string) {
     return state.value;
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'CHANNEL', id },
     });
   }
 }
 
-export default {
+export {
   setChannel,
   getChannel,
 };

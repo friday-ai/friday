@@ -14,7 +14,7 @@ async function setBrightness(this: DeviceClass, id: string, bright: number) {
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, bright },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'BRIGHTNESS', id, bright },
     });
   }
 }
@@ -27,12 +27,12 @@ async function getBrightness(this: DeviceClass, id: string) {
     return state.value;
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'BRIGHTNESS', id },
     });
   }
 }
 
-export default {
+export {
   setBrightness,
   getBrightness,
 };

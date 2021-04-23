@@ -14,7 +14,7 @@ async function setWarmColdWhite(this: DeviceClass, id: string, warmColdWite: num
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, warmColdWite },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'WARM_COLD_WHITE', id, warmColdWite },
     });
   }
 }

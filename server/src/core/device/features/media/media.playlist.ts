@@ -9,7 +9,7 @@ async function setPlaylist(this: DeviceClass, id: string, playlist: KVArr<string
     checkAvailableFeature(device, 'PLAYLIST');
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, playlist },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'PLAYLIST', id, playlist },
     });
   }
 }
@@ -20,12 +20,12 @@ async function getPlaylist(this: DeviceClass, id: string) {
     checkAvailableFeature(device, 'PLAYLIST');
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'PLAYLIST', id },
     });
   }
 }
 
-export default {
+export {
   setPlaylist,
   getPlaylist,
 };

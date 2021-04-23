@@ -15,7 +15,7 @@ export default async function powerOff(this: DeviceClass, id: string) {
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { deviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'POWER_OFF', id },
     });
   }
 }

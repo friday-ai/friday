@@ -8,7 +8,7 @@ export default async function getMetadata(this: DeviceClass, id: string) {
     checkAvailableFeature(device, 'METADATA');
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'METADATA', id },
     });
   }
 }

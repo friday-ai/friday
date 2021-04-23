@@ -29,7 +29,7 @@ async function setHue(this: DeviceClass, id: string, red: number, green: number,
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, rgb: { red, green, blue } },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'HUE', id, rgb: { red, green, blue } },
     });
   }
 }
@@ -45,12 +45,12 @@ async function getHue(this: DeviceClass, id: string) {
     return intToRgb(state.value);
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'HUE', id },
     });
   }
 }
 
-export default {
+export {
   setHue,
   getHue,
 };

@@ -16,7 +16,7 @@ export default async function volumeUP(this: DeviceClass, id: string, volume?: n
     }
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, volume },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'VOLUME_UP', id, volume },
     });
   }
 }

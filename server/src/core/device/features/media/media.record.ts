@@ -14,7 +14,7 @@ async function startRecord(this: DeviceClass, id: string) {
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'RECORD', id },
     });
   }
 }

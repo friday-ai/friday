@@ -16,7 +16,7 @@ export default async function volumeDown(this: DeviceClass, id: string, volume?:
     }
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id, volume },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'VOLUME_DOWN', id, volume },
     });
   }
 }

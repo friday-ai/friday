@@ -14,7 +14,7 @@ async function setState(this: DeviceClass, id: string, state: AvailableState) {
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { deviceClass: this, id, state },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'STATE', id, state },
     });
   }
 }
@@ -27,12 +27,12 @@ async function getState(this: DeviceClass, id: string) {
     return state.value;
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { deviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'STATE', id },
     });
   }
 }
 
-export default {
+export {
   setState,
   getState,
 };
