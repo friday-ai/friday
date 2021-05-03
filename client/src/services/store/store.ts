@@ -2,7 +2,7 @@ import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import appReducer from '../../components/App/app.reducer';
 
-const { PROD } = import.meta.env;
+const { DEV } = import.meta.env;
 
 const rootReducer = combineReducers({
   app: appReducer,
@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
 const store = configureStore({
   reducer: rootReducer,
   middleware: [...getDefaultMiddleware()],
-  devTools: PROD,
+  devTools: DEV,
 });
 
 export default store;

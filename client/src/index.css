@@ -8,7 +8,7 @@
   position: relative;
 }
 
-.geo-background::before{
+.geo-background::before {
   content: '';
   position: fixed;
   z-index: -1;
@@ -20,7 +20,7 @@
   height: 748px;
 }
 
-.geo-background::after{
+.geo-background::after {
   content: '';
   position: absolute;
   z-index: -1;
@@ -35,31 +35,32 @@
 }
 
 @media (max-width: 900px) and (max-height: 900px) {
-  .geo-background::before{
+  .geo-background::before {
     width: 275px;
     height: 374px;
   }
 
-  .geo-background::after{
+  .geo-background::after {
     width: 275px;
     height: 374px;
   }
 }
 
 @media (max-width: 600px) and (max-height: 600px) {
-  .geo-background::before{
+  .geo-background::before {
     display: none;
   }
 
-  .geo-background::after{
+  .geo-background::after {
     display: none;
   }
 }
 
 @layer components {
-  .btn-blue {
-    @apply mt-5 px-4 py-2 text-sm font-medium leading-5 shadow text-white transition-colors duration-150 border rounded-lg focus:outline-none bg-blue-500 hover:bg-opacity-80
+  .btn-base {
+    @apply mt-5 px-4 py-2 text-sm font-medium leading-5 shadow transition-colors duration-150 border rounded-lg focus:outline-none
   }
+
   .centered-container {
     @apply flex flex-col content-center justify-center items-center h-full
   }

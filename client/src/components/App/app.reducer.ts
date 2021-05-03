@@ -14,8 +14,8 @@ export type GlobalState = {
 
 const initialState: AppState = {
   drawerToggled: false,
-  currentView: 'dashboard',
-  theme: 'white',
+  currentView: 'Dashboard',
+  theme: 'base',
 };
 
 const appSlice = createSlice({

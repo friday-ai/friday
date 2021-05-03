@@ -16,6 +16,7 @@
     "lint:fix": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx --fix ./src\""
   },
   "dependencies": {
+    "@headlessui/react": "^1.0.0",
     "@reduxjs/toolkit": "^1.5.1",
     "@types/react-redux": "^7.1.16",
     "@types/react-router-dom": "^5.1.7",
