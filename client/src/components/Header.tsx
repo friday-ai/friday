@@ -1,5 +1,5 @@
 import React from 'react';
-import { HiChevronDoubleRight } from 'react-icons/all';
+import { HiChevronDoubleRight } from 'react-icons/hi';
 
 import { useAppDispatch, useAppSelector } from '../services/store/store';
 import { drawerToggled, toggleDrawer } from './App/app.reducer';

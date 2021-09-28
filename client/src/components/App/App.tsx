@@ -22,11 +22,11 @@ const App: React.FunctionComponent = () => {
   return (
     <ThemeProvider value={selectedTheme}>
       <Router history={history}>
-        <div className="flex h-screen overflow-y-hidden">
+        <div className="flex h-screen overflow-auto">
           <Drawer />
-          <div className="flex flex-col flex-1 h-full overflow-hidden">
+          <div className="flex flex-col flex-1 h-full overflow-auto">
             <Header />
-            <main className="flex-1 max-h-full p-5 overflow-hidden">
+            <main className="flex-1 max-h-full overflow-auto">
               <Switch>
                 <Route // TODO: This is during development stage
                   exact

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MdClose, MdDashboard, MdHelpOutline, MdLightbulbOutline, MdSettings } from 'react-icons/md';
-import { TiFlowChildren, VscExtensions } from 'react-icons/all';
+import { VscExtensions } from 'react-icons/vsc';
+import { TiFlowChildren } from 'react-icons/ti';
 import logoBlack from '../../assets/logo_black.svg';
 import logoWhite from '../../assets/logo_white.svg';
 import faviconWhite from '../../assets/favicon_white.svg';

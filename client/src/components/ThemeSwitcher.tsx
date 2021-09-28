@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { MdBrush, MdCheckCircle } from 'react-icons/all';
+import { MdBrush, MdCheckCircle } from 'react-icons/md';
 
 import { useTheme } from '../services/theme/themeProvider';
 import { changeTheme, theme as themeSelector } from './App/app.reducer';
