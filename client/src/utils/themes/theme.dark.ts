@@ -1,6 +1,9 @@
 import { KVArr } from '../interfaces';
 
 const dark: KVArr<KVArr<string>> = {
+  pwa: {
+    themeColor: '#2e3f51',
+  },
   app: {
     logo: 'white',
     favicon: 'white',

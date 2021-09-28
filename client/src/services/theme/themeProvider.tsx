@@ -17,6 +17,10 @@ const changeBackground = (color: string) => {
   document.body.className = `h-full ${color}`;
 };
 
+const changeThemeColorPwa = (color: string) => {
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', color);
+};
+
 export const ThemeContext = React.createContext<Context | undefined>(undefined);
 
 export const ThemeProvider = ({ value, children }: { value: string; children: React.ReactNode }): React.ReactElement => {
@@ -35,10 +39,12 @@ export const ThemeProvider = ({ value, children }: { value: string; children: Re
     const themeValues = themesList[value];
     setTheme(themeValues);
     changeBackground(themeValues.app.background);
+    changeThemeColorPwa(themeValues.pwa.themeColor);
   }, [value]);
 
   useEffect(() => {
     changeBackground(theme.app.background);
+    changeThemeColorPwa(theme.pwa.themeColor);
   });
 
   return <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>;

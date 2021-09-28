@@ -1,6 +1,9 @@
 import { KVArr } from '../interfaces';
 
 const base: KVArr<KVArr<string>> = {
+  pwa: {
+    themeColor: '#f3f5fc',
+  },
   app: {
     logo: 'black',
     favicon: 'black',
@@ -8,7 +11,7 @@ const base: KVArr<KVArr<string>> = {
   },
   illustrations: {
     primaryColor: '#121C42',
-    secondaryColor: 'bg-white',
+    secondaryColor: '#a3b0e6',
   },
   errorPages: {
     primaryText: 'text-blue-500',
