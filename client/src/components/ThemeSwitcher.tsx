@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
-import { MdBrush, MdCheckCircle } from 'react-icons/md';
+import { Icon } from '@iconify/react';
 
 import { useTheme } from '../services/theme/themeProvider';
 import { changeTheme, theme as themeSelector } from './App/app.reducer';
@@ -37,7 +37,7 @@ const ThemeSwitcher: React.FunctionComponent = () => {
         <>
           <div className="relative mt-1">
             <Listbox.Button className={`p-1 ${theme.header.buttonsBg} rounded-full focus:outline-none`}>
-              <MdBrush className={`object-cover w-8 h-8 rounded-full p-1 ${theme.header.text}`} />
+              <Icon icon="ic:baseline-brush" className={`object-cover w-8 h-8 rounded-full p-1 ${theme.header.text}`} />
             </Listbox.Button>
             <Transition show={open} as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
               <Listbox.Options
@@ -62,7 +62,7 @@ const ThemeSwitcher: React.FunctionComponent = () => {
                                 absolute inset-y-0 left-0 flex items-center pl-3
                               ${selected ? 'font-medium text-blue-900' : ''}`}
                           >
-                            <MdCheckCircle className="w-5 h-5" aria-hidden="true" />
+                            <Icon icon="ic:round-check-circle" className="w-5 h-5" aria-hidden="true" />
                           </span>
                         ) : null}
                       </>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { HiChevronDoubleRight } from 'react-icons/hi';
+import { Icon } from '@iconify/react';
 
 import { useAppDispatch, useAppSelector } from '../services/store/store';
 import { drawerToggled, toggleDrawer } from './App/app.reducer';
@@ -16,7 +16,10 @@ const Header: React.FunctionComponent = () => {
       <div className="flex items-center justify-between p-2">
         <div className="flex items-center space-x-3">
           <button type="button" className="p-2 rounded-md focus:outline-none" onClick={() => dispatch(toggleDrawer())}>
-            <HiChevronDoubleRight className={`w-6 h-6  ${theme.header.text} ${isSidebarOpen ? 'transform transition-transform -rotate-180' : ''}`} />
+            <Icon
+              icon="ic:baseline-keyboard-double-arrow-right"
+              className={`w-8 h-8  ${theme.header.text} ${isSidebarOpen ? 'transform transition-transform -rotate-180' : ''}`}
+            />
           </button>
         </div>
         <div className={`flex items-center space-x-3 ${theme.header.text}`}>

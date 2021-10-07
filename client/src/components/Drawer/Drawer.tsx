@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { MdClose, MdDashboard, MdHelpOutline, MdLightbulbOutline, MdSettings } from 'react-icons/md';
-import { VscExtensions } from 'react-icons/vsc';
-import { TiFlowChildren } from 'react-icons/ti';
+import { Icon } from '@iconify/react';
 import logoBlack from '../../assets/logo_black.svg';
 import logoWhite from '../../assets/logo_white.svg';
 import faviconWhite from '../../assets/favicon_white.svg';
@@ -43,7 +41,7 @@ const Drawer: React.FunctionComponent = () => {
           height={44}
         />
         <button type="button" className="p-2 rounded-md lg:hidden" onClick={() => dispatch(toggleDrawer())}>
-          <MdClose className={`w-6 h-6 ${theme.sidebar.closeButton}`} />
+          <Icon icon="ic:baseline-close" className={`w-6 h-6 ${theme.sidebar.closeButton}`} />
         </button>
       </div>
 
@@ -56,7 +54,7 @@ const Drawer: React.FunctionComponent = () => {
                 location.pathname.includes('/dashboard') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
             >
-              <MdDashboard className="w-6 h-6" />
+              <Icon icon="ic:baseline-dashboard" className="w-6 h-6" />
               <span className={`${!isSidebarOpen ? 'lg:hidden' : ''}`}>Dashboard</span>
             </Link>
           </li>
@@ -67,7 +65,7 @@ const Drawer: React.FunctionComponent = () => {
                 location.pathname.includes('/devices') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
             >
-              <MdLightbulbOutline className="w-6 h-6" />
+              <Icon icon="ic:outline-lightbulb" className="w-6 h-6" />
               <span className={`${!isSidebarOpen ? 'lg:hidden' : ''}`}>Devices</span>
             </Link>
           </li>
@@ -78,7 +76,7 @@ const Drawer: React.FunctionComponent = () => {
                 location.pathname.includes('/scenes') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
             >
-              <TiFlowChildren className="w-6 h-6" />
+              <Icon icon="typcn:flow-children" className="w-6 h-6" />
               <span className={`${!isSidebarOpen ? 'lg:hidden' : ''}`}>Scenes</span>
             </Link>
           </li>
@@ -89,7 +87,7 @@ const Drawer: React.FunctionComponent = () => {
                 location.pathname.includes('/plugins') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
             >
-              <VscExtensions className="w-6 h-6" />
+              <Icon icon="codicon:extensions" className="w-6 h-6" />
               <span className={`${!isSidebarOpen ? 'lg:hidden' : ''}`}>Plugins</span>
             </Link>
           </li>
@@ -105,7 +103,7 @@ const Drawer: React.FunctionComponent = () => {
               rel="noreferrer"
               className={`flex items-center p-2 space-x-2 rounded-lg ${!isSidebarOpen ? 'justify-center' : ''} ${theme.sidebar.elementInactive}`}
             >
-              <MdHelpOutline className="w-6 h-6" />
+              <Icon icon="ic:baseline-help-outline" className="w-6 h-6" />
               <span className={`${!isSidebarOpen ? 'lg:hidden' : ''}`}>Help</span>
             </a>
           </li>
@@ -116,7 +114,7 @@ const Drawer: React.FunctionComponent = () => {
                 location.pathname.includes('/settings') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
             >
-              <MdSettings className="w-6 h-6" />
+              <Icon icon="ic:baseline-settings" className="w-6 h-6" />
               <span className={`${!isSidebarOpen ? 'lg:hidden' : ''}`}>Settings</span>
             </Link>
           </li>
