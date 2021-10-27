@@ -34,6 +34,18 @@
   height: 748px;
 }
 
+.switch,
+.switch:checked,
+.switch:hover,
+.switch:focus,
+.switch:checked:hover,
+.switch:checked:focus {
+  background-color: transparent;
+  border-color: transparent;
+  border-width: 0;
+  background-image: none;
+}
+
 @media (max-width: 900px) and (max-height: 900px) {
   .geo-background::before {
     width: 275px;
