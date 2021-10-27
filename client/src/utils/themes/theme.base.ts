@@ -38,6 +38,11 @@ const base = {
     style: 'bg-white border border-gray-300 text-gray-600',
     arrow: 'bg-gray-300',
   },
+  notification: {
+    containerStyle: 'bg-white',
+    titleColor: '',
+    textColor: 'text-gray-500',
+  },
 };
 
 export default base;

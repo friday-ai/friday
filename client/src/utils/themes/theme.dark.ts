@@ -38,6 +38,11 @@ const dark = {
     style: 'bg-blueGray-900 border border-gray-500 text-gray-300',
     arrow: 'bg-gray-500',
   },
+  notification: {
+    containerStyle: 'bg-blueGray-900 border border-gray-500',
+    titleColor: 'text-white',
+    textColor: 'text-gray-200',
+  },
 };
 
 export default dark;
