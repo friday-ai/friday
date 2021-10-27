@@ -58,7 +58,19 @@
 
 @layer components {
   .btn-base {
-    @apply mt-5 px-4 py-2 text-sm font-medium leading-5 shadow transition-colors duration-150 border rounded-lg focus:outline-none
+    @apply text-center px-4 py-2 text-sm font-medium transition-colors ease-in duration-150 rounded-xl focus:outline-none
+  }
+
+  .icon-btn {
+    @apply btn-base inline-flex items-center
+  }
+
+  .card-base {
+    @apply rounded-2xl shadow-md p-5
+  }
+
+  .grid-container {
+    @apply grid gap-5 justify-center
   }
 
   .centered-container {
