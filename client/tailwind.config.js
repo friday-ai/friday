@@ -1,8 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
+// const colors = require('tailwindcss/colors')
 
 module.exports = {
   darkMode: 'media',
+  mode: 'jit',
   purge: {
     enabled: process.env.NODE_ENV === 'production',
     safeList: [],
@@ -39,6 +40,7 @@ module.exports = {
           "800": "#2e3f51",
           "900": "#131920"
         },
+        /*
         coolGray: colors.coolGray,
         trueGray: colors.trueGray,
         warmGray: colors.warmGray,
@@ -52,6 +54,7 @@ module.exports = {
         purple: colors.purple,
         fuchsia: colors.fuchsia,
         rose: colors.rose,
+         */
       },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],

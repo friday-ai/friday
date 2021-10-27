@@ -32,7 +32,7 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "serve": "^12.0.1",
-    "tailwindcss": "^2.0.4",
+    "tailwindcss": "^2.2.16",
     "uuid": "^8.3.2",
     "workbox-window": "^6.3.0"
   },
