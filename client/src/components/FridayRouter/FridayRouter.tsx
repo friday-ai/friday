@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { hasRoles, isAuth } from '../services/security';
-import Unauthorized from '../routes/Errors/Unauthorized';
-import { getPath } from '../utils/routes';
+import { hasRoles, isAuth } from '../../services/api/auth';
+import Unauthorized from '../../routes/Errors/Unauthorized';
+import { getPath } from '../../utils/routes';
 
 type RouteProps = {
   component: React.FunctionComponent;

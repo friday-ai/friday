@@ -6,21 +6,29 @@ import Login from '../routes/Login';
 import Dashboard from '../routes/Dashboard';
 import NotFound from '../routes/Errors/NotFound';
 import UnderConstruction from '../routes/Errors/UnderConstruction';
+import Scenes from '../routes/Scenes';
 
 const routes = [
   {
     key: v4(),
-    name: 'login',
+    name: 'Login',
     path: '/login',
     component: Login,
     roles: [],
   },
   {
     key: v4(),
-    name: 'dashboard',
+    name: 'Dashboard',
     path: '/dashboard',
     component: Dashboard,
     roles: ['ROLE_USER'],
+  },
+  {
+    key: v4(),
+    name: 'Scenes',
+    path: '/scenes',
+    component: Scenes,
+    roles: [],
   },
   {
     key: v4(),
@@ -31,7 +39,7 @@ const routes = [
   },
   {
     key: v4(),
-    name: 'underconstruction',
+    name: 'Underconstruction',
     path: '/underconstruction',
     component: UnderConstruction,
     roles: [],
@@ -83,4 +91,10 @@ const getPath = (name: string, params = {}): string => {
   return path;
 };
 
-export { getRoutes, getPath };
+const getName = (path: string): string => {
+  const routeFound = getRoutes().find((route) => route.path === path);
+  const name = routeFound ? routeFound.name : 'Dashboard';
+  return name;
+};
+
+export { getRoutes, getPath, getName };

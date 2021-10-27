@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Icon } from '@iconify/react';
 
-import { useAppDispatch, useAppSelector } from '../services/store/store';
-import { drawerToggled, toggleDrawer } from './App/app.reducer';
-import { useTheme } from '../services/theme/themeProvider';
-import ThemeSwitcher from './ThemeSwitcher';
+import { useLocation } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../services/store/store';
+import { drawerToggled, toggleDrawer, currentView, changeView } from '../App/app.reducer';
+import { useTheme } from '../../services/theme/ThemeProvider';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
+import { getName } from '../../utils/routes';
 
 const Header: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const isSidebarOpen = useAppSelector(drawerToggled);
+  const view = useAppSelector(currentView);
   const { theme } = useTheme();
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(changeView(getName(location.pathname)));
+  }, [dispatch, location]);
 
   return (
     <header className={`flex-shrink-0 border-b ${theme.header.background} ${theme.header.border}`}>
@@ -23,7 +31,7 @@ const Header: React.FunctionComponent = () => {
           </button>
         </div>
         <div className={`flex items-center space-x-3 ${theme.header.text}`}>
-          <span>Dashboard</span>
+          <span>{view}</span>
         </div>
         <div className="relative flex items-center space-x-3">
           <ThemeSwitcher />

@@ -3,11 +3,11 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import './app.css';
 
-import FridayRouter from '../FridayRouter';
+import FridayRouter from '../FridayRouter/FridayRouter';
 import NotFound from '../../routes/Errors/NotFound';
 
 import { getPath, getRoutes } from '../../utils/routes';
-import Header from '../Header';
+import Header from '../Header/Header';
 import Drawer from '../Drawer/Drawer';
 
 import history from '../../services/history';
