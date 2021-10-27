@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import logoBlack from '../../assets/logo_black.svg';
@@ -9,15 +9,25 @@ import faviconBlack from '../../assets/favicon_black.svg';
 import { useAppDispatch, useAppSelector } from '../../services/store/store';
 import { drawerToggled, toggleDrawer } from '../App/app.reducer';
 import { useTheme } from '../../services/theme/ThemeProvider';
+import useWindowEvent from '../../utils/useWindowEvent';
 
 const Drawer: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const isSidebarOpen = useAppSelector(drawerToggled);
   const location = useLocation();
   const { theme } = useTheme();
+  const ref = useRef<HTMLDivElement>(null);
+
+  useWindowEvent('mousedown', (event) => {
+    const target = event.target as HTMLElement;
+    if (ref.current && !ref.current.contains(target) && isSidebarOpen) {
+      dispatch(toggleDrawer());
+    }
+  });
 
   return (
     <aside
+      ref={ref}
       className={`${theme.sidebar.background} ${
         theme.sidebar.border
       } fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overflow-hidden
@@ -50,6 +60,7 @@ const Drawer: React.FunctionComponent = () => {
           <li className="mb-3">
             <Link
               to="/dashboard"
+              onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
               className={`flex items-center p-2 space-x-2 rounded-lg ${!isSidebarOpen ? 'justify-center' : ''} ${
                 location.pathname.includes('/dashboard') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
@@ -61,6 +72,7 @@ const Drawer: React.FunctionComponent = () => {
           <li className="mb-3">
             <Link
               to="/devices"
+              onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
               className={`flex items-center p-2 space-x-2 rounded-lg ${!isSidebarOpen ? 'justify-center' : ''} ${
                 location.pathname.includes('/devices') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
@@ -72,6 +84,7 @@ const Drawer: React.FunctionComponent = () => {
           <li className="mb-3">
             <Link
               to="/scenes"
+              onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
               className={`flex items-center p-2 space-x-2 rounded-lg ${!isSidebarOpen ? 'justify-center' : ''} ${
                 location.pathname.includes('/scenes') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
@@ -83,6 +96,7 @@ const Drawer: React.FunctionComponent = () => {
           <li className="mb-3 active">
             <Link
               to="/plugins"
+              onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
               className={`flex items-center p-2 space-x-2 rounded-lg ${!isSidebarOpen ? 'justify-center' : ''} ${
                 location.pathname.includes('/plugins') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
@@ -110,6 +124,7 @@ const Drawer: React.FunctionComponent = () => {
           <li>
             <Link
               to="/settings"
+              onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
               className={`flex items-center p-2 space-x-2 rounded-lg ${!isSidebarOpen ? 'justify-center' : ''} ${
                 location.pathname.includes('/settings') ? theme.sidebar.elementActive : theme.sidebar.elementInactive
               }`}
