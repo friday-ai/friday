@@ -1,6 +1,4 @@
-import { KVArr } from '../interfaces';
-
-const blue: KVArr<KVArr<string>> = {
+const blue = {
   pwa: {
     themeColor: '#0d1430',
   },

@@ -8,7 +8,7 @@ import faviconBlack from '../../assets/favicon_black.svg';
 
 import { useAppDispatch, useAppSelector } from '../../services/store/store';
 import { drawerToggled, toggleDrawer } from '../App/app.reducer';
-import { useTheme } from '../../services/theme/themeProvider';
+import { useTheme } from '../../services/theme/ThemeProvider';
 
 const Drawer: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import unauthorized from '../../assets/undraw_unauthorized.svg';
-import { useTheme } from '../../services/theme/themeProvider';
+import { useTheme } from '../../services/theme/ThemeProvider';
 import UndrawUnauthorized from '../../components/Illustrations/UndrawUnauthorized';
 
 const Unauthorized: React.FunctionComponent = () => {

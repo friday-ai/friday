@@ -1,6 +1,6 @@
 import React from 'react';
 import underConstruction from '../../assets/undraw_under_construction.svg';
-import { useTheme } from '../../services/theme/themeProvider';
+import { useTheme } from '../../services/theme/ThemeProvider';
 
 const UnderConstruction: React.FunctionComponent = () => {
   const { theme } = useTheme();

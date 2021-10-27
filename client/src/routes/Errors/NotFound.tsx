@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import UndrawNotFound from '../../components/Illustrations/UndrawNotFound';
-import { useTheme } from '../../services/theme/themeProvider';
+import { useTheme } from '../../services/theme/ThemeProvider';
 
 const NotFound: React.FunctionComponent = () => {
   const { theme } = useTheme();
+
   return (
     <div className="geo-background centered-container">
       <UndrawNotFound

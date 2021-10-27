@@ -11,7 +11,7 @@ import Header from '../Header/Header';
 import Drawer from '../Drawer/Drawer';
 
 import history from '../../services/history';
-import { ThemeProvider } from '../../services/theme/themeProvider';
+import { ThemeProvider } from '../../services/theme/ThemeProvider';
 import { useAppSelector } from '../../services/store/store';
 import { theme } from './app.reducer';
 

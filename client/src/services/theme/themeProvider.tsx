@@ -1,15 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { KVArr } from '../../utils/interfaces';
+import BaseTheme from '../../utils/themes/theme.base';
 
-type themeType = KVArr<KVArr<string>>;
+export type ThemeType = typeof BaseTheme;
 
-interface Context {
-  theme: themeType;
+interface ThemeContext {
+  theme: ThemeType;
 }
 
-const regexp = new RegExp(/[ \w-]+?(?=.ts)/gm);
-const files = import.meta.globEager('../../utils/themes/theme.*.ts');
-const themesList: KVArr<themeType> = {};
+const regexp = new RegExp(/[ \w-]+?(?=.ts)/m);
+const files = import.meta.globEager('../../utils/themes/theme.**.ts');
+const themesList: KVArr<ThemeType> = { base: BaseTheme };
+
+// Map themes and save it in list
+Object.entries(files).forEach((file) => {
+  const name = regexp.exec(`${file[0]}`);
+  // Escape base theme, this is default value and is already present in list
+  if (name !== null && name[0] !== 'base') {
+    const overloadedTheme = { ...BaseTheme, ...file[1].default };
+    Object.assign(themesList, { [name[0]]: overloadedTheme });
+  }
+});
 
 // Replace background color of body
 const changeBackground = (color: string) => {
@@ -21,18 +32,10 @@ const changeThemeColorPwa = (color: string) => {
   document.querySelector('meta[name="theme-color"]')?.setAttribute('content', color);
 };
 
-export const ThemeContext = React.createContext<Context | undefined>(undefined);
+const ThemeContext = React.createContext<ThemeContext>({ theme: BaseTheme });
 
 export const ThemeProvider = ({ value, children }: { value: string; children: React.ReactNode }): React.ReactElement => {
-  // Map themes and save it in list
-  Object.entries(files).forEach((file) => {
-    const name = regexp.exec(`${file[0]}`);
-    if (name !== null) {
-      Object.assign(themesList, { [name[0]]: file[1].default });
-    }
-  });
-
-  const [theme, setTheme] = useState<themeType>(themesList[value]);
+  const [theme, setTheme] = useState<ThemeType>(themesList[value]);
 
   // Reload colors
   useEffect(() => {
@@ -50,8 +53,8 @@ export const ThemeProvider = ({ value, children }: { value: string; children: Re
   return <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>;
 };
 
-export const useTheme = (): Context => {
-  const context = useContext(ThemeContext);
+export const useTheme = (): ThemeContext => {
+  const context = useContext<ThemeContext>(ThemeContext);
   if (context === undefined) {
     throw new Error('Theme context not provided');
   }
