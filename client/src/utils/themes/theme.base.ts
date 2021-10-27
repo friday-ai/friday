@@ -34,6 +34,10 @@ const base = {
     elementActive: 'text-blue-500 bg-blue-500 bg-opacity-30 hover:bg-opacity-10',
     elementInactive: 'hover:bg-blue-500 hover:bg-opacity-10',
   },
+  tooltip: {
+    style: 'bg-white border border-gray-300 text-gray-600',
+    arrow: 'bg-gray-300',
+  },
 };
 
 export default base;

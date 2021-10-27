@@ -34,6 +34,10 @@ const blue = {
     elementActive: 'text-white bg-white bg-opacity-20 hover:bg-opacity-10',
     elementInactive: 'hover:bg-white hover:bg-opacity-10',
   },
+  tooltip: {
+    style: 'bg-blue-600 border border-blue-300 text-gray-300',
+    arrow: 'bg-blue-300',
+  },
 };
 
 export default blue;

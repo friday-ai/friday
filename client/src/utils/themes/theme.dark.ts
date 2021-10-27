@@ -34,6 +34,10 @@ const dark = {
     elementActive: 'text-white bg-white bg-opacity-20 hover:bg-opacity-10',
     elementInactive: 'hover:bg-white hover:bg-opacity-10',
   },
+  tooltip: {
+    style: 'bg-blueGray-900 border border-gray-500 text-gray-300',
+    arrow: 'bg-gray-500',
+  },
 };
 
 export default dark;
