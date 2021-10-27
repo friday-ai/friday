@@ -23,14 +23,14 @@ const dark = {
   header: {
     text: 'text-white',
     background: 'bg-blueGray-900',
-    border: 'border-blue-500',
+    border: 'border-gray-500',
     buttonsBg: 'bg-blueGray-800',
   },
   sidebar: {
     closeButton: 'text-white',
     text: 'text-gray-400',
     background: 'bg-blueGray-900',
-    border: 'border-blue-500',
+    border: 'border-gray-500',
     elementActive: 'text-white bg-white bg-opacity-20 hover:bg-opacity-10',
     elementInactive: 'hover:bg-white hover:bg-opacity-10',
   },
