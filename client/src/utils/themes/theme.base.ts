@@ -43,6 +43,15 @@ const base = {
     titleColor: '',
     textColor: 'text-gray-500',
   },
+  modalConfirm: {
+    containerStyle: 'bg-white',
+    titleColor: 'text-gray-900',
+    textColor: 'text-gray-500',
+    iconColor: 'text-red-600',
+    iconHalo: 'bg-red-100',
+    cancelButton: 'border border-gray-300 bg-white text-gray-700 hover:bg-gray-50',
+    confirmButton: 'border border-transparent bg-red-600 text-base text-white hover:bg-red-700',
+  },
 };
 
 export default base;

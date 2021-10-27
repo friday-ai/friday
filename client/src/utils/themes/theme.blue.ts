@@ -43,6 +43,15 @@ const blue = {
     titleColor: 'text-white',
     textColor: 'text-gray-200',
   },
+  modalConfirm: {
+    containerStyle: 'bg-blue-600 border border-blue-300',
+    titleColor: 'text-white',
+    textColor: 'text-gray-200',
+    iconColor: 'text-red-800',
+    iconHalo: 'bg-red-200',
+    cancelButton: 'bg-blue-600 hover:bg-blue-800 border-blue-400 border text-white',
+    confirmButton: 'border border-transparent bg-red-800 text-base text-white hover:bg-red-700',
+  },
 };
 
 export default blue;

@@ -43,6 +43,15 @@ const dark = {
     titleColor: 'text-white',
     textColor: 'text-gray-200',
   },
+  modalConfirm: {
+    containerStyle: 'bg-blueGray-900 border border-gray-500',
+    titleColor: 'text-white',
+    textColor: 'text-gray-200',
+    iconColor: 'text-red-800',
+    iconHalo: 'bg-red-200',
+    cancelButton: 'bg-blueGray-900 hover:bg-blueGray-800 border-gray-500 border text-white',
+    confirmButton: 'border border-transparent bg-red-800 text-base text-white hover:bg-red-700',
+  },
 };
 
 export default dark;
