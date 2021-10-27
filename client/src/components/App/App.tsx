@@ -1,5 +1,6 @@
 import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 
 import './app.css';
 
@@ -14,38 +15,43 @@ import history from '../../services/history';
 import { ThemeProvider } from '../../services/theme/ThemeProvider';
 import { useAppSelector } from '../../services/store/store';
 import { theme } from './app.reducer';
+import { ApiProvider } from '../../services/api/ApiProvider';
 
 const prod = import.meta.env.PROD;
 
 const App: React.FunctionComponent = () => {
   const selectedTheme = useAppSelector(theme);
-  return (
-    <ThemeProvider value={selectedTheme}>
-      <Router history={history}>
-        <div className="flex h-screen overflow-auto">
-          <Drawer />
-          <div className="flex flex-col flex-1 h-full overflow-auto">
-            <Header />
-            <main className="flex-1 max-h-full overflow-auto">
-              <Switch>
-                <Route // TODO: This is during development stage
-                  exact
-                  path="/"
-                  render={() => {
-                    return prod === true ? <Redirect to={getPath('underconstruction')} /> : <Redirect to={getPath('dashboard')} />;
-                  }}
-                />
 
-                {getRoutes().map((route) => {
-                  return <FridayRouter path={route.path} key={route.key} component={route.component} roles={route.roles} />;
-                })}
-                <Route path="*" component={NotFound} />
-              </Switch>
-            </main>
+  return (
+    <ApiProvider>
+      <ThemeProvider value={selectedTheme}>
+        <Router history={history}>
+          <div className="flex h-screen overflow-auto">
+            <Drawer />
+            <div className="flex flex-col flex-1 h-full overflow-auto">
+              <Header />
+              <main className="flex-1 max-h-full overflow-auto">
+                <Switch>
+                  <Route // TODO: This is during development stage
+                    exact
+                    path="/"
+                    render={() => {
+                      return prod === true ? <Redirect to={getPath('underconstruction')} /> : <Redirect to={getPath('dashboard')} />;
+                    }}
+                  />
+
+                  {getRoutes().map((route) => {
+                    return <FridayRouter path={route.path} key={route.key} component={route.component} roles={route.roles} />;
+                  })}
+                  <Route path="*" component={NotFound} />
+                </Switch>
+              </main>
+            </div>
           </div>
-        </div>
-      </Router>
-    </ThemeProvider>
+        </Router>
+        <Toaster position="top-right" containerStyle={{ top: '75px', right: '30px' }} />
+      </ThemeProvider>
+    </ApiProvider>
   );
 };
 

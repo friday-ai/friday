@@ -1,0 +1,83 @@
+{
+  "get /api/v1/scene" : [
+    {
+      "id": "452fe9bd-4bce-4dbd-9314-c74257aef41c",
+      "icon": "fa-solid:music",
+      "name": "Music",
+      "description": "Play music in the house",
+      "status": "inactive"
+    },
+    {
+      "id": "4873661d-99cc-4397-962e-e31c1674dc4f",
+      "icon": "fa-solid:running",
+      "name": "Workout",
+      "description": "Play music in living room",
+      "status": "inactive"
+    },
+    {
+      "id": "d649e043-b3ad-4b7b-9a9c-532ac8c9b9bc",
+      "icon": "feather:sunrise",
+      "name": "Morning",
+      "description": "Open shutters and play music in house",
+      "status": "active"
+    },
+    {
+      "id": "09cf89d8-c8f9-49a3-a38b-a2a9d76eec86",
+      "icon": "mdi:netflix",
+      "name": "Relax",
+      "description": "Play Netflix",
+      "status": "active"
+    },
+    {
+      "id": "0ca9773e-8ecd-490e-9acd-ac516f719fa7",
+      "icon": "mdi:home-export-outline",
+      "name": "Left home",
+      "description": "Turn off all devices",
+      "status": "active"
+    },
+    {
+      "id": "01f431a1-255a-447c-9b63-c954b2f590be",
+      "icon": "feather:sunset",
+      "name": "Night",
+      "description": "Decrease the brightness",
+      "status": "errored",
+      "errorMessage": "Zwave module is not responding"
+    },
+    {
+      "id": "904b749e-b7e7-4c6b-82ad-68bd56b4acff",
+      "icon": "mdi:movie-open-outline",
+      "name": "Movie",
+      "description": "Turn on TV and decrease the brightness",
+      "status": "inactive"
+    },
+    {
+      "id": "f00644f9-d91c-4186-bd29-1e625605b17d",
+      "icon": "mdi:sleep",
+      "name": "Sleep",
+      "description": "Turn off devices and close shutters",
+      "status": "active"
+    },
+    {
+      "id": "c3fdd1e5-1866-4014-9a6a-c62a1dfb89c5",
+      "icon": "mdi:robot-vacuum-variant",
+      "name": "Vacuum",
+      "description": "Start vacuum cleaner",
+      "status": "errored",
+      "errorMessage": "The device 'Vacuum' is disconnected"
+    },
+    {
+      "id": "e4fa2b30-d5eb-4d86-9bd0-a18e61579504",
+      "icon": "ic:round-celebration",
+      "name": "Party",
+      "description": "Play music and turn off spotlights",
+      "status": "active"
+    },
+    {
+      "id": "abdd7553-3ada-4c2e-9609-44d33b208b40",
+      "icon": "mdi:sony-playstation",
+      "name": "Gaming",
+      "description": "Turn on TV and PS5",
+      "status": "active"
+    }
+  ]
+}

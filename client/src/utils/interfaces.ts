@@ -12,3 +12,12 @@ export interface SVGProps {
   primaryColor: string;
   secondaryColor: string;
 }
+
+export interface SceneType {
+  id: string;
+  icon: string;
+  name: string;
+  description: string;
+  status: string;
+  errorMessage?: string;
+}
