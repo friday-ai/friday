@@ -5,6 +5,8 @@ module.exports = {
     parser: "@typescript-eslint/parser",
   },
   rules: {
+    "@typescript-eslint/no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^_"}],
+    "react/jsx-props-no-spreading": [2, { "html": "ignore" }],
     "no-param-reassign": ["error", {"props": false}],
     "prettier/prettier": [
       "error",
