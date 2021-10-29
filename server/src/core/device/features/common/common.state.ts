@@ -1,33 +1,28 @@
-import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
-import { AvailableState, StateOwner } from '../../../../utils/constants';
+import { StateOwner } from '../../../../utils/constants';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-async function setState(this: DeviceClass, id: string, state: AvailableState) {
+async function setState(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'STATE');
-    this.state.set({
-      owner: device.id!,
+    await params.deviceClass.state.set({
+      owner: params.device.id!,
       ownerType: StateOwner.DEVICE,
-      value: state,
+      value: params.state!,
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'STATE', id, state },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'SET_STATE', params },
     });
   }
 }
 
-async function getState(this: DeviceClass, id: string) {
+async function getState(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'STATE');
-    const state = await this.state.getByOwner(device.id!);
+    const state = await params.deviceClass.state.getByOwner(params.device.id!);
     return state.value;
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'STATE', id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'GET_STATE', params },
     });
   }
 }

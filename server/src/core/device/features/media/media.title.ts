@@ -1,12 +1,12 @@
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-export default async function getTitle(this: DeviceClass, id: string, title: string) {
+export default async function getTitle(params: FeatureParameter) {
   try {
-    await this.sendCommand('TITLE', id, [title]);
+    // get title by event
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'TITLE', id, title },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'TITLE', params },
     });
   }
 }

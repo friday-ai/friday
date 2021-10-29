@@ -1,20 +1,17 @@
-import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
 import { AvailableState, StateOwner } from '../../../../utils/constants';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-export default async function stop(this: DeviceClass, id: string) {
+export default async function stop(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'STOP');
-    await this.state.set({
-      owner: device.id!,
+    await params.deviceClass.state.set({
+      owner: params.device.id!,
       ownerType: StateOwner.DEVICE,
       value: AvailableState.DEVICE_MEDIA_STOP,
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'STOP', id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'STOP', params },
     });
   }
 }

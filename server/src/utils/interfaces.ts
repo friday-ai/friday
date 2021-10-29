@@ -1,6 +1,8 @@
 import {
-  WebsocketMessageTypes, MqttMessageTypes, EventsType, TopicsTypes,
+  WebsocketMessageTypes, MqttMessageTypes, EventsType, TopicsTypes, AvailableState,
 } from './constants';
+import DeviceType from '../core/device/device.interface';
+import DeviceClass from '../core/device';
 
 /**
  * Options for core functions type 'getAll'
@@ -93,6 +95,22 @@ export interface PluginInstallOptions {
   name: string,
   repoTag: string;
   version: string;
+}
+
+export interface FeatureParameter {
+  device: DeviceType,
+  deviceClass: DeviceClass
+  state?: AvailableState|number
+  rgb?: {
+    red: number,
+    green: number,
+    blue: number
+  }
+}
+
+export interface DeviceTypeParameter {
+  deviceId: string,
+  state: AvailableState|number
 }
 
 export type NestedObjects = KVArr<string>;

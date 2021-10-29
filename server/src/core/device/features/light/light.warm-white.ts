@@ -1,12 +1,21 @@
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
+import { StateOwner } from '../../../../utils/constants';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-export default async function warmWhite(this: DeviceClass, id: string) {
+export default async function warmWhite(params: FeatureParameter) {
   try {
-    await this.sendCommand('WARM_WHITE', id);
+    if (typeof params.state !== 'string') {
+      throw new Error('State is not supported for this feature');
+    }
+
+    await params.deviceClass.state.set({
+      owner: params.device.id!,
+      ownerType: StateOwner.DEVICE,
+      value: params.state!,
+    });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'WARM_WHITE', id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'WARM_WHITE', params },
     });
   }
 }

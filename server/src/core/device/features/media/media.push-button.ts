@@ -1,12 +1,12 @@
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-export default async function pushButton(this: DeviceClass, id: string, button: string) {
+export default async function pushButton(params: FeatureParameter) {
   try {
-    await this.sendCommand('PUSH_BUTTON', id, [button]);
+    // send button by event
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'PUSH_BUTTON', id, button },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'PUSH_BUTTON', params },
     });
   }
 }

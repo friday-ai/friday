@@ -1,26 +1,22 @@
-import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
-import { KVArr } from '../../../../utils/interfaces';
-import DeviceClass from '../../index';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-async function setPlaylist(this: DeviceClass, id: string, playlist: KVArr<string>) {
+async function setPlaylist(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'PLAYLIST');
+    // set playlist
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'PLAYLIST', id, playlist },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'PLAYLIST', params },
     });
   }
 }
 
-async function getPlaylist(this: DeviceClass, id: string) {
+async function getPlaylist(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'PLAYLIST');
+    // get playlist by event
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'PLAYLIST', id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'PLAYLIST', params },
     });
   }
 }

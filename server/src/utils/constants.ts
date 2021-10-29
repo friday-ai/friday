@@ -62,7 +62,12 @@ export enum AvailableState {
   DEVICE_ERRORED = 'device.errored',
   DEVICE_WAITING_CONFIGURATION = 'device.waiting.configuration',
   DEVICE_MEDIA_PLAY = 'device.media.play',
+  DEVICE_MEDIA_PAUSE = 'device.media.pause',
   DEVICE_MEDIA_STOP = 'device.media.stop',
+  DEVICE_MEDIA_NEXT = 'device.media.next',
+  DEVICE_MEDIA_PREVIOUS = 'device.media.previous',
+  DEVICE_MEDIA_REWIND = 'device.media.rewind',
+  DEVICE_MEDIA_FAST_FORWARD = 'device.media.fast.forward',
   DEVICE_MEDIA_START_RECORD = 'device.media.start.record',
   DEVICE_MEDIA_STOP_RECORD = 'device.media.stop.record',
 }

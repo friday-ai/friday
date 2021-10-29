@@ -1,38 +1,37 @@
-import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
 import { StateOwner } from '../../../../utils/constants';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-async function setWarmColdWhite(this: DeviceClass, id: string, warmColdWite: number) {
+async function setWarmColdWhite(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'WARM_COLD_WHITE');
-    await this.state.set({
-      owner: device.id!,
+    if (typeof params.state !== 'string') {
+      throw new Error('State is not supported for this feature');
+    }
+
+    await params.deviceClass.state.set({
+      owner: params.device.id!,
       ownerType: StateOwner.DEVICE,
-      value: warmColdWite,
+      value: params.state!,
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'WARM_COLD_WHITE', id, warmColdWite },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'WARM_COLD_WHITE', params },
     });
   }
 }
 
-async function getWarmColdWhite(this: DeviceClass, id: string) {
+async function getWarmColdWhite(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'WARM_COLD_WHITE');
-    const state = await this.state.getByOwner(device.id!);
+    const state = await params.deviceClass.state.getByOwner(params.device.id!);
     return state.value;
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { DeviceClass: this, id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'WARM_COLD_WHITE', params },
     });
   }
 }
 
-export default {
+export {
   setWarmColdWhite,
   getWarmColdWhite,
 };

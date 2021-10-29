@@ -1,33 +1,32 @@
-import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
 import { StateOwner } from '../../../../utils/constants';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-async function setBrightness(this: DeviceClass, id: string, bright: number) {
+async function setBrightness(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'BRIGHTNESS');
-    await this.state.set({
-      owner: device.id!,
+    if (typeof params.state !== 'number') {
+      throw new Error('State is not supported for this feature');
+    }
+
+    await params.deviceClass.state.set({
+      owner: params.device.id!,
       ownerType: StateOwner.DEVICE,
-      value: bright,
+      value: params.state,
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'BRIGHTNESS', id, bright },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'BRIGHTNESS', params },
     });
   }
 }
 
-async function getBrightness(this: DeviceClass, id: string) {
+async function getBrightness(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'BRIGHTNESS');
-    const state = await this.state.getByOwner(device.id!);
+    const state = await params.deviceClass.state.getByOwner(params.device.id!);
     return state.value;
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'BRIGHTNESS', id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'BRIGHTNESS', params },
     });
   }
 }

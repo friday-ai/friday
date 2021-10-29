@@ -1,12 +1,17 @@
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
+import { FeatureParameter } from '../../../../utils/interfaces';
+import { AvailableState, StateOwner } from '../../../../utils/constants';
 
-export default async function pause(this: DeviceClass, id: string) {
+export default async function pause(params: FeatureParameter) {
   try {
-    await this.sendCommand('PAUSE', id);
+    await params.deviceClass.state.set({
+      owner: params.device.id!,
+      ownerType: StateOwner.DEVICE,
+      value: AvailableState.DEVICE_MEDIA_PAUSE,
+    });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'PAUSE', id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'PAUSE', params },
     });
   }
 }

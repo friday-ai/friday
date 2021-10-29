@@ -7,6 +7,8 @@ import StateClass from '../state/index';
 import checkAvailableFeature from './features/checkAvailableFeature';
 import error from '../../utils/errors/coreError';
 import { AvailableState } from '../../utils/constants';
+import Light from './features/light';
+import Media from './features/media';
 
 /**
  * Device
@@ -19,15 +21,18 @@ export default class Device {
   getById = getById;
 
   public state: StateClass;
+  private light: Light;
+  private media: Media;
 
   constructor(state: StateClass) {
     this.state = state;
+    this.light = new Light(this);
+    this.media = new Media(this);
   }
 
   public async sendCommand(action: string, id: string, value: [any]|null = null) {
     try {
-      const device = await this.getById(id);
-      checkAvailableFeature(device, action);
+      await this.checkDeviceAndFeature(id, action);
       // @Todo: API MQTT to call
     } catch (e) {
       throw error({
@@ -36,9 +41,12 @@ export default class Device {
     }
   }
 
-  public async light(feature: string, id: string, value: AvailableState|number) {
+  public async lightDevice(feature: string, id: string, value: AvailableState|number) {
     try {
-      console.log('titi');
+      await this.light.command(feature, {
+        deviceId: id,
+        state: value,
+      });
     } catch (e) {
       throw error({
         name: e.name, message: e.message, cause: e, metadata: { feature, id, value },
@@ -46,12 +54,27 @@ export default class Device {
     }
   }
 
-  public async media(feature: string, id: string, value: AvailableState|number) {
+  public async mediaDevice(feature: string, id: string, value: AvailableState|number) {
     try {
-      console.log('toto');
+      await this.media.command(feature, {
+        deviceId: id,
+        state: value,
+      });
     } catch (e) {
       throw error({
         name: e.name, message: e.message, cause: e, metadata: { feature, id, value },
+      });
+    }
+  }
+
+  private async checkDeviceAndFeature(id: string, feature: string) {
+    try {
+      const device = await this.getById(id);
+      checkAvailableFeature(device, feature);
+      return device;
+    } catch (e) {
+      throw error({
+        name: e.name, message: e.message, cause: e, metadata: { feature, id },
       });
     }
   }

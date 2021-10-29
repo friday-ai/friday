@@ -1,14 +1,12 @@
-import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-export default async function getMetadata(this: DeviceClass, id: string) {
+export default async function getMetadata(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'METADATA');
+    // get metadata by event
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'METADATA', id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'METADATA', params },
     });
   }
 }

@@ -1,12 +1,12 @@
 import error from '../../../../utils/errors/coreError';
-import DeviceClass from '../../index';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-export default async function launchGame(this: DeviceClass, id: string, game: string) {
+export default async function launchGame(params: FeatureParameter) {
   try {
-    await this.sendCommand('LAUNCH_GAME', id, [game]);
+    // launch game by event
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'LAUNCH_GAME', id, game },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'LAUNCH_GAME', params },
     });
   }
 }
