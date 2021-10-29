@@ -1,33 +1,28 @@
-import DeviceClass from '../../index';
-import checkAvailableFeature from '../checkAvailableFeature';
 import error from '../../../../utils/errors/coreError';
 import { StateOwner } from '../../../../utils/constants';
+import { FeatureParameter } from '../../../../utils/interfaces';
 
-async function setBattery(this: DeviceClass, id: string, battery: number) {
+async function setBattery(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'BATTERY');
-    this.state.set({
-      owner: device.id!,
+    await params.deviceClass.state.set({
+      owner: params.device.id!,
       ownerType: StateOwner.DEVICE,
-      value: battery,
+      value: params.state!,
     });
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'BATTERY', id, battery },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'SET_BATTERY', params },
     });
   }
 }
 
-async function getBattery(this: DeviceClass, id: string) {
+async function getBattery(params: FeatureParameter) {
   try {
-    const device = await this.getById(id);
-    checkAvailableFeature(device, 'BATTERY');
-    const state = await this.state.getByOwner(device.id!);
+    const state = await params.deviceClass.state.getByOwner(params.device.id!);
     return state.value;
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { feature: 'BATTERY', id },
+      name: e.name, message: e.message, cause: e, metadata: { feature: 'GET_BATTERY', params },
     });
   }
 }

@@ -83,8 +83,10 @@ const DEVICE_SUBTYPE_LIST: DeviceSubtypeList = {
 
 const DEVICE_TYPE_COMMON_FEATURE: DeviceTypeCommonFeature = {
   ALARM: {
-    STATE: 'state',
-    BATTERY: 'battery',
+    GET_STATE: 'getState',
+    SET_STATE: 'setState',
+    GET_BATTERY: 'getBattery',
+    SET_BATTERY: 'setBattery',
   },
   CAMERA: {
     POWER_OFF: 'powerOff',
@@ -96,7 +98,8 @@ const DEVICE_TYPE_COMMON_FEATURE: DeviceTypeCommonFeature = {
   COVER: {
     OPEN: 'open',
     CLOSE: 'close',
-    STATE: 'state',
+    GET_STATE: 'getState',
+    SET_STATE: 'setState',
     STOP: 'stop',
   },
   LIGHT: {
@@ -109,21 +112,27 @@ const DEVICE_TYPE_COMMON_FEATURE: DeviceTypeCommonFeature = {
   },
   NOTIFICATION: {},
   OUTLET: {
-    STATE: 'state',
+    GET_STATE: 'getState',
+    SET_STATE: 'setState',
     POWER_OFF: 'powerOff',
     POWER_ON: 'powerOn',
   },
   SENSOR: {
-    STATE: 'state',
-    BATTERY: 'battery',
+    GET_STATE: 'getState',
+    SET_STATE: 'setState',
+    GET_BATTERY: 'getBattery',
+    SET_BATTERY: 'setBattery',
   },
   SWITCH: {
-    STATE: 'state',
+    GET_STATE: 'getState',
+    SET_STATE: 'setState',
   },
   THERMOSTAT: {
-    BATTERY: 'battery',
+    GET_BATTERY: 'getBattery',
+    SET_BATTERY: 'setBattery',
     SETPOINT: 'setpoint',
-    STATE: 'state',
+    GET_STATE: 'getState',
+    SET_STATE: 'setState',
     MODE: 'mode',
     PLANING: 'planing',
   },
@@ -144,7 +153,8 @@ const DEVICE_SUBTYPE_FEATURE_LIST: DeviceSubtypeFeatureList = {
   },
   CAMERA: {
     IP: {
-      BATTERY: 'battery',
+      GET_BATTERY: 'getBattery',
+      SET_BATTERY: 'setBattery',
     },
     USB: {},
     RPI: {},
