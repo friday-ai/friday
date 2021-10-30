@@ -3,7 +3,7 @@ import checkAvailableFeature from './checkAvailableFeature';
 import { DeviceTypeParameter, FeatureParameter } from '../../../utils/interfaces';
 import error from '../../../utils/errors/coreError';
 import DeviceType from '../device.interface';
-import { getLightFeatures } from './features.helper';
+import getFeatures from './features.helper';
 
 export default class Media {
   private device: DeviceClass;
@@ -17,10 +17,10 @@ export default class Media {
     try {
       const device = await this.device.getById(params.deviceId);
 
-      checkAvailableFeature(device, action);
+      const featureList = checkAvailableFeature(device, action);
 
       if (this.checkMediaType(device)) {
-        const features = await getLightFeatures();
+        const features = await getFeatures(device, featureList);
 
         const paramFeature: FeatureParameter = {
           device,

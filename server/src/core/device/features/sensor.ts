@@ -1,17 +1,11 @@
-import { setState, getState } from './common/common.state';
-import { setBattery, getBattery } from './common/common.battery';
 import DeviceClass from '../index';
 import { DeviceTypeParameter, FeatureParameter } from '../../../utils/interfaces';
 import checkAvailableFeature from './checkAvailableFeature';
 import error from '../../../utils/errors/coreError';
 import DeviceType from '../device.interface';
+import getFeatures from './features.helper';
 
 export default class Sensor {
-  setState = setState;
-  getState = getState;
-  setBattery = setBattery;
-  getBattery = getBattery;
-
   private device: DeviceClass;
   private readonly SENSOR_CONST = 'SENSOR';
 
@@ -23,16 +17,18 @@ export default class Sensor {
     try {
       const device = await this.device.getById(params.deviceId);
 
-      checkAvailableFeature(device, action);
+      const featureList = checkAvailableFeature(device, action);
 
       if (this.checkSensorType(device)) {
+        const features = await getFeatures(device, featureList);
+
         const paramFeature: FeatureParameter = {
           device,
           deviceClass: this.device,
           state: params.state,
         };
-        // @ts-ignore
-        return this[action](paramFeature);
+
+        return features[action](paramFeature);
       }
       throw new Error('This device is not a sensor type');
     } catch (e) {

@@ -1,58 +1,24 @@
 import { glob as Glob } from 'glob';
-import powerOn from './common/common.power-on';
-import powerOff from './common/common.power-off';
-import { getState, setState } from './common/common.state';
 import { KVArr } from '../../../utils/interfaces';
+import DeviceType from '../device.interface';
 
-async function getLightFeatures() {
-  const lightFolder = `${__dirname}/light/`;
-  const lightFeatures: KVArr<Function> = {};
-  lightFeatures.powerOn = powerOn;
-  lightFeatures.powerOff = powerOff;
+export default async function getFeatures(device: DeviceType, featureTypeList: KVArr<string>): Promise<KVArr<Function>> {
+  const featuresList: KVArr<Function> = {};
 
-  Glob
-    .sync('*.ts', { cwd: lightFolder })
-    .map(async (filename) => {
-      const feats = await import(lightFolder + filename);
-      feats.map((property: string) => {
-        if (property === 'default') {
-          const funcName = feats[property].name;
-          lightFeatures[funcName] = feats.default;
-        } else {
-          lightFeatures[property] = feats[property];
-        }
+  return new Promise((resolve) => {
+    Glob
+      .sync(`${__dirname}/@(${device.type}|common)/*.ts`)
+      .map(async (filename) => {
+        const feats = await import(filename);
+        Object.keys(feats)
+          .map(async (property: string) => {
+            const funcName = property === 'default' ? feats[property].name : property;
+            const func = property === 'default' ? feats.default : feats[property];
+            if (Object.values(featureTypeList).includes(funcName)) {
+              featuresList[funcName] = func;
+            }
+          });
+        resolve(featuresList);
       });
-    });
-
-  return lightFeatures;
+  });
 }
-
-async function getMediaFeatures() {
-  const mediaFolder = `${__dirname}/media/`;
-  const mediaFeatures: KVArr<Function> = {};
-  mediaFeatures.powerOn = powerOn;
-  mediaFeatures.powerOff = powerOff;
-  mediaFeatures.getState = getState;
-  mediaFeatures.setState = setState;
-
-  Glob
-    .sync('*.ts', { cwd: mediaFolder })
-    .map(async (filename) => {
-      const feats = await import(mediaFolder + filename);
-      feats.map((property: string) => {
-        if (property === 'default') {
-          const funcName = feats[property].name;
-          mediaFeatures[funcName] = feats.default;
-        } else {
-          mediaFeatures[property] = feats[property];
-        }
-      });
-    });
-
-  return mediaFeatures;
-}
-
-export {
-  getLightFeatures,
-  getMediaFeatures,
-};

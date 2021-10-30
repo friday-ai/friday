@@ -3,7 +3,7 @@ import checkAvailableFeature from './checkAvailableFeature';
 import DeviceType from '../device.interface';
 import error from '../../../utils/errors/coreError';
 import { DeviceTypeParameter, FeatureParameter } from '../../../utils/interfaces';
-import { getLightFeatures } from './features.helper';
+import getFeatures from './features.helper';
 
 export default class Light {
   private device: DeviceClass;
@@ -17,10 +17,10 @@ export default class Light {
     try {
       const device = await this.device.getById(params.deviceId);
 
-      checkAvailableFeature(device, action);
+      const featureList = checkAvailableFeature(device, action);
 
       if (this.checkLightType(device)) {
-        const features = await getLightFeatures();
+        const features = await getFeatures(device, featureList);
 
         const paramFeature: FeatureParameter = {
           device,
