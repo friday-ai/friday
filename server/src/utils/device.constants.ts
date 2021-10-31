@@ -44,6 +44,7 @@ const DEVICE_SUBTYPE_LIST: DeviceSubtypeList = {
   MEDIA: {
     AUDIO: 'AUDIO',
     CONSOLE: 'CONSOLE',
+    IMAGE: 'IMAGE',
     VIDEO: 'VIDEO',
   },
   // Prise
@@ -223,6 +224,10 @@ const DEVICE_SUBTYPE_FEATURE_LIST: DeviceSubtypeFeatureList = {
       POWER_OFF: 'powerOff',
       POWER_ON: 'powerOn',
       LAUNCH_GAME: 'launchGame',
+    },
+    IMAGE: {
+      SET_URL: 'setUrl',
+      GET_URL: 'getUrl',
     },
     VIDEO: {
       POWER_OFF: 'powerOff',

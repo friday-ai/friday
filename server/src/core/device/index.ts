@@ -4,11 +4,10 @@ import destroy from './device.destroy';
 import getAll from './device.getAll';
 import getById from './device.getById';
 import StateClass from '../state/index';
-import checkAvailableFeature from './features/checkAvailableFeature';
+import getAvailableFeatures from './subdevice/subdevice.getFeatures';
 import error from '../../utils/errors/coreError';
-import { AvailableState } from '../../utils/constants';
-import Light from './features/light';
-import Media from './features/media';
+import { DeviceTypeParameter, FeatureParameter } from '../../utils/interfaces';
+import getFeatures from './features/features.helper';
 
 /**
  * Device
@@ -21,60 +20,29 @@ export default class Device {
   getById = getById;
 
   public state: StateClass;
-  private light: Light;
-  private media: Media;
 
   constructor(state: StateClass) {
     this.state = state;
-    this.light = new Light(this);
-    this.media = new Media(this);
   }
 
-  public async sendCommand(action: string, id: string, value: [any]|null = null) {
+  public async sendCommand(action: string, params: DeviceTypeParameter) {
     try {
-      await this.checkDeviceAndFeature(id, action);
-      // @Todo: API MQTT to call
-    } catch (e) {
-      throw error({
-        name: e.name, message: e.message, cause: e, metadata: { feature: action, id, value },
-      });
-    }
-  }
+      const device = await this.getById(params.deviceId);
 
-  public async lightDevice(feature: string, id: string, value: AvailableState|number) {
-    try {
-      await this.light.command(feature, {
-        deviceId: id,
-        state: value,
-      });
-    } catch (e) {
-      throw error({
-        name: e.name, message: e.message, cause: e, metadata: { feature, id, value },
-      });
-    }
-  }
+      const featureList = await getAvailableFeatures(device.type!, device.subType!);
 
-  public async mediaDevice(feature: string, id: string, value: AvailableState|number) {
-    try {
-      await this.media.command(feature, {
-        deviceId: id,
-        state: value,
-      });
-    } catch (e) {
-      throw error({
-        name: e.name, message: e.message, cause: e, metadata: { feature, id, value },
-      });
-    }
-  }
+      const features = await getFeatures(device.type!, featureList);
 
-  private async checkDeviceAndFeature(id: string, feature: string) {
-    try {
-      const device = await this.getById(id);
-      checkAvailableFeature(device, feature);
-      return device;
+      const paramFeature: FeatureParameter = {
+        device,
+        deviceClass: this,
+        state: params.state,
+      };
+
+      return features[action](paramFeature);
     } catch (e) {
       throw error({
-        name: e.name, message: e.message, cause: e, metadata: { feature, id },
+        name: e.name, message: e.message, cause: e, metadata: { action, params },
       });
     }
   }
