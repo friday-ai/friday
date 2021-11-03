@@ -61,6 +61,10 @@ export enum AvailableState {
   DEVICE_STANDBY = 'device.standby',
   DEVICE_ERRORED = 'device.errored',
   DEVICE_WAITING_CONFIGURATION = 'device.waiting.configuration',
+  DEVICE_OPEN_DETECTED = 'device.open.detected',
+  DEVICE_CLOSE_DETECTED = 'device.close.detected',
+  DEVICE_COVER_STOP = 'device.cover.stop',
+  DEVICE_MOVEMENT_DETECTED = 'device.movement.detected',
   DEVICE_MEDIA_PLAY = 'device.media.play',
   DEVICE_MEDIA_PAUSE = 'device.media.pause',
   DEVICE_MEDIA_STOP = 'device.media.stop',
@@ -70,6 +74,8 @@ export enum AvailableState {
   DEVICE_MEDIA_FAST_FORWARD = 'device.media.fast.forward',
   DEVICE_MEDIA_START_RECORD = 'device.media.start.record',
   DEVICE_MEDIA_STOP_RECORD = 'device.media.stop.record',
+  DEVICE_SWITCH_PUSH = 'device.switch.push',
+  DEVICE_OUTLET_SWITCH = 'device.outlet.switch',
 }
 
 export enum AvailableConditions {

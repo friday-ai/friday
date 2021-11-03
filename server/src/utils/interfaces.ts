@@ -3,6 +3,7 @@ import {
 } from './constants';
 import DeviceType from '../core/device/device.interface';
 import DeviceClass from '../core/device';
+import User from '../core/user';
 
 /**
  * Options for core functions type 'getAll'
@@ -100,6 +101,8 @@ export interface PluginInstallOptions {
 export interface FeatureParameter {
   device: DeviceType,
   deviceClass: DeviceClass
+  userClass?: User
+  userId?: string
   state?: AvailableState|number
   rgb?: {
     red: number,

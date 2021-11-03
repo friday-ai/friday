@@ -88,12 +88,16 @@ const DEVICE_TYPE_COMMON_FEATURE: DeviceTypeCommonFeature = {
     SET_STATE: 'setState',
     GET_BATTERY: 'getBattery',
     SET_BATTERY: 'setBattery',
+    GET_MODE: 'getMode',
+    SET_MODE: 'setMode',
   },
   CAMERA: {
     POWER_OFF: 'powerOff',
     POWER_ON: 'powerOn',
-    IMAGE: 'image',
-    MOVEMENT: 'movement',
+    SET_URL: 'setUrl',
+    GET_URL: 'getUrl',
+    SET_MOVEMENT: 'setMovement',
+    GET_MOVEMENT: 'getMovement',
     FACE_RECOGNITION: 'faceRecognition',
   },
   COVER: {
@@ -131,11 +135,14 @@ const DEVICE_TYPE_COMMON_FEATURE: DeviceTypeCommonFeature = {
   THERMOSTAT: {
     GET_BATTERY: 'getBattery',
     SET_BATTERY: 'setBattery',
-    SETPOINT: 'setpoint',
+    GET_SETPOINT: 'getSetpoint',
+    SET_SETPOINT: 'setSetpoint',
     GET_STATE: 'getState',
     SET_STATE: 'setState',
-    MODE: 'mode',
-    PLANING: 'planing',
+    GET_MODE: 'getMode',
+    SET_MODE: 'setMode',
+    GET_PLANING: 'getPlaning',
+    SET_PLANING: 'setPlaning',
   },
   UNKNOWN: {
     UNKNOWN: 'unknown',
@@ -248,7 +255,7 @@ const DEVICE_SUBTYPE_FEATURE_LIST: DeviceSubtypeFeatureList = {
   OUTLET: {
     SIMPLE: {},
     MULTIPLE: {
-      SWITCH_OUTLET: 'switch-outlet',
+      SWITCH_OUTLET: 'switchOutlet',
     },
   },
   SENSOR: {
