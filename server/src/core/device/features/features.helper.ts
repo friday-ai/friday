@@ -8,7 +8,7 @@ export default async function getFeatures(deviceType: string, featureTypeList: K
     Glob
       .sync(`@(${deviceType}|common)/*.ts`, { cwd: `${__dirname}/` })
       .map(async (filename) => {
-        const feats = await import(filename);
+        const feats = await import(`${__dirname}/${filename}`);
         Object.keys(feats)
           .map(async (property: string) => {
             const funcName = property === 'default' ? feats[property].name : property;

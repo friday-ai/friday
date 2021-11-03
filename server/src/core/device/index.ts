@@ -8,6 +8,7 @@ import getAvailableFeatures from './subdevice/subdevice.getFeatures';
 import error from '../../utils/errors/coreError';
 import { DeviceTypeParameter, FeatureParameter } from '../../utils/interfaces';
 import getFeatures from './features/features.helper';
+import checkAvailableFeature from './features/checkAvailableFeature';
 
 /**
  * Device
@@ -29,7 +30,9 @@ export default class Device {
     try {
       const device = await this.getById(params.deviceId);
 
-      const featureList = await getAvailableFeatures(device.type!, device.subType!);
+      checkAvailableFeature(device, action);
+
+      const featureList = getAvailableFeatures(device.type!, device.subType!);
 
       const features = await getFeatures(device.type!, featureList);
 
