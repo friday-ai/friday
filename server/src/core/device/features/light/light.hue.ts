@@ -28,7 +28,7 @@ async function setHue(params: FeatureParameter) {
     }
 
     await params.deviceClass.state.set({
-      owner: params.device.id!,
+      owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: rgbToInt(params.rgb!.red, params.rgb!.green, params.rgb!.blue),
     });
@@ -41,7 +41,7 @@ async function setHue(params: FeatureParameter) {
 
 async function getHue(params: FeatureParameter) {
   try {
-    const state = await params.deviceClass.state.getByOwner(params.device.id!);
+    const state = await params.deviceClass.state.getByOwner(params.deviceType.id!);
     if (typeof state.value === 'string') {
       throw new Error(`This value ${state.value} is not a number !`);
     }

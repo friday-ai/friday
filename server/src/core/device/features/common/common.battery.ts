@@ -5,7 +5,7 @@ import { FeatureParameter } from '../../../../utils/interfaces';
 async function setBattery(params: FeatureParameter) {
   try {
     await params.deviceClass.state.set({
-      owner: params.device.id!,
+      owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: params.state!,
     });
@@ -18,7 +18,7 @@ async function setBattery(params: FeatureParameter) {
 
 async function getBattery(params: FeatureParameter) {
   try {
-    const state = await params.deviceClass.state.getByOwner(params.device.id!);
+    const state = await params.deviceClass.state.getByOwner(params.deviceType.id!);
     return state.value;
   } catch (e) {
     throw error({

@@ -6,7 +6,7 @@ export default async function volumeUP(params: FeatureParameter) {
   try {
     if (typeof params.state === 'number') {
       await params.deviceClass.state.set({
-        owner: params.device.id!,
+        owner: params.deviceType.id!,
         ownerType: StateOwner.DEVICE,
         value: params.state,
       });

@@ -9,6 +9,8 @@ import error from '../../utils/errors/coreError';
 import { DeviceTypeParameter, FeatureParameter } from '../../utils/interfaces';
 import getFeatures from './features/features.helper';
 import checkAvailableFeature from './features/checkAvailableFeature';
+import { EventsType, MqttMessageTypes, TopicsTypes } from '../../utils/constants';
+import Event from '../../utils/event';
 
 /**
  * Device
@@ -21,14 +23,16 @@ export default class Device {
   getById = getById;
 
   public state: StateClass;
+  private event: Event;
 
-  constructor(state: StateClass) {
+  constructor(event: Event, state: StateClass) {
+    this.event = event;
     this.state = state;
   }
 
   public async sendCommand(action: string, params: DeviceTypeParameter) {
     try {
-      const device = await this.getById(params.deviceId);
+      const device = await this.getById(params.deviceId, 'withPlugin');
 
       checkAvailableFeature(device, action);
 
@@ -37,10 +41,27 @@ export default class Device {
       const features = await getFeatures(device.type!, featureList);
 
       const paramFeature: FeatureParameter = {
-        device,
+        deviceType: device,
         deviceClass: this,
         state: params.state,
       };
+
+      if (device.plugin !== undefined && device.plugin.satelliteId !== undefined) {
+        const { deviceClass, deviceType, ...newPayload } = paramFeature;
+
+        const message = {
+          receiver: device.plugin.satelliteId,
+          message: {
+            device: device.id,
+            method: action,
+            params: newPayload,
+          },
+          type: MqttMessageTypes.MESSAGE_SEND,
+          topic: TopicsTypes.PLUGIN_EXEC,
+        };
+
+        this.event.emit(EventsType.MQTT_PUBLISH, message);
+      }
 
       return features[action](paramFeature);
     } catch (e) {

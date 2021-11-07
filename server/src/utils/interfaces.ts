@@ -85,7 +85,7 @@ export interface MqttMessagePayload {
   type: MqttMessageTypes;
   sender: string;
   topic: TopicsTypes;
-  message: string;
+  message: string|object;
   receiver?: string;
 }
 
@@ -99,7 +99,7 @@ export interface PluginInstallOptions {
 }
 
 export interface FeatureParameter {
-  device: DeviceType,
+  deviceType: DeviceType,
   deviceClass: DeviceClass
   userClass?: User
   userId?: string

@@ -44,7 +44,7 @@ export default class Friday {
   public user = new User();
   public variable = new Variable();
   public state = new State(this.event, this.variable);
-  public device = new Device(this.state);
+  public device = new Device(this.event, this.state);
   public plugin = new Plugin(this.masterId, this.docker, this.state);
   public constants = Constants;
 

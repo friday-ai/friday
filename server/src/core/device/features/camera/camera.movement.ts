@@ -5,7 +5,7 @@ import { AvailableState, StateOwner } from '../../../../utils/constants';
 async function setMovement(params: FeatureParameter) {
   try {
     await params.deviceClass.state.set({
-      owner: params.device.id!,
+      owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: AvailableState.DEVICE_MOVEMENT_DETECTED,
     });
@@ -18,7 +18,7 @@ async function setMovement(params: FeatureParameter) {
 
 async function getMovement(params: FeatureParameter) {
   try {
-    const state = await params.deviceClass.state.getByOwner(params.device.id!);
+    const state = await params.deviceClass.state.getByOwner(params.deviceType.id!);
     return state.value;
   } catch (e) {
     throw error({

@@ -9,7 +9,7 @@ export default async function white(params: FeatureParameter) {
     }
 
     await params.deviceClass.state.set({
-      owner: params.device.id!,
+      owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: params.state,
     });

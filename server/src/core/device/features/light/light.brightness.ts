@@ -9,7 +9,7 @@ async function setBrightness(params: FeatureParameter) {
     }
 
     await params.deviceClass.state.set({
-      owner: params.device.id!,
+      owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: params.state,
     });
@@ -22,7 +22,7 @@ async function setBrightness(params: FeatureParameter) {
 
 async function getBrightness(params: FeatureParameter) {
   try {
-    const state = await params.deviceClass.state.getByOwner(params.device.id!);
+    const state = await params.deviceClass.state.getByOwner(params.deviceType.id!);
     return state.value;
   } catch (e) {
     throw error({
