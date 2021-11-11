@@ -28,6 +28,23 @@ describe('features.battery', () => {
     expect(message).equal('no-error');
   });
 
+  it('should not set battery on a device - Validation error', async () => {
+    let message = 'no-error';
+
+    try {
+      await setBattery({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+        state: 24,
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('Validation error: Validation notEmpty on owner failed,\nValidation error: Owner not found');
+  });
+
   it('should get battery on a device', async () => {
     let message = 'no-error';
     const device = await friday.device.getById('8bb02e82-42fb-43e5-a66a-80a92937547e');
@@ -42,5 +59,21 @@ describe('features.battery', () => {
       message = e.message;
     }
     expect(message).equal('no-error');
+  });
+
+  it('should not get battery on a device - no state', async () => {
+    let message = 'no-error';
+
+    try {
+      await getBattery({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('State not found');
   });
 });

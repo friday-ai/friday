@@ -3,6 +3,9 @@ import error from '../../../../utils/errors/coreError';
 import { StateOwner } from '../../../../utils/constants';
 import { Color, FeatureParameter } from '../../../../utils/interfaces';
 
+const RGB_MAX_VALUE = 255;
+const RGB_MIN_VALUE = 0;
+
 function rgbToInt(red: number, green: number, blue: number): number {
   let rgb = red;
   rgb = (rgb << 8) + green;
@@ -17,15 +20,21 @@ function intToRgb(int: number): Color {
   return { red, green, blue };
 }
 
+function checkRange(name: string, color: number) {
+  if (color > RGB_MAX_VALUE || color < RGB_MIN_VALUE) {
+    throw new Error(`The color ${name} must be in this range 0 to 255, actual is ${color}`);
+  }
+}
+
 async function setHue(params: FeatureParameter) {
   try {
     if (!('rgb' in params)) {
       throw new Error('RGB is missing from parameters');
     }
 
-    if (!('red' in params.rgb!) && !('green' in params.rgb!) && !('blue' in params.rgb!)) {
-      throw new Error('red, green and blue is missing from RGB parameters');
-    }
+    checkRange('red', params.rgb!.red);
+    checkRange('blue', params.rgb!.blue);
+    checkRange('green', params.rgb!.green);
 
     const state = await params.deviceClass.state.set({
       owner: params.deviceType.id!,
@@ -33,10 +42,10 @@ async function setHue(params: FeatureParameter) {
       value: rgbToInt(params.rgb!.red, params.rgb!.green, params.rgb!.blue),
     });
 
-    if (typeof state.value !== 'number') {
-      throw new Error(`This value ${state.value} is not a number !`);
+    if (typeof state.value === 'number') {
+      state.value = intToRgb(state.value);
     }
-    state.value = intToRgb(state.value);
+
     return state;
   } catch (e) {
     throw error({
@@ -48,13 +57,13 @@ async function setHue(params: FeatureParameter) {
 async function getHue(params: FeatureParameter) {
   try {
     const state = await params.deviceClass.state.getByOwner(params.deviceType.id!);
-    if (typeof state.value === 'string') {
-      const intRGB = parseInt(state.value, 10);
-      if (Number.isNaN(intRGB)) {
-        throw new Error(`This value ${state.value} is not a number !`);
-      }
-      state.value = intToRgb(intRGB);
+
+    if (typeof state.value === 'number') {
+      state.value = intToRgb(state.value);
+    } else if (typeof state.value !== 'object') {
+      state.value = intToRgb(parseInt(state.value, 10));
     }
+
     return state;
   } catch (e) {
     throw error({

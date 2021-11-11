@@ -28,6 +28,22 @@ describe('features.media.record', () => {
     expect(message).equal('no-error');
   });
 
+  it('should not start record on a media - Validation error', async () => {
+    let message = 'no-error';
+
+    try {
+      await startRecord({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('Validation error: Validation notEmpty on owner failed,\nValidation error: Owner not found');
+  });
+
   it('should stop record on a media', async () => {
     let message = 'no-error';
     const device = await friday.device.getById('9c338f0e-6397-4797-9f35-7cf90be6408a');
@@ -42,5 +58,21 @@ describe('features.media.record', () => {
       message = e.message;
     }
     expect(message).equal('no-error');
+  });
+
+  it('should not stop record on a media - Validation error', async () => {
+    let message = 'no-error';
+
+    try {
+      await stopRecord({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('Validation error: Validation notEmpty on owner failed,\nValidation error: Owner not found');
   });
 });

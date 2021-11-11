@@ -27,4 +27,20 @@ describe('features.switch.push', () => {
     }
     expect(message).equal('no-error');
   });
+
+  it('should not push on a switch - Validation error', async () => {
+    let message = 'no-error';
+
+    try {
+      await push({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('Validation error: Validation notEmpty on owner failed,\nValidation error: Owner not found');
+  });
 });

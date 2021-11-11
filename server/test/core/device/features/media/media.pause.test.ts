@@ -27,4 +27,20 @@ describe('features.media.pause', () => {
     }
     expect(message).equal('no-error');
   });
+
+  it('should not pause on a media - Validation error', async () => {
+    let message = 'no-error';
+
+    try {
+      await pause({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('Validation error: Validation notEmpty on owner failed,\nValidation error: Owner not found');
+  });
 });

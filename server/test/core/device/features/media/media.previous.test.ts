@@ -27,4 +27,20 @@ describe('features.media.previous', () => {
     }
     expect(message).equal('no-error');
   });
+
+  it('should not previous on a media - Validation error', async () => {
+    let message = 'no-error';
+
+    try {
+      await previous({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('Validation error: Validation notEmpty on owner failed,\nValidation error: Owner not found');
+  });
 });

@@ -36,4 +36,22 @@ describe('features.camera.faceRecognition', () => {
     }
     expect(message).equal('no-error');
   });
+
+  it('should not recognize user from a camera - Validation error', async () => {
+    let message = 'no-error';
+
+    try {
+      await faceRecognition({
+        userClass: friday.user,
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+        userId: '',
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('User not found');
+  });
 });

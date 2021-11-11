@@ -29,6 +29,23 @@ describe('features.state', () => {
     expect(message).equal('no-error');
   });
 
+  it('should not set state on a device - Validation error', async () => {
+    let message = 'no-error';
+
+    try {
+      await setState({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+        state: AvailableState.DEVICE_TRIGGERED,
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('Validation error: Validation notEmpty on owner failed,\nValidation error: Owner not found');
+  });
+
   it('should get state on a device', async () => {
     let message = 'no-error';
     const device = await friday.device.getById('2a5ba41e-1a52-4c0a-8c2a-83633cf0d55a');
@@ -43,5 +60,21 @@ describe('features.state', () => {
       message = e.message;
     }
     expect(message).equal('no-error');
+  });
+
+  it('should not get state on a device - no state', async () => {
+    let message = 'no-error';
+
+    try {
+      await getState({
+        deviceClass: friday.device,
+        deviceType: {
+          id: '',
+        },
+      });
+    } catch (e) {
+      message = e.message;
+    }
+    expect(message).equal('State not found');
   });
 });
