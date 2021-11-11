@@ -3,7 +3,7 @@ import { AvailableState } from '../../../../src/utils/constants';
 import { Color } from '../../../../src/utils/interfaces';
 import UserType from '../../../../src/core/user/user.interface';
 
-export default function testFeatureReturn(value: AvailableState|number|Color|string|UserType, state: any, type: string = 'set') {
+export default function testFeatureReturn(value: AvailableState | number | Color | string | UserType, state: any, type: string = 'set') {
   expect(state).to.be.an('object');
 
   expect(state).to.have.property('id');

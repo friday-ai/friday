@@ -85,7 +85,7 @@ export interface MqttMessagePayload {
   type: MqttMessageTypes;
   sender: string;
   topic: TopicsTypes;
-  message: string|object;
+  message: string | object;
   receiver?: string;
 }
 
@@ -109,13 +109,13 @@ export interface FeatureParameter {
   deviceClass: DeviceClass
   userClass?: User
   userId?: string
-  state?: AvailableState|number|Color
+  state?: AvailableState | number | Color
   rgb?: Color
 }
 
 export interface DeviceTypeParameter {
   deviceId: string,
-  state: AvailableState|Color|number
+  state: AvailableState | number | Color
 }
 
 export type NestedObjects = KVArr<string>;
