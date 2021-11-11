@@ -64,6 +64,12 @@ export enum AvailableState {
   DEVICE_OPEN_DETECTED = 'device.open.detected',
   DEVICE_CLOSE_DETECTED = 'device.close.detected',
   DEVICE_COVER_STOP = 'device.cover.stop',
+  DEVICE_PROGRAM = 'device.program',
+  DEVICE_MANUAL = 'device.manual',
+  DEVICE_TRIGGERED = 'device.triggered',
+  DEVICE_ARMED = 'device.armed',
+  DEVICE_DISARMED = 'device.disarmed',
+  DEVICE_LOCKED = 'device.locked',
   DEVICE_MOVEMENT_DETECTED = 'device.movement.detected',
   DEVICE_MEDIA_PLAY = 'device.media.play',
   DEVICE_MEDIA_PAUSE = 'device.media.pause',
@@ -74,8 +80,13 @@ export enum AvailableState {
   DEVICE_MEDIA_FAST_FORWARD = 'device.media.fast.forward',
   DEVICE_MEDIA_START_RECORD = 'device.media.start.record',
   DEVICE_MEDIA_STOP_RECORD = 'device.media.stop.record',
+  DEVICE_MEDIA_VOLUME_DOWN = 'device.media.volume.down',
+  DEVICE_MEDIA_VOLUME_UP = 'device.media.volume.up',
   DEVICE_SWITCH_PUSH = 'device.switch.push',
   DEVICE_OUTLET_SWITCH = 'device.outlet.switch',
+  DEVICE_LIGHT_WARM_COLD_WHITE = 'device.light.warm.cold.white',
+  DEVICE_LIGHT_WARM_WHITE = 'device.light.warm.white',
+  DEVICE_LIGHT_WHITE = 'device.light.white',
 }
 
 export enum AvailableConditions {

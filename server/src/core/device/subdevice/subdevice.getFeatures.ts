@@ -12,6 +12,10 @@ import { KVArr } from '../../../utils/interfaces';
  */
 export default function getAvailableFeatures(type: string, subtype: string): KVArr<string> {
   try {
+    if (!type && !subtype) {
+      throw new Error('This device has no information about his type or subtype');
+    }
+
     if (!(type in DEVICE_SUBTYPE_LIST)) {
       throw new Error(`${type} is not part of the available devices`);
     }

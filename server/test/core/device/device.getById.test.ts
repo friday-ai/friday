@@ -1,9 +1,15 @@
 import { expect, assert } from 'chai';
 import Device from '../../../src/core/device';
 import { DEVICE_SUBTYPE_LIST } from '../../../src/utils/device.constants';
+import Event from '../../../src/utils/event';
+import Variable from '../../../src/core/variable';
+import State from '../../../src/core/state';
 
 describe('Device.getById', () => {
-  const device = new Device();
+  const event = new Event();
+  const variable = new Variable();
+  const state = new State(event, variable);
+  const device = new Device(event, state);
 
   it('should return a device', async () => {
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3');

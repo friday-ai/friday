@@ -2,9 +2,15 @@ import { expect, assert } from 'chai';
 import Device from '../../../src/core/device';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/errors/coreError';
 import { DEVICE_SUBTYPE_LIST } from '../../../src/utils/device.constants';
+import Event from '../../../src/utils/event';
+import Variable from '../../../src/core/variable';
+import State from '../../../src/core/state';
 
 describe('Device.create', () => {
-  const device = new Device();
+  const event = new Event();
+  const variable = new Variable();
+  const state = new State(event, variable);
+  const device = new Device(event, state);
 
   it('should create a device', async () => {
     const createdDevice = await device.create({

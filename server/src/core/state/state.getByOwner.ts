@@ -1,3 +1,4 @@
+import sequelize from 'sequelize';
 import State from '../../models/state';
 import StateType from './state.interface';
 import error, { NotFoundError } from '../../utils/errors/coreError';
@@ -15,6 +16,7 @@ export default async function getByOwner(owner: string): Promise<StateType> {
   try {
     const state = await State.findOne({
       where: { owner },
+      order: [sequelize.literal('updatedAt DESC')],
     });
 
     if (state === null) {

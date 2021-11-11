@@ -8,7 +8,7 @@ async function setBrightness(params: FeatureParameter) {
       throw new Error('State is not supported for this feature');
     }
 
-    await params.deviceClass.state.set({
+    return await params.deviceClass.state.set({
       owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: params.state,
@@ -22,8 +22,7 @@ async function setBrightness(params: FeatureParameter) {
 
 async function getBrightness(params: FeatureParameter) {
   try {
-    const state = await params.deviceClass.state.getByOwner(params.deviceType.id!);
-    return state.value;
+    return await params.deviceClass.state.getByOwner(params.deviceType.id!);
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e, metadata: { feature: 'BRIGHTNESS', params },

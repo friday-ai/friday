@@ -92,6 +92,12 @@ export interface MqttMessagePayload {
 /**
  * Interface for plugin container
  */
+export interface Color {
+  red: number,
+  green: number,
+  blue: number
+}
+
 export interface PluginInstallOptions {
   name: string,
   repoTag: string;
@@ -103,17 +109,13 @@ export interface FeatureParameter {
   deviceClass: DeviceClass
   userClass?: User
   userId?: string
-  state?: AvailableState|number
-  rgb?: {
-    red: number,
-    green: number,
-    blue: number
-  }
+  state?: AvailableState|number|Color
+  rgb?: Color
 }
 
 export interface DeviceTypeParameter {
   deviceId: string,
-  state: AvailableState|number
+  state: AvailableState|Color|number
 }
 
 export type NestedObjects = KVArr<string>;

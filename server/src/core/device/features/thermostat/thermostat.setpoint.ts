@@ -4,7 +4,7 @@ import { StateOwner } from '../../../../utils/constants';
 
 async function setSetpoint(params: FeatureParameter) {
   try {
-    await params.deviceClass.state.set({
+    return await params.deviceClass.state.set({
       owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: params.state!,
@@ -18,8 +18,7 @@ async function setSetpoint(params: FeatureParameter) {
 
 async function getSetpoint(params: FeatureParameter) {
   try {
-    const state = await params.deviceClass.state.getByOwner(params.deviceType.id!);
-    return state.value;
+    return await params.deviceClass.state.getByOwner(params.deviceType.id!);
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e, metadata: { feature: 'GET_SETPOINT', params },

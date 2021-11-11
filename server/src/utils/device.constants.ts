@@ -224,7 +224,7 @@ const DEVICE_SUBTYPE_FEATURE_LIST: DeviceSubtypeFeatureList = {
       GET_PLAYLIST: 'getPlaylist',
       SET_PLAYLIST: 'setPlaylist',
       GET_METADATA: 'getMetadata',
-      VOLUME_UP: 'volumeUP',
+      VOLUME_UP: 'volumeUp',
       VOLUME_DOWN: 'volumeDown',
     },
     CONSOLE: {
@@ -248,7 +248,7 @@ const DEVICE_SUBTYPE_FEATURE_LIST: DeviceSubtypeFeatureList = {
       SET_CHANNEL: 'setChannel',
       PUSH_BUTTON: 'pushButton',
       GET_METADATA: 'getMetadata',
-      VOLUME_UP: 'volumeUP',
+      VOLUME_UP: 'volumeUp',
       VOLUME_DOWN: 'volumeDown',
     },
   },

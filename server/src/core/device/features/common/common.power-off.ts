@@ -4,7 +4,7 @@ import { FeatureParameter } from '../../../../utils/interfaces';
 
 export default async function powerOff(params: FeatureParameter) {
   try {
-    await params.deviceClass.state.set({
+    return await params.deviceClass.state.set({
       owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: AvailableState.DEVICE_POWER_OFF,

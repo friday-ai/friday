@@ -1,17 +1,13 @@
 import error from '../../../../utils/errors/coreError';
 import { FeatureParameter } from '../../../../utils/interfaces';
-import { StateOwner } from '../../../../utils/constants';
+import { AvailableState, StateOwner } from '../../../../utils/constants';
 
 export default async function white(params: FeatureParameter) {
   try {
-    if (typeof params.state !== 'number') {
-      throw new Error('State is not supported for this feature');
-    }
-
-    await params.deviceClass.state.set({
+    return await params.deviceClass.state.set({
       owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
-      value: params.state,
+      value: AvailableState.DEVICE_LIGHT_WHITE,
     });
   } catch (e) {
     throw error({

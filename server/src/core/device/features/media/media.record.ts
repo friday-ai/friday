@@ -4,7 +4,7 @@ import { FeatureParameter } from '../../../../utils/interfaces';
 
 async function startRecord(params: FeatureParameter) {
   try {
-    await params.deviceClass.state.set({
+    return await params.deviceClass.state.set({
       owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: AvailableState.DEVICE_MEDIA_START_RECORD,
@@ -18,7 +18,7 @@ async function startRecord(params: FeatureParameter) {
 
 async function stopRecord(params: FeatureParameter) {
   try {
-    await params.deviceClass.state.set({
+    return await params.deviceClass.state.set({
       owner: params.deviceType.id!,
       ownerType: StateOwner.DEVICE,
       value: AvailableState.DEVICE_MEDIA_STOP_RECORD,

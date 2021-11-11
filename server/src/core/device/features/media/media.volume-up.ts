@@ -1,16 +1,14 @@
 import error from '../../../../utils/errors/coreError';
-import { StateOwner } from '../../../../utils/constants';
+import { AvailableState, StateOwner } from '../../../../utils/constants';
 import { FeatureParameter } from '../../../../utils/interfaces';
 
-export default async function volumeUP(params: FeatureParameter) {
+export default async function volumeUp(params: FeatureParameter) {
   try {
-    if (typeof params.state === 'number') {
-      await params.deviceClass.state.set({
-        owner: params.deviceType.id!,
-        ownerType: StateOwner.DEVICE,
-        value: params.state,
-      });
-    }
+    return await params.deviceClass.state.set({
+      owner: params.deviceType.id!,
+      ownerType: StateOwner.DEVICE,
+      value: AvailableState.DEVICE_MEDIA_VOLUME_UP,
+    });
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e, metadata: { feature: 'VOLUME_UP', params },
