@@ -56,9 +56,37 @@ export enum AvailableState {
   // Device states
   DEVICE_CONNECTED = 'device.connected',
   DEVICE_DISCONNECTED = 'device.disconnected',
+  DEVICE_POWER_ON = 'device.power.on',
+  DEVICE_POWER_OFF = 'device.power.off',
   DEVICE_STANDBY = 'device.standby',
   DEVICE_ERRORED = 'device.errored',
   DEVICE_WAITING_CONFIGURATION = 'device.waiting.configuration',
+  DEVICE_OPEN_DETECTED = 'device.open.detected',
+  DEVICE_CLOSE_DETECTED = 'device.close.detected',
+  DEVICE_COVER_STOP = 'device.cover.stop',
+  DEVICE_PROGRAM = 'device.program',
+  DEVICE_MANUAL = 'device.manual',
+  DEVICE_TRIGGERED = 'device.triggered',
+  DEVICE_ARMED = 'device.armed',
+  DEVICE_DISARMED = 'device.disarmed',
+  DEVICE_LOCKED = 'device.locked',
+  DEVICE_MOVEMENT_DETECTED = 'device.movement.detected',
+  DEVICE_MEDIA_PLAY = 'device.media.play',
+  DEVICE_MEDIA_PAUSE = 'device.media.pause',
+  DEVICE_MEDIA_STOP = 'device.media.stop',
+  DEVICE_MEDIA_NEXT = 'device.media.next',
+  DEVICE_MEDIA_PREVIOUS = 'device.media.previous',
+  DEVICE_MEDIA_REWIND = 'device.media.rewind',
+  DEVICE_MEDIA_FAST_FORWARD = 'device.media.fast.forward',
+  DEVICE_MEDIA_START_RECORD = 'device.media.start.record',
+  DEVICE_MEDIA_STOP_RECORD = 'device.media.stop.record',
+  DEVICE_MEDIA_VOLUME_DOWN = 'device.media.volume.down',
+  DEVICE_MEDIA_VOLUME_UP = 'device.media.volume.up',
+  DEVICE_SWITCH_PUSH = 'device.switch.push',
+  DEVICE_OUTLET_SWITCH = 'device.outlet.switch',
+  DEVICE_LIGHT_WARM_COLD_WHITE = 'device.light.warm.cold.white',
+  DEVICE_LIGHT_WARM_WHITE = 'device.light.warm.white',
+  DEVICE_LIGHT_WHITE = 'device.light.white',
 }
 
 export enum AvailableConditions {
@@ -142,21 +170,6 @@ export enum SystemVariablesNames {
   FRIDAY_VERSION = 'friday_version',
   HISTORY_STATE_IN_DAYS = 'history_state_in_days',
   NUMBER_OF_BACKUPS = 'number_of_backups',
-}
-
-// TODO = Create a Json file with all type of device available
-export enum AvailableTypeOfDevice {
-  LIGHT = 'light',
-  SENSOR = 'sensor',
-}
-
-// TODO = Create a Json file with all sub type of device available
-export enum AvailableSubTypeOfDevice {
-  LIGHT_W = 'light_w',
-  LIGHT_RGB = 'light_rgb',
-  LIGHT_RGBW = 'light_rgbw',
-  SENSOR_TEMPERATURE = 'sensor_temperature',
-  SENSOR_HUMIDITY = 'sensor_humidity',
 }
 
 export const TopicHeaderSub = 'friday/master/';

@@ -1,6 +1,9 @@
 import {
-  WebsocketMessageTypes, MqttMessageTypes, EventsType, TopicsTypes,
+  WebsocketMessageTypes, MqttMessageTypes, EventsType, TopicsTypes, AvailableState,
 } from './constants';
+import DeviceType from '../core/device/device.interface';
+import DeviceClass from '../core/device';
+import User from '../core/user';
 
 /**
  * Options for core functions type 'getAll'
@@ -82,15 +85,43 @@ export interface MqttMessagePayload {
   type: MqttMessageTypes;
   sender: string;
   topic: TopicsTypes;
-  message: string;
+  message: string | object;
   receiver?: string;
 }
 
 /**
  * Interface for plugin container
  */
+export interface Color {
+  red: number,
+  green: number,
+  blue: number
+}
+
 export interface PluginInstallOptions {
   name: string,
   repoTag: string;
   version: string;
 }
+
+export interface FeatureParameter {
+  deviceType: DeviceType,
+  deviceClass: DeviceClass
+  userClass?: User
+  userId?: string
+  state?: AvailableState | number | Color
+  rgb?: Color
+}
+
+export interface DeviceTypeParameter {
+  deviceId: string,
+  state: AvailableState | number | Color
+}
+
+export type NestedObjects = KVArr<string>;
+
+export type DeviceSubtypeList = KVArr<NestedObjects>;
+
+export type DeviceTypeCommonFeature = KVArr<NestedObjects>;
+
+export type DeviceSubtypeFeatureList = KVArr<KVArr<NestedObjects>>;

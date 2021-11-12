@@ -33,7 +33,6 @@ export default class Friday {
   public event = new Event();
   public scheduler = new Scheduler(this.event, jobs);
   public action = new Action();
-  public device = new Device();
   public house = new House();
   public docker = new Docker();
   public room = new Room();
@@ -45,6 +44,7 @@ export default class Friday {
   public user = new User();
   public variable = new Variable();
   public state = new State(this.event, this.variable);
+  public device = new Device(this.event, this.state);
   public plugin = new Plugin(this.masterId, this.docker, this.state);
   public constants = Constants;
 

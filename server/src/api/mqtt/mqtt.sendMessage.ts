@@ -14,6 +14,9 @@ export default function sendMessage(this: MqttServer, message: MqttMessagePayloa
     if (typeof message.topic === 'undefined') {
       throw new BadParametersError({ name: 'Send mqtt message', message: 'Incorrect params topic', metadata: { message, options } });
     }
+    if (typeof message.message === 'object') {
+      message.message = JSON.stringify(message.message);
+    }
     if ((<any>Object).values(TopicsTypes).includes(message.topic)) {
       const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
 

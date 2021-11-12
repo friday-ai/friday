@@ -1,4 +1,3 @@
-import { AvailableTypeOfDevice, AvailableSubTypeOfDevice } from '../../utils/constants';
 import RoomType from '../room/room.interface';
 import StateType from '../state/state.interface';
 import PluginType from '../plugin/plugin.interface';
@@ -9,8 +8,8 @@ import PluginType from '../plugin/plugin.interface';
 export default interface DeviceType {
   id?: string;
   name?: string;
-  type?: AvailableTypeOfDevice;
-  subType?: AvailableSubTypeOfDevice;
+  type?: string;
+  subType?: string;
   variable?: any;
   unit?: string;
   value?: string;

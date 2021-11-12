@@ -5,6 +5,7 @@ import HouseType from '../house/house.interface';
 import PluginType from '../plugin/plugin.interface';
 import DeviceType from '../device/device.interface';
 import SatelliteType from '../satellite/satellite.interface';
+import { Color } from '../../utils/interfaces';
 
 /**
  * State interface.
@@ -13,7 +14,7 @@ export default interface StateType {
   id?: string;
   owner: string;
   ownerType: StateOwner;
-  value: AvailableState;
+  value: AvailableState | number | Color;
   last?: boolean;
   user?: UserType;
   room?: RoomType;
