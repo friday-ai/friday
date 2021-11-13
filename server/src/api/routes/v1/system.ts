@@ -33,4 +33,24 @@ export default class SystemRouter {
     const version = await this.friday.getVersion();
     res.json(version);
   };
+
+  /**
+   * Get master id
+   * @apiName infoMaster
+   * @apiDescription This route allows you to get friday master information
+   * @api {get} /api/v1/system/master/info
+   * @apiSampleRequest http://localhost:3000
+   * @apiGroup System
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "6fe3c56e-df6f-4b50-8464-e8bb4e2c9ba2",
+   * }
+   */
+  @Get({
+    path: '/master/info', authenticated: false, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+  })
+  infoMaster = async (req: Request, res: Response) => {
+    res.json(this.friday.masterId);
+  };
 }
