@@ -50,7 +50,7 @@ export default class Server {
     app.use(express.json() as RequestHandler);
 
     // middleware for secure HTTP headers
-    app.use(helmet());
+    app.use(helmet() as RequestHandler);
 
     // compress all response
     app.use(compression());
