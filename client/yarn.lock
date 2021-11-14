@@ -2256,7 +2256,7 @@ postcss@8.1.10, postcss@^8.1.6, postcss@^8.2.1, postcss@^8.3.8:
     source-map "^0.6.1"
     vfile-location "^3.2.0"
 
-postcss@^8.2.8:
+postcss@^8.3.11:
   version "8.3.11"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.3.11.tgz#c3beca7ea811cd5e1c4a3ec6d2e7599ef1f8f858"
   integrity sha512-hCmlUAIlUiav8Xdqw3Io4LcpA1DOt7h3LSTAC4G6JGHFFaWzI6qvFt9oilvl8BmkbBRX1IhM90ZAmpk68zccQA==
