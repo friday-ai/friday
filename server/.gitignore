@@ -57,8 +57,5 @@ friday-development.db-journal
 friday.db
 friday.db-journal
 
-# Package lock
-package-lock.json
-
 # Documentation files
 docs
