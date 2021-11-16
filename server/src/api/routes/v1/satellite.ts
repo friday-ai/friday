@@ -109,6 +109,31 @@ export default class SatelliteRouter {
   };
 
   /**
+   * discover a satellite
+   * @apiName discovery
+   * @apiDescription This route allows you to discover a satellite
+   * @api {get} /api/v1/satellite/discovery
+   * @apiGroup Satellite
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+   *   name: 'Main satellite',
+   *   roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3'
+   * }
+   */
+  @Get({
+    path: '/discovery', authenticated: false, rateLimit: false, aclMethod: 'discovery', aclResource: 'satellite',
+  })
+  discovery = async (req: Request, res: Response) => {
+    if (this.friday.mode === 'config') {
+      res.status(200).json({
+        mode: 'config',
+      });
+    }
+  };
+
+  /**
    * Get a satellite by id
    * @apiName getById
    * @apiDescription This route allows you to get a satellite with his identifier

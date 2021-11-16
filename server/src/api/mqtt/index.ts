@@ -39,6 +39,7 @@ export default class MqttServer {
   async start(mqttOptions: MqttOptions) {
     this.MqttClient = connect(mqttOptions);
     this.MqttClient.on('connect', () => {
+      this.friday.mqttSecret = mqttOptions;
       logger.info('Connected on mqtt broker');
 
       logger.info('Subscribing to friday\'s topics... ');

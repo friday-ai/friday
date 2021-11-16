@@ -47,6 +47,8 @@ export default class Friday {
   public device = new Device(this.event, this.state);
   public plugin = new Plugin(this.masterId, this.docker, this.state);
   public constants = Constants;
+  public mqttSecret: object = {};
+  public mode: string = 'config';
 
   private system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.scheduler, database);
 
