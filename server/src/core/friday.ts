@@ -21,6 +21,7 @@ import * as Constants from '../utils/constants';
 import { generateJwtSecret } from '../utils/jwt';
 import jobs from '../config/jobs';
 import error from '../utils/errors/coreError';
+import { FridayMode } from '../utils/constants';
 
 /**
  * Friday
@@ -48,7 +49,7 @@ export default class Friday {
   public plugin = new Plugin(this.masterId, this.docker, this.state);
   public constants = Constants;
   public mqttSecret: object = {};
-  public mode: string = 'config';
+  public mode: FridayMode = FridayMode.CONFIG_SATELLITE;
 
   private system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.scheduler, database);
 
@@ -60,6 +61,7 @@ export default class Friday {
       await database.init();
       this.masterId = await this.system.start();
     } catch (e) {
+      console.log(e);
       throw error(e);
     }
   }

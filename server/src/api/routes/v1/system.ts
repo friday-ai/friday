@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import { FridayRouter, Get } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
+import { encrypt } from '../../../utils/keyring';
+import { AvailableState } from '../../../utils/constants';
 
 /**
  * System router
@@ -35,8 +37,8 @@ export default class SystemRouter {
   };
 
   /**
-   * Get master id
-   * @apiName infoMaster
+   * get master id
+   * @apiName configMqtt
    * @apiDescription This route allows you to get friday master information
    * @api {get} /api/v1/system/info
    * @apiSampleRequest http://localhost:3000
@@ -44,19 +46,44 @@ export default class SystemRouter {
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response
    * {
-   *   mqttInfo: {
-            // @todo : describe
-        },
-        masterId: "6fe3c56e-df6f-4b50-8464-e8bb4e2c9ba2"
+   *   "masterId": "8ab51154-a436-4aa0-957d-ac34acc0ad1f",
    * }
    */
   @Get({
-    path: '/info', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+    path: '/info', authenticated: false, rateLimit: false, aclMethod: 'read', aclResource: 'system',
   })
-  infoMaster = async (req: Request, res: Response) => {
-    res.json({
-      mqttInfo: this.friday.mqttSecret,
-      masterId: this.friday.masterId,
+  masterInfo = async (req: Request, res: Response) => res.json({
+    masterId: this.friday.masterId,
+  });
+
+  /**
+   * get mqtt config, master id and satellite id
+   * @apiName configMqtt
+   * @apiDescription This route allows you to get mqtt configuration for satellite
+   * @api {get} /api/v1/system/info
+   * @apiSampleRequest http://localhost:3000
+   * @apiGroup System
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "mqttInfo": "+OLvbqHxcPS2xAZGofMog4RQV1m2+zkp3tNIrm3g1jQUxMxVo7n/siFtOSV1WOkAFc1yFRrFgYexj4ZS07IRL",
+   *   "satelliteId": "tDTnpdKPSZAt/nv6cLvh8jtLmpM7sxrNpw6/CVPdOu9vQtKrx0sl/8qUEOPCOkAFc1yF"
+   * }
+   */
+  @Get({
+    path: '/mqtt/config', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+  })
+  configMqtt = async (req: Request, res: Response) => {
+    const satellites = await this.friday.satellite.getAll({ scope: 'withState' });
+    const satellite = satellites.filter((s) => s.state!.value === AvailableState.SATELLITE_WAITING_CONFIGURATION);
+    if (satellite.length === 0) {
+      return res.status(404).json('Satellite is not configured !');
+    }
+
+    const satelliteId = satellite[0].id;
+    return res.json({
+      mqttInfo: encrypt(JSON.stringify(this.friday.mqttSecret), satelliteId!)[0],
+      satelliteId: encrypt(satelliteId!, this.friday.masterId)[0],
     });
   };
 }

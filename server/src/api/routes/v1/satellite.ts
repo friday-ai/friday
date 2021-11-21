@@ -3,6 +3,7 @@ import {
   FridayRouter, Get, Patch, Post, Delete,
 } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
+import { FridayMode } from '../../../utils/constants';
 
 /**
  * Satellite router
@@ -126,11 +127,22 @@ export default class SatelliteRouter {
     path: '/discovery', authenticated: false, rateLimit: false, aclMethod: 'discovery', aclResource: 'satellite',
   })
   discovery = async (req: Request, res: Response) => {
-    if (this.friday.mode === 'config') {
+    if (this.friday.mode === FridayMode.CONFIG_SATELLITE) {
+      this.friday.mode = FridayMode.NOMINAL;
       res.status(200).json({
         mode: 'config',
       });
     }
+  };
+
+  @Get({
+    path: '/login', authenticated: false, rateLimit: false, aclMethod: 'login', aclResource: 'satellite',
+  })
+  login = async (req: Request, res: Response) => {
+    const url = `http://${req.query.ip}:8080/login`;
+    // redirect to url
+    console.log(url);
+    res.json();
   };
 
   /**

@@ -194,3 +194,11 @@ export enum TopicsTypes {
   PLUGIN_RESTART = 'plugin/restart',
   PLUGIN_STOP = 'plugin/stop',
 }
+
+export enum FridayMode {
+  NOMINAL = 'nominal',
+  CONFIG = 'config',
+  CONFIG_SATELLITE = 'config.satellite',
+}
+
+export const SALT_KEY = '5a0240fc-e5a6-4293-b1d0-36f6e0c6c0ae';

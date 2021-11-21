@@ -11,7 +11,7 @@ export default function handleMessage(this: MqttServer, topic: string, message: 
 
     if (Object.values(Topics).includes(finalTopic)) {
       logger.info(`Received message on topic ${topic} (${message})`);
-      this.handlers[finalTopic](JSON.parse(message));
+      this.handlers[finalTopic](this, JSON.parse(message));
     }
   } catch (e) {
     throw error({
