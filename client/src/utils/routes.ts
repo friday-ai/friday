@@ -1,12 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { v4 } from 'uuid';
 
 import Login from '../routes/Login';
 import Dashboard from '../routes/Dashboard';
 import NotFound from '../routes/Errors/NotFound';
-import UnderConstruction from '../routes/Errors/UnderConstruction';
 import Scenes from '../routes/Scenes';
+import Satellites from '../routes/Satellites';
 
 const routes = [
   {
@@ -32,16 +31,16 @@ const routes = [
   },
   {
     key: v4(),
-    name: '404',
-    path: '/404',
-    component: NotFound,
+    name: 'Satellites and Plugins',
+    path: '/satellites',
+    component: Satellites,
     roles: [],
   },
   {
     key: v4(),
-    name: 'Underconstruction',
-    path: '/underconstruction',
-    component: UnderConstruction,
+    name: '404',
+    path: '/404',
+    component: NotFound,
     roles: [],
   },
 ];
@@ -50,7 +49,7 @@ type Route = {
   key: string;
   name: string;
   path: string;
-  component: React.FunctionComponent;
+  component: React.FC;
   roles: string[];
   routes?: Route[];
 };
@@ -80,6 +79,7 @@ const getRoutes = (): Route[] => {
   return flatRoutes;
 };
 
+// TODO: fix any warning
 const getPath = (name: string, params = {}): string => {
   const routeFound = getRoutes().find((route) => route.name === name);
   let path = routeFound ? routeFound.path : '/';

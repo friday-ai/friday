@@ -1,89 +1,67 @@
-import React, { Fragment } from 'react';
-import { Listbox, Transition } from '@headlessui/react';
+import React, { useEffect } from 'react';
 import { Icon } from '@iconify/react';
-
-import { useTheme } from '../../services/theme/ThemeProvider';
-import { changeTheme, theme as themeSelector } from '../App/app.reducer';
 import { useAppDispatch, useAppSelector } from '../../services/store/store';
+import { changeTheme, theme } from '../App/app.reducer';
+import { ThemeType } from '../../utils/interfaces';
+import themes from '../../services/theme/themes';
 
-// TODO: Build list dynamically (with translation)
-const themesList = [
-  {
-    name: 'White',
-    value: 'base',
-  },
-  {
-    name: 'Dark',
-    value: 'dark',
-  },
-  {
-    name: 'Blue',
-    value: 'blue',
-  },
-];
+interface ThemesListProps {
+  list: ThemeType[];
+  change: (value: string) => void;
+  selected: string;
+}
 
-const ThemeSwitcher: React.FunctionComponent = () => {
+const ThemeList = ({ list, change, selected }: ThemesListProps): JSX.Element => {
+  return (
+    <>
+      {list.map((t) => (
+        <li key={JSON.stringify(t)}>
+          {t.name === 'separator' && t.value === 'separator' ? (
+            <div className="divider divider-sm mx-3" />
+          ) : (
+            <button
+              type="button"
+              aria-label={t.name}
+              onClick={() => change(t.value)}
+              data-set-theme={t.value}
+              data-act-class="active"
+              className={`${selected === t.value && 'active'} mb-2`}
+            >
+              {t.name}
+            </button>
+          )}
+        </li>
+      ))}
+    </>
+  );
+};
+
+const ThemeSwitcher: React.FC = () => {
   const dispatch = useAppDispatch();
-  const selectedTheme = useAppSelector(themeSelector);
-  const { theme } = useTheme();
+  const selectedTheme = useAppSelector(theme);
 
-  const onChange = (val: string) => {
-    dispatch(changeTheme(val));
+  const handleChange = (value: string) => {
+    document.documentElement.setAttribute('data-theme', value);
+    dispatch(changeTheme(value));
   };
 
+  useEffect(() => {
+    // Force Init theme
+    document.documentElement.setAttribute('data-theme', selectedTheme);
+    dispatch(changeTheme(selectedTheme));
+  });
+
   return (
-    <Listbox value={selectedTheme} onChange={onChange}>
-      {({ open }) => (
-        <>
-          <div className="relative inline-block text-left">
-            <Listbox.Button className={`p-1 ${theme.header.buttonsBg} rounded-full focus:outline-none`}>
-              <Icon icon="ic:baseline-brush" className={`object-cover w-8 h-8 rounded-full p-1 ${theme.header.text}`} />
-            </Listbox.Button>
-            <Transition
-              show={open}
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <Listbox.Options
-                static
-                className="absolute z-50 transform -translate-x-2/4 min-w-max py-1 mt-1 overflow-auto text-base bg-white rounded-lg shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
-              >
-                {themesList.map((option) => (
-                  <Listbox.Option
-                    key={option.name}
-                    className={({ active }) =>
-                      `${active ? 'text-blue-700 bg-blue-100' : 'text-gray-400'}
-                          cursor-default select-none relative py-2 pl-10 pr-4`
-                    }
-                    value={option.value}
-                  >
-                    {({ selected, active }) => (
-                      <>
-                        <span className={`${selected ? 'font-medium text-blue-900' : 'font-normal'} block truncate`}>{option.name}</span>
-                        {selected && (
-                          <span
-                            className={`${active ? 'text-blue-700' : 'text-gray-400'}
-                                absolute inset-y-0 left-0 flex items-center pl-3
-                              ${selected ? 'font-medium text-blue-900' : ''}`}
-                          >
-                            <Icon icon="ic:round-check-circle" className="w-5 h-5" aria-hidden="true" />
-                          </span>
-                        )}
-                      </>
-                    )}
-                  </Listbox.Option>
-                ))}
-              </Listbox.Options>
-            </Transition>
-          </div>
-        </>
-      )}
-    </Listbox>
+    <div title="Change Theme" className="dropdown dropdown-end">
+      <button aria-label="Change Theme" type="button" tabIndex={0} className="btn btn-ghost btn-circle bg-base-300 text-primary">
+        <Icon icon="mdi:palette-swatch-variant" className="w-5 h-5" />
+      </button>
+      <div className="dropdown-base text-base-content border border-base-300">
+        <ul className="p-4 menu compact">
+          <ThemeList list={themes} change={handleChange} selected={selectedTheme} />
+        </ul>
+      </div>
+    </div>
   );
 };
 

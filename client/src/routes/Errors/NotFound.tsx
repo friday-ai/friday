@@ -1,25 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import UndrawNotFound from '../../components/Illustrations/UndrawNotFound';
-import { useTheme } from '../../services/theme/ThemeProvider';
 
-const NotFound: React.FunctionComponent = () => {
-  const { theme } = useTheme();
-
+const NotFound: React.FC = () => {
   return (
     <div className="geo-background centered-container">
-      <UndrawNotFound
-        className="self-center"
-        primaryColor={theme.illustrations.primaryColor}
-        secondaryColor={theme.illustrations.secondaryColor}
-        width="500"
-        height="300"
-      />
-      <h1 className={`mt-5 text-4xl font-bold text-center ${theme.errorPages.primaryText}`}>Sorry we couldn&apos;t find this page.</h1>
-      <span className={`mt-5 text-lg text-gray-400 text-center ${theme.errorPages.secondaryText}`}>
-        But dont worry, you can find plenty of other things on homepage.
-      </span>
-      <Link to="/" className={`btn-base ${theme.primaryButton.text} ${theme.primaryButton.background} ${theme.primaryButton.border}`}>
+      <UndrawNotFound className="self-center" width="500" height="300" />
+      <h1 className="mt-3 text-4xl font-bold text-center text-primary">Sorry we couldn&apos;t find this page.</h1>
+      <span className="mt-3 text-lg text-center">But dont worry, you can find plenty of other things on homepage.</span>
+      <Link to="/" className="btn btn-primary mt-2">
         back to homepage
       </Link>
     </div>

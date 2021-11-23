@@ -1,25 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useTheme } from '../../services/theme/ThemeProvider';
 import UndrawUnauthorized from '../../components/Illustrations/UndrawUnauthorized';
 
-const Unauthorized: React.FunctionComponent = () => {
-  const { theme } = useTheme();
-
+const Unauthorized: React.FC = () => {
   return (
     <div className="geo-background centered-container">
-      <UndrawUnauthorized
-        className="self-center"
-        primaryColor={theme.illustrations.primaryColor}
-        secondaryColor={theme.illustrations.secondaryColor}
-        width="500"
-        height="550"
-      />
-      <h1 className={`mt-5 text-4xl font-bold text-center ${theme.errorPages.primaryText}`}>Missing permissions</h1>
-      <span className={`mt-5 text-lg text-gray-400 text-center ${theme.errorPages.secondaryText}`}>
-        Do not worry though, there is always a way to go back homepage.
-      </span>
-      <Link to="/" className={`btn-base ${theme.primaryButton.text} ${theme.primaryButton.background} ${theme.primaryButton.border}`}>
+      <UndrawUnauthorized className="self-center" width="500" height="550" />
+      <h1 className="mt-3 text-4xl font-bold text-center text-primary">Missing permissions</h1>
+      <span className="mt-3 text-lg text-center">Do not worry though, there is always a way to go back homepage.</span>
+      <Link to="/" className="btn btn-primary mt-2">
         back to homepage
       </Link>
     </div>
