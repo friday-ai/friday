@@ -1,8 +1,6 @@
 import React from 'react';
 import toast from 'react-hot-toast';
 import { Icon } from '@iconify/react';
-import { KVArr } from '../../utils/interfaces';
-import { ThemeType } from '../../services/theme/ThemeProvider';
 
 type IconType = 'success' | 'warning' | 'info' | 'error';
 
@@ -10,10 +8,9 @@ interface Props {
   title: string;
   message?: string;
   type: IconType;
-  theme: ThemeType;
 }
 
-const NotificationIcon: React.FunctionComponent<{ type: IconType }> = ({ type }) => {
+const NotificationIcon: React.FC<{ type: IconType }> = ({ type }) => {
   switch (type) {
     case 'success':
       return <Icon icon="ic:round-check-circle-outline" className="w-6 h-6 text-green-500" />;
@@ -27,11 +24,11 @@ const NotificationIcon: React.FunctionComponent<{ type: IconType }> = ({ type })
 };
 
 const MakeNotification = (props: Props) => {
-  const { title, message, type, theme } = props;
+  const { title, message, type } = props;
 
   toast.custom((options) => (
     <div
-      className={`flex flex-row px-6 py-4 shadow-md rounded-lg max-w-sm overflow-clip ${theme.notification.containerStyle} ${
+      className={`flex flex-row px-6 py-4 shadow-md rounded-box max-w-sm overflow-clip border border-base-300 bg-base-100 ${
         options.visible ? 'animate-enter' : 'animate-leave'
       } duration-1000 ease-in-out`}
     >
@@ -39,8 +36,8 @@ const MakeNotification = (props: Props) => {
         <NotificationIcon type={type} />
       </div>
       <div className="ml-2 mr-6">
-        <span className={`font-semibold ${theme.notification.textColor}`}>{title}</span>
-        {message && <span className={`block ${theme.notification.textColor}`}>{message}</span>}
+        <span className="font-semibold">{title}</span>
+        {message && <span className="block">{message}</span>}
       </div>
     </div>
   ));
@@ -49,14 +46,13 @@ const MakeNotification = (props: Props) => {
 interface NotificationType {
   title: string;
   message?: string;
-  theme: ThemeType;
 }
 
 const Notification = {
-  success: ({ theme, title, message }: NotificationType): void => MakeNotification({ type: 'success', title, message, theme }),
-  info: ({ theme, title, message }: NotificationType): void => MakeNotification({ type: 'info', title, message, theme }),
-  warning: ({ theme, title, message }: NotificationType): void => MakeNotification({ type: 'warning', title, message, theme }),
-  error: ({ theme, title, message }: NotificationType): void => MakeNotification({ type: 'error', title, message, theme }),
+  success: ({ title, message }: NotificationType): void => MakeNotification({ type: 'success', title, message }),
+  info: ({ title, message }: NotificationType): void => MakeNotification({ type: 'info', title, message }),
+  warning: ({ title, message }: NotificationType): void => MakeNotification({ type: 'warning', title, message }),
+  error: ({ title, message }: NotificationType): void => MakeNotification({ type: 'error', title, message }),
 };
 
 export default Notification;

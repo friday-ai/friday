@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
-import Dropdown from '../Generic/Dropdown';
 import Search from '../Generic/Search';
+import Dropdown from '../Generic/Dropdown';
 import CheckboxGroup from '../Generic/Checkbox/CheckboxGroup';
 
 interface Props {
@@ -12,12 +12,13 @@ interface Props {
 }
 
 const checkboxFilters = [
-  { label: 'Active', value: 'active', checked: true },
-  { label: 'Inactive', value: 'inactive', checked: true },
+  { label: 'Running', value: 'running', checked: true },
+  { label: 'Stopped', value: 'stopped', checked: true },
   { label: 'Errored', value: 'errored', checked: true },
+  { label: 'Not Configured', value: 'not_configured', checked: true },
 ];
 
-const ScenesToolbar: React.FC<Props> = ({ onSearch, onFilter, onSort, onCreate }) => {
+const SatellitesToolbar: React.FC<Props> = ({ onSearch, onFilter, onSort, onCreate }) => {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('a-z');
 
@@ -40,7 +41,7 @@ const ScenesToolbar: React.FC<Props> = ({ onSearch, onFilter, onSort, onCreate }
         <span className="truncate">Alphabetical</span>
         <Icon icon={`${sort === 'a-z' ? 'ic:baseline-arrow-downward' : 'ic:baseline-arrow-upward'}`} className="w-5 h-5 ml-2" />
       </button>
-      <Dropdown className="xl:hidden" title="Filters" btnText="Filters" btnStyle="btn-neutral" icon="ic:outline-filter-alt">
+      <Dropdown className="xl:hidden" title="Filters" btnText="Filters" btnStyle="btn-neutral" icon="ic:outline-filter-alt" containerStyle="mt-12">
         <div className="checkbox-group-vertical pt-4 px-4">
           <span className="font-extrabold">Status</span>
           <div className="flex flex-col items-start mt-2">
@@ -69,11 +70,11 @@ const ScenesToolbar: React.FC<Props> = ({ onSearch, onFilter, onSort, onCreate }
         </div>
         <button type="button" className="btn-neutral mr-2" onClick={onCreate}>
           <Icon icon="ic:outline-add-circle-outline" className="w-5 h-5 md:mr-2" />
-          <span className="hidden md:block">New Scene</span>
+          <span className="hidden md:block">Install</span>
         </button>
       </div>
     </div>
   );
 };
 
-export default ScenesToolbar;
+export default SatellitesToolbar;

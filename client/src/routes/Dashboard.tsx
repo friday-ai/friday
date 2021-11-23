@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dashboard: React.FunctionComponent = () => {
+const Dashboard: React.FC = () => {
   return <div> Dashboard </div>;
 };
 
