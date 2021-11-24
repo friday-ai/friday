@@ -8,7 +8,7 @@ interface Props {
   onSearch: (value: string) => void;
   onFilter: (value: string[]) => void;
   onSort: (value: string) => void;
-  onCreate: () => void;
+  onCreate: VoidFunction;
 }
 
 const checkboxFilters = [

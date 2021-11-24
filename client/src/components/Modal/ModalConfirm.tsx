@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 interface ModalConfirmProps {
   title: string;
   message: string;
-  onOk: () => void;
-  onCancel?: () => void;
+  onOk: VoidFunction;
+  onCancel?: VoidFunction;
 }
 
 const ModalConfirm = ({ title, message, onOk, onCancel = () => null }: ModalConfirmProps): void => {
