@@ -13,17 +13,17 @@ const response = {
 };
 
 class demoApi {
-  static async get<T = never, R = AxiosResponse<T>>(url: string, _config?: AxiosRequestConfig<T>): Promise<R> {
+  static async get<T = never, R = AxiosResponse<T>, D = never>(url: string, _config?: AxiosRequestConfig<D>): Promise<R> {
     const key = `get ${url}` as JsonFileKeys;
     if (!JsonFile[key]) {
       throw new Error(`${key} not found in demo.json`);
     }
 
-    response.data = (JsonFile[key] as never) as T;
+    response.data = JsonFile[key] as never as T;
     return Promise.resolve(response as never);
   }
 
-  static post<T = never, R = AxiosResponse<T>>(url: string, data?: T, _config?: AxiosRequestConfig<T>): Promise<R> {
+  static post<T = never, R = AxiosResponse<T>, D = never>(url: string, data?: T, _config?: AxiosRequestConfig<D>): Promise<R> {
     const key = `post ${url}` as JsonFileKeys;
 
     if (!JsonFile[key]) {
@@ -31,16 +31,16 @@ class demoApi {
       return Promise.resolve(response as never);
     }
 
-    response.data = (JsonFile[key] as never) as T;
+    response.data = JsonFile[key] as never as T;
     return Promise.resolve(response as never);
   }
 
-  static patch<T = never, R = AxiosResponse<T>>(_url: string, data?: T, _config?: AxiosRequestConfig<T>): Promise<R> {
+  static patch<T = never, R = AxiosResponse<T>, D = never>(_url: string, data?: T, _config?: AxiosRequestConfig<D>): Promise<R> {
     response.data = data || {};
     return Promise.resolve(response as never);
   }
 
-  static delete<T = never, R = AxiosResponse<T>>(_url: string, _config?: AxiosRequestConfig<T>): Promise<R> {
+  static delete<T = never, R = AxiosResponse<T>, D = never>(_url: string, _config?: AxiosRequestConfig<D>): Promise<R> {
     response.data = { success: true };
     return Promise.resolve(response as never);
   }
