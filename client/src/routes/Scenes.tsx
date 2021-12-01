@@ -7,14 +7,14 @@ import Notification from '../components/Notification/Notification';
 import UndrawEmpty from '../components/Illustrations/UndrawEmpty';
 
 import { SceneType } from '../utils/interfaces';
-import { useApi } from '../services/api/ApiProvider';
 import { contains } from '../utils/array';
 import ModalConfirm from '../components/Modal/ModalConfirm';
+import { useApp } from '../services/AppProvider';
 
 let sceneList: SceneType[] = [];
 
 const Scenes: React.FC = () => {
-  const { scenes } = useApi();
+  const { scenes } = useApp();
 
   const [flipKey, setFlipKey] = useState(v4());
   const [filteredScenes, setFilteredScenes] = useState<SceneType[]>([]);

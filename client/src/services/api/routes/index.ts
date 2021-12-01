@@ -1,13 +1,14 @@
+import HttpClient from '../HttpClient';
+
 import Scenes from './scenes';
 import Satellites from './satellites';
-import apiInstance from '../apiInstance';
 
 export interface RoutesType {
   scenes: Scenes;
   satellites: Satellites;
 }
 
-export const init = (instance: typeof apiInstance): RoutesType => {
+export const init = (instance: HttpClient): RoutesType => {
   const routes: RoutesType = {
     scenes: new Scenes(instance),
     satellites: new Satellites(instance),

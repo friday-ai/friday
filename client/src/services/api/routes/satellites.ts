@@ -1,16 +1,15 @@
-import apiInstance from '../apiInstance';
+import HttpClient from '../HttpClient';
 import { SatelliteType } from '../../../utils/interfaces';
 
 class Satellites {
-  readonly api: typeof apiInstance;
+  readonly api: HttpClient;
 
-  constructor(api: typeof apiInstance) {
+  constructor(api: HttpClient) {
     this.api = api;
   }
 
   getAll = async (): Promise<SatelliteType[]> => {
-    const result = await this.api.get<SatelliteType[]>('/api/v1/satellite');
-    return result.data;
+    return this.api.get<SatelliteType[]>('/api/v1/satellite', { scope: 'full' });
   };
 }
 

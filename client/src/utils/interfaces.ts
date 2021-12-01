@@ -3,6 +3,9 @@
  */
 
 import { AvailableState, StateOwner } from './constants';
+import { AvailableLanguages, UserRole } from '../../../server/src/utils/constants';
+import VariableType from '../../../server/src/core/variable/variable.interface';
+import UserType from '../../../server/src/core/user/user.interface';
 
 export interface KVArr<T> {
   [Key: string]: T;
@@ -61,4 +64,14 @@ export interface SatelliteType {
   room: RoomType;
   state: StateType;
   plugins: PluginType[];
+}
+
+export interface SessionType {
+  id?: string;
+  refreshToken?: string;
+  revoked?: boolean;
+  validUntil?: Date;
+  userId?: string;
+  accessToken?: string;
+  user?: UserType;
 }

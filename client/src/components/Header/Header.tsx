@@ -1,21 +1,24 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Icon } from '@iconify/react';
 
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/store/store';
-import { drawerToggled, toggleDrawer, currentView, changeView } from '../App/app.reducer';
+import { drawerToggled, toggleDrawer, currentView } from '../App/app.reducer';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
-import { getName } from '../../utils/routes';
+import { useApp } from '../../services/AppProvider';
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
   const isSidebarOpen = useAppSelector(drawerToggled);
   const view = useAppSelector(currentView);
-  const location = useLocation();
+  const navigate = useNavigate();
+  const app = useApp();
 
-  useEffect(() => {
-    dispatch(changeView(getName(location.pathname)));
-  }, [dispatch, location]);
+  const logout = () => {
+    console.log(app);
+    app.logout();
+    navigate('/login');
+  };
 
   return (
     <div className="navbar border-b border-base-300 bg-base-100">
@@ -50,7 +53,7 @@ const Header: React.FC = () => {
               </li>
               <div className="divider divider-sm mx-3" />
               <li>
-                <button aria-label="Logout" type="button" className="space-x-2">
+                <button aria-label="Logout" type="button" className="space-x-2" onClick={logout}>
                   <Icon icon="ic:baseline-logout" className="w-6 h-6" />
                   <span>Log out</span>
                 </button>

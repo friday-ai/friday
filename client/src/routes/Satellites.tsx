@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import SatellitesToolbar from '../components/Satellites/SatellitesToolbar';
 import { SatelliteType } from '../utils/interfaces';
-import { useApi } from '../services/api/ApiProvider';
+import { useApp } from '../services/AppProvider';
 import { SatelliteList } from '../components/Satellites/SatellitesCard';
 
 let satellitesList: SatelliteType[] = [];
 
 const Satellites: React.FC = () => {
-  const { satellites } = useApi();
+  const { satellites } = useApp();
 
   const [filteredSatellites, setFilteredSatellites] = useState<SatelliteType[]>([]);
 

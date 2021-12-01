@@ -1,37 +1,55 @@
-import React from 'react';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
+import React, { useEffect } from 'react';
+import { Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
-import FridayRouter from '../FridayRouter/FridayRouter';
+import Layout from '../Layout/Layout';
+
+import Login from '../../routes/Login';
+import Devices from '../../routes/Devices';
+import Dashboard from '../../routes/Dashboard';
+import Scenes from '../../routes/Scenes';
+import Satellites from '../../routes/Satellites';
 import NotFound from '../../routes/Errors/NotFound';
 
-import { getRoutes } from '../../utils/routes';
-import Header from '../Header/Header';
-import Drawer from '../Drawer/Drawer';
-
-import { ApiProvider } from '../../services/api/ApiProvider';
+import { RequireAuth } from '../../services/auth/AuthProvider';
+import { changeView } from './app.reducer';
+import { useAppDispatch } from '../../services/store/store';
+import { useApp } from '../../services/AppProvider';
+import getRouteName from '../../utils/routes';
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const app = useApp();
+
+  useEffect(() => {
+    if (app.hasSession()) {
+      navigate('/dashboard');
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const name = getRouteName(location.pathname);
+    dispatch(changeView(name));
+    document.title = `Friday | ${name}`;
+  }, [location, dispatch]);
+
   return (
-    <ApiProvider>
-      <BrowserRouter>
-        <div className="flex h-screen overflow-auto bg-base-200">
-          <Drawer />
-          <div className="flex flex-col flex-1 h-full overflow-auto">
-            <Header />
-            <main className="flex-1 max-h-full overflow-auto">
-              <Routes>
-                {getRoutes().map((route) => {
-                  return FridayRouter({ key: route.key, component: route.component, path: route.path, roles: route.roles });
-                })}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-          </div>
-        </div>
-      </BrowserRouter>
-      <Toaster position="top-right" containerStyle={{ top: '75px', right: '30px' }} />
-    </ApiProvider>
+    <>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route element={<RequireAuth />}>
+          <Route path="dashboard" element={<Layout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="devices" element={<Devices />} />
+            <Route path="scenes" element={<Scenes />} />
+            <Route path="satellites" element={<Satellites />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 };
 

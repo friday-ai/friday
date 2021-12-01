@@ -7,6 +7,7 @@ import { drawerToggled, toggleDrawer } from '../App/app.reducer';
 import useWindowEvent from '../../utils/useWindowEvent';
 import Logo from '../Illustrations/Logo';
 import Favicon from '../Illustrations/Favicon';
+import getRouteName from '../../utils/routes';
 
 const Drawer: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -41,10 +42,10 @@ const Drawer: React.FC = () => {
         <ul className="menu p-2 overflow-hidden">
           <li className="mb-3">
             <Link
-              to="/dashboard"
+              to=""
               aria-label="dashboard"
               onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
-              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${location.pathname.includes('/dashboard') && 'active'}`}
+              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${getRouteName(location.pathname) === 'Dashboard' && 'active'}`}
             >
               <Icon icon="ic:baseline-dashboard" className="w-6 h-6" />
               <span className={`${!isSidebarOpen && 'lg:hidden'}`}>Dashboard</span>
@@ -52,10 +53,10 @@ const Drawer: React.FC = () => {
           </li>
           <li className="mb-3">
             <Link
-              to="/devices"
+              to="devices"
               aria-label="devices"
               onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
-              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${location.pathname.includes('/devices') && 'active'}`}
+              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${getRouteName(location.pathname) === 'Devices' && 'active'}`}
             >
               <Icon icon="ic:outline-lightbulb" className="w-6 h-6" />
               <span className={`${!isSidebarOpen && 'lg:hidden'}`}>Devices</span>
@@ -63,10 +64,10 @@ const Drawer: React.FC = () => {
           </li>
           <li className="mb-3">
             <Link
-              to="/scenes"
+              to="scenes"
               aria-label="scenes"
               onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
-              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${location.pathname.includes('/scenes') && 'active'}`}
+              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${getRouteName(location.pathname) === 'Scenes' && 'active'}`}
             >
               <Icon icon="typcn:flow-children" className="w-6 h-6" />
               <span className={`${!isSidebarOpen && 'lg:hidden'}`}>Scenes</span>
@@ -74,10 +75,12 @@ const Drawer: React.FC = () => {
           </li>
           <li className="mb-3 active">
             <Link
-              to="/satellites"
+              to="satellites"
               aria-label="satellites"
               onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
-              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${location.pathname.includes('/satellites') && 'active'}`}
+              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${
+                getRouteName(location.pathname) === 'Satellites and Plugins' && 'active'
+              }`}
             >
               <Icon icon="codicon:extensions" className="w-6 h-6" />
               <span className={`${!isSidebarOpen && 'lg:hidden'}`}>Plugins</span>
@@ -102,10 +105,10 @@ const Drawer: React.FC = () => {
           </li>
           <li>
             <Link
-              to="/settings"
+              to="settings"
               aria-label="settings"
               onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
-              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${location.pathname.includes('/settings') && 'active'}`}
+              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${getRouteName(location.pathname) === 'Settings' && 'active'}`}
             >
               <Icon icon="ic:baseline-settings" className="w-6 h-6" />
               <span className={`${!isSidebarOpen && 'lg:hidden'}`}>Settings</span>

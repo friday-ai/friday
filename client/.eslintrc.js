@@ -14,6 +14,12 @@ module.exports = {
         "singleQuote": true
       }
     ],
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        assert: 'either', // either check for `htmlFor` or `nesting`
+      },
+    ],
     semi: 0, // this cause a conflict with typescript rules
     '@typescript-eslint/semi': ['error', 'always'],
     quotes: [
