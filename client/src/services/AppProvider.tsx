@@ -3,6 +3,9 @@ import { useAuth } from './auth/AuthProvider';
 import { init, RoutesType } from './api/routes';
 import { SessionType } from '../utils/interfaces';
 import HttpClient from './api/HttpClient';
+import DemoClient from './api/DemoClient';
+
+const isDemo = import.meta.env.VITE_DEMO_MODE;
 
 interface AppContextType extends RoutesType {
   session: SessionType | null;
@@ -16,7 +19,7 @@ const AppContext = React.createContext<AppContextType>(undefined!);
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const auth = useAuth();
 
-  const api = new HttpClient(auth);
+  const api = isDemo ? new DemoClient() : new HttpClient(auth);
 
   const routes = init(api);
   const value = { session: auth.session, login: auth.login, logout: auth.logout, hasSession: auth.hasSession, ...routes };

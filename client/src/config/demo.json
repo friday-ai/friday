@@ -425,5 +425,22 @@
       },
       "plugins": []
     }
-  ]
+  ],
+  "post /api/v1/user/login": {
+    "id": "9edae19f-f3a0-4d53-a19b-b3709709fe64",
+    "revoked": false,
+    "refreshToken": "b62c377601ec0f59609f1f7943b5818f239da349c71408cb8c463257dd928452719939eecc2c9a133781c0cfba83a9bf7e5164ebc9a96d287c82cf62d22da5537d5f2c321392a036a4b80c23326e032f70ddbba1b86126526baca265f9a47fbba10948e7ee23320e68f58c8d04660e3e23b6e8a4756aa7efd9a152ce055c324975c39b407edb24081538334fcf3ef8fbdaed9054dc59ffabe01fdcadb1dc1f1b61ead28cae110b5490e8bbd3205c578ae153f4d22d4fb1cd71734db11bb082531a5fc05b5682bf62d53801638dd3d9976eff89b44f71ef8aa506daa293fb4fb65da414fa5cac05ecb3678f1bd52e370d1a6200b6b73b43819bcc",
+    "validUntil": "2030-12-10T17:58:43.022Z",
+    "userId": "564fba36-733b-4aa1-bfad-be0bb7291571",
+    "updatedAt": "2021-11-25T17:58:43.023Z",
+    "createdAt": "2021-11-25T17:58:43.023Z",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTY0ZmJhMzYtNzMzYi00YWExLWJmYWQtYmUwYmI3MjkxNTcxIiwic2Vzc2lvbiI6IjllZGFlMTlmLWYzYTAtNGQ1My1hMTliLWIzNzA5NzA5ZmU2NCIsImlhdCI6MTYzNzg2MzEyMywiZXhwIjoxNjM3OTQ5NTIzLCJhdWQiOiJ1c2VyIiwiaXNzIjoiZnJpZGF5In0.t2Fy6YKGaAD1uOViEHbQsrURnRnHku5a9vd6Ge0fz-0",
+    "user": {
+      "id": "564fba36-733b-4aa1-bfad-be0bb7291571",
+      "name": "John",
+      "firstName": "Pepperwood",
+      "email": "test@email.fr",
+      "birthDate": "1996-12-20"
+    }
+  }
 }

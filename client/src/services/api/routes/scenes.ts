@@ -1,10 +1,11 @@
 import HttpClient from '../HttpClient';
 import { SceneType } from '../../../utils/interfaces';
+import DemoClient from '../DemoClient';
 
 class Scenes {
-  readonly api: HttpClient;
+  readonly api: HttpClient | DemoClient;
 
-  constructor(api: HttpClient) {
+  constructor(api: HttpClient | DemoClient) {
     this.api = api;
   }
 
