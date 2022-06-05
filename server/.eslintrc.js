@@ -3,6 +3,7 @@ module.exports = {
   plugins: [
     '@typescript-eslint/eslint-plugin',
     'eslint-plugin-tsdoc',
+    'import',
   ],
   extends: ['airbnb-typescript/base'],
   parserOptions: {

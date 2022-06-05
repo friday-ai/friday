@@ -11,7 +11,7 @@ import error from '../../utils/errors/coreError';
  */
 export default async function getCount(): Promise<number> {
   try {
-    const users = await User.findAndCountAll();
+    const users = await User.findAndCountAll({});
     return users.count;
   } catch (e) {
     throw error({ name: e.name, message: e.message, cause: e });

@@ -51,6 +51,3 @@ dist/
 
 # IDE folder
 .idea
-
-# Package lock
-package-lock.json

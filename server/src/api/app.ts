@@ -1,9 +1,8 @@
 import * as http from 'http';
-import express from 'express';
+import express, { RequestHandler } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import compression from 'compression';
-import * as bodyParser from 'body-parser';
 import * as WebSocket from 'ws';
 import router from './routes/router';
 import Log from '../utils/log';
@@ -46,13 +45,13 @@ export default class Server {
     const logger = new Log();
 
     // middleware for parsing application/x-www-form-urlencoded
-    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(express.urlencoded({ extended: true }) as RequestHandler);
 
     // middleware for json body parsing
-    app.use(bodyParser.json());
+    app.use(express.json() as RequestHandler);
 
     // middleware for secure HTTP headers
-    app.use(helmet());
+    app.use(helmet() as RequestHandler);
 
     // compress all response
     app.use(compression());

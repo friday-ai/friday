@@ -12,8 +12,8 @@ describe('GET /api/v1/device/:id', () => {
         assert.deepEqual(res.body, {
           id: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
           name: 'Light',
-          type: 'light',
-          subType: 'light_rgb',
+          type: 'LIGHT',
+          subType: 'RGB',
           variable: {},
           unit: '',
           value: 'on',
