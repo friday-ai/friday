@@ -18,7 +18,7 @@ const initialState: AppState = {
   drawerToggled: false,
   currentView: 'Dashboard',
   theme: 'light',
-  themeColors: { primary: 'rgb(0,0,0)', secondary: 'rgb(0,0,0)' },
+  themeColors: { primary: 'rgb(20,37,91)', secondary: 'rgb(37,9,179)' },
 };
 
 const appSlice = createSlice({

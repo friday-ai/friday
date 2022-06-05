@@ -3,9 +3,6 @@
  */
 
 import { AvailableState, StateOwner } from './constants';
-import { AvailableLanguages, UserRole } from '../../../server/src/utils/constants';
-import VariableType from '../../../server/src/core/variable/variable.interface';
-import UserType from '../../../server/src/core/user/user.interface';
 
 export interface KVArr<T> {
   [Key: string]: T;
@@ -39,9 +36,17 @@ export interface StateType {
 }
 
 export interface RoomType {
-  id: string;
-  name: string;
-  houseId: string;
+  id?: string;
+  name?: string;
+  houseId?: string;
+}
+
+export interface HouseType {
+  id?: string;
+  name?: string;
+  latitude?: number;
+  longitude?: number;
+  rooms?: Array<RoomType[]>;
 }
 
 export interface PluginType {
@@ -66,6 +71,18 @@ export interface SatelliteType {
   plugins: PluginType[];
 }
 
+export interface UserType {
+  id?: string;
+  name?: string;
+  firstName?: string;
+  username?: string;
+  email?: string;
+  password?: string;
+  language?: string;
+  role?: string;
+  units?: string;
+}
+
 export interface SessionType {
   id?: string;
   refreshToken?: string;
@@ -74,4 +91,17 @@ export interface SessionType {
   userId?: string;
   accessToken?: string;
   user?: UserType;
+}
+
+export interface VariableType {
+  id?: string;
+  key?: string;
+  value?: string;
+  owner?: string;
+  ownerType?: string;
+}
+
+export interface Marker {
+  title: string;
+  position: [number, number];
 }

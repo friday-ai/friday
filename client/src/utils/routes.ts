@@ -23,6 +23,26 @@ const routes = [
     name: 'Settings',
     path: '/dashboard/settings',
   },
+  {
+    name: 'Signup',
+    path: '/signup',
+  },
+  {
+    name: 'Signup',
+    path: '/signup/user',
+  },
+  {
+    name: 'Signup',
+    path: '/signup/house',
+  },
+  {
+    name: 'Signup',
+    path: '/signup/settings',
+  },
+  {
+    name: 'Signup',
+    path: '/signup/final',
+  },
 ];
 
 const getRouteName = (path: string): string => {

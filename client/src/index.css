@@ -87,9 +87,14 @@
    transition-timing-function: cubic-bezier(.4,0,.2,1);
  }
 
-.menu li>button:focus, .menu li>button:hover {
+.menu li>button:hover {
   --tw-bg-opacity: .1;
   background-color: hsla(var(--bc)/var(--tw-bg-opacity,1));
+}
+
+.menu li>button.active:hover {
+  --tw-bg-opacity: .7;
+  background-color: hsla(var(--p)/var(--tw-bg-opacity,1));
 }
 
 .divider:after, .divider:before {
@@ -100,10 +105,12 @@
   height: .05rem;
 }
 
+/*
 :is(.btn, .btn-neutral):not(.btn-lg, .btn-sm, .btn-xs, .btn-circle) {
   height: 2.5rem;
   min-height: 2.5rem;
 }
+ */
 
 .btn-neutral {
   --tw-border-opacity: 1;

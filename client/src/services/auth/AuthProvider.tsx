@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
-import { SessionType } from '../../utils/interfaces';
+import { SessionType, UserType } from '../../utils/interfaces';
 
 interface AuthHookType {
   logout: () => Promise<void>;
@@ -10,6 +10,7 @@ interface AuthHookType {
   hasSession: () => boolean;
   login: (email: string, password: string, onSuccess: VoidFunction, onError: (error: string) => void) => Promise<void>;
   refreshToken: () => Promise<void>;
+  signup: (user: UserType) => Promise<void>;
 }
 
 const useAuth = (): AuthHookType => {
@@ -77,7 +78,13 @@ const useAuth = (): AuthHookType => {
     }));
   };
 
-  const value = { session, hasSession, getHeaders, login, logout, refreshToken };
+  const signup = async (user: UserType) => {
+    const { data } = await axios.post<SessionType>('http://localhost:3000/api/v1/user/signup', user);
+    setSession(data);
+    localStorage.setItem('session', JSON.stringify(data));
+  };
+
+  const value = { session, hasSession, getHeaders, login, logout, refreshToken, signup };
   return value;
 };
 

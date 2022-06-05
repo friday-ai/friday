@@ -14,11 +14,11 @@ class Scenes {
   };
 
   patch = async (scene: SceneType): Promise<SceneType> => {
-    return this.api.patch<SceneType>(`/api/scene/${scene.id}`, scene);
+    return this.api.patch<SceneType>(`/api/v1/scene/${scene.id}`, scene);
   };
 
   delete = async (scene: SceneType): Promise<{ success: boolean }> => {
-    return this.api.delete(`/api/scene/${scene.id}`);
+    return this.api.delete(`/api/v1/scene/${scene.id}`);
   };
 }
 

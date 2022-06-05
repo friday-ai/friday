@@ -4,7 +4,7 @@ import { Icon } from '@iconify/react';
 
 import { useAppDispatch, useAppSelector } from '../../services/store/store';
 import { drawerToggled, toggleDrawer } from '../App/app.reducer';
-import useWindowEvent from '../../utils/useWindowEvent';
+import useWindowEvent from '../../services/hooks/useWindowEvent';
 import Logo from '../Illustrations/Logo';
 import Favicon from '../Illustrations/Favicon';
 import getRouteName from '../../utils/routes';

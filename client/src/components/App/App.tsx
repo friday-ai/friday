@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Layout from '../Layout/Layout';
 
@@ -9,6 +9,7 @@ import Dashboard from '../../routes/Dashboard';
 import Scenes from '../../routes/Scenes';
 import Satellites from '../../routes/Satellites';
 import NotFound from '../../routes/Errors/NotFound';
+import Signup from '../../routes/Signup/Signup';
 
 import { RequireAuth } from '../../services/auth/AuthProvider';
 import { changeView } from './app.reducer';
@@ -19,14 +20,12 @@ import getRouteName from '../../utils/routes';
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
   const app = useApp();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    if (app.hasSession()) {
-      navigate('/dashboard');
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    app.users.getCount().then((result) => setCount(result));
+  }, [app.users]);
 
   useEffect(() => {
     const name = getRouteName(location.pathname);
@@ -34,22 +33,27 @@ const App: React.FC = () => {
     document.title = `Friday | ${name}`;
   }, [location, dispatch]);
 
+  const redirect = (): string => {
+    if (app.hasSession()) {
+      return '/dashboard';
+    }
+    return count === 0 ? '/signup' : '/login';
+  };
+
   return (
-    <>
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/login" element={<Login />} />
-        <Route element={<RequireAuth />}>
-          <Route path="dashboard" element={<Layout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="devices" element={<Devices />} />
-            <Route path="scenes" element={<Scenes />} />
-            <Route path="satellites" element={<Satellites />} />
-          </Route>
+    <Routes>
+      <Route path="/" element={<Navigate to={redirect()} replace />} />
+      {count === 0 ? <Route path="/signup/*" element={<Signup />} /> : <Route path="/login" element={<Login />} />}
+      <Route element={<RequireAuth />}>
+        <Route path="dashboard" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="devices" element={<Devices />} />
+          <Route path="scenes" element={<Scenes />} />
+          <Route path="satellites" element={<Satellites />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </>
+      </Route>
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 };
 

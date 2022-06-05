@@ -15,7 +15,6 @@ const Header: React.FC = () => {
   const app = useApp();
 
   const logout = () => {
-    console.log(app);
     app.logout();
     navigate('/login');
   };

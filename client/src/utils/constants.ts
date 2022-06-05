@@ -42,3 +42,5 @@ export enum AvailableState {
   DEVICE_ERRORED = 'device.errored',
   DEVICE_WAITING_CONFIGURATION = 'device.waiting.configuration',
 }
+
+export const DEFAULT_COORDS: [number, number] = [48.8583, 2.2945];

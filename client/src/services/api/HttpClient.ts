@@ -11,7 +11,6 @@ class HttpClient {
   }
 
   private async executeRequest<T>(method: Methods, url: string, query = {}, body = {}, retryCount = 0): Promise<T> {
-    console.info('httpclient');
     if (retryCount >= 3) {
       await this.auth.logout();
       throw new Error('MAX_RETRY_EXCEEDED');
