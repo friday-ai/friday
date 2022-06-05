@@ -1,4 +1,5 @@
 import React from 'react';
+import { createRoot } from 'react-dom/client';
 import { Icon } from '@iconify/react';
 import ReactDOM from 'react-dom';
 
@@ -13,6 +14,7 @@ const ModalConfirm = ({ title, message, onOk, onCancel = () => null }: ModalConf
   // Create fake element to insert modal
   const div = document.createElement('div');
   document.getElementById('root')?.appendChild(div);
+  const root = createRoot(div);
 
   const close = (confirmed: boolean) => {
     document.getElementsByClassName('modal')[0].classList.remove('modal-open');
@@ -34,7 +36,7 @@ const ModalConfirm = ({ title, message, onOk, onCancel = () => null }: ModalConf
   const render = () => {
     // Trick to not block React events on sync render, make it async
     setTimeout(() => {
-      ReactDOM.render(
+      root.render(
         <div className="modal modal-open flex items-center">
           <div className="bg-base-100 border border-base-300 rounded-box m-8 inline-block align-middle text-left transition-all transform">
             <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -61,8 +63,7 @@ const ModalConfirm = ({ title, message, onOk, onCancel = () => null }: ModalConf
               </button>
             </div>
           </div>
-        </div>,
-        div
+        </div>
       );
     });
   };

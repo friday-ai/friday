@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import './index.css';
@@ -9,7 +9,10 @@ import store from './services/store/store';
 
 import AppProvider from './services/AppProvider';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container!);
+
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
@@ -18,8 +21,7 @@ ReactDOM.render(
         </AppProvider>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 registerSW();
