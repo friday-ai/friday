@@ -3,10 +3,8 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
   mode: 'jit',
-  purge: {
-    enabled: process.env.NODE_ENV === 'production',
-    safeList: [],
-    content: [
+  content: {
+    files: [
       './src/index.html',
       './src/**/*.tsx',
       './src/**/*.ts',
@@ -133,8 +131,8 @@ module.exports = {
           'primary-content': '#000000',
           'secondary': '#ffffff',
           'secondary-focus': '#ffffff',
-          'secondary-content': '000000',
-          'accent': 'ffffff',
+          'secondary-content': '#000000',
+          'accent': '#ffffff',
           'accent-focus': '#ffffff',
           'accent-content': '#000000',
           'base-100': '#000000',
