@@ -1,6 +1,7 @@
 import * as http from 'http';
 import express from 'express';
 import helmet from 'helmet';
+import cors from 'cors';
 import compression from 'compression';
 import * as bodyParser from 'body-parser';
 import * as WebSocket from 'ws';
@@ -55,6 +56,8 @@ export default class Server {
 
     // compress all response
     app.use(compression());
+
+    app.use(cors({ credentials: true, origin: true }));
 
     // loading all friday's routes
     app.use(router(this.friday));

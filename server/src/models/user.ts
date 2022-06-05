@@ -13,7 +13,7 @@ import Session from './session';
  * User model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'firstName', 'email', 'birthDate'],
+  attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role'],
 }))
 @Scopes(() => ({
   full: {
