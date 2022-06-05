@@ -1,0 +1,446 @@
+{
+  "get /api/v1/scene" : [
+    {
+      "id": "452fe9bd-4bce-4dbd-9314-c74257aef41c",
+      "icon": "fa-solid:music",
+      "name": "Music",
+      "description": "Play music in the house",
+      "status": "inactive"
+    },
+    {
+      "id": "4873661d-99cc-4397-962e-e31c1674dc4f",
+      "icon": "fa-solid:running",
+      "name": "Workout",
+      "description": "Play music in living room",
+      "status": "inactive"
+    },
+    {
+      "id": "d649e043-b3ad-4b7b-9a9c-532ac8c9b9bc",
+      "icon": "feather:sunrise",
+      "name": "Morning",
+      "description": "Open shutters and play music in house",
+      "status": "active"
+    },
+    {
+      "id": "09cf89d8-c8f9-49a3-a38b-a2a9d76eec86",
+      "icon": "mdi:netflix",
+      "name": "Relax",
+      "description": "Play Netflix",
+      "status": "active"
+    },
+    {
+      "id": "0ca9773e-8ecd-490e-9acd-ac516f719fa7",
+      "icon": "mdi:home-export-outline",
+      "name": "Left home",
+      "description": "Turn off all devices",
+      "status": "active"
+    },
+    {
+      "id": "01f431a1-255a-447c-9b63-c954b2f590be",
+      "icon": "feather:sunset",
+      "name": "Night",
+      "description": "Decrease the brightness",
+      "status": "errored",
+      "errorMessage": "Zwave module is not responding"
+    },
+    {
+      "id": "904b749e-b7e7-4c6b-82ad-68bd56b4acff",
+      "icon": "mdi:movie-open-outline",
+      "name": "Movie",
+      "description": "Turn on TV and decrease the brightness",
+      "status": "inactive"
+    },
+    {
+      "id": "f00644f9-d91c-4186-bd29-1e625605b17d",
+      "icon": "mdi:sleep",
+      "name": "Sleep",
+      "description": "Turn off devices and close shutters",
+      "status": "active"
+    },
+    {
+      "id": "c3fdd1e5-1866-4014-9a6a-c62a1dfb89c5",
+      "icon": "mdi:robot-vacuum-variant",
+      "name": "Vacuum",
+      "description": "Start vacuum cleaner",
+      "status": "errored",
+      "errorMessage": "The device 'Vacuum' is disconnected"
+    },
+    {
+      "id": "e4fa2b30-d5eb-4d86-9bd0-a18e61579504",
+      "icon": "ic:round-celebration",
+      "name": "Party",
+      "description": "Play music and turn off spotlights",
+      "status": "active"
+    },
+    {
+      "id": "abdd7553-3ada-4c2e-9609-44d33b208b40",
+      "icon": "mdi:sony-playstation",
+      "name": "Gaming",
+      "description": "Turn on TV and PS5",
+      "status": "active"
+    }
+  ],
+  "get /api/v1/satellite" : [
+    {
+      "id": "a7ef5f08-2bad-4489-95bf-b73fcf894d8f",
+      "name": "Friday (Master)",
+      "lastHeartbeat": "4 minutes ago",
+      "url": "192.168.1.13",
+      "roomId": "fdd47ba9-c532-4802-b23c-757dfe8ce4d8",
+      "room": {
+        "id": "fdd47ba9-c532-4802-b23c-757dfe8ce4d8",
+        "name": "Office",
+        "houseId": "deb6854d-15cb-4001-8a9d-b7c0d0366387"
+      },
+      "state" : {
+        "id": "20334884-10dc-4ac4-9428-8cc22d60c5f3",
+        "owner": "a7ef5f08-2bad-4489-95bf-b73fcf894d8f",
+        "ownerType": "satellite",
+        "value": "satellite.connected"
+      },
+      "plugins": [
+        {
+          "id": "5575a7b0-d594-4b6c-960f-22115d62c858",
+          "name": "Tasmota",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "a7ef5f08-2bad-4489-95bf-b73fcf894d8f",
+          "state" : {
+            "id": "a4f90a30-f289-4e76-9073-c11efcc42aff",
+            "owner": "5575a7b0-d594-4b6c-960f-22115d62c858",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "ab3ecb78-6a57-4076-bdb8-494fc9ee539a",
+          "name": "Sonoff",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "a7ef5f08-2bad-4489-95bf-b73fcf894d8f",
+          "state" : {
+            "id": "8445828c-aad8-4265-990a-d7a1541ee95b",
+            "owner": "ab3ecb78-6a57-4076-bdb8-494fc9ee539a",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "39bf4bf8-d837-48da-9190-d8286d20133b",
+          "name": "Chromecast",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "a7ef5f08-2bad-4489-95bf-b73fcf894d8f",
+          "state" : {
+            "id": "070bc764-c40d-46f5-a38a-4ca4e6e38a50",
+            "owner": "39bf4bf8-d837-48da-9190-d8286d20133b",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        }
+      ]
+    },
+    {
+      "id": "7eb4ac2e-5c66-4345-a5ff-881234a7a0fc",
+      "name": "Satellite 1",
+      "lastHeartbeat": "6 minutes ago",
+      "url": "192.168.1.14",
+      "roomId": "c8014c3c-4644-4fb2-b996-bf36d25a0074",
+      "room": {
+        "id": "c8014c3c-4644-4fb2-b996-bf36d25a0074",
+        "name": "Living room",
+        "houseId": "bf3200c8-bd11-44ea-9a3a-cf89560a580c"
+      },
+      "state" : {
+        "id": "a77cef82-f417-4e29-a941-1bd2c762e883",
+        "owner": "7eb4ac2e-5c66-4345-a5ff-881234a7a0fc",
+        "ownerType": "satellite",
+        "value": "satellite.disconnected"
+      },
+      "plugins": [
+        {
+          "id": "f3a3feee-af14-4667-b583-d88db3d67d5a",
+          "name": "Zwave",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "7eb4ac2e-5c66-4345-a5ff-881234a7a0fc",
+          "state" : {
+            "id": "6b153971-6082-4892-9a27-26421e0cb993",
+            "owner": "f3a3feee-af14-4667-b583-d88db3d67d5a",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "4d3ba852-0292-4e59-9e5f-7b030cf4c0d1",
+          "name": "Zigbee",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "7eb4ac2e-5c66-4345-a5ff-881234a7a0fc",
+          "state" : {
+            "id": "0ba30152-01d1-45e2-bcee-a7463e5aceb6",
+            "owner": "4d3ba852-0292-4e59-9e5f-7b030cf4c0d1",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "05b66791-99b6-4374-b037-aee382d2db1e",
+          "name": "Xiaomi",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "7eb4ac2e-5c66-4345-a5ff-881234a7a0fc",
+          "state" : {
+            "id": "2386cd48-1b20-4fd8-b3b3-385f09e8f249",
+            "owner": "05b66791-99b6-4374-b037-aee382d2db1e",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "27a75da0-8331-4e0e-b6e6-a82c43d32590",
+          "name": "Netatmo",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "7eb4ac2e-5c66-4345-a5ff-881234a7a0fc",
+          "state" : {
+            "id": "afb9373b-61c7-48e7-94e6-17ee2e5ab30d",
+            "owner": "27a75da0-8331-4e0e-b6e6-a82c43d32590",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "1e0c523b-0a9f-44be-b163-b77236351712",
+          "name": "Philips hue",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "7eb4ac2e-5c66-4345-a5ff-881234a7a0fc",
+          "state" : {
+            "id": "b2d59ed3-4182-49d8-9ab7-1855f99007b4",
+            "owner": "1e0c523b-0a9f-44be-b163-b77236351712",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "d714e4b9-a6e8-4e05-98c6-4bddb80b8868",
+          "name": "Tp-Link",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "7eb4ac2e-5c66-4345-a5ff-881234a7a0fc",
+          "state" : {
+            "id": "518c5833-f039-4689-9a19-b19068567ecb",
+            "owner": "d714e4b9-a6e8-4e05-98c6-4bddb80b8868",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c6bf8178-505f-4ab3-9a99-dbe34313c01f",
+      "name": "Satellite 2",
+      "lastHeartbeat": "1 minutes ago",
+      "url": "192.168.1.14",
+      "roomId": "21df6d38-42d4-4792-9dfb-ddcac11c3d74",
+      "room": {
+        "id": "21df6d38-42d4-4792-9dfb-ddcac11c3d74",
+        "name": "Kitchen",
+        "houseId": "a0e6cb4e-3f65-4849-b4b7-6606eca372a9"
+      },
+      "state" : {
+        "id": "4cc2f7d8-a84d-4e43-84d0-fe1c3a9553e6",
+        "owner": "c6bf8178-505f-4ab3-9a99-dbe34313c01f",
+        "ownerType": "satellite",
+        "value": "satellite.standby"
+      },
+      "plugins": [
+        {
+          "id": "7ea8b621-4360-4227-bb38-9dc59784f0da",
+          "name": "Bose",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "c6bf8178-505f-4ab3-9a99-dbe34313c01f",
+          "state" : {
+            "id": "5fd8bd2c-4068-493a-919a-3d30f4240fe4",
+            "owner": "7ea8b621-4360-4227-bb38-9dc59784f0da",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "3f188c89-2f82-4744-97e2-779dafb1e06d",
+          "name": "Broadlink",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "c6bf8178-505f-4ab3-9a99-dbe34313c01f",
+          "state" : {
+            "id": "99d6ebc4-dc1d-4d6f-9349-b77487cc6775",
+            "owner": "3f188c89-2f82-4744-97e2-779dafb1e06d",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        },
+        {
+          "id": "e92dee73-28b6-4c48-b2e6-4aec0764cce1",
+          "name": "Sonos",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "c6bf8178-505f-4ab3-9a99-dbe34313c01f",
+          "state" : {
+            "id": "0db34ce3-215a-4f87-95f8-4b6e85b8d914",
+            "owner": "e92dee73-28b6-4c48-b2e6-4aec0764cce1",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        }
+      ]
+    },
+    {
+      "id": "75f86006-7542-4e47-bddd-8ecaa989d7d1",
+      "name": "Satellite 3",
+      "lastHeartbeat": "1 hour ago",
+      "url": "192.168.1.21",
+      "roomId": "72662ad4-1ac7-44b1-9ff7-120204911edf",
+      "room": {
+        "id": "72662ad4-1ac7-44b1-9ff7-120204911edf",
+        "name": "Bedroom",
+        "houseId": "ff6dce6f-a872-484e-865d-cc1c0dea97e6"
+      },
+      "state" : {
+        "id": "4dbe451a-290c-49f8-ad2f-16e1611a5261",
+        "owner": "75f86006-7542-4e47-bddd-8ecaa989d7d1",
+        "ownerType": "satellite",
+        "value": "satellite.offline"
+      },
+      "plugins": [
+        {
+          "id": "7faf1e12-93dd-4697-b983-ecfe1eab06b7",
+          "name": "Yeelight",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "75f86006-7542-4e47-bddd-8ecaa989d7d1",
+          "state" : {
+            "id": "1f016eee-74eb-46fa-ab30-4665f68b61a4",
+            "owner": "7faf1e12-93dd-4697-b983-ecfe1eab06b7",
+            "ownerType": "plugin",
+            "value": "plugin.stopped"
+          }
+        },
+        {
+          "id": "c29b934c-cea9-4c71-be53-caf99e44518c",
+          "name": "Hyperion",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "75f86006-7542-4e47-bddd-8ecaa989d7d1",
+          "state" : {
+            "id": "bae9b7fc-2679-455b-a714-d7a0998853d1",
+            "owner": "c29b934c-cea9-4c71-be53-caf99e44518c",
+            "ownerType": "plugin",
+            "value": "plugin.stopped"
+          }
+        }
+      ]
+    },
+    {
+      "id": "121b4b88-dcee-4a5a-9383-15036ecec32a",
+      "name": "Satellite 4",
+      "lastHeartbeat": "2 minutes ago",
+      "url": "192.168.1.33",
+      "roomId": "629183e2-ae40-40fc-83ef-c156d533f794",
+      "room": {
+        "id": "629183e2-ae40-40fc-83ef-c156d533f794",
+        "name": "Bathroom",
+        "houseId": "25b4014e-bd3f-432b-a5d3-9bf9d71cdb22"
+      },
+      "state" : {
+        "id": "25a74232-61c4-43d4-a381-adfdc007fb75",
+        "owner": "121b4b88-dcee-4a5a-9383-15036ecec32a",
+        "ownerType": "satellite",
+        "value": "satellite.connected"
+      },
+      "plugins": [
+        {
+          "id": "a69d4eb6-b540-4ef9-8ed9-044c3f2d3fcb",
+          "name": "Wemo",
+          "dockerId": "cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5",
+          "version": "v1",
+          "url": "fake url",
+          "enabled": false,
+          "satelliteId": "121b4b88-dcee-4a5a-9383-15036ecec32a",
+          "state" : {
+            "id": "1c32ab53-aa53-4fa4-9bb7-6addf9539677",
+            "owner": "a69d4eb6-b540-4ef9-8ed9-044c3f2d3fcb",
+            "ownerType": "plugin",
+            "value": "plugin.running"
+          }
+        }
+      ]
+    },
+    {
+      "id": "bc10a95c-f2ca-4fcb-b6eb-248611006a1d",
+      "name": "Satellite 5",
+      "lastHeartbeat": "2 minutes ago",
+      "url": "192.168.1.33",
+      "roomId": "74073a15-0860-4d86-bbd7-7cce9ee0ac0b",
+      "room": {
+        "id": "74073a15-0860-4d86-bbd7-7cce9ee0ac0b",
+        "name": "Kids Bedroom",
+        "houseId": "25b4014e-bd3f-432b-a5d3-9bf9d71cdb22"
+      },
+      "state" : {
+        "id": "d9340b47-a0dd-4a42-a291-586298a22061",
+        "owner": "bc10a95c-f2ca-4fcb-b6eb-248611006a1d",
+        "ownerType": "satellite",
+        "value": "satellite.waiting.configuration"
+      },
+      "plugins": []
+    }
+  ],
+  "post /api/v1/user/login": {
+    "id": "9edae19f-f3a0-4d53-a19b-b3709709fe64",
+    "revoked": false,
+    "refreshToken": "b62c377601ec0f59609f1f7943b5818f239da349c71408cb8c463257dd928452719939eecc2c9a133781c0cfba83a9bf7e5164ebc9a96d287c82cf62d22da5537d5f2c321392a036a4b80c23326e032f70ddbba1b86126526baca265f9a47fbba10948e7ee23320e68f58c8d04660e3e23b6e8a4756aa7efd9a152ce055c324975c39b407edb24081538334fcf3ef8fbdaed9054dc59ffabe01fdcadb1dc1f1b61ead28cae110b5490e8bbd3205c578ae153f4d22d4fb1cd71734db11bb082531a5fc05b5682bf62d53801638dd3d9976eff89b44f71ef8aa506daa293fb4fb65da414fa5cac05ecb3678f1bd52e370d1a6200b6b73b43819bcc",
+    "validUntil": "2030-12-10T17:58:43.022Z",
+    "userId": "564fba36-733b-4aa1-bfad-be0bb7291571",
+    "updatedAt": "2021-11-25T17:58:43.023Z",
+    "createdAt": "2021-11-25T17:58:43.023Z",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNTY0ZmJhMzYtNzMzYi00YWExLWJmYWQtYmUwYmI3MjkxNTcxIiwic2Vzc2lvbiI6IjllZGFlMTlmLWYzYTAtNGQ1My1hMTliLWIzNzA5NzA5ZmU2NCIsImlhdCI6MTYzNzg2MzEyMywiZXhwIjoxNjM3OTQ5NTIzLCJhdWQiOiJ1c2VyIiwiaXNzIjoiZnJpZGF5In0.t2Fy6YKGaAD1uOViEHbQsrURnRnHku5a9vd6Ge0fz-0",
+    "user": {
+      "id": "564fba36-733b-4aa1-bfad-be0bb7291571",
+      "name": "John",
+      "firstName": "Pepperwood",
+      "email": "test@email.fr",
+      "birthDate": "1996-12-20"
+    }
+  }
+}

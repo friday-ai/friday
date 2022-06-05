@@ -12,6 +12,7 @@
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "useUnknownInCatchVariables": false,
     "sourceMap": true,
     "outDir": "dist",
     "baseUrl": "./src",

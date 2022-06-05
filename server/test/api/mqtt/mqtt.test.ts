@@ -39,6 +39,8 @@ describe('Mqtt.connection', () => {
     friday = global.FRIDAY;
     // Start fake broker
     fakeBroker.start();
+    // Wait until the fake server was correctly started
+    await wait(80);
   });
 
   it('should connect to MQTT Broker', async () => {
@@ -46,7 +48,7 @@ describe('Mqtt.connection', () => {
 
     fakeBroker.on('connected', listener);
     await mqttClient.start(mqttOptions);
-    await wait(20);
+    await wait(40);
 
     expect(listener.called).equal(true);
   });
@@ -61,7 +63,7 @@ describe('Mqtt.connection', () => {
     const client = await mqttClient.start(fakeMqttOptions);
     client.on('error', listener);
 
-    await wait(20);
+    await wait(30);
     expect(listener.called).equal(true);
   });
 
@@ -80,7 +82,7 @@ describe('Mqtt.connection', () => {
     });
 
     await mqttClient.start(mqttOptions);
-    await wait(20);
+    await wait(30);
 
     expect(topicsSubscribed).deep.equal(topicsToSubscribe);
   });
@@ -97,9 +99,9 @@ describe('Mqtt.publish', () => {
     });
 
     // Wait until subscribe messages passed
-    await wait(20);
+    await wait(30);
     friday.event.emit(EventsType.MQTT_PUBLISH, fakeMsg);
-    await wait(20);
+    await wait(30);
 
     expect(msgReceived).deep.equal({ message: 'this is a test ;)' });
   });
@@ -117,9 +119,9 @@ describe('Mqtt.publish', () => {
 
     try {
       // Wait until subscribe messages passed
-      await wait(20);
+      await wait(30);
       friday.event.emit(EventsType.MQTT_PUBLISH, incorrectMsg);
-      await wait(20);
+      await wait(30);
     } catch (e) {
       return;
     }
@@ -143,7 +145,7 @@ describe('Mqtt.handleMessage', () => {
       topic: TopicsTypes.PLUGIN_EXEC,
     }, () => {});
 
-    await wait(20);
+    await wait(30);
 
     expect(spy.calledWith(TopicsTypes.PLUGIN_EXEC, 'this is a test ;)')).to.equal(true);
   });
