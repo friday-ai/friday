@@ -9,7 +9,7 @@ export default async function heartbeat(id: string): Promise<SatelliteType> {
       throw new NotFoundError({ name: 'Update a Satellite', message: 'Satellite not found', metadata: id });
     }
     satelliteToUpdate.lastHeartbeat = new Date();
-    satelliteToUpdate.update(satelliteToUpdate);
+    await satelliteToUpdate.update(satelliteToUpdate);
     const satelliteToReturn = <SatelliteType>satelliteToUpdate.get({ plain: true });
     return satelliteToReturn;
   } catch (e) {

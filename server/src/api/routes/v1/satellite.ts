@@ -3,6 +3,7 @@ import {
   FridayRouter, Get, Patch, Post, Delete,
 } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
+import { FridayMode } from '../../../utils/constants';
 
 /**
  * Satellite router
@@ -106,6 +107,42 @@ export default class SatelliteRouter {
   getAll = async (req: Request, res: Response) => {
     const satellites = await this.friday.satellite.getAll(req.query);
     res.json(satellites);
+  };
+
+  /**
+   * discover a satellite
+   * @apiName discovery
+   * @apiDescription This route allows you to discover a satellite
+   * @api {get} /api/v1/satellite/discovery
+   * @apiGroup Satellite
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+   *   name: 'Main satellite',
+   *   roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3'
+   * }
+   */
+  @Get({
+    path: '/discovery', authenticated: false, rateLimit: false, aclMethod: 'discovery', aclResource: 'satellite',
+  })
+  discovery = async (req: Request, res: Response) => {
+    if (this.friday.mode === FridayMode.CONFIG_SATELLITE) {
+      this.friday.mode = FridayMode.NOMINAL;
+      res.status(200).json({
+        mode: 'config',
+      });
+    }
+  };
+
+  @Get({
+    path: '/login', authenticated: false, rateLimit: false, aclMethod: 'login', aclResource: 'satellite',
+  })
+  login = async (req: Request, res: Response) => {
+    const url = `http://${req.query.ip}:8080/login`;
+    // redirect to url
+    console.log(url);
+    res.json();
   };
 
   /**

@@ -51,3 +51,9 @@ dist/
 
 # IDE folder
 .idea
+
+# Package lock
+package-lock.json
+
+# Docker folder
+/docker/mosquitto/data/
