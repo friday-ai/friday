@@ -47,7 +47,6 @@
     "url": "https://github.com/friday-ai/friday/issues"
   },
   "dependencies": {
-    "concurrently": "^6.4.0",
-    "per-env": "^1.0.2"
+    "concurrently": "^7.0.0",
   }
 }

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import {
-  FridayRouter, Get, Patch, Post, Delete,
+  Delete, FridayRouter, Get, Patch, Post,
 } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
@@ -128,7 +128,7 @@ export default class UserRouter {
    * @apiVersion 1.0.0
    */
   @Get({
-    path: '/count', authenticated: true, rateLimit: true, aclMethod: 'read', aclResource: 'user',
+    path: '/count', authenticated: false, rateLimit: true, aclMethod: 'read', aclResource: 'user',
   })
   getUsersCount = async (req: Request, res: Response) => {
     const count = await this.friday.user.getCount();
@@ -176,6 +176,24 @@ export default class UserRouter {
   })
   login = async (req: Request, res: Response) => {
     const user = await this.friday.user.login(req.body.email, req.body.password);
+    const session = await this.friday.session.create(user);
+    res.status(201).json(session);
+  };
+
+  /**
+   * Sign up a user
+   * @apiName signup
+   * @apiDescription This route allows you to sign up a user (available only on first start)
+   * @api {post} /api/v1/user/signup
+   * @apiGroup User
+   * @apiUse UserParam
+   * @apiVersion 1.0.0
+   */
+  @Post({
+    path: '/signup', authenticated: false, rateLimit: true, aclMethod: '', aclResource: '',
+  })
+  signup = async (req: Request, res: Response) => {
+    const user = await this.friday.user.create(req.body);
     const session = await this.friday.session.create(user);
     res.status(201).json(session);
   };
