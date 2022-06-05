@@ -8,6 +8,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^_"}],
     "react/jsx-props-no-spreading": [2, { "html": "ignore" }],
     "no-param-reassign": ["error", {"props": false}],
+    "react/function-component-definition": [2, { "namedComponents": "arrow-function" }],
     "prettier/prettier": [
       "error",
       {
