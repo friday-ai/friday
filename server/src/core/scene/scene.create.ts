@@ -17,7 +17,7 @@ import error from '../../utils/errors/coreError';
  */
 export default async function create(scene: SceneType): Promise<SceneType> {
   try {
-    const createdScene = await Scene.create(scene);
+    const createdScene = await Scene.create({ ...scene });
     const sceneToReturn = <SceneType>createdScene.get({ plain: true });
     return sceneToReturn;
   } catch (e) {

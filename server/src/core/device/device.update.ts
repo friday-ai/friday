@@ -24,7 +24,7 @@ export default async function update(id: string, device: DeviceType): Promise<De
     if (deviceToUpdate === null) {
       throw new NotFoundError({ name: 'Update a Device', message: 'Device not found', metadata: device.id });
     }
-    deviceToUpdate.update(device);
+    await deviceToUpdate.update(device);
     const deviceToReturn = <DeviceType>deviceToUpdate.get({ plain: true });
     return deviceToReturn;
   } catch (e) {

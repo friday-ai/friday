@@ -19,7 +19,7 @@ import error from '../../utils/errors/coreError';
  */
 export default async function create(variable: VariableType): Promise<VariableType> {
   try {
-    const createdVariable = await Variable.create(variable);
+    const createdVariable = await Variable.create({ ...variable });
     const variableToReturn = <VariableType>createdVariable.get({ plain: true });
     return variableToReturn;
   } catch (e) {

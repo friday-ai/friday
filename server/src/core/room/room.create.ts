@@ -19,7 +19,7 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  */
 export default async function create(room: RoomType): Promise<RoomType> {
   try {
-    const createdRoom = await Room.create(room);
+    const createdRoom = await Room.create({ ...room });
     const roomToReturn = <RoomType>createdRoom.get({ plain: true });
     setItemState(
       roomToReturn.id!,

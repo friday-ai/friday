@@ -2,7 +2,7 @@ import { QueryInterface } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 
 module.exports = {
-  up: async (queryInterface: QueryInterface) => {
+  up: async ({ context: queryInterface }: { context: QueryInterface }) => {
     await queryInterface.createTable('house', {
       id: {
         unique: true,
@@ -33,5 +33,5 @@ module.exports = {
       },
     });
   },
-  down: (queryInterface: QueryInterface) => queryInterface.dropTable('house'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('house'),
 };

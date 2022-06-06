@@ -34,7 +34,7 @@ export default async function set(state: StateType): Promise<StateType> {
     }
 
     // And then, create the new state
-    const createdState = await State.create(state);
+    const createdState = await State.create({ ...state });
     const stateToReturn = <StateType>createdState.get({ plain: true });
     return stateToReturn;
   } catch (e) {

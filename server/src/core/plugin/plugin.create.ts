@@ -23,7 +23,7 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  */
 export default async function create(this: PluginClass, plugin: PluginType, state: AvailableState): Promise<PluginType> {
   try {
-    const createdPlugin = await Plugin.create(plugin);
+    const createdPlugin = await Plugin.create({ ...plugin });
     const pluginToReturn = <PluginType>createdPlugin.get({ plain: true });
 
     await this.state.set({

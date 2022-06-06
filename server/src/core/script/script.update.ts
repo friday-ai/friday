@@ -24,7 +24,7 @@ export default async function update(id: string, script: ScriptType): Promise<Sc
     if (scriptToUpdate === null) {
       throw new NotFoundError({ name: 'Update a Script', message: 'Script not found', metadata: script.id });
     }
-    scriptToUpdate.update(script);
+    await scriptToUpdate.update(script);
     const scriptToReturn = <ScriptType>scriptToUpdate.get({ plain: true });
     return scriptToReturn;
   } catch (e) {

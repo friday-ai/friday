@@ -22,7 +22,7 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  */
 export default async function create(user: UserType): Promise<UserType> {
   try {
-    const createdUser = await User.create(user);
+    const createdUser = await User.create({ ...user });
     const userToReturn = <UserType>createdUser.get({ plain: true });
     setItemState(
       userToReturn.id!,

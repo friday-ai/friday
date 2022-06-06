@@ -24,7 +24,7 @@ export default async function update(id: string, trigger: TriggerType): Promise<
     if (triggerToUpdate === null) {
       throw new NotFoundError({ name: 'Update a Trigger', message: 'Trigger not found', metadata: trigger.id });
     }
-    triggerToUpdate.update(trigger);
+    await triggerToUpdate.update(trigger);
     const triggerToReturn = <TriggerType>triggerToUpdate.get({ plain: true });
     return triggerToReturn;
   } catch (e) {

@@ -1,6 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import error, { NotFoundError, BadParametersError } from '../../utils/errors/coreError';
+import error, { BadParametersError, NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Update a variable.
@@ -38,7 +38,7 @@ export default async function update(idOrKey: string, variable: VariableType): P
       throw new NotFoundError({ name: 'Update an Variable', message: 'Variable not found', metadata: variable });
     }
 
-    variableToUpdate.update(variable);
+    await variableToUpdate.update(variable);
     const variableToReturn = <VariableType>variableToUpdate.get({ plain: true });
     return variableToReturn;
   } catch (e) {

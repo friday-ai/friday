@@ -14,6 +14,7 @@
     "emitDecoratorMetadata": true,
     "useUnknownInCatchVariables": false,
     "sourceMap": true,
+    "skipLibCheck": true,
     "outDir": "dist",
     "baseUrl": "./src",
     "typeRoots": [

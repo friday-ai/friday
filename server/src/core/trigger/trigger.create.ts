@@ -22,7 +22,7 @@ import error from '../../utils/errors/coreError';
  */
 export default async function create(trigger: TriggerType): Promise<TriggerType> {
   try {
-    const createdTrigger = await Trigger.create(trigger);
+    const createdTrigger = await Trigger.create({ ...trigger });
     const triggerToReturn = <TriggerType>createdTrigger.get({ plain: true });
     return triggerToReturn;
   } catch (e) {

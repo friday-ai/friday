@@ -20,7 +20,7 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  */
 export default async function create(house: HouseType): Promise<HouseType> {
   try {
-    const createdHouse = await House.create(house);
+    const createdHouse = await House.create({ ...house });
     const houseToReturn = <HouseType>createdHouse.get({ plain: true });
     setItemState(
       houseToReturn.id!,

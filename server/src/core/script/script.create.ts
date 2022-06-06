@@ -17,7 +17,7 @@ import error from '../../utils/errors/coreError';
  */
 export default async function create(script: ScriptType): Promise<ScriptType> {
   try {
-    const createdScript = await Script.create(script);
+    const createdScript = await Script.create({ ...script });
     const scriptToReturn = <ScriptType>createdScript.get({ plain: true });
     return scriptToReturn;
   } catch (e) {

@@ -25,7 +25,7 @@ export default async function update(id: string, action: ActionType): Promise<Ac
       throw new NotFoundError({ name: 'Update an Action', message: 'Action not found', metadata: action.id });
     }
 
-    actionToUpdate.update(action);
+    await actionToUpdate.update(action);
     const actionToReturn = <ActionType>actionToUpdate.get({ plain: true });
     return actionToReturn;
   } catch (e) {

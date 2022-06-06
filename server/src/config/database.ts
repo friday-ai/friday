@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import Umzug from 'umzug';
+import { SequelizeStorage, Umzug } from 'umzug';
 import path from 'path';
 import { KVArr } from '../utils/interfaces';
 
@@ -26,18 +26,16 @@ const database = new Sequelize({
 // Migrations
 const umzug = new Umzug({
   migrations: {
-    path: path.join(__dirname, '../../migrations'),
-    params: [database.getQueryInterface()],
+    glob: path.join(__dirname, '../../migrations/*.ts'),
   },
-  storage: 'sequelize',
-  storageOptions: {
-    sequelize: database,
-  },
+  context: database.getQueryInterface(),
+  storage: new SequelizeStorage({ sequelize: database }),
+  logger: console,
 });
 
 const init = async () => {
   if (env === 'test') {
-    // If exist, drop tables for tests
+    // Drop tables for tests
     await database.sync({ force: true });
   } else {
     await database.sync();
@@ -45,7 +43,7 @@ const init = async () => {
 };
 
 const closeConnection = async () => {
-  database.close();
+  await database.close();
 };
 
 export {

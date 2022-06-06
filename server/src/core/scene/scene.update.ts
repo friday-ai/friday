@@ -24,7 +24,7 @@ export default async function update(id: string, scene: SceneType): Promise<Scen
     if (sceneToUpdate === null) {
       throw new NotFoundError({ name: 'Update an Scene', message: 'Scene not found', metadata: scene.id });
     }
-    sceneToUpdate.update(scene);
+    await sceneToUpdate.update(scene);
     const sceneToReturn = <SceneType>sceneToUpdate.get({ plain: true });
     return sceneToReturn;
   } catch (e) {

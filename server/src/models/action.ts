@@ -1,6 +1,18 @@
 import {
-  Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID,
-  AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default, Is,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  Is,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import Scene from './scene';
@@ -30,40 +42,40 @@ export default class Action extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @Column
-  description!: string;
+    description!: string;
 
   @AllowNull(false)
   @Column
-  type!: ActionsType;
+    type!: ActionsType;
 
   @AllowNull(false)
   @Column
-  subType!: string;
+    subType!: string;
 
   @Column
-  variableKey!: string;
+    variableKey!: string;
 
   @Column
-  variableValue!: string;
+    variableValue!: string;
 
   @NotEmpty
   @Is('sceneId', (value) => isOwnerExisting(value, ['scene']))
   @Column(DataType.UUIDV4)
-  sceneId!: string;
+    sceneId!: string;
 
   @BelongsTo(() => Scene, {
     foreignKey: 'sceneId',
     constraints: false,
   })
-  scene!: Scene;
+    scene!: Scene;
 }

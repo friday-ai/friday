@@ -1,6 +1,6 @@
 import Session from '../../models/session';
 import SessionType from './session.interface';
-import error, { NotFoundError, BadParametersError } from '../../utils/errors/coreError';
+import error, { BadParametersError, NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Revoke an session.
@@ -31,7 +31,7 @@ export default async function revoke(userId: string, sessionId: string): Promise
 
     const sessionToReturn = <SessionType>session.get({ plain: true });
     sessionToReturn.revoked = true;
-    session.update(sessionToReturn);
+    await session.update(sessionToReturn);
 
     return sessionToReturn;
   } catch (e) {

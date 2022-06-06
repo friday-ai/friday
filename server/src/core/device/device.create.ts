@@ -25,7 +25,7 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  */
 export default async function create(device: DeviceType): Promise<DeviceType> {
   try {
-    const createdDevice = await Device.create(device);
+    const createdDevice = await Device.create({ ...device });
     const deviceToReturn = <DeviceType>createdDevice.get({ plain: true });
     setItemState(
       deviceToReturn.id!,

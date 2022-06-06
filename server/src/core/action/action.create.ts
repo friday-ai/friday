@@ -22,7 +22,7 @@ import error from '../../utils/errors/coreError';
  */
 export default async function create(action: ActionType): Promise<ActionType> {
   try {
-    const createdAction = await Action.create(action);
+    const createdAction = await Action.create({ ...action });
     const actionToReturn = <ActionType>createdAction.get({ plain: true });
     return actionToReturn;
   } catch (e) {

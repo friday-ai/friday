@@ -24,7 +24,7 @@ export default async function update(id: string, user: UserType): Promise<UserTy
     if (userToUpdate === null) {
       throw new NotFoundError({ name: 'Update a User', message: 'User not found', metadata: user.id });
     }
-    userToUpdate.update(user);
+    await userToUpdate.update(user);
     const userToReturn = <UserType>userToUpdate.get({ plain: true });
     delete userToReturn.password;
     return userToReturn;

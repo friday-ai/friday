@@ -19,7 +19,7 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  */
 export default async function create(satellite: SatelliteType): Promise<SatelliteType> {
   try {
-    const createdSatellite = await Satellite.create(satellite);
+    const createdSatellite = await Satellite.create({ ...satellite });
     const satelliteToReturn = <SatelliteType>createdSatellite.get({ plain: true });
     setItemState(
       satelliteToReturn.id!,

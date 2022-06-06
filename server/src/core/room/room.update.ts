@@ -24,7 +24,7 @@ export default async function update(id: string, room: RoomType): Promise<RoomTy
     if (roomToUpdate === null) {
       throw new NotFoundError({ name: 'Update an Room', message: 'Room not found', metadata: room.id });
     }
-    roomToUpdate.update(room);
+    await roomToUpdate.update(room);
     const roomToReturn = <RoomType>roomToUpdate.get({ plain: true });
     return roomToReturn;
   } catch (e) {

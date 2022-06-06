@@ -24,7 +24,7 @@ export default async function update(id: string, house: HouseType): Promise<Hous
     if (houseToUpdate === null) {
       throw new NotFoundError({ name: 'Update an House', message: 'House not found', metadata: house.id });
     }
-    houseToUpdate.update(house);
+    await houseToUpdate.update(house);
     const houseToReturn = <HouseType>houseToUpdate.get({ plain: true });
     return houseToReturn;
   } catch (e) {
