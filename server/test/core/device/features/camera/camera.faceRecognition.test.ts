@@ -1,6 +1,7 @@
 import { assert, expect } from 'chai';
 import Friday from '../../../../../src/core/friday';
 import faceRecognition from '../../../../../src/core/device/features/camera/camera.faceRecognition';
+import { UserRole } from '../../../../../src/utils/constants';
 
 let friday: Friday;
 
@@ -26,10 +27,10 @@ describe('features.camera.faceRecognition', () => {
 
       assert.deepEqual(payload, {
         id: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
-        name: 'Pepperwood',
-        firstName: 'Jess',
+        userName: 'JessPepperwood',
         email: 'jess@pepperwood.com',
-        birthDate: '1997-01-20 00:00:00.000 +00:00',
+        theme: 'light',
+        role: UserRole.HABITANT,
       });
     } catch (e) {
       message = e.message;

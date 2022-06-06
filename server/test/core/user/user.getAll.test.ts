@@ -1,5 +1,6 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import User from '../../../src/core/user';
+import { UserRole } from '../../../src/utils/constants';
 
 describe('User.getAll', () => {
   const user = new User();
@@ -10,17 +11,17 @@ describe('User.getAll', () => {
     expect(users).to.be.an('array');
     assert.deepEqual(users, [{
       id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      name: 'Pepperwood',
-      firstName: 'John',
+      userName: 'JohnPepperwood',
       email: 'john@pepperwood.com',
-      birthDate: '1997-01-20 00:00:00.000 +00:00',
+      theme: 'light',
+      role: UserRole.HABITANT,
     },
     {
       id: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
-      name: 'Pepperwood',
-      firstName: 'Jess',
+      userName: 'JessPepperwood',
       email: 'jess@pepperwood.com',
-      birthDate: '1997-01-20 00:00:00.000 +00:00',
+      theme: 'light',
+      role: UserRole.HABITANT,
     }]);
   });
 
@@ -31,7 +32,7 @@ describe('User.getAll', () => {
 
     users.forEach((u) => {
       expect(u).to.have.property('id');
-      expect(u).to.have.property('name');
+      expect(u).to.have.property('userName');
       expect(u).to.have.property('role');
       expect(u).to.have.property('state');
       expect(u).to.have.property('variables');
@@ -62,7 +63,7 @@ describe('User.getAll', () => {
 
     users.forEach((u) => {
       expect(u).to.have.property('id');
-      expect(u).to.have.property('name');
+      expect(u).to.have.property('userName');
       expect(u).to.have.property('role');
       expect(u).to.have.property('state');
 
@@ -84,7 +85,7 @@ describe('User.getAll', () => {
 
     users.forEach((u) => {
       expect(u).to.have.property('id');
-      expect(u).to.have.property('name');
+      expect(u).to.have.property('userName');
       expect(u).to.have.property('role');
       expect(u).to.have.property('variables');
       expect(u.variables).to.be.an('array');

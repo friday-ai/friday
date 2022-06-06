@@ -10,11 +10,7 @@ module.exports = {
         primaryKey: true,
         type: DataType.UUIDV4,
       },
-      name: {
-        allowNull: false,
-        type: DataType.STRING,
-      },
-      firstName: {
+      userName: {
         allowNull: false,
         type: DataType.STRING,
       },
@@ -27,9 +23,9 @@ module.exports = {
         allowNull: false,
         type: DataType.JSON,
       },
-      birthDate: {
-        allowNull: false,
-        type: DataType.DATE,
+      theme: {
+        allowNull: true,
+        type: DataType.STRING,
       },
       role: {
         allowNull: false,

@@ -1,5 +1,6 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import User from '../../../src/core/user';
+import { UserRole } from '../../../src/utils/constants';
 
 describe('User.getById', () => {
   const user = new User();
@@ -10,10 +11,10 @@ describe('User.getById', () => {
     expect(userReturned).to.be.an('object');
     assert.deepEqual(userReturned, {
       id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      name: 'Pepperwood',
-      firstName: 'John',
+      userName: 'JohnPepperwood',
       email: 'john@pepperwood.com',
-      birthDate: '1997-01-20 00:00:00.000 +00:00',
+      theme: 'light',
+      role: UserRole.HABITANT,
     });
   });
 
@@ -45,7 +46,7 @@ describe('User.getById', () => {
     const userReturned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'withState');
 
     expect(userReturned).to.have.property('id');
-    expect(userReturned).to.have.property('name');
+    expect(userReturned).to.have.property('userName');
     expect(userReturned).to.have.property('role');
     expect(userReturned).to.have.property('state');
 
@@ -63,7 +64,7 @@ describe('User.getById', () => {
     const userReturned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'withVariables');
 
     expect(userReturned).to.have.property('id');
-    expect(userReturned).to.have.property('name');
+    expect(userReturned).to.have.property('userName');
     expect(userReturned).to.have.property('role');
     expect(userReturned).to.have.property('variables');
     expect(userReturned.variables).to.be.an('array');

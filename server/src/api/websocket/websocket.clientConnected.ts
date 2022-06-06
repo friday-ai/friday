@@ -12,7 +12,11 @@ const logger = new Log();
 export default async function clientConnected(this: WebsocketServer, message: WebsocketMessagePayload, ws: WebSocket) {
   try {
     if (message.accessToken === null) {
-      throw new BadParametersError({ name: 'Websocket authentication', message: 'Access token not found', metadata: message });
+      throw new BadParametersError({
+        name: 'Websocket authentication',
+        message: 'Access token not found',
+        metadata: message,
+      });
     }
 
     await this.friday.session.validateAccessToken(message.accessToken!);
@@ -32,7 +36,7 @@ export default async function clientConnected(this: WebsocketServer, message: We
 
     this.user = user;
     this.isAuthenticated = true;
-    logger.info(`User ${user.firstName} connected in websocket.`);
+    logger.info(`User ${user.userName} connected in websocket.`);
   } catch (e) {
     logger.error('Websocket authentication failed.');
     ws.close(4000, 'Auth failed');

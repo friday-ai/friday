@@ -12,11 +12,9 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  * ````
  * friday.user.create({
  *    id: '87d636b2-fa65-4f0e-ae04-622562f62c31',
- *    name: 'Pepperwood',
- *    firstName: 'John',
+ *    userName: 'Pepperwood',
  *    email: 'sample@sample.com',
- *    password: 'mysupersamplepassword',
- *    birthDate: new Date(1996, 12, 20)
+ *    password: 'mysupersamplepassword'
  * });
  * ````
  */

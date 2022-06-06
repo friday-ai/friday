@@ -13,7 +13,7 @@ import error, { NotFoundError } from '../../utils/errors/coreError';
  * 'f8be3bad-3d46-4009-b965-fe03a4d6d5f1',
  * {
  *   id: 'f8be3bad-3d46-4009-b965-fe03a4d6d5f1'
- *   name: 'user update'
+ *   userName: 'user update'
  * });
  * ````
  */

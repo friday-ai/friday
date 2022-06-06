@@ -1,6 +1,7 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import server from '../../../../utils/request';
 import VariableType from '../../../../../src/core/variable/variable.interface';
+import { UserRole } from '../../../../../src/utils/constants';
 
 describe('GET /api/v1/user/:id', () => {
   it('should return user', async () => {
@@ -12,10 +13,10 @@ describe('GET /api/v1/user/:id', () => {
         expect(res.body).to.be.an('object');
         assert.deepEqual(res.body, {
           id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-          name: 'Pepperwood',
-          firstName: 'John',
+          userName: 'JohnPepperwood',
           email: 'john@pepperwood.com',
-          birthDate: '1997-01-20 00:00:00.000 +00:00',
+          theme: 'light',
+          role: UserRole.HABITANT,
         });
       });
   });
@@ -32,7 +33,7 @@ describe('GET /api/v1/user/:id', () => {
         const user = res.body;
         expect(user).to.be.an('object');
         expect(user).to.contains.keys(
-          ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state', 'variables'],
+          ['id', 'userName', 'email', 'theme', 'role', 'language', 'state', 'variables'],
         );
         if (user.state !== null) {
           expect(user.state).to.be.an('object');
@@ -62,7 +63,7 @@ describe('GET /api/v1/user/:id', () => {
         const user = res.body;
         expect(user).to.be.an('object');
         expect(user).to.contains.keys(
-          ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state'],
+          ['id', 'userName', 'email', 'theme', 'role', 'language', 'state'],
         );
         if (user.state !== null) {
           expect(user.state).to.be.an('object');
@@ -85,7 +86,7 @@ describe('GET /api/v1/user/:id', () => {
         const user = res.body;
         expect(user).to.be.an('object');
         expect(user).to.contains.keys(
-          ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'variables'],
+          ['id', 'userName', 'email', 'theme', 'role', 'language', 'variables'],
         );
         expect(user.variables).to.be.an('array');
         user.variables!.forEach((variable: VariableType) => {

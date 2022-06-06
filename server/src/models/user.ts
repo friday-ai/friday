@@ -1,10 +1,25 @@
 import {
-  Table, Column, Model, PrimaryKey, DataType, HasOne, IsDate, IsUUID,
-  Default, AllowNull, Unique, IsEmail, NotEmpty, Length, DefaultScope, BeforeCreate, Scopes, HasMany,
+  AllowNull,
+  BeforeCreate,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  HasMany,
+  HasOne,
+  IsEmail,
+  IsUUID,
+  Length,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import Variable from './variable';
-import { UserRole, AvailableLanguages } from '../utils/constants';
+import { AvailableLanguages, UserRole } from '../utils/constants';
 import State from './state';
 import { hash } from '../utils/password';
 import Session from './session';
@@ -13,19 +28,19 @@ import Session from './session';
  * User model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role'],
+  attributes: ['id', 'userName', 'email', 'theme', 'role'],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
+    attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
     include: [State, Variable],
   },
   withState: {
-    attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
+    attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
     include: [State],
   },
   withVariables: {
-    attributes: ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language'],
+    attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
     include: [Variable],
   },
 }))
@@ -40,62 +55,57 @@ export default class User extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-  name!: string;
-
-  @AllowNull(false)
-  @Column
-  firstName!: string;
+    userName!: string;
 
   @AllowNull(false)
   @Unique
   @IsEmail
   @NotEmpty
   @Column
-  email!: string;
+    email!: string;
 
   @AllowNull(false)
   @Length({ min: 10 })
   @NotEmpty
   @Column
-  password!: string;
+    password!: string;
 
   @AllowNull(true)
-  @IsDate
-  @Column({ type: DataType.DATEONLY })
-  birthDate!: Date;
+  @Column
+    theme!: string;
 
   @AllowNull(false)
   @Default(UserRole.HABITANT)
   @Column
-  role!: UserRole;
+    role!: UserRole;
 
   @AllowNull(false)
   @Default(AvailableLanguages.EN)
   @Column
-  language!: AvailableLanguages;
+    language!: AvailableLanguages;
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',
     constraints: false,
   })
-  variables?: Variable[];
+    variables?: Variable[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-  state?: State;
+    state?: State;
 
   @HasMany(() => Session, {
     foreignKey: 'userId',
     constraints: false,
   })
-  session?: Session[];
+    session?: Session[];
 
   /**
    * Function to hash password before saving in the database

@@ -17,7 +17,7 @@ export default function clientDisconnected(this: WebsocketServer, ws: WebSocket)
     this.clients[this.user.id!].splice(connectionIndex, 1);
   }
 
-  if (this.user.firstName !== undefined) {
-    logger.info(`User ${this.user.firstName!} disconnected of websocket`);
+  if (this.user.userName !== undefined) {
+    logger.info(`User ${this.user.userName!} disconnected of websocket`);
   }
 }

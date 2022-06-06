@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 
@@ -6,11 +6,10 @@ describe('POST /api/v1/user', () => {
   it('should create a user', async () => {
     const user = {
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-      name: 'Pepperwood',
-      firstName: 'John',
+      userName: 'JohnPepperwood',
       email: 'test@test.com',
       password: 'mysuperpassword',
-      birthDate: new Date(1996, 12, 20),
+      theme: 'light',
     };
 
     await server
@@ -25,10 +24,9 @@ describe('POST /api/v1/user', () => {
         delete res.body.updatedAt;
         assert.deepEqual(res.body, {
           id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-          name: 'Pepperwood',
-          firstName: 'John',
+          userName: 'JohnPepperwood',
           email: 'test@test.com',
-          birthDate: '1997-01-20',
+          theme: 'light',
           language: 'en',
           role: 'habitant',
         });
@@ -38,11 +36,10 @@ describe('POST /api/v1/user', () => {
   it('admin should have to create a user', async () => {
     const user = {
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-      name: 'Pepperwood',
-      firstName: 'John',
+      userName: 'JohnPepperwood',
       email: 'test@test.com',
       password: 'mysuperpassword',
-      birthDate: new Date(1996, 12, 20),
+      theme: 'light',
     };
 
     await server
@@ -57,10 +54,9 @@ describe('POST /api/v1/user', () => {
         delete res.body.updatedAt;
         assert.deepEqual(res.body, {
           id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-          name: 'Pepperwood',
-          firstName: 'John',
+          userName: 'JohnPepperwood',
           email: 'test@test.com',
-          birthDate: '1997-01-20',
+          theme: 'light',
           language: 'en',
           role: 'habitant',
         });
@@ -70,11 +66,10 @@ describe('POST /api/v1/user', () => {
   it('habitant should\'t have to create a user', async () => {
     const user = {
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-      name: 'Pepperwood',
-      firstName: 'John',
+      userName: 'JohnPepperwood',
       email: 'test@test.com',
       password: 'mysuperpassword',
-      birthDate: new Date(1996, 12, 20),
+      theme: 'light',
     };
 
     await server
@@ -87,11 +82,10 @@ describe('POST /api/v1/user', () => {
   it('guest should\'t have to create a user', async () => {
     const user = {
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-      name: 'Pepperwood',
-      firstName: 'John',
+      userName: 'JohnPepperwood',
       email: 'test@test.com',
       password: 'mysuperpassword',
-      birthDate: new Date(1996, 12, 20),
+      theme: 'light',
     };
 
     await server
@@ -106,11 +100,10 @@ describe('POST /api/v1/user', () => {
       .post('/api/v1/user')
       .send({
         id: '0cd30aef-9c4e-4a23-88e3-3544971296e5',
-        name: 'Pepperwood',
-        firstName: 'John',
+        userName: 'JohnPepperwood',
         email: 'john@pepperwood.com',
         password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20),
+        theme: 'light',
       })
       .expect('Content-Type', /json/)
       .expect(409);
@@ -121,11 +114,10 @@ describe('POST /api/v1/user', () => {
       .post('/api/v1/user')
       .send({
         id: '0cd30aef-9c4e-4c23-88e3-3547971296e5',
-        name: 'Pepperwood',
-        firstName: 'John',
+        userName: 'JohnPepperwood',
         email: 'johnpepperwood',
         password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20),
+        theme: 'light',
       })
       .expect('Content-Type', /json/)
       .expect(422);
@@ -136,11 +128,10 @@ describe('POST /api/v1/user', () => {
       .post('/api/v1/user')
       .send({
         id: '0cd30aef-9c4e-4c23-89e3-3547971296e5',
-        name: 'Pepperwood',
-        firstName: 'John',
+        userName: 'JohnPepperwood',
         email: 'test2@test2.com',
         password: 'test',
-        birthDate: new Date(1996, 12, 20),
+        theme: 'light',
       })
       .expect('Content-Type', /json/)
       .expect(422);
@@ -151,11 +142,10 @@ describe('POST /api/v1/user', () => {
       .post('/api/v1/user')
       .send({
         id: 'cab61bee-7ea5-45ee-8932-36b7d6c5520f',
-        name: '',
-        firstName: 'John',
+        userName: '',
         email: 'test3@test3.com',
         password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20),
+        theme: 'light',
       })
       .expect('Content-Type', /json/)
       .expect(422);
@@ -166,11 +156,10 @@ describe('POST /api/v1/user', () => {
       .post('/api/v1/user')
       .send({
         id: 'c24df82e-4437-46c6-8c9f-be4024469dcd',
-        name: 'Pepperwood',
-        firstName: 'John',
+        userName: 'JohnPepperwood',
         email: 'test3@test3.com',
         password: '',
-        birthDate: new Date(1996, 12, 20),
+        theme: 'light',
       })
       .expect('Content-Type', /json/)
       .expect(422);
@@ -181,11 +170,10 @@ describe('POST /api/v1/user', () => {
       .post('/api/v1/user')
       .send({
         id: 'f522d4fc-2036-4ef2-8e54-785be7cce5e4',
-        name: 'Pepperwood',
-        firstName: 'John',
+        userName: 'JohnPepperwood',
         email: '',
         password: 'mysuperpassword',
-        birthDate: new Date(1996, 12, 20),
+        theme: 'light',
       })
       .expect('Content-Type', /json/)
       .expect(422);

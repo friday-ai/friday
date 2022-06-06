@@ -1,4 +1,4 @@
-import { UserRole, AvailableLanguages } from '../../utils/constants';
+import { AvailableLanguages, UserRole } from '../../utils/constants';
 import VariableType from '../variable/variable.interface';
 import StateType from '../state/state.interface';
 
@@ -7,11 +7,10 @@ import StateType from '../state/state.interface';
  */
 export default interface UserType {
   id?: string;
-  name?: string;
-  firstName?: string;
+  userName?: string;
   email?: string;
   password?: string;
-  birthDate?: Date | string;
+  theme?: string;
   role?: UserRole;
   language?: AvailableLanguages;
   state?: StateType;

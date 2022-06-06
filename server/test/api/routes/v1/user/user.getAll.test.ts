@@ -1,6 +1,7 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import server from '../../../../utils/request';
 import UserType from '../../../../../src/core/user/user.interface';
+import { UserRole } from '../../../../../src/utils/constants';
 
 describe('GET /api/v1/user', () => {
   it('should return all users', async () => {
@@ -12,17 +13,17 @@ describe('GET /api/v1/user', () => {
         expect(res.body).to.be.an('array');
         assert.deepEqual(res.body, [{
           id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-          name: 'Pepperwood',
-          firstName: 'John',
+          userName: 'JohnPepperwood',
           email: 'john@pepperwood.com',
-          birthDate: '1997-01-20 00:00:00.000 +00:00',
+          theme: 'light',
+          role: UserRole.HABITANT,
         },
         {
           id: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
-          name: 'Pepperwood',
-          firstName: 'Jess',
+          userName: 'JessPepperwood',
           email: 'jess@pepperwood.com',
-          birthDate: '1997-01-20 00:00:00.000 +00:00',
+          theme: 'light',
+          role: UserRole.HABITANT,
         }]);
       });
   });
@@ -41,7 +42,7 @@ describe('GET /api/v1/user', () => {
         users!.forEach((user: UserType) => {
           expect(user).to.be.an('object');
           expect(user).to.contains.keys(
-            ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state', 'variables'],
+            ['id', 'userName', 'email', 'theme', 'role', 'language', 'state', 'variables'],
           );
           if (user.state !== null) {
             expect(user.state).to.be.an('object');
@@ -74,7 +75,7 @@ describe('GET /api/v1/user', () => {
         users!.forEach((user: UserType) => {
           expect(user).to.be.an('object');
           expect(user).to.contains.keys(
-            ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'state'],
+            ['id', 'userName', 'email', 'theme', 'role', 'language', 'state'],
           );
           if (user.state !== null) {
             expect(user.state).to.be.an('object');
@@ -100,7 +101,7 @@ describe('GET /api/v1/user', () => {
         users!.forEach((user: UserType) => {
           expect(user).to.be.an('object');
           expect(user).to.contains.keys(
-            ['id', 'name', 'firstName', 'email', 'birthDate', 'role', 'language', 'variables'],
+            ['id', 'userName', 'email', 'theme', 'role', 'language', 'variables'],
           );
           expect(user.variables).to.be.an('array');
           user.variables!.forEach((variable) => {

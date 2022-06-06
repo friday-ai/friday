@@ -10,8 +10,7 @@ describe('Session.create', () => {
   it('should create an session', async () => {
     const createdSession = await session.create({
       id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      name: 'Pepperwood',
-      firstName: 'John',
+      userName: 'JohnPepperwood',
       email: 'john@pepperwood.com',
       role: UserRole.HABITANT,
     });
