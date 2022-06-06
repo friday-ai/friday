@@ -1,6 +1,17 @@
 import {
-  Table, Column, Model, PrimaryKey, DataType, IsUUID,
-  AllowNull, BelongsTo, Unique, DefaultScope, Default, Is, NotEmpty,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  Is,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import { StateOwner } from '../utils/constants';
@@ -29,61 +40,61 @@ export default class State extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('owner', (value) => isOwnerExisting(value, ['user', 'room', 'house', 'satellite', 'plugin', 'device']))
   @Column(DataType.UUIDV4)
-  owner!: string;
+    owner!: string;
 
   @AllowNull(false)
   @Column
-  ownerType!: StateOwner;
+    ownerType!: StateOwner;
 
   @AllowNull(false)
   @Column
-  value!: string;
+    value!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Default(true)
   @Column
-  last!: boolean;
+    last!: boolean;
 
   @BelongsTo(() => User, {
     foreignKey: 'owner',
     constraints: false,
   })
-  user?: User;
+    user?: User;
 
   @BelongsTo(() => Room, {
     foreignKey: 'owner',
     constraints: false,
   })
-  room?: Room;
+    room?: Room;
 
   @BelongsTo(() => House, {
     foreignKey: 'owner',
     constraints: false,
   })
-  house?: House;
+    house?: House;
 
   @BelongsTo(() => Plugin, {
     foreignKey: 'owner',
     constraints: false,
   })
-  plugin?: Plugin;
+    plugin?: Plugin;
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'owner',
     constraints: false,
   })
-  satellite?: Satellite;
+    satellite?: Satellite;
 
   @BelongsTo(() => Device, {
     foreignKey: 'owner',
     constraints: false,
   })
-  device?: Device;
+    device?: Device;
 }

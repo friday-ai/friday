@@ -1,6 +1,17 @@
 import {
-  Table, Column, Model, PrimaryKey, HasMany, DataType, IsUUID,
-  AllowNull, Unique, NotEmpty, DefaultScope, Scopes, Default,
+  AllowNull,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  HasMany,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import Scene from './scene';
@@ -29,29 +40,29 @@ export default class Trigger extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @Column
-  description!: string;
+    description!: string;
 
   @AllowNull(false)
   @Column
-  type!: AvailableConditions;
+    type!: AvailableConditions;
 
   @AllowNull(false)
   @Column(DataType.JSON)
-  rules: any;
+    rules: any;
 
   @HasMany(() => Scene, {
     foreignKey: 'triggerId',
     constraints: false,
   })
-  scenes!: Scene[];
+    scenes!: Scene[];
 }

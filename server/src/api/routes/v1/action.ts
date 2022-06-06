@@ -46,12 +46,12 @@ export default class ActionRouter {
    * }
    */
   @Post({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'action',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'action',
   })
-  create = async (req: Request, res: Response) => {
-    const action = await this.friday.action.create(req.body);
-    res.status(201).json(action);
-  };
+    create = async (req: Request, res: Response) => {
+      const action = await this.friday.action.create(req.body);
+      res.status(201).json(action);
+    };
 
   /**
    * Update an action
@@ -75,12 +75,12 @@ export default class ActionRouter {
    * }
    */
   @Patch({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'action',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'action',
   })
-  update = async (req: Request, res: Response) => {
-    const action = await this.friday.action.update(req.params.id, req.body);
-    res.json(action);
-  };
+    update = async (req: Request, res: Response) => {
+      const action = await this.friday.action.update(req.params.id, req.body);
+      res.json(action);
+    };
 
   /**
    * Delete an action by id
@@ -96,14 +96,14 @@ export default class ActionRouter {
    * }
    */
   @Delete({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'action',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'action',
   })
-  destroy = async (req: Request, res: Response) => {
-    await this.friday.action.destroy(req.params.id);
-    res.json({
-      success: true,
-    });
-  };
+    destroy = async (req: Request, res: Response) => {
+      await this.friday.action.destroy(req.params.id);
+      res.json({
+        success: true,
+      });
+    };
 
   /**
    * Get all actions
@@ -126,12 +126,12 @@ export default class ActionRouter {
    * }]
    */
   @Get({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'action',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'action',
   })
-  getAll = async (req: Request, res: Response) => {
-    const actions = await this.friday.action.getAll(req.query);
-    res.json(actions);
-  };
+    getAll = async (req: Request, res: Response) => {
+      const actions = await this.friday.action.getAll(req.query);
+      res.json(actions);
+    };
 
   /**
    * Get an action by id
@@ -153,11 +153,11 @@ export default class ActionRouter {
    * }
    */
   @Get({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'action',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'action',
   })
-  getById = async (req: Request, res: Response) => {
-    const scope = req.query.scope as string;
-    const action = await this.friday.action.getById(req.params.id, scope);
-    res.json(action);
-  };
+    getById = async (req: Request, res: Response) => {
+      const scope = req.query.scope as string;
+      const action = await this.friday.action.getById(req.params.id, scope);
+      res.json(action);
+    };
 }

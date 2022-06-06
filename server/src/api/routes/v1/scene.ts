@@ -36,12 +36,12 @@ export default class SceneRouter {
    * }
    */
   @Post({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'scene',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'scene',
   })
-  create = async (req: Request, res: Response) => {
-    const scene = await this.friday.scene.create(req.body);
-    res.status(201).json(scene);
-  };
+    create = async (req: Request, res: Response) => {
+      const scene = await this.friday.scene.create(req.body);
+      res.status(201).json(scene);
+    };
 
   /**
    * Update an scene
@@ -60,12 +60,12 @@ export default class SceneRouter {
    * }
    */
   @Patch({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'scene',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'scene',
   })
-  update = async (req: Request, res: Response) => {
-    const scene = await this.friday.scene.update(req.params.id, req.body);
-    res.json(scene);
-  };
+    update = async (req: Request, res: Response) => {
+      const scene = await this.friday.scene.update(req.params.id, req.body);
+      res.json(scene);
+    };
 
   /**
    * Delete an scene by id
@@ -80,14 +80,14 @@ export default class SceneRouter {
    * }
    */
   @Delete({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'scene',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'scene',
   })
-  destroy = async (req: Request, res: Response) => {
-    await this.friday.scene.destroy(req.params.id);
-    res.json({
-      success: true,
-    });
-  };
+    destroy = async (req: Request, res: Response) => {
+      await this.friday.scene.destroy(req.params.id);
+      res.json({
+        success: true,
+      });
+    };
 
   /**
    * Get all scenes
@@ -105,12 +105,12 @@ export default class SceneRouter {
    * }]
    */
   @Get({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'scene',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'scene',
   })
-  getAll = async (req: Request, res: Response) => {
-    const scenes = await this.friday.scene.getAll(req.query);
-    res.json(scenes);
-  };
+    getAll = async (req: Request, res: Response) => {
+      const scenes = await this.friday.scene.getAll(req.query);
+      res.json(scenes);
+    };
 
   /**
    * Get an scene by id
@@ -128,11 +128,11 @@ export default class SceneRouter {
    * }
    */
   @Get({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'scene',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'scene',
   })
-  getById = async (req: Request, res: Response) => {
-    const scope = req.query.scope as string;
-    const scene = await this.friday.scene.getById(req.params.id, scope);
-    res.json(scene);
-  };
+    getById = async (req: Request, res: Response) => {
+      const scope = req.query.scope as string;
+      const scene = await this.friday.scene.getById(req.params.id, scope);
+      res.json(scene);
+    };
 }

@@ -1,6 +1,22 @@
 import {
-  Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, HasMany, NotEmpty, Unique, DefaultScope, Scopes, Default, Is, IsDate, Validate,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  HasMany,
+  HasOne,
+  Is,
+  IsDate,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
+  Validate,
 } from 'sequelize-typescript';
 
 import Satellite from './satellite';
@@ -50,31 +66,31 @@ export default class Plugin extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  dockerId!: string;
+    dockerId!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @Column
-  version!: string;
+    version!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-  url!: string;
+    url!: string;
 
   @AllowNull(false)
   @Column
-  enabled!: boolean;
+    enabled!: boolean;
 
   @AllowNull(false)
   @NotEmpty
@@ -96,36 +112,36 @@ export default class Plugin extends Model {
     },
   })
   @Column(DataType.UUIDV4)
-  satelliteId!: string;
+    satelliteId!: string;
 
   @AllowNull(false)
   @IsDate
   @NotEmpty
   @Default(new Date())
   @Column({ type: DataType.DATE })
-  lastHeartbeat!: Date;
+    lastHeartbeat!: Date;
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'satelliteId',
     constraints: false,
   })
-  satellite!: Satellite;
+    satellite!: Satellite;
 
   @HasMany(() => Device, {
     foreignKey: 'pluginId',
     constraints: false,
   })
-  devices!: Device[];
+    devices!: Device[];
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',
     constraints: false,
   })
-  variables?: Variable[];
+    variables?: Variable[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-  state?: State;
+    state?: State;
 }

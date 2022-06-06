@@ -34,12 +34,12 @@ export default class ScriptRouter {
    * }
    */
   @Post({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'script',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'script',
   })
-  create = async (req: Request, res: Response) => {
-    const script = await this.friday.script.create(req.body);
-    res.status(201).json(script);
-  };
+    create = async (req: Request, res: Response) => {
+      const script = await this.friday.script.create(req.body);
+      res.status(201).json(script);
+    };
 
   /**
    * Update a script
@@ -57,12 +57,12 @@ export default class ScriptRouter {
    * }
    */
   @Patch({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'script',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'script',
   })
-  update = async (req: Request, res: Response) => {
-    const script = await this.friday.script.update(req.params.id, req.body);
-    res.json(script);
-  };
+    update = async (req: Request, res: Response) => {
+      const script = await this.friday.script.update(req.params.id, req.body);
+      res.json(script);
+    };
 
   /**
    * Delete a script by id
@@ -77,14 +77,14 @@ export default class ScriptRouter {
    * }
    */
   @Delete({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'script',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'script',
   })
-  destroy = async (req: Request, res: Response) => {
-    await this.friday.script.destroy(req.params.id);
-    res.json({
-      success: true,
-    });
-  };
+    destroy = async (req: Request, res: Response) => {
+      await this.friday.script.destroy(req.params.id);
+      res.json({
+        success: true,
+      });
+    };
 
   /**
    * Get all scripts
@@ -101,12 +101,12 @@ export default class ScriptRouter {
    * }]
    */
   @Get({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'script',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'script',
   })
-  getAll = async (req: Request, res: Response) => {
-    const scripts = await this.friday.script.getAll(req.query);
-    res.json(scripts);
-  };
+    getAll = async (req: Request, res: Response) => {
+      const scripts = await this.friday.script.getAll(req.query);
+      res.json(scripts);
+    };
 
   /**
    * Get a script by id
@@ -123,10 +123,10 @@ export default class ScriptRouter {
    * }
    */
   @Get({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'script',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'script',
   })
-  getById = async (req: Request, res: Response) => {
-    const script = await this.friday.script.getById(req.params.id);
-    res.json(script);
-  };
+    getById = async (req: Request, res: Response) => {
+      const script = await this.friday.script.getById(req.params.id);
+      res.json(script);
+    };
 }

@@ -1,6 +1,17 @@
 import {
-  Table, Column, Model, PrimaryKey, DataType, IsUUID,
-  AllowNull, Unique, NotEmpty, BelongsTo, DefaultScope, Default, Is,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  Is,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import { VariableOwner } from '../utils/constants';
@@ -26,44 +37,44 @@ export default class Variable extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  key!: string;
+    key!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-  value!: string;
+    value!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('owner', (value) => isOwnerExisting(value, ['user', 'satellite', 'plugin']))
   @Column(DataType.UUIDV4)
-  owner!: string;
+    owner!: string;
 
   @AllowNull(false)
   @Column
-  ownerType!: VariableOwner;
+    ownerType!: VariableOwner;
 
   @BelongsTo(() => User, {
     foreignKey: 'owner',
     constraints: false,
   })
-  user?: User;
+    user?: User;
 
   @BelongsTo(() => Plugin, {
     foreignKey: 'owner',
     constraints: false,
   })
-  plugin?: Plugin;
+    plugin?: Plugin;
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'owner',
     constraints: false,
   })
-  satellite?: Satellite;
+    satellite?: Satellite;
 }

@@ -1,6 +1,18 @@
 import {
-  Table, Column, Model, PrimaryKey, DataType, HasMany, HasOne, IsUUID,
-  AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default,
+  AllowNull,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  HasMany,
+  HasOne,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import Room from './room';
@@ -37,31 +49,31 @@ export default class House extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @Column
-  latitude!: string;
+    latitude!: string;
 
   @AllowNull(false)
   @Column
-  longitude!: string;
+    longitude!: string;
 
   @HasMany(() => Room, {
     foreignKey: 'houseId',
     constraints: false,
   })
-  rooms!: Room[];
+    rooms!: Room[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-  state!: State;
+    state!: State;
 }

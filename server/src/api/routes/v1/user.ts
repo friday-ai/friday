@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  Delete, FridayRouter, Get, Patch, Post,
-} from '../../../utils/decorators/route';
+import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
 /**
@@ -41,12 +39,12 @@ export default class UserRouter {
    * }
    */
   @Post({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'user',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'user',
   })
-  create = async (req: Request, res: Response) => {
-    const user = await this.friday.user.create(req.body);
-    res.status(201).json(user);
-  };
+    create = async (req: Request, res: Response) => {
+      const user = await this.friday.user.create(req.body);
+      res.status(201).json(user);
+    };
 
   /**
    * Update a user
@@ -66,12 +64,13 @@ export default class UserRouter {
    * }
    */
   @Patch({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'user',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'user',
   })
-  update = async (req: Request, res: Response) => {
-    const user = await this.friday.user.update(req.params.id, req.body);
-    res.json(user);
-  };
+    update = async (req: Request, res: Response) => {
+      const user = await this.friday.user.update(req.params.id, req.body);
+      res.json(user);
+    };
+
 
   /**
    * Delete a user by id
@@ -86,14 +85,15 @@ export default class UserRouter {
    * }
    */
   @Delete({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'user',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'user',
   })
-  destroy = async (req: Request, res: Response) => {
-    await this.friday.user.destroy(req.params.id);
-    res.json({
-      success: true,
-    });
-  };
+    destroy = async (req: Request, res: Response) => {
+      await this.friday.user.destroy(req.params.id);
+      res.json({
+        success: true,
+      });
+    };
+
 
   /**
    * Get all users
@@ -112,12 +112,12 @@ export default class UserRouter {
    * }]
    */
   @Get({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'user',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'user',
   })
-  getAll = async (req: Request, res: Response) => {
-    const users = await this.friday.user.getAll(req.query);
-    res.json(users);
-  };
+    getAll = async (req: Request, res: Response) => {
+      const users = await this.friday.user.getAll(req.query);
+      res.json(users);
+    };
 
   /**
    * Get user count
@@ -128,12 +128,12 @@ export default class UserRouter {
    * @apiVersion 1.0.0
    */
   @Get({
-    path: '/count', authenticated: false, rateLimit: true, aclMethod: 'read', aclResource: 'user',
+    path : '/count', authenticated: false, rateLimit: true, aclMethod: 'read', aclResource: 'user',
   })
-  getUsersCount = async (req: Request, res: Response) => {
-    const count = await this.friday.user.getCount();
-    res.status(200).json(count);
-  };
+    getUsersCount = async (req: Request, res: Response) => {
+      const count = await this.friday.user.getCount();
+      res.status(200).json(count);
+    };
 
   /**
    * Get a user by id
@@ -152,13 +152,13 @@ export default class UserRouter {
    * }
    */
   @Get({
-    path: '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'user',
+    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'user',
   })
-  getById = async (req: Request, res: Response) => {
-    const scope = req.query.scope as string;
-    const user = await this.friday.user.getById(req.params.id, scope);
-    res.json(user);
-  };
+    getById = async (req: Request, res: Response) => {
+      const scope = req.query.scope as string;
+      const user = await this.friday.user.getById(req.params.id, scope);
+      res.json(user);
+    };
 
   /**
    * Login a user
@@ -172,13 +172,13 @@ export default class UserRouter {
    * @apiVersion 1.0.0
    */
   @Post({
-    path: '/login', authenticated: false, rateLimit: true, aclMethod: 'login', aclResource: 'user',
+    path : '/login', authenticated: false, rateLimit: true, aclMethod: 'login', aclResource: 'user',
   })
-  login = async (req: Request, res: Response) => {
-    const user = await this.friday.user.login(req.body.email, req.body.password);
-    const session = await this.friday.session.create(user);
-    res.status(201).json(session);
-  };
+    login = async (req: Request, res: Response) => {
+      const user = await this.friday.user.login(req.body.email, req.body.password);
+      const session = await this.friday.session.create(user);
+      res.status(201).json(session);
+    };
 
   /**
    * Sign up a user
@@ -190,11 +190,11 @@ export default class UserRouter {
    * @apiVersion 1.0.0
    */
   @Post({
-    path: '/signup', authenticated: false, rateLimit: true, aclMethod: '', aclResource: '',
+    path : '/signup', authenticated: false, rateLimit: true, aclMethod: '', aclResource: '',
   })
-  signup = async (req: Request, res: Response) => {
-    const user = await this.friday.user.create(req.body);
-    const session = await this.friday.session.create(user);
-    res.status(201).json(session);
-  };
+    signup = async (req: Request, res: Response) => {
+      const user = await this.friday.user.create(req.body);
+      const session = await this.friday.session.create(user);
+      res.status(201).json(session);
+    };
 }

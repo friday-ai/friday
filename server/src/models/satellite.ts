@@ -1,6 +1,21 @@
 import {
-  Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, HasMany, DefaultScope, Scopes, NotEmpty, Unique, Default, Is, IsDate,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  HasMany,
+  HasOne,
+  Is,
+  IsDate,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import Room from './room';
@@ -48,48 +63,48 @@ export default class Satellite extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('roomId', (value) => isOwnerExisting(value, ['room']))
   @Column(DataType.UUIDV4)
-  roomId!: string;
+    roomId!: string;
 
   @AllowNull(false)
   @IsDate
   @NotEmpty
   @Default(new Date())
   @Column({ type: DataType.DATE })
-  lastHeartbeat!: Date;
+    lastHeartbeat!: Date;
 
   @BelongsTo(() => Room, {
     foreignKey: 'roomId',
     constraints: false,
   })
-  room!: Room;
+    room!: Room;
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',
     constraints: false,
   })
-  variables?: Variable[];
+    variables?: Variable[];
 
   @HasMany(() => Plugin, {
     foreignKey: 'satelliteId',
     constraints: false,
   })
-  plugins?: Plugin[];
+    plugins?: Plugin[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-  state!: State;
+    state!: State;
 }

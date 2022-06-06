@@ -13,7 +13,7 @@ import { EventsType } from '../../utils/constants';
 export default class WebsocketServer {
   public friday: Friday;
   public wss: WebSocket.Server;
-  public clients: { [x: string]: any } = [];
+  public clients: { [x : string]: any } = [];
   public user: UserType = {};
   public isAuthenticated: boolean = false;
   public clientConnected = clientConnected;

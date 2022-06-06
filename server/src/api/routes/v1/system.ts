@@ -29,12 +29,12 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
   })
-  getVersion = async (req: Request, res: Response) => {
-    const version = await this.friday.getVersion();
-    res.json(version);
-  };
+    getVersion = async (req: Request, res: Response) => {
+      const version = await this.friday.getVersion();
+      res.json(version);
+    };
 
   /**
    * get master id
@@ -50,11 +50,11 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path: '/info', authenticated: false, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+    path : '/info', authenticated: false, rateLimit: false, aclMethod: 'read', aclResource: 'system',
   })
-  masterInfo = async (req: Request, res: Response) => res.json({
-    masterId: this.friday.masterId,
-  });
+    masterInfo = async (req: Request, res: Response) => res.json({
+      masterId: this.friday.masterId,
+    });
 
   /**
    * get mqtt config, master id and satellite id
@@ -71,19 +71,19 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path: '/mqtt/config', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+    path : '/mqtt/config', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
   })
-  configMqtt = async (req: Request, res: Response) => {
-    const satellites = await this.friday.satellite.getAll({ scope: 'withState' });
-    const satellite = satellites.filter((s) => s.state!.value === AvailableState.SATELLITE_WAITING_CONFIGURATION);
-    if (satellite.length === 0) {
-      return res.status(404).json('Satellite is not configured !');
-    }
+    configMqtt = async (req: Request, res: Response) => {
+      const satellites = await this.friday.satellite.getAll({ scope: 'withState' });
+      const satellite = satellites.filter((s) => s.state!.value === AvailableState.SATELLITE_WAITING_CONFIGURATION);
+      if (satellite.length === 0) {
+        return res.status(404).json('Satellite is not configured !');
+      }
 
-    const satelliteId = satellite[0].id;
-    return res.json({
-      mqttInfo: encrypt(JSON.stringify(this.friday.mqttSecret), satelliteId!)[0],
-      satelliteId: encrypt(satelliteId!, this.friday.masterId)[0],
-    });
-  };
+      const satelliteId = satellite[0].id;
+      return res.json({
+        mqttInfo: encrypt(JSON.stringify(this.friday.mqttSecret), satelliteId!)[0],
+        satelliteId: encrypt(satelliteId!, this.friday.masterId)[0],
+      });
+    };
 }

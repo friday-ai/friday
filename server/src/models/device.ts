@@ -1,6 +1,20 @@
 import {
-  Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasOne,
-  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is, Validate,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  HasOne,
+  Is,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
+  Validate,
 } from 'sequelize-typescript';
 
 import Plugin from './plugin';
@@ -45,13 +59,13 @@ export default class Device extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @Validate({
@@ -65,7 +79,7 @@ export default class Device extends Model {
     },
   })
   @Column
-  type!: string;
+    type!: string;
 
   @AllowNull(false)
   @Validate({
@@ -79,45 +93,45 @@ export default class Device extends Model {
     },
   })
   @Column
-  subType!: string;
+    subType!: string;
 
   @Default({})
   @Column(DataType.JSON)
-  variable: any;
+    variable: any;
 
   @Default('')
   @Column
-  unit!: string;
+    unit!: string;
 
   @Default('')
   @Column
-  value!: string;
+    value!: string;
 
   @NotEmpty
   @Is('roomId', (value) => isOwnerExisting(value, ['room']))
   @Column(DataType.UUIDV4)
-  roomId!: string;
+    roomId!: string;
 
   @BelongsTo(() => Room, {
     foreignKey: 'roomId',
     constraints: false,
   })
-  room!: Room;
+    room!: Room;
 
   @NotEmpty
   @Is('pluginId', (value) => isOwnerExisting(value, ['plugin']))
   @Column(DataType.UUIDV4)
-  pluginId!: string;
+    pluginId!: string;
 
   @BelongsTo(() => Plugin, {
     foreignKey: 'pluginId',
     constraints: false,
   })
-  plugin!: Plugin;
+    plugin!: Plugin;
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-  state!: State;
+    state!: State;
 }

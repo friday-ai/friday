@@ -1,6 +1,15 @@
 import {
-  Table, Column, Model, PrimaryKey, DataType, IsUUID,
-  AllowNull, Unique, NotEmpty, DefaultScope, Default,
+  AllowNull,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 /**
@@ -20,16 +29,16 @@ export default class Script extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @Default('')
   @Column
-  code!: string;
+    code!: string;
 }

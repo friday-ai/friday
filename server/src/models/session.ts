@@ -1,6 +1,19 @@
 import {
-  Table, Column, Model, PrimaryKey, DataType, BelongsTo, IsUUID, AllowNull,
-  Unique, NotEmpty, DefaultScope, Scopes, Default, IsDate, Is,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  Is,
+  IsDate,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import User from './user';
@@ -29,33 +42,33 @@ export default class Session extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  refreshToken!: string;
+    refreshToken!: string;
 
   @AllowNull(false)
   @Default(false)
   @Column
-  revoked!: boolean;
+    revoked!: boolean;
 
   @AllowNull(false)
   @NotEmpty
   @IsDate
   @Column({ type: DataType.DATE })
-  validUntil!: Date;
+    validUntil!: Date;
 
   @NotEmpty
   @Is('userId', (value) => isOwnerExisting(value, ['user']))
   @Column(DataType.UUIDV4)
-  userId!: string;
+    userId!: string;
 
   @BelongsTo(() => User, {
     foreignKey: 'userId',
     constraints: false,
   })
-  user!: User;
+    user!: User;
 }

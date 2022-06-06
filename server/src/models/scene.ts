@@ -1,6 +1,19 @@
 import {
-  Table, Column, Model, PrimaryKey, DataType, BelongsTo, HasMany, IsUUID, AllowNull,
-  NotEmpty, Unique, DefaultScope, Scopes, Default, Is,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  HasMany,
+  Is,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import Trigger from './trigger';
@@ -38,17 +51,17 @@ export default class Scene extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @Column
-  description!: string;
+    description!: string;
 
   @Is('triggerId', async (value) => {
     if (value !== undefined) {
@@ -56,17 +69,17 @@ export default class Scene extends Model {
     }
   })
   @Column(DataType.UUIDV4)
-  triggerId!: string;
+    triggerId!: string;
 
   @BelongsTo(() => Trigger, {
     foreignKey: 'triggerId',
     constraints: false,
   })
-  trigger!: Trigger;
+    trigger!: Trigger;
 
   @HasMany(() => Action, {
     foreignKey: 'sceneId',
     constraints: false,
   })
-  actions!: Action[];
+    actions!: Action[];
 }

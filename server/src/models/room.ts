@@ -1,6 +1,20 @@
 import {
-  Table, Column, Model, PrimaryKey, BelongsTo, DataType, HasMany, HasOne,
-  IsUUID, AllowNull, NotEmpty, Unique, DefaultScope, Scopes, Default, Is,
+  AllowNull,
+  BelongsTo,
+  Column,
+  DataType,
+  Default,
+  DefaultScope,
+  HasMany,
+  HasOne,
+  Is,
+  IsUUID,
+  Model,
+  NotEmpty,
+  PrimaryKey,
+  Scopes,
+  Table,
+  Unique,
 } from 'sequelize-typescript';
 
 import House from './house';
@@ -48,41 +62,41 @@ export default class Room extends Model {
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-  id!: string;
+    id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-  name!: string;
+    name!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('houseId', (value) => isOwnerExisting(value, ['house']))
   @Column(DataType.UUIDV4)
-  houseId!: string;
+    houseId!: string;
 
   @BelongsTo(() => House, {
     foreignKey: 'houseId',
     constraints: false,
   })
-  house!: House;
+    house!: House;
 
   @HasMany(() => Device, {
     foreignKey: 'roomId',
     constraints: false,
   })
-  devices!: Device[];
+    devices!: Device[];
 
   @HasMany(() => Satellite, {
     foreignKey: 'roomId',
     constraints: false,
   })
-  satellites!: Satellite[];
+    satellites!: Satellite[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-  state!: State;
+    state!: State;
 }
