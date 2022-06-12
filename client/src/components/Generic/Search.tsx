@@ -17,13 +17,17 @@ const Search: React.FC<SearchProps> = ({ value, onSearch }) => {
           id="searchInput"
           aria-labelledby="search"
           type="text"
-          className="input input-bordered pl-10 h-10 w-40 sm:w-auto"
+          className="input input-bordered pl-10 w-40 sm:w-auto"
           onChange={(event) => {
             onSearch(event.target.value);
           }}
           value={value}
         />
-        <button type="button" className={`${value.length === 0 && 'hidden'} absolute inset-y-0 -right-0`} onClick={() => onSearch('')}>
+        <button
+          type="button"
+          className={`${value.length === 0 && 'hidden'} btn btn-ghost btn-sm m-2 absolute inset-y-0 -right-0 flex items-center px-1`}
+          onClick={() => onSearch('')}
+        >
           <Icon icon="ic:outline-close" className="w-5 h-5 mx-2" />
         </button>
       </label>

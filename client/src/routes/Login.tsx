@@ -10,6 +10,7 @@ const Login: React.FC = () => {
   const app = useApp();
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [passwordShown, setPasswordShown] = useState(true);
 
   const onSubmit = (event: React.SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,16 +66,26 @@ const Login: React.FC = () => {
                 <span className="label-text-alt text-info">Forgot your password ?</span>
               </Tooltip>
             </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-              placeholder="Password"
-              required
-              onChange={() => setError('')}
-              className={`input input-bordered ${error === '403' && 'input-error'}`}
-            />
+            <div className="relative">
+              <input
+                id="password"
+                name="password"
+                type={`${passwordShown ? 'password' : 'text'}`}
+                autoComplete="current-password"
+                placeholder="Password"
+                required
+                onChange={() => setError('')}
+                className={`input input-bordered w-full ${error === '403' && 'input-error'}`}
+              />
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm m-2 absolute inset-y-0 right-0 flex items-center p-0"
+                onClick={() => setPasswordShown(!passwordShown)}
+              >
+                {!passwordShown && <Icon icon="mdi:eye-off-outline" className="w-5 h-5 mx-2" />}
+                {passwordShown && <Icon icon="mdi:eye-outline" className="w-5 h-5 mx-2" />}
+              </button>
+            </div>
             <label htmlFor="password" className={`label p-0 pt-1 ${error === '403' ? 'visible' : 'invisible'}`}>
               <span className="label-text-alt text-error">Invalid password</span>
             </label>

@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import SatellitesToolbar from '../components/Satellites/SatellitesToolbar';
 import { SatelliteType } from '../utils/interfaces';
 import { useApp } from '../services/AppProvider';
-import { SatelliteList } from '../components/Satellites/SatellitesCard';
+import SatelliteCard from '../components/Satellites/SatellitesCard';
+import AnimatedList from '../components/AnimatedList/AnimatedList';
 
 let satellitesList: SatelliteType[] = [];
 
@@ -17,14 +18,13 @@ const Satellites: React.FC = () => {
       satellitesList = res.sort((a, b) => {
         return a.name.toLowerCase().localeCompare(b.name);
       });
-      // setFlipKey(Math.floor(Math.random() * 10));
       setFilteredSatellites(satellitesList);
     });
   }, [satellites]);
 
   return (
     <div>
-      <SatellitesToolbar onSearch={() => {}} onFilter={() => {}} onSort={() => {}} onCreate={() => {}} />
+      <SatellitesToolbar onSearch={() => null} onFilter={() => null} onSort={() => null} onCreate={() => null} />
 
       <div className="mx-7 space-y-2 bg-base-100 border border-base-300 rounded-btn p-4">
         <div className="grid grid-flow-col auto-cols-fr text-center items-center font-bold pl-4 pr-16">
@@ -35,7 +35,7 @@ const Satellites: React.FC = () => {
           <span className="hidden md:block">Uptime</span>
           <span />
         </div>
-        <SatelliteList flipKey="test_key1" satellites={filteredSatellites} />
+        <AnimatedList renderItem={(item) => <SatelliteCard satellite={item} />} items={filteredSatellites} />
       </div>
     </div>
   );

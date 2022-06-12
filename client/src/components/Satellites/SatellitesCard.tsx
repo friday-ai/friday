@@ -1,9 +1,9 @@
 import React from 'react';
-import { Flipped } from 'react-flip-toolkit';
+import AnimatedList from '../AnimatedList/AnimatedList';
 
 import { SatelliteType } from '../../utils/interfaces';
 import { AvailableState } from '../../utils/constants';
-import { PluginList } from '../Plugins/PluginsCard';
+import PluginCard from '../Plugins/PluginsCard';
 import Dropdown from '../Generic/Dropdown';
 import Badge from '../Badge/Badge';
 
@@ -43,10 +43,9 @@ const SatelliteState: React.FC<{ state: AvailableState }> = ({ state }) => {
 
 interface SatelliteCardProps {
   satellite: SatelliteType;
-  flippedProps?: unknown;
 }
 
-const SatelliteCard: React.FC<SatelliteCardProps> = ({ flippedProps = {}, satellite }) => {
+const SatelliteCard: React.FC<SatelliteCardProps> = ({ satellite }) => {
   return (
     <div className={`collapse w-full rounded-box collapse-arrow overflow-visible border ${getBorderColor(satellite.state.value)}`}>
       <input type="checkbox" />
@@ -99,27 +98,10 @@ const SatelliteCard: React.FC<SatelliteCardProps> = ({ flippedProps = {}, satell
         </div>
       </div>
       <div className="collapse-content">
-        <PluginList flipKey="test_key0" plugins={satellite.plugins} />
+        <AnimatedList renderItem={(item) => <PluginCard plugin={item} />} items={satellite.plugins} />
       </div>
     </div>
   );
 };
 
-interface PluginListProps {
-  flipKey: string;
-  satellites: SatelliteType[];
-}
-
-const SatelliteList = ({ flipKey, satellites }: PluginListProps): JSX.Element => {
-  return (
-    <>
-      {satellites.map((satellite) => (
-        <Flipped flipId={`item-${satellite.id}`} key={`item-${satellite.id}`}>
-          {(flippedProps) => <SatelliteCard satellite={satellite} flippedProps={flippedProps} />}
-        </Flipped>
-      ))}
-    </>
-  );
-};
-
-export { SatelliteList, SatelliteCard };
+export default SatelliteCard;

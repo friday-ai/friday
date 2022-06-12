@@ -1,7 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Icon } from '@iconify/react';
-import ReactDOM from 'react-dom';
 
 interface ModalConfirmProps {
   title: string;
@@ -11,10 +10,8 @@ interface ModalConfirmProps {
 }
 
 const ModalConfirm = ({ title, message, onOk, onCancel = () => null }: ModalConfirmProps): void => {
-  // Create fake element to insert modal
-  const div = document.createElement('div');
-  document.getElementById('root')?.appendChild(div);
-  const root = createRoot(div);
+  // Get modal element in DOM
+  const root = createRoot(document.getElementById('modal')!);
 
   const close = (confirmed: boolean) => {
     document.getElementsByClassName('modal')[0].classList.remove('modal-open');
@@ -26,10 +23,7 @@ const ModalConfirm = ({ title, message, onOk, onCancel = () => null }: ModalConf
 
     // Wait for the modal exit animation before to unmount component
     setInterval(() => {
-      const unmountResult = ReactDOM.unmountComponentAtNode(div);
-      if (unmountResult && div.parentNode) {
-        div.parentNode.removeChild(div);
-      }
+      root.unmount();
     }, 1000);
   };
 

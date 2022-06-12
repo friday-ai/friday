@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Flipper, Flipped } from 'react-flip-toolkit';
 import { Icon } from '@iconify/react';
 
 import Switch from '../Generic/Switch';
@@ -8,14 +7,11 @@ import Tooltip from '../Generic/Tooltip';
 
 interface SceneCardProps {
   scene: SceneType;
-  onStart: (scene: SceneType) => void;
-  onDelete: (scene: SceneType) => void;
-  onEdit: (scene: SceneType) => void;
+  onSceneClick: (event: 'start' | 'edit' | 'delete', scene: SceneType) => void;
   onStatusChange: (scene: SceneType, value: string) => void;
-  flippedProps?: unknown;
 }
 
-const SceneCard: React.FC<SceneCardProps> = ({ scene, onStart, onDelete, onEdit, onStatusChange, flippedProps }) => {
+const SceneCard: React.FC<SceneCardProps> = ({ scene, onSceneClick, onStatusChange }) => {
   const [status, setStatus] = useState(scene.status);
 
   const onChange = (value: boolean) => {
@@ -25,7 +21,7 @@ const SceneCard: React.FC<SceneCardProps> = ({ scene, onStart, onDelete, onEdit,
   };
 
   return (
-    <div {...flippedProps} className={`card-base ${status === 'errored' && 'border-error'}`}>
+    <div className={`card-base ${status === 'errored' && 'border-error'}`}>
       <div className="flex justify-between mb-6">
         <div className="flex items-center">
           <div className="flex items-center rounded-box border-2 border-base-300 p-2">
@@ -38,13 +34,18 @@ const SceneCard: React.FC<SceneCardProps> = ({ scene, onStart, onDelete, onEdit,
               type="button"
               aria-label="Edit scene"
               className={`btn btn-circle btn-sm btn-primary p-2 mr-2 ${status === 'errored' && 'animate-pulse'}`}
-              onClick={() => onEdit(scene)}
+              onClick={() => onSceneClick('edit', scene)}
             >
               <Icon icon="ic:baseline-edit-note" className="w-4 h-4" />
             </button>
           </Tooltip>
           <Tooltip msg="Delete scene">
-            <button aria-label="Delete scene" type="button" className="btn btn-circle btn-sm btn-primary p-2" onClick={() => onDelete(scene)}>
+            <button
+              aria-label="Delete scene"
+              type="button"
+              className="btn btn-circle btn-sm btn-primary p-2"
+              onClick={() => onSceneClick('delete', scene)}
+            >
               <Icon icon="ic:baseline-delete-outline" className="w-4 h-4" />
             </button>
           </Tooltip>
@@ -70,7 +71,7 @@ const SceneCard: React.FC<SceneCardProps> = ({ scene, onStart, onDelete, onEdit,
         </div>
       )}
 
-      <button type="button" className="btn btn-ghost btn-block bg-base-300 mt-0" onClick={() => onStart(scene)}>
+      <button type="button" className="btn btn-ghost btn-block bg-base-300 mt-0" onClick={() => onSceneClick('start', scene)}>
         {' '}
         START{' '}
       </button>
@@ -78,40 +79,4 @@ const SceneCard: React.FC<SceneCardProps> = ({ scene, onStart, onDelete, onEdit,
   );
 };
 
-SceneCard.defaultProps = {
-  flippedProps: {},
-};
-
-interface SceneListProps {
-  flipKey: string;
-  scenes: SceneType[];
-  onStart: (scene: SceneType) => void;
-  onDelete: (scene: SceneType) => void;
-  onEdit: (scene: SceneType) => void;
-  onStatusChange: (scene: SceneType, value: string) => void;
-}
-
-const SceneCardList = ({ flipKey, scenes, onStart, onDelete, onEdit, onStatusChange }: SceneListProps): JSX.Element => {
-  return (
-    <Flipper className="grid-container grid-cols-minmax-280 m-5" flipKey={`${flipKey}`} decisionData={{ type: 'list' }}>
-      <>
-        {scenes.map((scene) => (
-          <Flipped flipId={`item-${scene.id}`} key={`item-${scene.id}`}>
-            {(flippedProps) => (
-              <SceneCard
-                scene={scene}
-                onStart={onStart}
-                onDelete={onDelete}
-                onEdit={onEdit}
-                onStatusChange={onStatusChange}
-                flippedProps={flippedProps}
-              />
-            )}
-          </Flipped>
-        ))}
-      </>
-    </Flipper>
-  );
-};
-
-export { SceneCardList, SceneCard };
+export default SceneCard;
