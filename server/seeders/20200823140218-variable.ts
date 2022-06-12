@@ -1,5 +1,6 @@
 import { QueryInterface } from 'sequelize';
 import { VariableOwner } from '../src/utils/constants';
+import { version as packageVersion } from '../package.json';
 
 module.exports = {
   up: (queryInterface: QueryInterface) => queryInterface.bulkInsert('variable', [
@@ -36,6 +37,15 @@ module.exports = {
       value: 'test_value3',
       owner: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
       ownerType: VariableOwner.PLUGIN,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      key: 'friday_version',
+      value: packageVersion,
+      owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+      ownerType: 'satellite',
       createdAt: new Date(),
       updatedAt: new Date(),
     },

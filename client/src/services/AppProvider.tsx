@@ -15,7 +15,7 @@ interface AppContextType extends RoutesType {
   signup: (user: UserType) => Promise<void>;
 }
 
-const AppContext = React.createContext<AppContextType>(undefined!);
+const AppContext = React.createContext<AppContextType>({} as AppContextType);
 
 const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const auth = useAuth();
@@ -25,7 +25,14 @@ const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const routes = useMemo(() => init(api), [api]);
 
   const value = useMemo(
-    () => ({ session: auth.session, login: auth.login, logout: auth.logout, hasSession: auth.hasSession, signup: auth.signup, ...routes }),
+    () => ({
+      session: auth.session,
+      login: auth.login,
+      logout: auth.logout,
+      hasSession: auth.hasSession,
+      signup: auth.signup,
+      ...routes,
+    }),
     [auth, routes]
   );
 

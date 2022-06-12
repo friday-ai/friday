@@ -82,7 +82,7 @@ export default class Server {
     await this.mqttServer.start(this.mqttOptions);
 
     this.server.listen(this.port, () => {
-      logger.title('Friday server initialized !');
+      logger.title('Friday server started !');
       logger.info(`Friday server is available at localhost:${this.port}`);
     });
 

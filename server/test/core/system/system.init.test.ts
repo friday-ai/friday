@@ -1,35 +1,35 @@
+/* eslint-disable func-names */
 import { expect } from 'chai';
-import System from '../../../src/core/system';
-import Variable from '../../../src/core/variable';
-import House from '../../../src/core/house';
-import Room from '../../../src/core/room';
-import Satellite from '../../../src/core/satellite';
-import User from '../../../src/core/user';
-import Scheduler from '../../../src/utils/scheduler';
-import Event from '../../../src/utils/event';
 import * as database from '../../../src/config/database';
-import jobs from '../../../src/config/jobs';
-import { variables as initVariables } from '../../../src/config/init';
+import { SystemVariablesNames, VariableOwner } from '../../../src/utils/constants';
+import SatelliteType from '../../../src/core/satellite/satellite.interface';
 
 describe('System.init', () => {
-  const user = new User();
-  const variable = new Variable();
-  const room = new Room();
-  const satellite = new Satellite();
-  const house = new House();
-  const event = new Event();
-  const scheduler = new Scheduler(event, jobs);
-  const system = new System(variable, house, room, satellite, user, scheduler, database);
-
-  before(async function before() {
+  it('should init friday system and go to nominal mode', async function () {
     this.timeout(8000);
-    await system.init();
-  });
 
-  it('should init friday system', async () => {
-    initVariables.map(async (initVariable) => {
-      const savedVar = await variable.getValue(initVariable.key!);
-      expect(savedVar).to.deep.contain(initVariable);
-    });
+    await database.database.getQueryInterface().bulkInsert('variable',
+      [{
+        id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f33',
+        key: SystemVariablesNames.HISTORY_STATE_IN_DAYS,
+        value: '6 months',
+        owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+        ownerType: VariableOwner.SATELLITE,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }], {});
+
+    // @ts-ignore
+    const friday = global.FRIDAY;
+    const result = await friday.init();
+
+    expect(result).to.be.an('boolean');
+    expect(result).to.equal(true);
+
+    const satellites = await friday.satellite.getAll();
+    let master = satellites.filter((s: SatelliteType) => s.name === 'Master')[0];
+    console.log(master);
+
+    expect(master.id).to.be.not.equal(null);
   });
 });

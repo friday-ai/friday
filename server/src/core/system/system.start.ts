@@ -1,43 +1,29 @@
 import System from '.';
-import error, { NotFoundError } from '../../utils/errors/coreError';
-import { SystemVariablesNames } from '../../utils/constants';
-import Variable from '../../models/variable';
+import error from '../../utils/errors/coreError';
+import Log from '../../utils/log';
+
+const logger = new Log();
 
 /**
- * Start function fo Friday system
+ * Start function of Friday system
  */
 export default async function start(this: System): Promise<string> {
   try {
     const userCount = await this.user.getCount();
+    const houseCount = await this.house.getCount();
 
-    const fridayVersion = await Variable.findOne({
-      where: {
-        key: SystemVariablesNames.FRIDAY_VERSION,
-      },
-    });
+    if (userCount >= 1 && houseCount >= 1) {
+      // Find id of master
+      const satellites = await this.satellite.getAll();
+      let master = satellites.filter((s) => s.name === 'Master')[0];
 
-    // If is the first start and its not test env, run init function
-    if (userCount < 1 && fridayVersion === null && this.env !== 'test') {
-      await this.init();
-    }
+      await this.scheduler.init();
 
-    await this.scheduler.init();
-
-    // Find id of master
-    const satellites = await this.satellite.getAll();
-    const master = satellites.filter((s) => s.name === 'Master');
-
-    // In test env, do not throw
-    if (master.length === 0 && this.env !== 'test') {
-      throw new NotFoundError({ name: 'System start', message: 'Master satellite not found' });
-    }
-
-    // In test env return blank string
-    if (this.env === 'test') {
+      return master.id!;
+    } else {
+      logger.info('Friday is not initialized, please complete signup steps');
       return '';
     }
-
-    return master[0].id!;
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e,

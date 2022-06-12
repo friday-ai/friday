@@ -14,19 +14,11 @@ interface AuthHookType {
 }
 
 const useAuth = (): AuthHookType => {
-  const [session, setSession] = React.useState<SessionType>({});
+  const localSession = (JSON.parse(localStorage.getItem('session') || '{}') as SessionType) || {};
+  const [session, setSession] = React.useState<SessionType>(localSession);
 
   const hasSession = (): boolean => {
-    if (!session.accessToken) {
-      const localSession = localStorage.getItem('session');
-      if (localSession) {
-        const newSession = JSON.parse(localSession) as SessionType;
-        setSession(newSession);
-        return true;
-      }
-      return false;
-    }
-    return true;
+    return !!session.accessToken;
   };
 
   const getHeaders = () => {

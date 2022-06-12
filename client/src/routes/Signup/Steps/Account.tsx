@@ -86,7 +86,7 @@ const Account: React.FC<{ submit: (username: string, email: string, password: st
               placeholder="Username"
               className={`input input-bordered ${errors.username && 'input-error'}`}
               value={data.username}
-              onChange={onChange('username')}
+              onInput={onChange('username')}
             />
             <label htmlFor="username" className={`label p-0 pt-1 ${errors.username ? 'visible' : 'invisible'}`}>
               <span className="label-text-alt text-error">{errors.username}</span>
@@ -103,7 +103,7 @@ const Account: React.FC<{ submit: (username: string, email: string, password: st
               placeholder="name@email.com"
               className={`input input-bordered ${errors.email && 'input-error'}`}
               value={data.email}
-              onChange={onChange('email')}
+              onInput={onChange('email')}
             />
             <label htmlFor="email" className={`label p-0 pt-1 ${errors.email ? 'visible' : 'invisible'}`}>
               <span className="label-text-alt text-error">{errors.email}</span>
@@ -122,7 +122,7 @@ const Account: React.FC<{ submit: (username: string, email: string, password: st
                 placeholder="Password"
                 className={`input input-bordered ${errors.password && 'input-error'} w-full`}
                 value={data.password}
-                onChange={onChange('password')}
+                onInput={onChange('password')}
               />
               <button
                 type="button"
@@ -148,7 +148,7 @@ const Account: React.FC<{ submit: (username: string, email: string, password: st
               placeholder="Repeat password"
               className={`input input-bordered ${errors.passwordRepeat && 'input-error'}`}
               value={data.passwordRepeat}
-              onChange={onChange('passwordRepeat')}
+              onInput={onChange('passwordRepeat')}
             />
             <label htmlFor="password" className={`label p-0 pt-1 ${errors.passwordRepeat ? 'visible' : 'invisible'}`}>
               <span className="label-text-alt text-error">{errors.passwordRepeat}</span>

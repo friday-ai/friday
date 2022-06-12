@@ -7,6 +7,7 @@ import Users from './users';
 import Variables from './variables';
 import Houses from './houses';
 import Rooms from './rooms';
+import System from './system';
 
 export interface RoutesType {
   scenes: Scenes;
@@ -15,6 +16,7 @@ export interface RoutesType {
   variables: Variables;
   houses: Houses;
   rooms: Rooms;
+  system: System;
 }
 
 export const init = (instance: HttpClient | DemoClient): RoutesType => {
@@ -25,6 +27,7 @@ export const init = (instance: HttpClient | DemoClient): RoutesType => {
     variables: new Variables(instance),
     houses: new Houses(instance),
     rooms: new Rooms(instance),
+    system: new System(instance),
   };
 
   return routes;

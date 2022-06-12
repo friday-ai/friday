@@ -6,6 +6,7 @@ import House from '../../../../../src/core/house';
 import Room from '../../../../../src/core/room';
 import Satellite from '../../../../../src/core/satellite';
 import User from '../../../../../src/core/user';
+import State from '../../../../../src/core/state';
 import Scheduler from '../../../../../src/utils/scheduler';
 import Event from '../../../../../src/utils/event';
 import * as database from '../../../../../src/config/database';
@@ -22,8 +23,9 @@ describe('GET /api/v1/system', () => {
     const satellite = new Satellite();
     const house = new House();
     const event = new Event();
+    const state = new State(event, variable);
     const scheduler = new Scheduler(event, jobs);
-    const system = new System(variable, house, room, satellite, user, scheduler, database);
+    const system = new System(variable, house, room, satellite, user, state, scheduler, database);
     await system.init();
   });
 

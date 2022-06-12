@@ -4,7 +4,7 @@ module.exports = {
   up: (queryInterface: QueryInterface) => queryInterface.bulkInsert('satellite', [
     {
       id: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
-      name: 'Main satellite',
+      name: 'Master',
       roomId: '007d89b5-452e-4b4c-83a2-e6526e09dbf3',
       createdAt: new Date(),
       updatedAt: new Date(),

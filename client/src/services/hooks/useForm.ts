@@ -53,8 +53,8 @@ const useForm = <T>(options?: { validations?: Validations<T>; initialValues?: Pa
     }));
   };
 
-  const onSubmit = async (e: FormEvent<HTMLFormElement>): Promise<boolean> => {
-    e.preventDefault();
+  const onSubmit = async (e: FormEvent<HTMLFormElement> | null): Promise<boolean> => {
+    e?.preventDefault();
     const validations = options?.validations;
     if (validations) {
       let valid = true;

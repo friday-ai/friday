@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { FridayRouter, Get } from '../../../utils/decorators/route';
+import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 import { encrypt } from '../../../utils/keyring';
-import { AvailableState } from '../../../utils/constants';
+import { AvailableState, FridayMode } from '../../../utils/constants';
 
 /**
  * System router
@@ -35,6 +35,25 @@ export default class SystemRouter {
       const version = await this.friday.getVersion();
       res.json(version);
     };
+
+  /**
+   * Init Friday
+   */
+  @Post({
+    path : '/init', authenticated: true, rateLimit: true, aclMethod: 'read', aclResource: 'system',
+  })
+    init = async (req: Request, res: Response) => {
+    // This route is only active at first start for security reasons
+      if (this.friday.mode === FridayMode.INIT) {
+        const result = await this.friday.init();
+        res.status(200).json({
+          success: result,
+        });
+      } else {
+        res.sendStatus(404);
+      }
+    };
+
 
   /**
    * get master id

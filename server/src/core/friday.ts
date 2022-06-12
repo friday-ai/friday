@@ -18,10 +18,13 @@ import Variable from './variable';
 import Event from '../utils/event';
 import Scheduler from '../utils/scheduler';
 import * as Constants from '../utils/constants';
+import { FridayMode } from '../utils/constants';
 import { generateJwtSecret } from '../utils/jwt';
 import jobs from '../config/jobs';
 import error from '../utils/errors/coreError';
-import { FridayMode } from '../utils/constants';
+import Log from '../utils/log';
+
+const logger = new Log();
 
 /**
  * Friday
@@ -49,20 +52,44 @@ export default class Friday {
   public plugin = new Plugin(this.masterId, this.docker, this.state);
   public constants = Constants;
   public mqttSecret: object = {};
-  public mode: FridayMode = FridayMode.CONFIG_SATELLITE;
+  public mode: FridayMode = FridayMode.NOMINAL;
 
-  private system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.scheduler, database);
+  private system = new System(this.variable, this.house, this.room,
+    this.satellite, this.user, this.state, this.scheduler, database);
 
   /**
-   * Starts friday
+   * Start friday
    */
   async start() {
     try {
       await database.init();
       this.masterId = await this.system.start();
+
+      // If masterId is empty, is because master satellite not initialized
+      if (this.masterId === '') {
+        this.mode = FridayMode.INIT;
+      }
     } catch (e) {
-      console.log(e);
+      logger.error(e);
       throw error(e);
+    }
+  }
+
+  /**
+   * Init friday
+   */
+  async init() {
+    if (this.mode === FridayMode.INIT) {
+      try {
+        this.masterId = await this.system.init();
+        this.mode = FridayMode.NOMINAL;
+        return true;
+      } catch (e) {
+        logger.error(e);
+        throw error(e);
+      }
+    } else {
+      return false;
     }
   }
 

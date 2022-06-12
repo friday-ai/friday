@@ -16,7 +16,9 @@ class HttpClient {
       throw new Error('MAX_RETRY_EXCEEDED');
     }
     try {
-      const { data } = await axios[method]<T>(url, {
+      const { data }: { data: T } = await axios({
+        method,
+        url,
         baseURL: 'http://localhost:3000',
         params: query,
         data: body,

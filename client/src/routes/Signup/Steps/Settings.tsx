@@ -18,7 +18,7 @@ const history: Settings[] = [
   { code: '3 month', name: '3 month' },
   { code: '6 month', name: '6 month' },
   { code: '1 year', name: '1 year' },
-  { code: 'illimity', name: 'illimity' },
+  { code: 'unlimited', name: 'unlimited' },
 ];
 
 const Settings: React.FC<{ submit: (units: string, history: string) => void }> = ({ submit }) => {

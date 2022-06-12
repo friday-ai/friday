@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import Brand from './Brand';
@@ -10,7 +10,6 @@ import House from './Steps/House';
 import Final from './Final';
 
 import { useApp } from '../../services/AppProvider';
-import { UserType } from '../../utils/interfaces';
 
 const animation = {
   variants: {
@@ -33,29 +32,37 @@ const animation = {
 
 const Signup: React.FC = () => {
   const app = useApp();
-  const [data, setData] = useState<UserType>({});
+  const navigate = useNavigate();
+  const [language, setLanguage] = useState('en');
   const location = useLocation();
 
-  const handleDataChange = (d: UserType) => {
-    setData((prevState) => ({
-      ...prevState,
-      ...d,
-    }));
+  const restartServer = async () => {
+    setTimeout(async () => {
+      const res = await app.system.init();
+      if (res.success) {
+        navigate('/dashboard');
+      }
+    }, 3000);
   };
 
-  const setLanguage = (code: string) => {
-    handleDataChange({ language: code });
-  };
-
-  const setUser = async (username: string, email: string, password: string) => {
-    handleDataChange({ name: 't', firstName: 't', username, email, password, role: 'superadmin' });
-    await app.signup(data);
+  const setUser = async (userName: string, email: string, password: string) => {
+    await app.signup({ userName, email, password, language, role: 'superadmin' });
   };
 
   const setSettings = async (units: string, history: string) => {
-    handleDataChange({ units });
-    await app.users.patch(data);
-    await app.variables.create({ key: 'history_state_in_days', value: history });
+    await app.variables.create({
+      key: 'system_units',
+      value: units,
+      owner: app.session?.user?.id,
+      ownerType: 'user',
+    });
+
+    await app.variables.create({
+      key: 'history_state_in_days',
+      value: history,
+      owner: app.session?.user?.id,
+      ownerType: 'satellite',
+    });
   };
 
   const setHouse = async (name: string, position: [number, number], rooms: string[]) => {
@@ -63,6 +70,7 @@ const Signup: React.FC = () => {
     rooms.map(async (room) => {
       await app.rooms.create({ name: room, houseId: house.id });
     });
+    await restartServer();
   };
 
   return (

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
+import { FridayMode } from '../../../utils/constants';
 
 /**
  * User router
@@ -180,19 +181,18 @@ export default class UserRouter {
 
   /**
    * Sign up a user
-   * @apiName signup
-   * @apiDescription This route allows you to sign up a user (available only on first start)
-   * @api {post} /api/v1/user/signup
-   * @apiGroup User
-   * @apiUse UserParam
-   * @apiVersion 1.0.0
    */
   @Post({
     path : '/signup', authenticated: false, rateLimit: true, aclMethod: '', aclResource: '',
   })
     signup = async (req: Request, res: Response) => {
-      const user = await this.friday.user.create(req.body);
-      const session = await this.friday.session.create(user);
-      res.status(201).json(session);
+      // This route is only active at first start for security reasons
+      if (this.friday.mode === FridayMode.INIT) {
+        const user = await this.friday.user.create(req.body);
+        const session = await this.friday.session.create(user);
+        res.status(201).json(session);
+      } else {
+        res.sendStatus(404);
+      }
     };
 }

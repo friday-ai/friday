@@ -3,6 +3,7 @@ import update from './house.update';
 import destroy from './house.destroy';
 import getAll from './house.getAll';
 import getById from './house.getById';
+import getCount from './house.getCount';
 
 /**
  * House
@@ -13,4 +14,5 @@ export default class House {
   destroy = destroy;
   getAll = getAll;
   getById = getById;
+  getCount = getCount;
 }

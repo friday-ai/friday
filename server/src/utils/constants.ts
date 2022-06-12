@@ -197,6 +197,7 @@ export enum TopicsTypes {
 
 export enum FridayMode {
   NOMINAL = 'nominal',
+  INIT = 'initialization',
   CONFIG = 'config',
   CONFIG_SATELLITE = 'config.satellite',
 }

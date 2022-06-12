@@ -40,8 +40,8 @@ const House: React.FC<{ submit: (name: string, position: [number, number], rooms
     },
   });
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    const res = await onSubmit(e);
+  const handleSubmit = async () => {
+    const res = await onSubmit(null);
     if (res) {
       submit(data.name, data.position, data.rooms);
       navigate('/signup/final');
@@ -50,14 +50,16 @@ const House: React.FC<{ submit: (name: string, position: [number, number], rooms
 
   const AddRoom = async (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (data.roomName.length === 0) {
+    if (e.type === 'keyup' && (e as React.KeyboardEvent).key === 'Enter' && data.roomName.length === 0) {
       setCustomErrors('roomName', 'The name of room cannot be empty');
       return;
     }
 
-    onUpdate('rooms', [...data.rooms, data.roomName]);
-    onUpdate('roomName', '');
-    setCustomErrors('roomName', '');
+    if (((e.type === 'keyup' && (e as React.KeyboardEvent).key === 'Enter') || e.type === 'click') && data.roomName.length >= 1) {
+      onUpdate('rooms', [...data.rooms, data.roomName]);
+      onUpdate('roomName', '');
+      setCustomErrors('roomName', '');
+    }
   };
 
   const onRemoveRoom = (room: string) => {
@@ -68,7 +70,7 @@ const House: React.FC<{ submit: (name: string, position: [number, number], rooms
   };
 
   return (
-    <form className="card-base flex flex-col items-center p-10 h-4/5 w-4/5 xl:w-3/5 overflow-auto" onSubmit={handleSubmit}>
+    <form className="card-base flex flex-col items-center p-10 h-4/5 w-4/5 xl:w-3/5 overflow-auto">
       <div className="mb-5 flex-none">
         <Favicon width="60" height="60" />
       </div>
@@ -94,7 +96,7 @@ const House: React.FC<{ submit: (name: string, position: [number, number], rooms
               placeholder="Main house"
               className={`input input-bordered ${errors.name && 'input-error'}`}
               value={data.name}
-              onChange={onChange('name')}
+              onInput={onChange('name')}
             />
             <label htmlFor="name" className={`label p-0 pt-1 ${errors.name ? 'visible' : 'invisible'}`}>
               <span className="label-text-alt text-error">{errors.name}</span>
@@ -112,8 +114,8 @@ const House: React.FC<{ submit: (name: string, position: [number, number], rooms
                 placeholder="Bedroom"
                 className={`input input-bordered w-full ${(errors.rooms || errors.roomName) && 'input-error'}`}
                 value={data.roomName}
-                onChange={onChange('roomName')}
-                onKeyDown={AddRoom}
+                onInput={onChange('roomName')}
+                onKeyUp={AddRoom}
               />
               <button type="button" className="btn" onClick={AddRoom}>
                 Add
@@ -137,7 +139,7 @@ const House: React.FC<{ submit: (name: string, position: [number, number], rooms
         </div>
       </div>
 
-      <button type="submit" className="btn btn-sm self-end flex-none mt-5">
+      <button type="button" className="btn btn-sm self-end flex-none mt-5" onClick={handleSubmit}>
         Next step
       </button>
     </form>

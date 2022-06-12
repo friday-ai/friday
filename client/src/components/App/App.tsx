@@ -17,15 +17,20 @@ import { useAppDispatch } from '../../services/store/store';
 import { useApp } from '../../services/AppProvider';
 import getRouteName from '../../utils/routes';
 
+let userCount = 0;
+
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const app = useApp();
-  const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    app.users.getCount().then((result) => setCount(result));
-  }, [app.users]);
+    app.users.getCount().then((result) => {
+      userCount = result;
+      setLoading(false);
+    });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const name = getRouteName(location.pathname);
@@ -33,17 +38,13 @@ const App: React.FC = () => {
     document.title = `Friday | ${name}`;
   }, [location, dispatch]);
 
-  const redirect = (): string => {
-    if (app.hasSession()) {
-      return '/dashboard';
-    }
-    return count === 0 ? '/signup' : '/login';
-  };
-
-  return (
+  return loading ? (
+    <div />
+  ) : (
     <Routes>
-      <Route path="/" element={<Navigate to={redirect()} replace />} />
-      {count === 0 ? <Route path="/signup/*" element={<Signup />} /> : <Route path="/login" element={<Login />} />}
+      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/login" element={userCount !== 0 ? <Login /> : <Navigate to="/signup" replace />} />
+      <Route path="/signup/*" element={userCount === 0 ? <Signup /> : <Navigate to="/dashboard" replace />} />
       <Route element={<RequireAuth />}>
         <Route path="dashboard" element={<Layout />}>
           <Route index element={<Dashboard />} />

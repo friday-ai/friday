@@ -1,33 +1,30 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import Favicon from '../../components/Loader/Loader';
+import FaviconLoader from '../../components/Loader/Loader';
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 2,
+      staggerChildren: 2.3,
+    },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+  },
+};
 
 const Brand: React.FC = () => {
-  const navigate = useNavigate();
-
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 2,
-        staggerChildren: 2.3,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-    },
-  };
-
   return (
     <motion.div className="centered-container" variants={container} initial="hidden" animate="visible">
       <div key="logo">
-        <Favicon className="p-2" />
+        <FaviconLoader className="p-2" />
       </div>
       <motion.h1 key="title" className="mt-10 text-3xl text-primary font-bold" variants={item}>
         Friday is now initializing, this step can take a few minutes.

@@ -73,9 +73,7 @@ export interface SatelliteType {
 
 export interface UserType {
   id?: string;
-  name?: string;
-  firstName?: string;
-  username?: string;
+  userName?: string;
   email?: string;
   password?: string;
   language?: string;
