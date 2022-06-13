@@ -1,7 +1,5 @@
-import Log from '../../../../utils/log';
+import logger from '../../../../utils/log';
 import MqttServer from '../../index';
-
-const logger = new Log();
 
 /*
  * @route('friday/master/device/destroy')

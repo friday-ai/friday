@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Device from '../../../src/core/device';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 import Event from '../../../src/utils/event';
@@ -6,7 +6,7 @@ import State from '../../../src/core/state';
 import Variable from '../../../src/core/variable';
 
 describe('Device.update', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const device = new Device(event, state);

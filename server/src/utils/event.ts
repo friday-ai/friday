@@ -5,13 +5,13 @@ import { EventsType } from './constants';
  * Event
  */
 export default class Event {
-  public emitter = new EventEmitter();
+  public static emitter = new EventEmitter();
 
-  emit = (event: EventsType, ...args: any) => {
+  static emit(event: EventsType, ...args: any) {
     this.emitter.emit(event, ...args);
-  };
+  }
 
-  on = (event: EventsType, cb: (...args: any[]) => void) => {
+  static on(event: EventsType, cb: (...args: any[]) => void) {
     this.emitter.on(event, cb);
-  };
+  }
 }

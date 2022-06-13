@@ -11,7 +11,7 @@ import { NotFoundError } from '../../../src/utils/errors/coreError';
 let container: Container;
 
 describe('Plugin.install', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const docker = new Docker();

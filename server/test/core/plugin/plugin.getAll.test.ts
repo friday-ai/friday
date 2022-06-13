@@ -6,7 +6,7 @@ import State from '../../../src/core/state';
 import Docker from '../../../src/core/docker';
 
 describe('Plugin.getAll', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const docker = new Docker();

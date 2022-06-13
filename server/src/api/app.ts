@@ -5,7 +5,7 @@ import cors from 'cors';
 import compression from 'compression';
 import * as WebSocket from 'ws';
 import router from './routes/router';
-import Log from '../utils/log';
+import logger from '../utils/log';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';
 import errorMiddleware from './middlewares/errorMiddleware';
 import WebsocketServer from './websocket/index';
@@ -42,7 +42,6 @@ export default class Server {
    */
   async start() {
     const app = express();
-    const logger = new Log();
 
     // middleware for parsing application/x-www-form-urlencoded
     app.use(express.urlencoded({ extended: true }) as RequestHandler);

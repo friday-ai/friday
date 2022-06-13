@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Device from '../../../src/core/device';
 import { DEVICE_SUBTYPE_LIST } from '../../../src/utils/device.constants';
 import Event from '../../../src/utils/event';
@@ -6,7 +6,7 @@ import Variable from '../../../src/core/variable';
 import State from '../../../src/core/state';
 
 describe('Device.getAll', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const device = new Device(event, state);

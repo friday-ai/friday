@@ -1,8 +1,6 @@
-import Log from '../../../../utils/log';
+import logger from '../../../../utils/log';
 import MqttServer from '../../index';
 import PluginType from '../../../../core/plugin/plugin.interface';
-
-const logger = new Log();
 
 /*
  * @route('friday/master/plugin/discoverme')

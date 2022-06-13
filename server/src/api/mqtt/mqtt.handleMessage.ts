@@ -1,9 +1,7 @@
 import { TopicHeaderSub, TopicToSubscribe as Topics } from '../../utils/constants';
 import error from '../../utils/errors/coreError';
 import MqttServer from './index';
-import Log from '../../utils/log';
-
-const logger = new Log();
+import logger from '../../utils/log';
 
 export default function handleMessage(this: MqttServer, topic: string, message: string) {
   try {

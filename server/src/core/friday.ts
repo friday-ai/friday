@@ -22,9 +22,7 @@ import { FridayMode } from '../utils/constants';
 import { generateJwtSecret } from '../utils/jwt';
 import jobs from '../config/jobs';
 import error from '../utils/errors/coreError';
-import Log from '../utils/log';
-
-const logger = new Log();
+import logger from '../utils/log';
 
 /**
  * Friday
@@ -34,7 +32,7 @@ export default class Friday {
   readonly secretJwt: string = generateJwtSecret();
   public masterId: string = '';
 
-  public event = new Event();
+  public event = Event;
   public scheduler = new Scheduler(this.event, jobs);
   public action = new Action();
   public house = new House();

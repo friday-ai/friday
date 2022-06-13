@@ -15,7 +15,7 @@ export default class State {
 
   public variable: VariableClass;
 
-  constructor(event: EventClass, variable: VariableClass) {
+  constructor(event: typeof EventClass, variable: VariableClass) {
     this.variable = variable;
     event.on(EventsType.STATES_PURGE, purge);
   }

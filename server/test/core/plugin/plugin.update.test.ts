@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Plugin from '../../../src/core/plugin';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
 import Event from '../../../src/utils/event';
@@ -7,7 +7,7 @@ import State from '../../../src/core/state';
 import Docker from '../../../src/core/docker';
 
 describe('Plugin.update', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const docker = new Docker();

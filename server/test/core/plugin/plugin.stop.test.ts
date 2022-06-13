@@ -1,5 +1,5 @@
 /* eslint-disable func-names */
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import { Container } from 'dockerode';
 import Plugin from '../../../src/core/plugin';
 import { NotFoundError } from '../../../src/utils/errors/coreError';
@@ -11,7 +11,7 @@ import Docker from '../../../src/core/docker';
 let container: Container;
 
 describe('Plugin.stop', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const docker = new Docker();

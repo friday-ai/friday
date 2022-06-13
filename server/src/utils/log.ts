@@ -12,7 +12,7 @@ export default class Log {
    * @param {string} text
    * @memberof Log
    */
-  default(text: string) {
+  static default(text: string) {
     console.log('\n---\n\n\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase());
   }
 
@@ -21,7 +21,7 @@ export default class Log {
    * @param {string} text
    * @memberof Log
    */
-  title(text: string) {
+  static title(text: string) {
     if (env !== 'test') {
       // tslint:disable-next-line: no-console
       console.log('\n---\n\n\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase());
@@ -33,7 +33,7 @@ export default class Log {
    * @param {string} text
    * @memberof Log
    */
-  info(text: string) {
+  static info(text: string) {
     if (env !== 'test') {
       // tslint:disable-next-line: no-console
       console.info('\x1b[36m➡ %s\x1b[0m', text);
@@ -45,7 +45,7 @@ export default class Log {
    * @param {string} text
    * @memberof Log
    */
-  success(text: string) {
+  static success(text: string) {
     console.log('\x1b[32m✔ %s\x1b[0m', text);
   }
 
@@ -54,7 +54,7 @@ export default class Log {
    * @param {string} text
    * @memberof Log
    */
-  warning(text: string) {
+  static warning(text: string) {
     console.warn('\x1b[33m❗ %s\x1b[0m', text);
   }
 
@@ -64,7 +64,7 @@ export default class Log {
    * @returns {Error}
    * @memberof Log
    */
-  error(text: string) {
+  static error(text: string) {
     // tslint:disable-next-line: no-console
     console.trace('\x1b[31m✖ %s\x1b[0m', text);
   }

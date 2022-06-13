@@ -1,9 +1,8 @@
 import Server from './api/app';
 import Friday from './core/friday';
-import Log from './utils/log';
+import logger from './utils/log';
 
 const port = parseInt(process.env.SERVER_PORT!, 10) || 3000;
-const logger = new Log();
 
 (async () => {
   try {

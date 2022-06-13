@@ -10,7 +10,7 @@ import { DeviceTypeParameter, FeatureParameter } from '../../utils/interfaces';
 import getFeatures from './features/features.helper';
 import checkAvailableFeature from './features/checkAvailableFeature';
 import { EventsType, MqttMessageTypes, TopicsTypes } from '../../utils/constants';
-import Event from '../../utils/event';
+import EventClass from '../../utils/event';
 
 /**
  * Device
@@ -23,9 +23,9 @@ export default class Device {
   getById = getById;
 
   public state: StateClass;
-  private event: Event;
+  private event: typeof EventClass;
 
-  constructor(event: Event, state: StateClass) {
+  constructor(event: typeof EventClass, state: StateClass) {
     this.event = event;
     this.state = state;
   }

@@ -6,7 +6,7 @@ import Variable from '../../../src/core/variable';
 import State from '../../../src/core/state';
 
 describe('Device.destroy', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const device = new Device(event, state);

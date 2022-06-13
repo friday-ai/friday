@@ -12,7 +12,7 @@ import { admin, guest, habitant } from '../../../../utils/apiToken';
 let container: Container;
 
 describe('DELETE /api/v1/plugin/:id', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const docker = new Docker();

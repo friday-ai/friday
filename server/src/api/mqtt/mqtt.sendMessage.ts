@@ -1,10 +1,9 @@
 import MqttServer from './index';
 import error, { BadParametersError } from '../../utils/errors/coreError';
-import Log from '../../utils/log';
-import { MqttSendOptions, MqttMessagePayload } from '../../utils/interfaces';
+import logger from '../../utils/log';
+import { MqttMessagePayload, MqttSendOptions } from '../../utils/interfaces';
 import { TopicHeaderPub, TopicsTypes } from '../../utils/constants';
 
-const logger = new Log();
 const DEFAULT_OPTIONS: MqttSendOptions = {
   sendAll: false,
 };
@@ -12,7 +11,11 @@ const DEFAULT_OPTIONS: MqttSendOptions = {
 export default function sendMessage(this: MqttServer, message: MqttMessagePayload, options?: MqttSendOptions) {
   try {
     if (typeof message.topic === 'undefined') {
-      throw new BadParametersError({ name: 'Send mqtt message', message: 'Incorrect params topic', metadata: { message, options } });
+      throw new BadParametersError({
+        name: 'Send mqtt message',
+        message: 'Incorrect params topic',
+        metadata: { message, options },
+      });
     }
     if (typeof message.message === 'object') {
       message.message = JSON.stringify(message.message);

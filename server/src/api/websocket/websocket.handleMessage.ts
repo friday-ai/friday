@@ -1,10 +1,8 @@
 import * as WebSocket from 'ws';
 import { WebsocketMessagePayload } from '../../utils/interfaces';
 import { WebsocketMessageTypes } from '../../utils/constants';
-import Log from '../../utils/log';
+import logger from '../../utils/log';
 import WebsocketServer from '.';
-
-const logger = new Log();
 
 /**
  * Handle message

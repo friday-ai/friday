@@ -1,8 +1,6 @@
-import Log from '../../../../utils/log';
+import logger from '../../../../utils/log';
 import MqttServer from '../../index';
 import StateType from '../../../../core/state/state.interface';
-
-const logger = new Log();
 
 /*
  * @route('friday/master/state/set')

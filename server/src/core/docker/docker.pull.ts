@@ -1,8 +1,6 @@
 import error, { PlatformNotCompatible } from '../../utils/errors/coreError';
 import Docker from './index';
-import Log from '../../utils/log';
-
-const logger = new Log();
+import logger from '../../utils/log';
 
 /**
  * Pull an new container image.

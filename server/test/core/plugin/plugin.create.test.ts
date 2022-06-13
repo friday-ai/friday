@@ -8,7 +8,7 @@ import Docker from '../../../src/core/docker';
 import { AvailableState } from '../../../src/utils/constants';
 
 describe('Plugin.create', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const docker = new Docker();

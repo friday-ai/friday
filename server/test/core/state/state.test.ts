@@ -1,13 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import State from '../../../src/core/state';
 import Variable from '../../../src/core/variable';
 import Event from '../../../src/utils/event';
-import { StateOwner, AvailableState } from '../../../src/utils/constants';
-import { NotFoundError, DatabaseValidationError } from '../../../src/utils/errors/coreError';
+import { AvailableState, StateOwner } from '../../../src/utils/constants';
+import { DatabaseValidationError, NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('State.set', () => {
   const variable = new Variable();
-  const event = new Event();
+  const event = Event;
   const state = new State(event, variable);
 
   it('should create a state', async () => {
@@ -48,7 +48,7 @@ describe('State.set', () => {
 
 describe('State.getByOwner', () => {
   const variable = new Variable();
-  const event = new Event();
+  const event = Event;
   const state = new State(event, variable);
 
   it('should return a state of one owner', async () => {

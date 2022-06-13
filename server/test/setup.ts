@@ -4,9 +4,9 @@ import chaiLike from 'chai-like';
 import chaiThings from 'chai-things';
 import Server from '../src/api/app';
 import Friday from '../src/core/friday';
-import { seedDb, cleanDb } from './utils/seed';
+import { cleanDb, seedDb } from './utils/seed';
 import { umzug } from '../src/config/database';
-import Log from '../src/utils/log';
+import logger from '../src/utils/log';
 import { MqttOptions } from '../src/utils/interfaces';
 
 const port = parseInt(process.env.SERVER_PORT!, 10) || 3500;
@@ -17,8 +17,6 @@ const mqttOptions: MqttOptions = {
   port: mqttPort,
   host: mqttAddress,
 };
-
-const log = new Log();
 
 chai.use(chaiLike);
 chai.use(chaiThings);
@@ -45,13 +43,13 @@ before(async function before() {
   try {
     await cleanDb();
   } catch (e) {
-    log.warning('Impossible to clean database, ignoring error');
+    logger.warning('Impossible to clean database, ignoring error');
   }
   try {
     await umzug.up();
     await seedDb();
   } catch (e) {
-    log.error(e);
+    logger.error(e);
     throw e;
   }
 });

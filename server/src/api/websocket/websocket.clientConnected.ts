@@ -1,10 +1,8 @@
 import * as WebSocket from 'ws';
 import { WebsocketMessagePayload } from '../../utils/interfaces';
 import WebsocketServer from '.';
-import Log from '../../utils/log';
+import logger from '../../utils/log';
 import { BadParametersError } from '../../utils/errors/coreError';
-
-const logger = new Log();
 
 /**
  * Client connected

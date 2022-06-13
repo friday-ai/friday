@@ -1,8 +1,6 @@
 import System from '.';
 import error from '../../utils/errors/coreError';
-import Log from '../../utils/log';
-
-const logger = new Log();
+import logger from '../../utils/log';
 
 /**
  * Start function of Friday system

@@ -11,7 +11,7 @@ import Docker from '../../../src/core/docker';
 let container: Container;
 
 describe('Plugin.destroy', () => {
-  const event = new Event();
+  const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const docker = new Docker();

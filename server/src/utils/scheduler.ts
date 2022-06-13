@@ -1,19 +1,17 @@
 import schedule from 'node-schedule';
 import { JobsInterface } from './interfaces';
-import Log from './log';
+import logger from './log';
 import EventClass from './event';
-
-const logger = new Log();
 
 /**
  * Friday scheduler
  * @class Scheduler
  */
 export default class Scheduler {
-  public event: EventClass;
+  public event: typeof EventClass;
   public jobs: Array<JobsInterface>;
 
-  constructor(event: EventClass, jobs: Array<JobsInterface>) {
+  constructor(event: typeof EventClass, jobs: Array<JobsInterface>) {
     this.event = event;
     this.jobs = jobs;
   }
