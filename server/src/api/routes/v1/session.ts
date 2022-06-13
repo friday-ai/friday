@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  FridayRouter, Get, Patch, Post,
-} from '../../../utils/decorators/route';
+import { FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
 /**
@@ -45,8 +43,7 @@ export default class SessionRouter {
     path : '/revoke/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'session',
   })
     revoke = async (req: Request, res: Response) => {
-      const sessionId = req.query.sessionId as string;
-      const session = await this.friday.session.revoke(req.params.id, sessionId);
+      const session = await this.friday.session.revoke(req.params.id);
       res.json(session);
     };
 
