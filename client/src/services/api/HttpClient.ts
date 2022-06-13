@@ -1,12 +1,12 @@
 import axios, { AxiosError } from 'axios';
-import { AuthHookType } from '../auth/AuthProvider';
+import Auth from '../auth/auth';
 
 type Methods = 'get' | 'post' | 'patch' | 'delete';
 
 class HttpClient {
-  private readonly auth: AuthHookType;
+  private readonly auth: Auth;
 
-  constructor(auth: AuthHookType) {
+  constructor(auth: Auth) {
     this.auth = auth;
   }
 

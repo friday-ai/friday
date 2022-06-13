@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 
 import SatellitesToolbar from '../components/Satellites/SatellitesToolbar';
 import { SatelliteType } from '../utils/interfaces';
-import { useApp } from '../services/AppProvider';
+import useSharedApp from '../services/App';
 import SatelliteCard from '../components/Satellites/SatellitesCard';
 import AnimatedList from '../components/AnimatedList/AnimatedList';
 
 let satellitesList: SatelliteType[] = [];
 
 const Satellites: React.FC = () => {
-  const { satellites } = useApp();
+  const { satellites } = useSharedApp();
 
   const [filteredSatellites, setFilteredSatellites] = useState<SatelliteType[]>([]);
 

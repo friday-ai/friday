@@ -9,7 +9,7 @@ import Settings from './Steps/Settings';
 import House from './Steps/House';
 import Final from './Final';
 
-import { useApp } from '../../services/AppProvider';
+import useSharedApp from '../../services/App';
 
 const animation = {
   variants: {
@@ -31,7 +31,7 @@ const animation = {
 };
 
 const Signup: React.FC = () => {
-  const app = useApp();
+  const app = useSharedApp();
   const navigate = useNavigate();
   const [language, setLanguage] = useState('en');
   const location = useLocation();
@@ -47,9 +47,11 @@ const Signup: React.FC = () => {
 
   const setUser = async (userName: string, email: string, password: string) => {
     await app.signup({ userName, email, password, language, role: 'superadmin' });
+    console.log(app.session);
   };
 
   const setSettings = async (units: string, history: string) => {
+    console.log(app.session);
     await app.variables.create({
       key: 'system_units',
       value: units,

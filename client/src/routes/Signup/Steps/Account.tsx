@@ -42,7 +42,7 @@ const Account: React.FC<{ submit: (username: string, email: string, password: st
         },
         custom: {
           isValid: (value) => value.length > 9,
-          message: 'The password needs to be at least 6 characters long.',
+          message: 'The password needs to be at least 10 characters long.',
         },
       },
       passwordRepeat: {

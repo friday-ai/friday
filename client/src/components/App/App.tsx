@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import Layout from '../Layout/Layout';
@@ -11,26 +11,16 @@ import Satellites from '../../routes/Satellites';
 import NotFound from '../../routes/Errors/NotFound';
 import Signup from '../../routes/Signup/Signup';
 
-import { RequireAuth } from '../../services/auth/AuthProvider';
+import RequireAuth from '../../services/auth/RequireAuth';
 import { changeView } from './app.reducer';
 import { useAppDispatch } from '../../services/store/store';
-import { useApp } from '../../services/AppProvider';
+import useSharedApp from '../../services/App';
 import getRouteName from '../../utils/routes';
-
-let userCount = 0;
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const app = useApp();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    app.users.getCount().then((result) => {
-      userCount = result;
-      setLoading(false);
-    });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const app = useSharedApp();
 
   useEffect(() => {
     const name = getRouteName(location.pathname);
@@ -38,13 +28,11 @@ const App: React.FC = () => {
     document.title = `Friday | ${name}`;
   }, [location, dispatch]);
 
-  return loading ? (
-    <div />
-  ) : (
+  return (
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      <Route path="/login" element={userCount !== 0 ? <Login /> : <Navigate to="/signup" replace />} />
-      <Route path="/signup/*" element={userCount === 0 ? <Signup /> : <Navigate to="/dashboard" replace />} />
+      <Route path="/login" element={app.userCount !== 0 ? <Login /> : <Navigate to="/signup" replace />} />
+      <Route path="/signup/*" element={app.userCount === 0 ? <Signup /> : <Navigate to="/dashboard" replace />} />
       <Route element={<RequireAuth />}>
         <Route path="dashboard" element={<Layout />}>
           <Route index element={<Dashboard />} />

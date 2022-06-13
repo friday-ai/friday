@@ -7,8 +7,6 @@ import { registerSW } from 'virtual:pwa-register';
 import App from './components/App/App';
 import store from './services/store/store';
 
-import AppProvider from './services/AppProvider';
-
 const container = document.getElementById('root');
 const root = createRoot(container!);
 
@@ -16,9 +14,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <AppProvider>
-          <App />
-        </AppProvider>
+        <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

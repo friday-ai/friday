@@ -7,25 +7,30 @@ import UndrawEmpty from '../components/Illustrations/UndrawEmpty';
 
 import { SceneType } from '../utils/interfaces';
 import ModalConfirm from '../components/Modal/ModalConfirm';
-import { useApp } from '../services/AppProvider';
+import useSharedApp from '../services/App';
 import AnimatedList from '../components/AnimatedList/AnimatedList';
 
 let sceneList: SceneType[] = [];
 
 const Scenes: React.FC = () => {
-  const { scenes } = useApp();
+  const { scenes } = useSharedApp();
   const [filteredScenes, setFilteredScenes] = useState<SceneType[]>([]);
   const [searchField, setSearchField] = useState('');
   const [filters, setFilters] = useState(['active', 'inactive', 'errored']);
   const [sort, setSort] = useState('a-z');
 
   useEffect(() => {
-    scenes.getAll().then((res) => {
-      sceneList = res.sort((a, b) => {
-        return a.name.toLowerCase().localeCompare(b.name);
+    scenes
+      .getAll()
+      .then((res) => {
+        sceneList = res.sort((a, b) => {
+          return a.name.toLowerCase().localeCompare(b.name);
+        });
+        setFilteredScenes(sceneList);
+      })
+      .catch((err) => {
+        console.error(err);
       });
-      setFilteredScenes(sceneList);
-    });
   }, [scenes]);
 
   useEffect(() => {

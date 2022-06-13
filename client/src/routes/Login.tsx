@@ -4,10 +4,10 @@ import { Icon } from '@iconify/react';
 import Favicon from '../assets/favicon_black.svg';
 
 import Tooltip from '../components/Generic/Tooltip';
-import { useApp } from '../services/AppProvider';
+import useSharedApp from '../services/App';
 
 const Login: React.FC = () => {
-  const app = useApp();
+  const app = useSharedApp();
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [passwordShown, setPasswordShown] = useState(true);

@@ -3,9 +3,9 @@ import { Icon } from '@iconify/react';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../services/store/store';
-import { drawerToggled, toggleDrawer, currentView } from '../App/app.reducer';
+import { currentView, drawerToggled, toggleDrawer } from '../App/app.reducer';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
-import { useApp } from '../../services/AppProvider';
+import useApp from '../../services/App';
 
 const Header: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,8 +14,8 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const app = useApp();
 
-  const logout = () => {
-    app.logout();
+  const logout = async () => {
+    await app.logout();
     navigate('/login');
   };
 
