@@ -1,6 +1,6 @@
 name: Pull request tests
 
-on: [ workflow_dispatch ]
+on: [ pull_request, workflow_dispatch ]
 
 jobs:
   test-server:
@@ -33,7 +33,7 @@ jobs:
           workdir: /server
 
       - name: 'Run Mocha/Chai unit tests'
-        run: npm run coverage-server:junit
+        run: yarn run coverage-server:junit
 
       - name: 'Publish Unit Test Results'
         uses: EnricoMi/publish-unit-test-result-action@v1.9
@@ -43,7 +43,7 @@ jobs:
           files: ./server/test-results.xml
 
       - name: 'Upload coverage to Codecov'
-        uses: codecov/codecov-action@v1.2.1
+        uses: codecov/codecov-action@v2
         if: always()
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
