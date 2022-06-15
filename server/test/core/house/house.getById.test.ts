@@ -1,5 +1,6 @@
 import { expect, assert } from 'chai';
 import House from '../../../src/core/house';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('House.getById', () => {
   const house = new House();
@@ -79,5 +80,11 @@ describe('House.getById', () => {
         expect(r).to.have.property('houseId');
       });
     }
+  });
+
+  it('should not found a house', async () => {
+    const promise = house.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

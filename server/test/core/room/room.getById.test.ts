@@ -1,5 +1,6 @@
 import { expect, assert } from 'chai';
 import Room from '../../../src/core/room';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('Room.getById', () => {
   const room = new Room();
@@ -120,5 +121,11 @@ describe('Room.getById', () => {
       expect(s).to.have.property('name');
       expect(s).to.have.property('roomId');
     });
+  });
+
+  it('should not found a room', async () => {
+    const promise = room.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

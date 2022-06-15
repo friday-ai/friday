@@ -1,6 +1,7 @@
 import { expect, assert } from 'chai';
 import Action from '../../../src/core/action';
 import { ActionsType } from '../../../src/utils/constants';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('Action.getById', () => {
   const action = new Action();
@@ -39,5 +40,11 @@ describe('Action.getById', () => {
     expect(actionReturned.scene).to.have.property('name');
     expect(actionReturned.scene).to.have.property('description');
     expect(actionReturned.scene).to.have.property('triggerId');
+  });
+
+  it('should not found an action', async () => {
+    const promise = action.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

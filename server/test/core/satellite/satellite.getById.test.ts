@@ -1,5 +1,6 @@
-import { expect } from 'chai';
+import { assert, expect } from 'chai';
 import Satellite from '../../../src/core/satellite';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('Satellite.getById', () => {
   const satellite = new Satellite();
@@ -152,5 +153,11 @@ describe('Satellite.getById', () => {
         expect(p).to.have.property('satelliteId');
       });
     }
+  });
+
+  it('should not found a satelilte', async () => {
+    const promise = satellite.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

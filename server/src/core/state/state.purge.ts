@@ -23,14 +23,12 @@ export default async function purge(this: StateClass) {
     const now = new Date().getTime();
     const timestampLimit = now - stateHistoryInDays * 24 * 60 * 60 * 1000;
 
-    await State.destroy({
-      where: {
-        updated_at: {
-          [Op.lte]: new Date(timestampLimit),
-        },
-        last: false,
+    await State.sequelize?.getQueryInterface().bulkDelete('state', {
+      updatedAt: {
+        [Op.lte]: new Date(timestampLimit),
       },
-    });
+    }) ;
+
   } catch (e) {
     throw error({ name: e.name, message: e.message, cause: e });
   }

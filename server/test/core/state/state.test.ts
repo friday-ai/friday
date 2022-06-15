@@ -2,7 +2,7 @@ import { assert, expect } from 'chai';
 import State from '../../../src/core/state';
 import Variable from '../../../src/core/variable';
 import Event from '../../../src/utils/event';
-import { AvailableState, StateOwner } from '../../../src/utils/constants';
+import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '../../../src/utils/constants';
 import { DatabaseValidationError, NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('State.set', () => {
@@ -63,5 +63,23 @@ describe('State.getByOwner', () => {
   it('should not found state', async () => {
     const promise = state.getByOwner('639cf491-7ff5-4e76-853d-806c81e53f8d');
     await assert.isRejected(promise, NotFoundError);
+  });
+});
+
+describe('State.purge', () => {
+  const variable = new Variable();
+  const event = Event;
+  const state = new State(event, variable);
+
+  it('should purge all states', async () => {
+    await variable.create({
+      key: SystemVariablesNames.HISTORY_STATE_IN_DAYS,
+      value: '30',
+      owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+      ownerType: VariableOwner.SATELLITE,
+    });
+
+    const promise = state.purge();
+    await assert.isFulfilled(promise);
   });
 });

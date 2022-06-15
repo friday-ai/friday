@@ -1,5 +1,6 @@
 import { expect, assert } from 'chai';
 import Scene from '../../../src/core/scene';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('Scene.getById', () => {
   const scene = new Scene();
@@ -89,5 +90,11 @@ describe('Scene.getById', () => {
         expect(a).to.have.property('sceneId');
       });
     }
+  });
+
+  it('should not found a scene', async () => {
+    const promise = scene.getById('edfca72c-87bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

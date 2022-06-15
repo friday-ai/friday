@@ -1,6 +1,7 @@
 import { expect, assert } from 'chai';
 import Trigger from '../../../src/core/trigger';
 import { AvailableConditions } from '../../../src/utils/constants';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('Trigger.getById', () => {
   const trigger = new Trigger();
@@ -43,5 +44,11 @@ describe('Trigger.getById', () => {
       },
       ],
     });
+  });
+
+  it('should not found a trigger', async () => {
+    const promise = trigger.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

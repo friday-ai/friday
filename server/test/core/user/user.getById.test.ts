@@ -1,6 +1,7 @@
 import { assert, expect } from 'chai';
 import User from '../../../src/core/user';
 import { UserRole } from '../../../src/utils/constants';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('User.getById', () => {
   const user = new User();
@@ -75,5 +76,11 @@ describe('User.getById', () => {
       expect(v).to.have.property('owner');
       expect(v).to.have.property('ownerType');
     });
+  });
+
+  it('should not found a user', async () => {
+    const promise = user.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

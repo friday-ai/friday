@@ -1,9 +1,10 @@
-import { expect } from 'chai';
+import { assert, expect } from 'chai';
 import Plugin from '../../../src/core/plugin';
 import Event from '../../../src/utils/event';
 import Variable from '../../../src/core/variable';
 import State from '../../../src/core/state';
 import Docker from '../../../src/core/docker';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('Plugin.getById', () => {
   const event = Event;
@@ -163,5 +164,11 @@ describe('Plugin.getById', () => {
         expect(v).to.have.property('ownerType');
       });
     }
+  });
+
+  it('should not found a plugin', async () => {
+    const promise = plugin.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

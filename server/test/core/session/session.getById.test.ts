@@ -1,5 +1,6 @@
-import { expect } from 'chai';
+import { assert, expect } from 'chai';
 import Session from '../../../src/core/session';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('Session.getById', () => {
   const session = new Session('secretJwt');
@@ -21,5 +22,11 @@ describe('Session.getById', () => {
     expect(sessionReturned).to.have.property('userId');
     expect(sessionReturned.user).to.be.an('object');
     expect(sessionReturned.user).not.to.have.property('password');
+  });
+
+  it('should not found an session', async () => {
+    const promise = session.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });

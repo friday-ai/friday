@@ -4,6 +4,7 @@ import { DEVICE_SUBTYPE_LIST } from '../../../src/utils/device.constants';
 import Event from '../../../src/utils/event';
 import Variable from '../../../src/core/variable';
 import State from '../../../src/core/state';
+import { NotFoundError } from '../../../src/utils/errors/coreError';
 
 describe('Device.getById', () => {
   const event = Event;
@@ -130,5 +131,11 @@ describe('Device.getById', () => {
       expect(deviceReturned.plugin).to.have.property('enabled');
       expect(deviceReturned.plugin).to.have.property('satelliteId');
     }
+  });
+
+  it('should not found a device', async () => {
+    const promise = device.getById('edfca72c-89bf-4cee-a4b6-fabbef87528a');
+
+    await assert.isRejected(promise, NotFoundError);
   });
 });
