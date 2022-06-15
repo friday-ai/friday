@@ -1,0 +1,144 @@
+name: Release Friday Images
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build-server:
+    name: Build Friday Server
+    runs-on: ubuntu-latest
+    container:
+      image: node:current-alpine
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        working-directory: ./server
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Build Server
+        working-directory: ./server
+        run: yarn run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: server/dist
+
+  build-client:
+    name: Build Friday client
+    runs-on: ubuntu-latest
+    container:
+      image: node:current-alpine
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        working-directory: ./client
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Build front
+        working-directory: ./client
+        run: yarn run build
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: client/dist
+  buildx:
+    needs: [ build-server, build-client ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Prepare
+        run: |
+          DOCKER_IMAGE=fridayai/friday
+          DOCKER_PLATFORMS=linux/386,linux/amd64,linux/arm/v7,linux/arm64
+          VERSION=edge
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          fi
+          TAGS="--tag ${DOCKER_IMAGE}:${VERSION}"
+          if [[ $VERSION =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+            TAGS="$TAGS --tag ${DOCKER_IMAGE}:latest"
+          fi
+          echo ::set-output name=docker_image::${DOCKER_IMAGE}
+          echo ::set-output name=version::${VERSION}
+          echo ::set-output name=buildx_args::--platform ${DOCKER_PLATFORMS} \
+            --build-arg VERSION=${VERSION} \
+            --build-arg BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ') \
+            --build-arg VCS_REF=${GITHUB_SHA::8} \
+            ${TAGS} --file ./Dockerfile . \
+
+      - name: Set up Docker Buildx
+        uses: crazy-max/ghaction-docker-buildx@v3
+
+      - name: Docker build
+        run: |
+          docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args }}
+
+      - name: Login to DockerHub
+        if: success() && github.event_name != 'pull_request'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Docker push
+        if: success() && github.event_name != 'pull_request'
+        run: |
+          docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args }}
+
+      - name: Inspect image
+        if: always() && github.event_name != 'pull_request'
+        run: |
+          docker buildx imagetools inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
+
+  build-documentation:
+    needs: [ buildx ]
+    runs-on: ubuntu-latest
+    container:
+      image: node:current-alpine
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: yarn
+
+      - uses: actions/checkout@v2
+        with:
+          repository: friday-ai/friday-docs
+          ref: master
+          path: 'doc'
+
+      - name: creates documentation
+        run: yarn run generate-doc
+
+      - name: create structure
+        run: |
+          mv -v ./server/docs/core/modules/* ./server/docs/core/
+          rm ./server/docs/core/globals.md
+          rm -r ./server/docs/core/modules
+          rsync -pr ./server/docs/core/* ./doc/node-js-api-1
+          rsync -pr  ./server/docs/rest/* ./doc/rest-api-1
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'doc'
+          destination-github-username: 'friday-ai'
+          destination-repository-name: 'friday-docs'
+          user-email: ${{ secrets.EMAIL_DOC }}
+          target-branch: 'master'
