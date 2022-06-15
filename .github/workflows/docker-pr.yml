@@ -1,0 +1,52 @@
+name: Pull request tests
+
+on: [ workflow_dispatch ]
+
+jobs:
+  test-server:
+    name: Server test
+    runs-on: ubuntu-latest
+    container:
+      image: node:current-alpine
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Prerequisites
+        run: |
+          apk add --no-cache bash curl git
+          apk add docker
+          addgroup root docker
+          docker pull alpine
+
+      - name: Install dependencies
+        working-directory: ./server
+        run: yarn
+
+      - uses: actions/checkout@v2
+      - name: 'Reviewdog: ESLint'
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: 'github-pr-review'
+          fail_on_error: true
+          eslint_flags: '--ext .js,.jsx,.ts,.tsx ./'
+          workdir: /server
+
+      - name: 'Run Mocha/Chai unit tests'
+        run: npm run coverage-server:junit
+
+      - name: 'Publish Unit Test Results'
+        uses: EnricoMi/publish-unit-test-result-action@v1.9
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: ./server/test-results.xml
+
+      - name: 'Upload coverage to Codecov'
+        uses: codecov/codecov-action@v1.2.1
+        if: always()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          fail_ci_if_error: true
+          directory: ./server/

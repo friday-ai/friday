@@ -1,16 +1,17 @@
-name: codecov
+name: Main branch tests
 
-on: [pull_request, workflow_dispatch]
+on:
+  workflow_dispatch:
 
 jobs:
-  test:
+  test-server:
+    name: Server test
     runs-on: ubuntu-latest
     container:
       image: node:current-alpine
 
     steps:
       - uses: actions/checkout@v1
-
       - name: Install Prerequisites
         run: |
           apk add --no-cache bash curl git
@@ -22,8 +23,18 @@ jobs:
         working-directory: ./server
         run: yarn
 
+      - uses: actions/checkout@v2
+      - name: 'Reviewdog: ESLint'
+        uses: reviewdog/action-eslint@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: 'github-pr-review'
+          fail_on_error: true
+          eslint_flags: '--ext .js,.jsx,.ts,.tsx ./'
+          workdir: /server
+
       - name: 'Run Mocha/Chai unit tests'
-        run: npm run coverage-server:junit
+        run: yarn run coverage-server:junit
 
       - name: 'Publish Unit Test Results'
         uses: EnricoMi/publish-unit-test-result-action@v1.9
