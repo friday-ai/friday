@@ -1,5 +1,5 @@
 import System from '.';
-import error from '../../utils/errors/coreError';
+import error, { BaseCoreError } from '../../utils/errors/coreError';
 import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '../../utils/constants';
 import { version as packageVersion } from '../../../package.json';
 
@@ -35,9 +35,11 @@ export default async function init(this: System): Promise<string> {
 
       // await this.variable.create(SystemVariablesNames.NUMBER_OF_BACKUPS, { owner: master.id });
       await this.variable.update(SystemVariablesNames.HISTORY_STATE_IN_DAYS, { owner: master.id });
-    }
 
-    return master.id!;
+      return master.id!;
+    } else {
+      throw new BaseCoreError({ name: 'FRIDAY_INIT_ERROR', message: 'Master satellite already exists' });
+    }
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e,

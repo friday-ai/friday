@@ -2,11 +2,33 @@
 import { expect } from 'chai';
 import * as database from '../../../src/config/database';
 import { SystemVariablesNames, VariableOwner } from '../../../src/utils/constants';
-import SatelliteType from '../../../src/core/satellite/satellite.interface';
+import User from '../../../src/core/user';
+import Variable from '../../../src/core/variable';
+import Room from '../../../src/core/room';
+import Satellite from '../../../src/core/satellite';
+import House from '../../../src/core/house';
+import Event from '../../../src/utils/event';
+import State from '../../../src/core/state';
+import Scheduler from '../../../src/utils/scheduler';
+import jobs from '../../../src/config/jobs';
+import System from '../../../src/core/system';
 
 describe('System.init', () => {
+  const user = new User();
+  const variable = new Variable();
+  const room = new Room();
+  const satellite = new Satellite();
+  const house = new House();
+  const event = Event;
+  const state = new State(event, variable);
+  const scheduler = new Scheduler(event, jobs);
+  const system = new System(variable, house, room, satellite, user, state, scheduler, database);
+
   it('should init friday system and go to nominal mode', async function () {
     this.timeout(8000);
+
+    await database.database.getQueryInterface().bulkDelete('satellite', {});
+    await database.database.getQueryInterface().bulkDelete('variable', {});
 
     await database.database.getQueryInterface().bulkInsert('variable',
       [{
@@ -19,16 +41,16 @@ describe('System.init', () => {
         updatedAt: new Date(),
       }], {});
 
+    const result = await system.init();
+
+    expect(result).to.be.an('string');
+    expect(result).to.be.not.equal(null);
+  });
+
+  it('should not init friday system twice', async function () {
     // @ts-ignore
     const friday = global.FRIDAY;
     const result = await friday.init();
-
-    expect(result).to.be.an('boolean');
-    expect(result).to.equal(true);
-
-    const satellites = await friday.satellite.getAll();
-    let master = satellites.filter((s: SatelliteType) => s.name === 'Master')[0];
-
-    expect(master.id).to.be.not.equal(null);
+    expect(result).to.be.equal(false);
   });
 });

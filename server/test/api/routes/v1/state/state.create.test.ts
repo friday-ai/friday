@@ -28,7 +28,7 @@ describe('POST /api/v1/state', () => {
 
   it('should not create a state with a empty owner id', async () => {
     await server
-      .post('/api/v1/room')
+      .post('/api/v1/state')
       .send({
         id: '658343ba-4d4f-4767-a134-78cc01e7f06c',
         owner: '',
@@ -40,7 +40,7 @@ describe('POST /api/v1/state', () => {
 
   it('should not create a state with a wrong owner id', async () => {
     await server
-      .post('/api/v1/room')
+      .post('/api/v1/state')
       .send({
         id: 'ee688e4d-619c-4938-9189-fc3f21923308',
         owner: '33586095-0d16-4dee-9120-7d77448a803b',
