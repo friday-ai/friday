@@ -1,6 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import error, {BadParametersError, NotFoundError} from '../../utils/errors/coreError';
+import error, { BadParametersError, NotFoundError } from '../../utils/errors/coreError';
 
 /**
  * Get a variable value by key.
