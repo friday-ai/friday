@@ -99,4 +99,11 @@ export default class Friday {
     // Return only package version
     return version[0];
   }
+
+  /**
+   * Stop friday
+   */
+  async stop() {
+    return this.system.shutdown();
+  }
 }

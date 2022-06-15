@@ -28,7 +28,6 @@ describe('System.init', () => {
 
     const satellites = await friday.satellite.getAll();
     let master = satellites.filter((s: SatelliteType) => s.name === 'Master')[0];
-    console.log(master);
 
     expect(master.id).to.be.not.equal(null);
   });

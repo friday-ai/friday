@@ -1,6 +1,6 @@
 import Variable from '../../models/variable';
 import VariableType from './variable.interface';
-import error, { NotFoundError, BadParametersError } from '../../utils/errors/coreError';
+import error, {BadParametersError, NotFoundError} from '../../utils/errors/coreError';
 
 /**
  * Get a variable value by key.
@@ -27,8 +27,7 @@ export default async function getValue(key: string): Promise<VariableType> {
       throw new NotFoundError({ name: 'Get value of an Variable', message: 'Variable not found', metadata: key });
     }
 
-    const variableToReturn = <VariableType>variable.get({ plain: true });
-    return variableToReturn;
+    return <VariableType>variable.get({ plain: true });
   } catch (e) {
     throw error({
       name: e.name, message: e.message, cause: e, metadata: key,
