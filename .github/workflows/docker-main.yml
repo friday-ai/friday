@@ -2,6 +2,8 @@ name: Main branch tests
 
 on:
   workflow_dispatch:
+  push: 
+    branches: [ main ]
 
 jobs:
   test-server:
