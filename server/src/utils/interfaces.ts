@@ -1,9 +1,9 @@
 import {
   WebsocketMessageTypes, MqttMessageTypes, EventsType, TopicsTypes, AvailableState,
-} from './constants';
-import DeviceType from '../core/device/device.interface';
-import DeviceClass from '../core/device';
-import User from '../core/user';
+} from '../config/constants';
+import DeviceClass from '../core/device/device';
+import User from '../core/user/user';
+import { DeviceType } from '../config/entities';
 
 /**
  * Options for core functions type 'getAll'
@@ -21,7 +21,7 @@ export interface ErrorType {
   name: string;
   message: string;
   cause?: Error;
-  metadata?: Object;
+  metadata?: any;
 }
 
 /**
@@ -125,3 +125,13 @@ export type DeviceSubtypeList = KVArr<NestedObjects>;
 export type DeviceTypeCommonFeature = KVArr<NestedObjects>;
 
 export type DeviceSubtypeFeatureList = KVArr<KVArr<NestedObjects>>;
+
+
+/**
+ * Access token interface
+ */
+export interface AccessTokenType {
+  user: string;
+  role: string;
+  session: string;
+}

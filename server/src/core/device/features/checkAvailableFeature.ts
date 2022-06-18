@@ -1,4 +1,4 @@
-import DeviceType from '../device.interface';
+import { DeviceType } from '../../../config/entities';
 import getAvailableFeatures from '../subdevice/subdevice.getFeatures';
 
 export default function checkAvailableFeature(device: DeviceType, feature: string) {

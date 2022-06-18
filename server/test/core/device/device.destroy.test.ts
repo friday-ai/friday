@@ -1,9 +1,9 @@
 import { assert } from 'chai';
-import Device from '../../../src/core/device';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Device from '../../../src/core/device/device';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable';
-import State from '../../../src/core/state';
+import Variable from '../../../src/core/variable/variable';
+import State from '../../../src/core/state/state';
 
 describe('Device.destroy', () => {
   const event = Event;

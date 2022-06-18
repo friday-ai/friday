@@ -99,9 +99,9 @@ export default class PluginRouter {
     };
 
   /**
-   * Get all plugins
-   * @apiName getAll
-   * @apiDescription This route allows you to get all plugins
+   * List All plugins
+   * @apiName listAll
+   * @apiDescription This route allows you to List All plugins
    * @api {get} /api/v1/plugin
    * @apiGroup Plugin
    * @apiVersion 1.0.0
@@ -118,8 +118,8 @@ export default class PluginRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'plugin',
   })
-    getAll = async (req: Request, res: Response) => {
-      const plugins = await this.friday.plugin.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const plugins = await this.friday.plugin.listAll(req.query);
       res.json(plugins);
     };
 

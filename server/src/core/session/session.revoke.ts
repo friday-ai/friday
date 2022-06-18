@@ -1,6 +1,6 @@
 import Session from '../../models/session';
-import SessionType from './session.interface';
-import error, { BadParametersError, NotFoundError } from '../../utils/errors/coreError';
+import { SessionType } from '../../config/entities';
+import { BadParametersError, NotFoundError } from '../../utils/decorators/error';
 
 /**
  * Revoke an session.
@@ -12,30 +12,22 @@ import error, { BadParametersError, NotFoundError } from '../../utils/errors/cor
  * ````
  */
 export default async function revoke(sessionId: string): Promise<SessionType> {
-  try {
-    if (sessionId === '' || sessionId === null || sessionId === undefined) {
-      throw new BadParametersError({ name: 'Revoke an Session', message: 'Incorrect params', metadata: { sessionId } });
-    }
-
-    const session = await Session.findOne({
-      where: {
-        id: sessionId,
-      },
-    });
-
-    if (session === null) {
-      throw new NotFoundError({ name: 'Revoke an Session', message: 'Session not found', metadata: { sessionId } });
-    }
-
-    session.revoked = true;
-    await session.save();
-
-    const sessionToReturn = <SessionType>session.get({ plain: true });
-
-    return sessionToReturn;
-  } catch (e) {
-    throw error({
-      name: e.name, message: e.message, cause: e, metadata: sessionId,
-    });
+  if (sessionId === '' || sessionId === null || sessionId === undefined) {
+    throw new BadParametersError({ name: 'Revoke an Session', message: 'Incorrect params', metadata: { sessionId } });
   }
+
+  const session = await Session.findOne({
+    where: {
+      id: sessionId,
+    },
+  });
+
+  if (session === null) {
+    throw new NotFoundError({ name: 'Revoke an Session', message: 'Session not found', metadata: { sessionId } });
+  }
+
+  session.revoked = true;
+  await session.save();
+
+  return <SessionType>session.get({ plain: true });
 }

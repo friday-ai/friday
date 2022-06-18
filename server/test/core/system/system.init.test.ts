@@ -1,17 +1,17 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 import * as database from '../../../src/config/database';
-import { SystemVariablesNames, VariableOwner } from '../../../src/utils/constants';
-import User from '../../../src/core/user';
-import Variable from '../../../src/core/variable';
-import Room from '../../../src/core/room';
-import Satellite from '../../../src/core/satellite';
-import House from '../../../src/core/house';
+import { SystemVariablesNames, VariableOwner } from '../../../src/config/constants';
+import User from '../../../src/core/user/user';
+import Variable from '../../../src/core/variable/variable';
+import Room from '../../../src/core/room/room';
+import Satellite from '../../../src/core/satellite/satellite';
+import House from '../../../src/core/house/house';
 import Event from '../../../src/utils/event';
-import State from '../../../src/core/state';
+import State from '../../../src/core/state/state';
 import Scheduler from '../../../src/utils/scheduler';
 import jobs from '../../../src/config/jobs';
-import System from '../../../src/core/system';
+import System from '../../../src/core/system/system';
 
 describe('System.init', () => {
   const user = new User();

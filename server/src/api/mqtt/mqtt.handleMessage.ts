@@ -1,5 +1,5 @@
-import { TopicHeaderSub, TopicToSubscribe as Topics } from '../../utils/constants';
-import error from '../../utils/errors/coreError';
+import { TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
+import error from '../../utils/decorators/error';
 import MqttServer from './index';
 import logger from '../../utils/log';
 

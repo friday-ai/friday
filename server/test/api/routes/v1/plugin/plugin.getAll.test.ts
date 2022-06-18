@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import server from '../../../../utils/request';
-import PluginType from '../../../../../src/core/plugin/plugin.interface';
+import { PluginType } from '../../../../../src/config/entities';
 import { admin, habitant } from '../../../../utils/apiToken';
 
 describe('GET /api/v1/plugin', () => {

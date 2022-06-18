@@ -1,16 +1,16 @@
 import * as WebSocket from 'ws';
 import { WebsocketMessagePayload } from '../../utils/interfaces';
-import { WebsocketMessageTypes } from '../../utils/constants';
+import { WebsocketMessageTypes } from '../../config/constants';
 import logger from '../../utils/log';
 import WebsocketServer from '.';
 
 /**
  * Handle message
  */
-export default function handleMessage(this: WebsocketServer, message: WebsocketMessagePayload, ws: WebSocket) {
+export default async function handleMessage(this: WebsocketServer, message: WebsocketMessagePayload, ws: WebSocket) {
   switch (message.type) {
     case WebsocketMessageTypes.AUTHENTICATION:
-      this.clientConnected(message, ws);
+      await this.clientConnected(message, ws);
       break;
     case WebsocketMessageTypes.MESSAGE_SEND:
       this.sendMessage(message);

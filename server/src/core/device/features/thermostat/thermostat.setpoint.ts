@@ -1,6 +1,6 @@
-import error from '../../../../utils/errors/coreError';
+import error from '../../../../utils/decorators/error';
 import { FeatureParameter } from '../../../../utils/interfaces';
-import { StateOwner } from '../../../../utils/constants';
+import { StateOwner } from '../../../../config/constants';
 
 async function setSetpoint(params: FeatureParameter) {
   try {

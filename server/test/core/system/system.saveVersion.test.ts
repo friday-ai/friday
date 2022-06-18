@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import System from '../../../src/core/system';
-import Variable from '../../../src/core/variable';
-import House from '../../../src/core/house';
-import Room from '../../../src/core/room';
-import Satellite from '../../../src/core/satellite';
-import User from '../../../src/core/user';
-import State from '../../../src/core/state';
+import System from '../../../src/core/system/system';
+import Variable from '../../../src/core/variable/variable';
+import House from '../../../src/core/house/house';
+import Room from '../../../src/core/room/room';
+import Satellite from '../../../src/core/satellite/satellite';
+import User from '../../../src/core/user/user';
+import State from '../../../src/core/state/state';
 import Scheduler from '../../../src/utils/scheduler';
 import Event from '../../../src/utils/event';
 import * as database from '../../../src/config/database';

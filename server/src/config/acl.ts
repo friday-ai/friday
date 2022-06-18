@@ -1,4 +1,4 @@
-import { UserRole } from '../utils/constants';
+import { UserRole } from './constants';
 
 export default {
   [UserRole.SUPERADMIN]: {

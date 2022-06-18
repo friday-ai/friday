@@ -1,8 +1,8 @@
 /* eslint-disable func-names */
 import { assert, expect } from 'chai';
 import { Container } from 'dockerode';
-import Docker from '../../../src/core/docker';
-import { PlatformNotCompatible } from '../../../src/utils/errors/coreError';
+import Docker from '../../../src/core/docker/docker';
+import { PlatformNotCompatible } from '../../../src/utils/decorators/error';
 
 let container: Container;
 

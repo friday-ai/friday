@@ -105,9 +105,9 @@ export default class DeviceRouter {
     };
 
   /**
-   * Get all devices
-   * @apiName getAll
-   * @apiDescription This route allows you to get all devices
+   * List All devices
+   * @apiName listAll
+   * @apiDescription This route allows you to List All devices
    * @api {get} /api/v1/device
    * @apiGroup Device
    * @apiVersion 1.0.0
@@ -127,8 +127,8 @@ export default class DeviceRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'device',
   })
-    getAll = async (req: Request, res: Response) => {
-      const devices = await this.friday.device.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const devices = await this.friday.device.listAll(req.query);
       res.json(devices);
     };
 

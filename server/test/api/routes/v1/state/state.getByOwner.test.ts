@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import { AvailableState, StateOwner } from '../../../../../src/utils/constants';
+import { AvailableState, StateOwner } from '../../../../../src/config/constants';
 
 describe('GET /api/v1/state/:owner', () => {
   it('should return a state of one owner', async () => {

@@ -1,20 +1,14 @@
-import error, { NotFoundError } from '../../utils/errors/coreError';
+import { NotFoundError } from '../../utils/decorators/error';
 import Satellite from '../../models/satellite';
-import SatelliteType from './satellite.interface';
+import { SatelliteType } from '../../config/entities';
 
 export default async function heartbeat(id: string): Promise<SatelliteType> {
-  try {
-    const satelliteToUpdate = await Satellite.findByPk(id);
-    if (satelliteToUpdate === null) {
-      throw new NotFoundError({ name: 'Update a Satellite', message: 'Satellite not found', metadata: id });
-    }
-    satelliteToUpdate.lastHeartbeat = new Date();
-    await satelliteToUpdate.update(satelliteToUpdate);
-    const satelliteToReturn = <SatelliteType>satelliteToUpdate.get({ plain: true });
-    return satelliteToReturn;
-  } catch (e) {
-    throw error({
-      name: e.name, message: e.message, cause: e, metadata: id,
-    });
+  const satellite = await Satellite.findByPk(id);
+  if (satellite === null) {
+    throw new NotFoundError({ name: 'Update a Satellite', message: 'Satellite not found', metadata: id });
   }
+  satellite.lastHeartbeat = new Date();
+  await satellite.update(satellite);
+
+  return <SatelliteType>satellite.get({ plain: true });
 }

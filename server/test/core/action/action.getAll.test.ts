@@ -1,12 +1,12 @@
 import { expect, assert } from 'chai';
-import Action from '../../../src/core/action';
-import { ActionsType } from '../../../src/utils/constants';
+import Action from '../../../src/core/action/action';
+import { ActionsType } from '../../../src/config/constants';
 
-describe('Action.getAll', () => {
+describe('Action.listAll', () => {
   const action = new Action();
 
   it('should return all actions', async () => {
-    const actions = await action.getAll();
+    const actions = await action.listAll();
 
     expect(actions).to.be.an('array');
     assert.deepEqual(actions, [{
@@ -33,7 +33,7 @@ describe('Action.getAll', () => {
   });
 
   it('should return all actions with full scope', async () => {
-    const actions = await action.getAll({ scope: 'full' });
+    const actions = await action.listAll({ scope: 'full' });
 
     expect(actions).to.be.an('array');
     actions.forEach((a) => {

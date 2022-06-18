@@ -1,7 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import DeviceType from '../../../../../src/core/device/device.interface';
-import SatelliteType from '../../../../../src/core/satellite/satellite.interface';
+import { DeviceType, SatelliteType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/room/:id', () => {
   it('should return a room', async () => {

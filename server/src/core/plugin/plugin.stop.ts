@@ -1,6 +1,5 @@
-import PluginClass from './index';
-import error from '../../utils/errors/coreError';
-import { AvailableState, StateOwner } from '../../utils/constants';
+import PluginClass from './plugin';
+import { AvailableState, StateOwner } from '../../config/constants';
 
 /**
  * Stop a plugin.
@@ -12,20 +11,14 @@ import { AvailableState, StateOwner } from '../../utils/constants';
  * ````
  */
 export default async function stop(this: PluginClass, id: string): Promise<any> {
-  try {
-    const plugin = await this.getById(id);
-    await this.docker.stop(plugin.dockerId!);
+  const plugin = await this.getById(id);
+  await this.docker.stop(plugin.dockerId!);
 
-    await this.state.set({
-      owner: plugin.id!,
-      ownerType: StateOwner.PLUGIN,
-      value: AvailableState.PLUGIN_STOPPED,
-    });
+  await this.state.set({
+    owner: plugin.id!,
+    ownerType: StateOwner.PLUGIN,
+    value: AvailableState.PLUGIN_STOPPED,
+  });
 
-    return true;
-  } catch (e) {
-    throw error({
-      name: e.name, message: e.message, cause: e, metadata: id,
-    });
-  }
+  return true;
 }

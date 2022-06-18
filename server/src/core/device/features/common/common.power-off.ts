@@ -1,5 +1,5 @@
-import error from '../../../../utils/errors/coreError';
-import { AvailableState, StateOwner } from '../../../../utils/constants';
+import error from '../../../../utils/decorators/error';
+import { AvailableState, StateOwner } from '../../../../config/constants';
 import { FeatureParameter } from '../../../../utils/interfaces';
 
 export default async function powerOff(params: FeatureParameter) {

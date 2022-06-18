@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import server from '../../../../utils/request';
-import VariableType from '../../../../../src/core/variable/variable.interface';
-import PluginType from '../../../../../src/core/plugin/plugin.interface';
+import { VariableType, PluginType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/satellite/:id', () => {
   it('should return a satellite', async () => {

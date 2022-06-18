@@ -1,7 +1,8 @@
 import { assert, expect } from 'chai';
 import Friday from '../../../../../src/core/friday';
 import faceRecognition from '../../../../../src/core/device/features/camera/camera.faceRecognition';
-import { UserRole } from '../../../../../src/utils/constants';
+import { UserRole } from '../../../../../src/config/constants';
+import { NotFoundError } from '../../../../../src/utils/decorators/error';
 
 let friday: Friday;
 
@@ -39,20 +40,15 @@ describe('features.camera.faceRecognition', () => {
   });
 
   it('should not recognize user from a camera - Validation error', async () => {
-    let message = 'no-error';
+    const promise = faceRecognition({
+      userClass: friday.user,
+      deviceClass: friday.device,
+      deviceType: {
+        id: '',
+      },
+      userId: '',
+    });
 
-    try {
-      await faceRecognition({
-        userClass: friday.user,
-        deviceClass: friday.device,
-        deviceType: {
-          id: '',
-        },
-        userId: '',
-      });
-    } catch (e) {
-      message = e.message;
-    }
-    expect(message).equal('User not found');
+    await assert.isRejected(promise, NotFoundError);
   });
 });

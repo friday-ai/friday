@@ -2,7 +2,7 @@ import * as WebSocket from 'ws';
 import { WebsocketMessagePayload } from '../../utils/interfaces';
 import WebsocketServer from '.';
 import logger from '../../utils/log';
-import { BadParametersError } from '../../utils/errors/coreError';
+import { BadParametersError } from '../../utils/decorators/error';
 
 /**
  * Client connected

@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import { ActionsType } from '../../../../../src/utils/constants';
+import { ActionsType } from '../../../../../src/config/constants';
 
 describe('POST /api/v1/action', () => {
   it('should return Created', async () => {

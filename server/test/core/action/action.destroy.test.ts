@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import Action from '../../../src/core/action';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Action from '../../../src/core/action/action';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Action.destroy', () => {
   const action = new Action();

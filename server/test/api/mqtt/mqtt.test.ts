@@ -11,7 +11,7 @@ import {
   TopicHeaderSub,
   TopicsTypes,
   TopicToSubscribe as Topics,
-} from '../../../src/utils/constants';
+} from '../../../src/config/constants';
 
 const fakeBroker = new MqttBroker();
 const mqttPort = parseInt(process.env.MQTT_PORT!, 10) || 1884;

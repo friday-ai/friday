@@ -1,5 +1,5 @@
 import { QueryInterface } from 'sequelize';
-import { ActionsType } from '../src/utils/constants';
+import { ActionsType } from '../src/config/constants';
 
 module.exports = {
   up: (queryInterface: QueryInterface) => queryInterface.bulkInsert('action', [

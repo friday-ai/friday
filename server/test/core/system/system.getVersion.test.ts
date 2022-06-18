@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { SystemVariablesNames } from '../../../src/utils/constants';
+import { SystemVariablesNames } from '../../../src/config/constants';
 import { version as packageVersion } from '../../../package.json';
 
 describe('System.getVersion', () => {

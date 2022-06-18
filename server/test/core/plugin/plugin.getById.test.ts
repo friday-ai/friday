@@ -1,10 +1,10 @@
 import { assert, expect } from 'chai';
-import Plugin from '../../../src/core/plugin';
+import Plugin from '../../../src/core/plugin/plugin';
 import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable';
-import State from '../../../src/core/state';
-import Docker from '../../../src/core/docker';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Variable from '../../../src/core/variable/variable';
+import State from '../../../src/core/state/state';
+import Docker from '../../../src/core/docker/docker';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Plugin.getById', () => {
   const event = Event;

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import server from '../../../../utils/request';
-import SatelliteType from '../../../../../src/core/satellite/satellite.interface';
+import { SatelliteType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/satellite', () => {
   it('should return all satellites', async () => {

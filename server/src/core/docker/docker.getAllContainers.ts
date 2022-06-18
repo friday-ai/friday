@@ -1,6 +1,6 @@
 import { ContainerInfo } from 'dockerode';
-import Docker from './index';
-import error, { PlatformNotCompatible } from '../../utils/errors/coreError';
+import Docker from './docker';
+import { PlatformNotCompatible } from '../../utils/decorators/error';
 
 /**
  * Get all containers.
@@ -9,15 +9,9 @@ import error, { PlatformNotCompatible } from '../../utils/errors/coreError';
  * const containers = await friday.docker.getAllContainers();
  */
 export default async function getAllContainers(this: Docker): Promise<ContainerInfo[]> {
-  try {
-    if (!this.dockerode) {
-      throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'Friday not running on Docker' });
-    }
-
-    return await this.dockerode.listContainers({ all: true });
-  } catch (e) {
-    throw error({
-      name: e.name, message: e.message, cause: e,
-    });
+  if (!this.dockerode) {
+    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'Friday not running on Docker' });
   }
+
+  return this.dockerode.listContainers({ all: true });
 }

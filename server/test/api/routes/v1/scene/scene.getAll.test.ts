@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import SceneType from '../../../../../src/core/scene/scene.interface';
+import { SceneType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/scene', () => {
   it('should return all scenes', async () => {

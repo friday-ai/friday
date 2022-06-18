@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import ActionType from '../../../../../src/core/action/action.interface';
+import { ActionType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/scene/:id', () => {
   it('should return one scene', async () => {

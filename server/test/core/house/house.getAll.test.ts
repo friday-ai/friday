@@ -1,11 +1,11 @@
 import { expect, assert } from 'chai';
-import House from '../../../src/core/house';
+import House from '../../../src/core/house/house';
 
-describe('House.getAll', () => {
+describe('House.listAll', () => {
   const house = new House();
 
   it('should return all houses', async () => {
-    const houses = await house.getAll();
+    const houses = await house.listAll();
 
     expect(houses).to.be.an('array');
     assert.deepEqual(houses, [{
@@ -18,7 +18,7 @@ describe('House.getAll', () => {
   });
 
   it('should return all houses with full scope', async () => {
-    const houses = await house.getAll({ scope: 'full' });
+    const houses = await house.listAll({ scope: 'full' });
 
     expect(houses).to.be.an('array');
     houses.forEach((h) => {
@@ -49,7 +49,7 @@ describe('House.getAll', () => {
   });
 
   it('should return all houses with state', async () => {
-    const houses = await house.getAll({ scope: 'withState' });
+    const houses = await house.listAll({ scope: 'withState' });
 
     expect(houses).to.be.an('array');
     houses.forEach((h) => {
@@ -70,7 +70,7 @@ describe('House.getAll', () => {
   });
 
   it('should return all houses with rooms', async () => {
-    const houses = await house.getAll({ scope: 'withRooms' });
+    const houses = await house.listAll({ scope: 'withRooms' });
 
     expect(houses).to.be.an('array');
     houses.forEach((h) => {

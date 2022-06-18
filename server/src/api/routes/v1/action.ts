@@ -106,9 +106,9 @@ export default class ActionRouter {
     };
 
   /**
-   * Get all actions
-   * @apiName getAll
-   * @apiDescription This route allows you to get all actions
+   * List All actions
+   * @apiName listAll
+   * @apiDescription This route allows you to List All actions
    * @api {get} /api/v1/action
    * @apiSampleRequest http://localhost:3000
    * @apiGroup Action
@@ -128,8 +128,8 @@ export default class ActionRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'action',
   })
-    getAll = async (req: Request, res: Response) => {
-      const actions = await this.friday.action.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const actions = await this.friday.action.listAll(req.query);
       res.json(actions);
     };
 

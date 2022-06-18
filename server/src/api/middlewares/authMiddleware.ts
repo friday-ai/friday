@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import httpError, { Error401 } from '../../utils/errors/httpError';
+import httpError, { Error401 } from '../../utils/httpError';
 import Friday from '../../core/friday';
 
 export default (friday: Friday) => async (req: Request, res: Response, next: NextFunction) => {

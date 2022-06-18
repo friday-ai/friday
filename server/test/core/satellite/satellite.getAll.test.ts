@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import Satellite from '../../../src/core/satellite';
+import Satellite from '../../../src/core/satellite/satellite';
 
-describe('Satellite.getAll', () => {
+describe('Satellite.listAll', () => {
   const satellite = new Satellite();
 
   it('should return all satellites', async () => {
-    const satellites = await satellite.getAll();
+    const satellites = await satellite.listAll();
 
     expect(satellites).to.be.an('array');
     satellites.forEach((s) => {
@@ -16,7 +16,7 @@ describe('Satellite.getAll', () => {
   });
 
   it('should return all satellites with full scope', async () => {
-    const satellites = await satellite.getAll({ scope: 'full' });
+    const satellites = await satellite.listAll({ scope: 'full' });
 
     expect(satellites).to.be.an('array');
 
@@ -72,7 +72,7 @@ describe('Satellite.getAll', () => {
   });
 
   it('should return all satellites with room', async () => {
-    const satellites = await satellite.getAll({ scope: 'withRoom' });
+    const satellites = await satellite.listAll({ scope: 'withRoom' });
 
     expect(satellites).to.be.an('array');
 
@@ -91,7 +91,7 @@ describe('Satellite.getAll', () => {
   });
 
   it('should return all satellites with state', async () => {
-    const satellites = await satellite.getAll({ scope: 'withState' });
+    const satellites = await satellite.listAll({ scope: 'withState' });
 
     expect(satellites).to.be.an('array');
 
@@ -114,7 +114,7 @@ describe('Satellite.getAll', () => {
   });
 
   it('should return all satellites with variables', async () => {
-    const satellites = await satellite.getAll({ scope: 'withVariables' });
+    const satellites = await satellite.listAll({ scope: 'withVariables' });
 
     expect(satellites).to.be.an('array');
 
@@ -140,7 +140,7 @@ describe('Satellite.getAll', () => {
   });
 
   it('should return all satellites with plugins', async () => {
-    const satellites = await satellite.getAll({ scope: 'withPlugins' });
+    const satellites = await satellite.listAll({ scope: 'withPlugins' });
 
     expect(satellites).to.be.an('array');
 

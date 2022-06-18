@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import { VariableOwner } from '../../../../../src/utils/constants';
+import { VariableOwner } from '../../../../../src/config/constants';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 
 describe('POST /api/v1/variable', () => {

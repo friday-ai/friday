@@ -1,8 +1,8 @@
 import MqttServer from './index';
-import error, { BadParametersError } from '../../utils/errors/coreError';
+import error, { BadParametersError } from '../../utils/decorators/error';
 import logger from '../../utils/log';
 import { MqttMessagePayload, MqttSendOptions } from '../../utils/interfaces';
-import { TopicHeaderPub, TopicsTypes } from '../../utils/constants';
+import { TopicHeaderPub, TopicsTypes } from '../../config/constants';
 
 const DEFAULT_OPTIONS: MqttSendOptions = {
   sendAll: false,

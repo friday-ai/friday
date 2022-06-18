@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
-import User from '../../../src/core/user';
-import { NotFoundError, AuthError } from '../../../src/utils/errors/coreError';
+import User from '../../../src/core/user/user';
+import { NotFoundError, AuthError } from '../../../src/utils/decorators/error';
 
 describe('User.login', () => {
   const user = new User();

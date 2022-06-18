@@ -1,9 +1,9 @@
 import { assert, expect } from 'chai';
-import State from '../../../src/core/state';
-import Variable from '../../../src/core/variable';
+import State from '../../../src/core/state/state';
+import Variable from '../../../src/core/variable/variable';
 import Event from '../../../src/utils/event';
-import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '../../../src/utils/constants';
-import { DatabaseValidationError, NotFoundError } from '../../../src/utils/errors/coreError';
+import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '../../../src/config/constants';
+import { DatabaseValidationError, NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('State.set', () => {
   const variable = new Variable();

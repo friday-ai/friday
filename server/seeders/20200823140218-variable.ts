@@ -1,5 +1,5 @@
 import { QueryInterface } from 'sequelize';
-import { VariableOwner } from '../src/utils/constants';
+import { VariableOwner } from '../src/config/constants';
 import { version as packageVersion } from '../package.json';
 
 module.exports = {

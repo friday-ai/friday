@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
-import Session from '../../../src/core/session';
-import { NotFoundError, UnauthorizedError } from '../../../src/utils/errors/coreError';
+import Session from '../../../src/core/session/session';
+import { NotFoundError, UnauthorizedError } from '../../../src/utils/decorators/error';
 
 // tokenHash: 'c090007e57736654afa0b637f0e6e7a6d7dddbe476e2892c0d62fdd601d0807d', // hash of 'refresh-token-test-create'
 

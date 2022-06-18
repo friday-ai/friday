@@ -23,9 +23,9 @@ import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';
 import Device from './device';
-import { isOwnerExisting } from '../utils/databaseValidation';
-import { DatabaseValidationError } from '../utils/errors/coreError';
-import PluginType from '../core/plugin/plugin.interface';
+import { isOwnerExisting } from '../utils/database/validation';
+import { DatabaseValidationError } from '../utils/decorators/error';
+import { PluginType } from '../config/entities';
 
 /**
  * Plugin model

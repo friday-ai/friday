@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
-import Session from '../../../src/core/session';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Session from '../../../src/core/session/session';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Session.getById', () => {
   const session = new Session('secretJwt');

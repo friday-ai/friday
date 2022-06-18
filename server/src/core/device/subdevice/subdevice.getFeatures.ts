@@ -1,5 +1,5 @@
-import { DEVICE_TYPE_COMMON_FEATURE, DEVICE_SUBTYPE_FEATURE_LIST, DEVICE_SUBTYPE_LIST } from '../../../utils/device.constants';
-import error from '../../../utils/errors/coreError';
+import { DEVICE_TYPE_COMMON_FEATURE, DEVICE_SUBTYPE_FEATURE_LIST, DEVICE_SUBTYPE_LIST } from '../../../config/device';
+import error from '../../../utils/decorators/error';
 import { KVArr } from '../../../utils/interfaces';
 
 /**

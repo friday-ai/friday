@@ -1,6 +1,6 @@
 import logger from '../../../../utils/log';
 import MqttServer from '../../index';
-import DeviceType from '../../../../core/device/device.interface';
+import { DeviceType } from '../../../../config/entities';
 
 /*
  * @route('friday/master/device/set')

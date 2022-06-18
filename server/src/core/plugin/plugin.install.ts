@@ -1,8 +1,8 @@
-import PluginClass from './index';
-import PluginType from './plugin.interface';
-import error, { NotFoundError } from '../../utils/errors/coreError';
+import PluginClass from './plugin';
+import { PluginType } from '../../config/entities';
 import { PluginInstallOptions } from '../../utils/interfaces';
-import { AvailableState } from '../../utils/constants';
+import { AvailableState, StateOwner } from '../../config/constants';
+import error, { NotFoundError } from '../../utils/decorators/error';
 
 /**
  * Install a plugin.
@@ -33,7 +33,13 @@ export default async function install(this: PluginClass, options: PluginInstallO
       url: 'TODO',
       version: options.version,
       satelliteId: this.masterId,
-    }, AvailableState.PLUGIN_INSTALLED);
+    });
+
+    await this.state.set({
+      owner: plugin.id!,
+      ownerType: StateOwner.PLUGIN,
+      value: AvailableState.PLUGIN_INSTALLED,
+    });
 
     await this.docker.start(container.id);
 

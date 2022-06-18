@@ -1,7 +1,7 @@
 import sequelize from 'sequelize';
 import State from '../../models/state';
-import StateType from './state.interface';
-import error, { NotFoundError } from '../../utils/errors/coreError';
+import { StateType } from '../../config/entities';
+import { NotFoundError } from '../../utils/decorators/error';
 
 /**
  * Get a state by owner.
@@ -13,22 +13,14 @@ import error, { NotFoundError } from '../../utils/errors/coreError';
  * ````
  */
 export default async function getByOwner(owner: string): Promise<StateType> {
-  try {
-    const state = await State.findOne({
-      where: { owner },
-      order: [sequelize.literal('updatedAt DESC')],
-    });
+  const state = await State.findOne({
+    where: { owner },
+    order: [sequelize.literal('updatedAt DESC')],
+  });
 
-    if (state === null) {
-      throw new NotFoundError({ name: 'Get State by owner', message: 'State not found', metadata: owner });
-    }
-
-    const stateToReturn = <StateType>state.get({ plain: true });
-
-    return stateToReturn;
-  } catch (e) {
-    throw error({
-      name: e.name, message: e.message, cause: e, metadata: owner,
-    });
+  if (state === null) {
+    throw new NotFoundError({ name: 'Get State by owner', message: 'State not found', metadata: owner });
   }
+
+  return <StateType>state.get({ plain: true });
 }

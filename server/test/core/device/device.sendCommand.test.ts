@@ -1,7 +1,8 @@
-import { expect } from 'chai';
-import Device from '../../../src/core/device';
-import { DEVICE_SUBTYPE_FEATURE_LIST, DEVICE_TYPE_COMMON_FEATURE } from '../../../src/utils/device.constants';
-import { AvailableState } from '../../../src/utils/constants';
+import { expect, assert } from 'chai';
+import Device from '../../../src/core/device/device';
+import { DEVICE_SUBTYPE_FEATURE_LIST, DEVICE_TYPE_COMMON_FEATURE } from '../../../src/config/device';
+import { AvailableState } from '../../../src/config/constants';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 let device: Device;
 
@@ -31,16 +32,13 @@ describe('Device.sendCommand', () => {
   });
 
   it('should not power on on non existing device', async () => {
-    let message = 'no-error';
-    try {
-      await device.sendCommand(DEVICE_TYPE_COMMON_FEATURE.LIGHT.POWER_OFF, {
-        deviceId: '22b5b9ce-cd9e-404a-8c31-97350d684f',
-        state: AvailableState.DEVICE_POWER_OFF,
-      });
-    } catch (e) {
-      message = e.message;
-    }
-    expect(message).equal('Device not found');
+
+    const promise = device.sendCommand(DEVICE_TYPE_COMMON_FEATURE.LIGHT.POWER_OFF, {
+      deviceId: '22b5b9ce-cd9e-404a-8c31-97350d684f',
+      state: AvailableState.DEVICE_POWER_OFF,
+    });
+
+    await assert.isRejected(promise, NotFoundError);
   });
 
   it('should not set hue on a light SIMPLE device', async () => {

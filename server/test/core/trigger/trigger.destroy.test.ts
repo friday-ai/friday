@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import Trigger from '../../../src/core/trigger';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Trigger from '../../../src/core/trigger/trigger';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Trigger.destroy', () => {
   const trigger = new Trigger();

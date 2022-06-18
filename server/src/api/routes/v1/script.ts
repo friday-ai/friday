@@ -87,9 +87,9 @@ export default class ScriptRouter {
     };
 
   /**
-   * Get all scripts
-   * @apiName getAll
-   * @apiDescription This route allows you to get all scripts
+   * List All scripts
+   * @apiName listAll
+   * @apiDescription This route allows you to List All scripts
    * @api {get} /api/v1/script
    * @apiGroup Script
    * @apiVersion 1.0.0
@@ -103,8 +103,8 @@ export default class ScriptRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'script',
   })
-    getAll = async (req: Request, res: Response) => {
-      const scripts = await this.friday.script.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const scripts = await this.friday.script.listAll(req.query);
       res.json(scripts);
     };
 

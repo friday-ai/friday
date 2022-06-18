@@ -17,7 +17,7 @@ import {
 } from 'sequelize-typescript';
 
 import User from './user';
-import { isOwnerExisting } from '../utils/databaseValidation';
+import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Session model

@@ -14,14 +14,14 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { StateOwner } from '../utils/constants';
+import { StateOwner } from '../config/constants';
 import User from './user';
 import Satellite from './satellite';
 import Room from './room';
 import House from './house';
 import Device from './device';
 import Plugin from './plugin';
-import { isOwnerExisting } from '../utils/databaseValidation';
+import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * State model

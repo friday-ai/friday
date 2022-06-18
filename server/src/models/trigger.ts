@@ -15,7 +15,7 @@ import {
 } from 'sequelize-typescript';
 
 import Scene from './scene';
-import { AvailableConditions } from '../utils/constants';
+import { AvailableConditions } from '../config/constants';
 
 /**
  * Trigger model

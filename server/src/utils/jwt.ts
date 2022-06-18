@@ -15,11 +15,10 @@ const env = process.env.NODE_ENV || 'production';
  * @returns {string} The hash of the token.
  */
 export function hashToken(token: string) {
-  const tokenHash = crypto
+  return crypto
     .createHash('sha256')
     .update(token)
     .digest('hex');
-  return tokenHash;
 }
 
 /**
@@ -32,12 +31,11 @@ export function generateJwtSecret() {
     return 'secretJwt';
   }
 
-  const jwtSecret = crypto
+  // return required number of characters
+  return crypto
     .randomBytes(Math.ceil(tokenLength / 2))
     .toString('hex') // convert to hexadecimal format
-    .slice(0, tokenLength); // return required number of characters
-
-  return jwtSecret;
+    .slice(0, tokenLength);
 }
 
 /**

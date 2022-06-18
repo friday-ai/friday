@@ -1,11 +1,11 @@
 import { expect, assert } from 'chai';
-import Script from '../../../src/core/script';
+import Script from '../../../src/core/script/script';
 
-describe('Script.getAll', () => {
+describe('Script.listAll', () => {
   const script = new Script();
 
   it('should return all script', async () => {
-    const scripts = await script.getAll();
+    const scripts = await script.listAll();
 
     expect(scripts).to.be.an('array');
     assert.deepEqual(scripts, [{

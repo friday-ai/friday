@@ -1,6 +1,6 @@
 /* eslint-disable no-bitwise */
-import error from '../../../../utils/errors/coreError';
-import { StateOwner } from '../../../../utils/constants';
+import error from '../../../../utils/decorators/error';
+import { StateOwner } from '../../../../config/constants';
 import { Color, FeatureParameter } from '../../../../utils/interfaces';
 
 const RGB_MAX_VALUE = 255;

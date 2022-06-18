@@ -1,8 +1,8 @@
 import { Op } from 'sequelize';
 import State from '../../models/state';
-import StateClass from '.';
-import error, { BaseCoreError } from '../../utils/errors/coreError';
-import { SystemVariablesNames } from '../../utils/constants';
+import StateClass from './state';
+import { CoreError } from '../../utils/decorators/error';
+import { SystemVariablesNames } from '../../config/constants';
 
 /**
  * Purge states.
@@ -12,24 +12,21 @@ import { SystemVariablesNames } from '../../utils/constants';
  * ````
  */
 export default async function purge(this: StateClass) {
-  try {
-    const { value } = await this.variable.getValue(SystemVariablesNames.HISTORY_STATE_IN_DAYS);
-    const stateHistoryInDays = parseInt(value!, 10);
+  const { value } = await this.variable.getValue(SystemVariablesNames.HISTORY_STATE_IN_DAYS);
+  const stateHistoryInDays = parseInt(value!, 10);
 
-    if (Number.isNaN(stateHistoryInDays)) {
-      throw new BaseCoreError({ name: 'Purging states', message: 'History value is not a number', metadata: stateHistoryInDays });
-    }
-
-    const now = new Date().getTime();
-    const timestampLimit = now - stateHistoryInDays * 24 * 60 * 60 * 1000;
-
-    await State.sequelize?.getQueryInterface().bulkDelete('state', {
-      updatedAt: {
-        [Op.lte]: new Date(timestampLimit),
-      },
-    }) ;
-
-  } catch (e) {
-    throw error({ name: e.name, message: e.message, cause: e });
+  if (Number.isNaN(stateHistoryInDays)) {
+    throw new CoreError({ name: 'Purging states', message: 'History value is not a number', metadata: stateHistoryInDays });
   }
+
+  const now = new Date().getTime();
+  const timestampLimit = now - stateHistoryInDays * 24 * 60 * 60 * 1000;
+
+  await State.sequelize?.getQueryInterface().bulkDelete('state', {
+    updatedAt: {
+      [Op.lte]: new Date(timestampLimit),
+    },
+  });
+
+  return;
 }

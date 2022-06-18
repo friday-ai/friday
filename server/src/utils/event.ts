@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { EventsType } from './constants';
+import { EventsType } from '../config/constants';
 
 /**
  * Event

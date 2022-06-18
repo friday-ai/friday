@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
-import Session from '../../../src/core/session';
-import { NotFoundError, UnauthorizedError } from '../../../src/utils/errors/coreError';
+import Session from '../../../src/core/session/session';
+import { NotFoundError, UnauthorizedError } from '../../../src/utils/decorators/error';
 import { generateAccessToken } from '../../../src/utils/jwt';
 
 describe('Session.validateAccessToken', () => {

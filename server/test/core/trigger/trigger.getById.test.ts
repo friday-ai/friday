@@ -1,7 +1,7 @@
 import { expect, assert } from 'chai';
-import Trigger from '../../../src/core/trigger';
-import { AvailableConditions } from '../../../src/utils/constants';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Trigger from '../../../src/core/trigger/trigger';
+import { AvailableConditions } from '../../../src/config/constants';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Trigger.getById', () => {
   const trigger = new Trigger();

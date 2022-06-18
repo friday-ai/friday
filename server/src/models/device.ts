@@ -20,9 +20,9 @@ import {
 import Plugin from './plugin';
 import Room from './room';
 import State from './state';
-import { isOwnerExisting } from '../utils/databaseValidation';
-import { DEVICE_SUBTYPE_LIST } from '../utils/device.constants';
-import { DatabaseValidationError } from '../utils/errors/coreError';
+import { isOwnerExisting } from '../utils/database/validation';
+import { DEVICE_SUBTYPE_LIST } from '../config/device';
+import { DatabaseValidationError } from '../utils/decorators/error';
 
 /**
  * Device model

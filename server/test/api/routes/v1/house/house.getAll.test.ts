@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import HouseType from '../../../../../src/core/house/house.interface';
+import { HouseType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/house', () => {
   it('should return all houses', async () => {

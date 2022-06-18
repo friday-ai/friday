@@ -1,12 +1,12 @@
 import { expect, assert } from 'chai';
-import Trigger from '../../../src/core/trigger';
-import { AvailableConditions } from '../../../src/utils/constants';
+import Trigger from '../../../src/core/trigger/trigger';
+import { AvailableConditions } from '../../../src/config/constants';
 
-describe('Trigger.getAll', () => {
+describe('Trigger.listAll', () => {
   const trigger = new Trigger();
 
   it('should return all triggers', async () => {
-    const triggers = await trigger.getAll();
+    const triggers = await trigger.listAll();
 
     expect(triggers).to.be.an('array');
     assert.deepEqual(triggers, [{
@@ -23,7 +23,7 @@ describe('Trigger.getAll', () => {
   });
 
   it('should return all triggers with full scope', async () => {
-    const triggers = await trigger.getAll({ scope: 'full' });
+    const triggers = await trigger.listAll({ scope: 'full' });
 
     expect(triggers).to.be.an('array');
     assert.deepEqual(triggers, [{

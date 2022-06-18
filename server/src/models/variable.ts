@@ -14,11 +14,11 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { VariableOwner } from '../utils/constants';
+import { VariableOwner } from '../config/constants';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
-import { isOwnerExisting } from '../utils/databaseValidation';
+import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Variable model

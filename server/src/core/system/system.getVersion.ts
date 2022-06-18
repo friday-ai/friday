@@ -1,6 +1,6 @@
-import error, { NotFoundError } from '../../utils/errors/coreError';
-import System from '.';
-import { SystemVariablesNames } from '../../utils/constants';
+import error, { NotFoundError } from '../../utils/decorators/error';
+import System from './system';
+import { SystemVariablesNames } from '../../config/constants';
 import { version as packageVersion } from '../../../package.json';
 
 /**

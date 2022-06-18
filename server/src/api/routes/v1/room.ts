@@ -87,9 +87,9 @@ export default class RoomRouter {
     };
 
   /**
-   * Get all rooms
-   * @apiName getAll
-   * @apiDescription This route allows you to get all rooms
+   * List All rooms
+   * @apiName listAll
+   * @apiDescription This route allows you to List All rooms
    * @api {get} /api/v1/room
    * @apiGroup Room
    * @apiVersion 1.0.0
@@ -103,8 +103,8 @@ export default class RoomRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'room',
   })
-    getAll = async (req: Request, res: Response) => {
-      const rooms = await this.friday.room.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const rooms = await this.friday.room.listAll(req.query);
       res.json(rooms);
     };
 

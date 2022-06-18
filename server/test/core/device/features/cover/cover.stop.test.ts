@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import Friday from '../../../../../src/core/friday';
-import { AvailableState } from '../../../../../src/utils/constants';
+import { AvailableState } from '../../../../../src/config/constants';
 import testFeatureReturn from '../test.feature.return';
 import stop from '../../../../../src/core/device/features/cover/cover.stop';
 

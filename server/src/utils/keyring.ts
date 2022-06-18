@@ -1,5 +1,5 @@
 import { keyring } from '@fnando/keyring';
-import { SALT_KEY } from './constants';
+import { SALT_KEY } from '../config/constants';
 
 function getEncryptedKey(key: string) {
   return {

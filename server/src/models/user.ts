@@ -19,7 +19,7 @@ import {
 } from 'sequelize-typescript';
 
 import Variable from './variable';
-import { AvailableLanguages, UserRole } from '../utils/constants';
+import { AvailableLanguages, UserRole } from '../config/constants';
 import State from './state';
 import { hash } from '../utils/password';
 import Session from './session';

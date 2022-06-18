@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { AccessControl } from 'role-acl';
-import httpError, { Error403 } from '../../utils/errors/httpError';
+import httpError, { Error403 } from '../../utils/httpError';
 import grants from '../../config/acl';
 
 const ac = new AccessControl(grants);

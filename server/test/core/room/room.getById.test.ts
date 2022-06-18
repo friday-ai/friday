@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
-import Room from '../../../src/core/room';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Room from '../../../src/core/room/room';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Room.getById', () => {
   const room = new Room();

@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 import { assert, expect } from 'chai';
-import Docker from '../../../src/core/docker';
-import { BaseCoreError, PlatformNotCompatible } from '../../../src/utils/errors/coreError';
+import Docker from '../../../src/core/docker/docker';
+import { CoreError, PlatformNotCompatible } from '../../../src/utils/decorators/error';
 
 describe('Docker.pull', () => {
   const docker = new Docker();
@@ -15,7 +15,7 @@ describe('Docker.pull', () => {
 
   it('should not pull an image', async () => {
     const promise = docker.pull('ubuntu:azeaze');
-    await assert.isRejected(promise, BaseCoreError);
+    await assert.isRejected(promise, CoreError);
   });
 
   it('should not pull an image', async () => {

@@ -1,11 +1,11 @@
 /* eslint-disable func-names */
 import { expect } from 'chai';
 import { Container } from 'dockerode';
-import Docker from '../../../../../src/core/docker';
+import Docker from '../../../../../src/core/docker/docker';
 import Event from '../../../../../src/utils/event';
-import Variable from '../../../../../src/core/variable';
-import State from '../../../../../src/core/state';
-import Plugin from '../../../../../src/core/plugin';
+import Variable from '../../../../../src/core/variable/variable';
+import State from '../../../../../src/core/state/state';
+import Plugin from '../../../../../src/core/plugin/plugin';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 

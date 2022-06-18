@@ -99,9 +99,9 @@ export default class TriggerRouter {
     };
 
   /**
-   * Get all triggers
-   * @apiName getAll
-   * @apiDescription This route allows you to get all triggers
+   * List All triggers
+   * @apiName listAll
+   * @apiDescription This route allows you to List All triggers
    * @api {get} /api/v1/trigger
    * @apiGroup Trigger
    * @apiVersion 1.0.0
@@ -120,8 +120,8 @@ export default class TriggerRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'trigger',
   })
-    getAll = async (req: Request, res: Response) => {
-      const triggers = await this.friday.trigger.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const triggers = await this.friday.trigger.listAll(req.query);
       res.json(triggers);
     };
 

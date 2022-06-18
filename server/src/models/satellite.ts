@@ -22,7 +22,7 @@ import Room from './room';
 import State from './state';
 import Variable from './variable';
 import Plugin from './plugin';
-import { isOwnerExisting } from '../utils/databaseValidation';
+import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Satellite model

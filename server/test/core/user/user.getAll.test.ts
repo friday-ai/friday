@@ -1,12 +1,12 @@
 import { assert, expect } from 'chai';
-import User from '../../../src/core/user';
-import { UserRole } from '../../../src/utils/constants';
+import User from '../../../src/core/user/user';
+import { UserRole } from '../../../src/config/constants';
 
-describe('User.getAll', () => {
+describe('User.listAll', () => {
   const user = new User();
 
   it('should return all users', async () => {
-    const users = await user.getAll();
+    const users = await user.listAll();
 
     expect(users).to.be.an('array');
     assert.deepEqual(users, [{
@@ -26,7 +26,7 @@ describe('User.getAll', () => {
   });
 
   it('should return all users with full scope', async () => {
-    const users = await user.getAll({ scope: 'full' });
+    const users = await user.listAll({ scope: 'full' });
 
     expect(users).to.be.an('array');
 
@@ -57,7 +57,7 @@ describe('User.getAll', () => {
   });
 
   it('should return all users with state', async () => {
-    const users = await user.getAll({ scope: 'withState' });
+    const users = await user.listAll({ scope: 'withState' });
 
     expect(users).to.be.an('array');
 
@@ -79,7 +79,7 @@ describe('User.getAll', () => {
   });
 
   it('should return all users with variables', async () => {
-    const users = await user.getAll({ scope: 'withVariables' });
+    const users = await user.listAll({ scope: 'withVariables' });
 
     expect(users).to.be.an('array');
 

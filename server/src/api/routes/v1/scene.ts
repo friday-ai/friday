@@ -90,9 +90,9 @@ export default class SceneRouter {
     };
 
   /**
-   * Get all scenes
-   * @apiName getAll
-   * @apiDescription This route allows you to get all scenes
+   * List All scenes
+   * @apiName listAll
+   * @apiDescription This route allows you to List All scenes
    * @api {get} /api/v1/scene
    * @apiGroup Scene
    * @apiVersion 1.0.0
@@ -107,8 +107,8 @@ export default class SceneRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'scene',
   })
-    getAll = async (req: Request, res: Response) => {
-      const scenes = await this.friday.scene.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const scenes = await this.friday.scene.listAll(req.query);
       res.json(scenes);
     };
 

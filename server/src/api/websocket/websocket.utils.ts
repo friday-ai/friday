@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { WebsocketMessageTypes } from '../../utils/constants';
+import { WebsocketMessageTypes } from '../../config/constants';
 
 /**
  * Format websocket message

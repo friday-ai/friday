@@ -1,5 +1,5 @@
-import error from '../../../../utils/errors/coreError';
-import { StateOwner } from '../../../../utils/constants';
+import error from '../../../../utils/decorators/error';
+import { StateOwner } from '../../../../config/constants';
 import { FeatureParameter } from '../../../../utils/interfaces';
 
 async function setBattery(params: FeatureParameter) {

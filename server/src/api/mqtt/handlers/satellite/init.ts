@@ -1,6 +1,6 @@
 import logger from '../../../../utils/log';
 import MqttServer from '../../index';
-import SatelliteType from '../../../../core/satellite/satellite.interface';
+import { SatelliteType } from '../../../../config/entities';
 
 /*
  * @route('friday/master/satellite/init')

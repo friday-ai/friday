@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import server from '../../../../utils/request';
 import * as database from '../../../../../src/config/database';
-import { SystemVariablesNames, VariableOwner } from '../../../../../src/utils/constants';
+import { SystemVariablesNames, VariableOwner } from '../../../../../src/config/constants';
 
 describe('POST /api/v1/system/init', () => {
   it('should init friday system and go to nominal mode', async function () {

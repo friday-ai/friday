@@ -1,11 +1,11 @@
 import { expect } from 'chai';
-import Plugin from '../../../src/core/plugin';
+import Plugin from '../../../src/core/plugin/plugin';
 import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable';
-import State from '../../../src/core/state';
-import Docker from '../../../src/core/docker';
+import Variable from '../../../src/core/variable/variable';
+import State from '../../../src/core/state/state';
+import Docker from '../../../src/core/docker/docker';
 
-describe('Plugin.getAll', () => {
+describe('Plugin.listAll', () => {
   const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
@@ -13,7 +13,7 @@ describe('Plugin.getAll', () => {
   const plugin = new Plugin('e2cz8cc-60a7-4c40-87d2-b25048b1aa04', docker, state);
 
   it('should return all plugins', async () => {
-    const plugins = await plugin.getAll();
+    const plugins = await plugin.listAll();
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
@@ -24,7 +24,7 @@ describe('Plugin.getAll', () => {
   });
 
   it('should return all plugins with full scope', async () => {
-    const plugins = await plugin.getAll({ scope: 'full' });
+    const plugins = await plugin.listAll({ scope: 'full' });
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
@@ -81,7 +81,7 @@ describe('Plugin.getAll', () => {
   });
 
   it('should return all plugins with satellites', async () => {
-    const plugins = await plugin.getAll({ scope: 'withSatellite' });
+    const plugins = await plugin.listAll({ scope: 'withSatellite' });
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
@@ -103,7 +103,7 @@ describe('Plugin.getAll', () => {
   });
 
   it('should return all plugins with state', async () => {
-    const plugins = await plugin.getAll({ scope: 'withState' });
+    const plugins = await plugin.listAll({ scope: 'withState' });
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
@@ -127,7 +127,7 @@ describe('Plugin.getAll', () => {
   });
 
   it('should return all plugins with devices', async () => {
-    const plugins = await plugin.getAll({ scope: 'withDevices' });
+    const plugins = await plugin.listAll({ scope: 'withDevices' });
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
@@ -156,7 +156,7 @@ describe('Plugin.getAll', () => {
   });
 
   it('should return all plugins with variables', async () => {
-    const plugins = await plugin.getAll({ scope: 'withVariables' });
+    const plugins = await plugin.listAll({ scope: 'withVariables' });
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {

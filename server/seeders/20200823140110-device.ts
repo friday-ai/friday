@@ -1,6 +1,6 @@
 import { QueryInterface } from 'sequelize';
-import { DEVICE_SUBTYPE_LIST } from '../src/utils/device.constants';
-import { AvailableState } from '../src/utils/constants';
+import { DEVICE_SUBTYPE_LIST } from '../src/config/device';
+import { AvailableState } from '../src/config/constants';
 
 module.exports = {
   up: (queryInterface: QueryInterface) => queryInterface.bulkInsert('device', [

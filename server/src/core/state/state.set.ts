@@ -1,10 +1,9 @@
 import State from '../../models/state';
-import StateType from './state.interface';
-import error from '../../utils/errors/coreError';
+import { StateType } from '../../config/entities';
 
 /**
  * Set a state.
- * @param {StateType} state -A state object.
+ * @param {StateType} data -A state object.
  * @returns {Promise<StateType[]>} Resolve with state.
  * @example
  * ````
@@ -16,30 +15,23 @@ import error from '../../utils/errors/coreError';
  * });
  * ````
  */
-export default async function set(state: StateType): Promise<StateType> {
-  try {
-    // Check if old state exist
-    const stateToUpdate = await State.findOne({
-      where: {
-        owner: state.owner,
-        last: true,
-      },
-    });
+export default async function set(data: StateType): Promise<StateType> {
+  // Check if old state exist
+  const existingState = await State.findOne({
+    where: {
+      owner: data.owner,
+      last: true,
+    },
+  });
 
-    // If old state exist, update it
-    if (stateToUpdate !== null) {
-      const plainStateToUpdate = <StateType>stateToUpdate.get({ plain: true });
-      plainStateToUpdate.last = false;
-      await stateToUpdate.update(plainStateToUpdate);
-    }
-
-    // And then, create the new state
-    const createdState = await State.create({ ...state });
-    const stateToReturn = <StateType>createdState.get({ plain: true });
-    return stateToReturn;
-  } catch (e) {
-    throw error({
-      name: e.name, message: e.message, cause: e, metadata: state,
-    });
+  // If old state exist, update it
+  if (existingState !== null) {
+    const plainStateToUpdate = <StateType>existingState.get({ plain: true });
+    plainStateToUpdate.last = false;
+    await existingState.update(plainStateToUpdate);
   }
+
+  // And then, create the new state
+  const newState = await State.create({ ...data });
+  return <StateType>newState.get({ plain: true });
 }

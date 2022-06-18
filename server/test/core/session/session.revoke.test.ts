@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
-import Session from '../../../src/core/session';
-import { BadParametersError, NotFoundError } from '../../../src/utils/errors/coreError';
+import Session from '../../../src/core/session/session';
+import { BadParametersError, NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Session.revoke', () => {
   const session = new Session('secretJwt');

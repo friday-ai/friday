@@ -1,13 +1,12 @@
 import { expect, assert } from 'chai';
-import Scene from '../../../src/core/scene';
-import { DatabaseValidationError } from '../../../src/utils/errors/coreError';
+import Scene from '../../../src/core/scene/scene';
+import { DatabaseValidationError } from '../../../src/utils/decorators/error';
 
 describe('Scene.create', () => {
   const scene = new Scene();
 
   it('should create a scene', async () => {
     const createdScene = await scene.create({
-      id: '46e6a6e2-db6f-4f72-a2e9-4d41c420da33',
       name: 'Test Scene 2',
       description: 'A test to create a scene',
     });
@@ -19,7 +18,6 @@ describe('Scene.create', () => {
 
   it('should not create a scene with an empty name', async () => {
     const promise = scene.create({
-      id: '0d0b207c-7972-4d79-bf71-b0fc6b6a549e',
       name: '',
       description: 'A test to create a scene',
     });

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
-import { FridayMode } from '../../../utils/constants';
+import { FridayMode } from '../../../config/constants';
 
 /**
  * User router
@@ -97,9 +97,9 @@ export default class UserRouter {
 
 
   /**
-   * Get all users
-   * @apiName getAll
-   * @apiDescription This route allows you to get all users
+   * List All users
+   * @apiName listAll
+   * @apiDescription This route allows you to List All users
    * @api {get} /api/v1/user
    * @apiGroup User
    * @apiVersion 1.0.0
@@ -114,8 +114,8 @@ export default class UserRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'user',
   })
-    getAll = async (req: Request, res: Response) => {
-      const users = await this.friday.user.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const users = await this.friday.user.listAll(req.query);
       res.json(users);
     };
 
@@ -130,8 +130,8 @@ export default class UserRouter {
   @Get({
     path : '/count', authenticated: false, rateLimit: true, aclMethod: 'read', aclResource: 'user',
   })
-    getUsersCount = async (req: Request, res: Response) => {
-      const count = await this.friday.user.getCount();
+    getUsersCount = async (_: Request, res: Response) => {
+      const count = await this.friday.user.count();
       res.status(200).json(count);
     };
 

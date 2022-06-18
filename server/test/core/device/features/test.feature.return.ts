@@ -1,7 +1,7 @@
 import { assert, expect } from 'chai';
-import { AvailableState } from '../../../../src/utils/constants';
+import { AvailableState } from '../../../../src/config/constants';
 import { Color } from '../../../../src/utils/interfaces';
-import UserType from '../../../../src/core/user/user.interface';
+import { UserType } from '../../../../src/config/entities';
 
 export default function testFeatureReturn(value: AvailableState | number | Color | string | UserType, state: any, type: string = 'set') {
   expect(state).to.be.an('object');

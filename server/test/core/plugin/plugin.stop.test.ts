@@ -1,12 +1,12 @@
 /* eslint-disable func-names */
 import { assert, expect } from 'chai';
 import { Container } from 'dockerode';
-import Plugin from '../../../src/core/plugin';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Plugin from '../../../src/core/plugin/plugin';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable';
-import State from '../../../src/core/state';
-import Docker from '../../../src/core/docker';
+import Variable from '../../../src/core/variable/variable';
+import State from '../../../src/core/state/state';
+import Docker from '../../../src/core/docker/docker';
 
 let container: Container;
 

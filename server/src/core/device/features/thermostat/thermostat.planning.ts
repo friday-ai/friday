@@ -1,4 +1,4 @@
-import error from '../../../../utils/errors/coreError';
+import error from '../../../../utils/decorators/error';
 import { FeatureParameter } from '../../../../utils/interfaces';
 
 async function setPlanning(params: FeatureParameter) {

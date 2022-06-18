@@ -1,7 +1,7 @@
 import { assert, expect } from 'chai';
-import User from '../../../src/core/user';
-import { UserRole } from '../../../src/utils/constants';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import User from '../../../src/core/user/user';
+import { UserRole } from '../../../src/config/constants';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('User.getById', () => {
   const user = new User();

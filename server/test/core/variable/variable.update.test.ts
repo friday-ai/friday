@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
-import Variable from '../../../src/core/variable';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Variable from '../../../src/core/variable/variable';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Variable.update', () => {
   const variable = new Variable();

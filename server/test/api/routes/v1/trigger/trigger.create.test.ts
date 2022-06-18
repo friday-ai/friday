@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import { AvailableConditions } from '../../../../../src/utils/constants';
+import { AvailableConditions } from '../../../../../src/config/constants';
 
 describe('POST /api/v1/trigger', () => {
   it('should create a trigger', async () => {

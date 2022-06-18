@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import Friday from '../../../../../src/core/friday';
 import powerOn from '../../../../../src/core/device/features/common/common.power-on';
-import { AvailableState } from '../../../../../src/utils/constants';
+import { AvailableState } from '../../../../../src/config/constants';
 import testFeatureReturn from '../test.feature.return';
 
 let friday: Friday;

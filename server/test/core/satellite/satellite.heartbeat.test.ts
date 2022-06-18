@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
-import Satellite from '../../../src/core/satellite';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Satellite from '../../../src/core/satellite/satellite';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Satellite.heartbeat', () => {
   const satellite = new Satellite();

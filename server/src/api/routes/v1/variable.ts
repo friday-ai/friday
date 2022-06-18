@@ -95,7 +95,7 @@ export default class VariableRouter {
   /**
    * Get value variables
    * @apiName getValue
-   * @apiDescription This route allows you to get all variables
+   * @apiDescription This route allows you to List All variables
    * @api {get} /api/v1/variable
    * @apiGroup Variable
    * @apiVersion 1.0.0

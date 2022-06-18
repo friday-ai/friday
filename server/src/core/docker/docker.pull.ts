@@ -1,5 +1,5 @@
-import error, { PlatformNotCompatible } from '../../utils/errors/coreError';
-import Docker from './index';
+import { PlatformNotCompatible } from '../../utils/decorators/error';
+import Docker from './docker';
 import logger from '../../utils/log';
 
 /**
@@ -10,25 +10,19 @@ import logger from '../../utils/log';
  * await friday.docker.pull('my-image');
  */
 export default async function pull(this: Docker, repoTag: string, onProgress = logger.info): Promise<any> {
-  try {
-    if (!this.dockerode) {
-      throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'Friday not running on Docker' });
-    }
-    const stream = await this.dockerode.pull(repoTag);
-
-    return this.dockerode.modem.followProgress(
-      stream,
-      (finishErr: any, output: any) => {
-        if (finishErr) {
-          throw finishErr;
-        }
-        return output;
-      },
-      onProgress,
-    );
-  } catch (e) {
-    throw error({
-      name: e.name, message: e.message, cause: e, metadata: repoTag,
-    });
+  if (!this.dockerode) {
+    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'Friday not running on Docker' });
   }
+  const stream = await this.dockerode.pull(repoTag);
+
+  return this.dockerode.modem.followProgress(
+    stream,
+    (finishErr: any, output: any) => {
+      if (finishErr) {
+        throw finishErr;
+      }
+      return output;
+    },
+    onProgress,
+  );
 }

@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
-import Scene from '../../../src/core/scene';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Scene from '../../../src/core/scene/scene';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Scene.getById', () => {
   const scene = new Scene();

@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import { AvailableState, StateOwner } from '../../../../../src/utils/constants';
+import { AvailableState, StateOwner } from '../../../../../src/config/constants';
 
 describe('POST /api/v1/state', () => {
   it('should create a state', async () => {

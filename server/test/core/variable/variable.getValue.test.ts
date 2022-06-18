@@ -1,7 +1,7 @@
 import { expect, assert } from 'chai';
-import Variable from '../../../src/core/variable';
-import { NotFoundError, BadParametersError } from '../../../src/utils/errors/coreError';
-import { VariableOwner } from '../../../src/utils/constants';
+import Variable from '../../../src/core/variable/variable';
+import { NotFoundError, BadParametersError } from '../../../src/utils/decorators/error';
+import { VariableOwner } from '../../../src/config/constants';
 
 describe('Variable.getValue', () => {
   const variable = new Variable();

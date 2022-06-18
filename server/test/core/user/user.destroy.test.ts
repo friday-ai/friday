@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import User from '../../../src/core/user';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import User from '../../../src/core/user/user';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('User.destroy', () => {
   const user = new User();

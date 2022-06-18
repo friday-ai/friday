@@ -1,7 +1,7 @@
 import { assert, expect } from 'chai';
 import server from '../../../../utils/request';
-import UserType from '../../../../../src/core/user/user.interface';
-import { UserRole } from '../../../../../src/utils/constants';
+import { UserType } from '../../../../../src/config/entities';
+import { UserRole } from '../../../../../src/config/constants';
 
 describe('GET /api/v1/user', () => {
   it('should return all users', async () => {

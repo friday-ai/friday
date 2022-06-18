@@ -1,11 +1,11 @@
 import { expect, assert } from 'chai';
-import Scene from '../../../src/core/scene';
+import Scene from '../../../src/core/scene/scene';
 
-describe('Scene.getAll', () => {
+describe('Scene.listAll', () => {
   const scene = new Scene();
 
   it('should return all scenes', async () => {
-    const scenes = await scene.getAll();
+    const scenes = await scene.listAll();
 
     expect(scenes).to.be.an('array');
     assert.deepEqual(scenes, [{
@@ -18,7 +18,7 @@ describe('Scene.getAll', () => {
   });
 
   it('should return all scenes with full scope', async () => {
-    const scenes = await scene.getAll({ scope: 'full' });
+    const scenes = await scene.listAll({ scope: 'full' });
 
     expect(scenes).to.be.an('array');
 
@@ -52,7 +52,7 @@ describe('Scene.getAll', () => {
   });
 
   it('should return all scenes with trigger', async () => {
-    const scenes = await scene.getAll({ scope: 'withTrigger' });
+    const scenes = await scene.listAll({ scope: 'withTrigger' });
 
     expect(scenes).to.be.an('array');
 
@@ -72,7 +72,7 @@ describe('Scene.getAll', () => {
   });
 
   it('should return all scenes with actions', async () => {
-    const scenes = await scene.getAll({ scope: 'withActions' });
+    const scenes = await scene.listAll({ scope: 'withActions' });
 
     expect(scenes).to.be.an('array');
 

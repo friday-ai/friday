@@ -1,7 +1,7 @@
 import { expect, assert } from 'chai';
-import Action from '../../../src/core/action';
-import { ActionsType } from '../../../src/utils/constants';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Action from '../../../src/core/action/action';
+import { ActionsType } from '../../../src/config/constants';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Action.getById', () => {
   const action = new Action();

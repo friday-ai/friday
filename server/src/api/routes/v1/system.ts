@@ -2,7 +2,8 @@ import { Request, Response } from 'express';
 import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 import { encrypt } from '../../../utils/keyring';
-import { AvailableState, FridayMode } from '../../../utils/constants';
+import { AvailableState, FridayMode } from '../../../config/constants';
+import { SatelliteType } from '../../../config/entities';
 
 /**
  * System router
@@ -31,7 +32,7 @@ export default class SystemRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
   })
-    getVersion = async (req: Request, res: Response) => {
+    getVersion = async (_: Request, res: Response) => {
       const version = await this.friday.getVersion();
       res.json(version);
     };
@@ -42,7 +43,7 @@ export default class SystemRouter {
   @Post({
     path : '/init', authenticated: true, rateLimit: true, aclMethod: 'read', aclResource: 'system',
   })
-    init = async (req: Request, res: Response) => {
+    init = async (_: Request, res: Response) => {
     // This route is only active at first start for security reasons
       if (this.friday.mode === FridayMode.INIT) {
         const result = await this.friday.init();
@@ -71,7 +72,7 @@ export default class SystemRouter {
   @Get({
     path : '/info', authenticated: false, rateLimit: false, aclMethod: 'read', aclResource: 'system',
   })
-    masterInfo = async (req: Request, res: Response) => res.json({
+    masterInfo = async (_: Request, res: Response) => res.json({
       masterId: this.friday.masterId,
     });
 
@@ -92,9 +93,12 @@ export default class SystemRouter {
   @Get({
     path : '/mqtt/config', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
   })
-    configMqtt = async (req: Request, res: Response) => {
-      const satellites = await this.friday.satellite.getAll({ scope: 'withState' });
-      const satellite = satellites.filter((s) => s.state!.value === AvailableState.SATELLITE_WAITING_CONFIGURATION);
+    configMqtt = async (_: Request, res: Response) => {
+      const satellites = await this.friday.satellite.listAll({ scope: 'withState' });
+
+      const satellite = satellites.filter((s: SatelliteType) =>
+        s.state!.value === AvailableState.SATELLITE_WAITING_CONFIGURATION);
+
       if (satellite.length === 0) {
         return res.status(404).json('Satellite is not configured !');
       }

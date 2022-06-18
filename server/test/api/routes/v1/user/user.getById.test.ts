@@ -1,7 +1,7 @@
 import { assert, expect } from 'chai';
 import server from '../../../../utils/request';
-import VariableType from '../../../../../src/core/variable/variable.interface';
-import { UserRole } from '../../../../../src/utils/constants';
+import { VariableType } from '../../../../../src/config/entities';
+import { UserRole } from '../../../../../src/config/constants';
 
 describe('GET /api/v1/user/:id', () => {
   it('should return user', async () => {

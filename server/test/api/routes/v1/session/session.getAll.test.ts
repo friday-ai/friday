@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import server from '../../../../utils/request';
-import SessionType from '../../../../../src/core/session/session.interface';
+import { SessionType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/session', () => {
   it('should return all sessions', async () => {

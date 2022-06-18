@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import { DEVICE_SUBTYPE_LIST } from '../../../../../src/utils/device.constants';
+import { DEVICE_SUBTYPE_LIST } from '../../../../../src/config/device';
 
 describe('POST /api/v1/device', () => {
   it('should create a device', async () => {

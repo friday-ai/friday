@@ -90,9 +90,9 @@ export default class HouseRouter {
     };
 
   /**
-   * Get all houses
-   * @apiName getAll
-   * @apiDescription This route allows you to get all houses
+   * List All houses
+   * @apiName listAll
+   * @apiDescription This route allows you to List All houses
    * @api {get} /api/v1/house
    * @apiGroup House
    * @apiVersion 1.0.0
@@ -107,8 +107,8 @@ export default class HouseRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'house',
   })
-    getAll = async (req: Request, res: Response) => {
-      const houses = await this.friday.house.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const houses = await this.friday.house.listAll(req.query);
       res.json(houses);
     };
 

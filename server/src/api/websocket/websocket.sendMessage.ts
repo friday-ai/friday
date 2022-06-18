@@ -1,9 +1,9 @@
 import * as WebSocket from 'ws';
 import { WebsocketMessagePayload, WebsocketSendOptions } from '../../utils/interfaces';
 import WebSocketServer from './index';
-import error, { BadParametersError, NotFoundError } from '../../utils/errors/coreError';
-import UserType from '../../core/user/user.interface';
-import { UserRole } from '../../utils/constants';
+import error, { BadParametersError, NotFoundError } from '../../utils/decorators/error';
+import { UserType } from '../../config/entities';
+import { UserRole } from '../../config/constants';
 
 const DEFAULT_OPTIONS: WebsocketSendOptions = {
   sendAll: false,

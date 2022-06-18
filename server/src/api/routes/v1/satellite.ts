@@ -3,7 +3,7 @@ import {
   FridayRouter, Get, Patch, Post, Delete,
 } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
-import { FridayMode } from '../../../utils/constants';
+import { FridayMode } from '../../../config/constants';
 
 /**
  * Satellite router
@@ -88,9 +88,9 @@ export default class SatelliteRouter {
     };
 
   /**
-   * Get all satellites
-   * @apiName getAll
-   * @apiDescription This route allows you to get all satellites
+   * List All satellites
+   * @apiName listAll
+   * @apiDescription This route allows you to List All satellites
    * @api {get} /api/v1/satellite
    * @apiGroup Satellite
    * @apiVersion 1.0.0
@@ -104,8 +104,8 @@ export default class SatelliteRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'satellite',
   })
-    getAll = async (req: Request, res: Response) => {
-      const satellites = await this.friday.satellite.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const satellites = await this.friday.satellite.listAll(req.query);
       res.json(satellites);
     };
 
@@ -126,7 +126,7 @@ export default class SatelliteRouter {
   @Get({
     path : '/discovery', authenticated: false, rateLimit: false, aclMethod: 'discovery', aclResource: 'satellite',
   })
-    discovery = async (req: Request, res: Response) => {
+    discovery = async (_: Request, res: Response) => {
       if (this.friday.mode === FridayMode.CONFIG_SATELLITE) {
         this.friday.mode = FridayMode.NOMINAL;
         res.status(200).json({

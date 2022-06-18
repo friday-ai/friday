@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
 import getAvailableFeatures from '../../../../src/core/device/subdevice/subdevice.getFeatures';
-import Device from '../../../../src/core/device';
+import Device from '../../../../src/core/device/device';
 
 let device: Device;
 

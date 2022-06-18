@@ -1,10 +1,10 @@
 import { assert, expect } from 'chai';
-import Device from '../../../src/core/device';
-import { DEVICE_SUBTYPE_LIST } from '../../../src/utils/device.constants';
+import Device from '../../../src/core/device/device';
+import { DEVICE_SUBTYPE_LIST } from '../../../src/config/device';
 import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable';
-import State from '../../../src/core/state';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Variable from '../../../src/core/variable/variable';
+import State from '../../../src/core/state/state';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Device.getById', () => {
   const event = Event;

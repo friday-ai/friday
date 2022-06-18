@@ -1,5 +1,5 @@
 import { QueryInterface } from 'sequelize';
-import { AvailableState, StateOwner } from '../src/utils/constants';
+import { AvailableState, StateOwner } from '../src/config/constants';
 
 module.exports = {
   up: (queryInterface: QueryInterface) => queryInterface.bulkInsert('state', [

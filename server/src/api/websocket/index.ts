@@ -4,8 +4,8 @@ import handleMessage from './websocket.handleMessage';
 import clientConnected from './websocket.clientConnected';
 import clientDisconnected from './websocket.clientDisconnected';
 import sendMessage from './websocket.sendMessage';
-import UserType from '../../core/user/user.interface';
-import { EventsType } from '../../utils/constants';
+import { UserType } from '../../config/entities';
+import { EventsType } from '../../config/constants';
 
 /**
  * Web socket manager
@@ -42,8 +42,8 @@ export default class WebsocketServer {
         this.clientDisconnected(ws);
       });
 
-      ws.on('message', (message: string) => {
-        this.handleMessage(JSON.parse(message), ws);
+      ws.on('message', async (message: string) => {
+        await this.handleMessage(JSON.parse(message), ws);
       });
 
       setTimeout(() => {

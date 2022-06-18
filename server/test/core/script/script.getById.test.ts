@@ -1,6 +1,6 @@
 import { expect, assert } from 'chai';
-import Script from '../../../src/core/script';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import Script from '../../../src/core/script/script';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('Script.getById', () => {
   const script = new Script();

@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import House from '../../../src/core/house';
-import { NotFoundError } from '../../../src/utils/errors/coreError';
+import House from '../../../src/core/house/house';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 describe('House.destroy', () => {
   const house = new House();

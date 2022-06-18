@@ -1,6 +1,6 @@
-import error from '../../../../utils/errors/coreError';
+import error from '../../../../utils/decorators/error';
 import { FeatureParameter } from '../../../../utils/interfaces';
-import { AvailableState, StateOwner } from '../../../../utils/constants';
+import { AvailableState, StateOwner } from '../../../../config/constants';
 
 export default async function pause(params: FeatureParameter) {
   try {

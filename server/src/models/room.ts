@@ -21,7 +21,7 @@ import House from './house';
 import Satellite from './satellite';
 import Device from './device';
 import State from './state';
-import { isOwnerExisting } from '../utils/databaseValidation';
+import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Room model

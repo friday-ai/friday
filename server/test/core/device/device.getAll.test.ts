@@ -1,18 +1,18 @@
 import { assert, expect } from 'chai';
-import Device from '../../../src/core/device';
-import { DEVICE_SUBTYPE_LIST } from '../../../src/utils/device.constants';
+import Device from '../../../src/core/device/device';
+import { DEVICE_SUBTYPE_LIST } from '../../../src/config/device';
 import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable';
-import State from '../../../src/core/state';
+import Variable from '../../../src/core/variable/variable';
+import State from '../../../src/core/state/state';
 
-describe('Device.getAll', () => {
+describe('Device.listAll', () => {
   const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);
   const device = new Device(event, state);
 
   it('should return all devices', async () => {
-    const devices = await device.getAll();
+    const devices = await device.listAll();
 
     expect(devices).to.be.an('array');
     assert.deepEqual(devices, [{
@@ -173,7 +173,7 @@ describe('Device.getAll', () => {
   });
 
   it('should return all devices with full scope', async () => {
-    const devices = await device.getAll({ scope: 'full' });
+    const devices = await device.listAll({ scope: 'full' });
 
     expect(devices).to.be.an('array');
     devices.forEach((d) => {
@@ -214,7 +214,7 @@ describe('Device.getAll', () => {
   });
 
   it('should return all devices with state', async () => {
-    const devices = await device.getAll({ scope: 'withState' });
+    const devices = await device.listAll({ scope: 'withState' });
 
     expect(devices).to.be.an('array');
     devices.forEach((d) => {
@@ -240,7 +240,7 @@ describe('Device.getAll', () => {
   });
 
   it('should return all Devices with room', async () => {
-    const devices = await device.getAll({ scope: 'withRoom' });
+    const devices = await device.listAll({ scope: 'withRoom' });
 
     expect(devices).to.be.an('array');
     devices.forEach((d) => {
@@ -262,7 +262,7 @@ describe('Device.getAll', () => {
   });
 
   it('should return all Devices with plugin', async () => {
-    const devices = await device.getAll({ scope: 'withPlugin' });
+    const devices = await device.listAll({ scope: 'withPlugin' });
 
     expect(devices).to.be.an('array');
     devices.forEach((d) => {

@@ -1,7 +1,7 @@
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import DeviceType from '../../../../../src/core/device/device.interface';
-import { DEVICE_SUBTYPE_LIST } from '../../../../../src/utils/device.constants';
+import { DeviceType } from '../../../../../src/config/entities';
+import { DEVICE_SUBTYPE_LIST } from '../../../../../src/config/device';
 
 describe('GET /api/v1/device', () => {
   it('should return all devices', async () => {

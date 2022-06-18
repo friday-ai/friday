@@ -16,8 +16,8 @@ import {
 } from 'sequelize-typescript';
 
 import Scene from './scene';
-import { ActionsType } from '../utils/constants';
-import { isOwnerExisting } from '../utils/databaseValidation';
+import { ActionsType } from '../config/constants';
+import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Action model

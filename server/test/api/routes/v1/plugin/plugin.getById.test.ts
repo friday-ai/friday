@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import server from '../../../../utils/request';
-import DeviceType from '../../../../../src/core/device/device.interface';
-import VariableType from '../../../../../src/core/variable/variable.interface';
+import { DeviceType, VariableType } from '../../../../../src/config/entities';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 
 describe('GET /api/v1/plugin/:id', () => {

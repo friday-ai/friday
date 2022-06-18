@@ -18,7 +18,7 @@ import {
 
 import Trigger from './trigger';
 import Action from './action';
-import { isOwnerExisting } from '../utils/databaseValidation';
+import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Scene model

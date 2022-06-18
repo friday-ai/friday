@@ -1,4 +1,4 @@
-import { EventsType } from '../utils/constants';
+import { EventsType } from './constants';
 import { JobsInterface } from '../utils/interfaces';
 
 const jobs: Array<JobsInterface> = [

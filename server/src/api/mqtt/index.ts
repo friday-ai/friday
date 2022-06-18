@@ -4,7 +4,7 @@ import { glob as Glob } from 'glob';
 import Friday from '../../core/friday';
 import sendMessage from './mqtt.sendMessage';
 import handleMessage from './mqtt.handleMessage';
-import { EventsType, TopicHeaderSub, TopicToSubscribe as Topics } from '../../utils/constants';
+import { EventsType, TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
 import logger from '../../utils/log';
 import { KVArr, MqttOptions } from '../../utils/interfaces';
 

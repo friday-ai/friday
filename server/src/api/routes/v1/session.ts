@@ -48,9 +48,9 @@ export default class SessionRouter {
     };
 
   /**
-   * Get all sessions
-   * @apiName getAll
-   * @apiDescription This route allows you to get all sessions
+   * List All sessions
+   * @apiName listAll
+   * @apiDescription This route allows you to List All sessions
    * @api {get} /api/v1/session
    * @apiGroup Session
    * @apiVersion 1.0.0
@@ -58,8 +58,8 @@ export default class SessionRouter {
   @Get({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'session',
   })
-    getAll = async (req: Request, res: Response) => {
-      const sessions = await this.friday.session.getAll(req.query);
+    listAll = async (req: Request, res: Response) => {
+      const sessions = await this.friday.session.listAll(req.query);
       res.json(sessions);
     };
 }

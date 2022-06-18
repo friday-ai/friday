@@ -27,6 +27,7 @@ module.exports = {
     after: true,
   },
   rules: {
+    '@typescript-eslint/no-unused-vars': [2, { 'args': 'all', 'argsIgnorePattern': '^_' }],
     'import/no-cycle': 0,
     semi: 0, // this cause a conflict with typescript rules
     '@typescript-eslint/semi': ['error', 'always'],
