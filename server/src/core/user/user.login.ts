@@ -1,7 +1,8 @@
 import User from '../../models/user';
 import { UserType } from '../../config/entities';
-import { NotFoundError, AuthError } from '../../utils/decorators/error';
+import { AuthError, NotFoundError } from '../../utils/decorators/error';
 import { compare } from '../../utils/password';
+import logger from '../../utils/log';
 
 /**
  * User login
@@ -31,6 +32,8 @@ export default async function login(email: string, password: string): Promise<Us
   if (!passwordMatches) {
     throw new AuthError({ name: 'User login', message: 'Password not matches.', metadata: email });
   }
+
+  logger.success(`User ${user.userName} logged in`);
 
   delete userToReturn.password;
   return userToReturn;

@@ -10,9 +10,11 @@ const port = parseInt(process.env.SERVER_PORT!, 10) || 3000;
     const friday = new Friday();
 
     // Start Friday core
+    logger.info('Starting Friday core');
     await friday.start();
 
     // Start Friday server
+    logger.info('Starting Friday server');
     await new Server(port, friday).start();
   } catch (e) {
     logger.error(e);

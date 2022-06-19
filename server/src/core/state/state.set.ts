@@ -1,5 +1,6 @@
 import State from '../../models/state';
 import { StateType } from '../../config/entities';
+import logger from '../../utils/log';
 
 /**
  * Set a state.
@@ -33,5 +34,8 @@ export default async function set(data: StateType): Promise<StateType> {
 
   // And then, create the new state
   const newState = await State.create({ ...data });
+
+  logger.success(`State ${data.value} created for ${data.ownerType} ${data.owner}`);
+
   return <StateType>newState.get({ plain: true });
 }

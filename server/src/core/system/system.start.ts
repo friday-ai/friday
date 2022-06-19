@@ -15,6 +15,7 @@ export default async function start(this: System): Promise<string> {
 
     await this.scheduler.init();
 
+    logger.success('Friday system started');
     return master.id!;
   } else {
     logger.info('Friday is not initialized, please complete signup steps');

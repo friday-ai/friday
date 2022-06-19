@@ -3,6 +3,7 @@ import { SatelliteType } from '../../config/entities';
 import SatelliteModel from '../../models/satellite';
 import { Catch } from '../../utils/decorators/error';
 import StateClass from '../state/state';
+import logger from '../../utils/log';
 
 import heartbeat from './satellite.heartbeat';
 import { AvailableState, StateOwner } from '../../config/constants';
@@ -30,6 +31,7 @@ export default class Satellite extends BaseModel<SatelliteModel, SatelliteType> 
       last: true,
     });
 
+    logger.success(`Satellite ${satellite.id} created`);
     return satellite;
   }
 

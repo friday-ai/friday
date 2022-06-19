@@ -3,6 +3,7 @@ import { PluginType } from '../../config/entities';
 import { PluginInstallOptions } from '../../utils/interfaces';
 import { AvailableState, StateOwner } from '../../config/constants';
 import error, { NotFoundError } from '../../utils/decorators/error';
+import logger from '../../utils/log';
 
 /**
  * Install a plugin.
@@ -19,11 +20,15 @@ import error, { NotFoundError } from '../../utils/decorators/error';
  */
 export default async function install(this: PluginClass, options: PluginInstallOptions): Promise<PluginType> {
   try {
+    logger.info(`Installing plugin ${options.name}`);
+
     await this.docker.pull(options.repoTag);
     const container = await this.docker.createContainer({
       name: options.name,
       Image: options.repoTag,
     });
+
+    logger.info(`Plugin ${options.name} installed`);
 
     // TODO: Create a plugin registry (with version and url)
     const plugin = await this.create({
@@ -42,6 +47,8 @@ export default async function install(this: PluginClass, options: PluginInstallO
     });
 
     await this.docker.start(container.id);
+
+    logger.success(`Plugin ${options.name} started`);
 
     return plugin;
   } catch (e) {

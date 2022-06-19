@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-useless-constructor */
 /* eslint-disable max-classes-per-file */
 /* eslint-disable max-len */
-import { ValidationError, UniqueConstraintError } from 'sequelize';
-import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtoken';
+import { UniqueConstraintError, ValidationError } from 'sequelize';
+import { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 import { ErrorType } from '../interfaces';
+import logger from '../log';
 
 //      ____                                        __                                          __     _     __
 //     / __ \  ___   _____  ____    _____  ____ _  / /_  ____    _____   _____         __  __  / /_   (_)   / /   _____
@@ -160,6 +161,7 @@ export const Catch = () => (_: any, __: string, descriptor: PropertyDescriptor) 
       if (result && typeof result.then === 'function' && typeof result.catch === 'function') {
         // return promise
         return result.catch((e: any) => {
+          logger.error(e);
           throw error({
             name: e.name, message: e.message, cause: e, metadata: args,
           });
@@ -169,6 +171,7 @@ export const Catch = () => (_: any, __: string, descriptor: PropertyDescriptor) 
       // return actual result
       return result;
     } catch (e) {
+      logger.error(e);
       throw error({
         name: e.name, message: e.message, cause: e, metadata: args,
       });
