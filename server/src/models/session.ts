@@ -23,11 +23,11 @@ import { isOwnerExisting } from '../utils/database/validation';
  * Session model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'refreshToken', 'revoked', 'validUntil', 'userId'],
+  attributes: ['id', 'refreshToken', 'revoked', 'userAgent', 'validUntil', 'userId'],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'refreshToken', 'revoked', 'validUntil', 'userId'],
+    attributes: ['id', 'refreshToken', 'revoked', 'userAgent', 'validUntil', 'userId'],
     include: [User],
   },
 }))
@@ -54,6 +54,9 @@ export default class Session extends Model {
   @Default(false)
   @Column
     revoked!: boolean;
+
+  @Column
+    userAgent!: string;
 
   @AllowNull(false)
   @NotEmpty

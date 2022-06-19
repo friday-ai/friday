@@ -19,6 +19,9 @@ module.exports = {
         allowNull: false,
         type: DataType.BOOLEAN,
       },
+      userAgent: {
+        type: DataType.STRING,
+      },
       validUntil: {
         allowNull: false,
         type: DataType.DATE,

@@ -7,6 +7,7 @@ import { generateRefreshToken, generateAccessToken } from '../../utils/jwt';
 /**
  * Create a session.
  * @param {UserType} user - A user object.
+ * @param {string} userAgent
  * @returns {Promise<SessionType>} Resolve with created session.
  * @example
  * ````
@@ -19,12 +20,13 @@ import { generateRefreshToken, generateAccessToken } from '../../utils/jwt';
  * });
  * ````
  */
-export default async function create(this: SessionClass, user: UserType): Promise<SessionType> {
+export default async function create(this: SessionClass, user: UserType, userAgent?: string): Promise<SessionType> {
   const { refreshToken, refreshTokenHash, refreshTokenValidity } = await generateRefreshToken();
   const newSession: {} = {
     refreshToken: refreshTokenHash,
     validUntil: new Date(Date.now() + refreshTokenValidity * 1000),
     userId: user.id,
+    userAgent,
   };
 
   const createdSession = await Session.create(newSession);

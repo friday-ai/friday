@@ -175,7 +175,7 @@ export default class UserRouter {
   })
     login = async (req: Request, res: Response) => {
       const user = await this.friday.user.login(req.body.email, req.body.password);
-      const session = await this.friday.session.create(user);
+      const session = await this.friday.session.create(user, req.headers['user-agent']);
       res.status(201).json(session);
     };
 

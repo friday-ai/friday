@@ -22,8 +22,8 @@ export default class Session extends PartialModel<SessionModel, SessionType> {
   }
 
   @Catch()
-  async create(user: UserType) {
-    return create.call(this, user);
+  async create(user: UserType, userAgent?: string) {
+    return create.call(this, user, userAgent);
   }
 
   @Catch()
