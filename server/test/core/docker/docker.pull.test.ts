@@ -2,9 +2,16 @@
 import { assert, expect } from 'chai';
 import Docker from '../../../src/core/docker/docker';
 import { CoreError, PlatformNotCompatible } from '../../../src/utils/decorators/error';
+import Dockerode from 'dockerode';
+
+let docker: Docker;
 
 describe('Docker.pull', () => {
-  const docker = new Docker();
+  before(async () => {
+    docker = global.FRIDAY.docker;
+    // Override object for tests
+    docker.dockerode = new Dockerode();
+  });
 
   it('should pull an image', async function () {
     this.timeout(1500);

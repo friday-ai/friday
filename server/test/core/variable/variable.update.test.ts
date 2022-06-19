@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Variable from '../../../src/core/variable/variable';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 
+let variable: Variable;
+
 describe('Variable.update', () => {
-  const variable = new Variable();
+  before(async () => {
+    variable = global.FRIDAY.variable;
+  });
 
   it('should update a variable with a id', async () => {
     const updatedVariable = await variable.update('a2b9ba3a-72f1-4a24-b268-e3813c1e8f32', {

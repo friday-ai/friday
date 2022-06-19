@@ -1,10 +1,14 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Trigger from '../../../src/core/trigger/trigger';
 import { AvailableConditions } from '../../../src/config/constants';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 
+let trigger: Trigger;
+
 describe('Trigger.getById', () => {
-  const trigger = new Trigger();
+  before(async () => {
+    trigger = global.FRIDAY.trigger;
+  });
 
   it('should return a trigger', async () => {
     const triggerReturned = await trigger.getById('a0f02b72-73e0-4cfd-a049-5caaa0b80514');

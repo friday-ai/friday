@@ -1,26 +1,23 @@
 /* eslint-disable func-names */
 import { assert, expect } from 'chai';
-import { Container } from 'dockerode';
-import Plugin from '../../../src/core/plugin/plugin';
+import Dockerode, { Container } from 'dockerode';
 import { NotFoundError } from '../../../src/utils/decorators/error';
-import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable/variable';
-import State from '../../../src/core/state/state';
-import Docker from '../../../src/core/docker/docker';
+import Plugin from '../../../src/core/plugin/plugin';
 
+let plugin: Plugin;
 let container: Container;
 
 describe('Plugin.stop', () => {
-  const event = Event;
-  const variable = new Variable();
-  const state = new State(event, variable);
-  const docker = new Docker();
-  const plugin = new Plugin('e2cz8cc-60a7-4c40-87d2-b25048b1aa04', docker, state);
+  before(async () => {
+    plugin = global.FRIDAY.plugin;
+    // Override object for tests
+    global.FRIDAY.docker.dockerode = new Dockerode();
+  });
 
   // Create a fake container and save docker id on plugin
   beforeEach(async function () {
     this.timeout(15000);
-    container = await docker.createContainer({
+    container = await global.FRIDAY.docker.createContainer({
       Image: 'alpine',
       AttachStdin: false,
       AttachStdout: true,

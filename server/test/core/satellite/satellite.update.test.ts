@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
-import Satellite from '../../../src/core/satellite/satellite';
+import { assert, expect } from 'chai';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import Satellite from '../../../src/core/satellite/satellite';
+
+let satellite: Satellite;
 
 describe('Satellite.update', () => {
-  const satellite = new Satellite();
+  before(async () => {
+    satellite = global.FRIDAY.satellite;
+  });
 
   it('should update a satellite', async () => {
     const updatedSatellite = await satellite.update('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', {

@@ -1,14 +1,14 @@
 import { assert, expect } from 'chai';
 import State from '../../../src/core/state/state';
-import Variable from '../../../src/core/variable/variable';
-import Event from '../../../src/utils/event';
 import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '../../../src/config/constants';
 import { DatabaseValidationError, NotFoundError } from '../../../src/utils/decorators/error';
 
+let state: State;
+
 describe('State.set', () => {
-  const variable = new Variable();
-  const event = Event;
-  const state = new State(event, variable);
+  before(async () => {
+    state = global.FRIDAY.state;
+  });
 
   it('should create a state', async () => {
     const createdState = await state.set({
@@ -47,9 +47,9 @@ describe('State.set', () => {
 });
 
 describe('State.getByOwner', () => {
-  const variable = new Variable();
-  const event = Event;
-  const state = new State(event, variable);
+  before(async () => {
+    state = global.FRIDAY.state;
+  });
 
   it('should return a state of one owner', async () => {
     const stateReturned = await state.getByOwner('c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a');
@@ -67,12 +67,12 @@ describe('State.getByOwner', () => {
 });
 
 describe('State.purge', () => {
-  const variable = new Variable();
-  const event = Event;
-  const state = new State(event, variable);
+  before(async () => {
+    state = global.FRIDAY.state;
+  });
 
   it('should purge all states', async () => {
-    await variable.create({
+    await global.FRIDAY.variable.create({
       key: SystemVariablesNames.HISTORY_STATE_IN_DAYS,
       value: '30',
       owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',

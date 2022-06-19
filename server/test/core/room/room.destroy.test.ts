@@ -1,9 +1,13 @@
 import { assert } from 'chai';
-import Room from '../../../src/core/room/room';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import Room from '../../../src/core/room/room';
+
+let room: Room;
 
 describe('Room.destroy', () => {
-  const room = new Room();
+  before(async () => {
+    room = global.FRIDAY.room;
+  });
 
   it('should destroy an room', async () => {
     await room.destroy('c97ba085-ba97-4a30-bdd3-b7a62f6514dc');

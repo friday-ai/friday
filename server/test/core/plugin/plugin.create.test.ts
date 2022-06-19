@@ -1,17 +1,13 @@
 import { assert, expect } from 'chai';
-import Plugin from '../../../src/core/plugin/plugin';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
-import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable/variable';
-import State from '../../../src/core/state/state';
-import Docker from '../../../src/core/docker/docker';
+import Plugin from '../../../src/core/plugin/plugin';
+
+let plugin: Plugin;
 
 describe('Plugin.create', () => {
-  const event = Event;
-  const variable = new Variable();
-  const state = new State(event, variable);
-  const docker = new Docker();
-  const plugin = new Plugin('e2cz8cc-60a7-4c40-87d2-b25048b1aa04', docker, state);
+  before(async () => {
+    plugin = global.FRIDAY.plugin;
+  });
 
   it('should create a plugin', async () => {
     const createdPlugin = await plugin.create({

@@ -1,10 +1,14 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Trigger from '../../../src/core/trigger/trigger';
 import { AvailableConditions } from '../../../src/config/constants';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
 
+let trigger: Trigger;
+
 describe('Trigger.create', () => {
-  const trigger = new Trigger();
+  before(async () => {
+    trigger = global.FRIDAY.trigger;
+  });
 
   it('should create a trigger', async () => {
     const createdTrigger = await trigger.create({

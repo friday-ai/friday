@@ -34,20 +34,22 @@ export default class Friday {
 
   public event = Event;
   public scheduler = new Scheduler(this.event, jobs);
-  public action = new Action();
-  public house = new House();
+  public variable = new Variable();
   public docker = new Docker();
-  public room = new Room();
-  public satellite = new Satellite();
+  public state = new State(this.event, this.variable);
+
+  public house = new House(this.state);
+  public room = new Room(this.state);
+  public satellite = new Satellite(this.state);
+  public device = new Device(this.event, this.state);
+  public user = new User(this.state);
+  public plugin = new Plugin(this.masterId, this.docker, this.state);
+
+  public action = new Action();
   public scene = new Scene();
   public script = new Script();
   public session = new Session(this.secretJwt);
   public trigger = new Trigger();
-  public user = new User();
-  public variable = new Variable();
-  public state = new State(this.event, this.variable);
-  public device = new Device(this.event, this.state);
-  public plugin = new Plugin(this.masterId, this.docker, this.state);
   public constants = Constants;
   public mqttSecret: object = {};
   public mode: FridayMode = FridayMode.NOMINAL;

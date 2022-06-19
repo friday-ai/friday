@@ -1,8 +1,12 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Script from '../../../src/core/script/script';
 
+let script: Script;
+
 describe('Script.listAll', () => {
-  const script = new Script();
+  before(async () => {
+    script = global.FRIDAY.script;
+  });
 
   it('should return all script', async () => {
     const scripts = await script.listAll();

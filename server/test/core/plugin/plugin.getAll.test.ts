@@ -1,16 +1,12 @@
 import { expect } from 'chai';
 import Plugin from '../../../src/core/plugin/plugin';
-import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable/variable';
-import State from '../../../src/core/state/state';
-import Docker from '../../../src/core/docker/docker';
+
+let plugin: Plugin;
 
 describe('Plugin.listAll', () => {
-  const event = Event;
-  const variable = new Variable();
-  const state = new State(event, variable);
-  const docker = new Docker();
-  const plugin = new Plugin('e2cz8cc-60a7-4c40-87d2-b25048b1aa04', docker, state);
+  before(async () => {
+    plugin = global.FRIDAY.plugin;
+  });
 
   it('should return all plugins', async () => {
     const plugins = await plugin.listAll();
@@ -36,7 +32,6 @@ describe('Plugin.listAll', () => {
       expect(p).to.have.property('satelliteId');
       expect(p).to.have.property('lastHeartbeat');
 
-      // TODO: The state cannot must be null
       if (p.state !== null) {
         expect(p.state).to.be.an('object');
         expect(p.state).to.have.property('id');

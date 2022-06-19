@@ -1,8 +1,12 @@
 import { expect } from 'chai';
 import User from '../../../src/core/user/user';
 
+let user: User;
+
 describe('User.getCount', () => {
-  const user = new User();
+  before(async () => {
+    user = global.FRIDAY.user;
+  });
 
   it('should return the number of registered users', async () => {
     const usersCount = await user.count();

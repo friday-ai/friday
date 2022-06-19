@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Script from '../../../src/core/script/script';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 
+let script: Script;
+
 describe('Script.getById', () => {
-  const script = new Script();
+  before(async () => {
+    script = global.FRIDAY.script;
+  });
 
   it('should return script', async () => {
     const scriptReturned = await script.getById('d354cede-3895-4dac-8a90-73d970b4617c');

@@ -6,7 +6,7 @@ import { DeviceType } from '../../config/entities';
 import { Catch } from '../../utils/decorators/error';
 
 import { DeviceTypeParameter, FeatureParameter } from '../../utils/interfaces';
-import { EventsType, MqttMessageTypes, TopicsTypes } from '../../config/constants';
+import { AvailableState, EventsType, MqttMessageTypes, StateOwner, TopicsTypes } from '../../config/constants';
 
 import getFeatures from './features/features.helper';
 import checkAvailableFeature from './features/checkAvailableFeature';
@@ -22,6 +22,21 @@ export default class Device extends BaseModel<DeviceModel, DeviceType> {
     super(DeviceModel);
     this.event = event;
     this.state = state;
+  }
+
+  @Catch()
+  async create(data: Omit<DeviceType, 'id'>) {
+    const device = await super.create(data);
+
+    // Set default state for device
+    await this.state.set({
+      owner: device.id!,
+      ownerType: StateOwner.DEVICE,
+      value: AvailableState.DEVICE_WAITING_CONFIGURATION,
+      last: true,
+    });
+
+    return device;
   }
 
   @Catch()

@@ -1,8 +1,12 @@
 import { expect } from 'chai';
 import Session from '../../../src/core/session/session';
 
+let session: Session;
+
 describe('Session.listAll', () => {
-  const session = new Session('secretJwt');
+  before(async () => {
+    session = global.FRIDAY.session;
+  });
 
   it('should return all sessions', async () => {
     const sessions = await session.listAll();

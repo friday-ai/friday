@@ -2,8 +2,12 @@ import { assert } from 'chai';
 import Script from '../../../src/core/script/script';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 
+let script: Script;
+
 describe('Script.destroy', () => {
-  const script = new Script();
+  before(async () => {
+    script = global.FRIDAY.script;
+  });
 
   it('should destroy a script', async () => {
     await script.destroy('d354cede-3895-4dac-8a90-73d970b4617c');

@@ -2,8 +2,12 @@ import { assert } from 'chai';
 import Trigger from '../../../src/core/trigger/trigger';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 
+let trigger: Trigger;
+
 describe('Trigger.destroy', () => {
-  const trigger = new Trigger();
+  before(async () => {
+    trigger = global.FRIDAY.trigger;
+  });
 
   it('should destroy a trigger', async () => {
     await trigger.destroy('a0f02b72-73e0-4cfd-a049-5caaa0b80514');

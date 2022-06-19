@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Script from '../../../src/core/script/script';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
 
+let script: Script;
+
 describe('Script.create', () => {
-  const script = new Script();
+  before(async () => {
+    script = global.FRIDAY.script;
+  });
 
   it('should create a script', async () => {
     const createdScript = await script.create({

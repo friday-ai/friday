@@ -2,8 +2,12 @@ import { assert } from 'chai';
 import Scene from '../../../src/core/scene/scene';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 
+let scene: Scene;
+
 describe('Scene.destroy', () => {
-  const scene = new Scene();
+  before(async () => {
+    scene = global.FRIDAY.scene;
+  });
 
   it('should destroy an scene', async () => {
     await scene.destroy('2452964a-a225-47dd-9b83-d88d57ed280e');

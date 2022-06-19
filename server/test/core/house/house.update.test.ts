@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
-import House from '../../../src/core/house/house';
+import { assert, expect } from 'chai';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import House from '../../../src/core/house/house';
+
+let house: House;
 
 describe('House.update', () => {
-  const house = new House();
+  before(async () => {
+    house = global.FRIDAY.house;
+  });
 
   it('should update a house', async () => {
     const updatedHouse = await house.update('ecb7958f-ea9e-4520-819e-be6358dc407c', {

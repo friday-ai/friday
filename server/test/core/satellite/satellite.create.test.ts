@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
-import Satellite from '../../../src/core/satellite/satellite';
+import { assert, expect } from 'chai';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
+import Satellite from '../../../src/core/satellite/satellite';
+
+let satellite: Satellite;
 
 describe('Satellite.create', () => {
-  const satellite = new Satellite();
+  before(async () => {
+    satellite = global.FRIDAY.satellite;
+  });
 
   it('should create a satellite', async () => {
     const createdSatellite = await satellite.create({

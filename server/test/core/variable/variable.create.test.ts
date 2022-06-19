@@ -1,10 +1,14 @@
-import { expect, assert } from 'chai';
-import Variable from '../../../src/core/variable/variable';
+import { assert, expect } from 'chai';
 import { VariableOwner } from '../../../src/config/constants';
-import { DatabaseValidationError, DatabaseUniqueConstraintError } from '../../../src/utils/decorators/error';
+import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
+import Variable from '../../../src/core/variable/variable';
+
+let variable: Variable;
 
 describe('Variable.create', () => {
-  const variable = new Variable();
+  before(async () => {
+    variable = global.FRIDAY.variable;
+  });
 
   it('should create a variable', async () => {
     const createdVariable = await variable.create({

@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Trigger from '../../../src/core/trigger/trigger';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 
+let trigger: Trigger;
+
 describe('Trigger.update', () => {
-  const trigger = new Trigger();
+  before(async () => {
+    trigger = global.FRIDAY.trigger;
+  });
 
   it('should update a trigger', async () => {
     const updatedTrigger = await trigger.update('a0f02b72-73e0-4cfd-a049-5caaa0b80514', {

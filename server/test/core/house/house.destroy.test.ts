@@ -1,9 +1,13 @@
 import { assert } from 'chai';
-import House from '../../../src/core/house/house';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import House from '../../../src/core/house/house';
+
+let house: House;
 
 describe('House.destroy', () => {
-  const house = new House();
+  before(async () => {
+    house = global.FRIDAY.house;
+  });
 
   it('should destroy an house', async () => {
     await house.destroy('ecb7958f-ea9e-4520-819e-be6358dc407c');

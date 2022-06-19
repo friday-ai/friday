@@ -1,21 +1,19 @@
 /* eslint-disable func-names */
 import { assert, expect } from 'chai';
-import { Container } from 'dockerode';
-import Plugin from '../../../src/core/plugin/plugin';
-import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable/variable';
-import State from '../../../src/core/state/state';
-import Docker from '../../../src/core/docker/docker';
+import Dockerode, { Container } from 'dockerode';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import Plugin from '../../../src/core/plugin/plugin';
 
+let plugin: Plugin;
 let container: Container;
 
 describe('Plugin.install', () => {
-  const event = Event;
-  const variable = new Variable();
-  const state = new State(event, variable);
-  const docker = new Docker();
-  const plugin = new Plugin('a7ef5f08-2bad-4489-95bf-b73fcf894d8f', docker, state);
+  before(async () => {
+    plugin = global.FRIDAY.plugin;
+    // Override object for tests
+    global.FRIDAY.docker.dockerode = new Dockerode();
+    plugin.masterId = 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f';
+  });
 
   after(async function () {
     this.timeout(15000);
@@ -30,7 +28,7 @@ describe('Plugin.install', () => {
       repoTag: 'alpine:latest',
     });
 
-    container = await docker.getContainer(installedPlugin.dockerId!);
+    container = await global.FRIDAY.docker.getContainer(installedPlugin.dockerId!);
     const containerInfos = await container.inspect();
 
     expect(containerInfos.Config.Image).to.equal('alpine:latest');

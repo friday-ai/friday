@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
-import Room from '../../../src/core/room/room';
+import { assert, expect } from 'chai';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import Room from '../../../src/core/room/room';
+
+let room: Room;
 
 describe('Room.getById', () => {
-  const room = new Room();
+  before(async () => {
+    room = global.FRIDAY.room;
+  });
 
   it('should return a room', async () => {
     const roomReturned = await room.getById('c97ba085-ba97-4a30-bdd3-b7a62f6514dc');

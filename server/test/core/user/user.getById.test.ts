@@ -1,10 +1,14 @@
 import { assert, expect } from 'chai';
-import User from '../../../src/core/user/user';
 import { UserRole } from '../../../src/config/constants';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import User from '../../../src/core/user/user';
+
+let user: User;
 
 describe('User.getById', () => {
-  const user = new User();
+  before(async () => {
+    user = global.FRIDAY.user;
+  });
 
   it('should return user', async () => {
     const userReturned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5');

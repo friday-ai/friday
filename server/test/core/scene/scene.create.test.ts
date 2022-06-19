@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Scene from '../../../src/core/scene/scene';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
 
+let scene: Scene;
+
 describe('Scene.create', () => {
-  const scene = new Scene();
+  before(async () => {
+    scene = global.FRIDAY.scene;
+  });
 
   it('should create a scene', async () => {
     const createdScene = await scene.create({

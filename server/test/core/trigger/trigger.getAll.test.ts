@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Trigger from '../../../src/core/trigger/trigger';
 import { AvailableConditions } from '../../../src/config/constants';
 
+let trigger: Trigger;
+
 describe('Trigger.listAll', () => {
-  const trigger = new Trigger();
+  before(async () => {
+    trigger = global.FRIDAY.trigger;
+  });
 
   it('should return all triggers', async () => {
     const triggers = await trigger.listAll();

@@ -32,5 +32,8 @@
   ],
   "exclude": [
     "src/node_modules"
-  ]
+  ],
+  "ts-node": {
+    "files": true
+  }
 }

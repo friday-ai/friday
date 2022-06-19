@@ -2,8 +2,12 @@ import { assert } from 'chai';
 import Action from '../../../src/core/action/action';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 
+let action: Action;
+
 describe('Action.destroy', () => {
-  const action = new Action();
+  before(async () => {
+    action = global.FRIDAY.action;
+  });
 
   it('should destroy an action', async () => {
     await action.destroy('33ab56b0-4064-40d0-b1f4-1e426bff1ea3');

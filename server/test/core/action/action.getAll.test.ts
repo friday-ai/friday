@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Action from '../../../src/core/action/action';
 import { ActionsType } from '../../../src/config/constants';
 
+let action: Action;
+
 describe('Action.listAll', () => {
-  const action = new Action();
+  before(async () => {
+    action = global.FRIDAY.action;
+  });
 
   it('should return all actions', async () => {
     const actions = await action.listAll();

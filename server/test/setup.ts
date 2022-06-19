@@ -33,11 +33,8 @@ before(async function before() {
 
   const server = new Server(port, friday, mqttOptions);
 
-  // @ts-ignore
   global.FRIDAY = friday;
-  // @ts-ignore
   global.TEST_SERVER = await server.start();
-  // @ts-ignore
   global.MQTT_TEST_SERVER = server.mqttServer;
 
   try {

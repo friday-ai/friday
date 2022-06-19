@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Device from '../../../src/core/device/device';
 import { DEVICE_SUBTYPE_FEATURE_LIST, DEVICE_TYPE_COMMON_FEATURE } from '../../../src/config/device';
 import { AvailableState } from '../../../src/config/constants';
@@ -8,7 +8,6 @@ let device: Device;
 
 describe('Device.sendCommand', () => {
   before(async () => {
-    // @ts-ignore
     device = global.FRIDAY.device;
   });
 

@@ -1,10 +1,14 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Action from '../../../src/core/action/action';
 import { ActionsType } from '../../../src/config/constants';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 
+let action: Action;
+
 describe('Action.create', () => {
-  const action = new Action();
+  before(async () => {
+    action = global.FRIDAY.action;
+  });
 
   it('should create a action', async () => {
     const createdAction = await action.create({

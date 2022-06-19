@@ -16,13 +16,13 @@ describe('System.shutdown', () => {
     closeConnection: sinon.stub(),
   };
 
-  const user = new User();
-  const variable = new Variable();
-  const room = new Room();
-  const satellite = new Satellite();
-  const house = new House();
   const event = Event;
+  const variable = new Variable();
   const state = new State(event, variable);
+  const user = new User(state);
+  const room = new Room(state);
+  const satellite = new Satellite(state);
+  const house = new House(state);
   const scheduler = new Scheduler(event, jobs);
   const system = new System(variable, house, room, satellite, user, state, scheduler, databaseStub);
 

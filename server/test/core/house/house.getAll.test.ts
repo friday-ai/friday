@@ -1,8 +1,12 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import House from '../../../src/core/house/house';
 
+let house: House;
+
 describe('House.listAll', () => {
-  const house = new House();
+  before(async () => {
+    house = global.FRIDAY.house;
+  });
 
   it('should return all houses', async () => {
     const houses = await house.listAll();
@@ -27,7 +31,6 @@ describe('House.listAll', () => {
       expect(h).to.have.property('latitude');
       expect(h).to.have.property('longitude');
 
-      // TODO: The state cannot must be null
       if (h.state !== null) {
         expect(h.state).to.be.an('object');
         expect(h.state).to.have.property('id');

@@ -1,9 +1,13 @@
 import { assert, expect } from 'chai';
-import Session from '../../../src/core/session/session';
 import { BadParametersError, NotFoundError } from '../../../src/utils/decorators/error';
+import Session from '../../../src/core/session/session';
+
+let session: Session;
 
 describe('Session.revoke', () => {
-  const session = new Session('secretJwt');
+  before(async () => {
+    session = global.FRIDAY.session;
+  });
 
   it('should revoke an session', async () => {
     const revokedSession = await session.revoke('894b93df-a7ab-494c-92f6-7d88ae9164b3');

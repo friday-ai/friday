@@ -1,11 +1,15 @@
-import { expect, assert } from 'chai';
-import Session from '../../../src/core/session/session';
+import { assert, expect } from 'chai';
 import { NotFoundError, UnauthorizedError } from '../../../src/utils/decorators/error';
+import Session from '../../../src/core/session/session';
 
 // tokenHash: 'c090007e57736654afa0b637f0e6e7a6d7dddbe476e2892c0d62fdd601d0807d', // hash of 'refresh-token-test-create'
 
+let session: Session;
+
 describe('Session.getAccessToken', () => {
-  const session = new Session('secretJwt');
+  before(async () => {
+    session = global.FRIDAY.session;
+  });
 
   it('should get a access token for an session', async () => {
     const sessionReturned = await session.getAccessToken('refresh-token-test-simple');

@@ -1,9 +1,13 @@
 import { assert, expect } from 'chai';
-import User from '../../../src/core/user/user';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
+import User from '../../../src/core/user/user';
+
+let user: User;
 
 describe('User.create', () => {
-  const user = new User();
+  before(async () => {
+    user = global.FRIDAY.user;
+  });
 
   it('should create a user', async () => {
     const createdUser = await user.create({

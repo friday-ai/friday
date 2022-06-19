@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
-import House from '../../../src/core/house/house';
+import { assert, expect } from 'chai';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import House from '../../../src/core/house/house';
+
+let house: House;
 
 describe('House.getById', () => {
-  const house = new House();
+  before(async () => {
+    house = global.FRIDAY.house;
+  });
 
   it('should return a house', async () => {
     const houseReturned = await house.getById('ecb7958f-ea9e-4520-819e-be6358dc407c');
@@ -25,7 +29,6 @@ describe('House.getById', () => {
     expect(houseReturned).to.have.property('latitude');
     expect(houseReturned).to.have.property('longitude');
 
-    // TODO: The state cannot must be null
     if (houseReturned.state !== null) {
       expect(houseReturned.state).to.be.an('object');
       expect(houseReturned.state).to.have.property('id');

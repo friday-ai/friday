@@ -1,16 +1,14 @@
 import { assert, expect } from 'chai';
-import Device from '../../../src/core/device/device';
 import { DEVICE_SUBTYPE_LIST } from '../../../src/config/device';
-import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable/variable';
-import State from '../../../src/core/state/state';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import Device from '../../../src/core/device/device';
+
+let device: Device;
 
 describe('Device.getById', () => {
-  const event = Event;
-  const variable = new Variable();
-  const state = new State(event, variable);
-  const device = new Device(event, state);
+  before(async () => {
+    device = global.FRIDAY.device;
+  });
 
   it('should return a device', async () => {
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3');
@@ -42,7 +40,6 @@ describe('Device.getById', () => {
     expect(deviceReturned).to.have.property('roomId');
     expect(deviceReturned).to.have.property('pluginId');
 
-    // TODO: The state cannot must be null
     if (deviceReturned.state !== null) {
       expect(deviceReturned.state).to.be.an('object');
       expect(deviceReturned.state).to.have.property('id');

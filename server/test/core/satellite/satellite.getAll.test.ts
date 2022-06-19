@@ -1,8 +1,12 @@
 import { expect } from 'chai';
 import Satellite from '../../../src/core/satellite/satellite';
 
+let satellite: Satellite;
+
 describe('Satellite.listAll', () => {
-  const satellite = new Satellite();
+  before(async () => {
+    satellite = global.FRIDAY.satellite;
+  });
 
   it('should return all satellites', async () => {
     const satellites = await satellite.listAll();
@@ -35,7 +39,6 @@ describe('Satellite.listAll', () => {
       expect(s.room).to.have.property('name');
       expect(s.room).to.have.property('houseId');
 
-      // TODO: The state cannot must be null
       if (s.state !== null) {
         expect(s.state).to.be.an('object');
         expect(s.state).to.have.property('id');

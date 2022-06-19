@@ -1,10 +1,14 @@
-import { expect, assert } from 'chai';
-import Variable from '../../../src/core/variable/variable';
-import { NotFoundError, BadParametersError } from '../../../src/utils/decorators/error';
+import { assert, expect } from 'chai';
+import { BadParametersError, NotFoundError } from '../../../src/utils/decorators/error';
 import { VariableOwner } from '../../../src/config/constants';
+import Variable from '../../../src/core/variable/variable';
+
+let variable: Variable;
 
 describe('Variable.getValue', () => {
-  const variable = new Variable();
+  before(async () => {
+    variable = global.FRIDAY.variable;
+  });
 
   it('should return a variable', async () => {
     const variableReturned = await variable.getValue('test_key0');

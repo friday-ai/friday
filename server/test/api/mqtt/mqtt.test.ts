@@ -33,10 +33,9 @@ const fakeMsg: MqttMessagePayload = {
 
 describe('Mqtt.connection', () => {
   before(async () => {
-    // @ts-ignore
     mqttClient = global.MQTT_TEST_SERVER;
-    // @ts-ignore
     friday = global.FRIDAY;
+
     // Start fake broker
     fakeBroker.start();
     // Wait until the fake server was correctly started

@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import House from '../../../src/core/house/house';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 
+let house: House;
+
 describe('House.create', () => {
-  const house = new House();
+  before(async () => {
+    house = global.FRIDAY.house;
+  });
 
   it('should create a house', async () => {
     const createdHouse = await house.create({

@@ -1,15 +1,13 @@
 import { assert, expect } from 'chai';
-import Device from '../../../src/core/device/device';
 import { DEVICE_SUBTYPE_LIST } from '../../../src/config/device';
-import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable/variable';
-import State from '../../../src/core/state/state';
+import Device from '../../../src/core/device/device';
+
+let device: Device;
 
 describe('Device.listAll', () => {
-  const event = Event;
-  const variable = new Variable();
-  const state = new State(event, variable);
-  const device = new Device(event, state);
+  before(async () => {
+    device = global.FRIDAY.device;
+  });
 
   it('should return all devices', async () => {
     const devices = await device.listAll();
@@ -187,7 +185,6 @@ describe('Device.listAll', () => {
       expect(d).to.have.property('roomId');
       expect(d).to.have.property('pluginId');
 
-      // TODO: The state cannot must be null
       if (d.state !== null) {
         expect(d.state).to.be.an('object');
         expect(d.state).to.have.property('id');

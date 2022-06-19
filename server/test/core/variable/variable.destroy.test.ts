@@ -1,9 +1,13 @@
 import { assert } from 'chai';
-import Variable from '../../../src/core/variable/variable';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import Variable from '../../../src/core/variable/variable';
+
+let variable: Variable;
 
 describe('Variable.destroy', () => {
-  const variable = new Variable();
+  before(async () => {
+    variable = global.FRIDAY.variable;
+  });
 
   it('should destroy a variable', async () => {
     await variable.destroy('a2b9ba3a-72f1-4a24-b268-e3813c1e8f32');

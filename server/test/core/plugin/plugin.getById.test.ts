@@ -1,17 +1,13 @@
 import { assert, expect } from 'chai';
-import Plugin from '../../../src/core/plugin/plugin';
-import Event from '../../../src/utils/event';
-import Variable from '../../../src/core/variable/variable';
-import State from '../../../src/core/state/state';
-import Docker from '../../../src/core/docker/docker';
 import { NotFoundError } from '../../../src/utils/decorators/error';
+import Plugin from '../../../src/core/plugin/plugin';
+
+let plugin: Plugin;
 
 describe('Plugin.getById', () => {
-  const event = Event;
-  const variable = new Variable();
-  const state = new State(event, variable);
-  const docker = new Docker();
-  const plugin = new Plugin('e2cz8cc-60a7-4c40-87d2-b25048b1aa04', docker, state);
+  before(async () => {
+    plugin = global.FRIDAY.plugin;
+  });
 
   it('should return a plugin', async () => {
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
@@ -33,7 +29,6 @@ describe('Plugin.getById', () => {
     expect(pluginReturned).to.have.property('satelliteId');
     expect(pluginReturned).to.have.property('lastHeartbeat');
 
-    // TODO: The state cannot must be null
     if (pluginReturned.state !== null) {
       expect(pluginReturned.state).to.be.an('object');
       expect(pluginReturned.state).to.have.property('id');

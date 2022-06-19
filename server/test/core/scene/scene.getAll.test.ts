@@ -1,8 +1,12 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Scene from '../../../src/core/scene/scene';
 
+let scene: Scene;
+
 describe('Scene.listAll', () => {
-  const scene = new Scene();
+  before(async () => {
+    scene = global.FRIDAY.scene;
+  });
 
   it('should return all scenes', async () => {
     const scenes = await scene.listAll();

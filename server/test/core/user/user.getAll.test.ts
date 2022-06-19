@@ -1,9 +1,13 @@
 import { assert, expect } from 'chai';
-import User from '../../../src/core/user/user';
 import { UserRole } from '../../../src/config/constants';
+import User from '../../../src/core/user/user';
+
+let user: User;
 
 describe('User.listAll', () => {
-  const user = new User();
+  before(async () => {
+    user = global.FRIDAY.user;
+  });
 
   it('should return all users', async () => {
     const users = await user.listAll();

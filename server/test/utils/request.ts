@@ -15,7 +15,6 @@ const authenticatedRequest = (methode: Methods, url: string, token?: string) => 
     header = `Bearer ${token}`;
   }
 
-  // @ts-ignore
   return request(global.TEST_SERVER)[methode](url)
     .set('Accept', 'application/json')
     .set('Authorization', header);

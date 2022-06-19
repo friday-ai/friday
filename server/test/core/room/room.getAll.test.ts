@@ -1,8 +1,12 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import Room from '../../../src/core/room/room';
 
+let room: Room;
+
 describe('Room.listAll', () => {
-  const room = new Room();
+  before(async () => {
+    room = global.FRIDAY.room;
+  });
 
   it('should return all rooms', async () => {
     const rooms = await room.listAll();

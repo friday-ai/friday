@@ -1,9 +1,13 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
+import { AuthError, NotFoundError } from '../../../src/utils/decorators/error';
 import User from '../../../src/core/user/user';
-import { NotFoundError, AuthError } from '../../../src/utils/decorators/error';
+
+let user: User;
 
 describe('User.login', () => {
-  const user = new User();
+  before(async () => {
+    user = global.FRIDAY.user;
+  });
 
   it('should log a user', async () => {
     const loggedUser = await user.login('john@pepperwood.com', 'mysuperpassword');

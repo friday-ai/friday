@@ -1,14 +1,19 @@
 /* eslint-disable func-names */
-import { expect, assert } from 'chai';
-import { Container } from 'dockerode';
+import { assert, expect } from 'chai';
+import Dockerode, { Container } from 'dockerode';
 import Docker from '../../../src/core/docker/docker';
 import { NotFoundError, PlatformNotCompatible } from '../../../src/utils/decorators/error';
 import wait from '../../utils/timer';
 
+let docker: Docker;
 let container: Container;
 
 describe('Docker.restart', () => {
-  const docker = new Docker();
+  before(async () => {
+    docker = global.FRIDAY.docker;
+    // Override object for tests
+    docker.dockerode = new Dockerode();
+  });
 
   before(async function () {
     this.timeout(15000);
