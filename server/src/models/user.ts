@@ -33,11 +33,11 @@ import Session from './session';
 @Scopes(() => ({
   full: {
     attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
-    include: [State, Variable],
+    include: [Variable, { model: State, where: { last: true } }],
   },
   withState: {
     attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
-    include: [State],
+    include: [{ model: State, where: { last: true } }],
   },
   withVariables: {
     attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],

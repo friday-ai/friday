@@ -33,7 +33,7 @@ import { DatabaseValidationError } from '../utils/decorators/error';
 @Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-    include: [Room, Plugin, State],
+    include: [Room, Plugin, { model: State, where: { last: true } }],
   },
   withRoom: {
     attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
@@ -45,7 +45,7 @@ import { DatabaseValidationError } from '../utils/decorators/error';
   },
   withState: {
     attributes: ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-    include: [State],
+    include: [{ model: State, where: { last: true } }],
   },
 }))
 @Table({

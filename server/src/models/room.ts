@@ -32,7 +32,7 @@ import { isOwnerExisting } from '../utils/database/validation';
 @Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'houseId'],
-    include: [House, Device, Satellite, State],
+    include: [House, Device, Satellite, { model: State, where: { last: true } }],
   },
   withHouse: {
     attributes: ['id', 'name', 'houseId'],
@@ -40,7 +40,7 @@ import { isOwnerExisting } from '../utils/database/validation';
   },
   withState: {
     attributes: ['id', 'name', 'houseId'],
-    include: [State],
+    include: [{ model: State, where: { last: true } }],
   },
   withDevices: {
     attributes: ['id', 'name', 'houseId'],

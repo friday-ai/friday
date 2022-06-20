@@ -30,7 +30,6 @@ describe('User.getById', () => {
     expect(userReturned).to.have.property('variables');
     expect(userReturned.variables).to.be.an('array');
 
-    // TODO: The state cannot must be null
     if (userReturned.state !== null) {
       expect(userReturned.state).to.be.an('object');
       expect(userReturned.state).to.have.property('id');

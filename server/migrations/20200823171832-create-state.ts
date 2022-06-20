@@ -22,6 +22,11 @@ module.exports = {
         allowNull: false,
         type: DataType.STRING,
       },
+      last: {
+        allowNull: false,
+        defaultValue: true,
+        type: DataType.BOOLEAN,
+      },
       created_at: {
         allowNull: false,
         type: DataType.DATE,

@@ -36,7 +36,7 @@ import { PluginType } from '../config/entities';
 @Scopes(() => ({
   full: {
     attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-    include: [Satellite, State, Device, Variable],
+    include: [Satellite, Device, Variable, { model: State, where: { last: true } }],
   },
   withSatellite: {
     attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
@@ -44,7 +44,7 @@ import { PluginType } from '../config/entities';
   },
   withState: {
     attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-    include: [State],
+    include: [{ model: State, where: { last: true } }],
   },
   withDevices: {
     attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],

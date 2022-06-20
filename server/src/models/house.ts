@@ -27,7 +27,7 @@ import State from './state';
 @Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
-    include: [Room, State],
+    include: [Room, { model: State, where: { last: true } }],
   },
   withRooms: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
@@ -35,7 +35,7 @@ import State from './state';
   },
   withState: {
     attributes: ['id', 'name', 'latitude', 'longitude'],
-    include: [State],
+    include: [{ model: State, where: { last: true } }],
   },
 }))
 @Table({

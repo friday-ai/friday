@@ -33,7 +33,7 @@ import { isOwnerExisting } from '../utils/database/validation';
 @Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
-    include: [Room, Plugin, State, Variable],
+    include: [Room, Plugin, Variable, { model: State, where: { last: true } }],
   },
   withRoom: {
     attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
@@ -41,7 +41,7 @@ import { isOwnerExisting } from '../utils/database/validation';
   },
   withState: {
     attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
-    include: [State],
+    include: [{ model: State, where: { last: true } }],
   },
   withVariables: {
     attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
