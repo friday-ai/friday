@@ -13,7 +13,9 @@ export default class Log {
    * @memberof Log
    */
   static default(text: string) {
-    console.log('\n---\n\n\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase());
+    if (env !== 'test') {
+      console.log('\n---\n\n\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase());
+    }
   }
 
   /**
@@ -46,7 +48,9 @@ export default class Log {
    * @memberof Log
    */
   static success(text: string) {
-    console.log('\x1b[32m✔ %s\x1b[0m', text);
+    if (env !== 'test') {
+      console.log('\x1b[32m✔ %s\x1b[0m', text);
+    }
   }
 
   /**
@@ -55,7 +59,9 @@ export default class Log {
    * @memberof Log
    */
   static warning(text: string) {
-    console.warn('\x1b[33m❗ %s\x1b[0m', text);
+    if (env !== 'test') {
+      console.warn('\x1b[33m❗ %s\x1b[0m', text);
+    }
   }
 
   /**
@@ -65,7 +71,9 @@ export default class Log {
    * @memberof Log
    */
   static error(text: string) {
-    // tslint:disable-next-line: no-console
-    console.trace('\x1b[31m✖ %s\x1b[0m', text);
+    if (env !== 'test') {
+      // tslint:disable-next-line: no-console
+      console.trace('\x1b[31m✖ %s\x1b[0m', text);
+    }
   }
 }
