@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import Auth from '../auth/auth';
+import store from '../store/store';
 
 type Methods = 'get' | 'post' | 'patch' | 'delete';
 
@@ -11,6 +12,9 @@ class HttpClient {
   }
 
   private async executeRequest<T>(method: Methods, url: string, query = {}, body = {}, retryCount = 0): Promise<T> {
+    store.dispatch({ type: 'app/setServerOffline', payload: false });
+    store.dispatch({ type: 'app/setLoading', payload: true });
+
     if (retryCount >= 3) {
       await this.auth.logout();
       throw new Error('MAX_RETRY_EXCEEDED');
@@ -25,6 +29,7 @@ class HttpClient {
         headers: this.auth.getHeaders(),
       });
 
+      store.dispatch({ type: 'app/setLoading', payload: false });
       return data;
     } catch (e: unknown) {
       const error = e as AxiosError;
@@ -32,6 +37,12 @@ class HttpClient {
         await this.auth.refreshToken();
         return this.executeRequest(method, url, query, body, retryCount + 1);
       }
+
+      if (error && error.response?.status === 0) {
+        store.dispatch({ type: 'app/setServerOffline', payload: true });
+      }
+      store.dispatch({ type: 'app/setLoading', payload: false });
+
       throw e;
     }
   }

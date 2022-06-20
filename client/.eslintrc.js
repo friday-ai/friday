@@ -43,5 +43,6 @@ module.exports = {
         ignoreTemplateLiterals: true,
       },
     ],
+    'lines-between-class-members': 'off',
   }
 }

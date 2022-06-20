@@ -6,6 +6,8 @@ interface AppState {
   currentView: string;
   theme: string;
   themeColors: { primary: string; secondary: string };
+  setLoading: boolean;
+  serverOffline: boolean;
 }
 
 // Declare Global state here to not import store
@@ -19,6 +21,8 @@ const initialState: AppState = {
   currentView: 'Dashboard',
   theme: 'light',
   themeColors: { primary: 'rgb(20,37,91)', secondary: 'rgb(37,9,179)' },
+  setLoading: false,
+  serverOffline: false,
 };
 
 const appSlice = createSlice({
@@ -35,6 +39,12 @@ const appSlice = createSlice({
       state.theme = action.payload;
       state.themeColors = updateThemeColor();
     },
+    setLoading: (state, action: PayloadAction<boolean>) => {
+      state.setLoading = action.payload;
+    },
+    setServerOffline: (state, action: PayloadAction<boolean>) => {
+      state.serverOffline = action.payload;
+    },
   },
 });
 
@@ -48,3 +58,5 @@ export const drawerToggled = (state: GlobalState): boolean => state.app.drawerTo
 export const currentView = (state: GlobalState): string => state.app.currentView;
 export const theme = (state: GlobalState): string => state.app.theme;
 export const themeColors = (state: GlobalState) => state.app.themeColors;
+export const loading = (state: GlobalState): boolean => state.app.setLoading;
+export const serverOffline = (state: GlobalState): boolean => state.app.serverOffline;

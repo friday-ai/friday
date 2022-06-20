@@ -12,10 +12,11 @@ import NotFound from '../../routes/Errors/NotFound';
 import Signup from '../../routes/Signup/Signup';
 
 import RequireAuth from '../../services/auth/RequireAuth';
-import { changeView } from './app.reducer';
-import { useAppDispatch } from '../../services/store/store';
+import { changeView, serverOffline } from './app.reducer';
+import { useAppDispatch, useAppSelector } from '../../services/store/store';
 import useSharedApp from '../../services/App';
 import getRouteName from '../../utils/routes';
+import ServerDown from '../../routes/Errors/ServerDown';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +29,9 @@ const App: React.FC = () => {
     document.title = `Friday | ${name}`;
   }, [location, dispatch]);
 
-  return (
+  return useAppSelector(serverOffline) ? (
+    <ServerDown />
+  ) : (
     <Routes>
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
       <Route path="/login" element={app.userCount !== 0 ? <Login /> : <Navigate to="/signup" replace />} />

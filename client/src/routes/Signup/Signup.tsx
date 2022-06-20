@@ -47,11 +47,9 @@ const Signup: React.FC = () => {
 
   const setUser = async (userName: string, email: string, password: string) => {
     await app.signup({ userName, email, password, language, role: 'superadmin' });
-    console.log(app.session);
   };
 
   const setSettings = async (units: string, history: string) => {
-    console.log(app.session);
     await app.variables.create({
       key: 'system_units',
       value: units,

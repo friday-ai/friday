@@ -20,7 +20,7 @@ export interface RoutesType {
 }
 
 export const init = (instance: HttpClient | DemoClient): RoutesType => {
-  const routes: RoutesType = {
+  return {
     scenes: new Scenes(instance),
     satellites: new Satellites(instance),
     users: new Users(instance),
@@ -29,6 +29,4 @@ export const init = (instance: HttpClient | DemoClient): RoutesType => {
     rooms: new Rooms(instance),
     system: new System(instance),
   };
-
-  return routes;
 };

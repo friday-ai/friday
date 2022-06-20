@@ -1,10 +1,11 @@
-import { defineConfig } from 'vite'
+import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
-import { VitePWA } from 'vite-plugin-pwa'
+import {VitePWA} from 'vite-plugin-pwa'
 
 export default defineConfig({
   server: {
-    https: process.env.HTTPS === 'true'
+    https: process.env.HTTPS === 'true',
+    port: parseInt(process.env.PORT) || 3001
   },
   plugins: [
     react(),

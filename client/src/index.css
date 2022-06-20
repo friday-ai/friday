@@ -28,7 +28,7 @@
 .geo-background::before {
   content: '';
   position: fixed;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
   background-image: url(./assets/geometric.svg);
   bottom: 0;
@@ -40,7 +40,7 @@
 .geo-background::after {
   content: '';
   position: absolute;
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
   background-image: url(./assets/geometric.svg);
   -webkit-transform: scaleX(-1) scaleY(-1);
