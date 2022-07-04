@@ -8,5 +8,5 @@ import Friday from '../../../../core/friday';
  */
 export default async function discoverme(friday: Friday, payload: { pluginName: string, plugin: PluginType }) {
   logger.info(`Plugin discoverme ${payload.pluginName}`);
-  // await friday.plugin.create(payload.plugin);
+  await friday.plugin.create(payload.plugin);
 }
