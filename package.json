@@ -16,7 +16,7 @@
     "start": "per-env",
     "start:": "npm run start:production",
     "build": "npm run build-server && npm run build-client",
-    "start:production": "npm run start-server:prod && npm run start-client:prod",
+    "start:production": "npm run start-server:prod & npm run start-client:prod",
     "start:development": "concurrently -k -p \"none\" \"npm run start-server:dev\" \"npm run start-client:dev\"",
     "test": "npm run test-server && npm run test-client",
     "coverage": "npm run coverage-server && npm run coverage-client",
