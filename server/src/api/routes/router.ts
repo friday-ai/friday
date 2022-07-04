@@ -20,9 +20,9 @@ import aclMiddleware from '../middlewares/aclMiddleware';
  */
 export default function router(friday: Friday): Router {
   const routerObject = Router();
-
+  
   const routers = Glob
-    .sync('**/*.ts', { cwd: `${__dirname}/` })
+    .sync('**/*.{js,ts}', { cwd: `${__dirname}/` })
     .map((filename) => require(`./${filename}`).default)
     .filter((routerClass) => routerClass !== undefined)
     .filter((routerClass) => Reflect.hasOwnMetadata('prefix', routerClass));

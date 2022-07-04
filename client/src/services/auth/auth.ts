@@ -2,6 +2,8 @@ import React from 'react';
 import axios, { AxiosError, AxiosRequestHeaders } from 'axios';
 import { SessionType, UserType } from '../../utils/interfaces';
 
+const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
+
 class Auth {
   public session: SessionType;
 
@@ -32,7 +34,7 @@ class Auth {
 
   login = async (email: string, password: string, onSuccess: VoidFunction, onError: (error: string) => void) => {
     try {
-      const { data } = await axios.post<SessionType>('http://localhost:3000/api/v1/user/login', { email, password });
+      const { data } = await axios.post<SessionType>(`http://localhost:${port}/api/v1/user/login`, { email, password });
       localStorage.setItem('session', JSON.stringify(data));
       onSuccess();
       this.setSession(data);
@@ -60,7 +62,7 @@ class Auth {
     this.setSession({});
 
     await axios.patch<SessionType>(
-      `http://localhost:3000/api/v1/session/revoke/${sessionId}`,
+      `http://localhost:${port}/api/v1/session/revoke/${sessionId}`,
       {},
       {
         headers,
@@ -70,7 +72,7 @@ class Auth {
 
   refreshToken = async () => {
     try {
-      const { data } = await axios.post<SessionType>('http://localhost:3000/api/v1/session/access_token', {
+      const { data } = await axios.post<SessionType>(`http://localhost:${port}/api/v1/session/access_token`, {
         refreshToken: this.session.refreshToken,
       });
 
@@ -82,7 +84,7 @@ class Auth {
   };
 
   signup = async (user: UserType) => {
-    const { data } = await axios.post<SessionType>('http://localhost:3000/api/v1/user/signup', user);
+    const { data } = await axios.post<SessionType>(`http://localhost:${port}/api/v1/user/signup`, user);
     this.setSession(data);
     localStorage.setItem('session', JSON.stringify(data));
   };

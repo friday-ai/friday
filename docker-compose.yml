@@ -4,15 +4,16 @@ services:
   friday:
     container_name: Friday-ai
     build: .
-    #image: fridai-ai_friday
+    #image: friday-ai_friday
     restart: always
     ports:
       - "1443:1443"
       - "1444:1444"
     environment:
       - NODE_ENV=production
+      - MQTT_HOST=host.docker.internal
   broker:
-    container_name: Friday-ai-brocker
+    container_name: Friday-ai-broker
     image: eclipse-mosquitto:latest
     restart: always
     ports:

@@ -1,11 +1,11 @@
 import logger from '../../../../utils/log';
-import MqttServer from '../../index';
+import Friday from '../../../../core/friday';
 
 /*
  * @route('friday/master/satellite/heartbeat')
  * @param('Object', 'payload', '{satelliteId: string}')
  */
-export default async function heartbeat(mqtt: MqttServer, payload: { satelliteId: string }) {
+export default async function heartbeat(friday: Friday, payload: { satelliteId: string }) {
   logger.info(`Satellite heartbeat ${payload.satelliteId}`);
-  await mqtt.friday.satellite.heartbeat(payload.satelliteId);
+  await friday.satellite.heartbeat(payload.satelliteId);
 }

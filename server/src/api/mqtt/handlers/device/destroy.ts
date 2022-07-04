@@ -1,11 +1,11 @@
 import logger from '../../../../utils/log';
-import MqttServer from '../../index';
+import Friday from '../../../../core/friday';
 
 /*
  * @route('friday/master/device/destroy')
  * @param('Object', 'payload', '{deviceId: string}')
  */
-export default async function destroy(this: MqttServer, payload: { deviceId: string }) {
+export default async function destroy(friday: Friday, payload: { deviceId: string }) {
   logger.info(`Device destroy ${payload.deviceId}`);
-  await this.friday.device.destroy(payload.deviceId);
+  await friday.device.destroy(payload.deviceId);
 }

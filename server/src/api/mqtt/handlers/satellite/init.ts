@@ -1,12 +1,12 @@
 import logger from '../../../../utils/log';
-import MqttServer from '../../index';
 import { SatelliteType } from '../../../../config/entities';
+import Friday from '../../../../core/friday';
 
 /*
  * @route('friday/master/satellite/init')
  * @param('Object', 'payload', '{satelliteId: string, satellite: SatelliteType}')
  */
-export default async function init(this: MqttServer, payload: { satelliteId: string, satellite: SatelliteType }) {
+export default async function init(friday: Friday, payload: { satelliteId: string, satellite: SatelliteType }) {
   logger.info(`Satellite init ${payload.satelliteId}`);
-  await this.friday.satellite.update(payload.satelliteId, payload.satellite);
+  await friday.satellite.update(payload.satelliteId, payload.satellite);
 }

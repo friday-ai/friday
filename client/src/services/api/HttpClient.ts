@@ -4,6 +4,8 @@ import store from '../store/store';
 
 type Methods = 'get' | 'post' | 'patch' | 'delete';
 
+const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
+
 class HttpClient {
   private readonly auth: Auth;
 
@@ -23,7 +25,7 @@ class HttpClient {
       const { data }: { data: T } = await axios({
         method,
         url,
-        baseURL: 'http://localhost:3000',
+        baseURL: `http://localhost:${port}`,
         params: query,
         data: body,
         headers: this.auth.getHeaders(),

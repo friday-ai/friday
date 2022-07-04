@@ -21,15 +21,19 @@ export default class MqttServer {
 
   constructor(friday: Friday) {
     this.friday = friday;
-    this.friday.event.on(EventsType.MQTT_PUBLISH, (event) => this.sendMessage(event));
-    this.friday.event.on(EventsType.MQTT_PUBLISH_ALL, (event) => this.sendMessage(event, { sendAll: true }));
+    this.friday.event.on(EventsType.MQTT_PUBLISH, (event) =>
+      this.sendMessage(event),
+    );
+    this.friday.event.on(EventsType.MQTT_PUBLISH_ALL, (event) =>
+      this.sendMessage(event, { sendAll: true }),
+    );
 
-    Glob
-      .sync('**/*.ts', { cwd: `${__dirname}/handlers/` })
-      .forEach((filename) => {
-        const topic = filename.replace('.ts', '');
+    Glob.sync('**/*.{js,ts}', { cwd: `${__dirname}/handlers/` }).forEach(
+      (filename) => {
+        const topic = filename.replace(/.js|.ts/gi, '');
         this.handlers[topic] = require(`./handlers/${filename}`).default;
-      });
+      },
+    );
   }
 
   async start(mqttOptions: MqttOptions) {
@@ -50,11 +54,9 @@ export default class MqttServer {
       });
     });
 
-    /*
     this.MqttClient.on('error', (error) => {
       logger.error(error.message);
     });
-     */
 
     return this.MqttClient;
   }

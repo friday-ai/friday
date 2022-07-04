@@ -15,7 +15,7 @@ import { MqttOptions } from '../utils/interfaces';
 
 const defaultMqttOptions: MqttOptions = {
   port: 1883,
-  host: 'localhost',
+  host: process.env.MQTT_HOST || 'localhost',
   protocol: 'mqtt',
 };
 
