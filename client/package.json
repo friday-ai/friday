@@ -12,7 +12,7 @@
     "build": "cross-env NODE_ENV=production tsc && vite build --mode production",
     "preview": "npm run build && vite preview --host",
     "preview:https": "cross-env HTTPS=true npm run preview",
-    "serve": "cross-env NODE_ENV=production http-server dist -s -p 1444",
+    "serve": "cross-env NODE_ENV=production http-server dist -p 1444",
     "demo": "cross-env NODE_ENV=production tsc && vite build --mode staging && http-server dist",
     "test": "echo \"Error: tests are not yet implemented\" && exit 1",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
