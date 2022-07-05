@@ -12,3 +12,6 @@ dev:
 		-e NODE_ENV=development \
 		-v `pwd`:/usr/app \
 		friday
+
+log:
+	@docker container logs -n 20 Friday-ai

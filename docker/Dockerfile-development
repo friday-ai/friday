@@ -1,0 +1,19 @@
+FROM node:lts-alpine
+
+# System dependencies
+RUN apk add --no-cache sqlite
+
+# Add friday core
+WORKDIR /src
+COPY . /src
+
+RUN apk add --no-cache make git \
+    && npm install --unsafe-perm \
+    && npm cache clean --force
+
+ENV NODE_ENV development
+
+# Export listening port
+EXPOSE 80
+
+CMD ["npm" ,"run", "start:production"]

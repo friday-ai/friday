@@ -3,14 +3,16 @@ version: '3'
 services:
   friday:
     container_name: Friday-ai
-    build: .
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile-${NODE_ENV:-production}
     #image: friday-ai_friday
     restart: always
     ports:
-      - "1443:1443"
       - "1444:1444"
+      - "1443:1443"
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=${NODE_ENV:-production}
       - MQTT_HOST=host.docker.internal
   broker:
     container_name: Friday-ai-broker
@@ -26,6 +28,7 @@ services:
       - TZ=Europe/Paris
     user: 1000:1000
   watchtower:
+    container_name: Friday-ai-watchtower
     image: containrrr/watchtower
     restart: always
     volumes:
