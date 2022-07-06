@@ -19,7 +19,7 @@ RUN cd server && yarn install && yarn build
 FROM base
 
 # System dependencies
-RUN apk add --no-cache sqlite make
+RUN apk add --no-cache sqlite make curl
 
 # Add friday core
 WORKDIR /src
@@ -35,6 +35,10 @@ COPY ../client/package.json ./client/
 COPY ../server/package.json ./server/
 
 ENV NODE_ENV production
+
+# Ping friday to check heartbeat
+HEALTHCHECK --interval=10s --retries=5 \
+   CMD curl --fail "http://localhost:1444" || exit 1
 
 # Export listening port
 EXPOSE 1444
