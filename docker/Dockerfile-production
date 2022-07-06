@@ -27,7 +27,7 @@ WORKDIR /src
 COPY --from=build-client /usr/src/client/dist ./client/dist
 COPY --from=build-server /usr/src/server/dist ./server/dist
 
-COPY --from=build-client /usr/src/client/node_modules ./client/node_modules
+RUN cd ./client && yarn add http-server cross-env
 COPY --from=build-server /usr/src/server/node_modules ./server/node_modules
 
 COPY package.json .
