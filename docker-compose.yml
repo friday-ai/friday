@@ -3,6 +3,8 @@ version: '3'
 services:
   friday:
     container_name: Friday-ai
+    labels:
+      "autoheal": "true"
     build:
       context: .
       dockerfile: ./docker/Dockerfile-${NODE_ENV:-production}
@@ -34,3 +36,11 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --cleanup
+  autoheal:
+    container_name: Friday-ai-autoheal
+    image: willfarrell/autoheal
+    restart: always
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+      - AUTOHEAL_INTERVAL=10

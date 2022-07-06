@@ -13,6 +13,10 @@ RUN apk add --no-cache make git \
 
 ENV NODE_ENV development
 
+# Ping friday to check heartbeat
+HEALTHCHECK --interval=10s --retries=5 \
+   CMD curl --fail "http://localhost:3000" || exit 1
+
 # Export listening port
 EXPOSE 80
 
