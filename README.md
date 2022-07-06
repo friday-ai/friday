@@ -18,4 +18,21 @@ npm run lint
 
 # fix linting errors 
 npm run lint:fix
+
+# Start container in development mode
+## with make
+make dev
+## without make
+docker-compose run -d \
+		-p 9000:9000 \
+		-p 3000:3000 \
+		-e NODE_ENV=development \
+		-v `pwd`:/usr/app \
+		friday
+
+# Start container in production mode
+## with make
+make prod
+## without make
+docker-compose up -d
 ```
