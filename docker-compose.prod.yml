@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  friday:
+    labels:
+      "autoheal": "true"
+    image: fridayai/friday:prod
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile-production
+    ports:
+      - "1444:1444"
+      - "1443:1443"
+    environment:
+      - NODE_ENV=production
+  autoheal:
+    container_name: Friday-ai-autoheal
+    image: willfarrell/autoheal
+    restart: always
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+    environment:
+      - AUTOHEAL_INTERVAL=10
+  watchtower:
+    container_name: Friday-ai-watchtower
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup

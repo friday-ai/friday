@@ -3,18 +3,15 @@ version: '3'
 services:
   friday:
     container_name: Friday-ai
-    labels:
-      "autoheal": "true"
+    image: fridayai/friday:dev
     build:
-      context: .
-      dockerfile: ./docker/Dockerfile-${NODE_ENV:-production}
-    #image: friday-ai_friday
-    restart: always
+      context: ./
+      dockerfile: ./docker/Dockerfile-development
     ports:
-      - "1444:1444"
-      - "1443:1443"
+      - "9000:9000"
+      - "3001:3001"
     environment:
-      - NODE_ENV=${NODE_ENV:-production}
+      - NODE_ENV=development
       - MQTT_HOST=host.docker.internal
   broker:
     container_name: Friday-ai-broker
@@ -29,18 +26,3 @@ services:
     environment:
       - TZ=Europe/Paris
     user: 1000:1000
-  watchtower:
-    container_name: Friday-ai-watchtower
-    image: containrrr/watchtower
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: --cleanup
-  autoheal:
-    container_name: Friday-ai-autoheal
-    image: willfarrell/autoheal
-    restart: always
-    volumes:
-      - '/var/run/docker.sock:/var/run/docker.sock'
-    environment:
-      - AUTOHEAL_INTERVAL=10

@@ -1,23 +1,18 @@
 FROM node:lts-alpine
 
 # System dependencies
-RUN apk add --no-cache sqlite
+RUN apk add --no-cache sqlite make python3 gcc g++
 
 # Add friday core
 WORKDIR /src
-COPY . /src
-
-RUN apk add --no-cache make git \
-    && npm install --unsafe-perm \
-    && npm cache clean --force
 
 ENV NODE_ENV development
 
 # Ping friday to check heartbeat
-HEALTHCHECK --interval=10s --retries=5 \
-   CMD curl --fail "http://localhost:3000" || exit 1
+HEALTHCHECK --interval=50s --retries=12 \
+   CMD curl --fail "http://localhost:3001" || exit 1
 
 # Export listening port
-EXPOSE 80
+EXPOSE 3001 9000
 
-CMD ["npm" ,"run", "start:production"]
+CMD ["npm" ,"run", "start:development"]

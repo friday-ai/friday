@@ -23,16 +23,11 @@ npm run lint:fix
 ## with make
 make dev
 ## without make
-docker-compose run -d \
-		-p 9000:9000 \
-		-p 3000:3000 \
-		-e NODE_ENV=development \
-		-v `pwd`:/usr/app \
-		friday
+docker compose up -d --remove-orphans
 
 # Start container in production mode
 ## with make
 make prod
 ## without make
-docker-compose up -d
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --remove-orphans
 ```
