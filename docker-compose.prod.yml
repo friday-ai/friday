@@ -4,7 +4,7 @@ services:
   friday:
     labels:
       "autoheal": "true"
-    image: fridayai/friday:prod
+    image: fridayai/friday:latest
     build:
       context: ./
       dockerfile: ./docker/Dockerfile-production
