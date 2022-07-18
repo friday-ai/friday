@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  friday:
+    volumes:
+      # Base
+      - .:/src
+      # Exclude local node_modules
+      - /src/node_modules
+      - /src/client/node_modules
+      - /src/server/node_modules
