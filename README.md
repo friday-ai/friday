@@ -18,4 +18,16 @@ npm run lint
 
 # fix linting errors 
 npm run lint:fix
+
+# Start container in development mode
+## with make
+make dev
+## without make
+docker compose up -d --remove-orphans
+
+# Start container in production mode
+## with make
+make prod
+## without make
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d --remove-orphans
 ```
