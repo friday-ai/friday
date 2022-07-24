@@ -41,7 +41,7 @@ export default class Friday {
   public house = new House(this.state);
   public room = new Room(this.state);
   public satellite = new Satellite(this.state);
-  public device = new Device(this.event, this.state);
+  public device = new Device(this.event);
   public user = new User(this.state);
   public plugin = new Plugin(this.masterId, this.docker, this.state);
 
