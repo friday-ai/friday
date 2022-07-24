@@ -1,9 +1,8 @@
-import {
-  WebsocketMessageTypes, MqttMessageTypes, EventsType, TopicsTypes, AvailableState,
-} from '../config/constants';
+import { AvailableState, EventsType, MqttMessageTypes, TopicsTypes, WebsocketMessageTypes } from '../config/constants';
 import DeviceClass from '../core/device/device';
 import User from '../core/user/user';
 import { DeviceType } from '../config/entities';
+import { DevicesActionsType } from '../config/device';
 
 /**
  * Options for core functions type 'getAll'
@@ -102,6 +101,19 @@ export interface PluginInstallOptions {
   name: string,
   repoTag: string;
   version: string;
+}
+
+export interface DeviceCommandType {
+  action: DevicesActionsType;
+  params: any;
+}
+
+export interface CapabilityManagerParams {
+  actions: DevicesActionsType[]
+}
+
+export interface CapabilityManagerParamsList {
+  [key: string]: CapabilityManagerParams
 }
 
 export interface FeatureParameter {
