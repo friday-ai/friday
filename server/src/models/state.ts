@@ -19,7 +19,6 @@ import User from './user';
 import Satellite from './satellite';
 import Room from './room';
 import House from './house';
-import Device from './device';
 import Plugin from './plugin';
 import { isOwnerExisting } from '../utils/database/validation';
 
@@ -44,7 +43,7 @@ export default class State extends Model {
 
   @AllowNull(false)
   @NotEmpty
-  @Is('owner', (value) => isOwnerExisting(value, ['user', 'room', 'house', 'satellite', 'plugin', 'device']))
+  @Is('owner', (value) => isOwnerExisting(value, ['user', 'room', 'house', 'satellite', 'plugin']))
   @Column(DataType.UUIDV4)
     owner!: string;
 
@@ -91,10 +90,4 @@ export default class State extends Model {
     constraints: false,
   })
     satellite?: Satellite;
-
-  @BelongsTo(() => Device, {
-    foreignKey: 'owner',
-    constraints: false,
-  })
-    device?: Device;
 }
