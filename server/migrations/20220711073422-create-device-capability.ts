@@ -3,7 +3,7 @@ import { DataType } from 'sequelize-typescript';
 
 module.exports = {
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
-    await queryInterface.createTable('device', {
+    await queryInterface.createTable('device_capability', {
       id: {
         unique: true,
         allowNull: false,
@@ -14,14 +14,6 @@ module.exports = {
         allowNull: false,
         type: DataType.STRING,
       },
-      defaultManufacturer: {
-        allowNull: false,
-        type: DataType.STRING,
-      },
-      defaultModel: {
-        allowNull: false,
-        type: DataType.STRING,
-      },
       name: {
         type: DataType.STRING,
       },
@@ -29,20 +21,12 @@ module.exports = {
         allowNull: false,
         type: DataType.STRING,
       },
-      manufacturer: {
-        type: DataType.STRING,
-      },
-      model: {
-        type: DataType.JSON,
-      },
       deviceId: {
+        allowNull: false,
         type: DataType.UUID,
       },
       roomId: {
         allowNull: false,
-        type: DataType.UUID,
-      },
-      pluginId: {
         type: DataType.UUID,
       },
       created_at: {
@@ -56,5 +40,5 @@ module.exports = {
     });
   },
   down: ({ context: queryInterface }: { context: QueryInterface }) =>
-    queryInterface.dropTable('device'),
+    queryInterface.dropTable('device_capability'),
 };
