@@ -10,6 +10,7 @@ enum DevicesClassesType {
 
 enum DevicesCapabilityType {
   ONOFF = 'onoff',
+  BRIGHTNESS = 'brightness',
 }
 
 export enum DevicesActionsType {
@@ -18,9 +19,15 @@ export enum DevicesActionsType {
   SET_BRIGHTNESS = 'action.devices.commands.set_brightness',
 }
 
-interface DeviceCapabilitySettingsSchema {
-  'onoff': {}
+type OnOffSettings = null;
+
+interface BrightnessSettings extends Record<string, any> {
+  min: number;
+  max: number;
+  step: number;
 }
+
+export type DeviceCapabilitySettingsSchema = OnOffSettings | BrightnessSettings;
 
 interface DeviceCapabilitySettingsRegisterType {
   type: DevicesCapabilityType;
@@ -30,7 +37,7 @@ interface DeviceCapabilitySettingsRegisterType {
 interface DeviceCapabilityRegisterType {
   defaultName: string;
   type: DevicesCapabilityType;
-  settings?: DeviceCapabilitySettingsRegisterType;
+  settings?: DeviceCapabilitySettingsSchema;
 }
 
 interface DeviceRegisterType {
@@ -39,6 +46,7 @@ interface DeviceRegisterType {
   defaultModel: string;
   type: DevicesType;
   deviceId?: string;
+  pluginSelector?: string;
   pluginId: string;
   capabilities?: DeviceCapabilityRegisterType[];
 }

@@ -8,7 +8,7 @@ import {
   VariableOwner,
 } from './constants';
 import { Color } from '../utils/interfaces';
-import { DevicesCapabilityType, DevicesType } from './device';
+import { DeviceCapabilitySettingsSchema, DevicesCapabilityType, DevicesType } from './device';
 
 /**
  * Action interface
@@ -37,6 +37,7 @@ export interface DeviceType {
   type?: DevicesType;
   manufacturer?: string;
   model?: string;
+  pluginSelector?: string;
   deviceId?: string;
   roomId?: string;
   pluginId?: string;
@@ -58,6 +59,8 @@ export interface DeviceCapabilityType {
   roomId?: string;
   device?: DeviceType;
   room?: RoomType;
+  settings?: DeviceCapabilitySettingsSchema;
+  state?: DeviceCapabilityStateType;
 }
 
 /**
@@ -65,8 +68,7 @@ export interface DeviceCapabilityType {
  */
 export interface DeviceCapabilitySettingsType {
   id?: string;
-  type?: string;
-  value?: string;
+  settings?: DeviceCapabilitySettingsSchema;
   capabilityId?: string;
   capability?: DeviceCapabilityType;
 }

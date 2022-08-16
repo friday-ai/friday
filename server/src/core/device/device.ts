@@ -1,22 +1,28 @@
 import BaseModel from '../../utils/database/model.base';
 import DeviceModel from '../../models/device';
 import EventClass from '../../utils/event';
-import { DeviceCapabilityStateType, DeviceCapabilityType, DeviceType2 } from '../../config/entities';
+import { DeviceCapabilityStateType, DeviceCapabilityType, DeviceType } from '../../config/entities';
 import { Catch } from '../../utils/decorators/error';
-import { DeviceCapabilityRegisterType, DeviceRegisterType, DevicesActionsType } from '../../config/device';
 import { DeviceCommandType } from '../../utils/interfaces';
+import {
+  DeviceCapabilityRegisterType,
+  DeviceCapabilitySettingsSchema,
+  DeviceRegisterType,
+  DevicesActionsType,
+} from '../../config/device';
 
 import register from './device.register';
 import exec from './device.exec';
 import setCapability from './device.setCapability';
 import getCapabilityById from './device.getCapabilityById';
+import setCapabilitySettings from './device.setCapabilitySettings';
 import setCapabilityState from './device.setCapabilityState';
 import { glob as Glob } from 'glob';
 
 /**
  * Device
  */
-export default class Device extends BaseModel<DeviceModel, DeviceType2> {
+export default class Device extends BaseModel<DeviceModel, DeviceType> {
   public event: typeof EventClass;
 
   constructor(event: typeof EventClass) {
@@ -49,6 +55,11 @@ export default class Device extends BaseModel<DeviceModel, DeviceType2> {
   @Catch()
   async getCapabilityById(id: string, scope?: string) {
     return getCapabilityById.call(this, id, scope!);
+  }
+
+  @Catch()
+  async setCapabilitySettings(capabilityId: string, settings: DeviceCapabilitySettingsSchema) {
+    return setCapabilitySettings.call(this, capabilityId, settings);
   }
 
   @Catch()

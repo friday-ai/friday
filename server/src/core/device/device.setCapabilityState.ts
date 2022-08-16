@@ -18,11 +18,8 @@ export default async function setCapabilityState(this: DeviceClass, state: Omit<
 
   // If old state exist, update it
   if (existingState !== null) {
-    const plainStateToUpdate = <DeviceCapabilityStateType>(
-      existingState.get({ plain: true })
-    );
-    plainStateToUpdate.last = false;
-    await existingState.update(plainStateToUpdate);
+    existingState.last = false;
+    await existingState.save();
   }
 
   // And then, create the new state

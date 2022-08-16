@@ -177,7 +177,7 @@ export const TopicHeaderPub = 'friday/satellite/';
 
 export enum TopicToSubscribe {
   'device/destroy',
-  'device/set',
+  'device/register',
   'plugin/discoverme',
   'plugin/heartbeat',
   'plugin/init',

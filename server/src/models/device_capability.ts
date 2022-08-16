@@ -27,6 +27,7 @@ import { DevicesCapabilityType } from '../config/device';
  */
 @DefaultScope(() => ({
   attributes: ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
+  include: [DeviceCapabilitySettings],
 }))
 @Scopes(() => ({
   full: {
@@ -84,7 +85,8 @@ export default class DeviceCapability extends Model {
     deviceId!: string;
 
   @NotEmpty
-  @Is('roomId', (value) => isOwnerExisting(value, ['room']))
+  @AllowNull(true)
+  @Is('roomId', (value) => value !== undefined ? isOwnerExisting(value, ['room']) : true)
   @Column(DataType.UUIDV4)
     roomId!: string;
 
@@ -100,6 +102,12 @@ export default class DeviceCapability extends Model {
     constraints: false,
   })
     room!: Room;
+
+  @HasOne(() => DeviceCapabilitySettings, {
+    foreignKey: 'capabilityId',
+    constraints: false,
+  })
+    settings!: DeviceCapabilitySettings;
 
   @HasOne(() => DeviceCapabilityState, {
     foreignKey: 'capabilityId',

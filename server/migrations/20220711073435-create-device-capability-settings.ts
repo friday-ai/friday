@@ -10,11 +10,7 @@ module.exports = {
         primaryKey: true,
         type: DataType.UUID,
       },
-      type: {
-        allowNull: false,
-        type: DataType.STRING,
-      },
-      value: {
+      settings: {
         type: DataType.JSON,
       },
       capabilityId: {

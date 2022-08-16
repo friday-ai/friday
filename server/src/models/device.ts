@@ -26,28 +26,28 @@ import { DevicesType } from '../config/device';
  * Device model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'deviceId', 'roomId', 'pluginId'],
+  attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'deviceId', 'roomId', 'pluginId'],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'deviceId', 'roomId', 'pluginId'],
+    attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'deviceId', 'roomId', 'pluginId'],
     include: [Room, Plugin, Device, DeviceCapability],
   },
   withDevice: {
-    attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'deviceId', 'roomId', 'pluginId'],
+    attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'deviceId', 'roomId', 'pluginId'],
     include: [Device],
   },
   withRoom: {
-    attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'deviceId', 'roomId', 'pluginId'],
+    attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'deviceId', 'roomId', 'pluginId'],
     include: [Room],
   },
   withPlugin: {
-    attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'deviceId', 'roomId', 'pluginId'],
+    attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'deviceId', 'roomId', 'pluginId'],
     include: [Plugin],
   },
   withCapabilities: {
     attributes: ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'deviceId', 'roomId', 'pluginId'],
-    include: [DeviceCapability],
+    include: [{ model: DeviceCapability.scope('withSettings') }],
   },
 }))
 @Table({
@@ -96,12 +96,17 @@ export default class Device extends Model {
     model!: string;
 
   @AllowNull(true)
-  @Is('deviceId', (value) => isOwnerExisting(value, ['device']))
+  @Column
+    pluginSelector!: string;
+
+  @AllowNull(true)
+  @Is('deviceId', (value) => value !== undefined ? isOwnerExisting(value, ['device']) : true)
   @Column(DataType.UUIDV4)
     deviceId!: string;
 
   @NotEmpty
-  @Is('roomId', (value) => isOwnerExisting(value, ['room']))
+  @AllowNull(true)
+  @Is('roomId', (value) => value !== undefined ? isOwnerExisting(value, ['room']) : true)
   @Column(DataType.UUIDV4)
     roomId!: string;
 
