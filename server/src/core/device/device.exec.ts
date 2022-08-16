@@ -16,7 +16,7 @@ export default async function exec(
   const message = {
     receiver: device.pluginId,
     message: {
-      device: device.id,
+      device: device.pluginSelector ? device.pluginSelector : device.id,
       method: command.action,
       params: command.params,
     },

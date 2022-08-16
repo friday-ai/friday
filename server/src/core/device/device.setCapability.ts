@@ -9,7 +9,7 @@ import logger from '../../utils/log';
  * @param deviceId
  * @param capability
  */
-export default async function setCapabilityState(this: DeviceClass, deviceId: string, capability: Omit<DeviceCapabilityRegisterType, 'id'>): Promise<DeviceCapabilityType> {
+export default async function setCapability(this: DeviceClass, deviceId: string, capability: Omit<DeviceCapabilityRegisterType, 'id'>): Promise<DeviceCapabilityType> {
   const capabilityToCreate: DeviceCapabilityType = {
     deviceId,
     defaultName: capability.defaultName,
@@ -21,6 +21,10 @@ export default async function setCapabilityState(this: DeviceClass, deviceId: st
   logger.success(
     `New capability registered, type: ${capability.type} for device ${deviceId}`,
   );
+
+  if (capability.settings) {
+    await this.setCapabilitySettings(deviceCapability.id!, capability.settings!);
+  }
 
   return <DeviceCapabilityType>deviceCapability.get({ plain: true });
 }

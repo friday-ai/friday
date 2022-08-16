@@ -10,7 +10,9 @@ export default async function register(this: DeviceClass, device: DeviceRegister
     defaultManufacturer: device.defaultManufacturer,
     defaultName: device.defaultName,
     defaultModel: device.defaultModel,
-    deviceId: device.deviceId,
+    type: device.type,
+    pluginSelector: device.pluginSelector,
+    deviceId: device.deviceId || undefined,
     pluginId: device.pluginId,
   };
 

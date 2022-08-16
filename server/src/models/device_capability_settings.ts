@@ -16,12 +16,13 @@ import {
 import Device from './device';
 import { isOwnerExisting } from '../utils/database/validation';
 import DeviceCapability from './device_capability';
+import { DeviceCapabilitySettingsSchema } from '../config/device';
 
 /**
  * Device capability settings model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'capabilityId', 'value'],
+  attributes: ['id', 'capabilityId', 'settings'],
 }))
 @Table({
   tableName: 'device_capability_settings',
@@ -42,14 +43,9 @@ export default class DeviceCapabilitySettings extends Model {
   @Column(DataType.UUIDV4)
     capabilityId!: string;
 
-  @AllowNull(false)
-  @NotEmpty
-  @Column
-    type!: string;
-
-  @AllowNull(false)
+  @AllowNull(true)
   @Column(DataType.JSON)
-    value!: string;
+    settings!: DeviceCapabilitySettingsSchema;
 
   @BelongsTo(() => Device, {
     foreignKey: 'capabilityId',

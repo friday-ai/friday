@@ -35,6 +35,9 @@ module.exports = {
       model: {
         type: DataType.JSON,
       },
+      pluginSelector: {
+        type: DataType.STRING,
+      },
       deviceId: {
         type: DataType.UUID,
       },
