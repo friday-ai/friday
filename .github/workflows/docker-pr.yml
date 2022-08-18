@@ -26,7 +26,7 @@ jobs:
       - name: 'Reviewdog: ESLint'
         uses: reviewdog/action-eslint@v1
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: 'github-pr-review'
           fail_on_error: true
           eslint_flags: '--ext .js,.jsx,.ts,.tsx ./'
