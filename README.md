@@ -16,13 +16,13 @@ npm run test
 npm i -g typescript tslint
 npm run lint
 
-# fix linting errors 
+# fix linting errors
 npm run lint:fix
 
 # Start container in development mode
 ## with make
 make dev
-## without make
+## without make (please delete if exists all node_modules before)
 docker compose up -d --remove-orphans
 
 # Start container in production mode

@@ -7,6 +7,9 @@ prod:
 		up -d --remove-orphans
 
 dev:
+	@if [ -d ./node_modules ]; then rm -r ./node_modules; fi
+	@if [ -d ./client/node_modules ]; then rm -r ./client/node_modules; fi
+	@if [ -d ./server/node_modules ]; then rm -r ./server/node_modules; fi
 	@docker compose up -d --remove-orphans
 
 log:
