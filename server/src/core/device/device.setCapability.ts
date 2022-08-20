@@ -3,6 +3,7 @@ import DeviceClass from './device';
 import { DeviceCapabilityType } from '../../config/entities';
 import { DeviceCapabilityRegisterType } from '../../config/device';
 import logger from '../../utils/log';
+import { BadParametersError } from '../../utils/decorators/error';
 
 /**
  * Device capability
@@ -15,6 +16,10 @@ export default async function setCapability(this: DeviceClass, deviceId: string,
     defaultName: capability.defaultName,
     type: capability.type,
   };
+
+  if (deviceId === '') {
+    throw new BadParametersError({ name: 'Friday set capability', message: 'Device id is empty', metadata: capability });
+  }
 
   const deviceCapability = await DeviceCapability.create({ ...capabilityToCreate });
 
