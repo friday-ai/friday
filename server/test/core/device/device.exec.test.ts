@@ -24,7 +24,7 @@ describe('Device.exec', () => {
     expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{}}');
   });
 
-  it('should not exec a device action', async () => {
+  it('should not exec a device action with wrong device id', async () => {
     const promise = device.exec('wrong', { action: DevicesActionsType.TURN_ON, params: {} });
     await assert.isRejected(promise, NotFoundError);
   });
