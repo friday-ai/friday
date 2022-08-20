@@ -14,9 +14,16 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.contains.keys(
-            ['id', 'name', 'dockerId', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-          );
+          expect(plugin).to.contains.keys([
+            'id',
+            'name',
+            'dockerId',
+            'version',
+            'url',
+            'enabled',
+            'satelliteId',
+            'lastHeartbeat',
+          ]);
         });
       });
   });
@@ -32,30 +39,57 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.contains.keys(
-            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
-          );
+          expect(plugin).to.contains.keys([
+            'id',
+            'name',
+            'version',
+            'url',
+            'enabled',
+            'satelliteId',
+            'satellite',
+            'state',
+            'devices',
+            'variables',
+            'lastHeartbeat',
+          ]);
           if (plugin.state !== null) {
             expect(plugin.state).to.be.an('object');
-            expect(plugin.state).to.contains.keys(
-              ['id', 'owner', 'ownerType', 'value'],
-            );
+            expect(plugin.state).to.contains.keys([
+              'id',
+              'owner',
+              'ownerType',
+              'value',
+            ]);
           }
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
-            expect(plugin.satellite).to.contains.keys(
-              ['id', 'name', 'roomId', 'lastHeartbeat'],
-            );
+            expect(plugin.satellite).to.contains.keys([
+              'id',
+              'name',
+              'roomId',
+              'lastHeartbeat',
+            ]);
           }
 
           if (plugin.devices !== null) {
             expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.contains.keys(
-                ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-              );
+              expect(device).to.contains.keys([
+                'id',
+                'defaultName',
+                'defaultManufacturer',
+                'defaultModel',
+                'name',
+                'type',
+                'manufacturer',
+                'model',
+                'pluginSelector',
+                'viaDevice',
+                'roomId',
+                'pluginId',
+              ]);
             });
           }
 
@@ -63,9 +97,13 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.contains.keys(
-                ['id', 'key', 'value', 'owner', 'ownerType'],
-              );
+              expect(variable).to.contains.keys([
+                'id',
+                'key',
+                'value',
+                'owner',
+                'ownerType',
+              ]);
             });
           }
         });
@@ -83,30 +121,57 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.contains.keys(
-            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
-          );
+          expect(plugin).to.contains.keys([
+            'id',
+            'name',
+            'version',
+            'url',
+            'enabled',
+            'satelliteId',
+            'satellite',
+            'state',
+            'devices',
+            'variables',
+            'lastHeartbeat',
+          ]);
           if (plugin.state !== null) {
             expect(plugin.state).to.be.an('object');
-            expect(plugin.state).to.contains.keys(
-              ['id', 'owner', 'ownerType', 'value'],
-            );
+            expect(plugin.state).to.contains.keys([
+              'id',
+              'owner',
+              'ownerType',
+              'value',
+            ]);
           }
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
-            expect(plugin.satellite).to.contains.keys(
-              ['id', 'name', 'roomId', 'lastHeartbeat'],
-            );
+            expect(plugin.satellite).to.contains.keys([
+              'id',
+              'name',
+              'roomId',
+              'lastHeartbeat',
+            ]);
           }
 
           if (plugin.devices !== null) {
             expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.contains.keys(
-                ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-              );
+              expect(device).to.contains.keys([
+                'id',
+                'defaultName',
+                'defaultManufacturer',
+                'defaultModel',
+                'name',
+                'type',
+                'manufacturer',
+                'model',
+                'pluginSelector',
+                'viaDevice',
+                'roomId',
+                'pluginId',
+              ]);
             });
           }
 
@@ -114,9 +179,13 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.contains.keys(
-                ['id', 'key', 'value', 'owner', 'ownerType'],
-              );
+              expect(variable).to.contains.keys([
+                'id',
+                'key',
+                'value',
+                'owner',
+                'ownerType',
+              ]);
             });
           }
         });
@@ -134,30 +203,57 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.contains.keys(
-            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'state', 'devices', 'variables', 'lastHeartbeat'],
-          );
+          expect(plugin).to.contains.keys([
+            'id',
+            'name',
+            'version',
+            'url',
+            'enabled',
+            'satelliteId',
+            'satellite',
+            'state',
+            'devices',
+            'variables',
+            'lastHeartbeat',
+          ]);
           if (plugin.state !== null) {
             expect(plugin.state).to.be.an('object');
-            expect(plugin.state).to.contains.keys(
-              ['id', 'owner', 'ownerType', 'value'],
-            );
+            expect(plugin.state).to.contains.keys([
+              'id',
+              'owner',
+              'ownerType',
+              'value',
+            ]);
           }
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
-            expect(plugin.satellite).to.contains.keys(
-              ['id', 'name', 'roomId', 'lastHeartbeat'],
-            );
+            expect(plugin.satellite).to.contains.keys([
+              'id',
+              'name',
+              'roomId',
+              'lastHeartbeat',
+            ]);
           }
 
           if (plugin.devices !== null) {
             expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.contains.keys(
-                ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-              );
+              expect(device).to.contains.keys([
+                'id',
+                'defaultName',
+                'defaultManufacturer',
+                'defaultModel',
+                'name',
+                'type',
+                'manufacturer',
+                'model',
+                'pluginSelector',
+                'viaDevice',
+                'roomId',
+                'pluginId',
+              ]);
             });
           }
 
@@ -165,9 +261,13 @@ describe('GET /api/v1/plugin', () => {
             expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.contains.keys(
-                ['id', 'key', 'value', 'owner', 'ownerType'],
-              );
+              expect(variable).to.contains.keys([
+                'id',
+                'key',
+                'value',
+                'owner',
+                'ownerType',
+              ]);
             });
           }
         });
@@ -185,15 +285,25 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.contains.keys(
-            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'satellite', 'lastHeartbeat'],
-          );
+          expect(plugin).to.contains.keys([
+            'id',
+            'name',
+            'version',
+            'url',
+            'enabled',
+            'satelliteId',
+            'satellite',
+            'lastHeartbeat',
+          ]);
 
           if (plugin.satellite !== null) {
             expect(plugin.satellite).to.be.an('object');
-            expect(plugin.satellite).to.contains.keys(
-              ['id', 'name', 'roomId', 'lastHeartbeat'],
-            );
+            expect(plugin.satellite).to.contains.keys([
+              'id',
+              'name',
+              'roomId',
+              'lastHeartbeat',
+            ]);
           }
         });
       });
@@ -210,14 +320,24 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.contains.keys(
-            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state', 'lastHeartbeat'],
-          );
+          expect(plugin).to.contains.keys([
+            'id',
+            'name',
+            'version',
+            'url',
+            'enabled',
+            'satelliteId',
+            'state',
+            'lastHeartbeat',
+          ]);
           if (plugin.state !== null) {
             expect(plugin.state).to.be.an('object');
-            expect(plugin.state).to.contains.keys(
-              ['id', 'owner', 'ownerType', 'value'],
-            );
+            expect(plugin.state).to.contains.keys([
+              'id',
+              'owner',
+              'ownerType',
+              'value',
+            ]);
           }
         });
       });
@@ -234,17 +354,36 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.contains.keys(
-            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'devices', 'lastHeartbeat'],
-          );
+          expect(plugin).to.contains.keys([
+            'id',
+            'dockerId',
+            'name',
+            'version',
+            'url',
+            'enabled',
+            'satelliteId',
+            'lastHeartbeat',
+            'devices',
+          ]);
 
           if (plugin.devices !== null) {
             expect(plugin.devices).to.be.an('array');
             plugin.devices!.forEach((device) => {
               expect(device).to.be.an('object');
-              expect(device).to.contains.keys(
-                ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-              );
+              expect(device).to.contains.keys([
+                'id',
+                'defaultName',
+                'defaultManufacturer',
+                'defaultModel',
+                'name',
+                'type',
+                'manufacturer',
+                'model',
+                'pluginSelector',
+                'viaDevice',
+                'roomId',
+                'pluginId',
+              ]);
             });
           }
         });
@@ -262,16 +401,27 @@ describe('GET /api/v1/plugin', () => {
         expect(plugins).to.be.an('array');
         plugins.forEach((plugin: PluginType) => {
           expect(plugin).to.be.an('object');
-          expect(plugin).to.contains.keys(
-            ['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'variables', 'lastHeartbeat'],
-          );
+          expect(plugin).to.contains.keys([
+            'id',
+            'name',
+            'version',
+            'url',
+            'enabled',
+            'satelliteId',
+            'variables',
+            'lastHeartbeat',
+          ]);
           if (plugin.variables !== null) {
             expect(plugin.variables).to.be.an('array');
             plugin.variables!.forEach((variable) => {
               expect(variable).to.be.an('object');
-              expect(variable).to.contains.keys(
-                ['id', 'key', 'value', 'owner', 'ownerType'],
-              );
+              expect(variable).to.contains.keys([
+                'id',
+                'key',
+                'value',
+                'owner',
+                'ownerType',
+              ]);
             });
           }
         });

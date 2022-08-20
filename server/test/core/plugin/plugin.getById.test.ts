@@ -21,144 +21,94 @@ describe('Plugin.getById', () => {
   it('should return a plugin with full scope', async () => {
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'full');
 
-    expect(pluginReturned).to.have.property('id');
-    expect(pluginReturned).to.have.property('name');
-    expect(pluginReturned).to.have.property('version');
-    expect(pluginReturned).to.have.property('url');
-    expect(pluginReturned).to.have.property('enabled');
-    expect(pluginReturned).to.have.property('satelliteId');
-    expect(pluginReturned).to.have.property('lastHeartbeat');
+    expect(pluginReturned).to.be.an('object');
+    expect(pluginReturned).to.contains.keys(
+      ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    );
 
-    if (pluginReturned.state !== null) {
-      expect(pluginReturned.state).to.be.an('object');
-      expect(pluginReturned.state).to.have.property('id');
-      expect(pluginReturned.state).to.have.property('owner');
-      expect(pluginReturned.state).to.have.property('ownerType');
-      expect(pluginReturned.state).to.have.property('value');
-    }
+    expect(pluginReturned.state).to.be.an('object');
+    expect(pluginReturned.state).to.contains.keys(
+      ['id', 'owner', 'ownerType', 'value'],
+    );
 
-    if (pluginReturned.satellite !== null) {
-      expect(pluginReturned.satellite).to.be.an('object');
-      expect(pluginReturned.satellite).to.have.property('id');
-      expect(pluginReturned.satellite).to.have.property('name');
-      expect(pluginReturned.satellite).to.have.property('roomId');
-    }
+    expect(pluginReturned.satellite).to.be.an('object');
+    expect(pluginReturned.satellite).to.contains.keys(
+      ['id', 'name', 'roomId'],
+    );
 
-    if (pluginReturned.devices !== null) {
-      expect(pluginReturned.devices).to.be.an('array');
-      pluginReturned.devices!.forEach((d) => {
-        expect(d).to.be.an('object');
-        expect(d).to.have.property('id');
-        expect(d).to.have.property('name');
-        expect(d).to.have.property('type');
-        expect(d).to.have.property('subType');
-        expect(d).to.have.property('variable');
-        expect(d).to.have.property('unit');
-        expect(d).to.have.property('value');
-      });
-    }
+    expect(pluginReturned.devices).to.be.an('array');
+    pluginReturned.devices!.forEach((d) => {
+      expect(d).to.contains.keys(
+        ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
+      );
+    });
 
-    if (pluginReturned.variables !== null) {
-      expect(pluginReturned.variables).to.be.an('array');
-      pluginReturned.variables!.forEach((v) => {
-        expect(v).to.be.an('object');
-        expect(v).to.have.property('id');
-        expect(v).to.have.property('key');
-        expect(v).to.have.property('value');
-        expect(v).to.have.property('owner');
-        expect(v).to.have.property('ownerType');
-      });
-    }
+    expect(pluginReturned.variables).to.be.an('array');
+    pluginReturned.variables!.forEach((v) => {
+      expect(v).to.contains.keys(
+        ['id', 'value', 'owner', 'ownerType', 'value'],
+      );
+    });
   });
 
   it('should return a plugin with satellite', async () => {
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'withSatellite');
 
-    expect(pluginReturned).to.have.property('id');
-    expect(pluginReturned).to.have.property('name');
-    expect(pluginReturned).to.have.property('version');
-    expect(pluginReturned).to.have.property('url');
-    expect(pluginReturned).to.have.property('enabled');
-    expect(pluginReturned).to.have.property('satelliteId');
-    expect(pluginReturned).to.have.property('lastHeartbeat');
+    expect(pluginReturned).to.be.an('object');
+    expect(pluginReturned).to.contains.keys(
+      ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    );
 
-    if (pluginReturned.satellite !== null) {
-      expect(pluginReturned.satellite).to.be.an('object');
-      expect(pluginReturned.satellite).to.have.property('id');
-      expect(pluginReturned.satellite).to.have.property('name');
-      expect(pluginReturned.satellite).to.have.property('roomId');
-    }
+    expect(pluginReturned.satellite).to.be.an('object');
+    expect(pluginReturned.satellite).to.contains.keys(
+      ['id', 'name', 'roomId'],
+    );
   });
 
   it('should return a plugin with state', async () => {
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'withState');
 
-    expect(pluginReturned).to.have.property('id');
-    expect(pluginReturned).to.have.property('name');
-    expect(pluginReturned).to.have.property('version');
-    expect(pluginReturned).to.have.property('url');
-    expect(pluginReturned).to.have.property('enabled');
-    expect(pluginReturned).to.have.property('satelliteId');
-    expect(pluginReturned).to.have.property('lastHeartbeat');
+    expect(pluginReturned).to.be.an('object');
+    expect(pluginReturned).to.contains.keys(
+      ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    );
 
-    // TODO: The state cannot must be null
-    if (pluginReturned.state !== null) {
-      expect(pluginReturned.state).to.be.an('object');
-      expect(pluginReturned.state).to.have.property('id');
-      expect(pluginReturned.state).to.have.property('owner');
-      expect(pluginReturned.state).to.have.property('ownerType');
-      expect(pluginReturned.state).to.have.property('value');
-    }
+    expect(pluginReturned.state).to.be.an('object');
+    expect(pluginReturned.state).to.contains.keys(
+      ['id', 'owner', 'ownerType', 'value'],
+    );
   });
 
   it('should return a plugin with devices', async () => {
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'withDevices');
 
-    expect(pluginReturned).to.have.property('id');
-    expect(pluginReturned).to.have.property('name');
-    expect(pluginReturned).to.have.property('version');
-    expect(pluginReturned).to.have.property('url');
-    expect(pluginReturned).to.have.property('enabled');
-    expect(pluginReturned).to.have.property('satelliteId');
-    expect(pluginReturned).to.have.property('lastHeartbeat');
+    expect(pluginReturned).to.be.an('object');
+    expect(pluginReturned).to.contains.keys(
+      ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    );
 
-    if (pluginReturned.devices !== null) {
-      expect(pluginReturned.devices).to.be.an('array');
-      pluginReturned.devices!.forEach((d) => {
-        expect(d).to.be.an('object');
-        expect(d).to.have.property('id');
-        expect(d).to.have.property('name');
-        expect(d).to.have.property('type');
-        expect(d).to.have.property('subType');
-        expect(d).to.have.property('variable');
-        expect(d).to.have.property('unit');
-        expect(d).to.have.property('value');
-      });
-    }
+    expect(pluginReturned.devices).to.be.an('array');
+    pluginReturned.devices!.forEach((d) => {
+      expect(d).to.contains.keys(
+        ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
+      );
+    });
   });
 
   it('should return a plugin with variables', async () => {
     const pluginReturned = await plugin.getById('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', 'withVariables');
 
-    expect(pluginReturned).to.have.property('id');
-    expect(pluginReturned).to.have.property('name');
-    expect(pluginReturned).to.have.property('version');
-    expect(pluginReturned).to.have.property('url');
-    expect(pluginReturned).to.have.property('enabled');
-    expect(pluginReturned).to.have.property('satelliteId');
-    expect(pluginReturned).to.have.property('lastHeartbeat');
+    expect(pluginReturned).to.be.an('object');
+    expect(pluginReturned).to.contains.keys(
+      ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    );
 
-    if (pluginReturned.variables !== null) {
-      expect(pluginReturned.variables).to.be.an('array');
-      pluginReturned.variables!.forEach((v) => {
-        expect(v).to.be.an('object');
-        expect(v).to.have.property('id');
-        expect(v).to.have.property('key');
-        expect(v).to.have.property('value');
-        expect(v).to.have.property('owner');
-        expect(v).to.have.property('ownerType');
-      });
-    }
+    expect(pluginReturned.variables).to.be.an('array');
+    pluginReturned.variables!.forEach((v) => {
+      expect(v).to.contains.keys(
+        ['id', 'value', 'owner', 'ownerType', 'value'],
+      );
+    });
   });
 
   it('should not found a plugin', async () => {
