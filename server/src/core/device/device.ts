@@ -1,7 +1,7 @@
 import BaseModel from '../../utils/database/model.base';
 import DeviceModel from '../../models/device';
 import EventClass from '../../utils/event';
-import { DeviceCapabilityStateType, DeviceCapabilityType, DeviceType } from '../../config/entities';
+import { DeviceCapabilityStateType, DeviceType } from '../../config/entities';
 import { Catch } from '../../utils/decorators/error';
 import { DeviceCommandType } from '../../utils/interfaces';
 import {
@@ -68,7 +68,7 @@ export default class Device extends BaseModel<DeviceModel, DeviceType> {
   }
 
   @Catch()
-  async exec(capability: DeviceCapabilityType, command: DeviceCommandType) {
-    return exec.call(this, capability, command);
+  async exec(identifier: string, command: DeviceCommandType) {
+    return exec.call(this, identifier, command);
   }
 }

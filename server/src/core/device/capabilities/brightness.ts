@@ -21,7 +21,7 @@ export async function setBrightness(this: DeviceClass, args: { id: string, value
     value: args.value.toString(),
   });
 
-  await this.exec(capability, { action: DevicesActionsType.SET_BRIGHTNESS, params: { value: args.value } });
+  await this.exec(capability.deviceId!, { action: DevicesActionsType.SET_BRIGHTNESS, params: { value: args.value } });
 
   return state;
 }

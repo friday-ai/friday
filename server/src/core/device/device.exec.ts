@@ -1,5 +1,4 @@
 import DeviceClass from './device';
-import { DeviceCapabilityType } from '../../config/entities';
 import { EventsType, MqttMessageTypes, TopicsTypes } from '../../config/constants';
 import { DeviceCommandType } from '../../utils/interfaces';
 
@@ -8,11 +7,12 @@ import { DeviceCommandType } from '../../utils/interfaces';
  */
 export default async function exec(
   this: DeviceClass,
-  capability: DeviceCapabilityType,
+  identifier: string,
   command: DeviceCommandType,
 ): Promise<void> {
-  const device = await this.getById(capability.deviceId!);
+  const device = await this.getById(identifier);
 
+  // TODO: check if action is available for this device
   const message = {
     receiver: device.pluginId,
     message: {
