@@ -12,7 +12,7 @@ export default async function register(this: DeviceClass, device: DeviceRegister
     defaultModel: device.defaultModel,
     type: device.type,
     pluginSelector: device.pluginSelector,
-    deviceId: device.deviceId || undefined,
+    viaDevice: device.viaDevice || undefined,
     pluginId: device.pluginId,
   };
 

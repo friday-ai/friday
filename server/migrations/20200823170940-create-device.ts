@@ -38,7 +38,7 @@ module.exports = {
       pluginSelector: {
         type: DataType.STRING,
       },
-      deviceId: {
+      viaDevice: {
         type: DataType.UUID,
       },
       roomId: {

@@ -45,7 +45,7 @@ interface DeviceRegisterType {
   defaultManufacturer: string;
   defaultModel: string;
   type: DevicesType;
-  deviceId?: string;
+  viaDevice?: string;
   pluginSelector?: string;
   pluginId: string;
   capabilities?: DeviceCapabilityRegisterType[];

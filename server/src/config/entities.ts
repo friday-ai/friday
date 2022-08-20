@@ -38,7 +38,7 @@ export interface DeviceType {
   manufacturer?: string;
   model?: string;
   pluginSelector?: string;
-  deviceId?: string;
+  viaDevice?: string;
   roomId?: string;
   pluginId?: string;
   device?: DeviceType;
@@ -78,7 +78,7 @@ export interface DeviceCapabilitySettingsType {
  */
 export interface DeviceCapabilityStateType {
   id?: string;
-  value?: string;
+  value?: string | number | boolean | Color;
   last?: boolean;
   capabilityId?: string;
   capability?: DeviceCapabilityType;
