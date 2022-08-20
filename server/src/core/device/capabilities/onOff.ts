@@ -21,7 +21,12 @@ export async function setOnOff(this: DeviceClass, args: { id: string, value: boo
     value: args.value ? 'ON' : 'OFF',
   });
 
-  await this.exec(capability.deviceId!, { action: args.value ? DevicesActionsType.TURN_ON : DevicesActionsType.TURN_OFF, params: {} });
+  await this.exec(
+    capability.deviceId!,
+    {
+      action: args.value ? DevicesActionsType.TURN_ON : DevicesActionsType.TURN_OFF,
+      params: {},
+    });
 
   return state;
 }

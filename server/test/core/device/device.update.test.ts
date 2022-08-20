@@ -19,6 +19,7 @@ describe('Device.update', () => {
 
   it('should not found device to update', async () => {
     const promise = device.update('39144f78-36e7-4c8b-88d1-b42dead53a09', {
+      name: 'Device update',
     });
 
     await assert.isRejected(promise, NotFoundError);

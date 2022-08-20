@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  FridayRouter, Get, Patch, Post, Delete,
-} from '../../../utils/decorators/route';
+import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
 /**
@@ -48,8 +46,8 @@ export default class DeviceRouter {
   @Post({
     path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'device',
   })
-    create = async (req: Request, res: Response) => {
-      const device = await this.friday.device.create(req.body);
+    register = async (req: Request, res: Response) => {
+      const device = await this.friday.device.register(req.body);
       res.status(201).json(device);
     };
 
