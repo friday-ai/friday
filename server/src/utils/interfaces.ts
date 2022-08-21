@@ -101,6 +101,7 @@ export interface PluginInstallOptions {
   name: string,
   repoTag: string;
   version: string;
+  satelliteId: string;
 }
 
 export interface DeviceCommandType {

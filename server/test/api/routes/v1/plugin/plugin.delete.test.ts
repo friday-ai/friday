@@ -16,7 +16,7 @@ describe('DELETE /api/v1/plugin/:id', () => {
   const variable = new Variable();
   const state = new State(event, variable);
   const docker = new Docker();
-  const plugin = new Plugin('e2cz8cc-60a7-4c40-87d2-b25048b1aa04', docker, state);
+  const plugin = new Plugin(docker, state);
 
   // Create a fake container and save docker id on plugin
   beforeEach(async function () {

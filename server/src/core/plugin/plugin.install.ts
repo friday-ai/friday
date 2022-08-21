@@ -15,6 +15,7 @@ import logger from '../../utils/log';
  *    name: 'Sample plugin',
  *    version: '1.0.0',
  *    repoTag: 'sample:latest',
+ *    satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f
  * });
  * ````
  */
@@ -37,7 +38,7 @@ export default async function install(this: PluginClass, options: PluginInstallO
       enabled: true,
       url: 'TODO',
       version: options.version,
-      satelliteId: this.masterId,
+      satelliteId: options.satelliteId,
     });
 
     await this.state.set({

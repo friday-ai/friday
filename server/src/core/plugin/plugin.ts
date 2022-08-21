@@ -14,13 +14,11 @@ import stop from './plugin.stop';
  * Plugin
  */
 export default class Plugin extends BaseModel<PluginModel, PluginType> {
-  public masterId: string;
   public docker: DockerClass;
   public state: StateClass;
 
-  constructor(masterId: string, docker: DockerClass, state: StateClass) {
+  constructor(docker: DockerClass, state: StateClass) {
     super(PluginModel);
-    this.masterId = masterId;
     this.docker = docker;
     this.state = state;
   }

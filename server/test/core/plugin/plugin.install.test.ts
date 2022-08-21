@@ -12,7 +12,6 @@ describe('Plugin.install', () => {
     plugin = global.FRIDAY.plugin;
     // Override object for tests
     global.FRIDAY.docker.dockerode = new Dockerode();
-    plugin.masterId = 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f';
   });
 
   after(async function () {
@@ -26,6 +25,7 @@ describe('Plugin.install', () => {
       name: 'Sample-plugin',
       version: 'v1',
       repoTag: 'alpine:latest',
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
     });
 
     container = await global.FRIDAY.docker.getContainer(installedPlugin.dockerId!);
@@ -43,6 +43,7 @@ describe('Plugin.install', () => {
       name: 'Sample-plugin',
       version: 'v1',
       repoTag: 'fake-plugin:friday',
+      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
     });
 
     await assert.isRejected(promise, NotFoundError);
