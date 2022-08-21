@@ -38,7 +38,7 @@ export default class Log {
   static info(text: string) {
     if (env !== 'test') {
       // tslint:disable-next-line: no-console
-      console.info('\x1b[36m➡ %s\x1b[0m', text);
+      console.info('\x1b[36m➡  %s\x1b[0m', text);
     }
   }
 
@@ -49,7 +49,7 @@ export default class Log {
    */
   static success(text: string) {
     if (env !== 'test') {
-      console.log('\x1b[32m✔ %s\x1b[0m', text);
+      console.log('\x1b[32m✔  %s\x1b[0m', text);
     }
   }
 
@@ -60,7 +60,7 @@ export default class Log {
    */
   static warning(text: string) {
     if (env !== 'test') {
-      console.warn('\x1b[33m❗ %s\x1b[0m', text);
+      console.warn('\x1b[33m❗  %s\x1b[0m', text);
     }
   }
 
@@ -73,7 +73,7 @@ export default class Log {
   static error(text: string) {
     if (env !== 'test') {
       // tslint:disable-next-line: no-console
-      console.trace('\x1b[31m✖ %s\x1b[0m', text);
+      console.trace('\x1b[31m✖  %s\x1b[0m', text);
     }
   }
 }
