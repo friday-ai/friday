@@ -24,54 +24,33 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.have.property('id');
-      expect(p).to.have.property('name');
-      expect(p).to.have.property('version');
-      expect(p).to.have.property('url');
-      expect(p).to.have.property('enabled');
-      expect(p).to.have.property('satelliteId');
-      expect(p).to.have.property('lastHeartbeat');
+      expect(p).to.contains.keys(
+        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+      );
 
-      if (p.state !== null) {
-        expect(p.state).to.be.an('object');
-        expect(p.state).to.have.property('id');
-        expect(p.state).to.have.property('owner');
-        expect(p.state).to.have.property('ownerType');
-        expect(p.state).to.have.property('value');
-      }
+      expect(p.state).to.be.an('object');
+      expect(p.state).to.contains.keys(
+        ['id', 'owner', 'ownerType', 'value'],
+      );
 
-      if (p.satellite !== null) {
-        expect(p.satellite).to.be.an('object');
-        expect(p.satellite).to.have.property('id');
-        expect(p.satellite).to.have.property('name');
-        expect(p.satellite).to.have.property('roomId');
-      }
+      expect(p.satellite).to.be.an('object');
+      expect(p.satellite).to.contains.keys(
+        ['id', 'name', 'roomId'],
+      );
 
-      if (p.devices !== null) {
-        expect(p.devices).to.be.an('array');
-        p.devices!.forEach((d) => {
-          expect(d).to.be.an('object');
-          expect(d).to.have.property('id');
-          expect(d).to.have.property('name');
-          expect(d).to.have.property('type');
-          expect(d).to.have.property('subType');
-          expect(d).to.have.property('variable');
-          expect(d).to.have.property('unit');
-          expect(d).to.have.property('value');
-        });
-      }
+      expect(p.devices).to.be.an('array');
+      p.devices!.forEach((d) => {
+        expect(d).to.contains.keys(
+          ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
+        );
+      });
 
-      if (p.variables !== null) {
-        expect(p.variables).to.be.an('array');
-        p.variables!.forEach((v) => {
-          expect(v).to.be.an('object');
-          expect(v).to.have.property('id');
-          expect(v).to.have.property('key');
-          expect(v).to.have.property('value');
-          expect(v).to.have.property('owner');
-          expect(v).to.have.property('ownerType');
-        });
-      }
+      expect(p.variables).to.be.an('array');
+      p.variables!.forEach((v) => {
+        expect(v).to.contains.keys(
+          ['id', 'value', 'owner', 'ownerType', 'value'],
+        );
+      });
     });
   });
 
@@ -80,20 +59,14 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.have.property('id');
-      expect(p).to.have.property('name');
-      expect(p).to.have.property('version');
-      expect(p).to.have.property('url');
-      expect(p).to.have.property('enabled');
-      expect(p).to.have.property('satelliteId');
-      expect(p).to.have.property('lastHeartbeat');
+      expect(p).to.contains.keys(
+        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+      );
 
-      if (p.satellite !== null) {
-        expect(p.satellite).to.be.an('object');
-        expect(p.satellite).to.have.property('id');
-        expect(p.satellite).to.have.property('name');
-        expect(p.satellite).to.have.property('roomId');
-      }
+      expect(p.satellite).to.be.an('object');
+      expect(p.satellite).to.contains.keys(
+        ['id', 'name', 'roomId'],
+      );
     });
   });
 
@@ -102,22 +75,14 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.have.property('id');
-      expect(p).to.have.property('name');
-      expect(p).to.have.property('version');
-      expect(p).to.have.property('url');
-      expect(p).to.have.property('enabled');
-      expect(p).to.have.property('satelliteId');
-      expect(p).to.have.property('lastHeartbeat');
+      expect(p).to.contains.keys(
+        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+      );
 
-      // TODO: The state cannot must be null
-      if (p.state !== null) {
-        expect(p.state).to.be.an('object');
-        expect(p.state).to.have.property('id');
-        expect(p.state).to.have.property('owner');
-        expect(p.state).to.have.property('ownerType');
-        expect(p.state).to.have.property('value');
-      }
+      expect(p.state).to.be.an('object');
+      expect(p.state).to.contains.keys(
+        ['id', 'owner', 'ownerType', 'value'],
+      );
     });
   });
 
@@ -126,27 +91,16 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.have.property('id');
-      expect(p).to.have.property('name');
-      expect(p).to.have.property('version');
-      expect(p).to.have.property('url');
-      expect(p).to.have.property('enabled');
-      expect(p).to.have.property('satelliteId');
-      expect(p).to.have.property('lastHeartbeat');
+      expect(p).to.contains.keys(
+        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+      );
 
-      if (p.devices !== null) {
-        expect(p.devices).to.be.an('array');
-        p.devices!.forEach((d) => {
-          expect(d).to.be.an('object');
-          expect(d).to.have.property('id');
-          expect(d).to.have.property('name');
-          expect(d).to.have.property('type');
-          expect(d).to.have.property('subType');
-          expect(d).to.have.property('variable');
-          expect(d).to.have.property('unit');
-          expect(d).to.have.property('value');
-        });
-      }
+      expect(p.devices).to.be.an('array');
+      p.devices!.forEach((d) => {
+        expect(d).to.contains.keys(
+          ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
+        );
+      });
     });
   });
 
@@ -155,25 +109,16 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.have.property('id');
-      expect(p).to.have.property('name');
-      expect(p).to.have.property('version');
-      expect(p).to.have.property('url');
-      expect(p).to.have.property('enabled');
-      expect(p).to.have.property('satelliteId');
-      expect(p).to.have.property('lastHeartbeat');
+      expect(p).to.contains.keys(
+        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+      );
 
-      if (p.variables !== null) {
-        expect(p.variables).to.be.an('array');
-        p.variables!.forEach((v) => {
-          expect(v).to.be.an('object');
-          expect(v).to.have.property('id');
-          expect(v).to.have.property('key');
-          expect(v).to.have.property('value');
-          expect(v).to.have.property('owner');
-          expect(v).to.have.property('ownerType');
-        });
-      }
+      expect(p.variables).to.be.an('array');
+      p.variables!.forEach((v) => {
+        expect(v).to.contains.keys(
+          ['id', 'value', 'owner', 'ownerType', 'value'],
+        );
+      });
     });
   });
 });

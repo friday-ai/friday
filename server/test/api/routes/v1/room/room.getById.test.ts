@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import server from '../../../../utils/request';
 import { DeviceType, SatelliteType } from '../../../../../src/config/entities';
 
@@ -27,34 +27,60 @@ describe('GET /api/v1/room/:id', () => {
       .then((res) => {
         const room = res.body;
         expect(room).to.be.an('object');
-        expect(room).to.contains.keys(
-          ['id', 'name', 'houseId', 'house', 'devices', 'satellites', 'state'],
-        );
+        expect(room).to.contains.keys([
+          'id',
+          'name',
+          'houseId',
+          'house',
+          'devices',
+          'satellites',
+          'state',
+        ]);
         expect(room.house).to.be.an('object');
-        expect(room.house).to.contains.keys(
-          ['id', 'name', 'latitude', 'longitude'],
-        );
+        expect(room.house).to.contains.keys([
+          'id',
+          'name',
+          'latitude',
+          'longitude',
+        ]);
         if (room.state !== null) {
           expect(room.state).to.be.an('object');
-          expect(room.state).to.contains.keys(
-            ['id', 'owner', 'ownerType', 'value'],
-          );
+          expect(room.state).to.contains.keys([
+            'id',
+            'owner',
+            'ownerType',
+            'value',
+          ]);
         }
         if (room.devices !== null) {
           room.devices!.forEach((device: DeviceType) => {
             expect(device).to.be.an('object');
-            expect(device).to.contains.keys(
-              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-            );
+            expect(device).to.contains.keys([
+              'id',
+              'defaultName',
+              'defaultManufacturer',
+              'defaultModel',
+              'name',
+              'type',
+              'manufacturer',
+              'model',
+              'pluginSelector',
+              'viaDevice',
+              'roomId',
+              'pluginId',
+            ]);
           });
         }
         if (room.satellites !== null) {
           expect(room.satellites).to.be.an('array');
           room.satellites!.forEach((satellite: SatelliteType) => {
             expect(satellite).to.be.an('object');
-            expect(satellite).to.contains.keys(
-              ['id', 'name', 'roomId', 'lastHeartbeat'],
-            );
+            expect(satellite).to.contains.keys([
+              'id',
+              'name',
+              'roomId',
+              'lastHeartbeat',
+            ]);
           });
         }
       });
@@ -69,13 +95,14 @@ describe('GET /api/v1/room/:id', () => {
       .then((res) => {
         const room = res.body;
         expect(room).to.be.an('object');
-        expect(room).to.contains.keys(
-          ['id', 'name', 'houseId', 'house'],
-        );
+        expect(room).to.contains.keys(['id', 'name', 'houseId', 'house']);
         expect(room.house).to.be.an('object');
-        expect(room.house).to.contains.keys(
-          ['id', 'name', 'latitude', 'longitude'],
-        );
+        expect(room.house).to.contains.keys([
+          'id',
+          'name',
+          'latitude',
+          'longitude',
+        ]);
       });
   });
 
@@ -88,14 +115,15 @@ describe('GET /api/v1/room/:id', () => {
       .then((res) => {
         const room = res.body;
         expect(room).to.be.an('object');
-        expect(room).to.contains.keys(
-          ['id', 'name', 'houseId', 'state'],
-        );
+        expect(room).to.contains.keys(['id', 'name', 'houseId', 'state']);
         if (room.state !== null) {
           expect(room.state).to.be.an('object');
-          expect(room.state).to.contains.keys(
-            ['id', 'owner', 'ownerType', 'value'],
-          );
+          expect(room.state).to.contains.keys([
+            'id',
+            'owner',
+            'ownerType',
+            'value',
+          ]);
         }
       });
   });
@@ -109,15 +137,24 @@ describe('GET /api/v1/room/:id', () => {
       .then((res) => {
         const room = res.body;
         expect(room).to.be.an('object');
-        expect(room).to.contains.keys(
-          ['id', 'name', 'houseId', 'devices'],
-        );
+        expect(room).to.contains.keys(['id', 'name', 'houseId', 'devices']);
         if (room.devices !== null) {
           room.devices!.forEach((device: DeviceType) => {
             expect(device).to.be.an('object');
-            expect(device).to.contains.keys(
-              ['id', 'name', 'type', 'subType', 'variable', 'unit', 'value', 'roomId', 'pluginId'],
-            );
+            expect(device).to.contains.keys([
+              'id',
+              'defaultName',
+              'defaultManufacturer',
+              'defaultModel',
+              'name',
+              'type',
+              'manufacturer',
+              'model',
+              'pluginSelector',
+              'viaDevice',
+              'roomId',
+              'pluginId',
+            ]);
           });
         }
       });
@@ -132,16 +169,17 @@ describe('GET /api/v1/room/:id', () => {
       .then((res) => {
         const room = res.body;
         expect(room).to.be.an('object');
-        expect(room).to.contains.keys(
-          ['id', 'name', 'houseId', 'satellites'],
-        );
+        expect(room).to.contains.keys(['id', 'name', 'houseId', 'satellites']);
         if (room.satellites !== null) {
           expect(room.satellites).to.be.an('array');
           room.satellites!.forEach((satellite: SatelliteType) => {
             expect(satellite).to.be.an('object');
-            expect(satellite).to.contains.keys(
-              ['id', 'name', 'roomId', 'lastHeartbeat'],
-            );
+            expect(satellite).to.contains.keys([
+              'id',
+              'name',
+              'roomId',
+              'lastHeartbeat',
+            ]);
           });
         }
       });

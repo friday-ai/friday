@@ -4,9 +4,11 @@ import {
   AvailableLanguages,
   AvailableState,
   StateOwner,
-  UserRole, VariableOwner,
+  UserRole,
+  VariableOwner,
 } from './constants';
 import { Color } from '../utils/interfaces';
+import { DeviceCapabilitySettingsSchema, DevicesCapabilityType, DevicesType } from './device';
 
 /**
  * Action interface
@@ -28,17 +30,58 @@ export interface ActionType {
  */
 export interface DeviceType {
   id?: string;
+  defaultName?: string;
+  defaultManufacturer?: string;
+  defaultModel?: string;
   name?: string;
-  type?: string;
-  subType?: string;
-  variable?: any;
-  unit?: string;
-  value?: string;
+  type?: DevicesType;
+  manufacturer?: string;
+  model?: string;
+  pluginSelector?: string;
+  viaDevice?: string;
   roomId?: string;
-  room?: RoomType;
   pluginId?: string;
+  device?: DeviceType;
+  room?: RoomType;
   plugin?: PluginType;
-  state?: StateType;
+  capabilities?: DeviceCapabilityType[];
+}
+
+/**
+ * Device capability interface.
+ */
+export interface DeviceCapabilityType {
+  id?: string;
+  defaultName?: string;
+  name?: string;
+  type?: DevicesCapabilityType;
+  deviceId?: string;
+  roomId?: string;
+  device?: DeviceType;
+  room?: RoomType;
+  settings?: DeviceCapabilitySettingsSchema;
+  state?: DeviceCapabilityStateType;
+}
+
+/**
+ * Device capability settings interface.
+ */
+export interface DeviceCapabilitySettingsType {
+  id?: string;
+  settings?: DeviceCapabilitySettingsSchema;
+  capabilityId?: string;
+  capability?: DeviceCapabilityType;
+}
+
+/**
+ * Device capability state interface.
+ */
+export interface DeviceCapabilityStateType {
+  id?: string;
+  value?: string | number | boolean | Color;
+  last?: boolean;
+  capabilityId?: string;
+  capability?: DeviceCapabilityType;
 }
 
 /**

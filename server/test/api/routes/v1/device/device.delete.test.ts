@@ -12,8 +12,6 @@ describe('DELETE /api/v1/device/:id', () => {
   });
 
   it('should not found device to delete', async () => {
-    await server
-      .delete('/api/v1/device/22b5b9ce-cd9e-404a-8c31-97350d684333')
-      .expect(404);
+    await server.delete('/api/v1/device/wrong').expect(404);
   });
 });

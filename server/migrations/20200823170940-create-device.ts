@@ -10,34 +10,42 @@ module.exports = {
         primaryKey: true,
         type: DataType.UUID,
       },
-      name: {
-        unique: true,
+      defaultName: {
         allowNull: false,
+        type: DataType.STRING,
+      },
+      defaultManufacturer: {
+        allowNull: false,
+        type: DataType.STRING,
+      },
+      defaultModel: {
+        allowNull: false,
+        type: DataType.STRING,
+      },
+      name: {
         type: DataType.STRING,
       },
       type: {
         allowNull: false,
         type: DataType.STRING,
       },
-      subType: {
-        allowNull: false,
+      manufacturer: {
         type: DataType.STRING,
       },
-      variable: {
+      model: {
         type: DataType.JSON,
       },
-      unit: {
+      pluginSelector: {
         type: DataType.STRING,
       },
-      value: {
-        type: DataType.STRING,
+      viaDevice: {
+        type: DataType.UUID,
       },
       roomId: {
         allowNull: false,
         type: DataType.UUID,
       },
       pluginId: {
-        allowNull: false,
         type: DataType.UUID,
       },
       created_at: {
@@ -50,5 +58,6 @@ module.exports = {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('device'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) =>
+    queryInterface.dropTable('device'),
 };

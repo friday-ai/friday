@@ -1,77 +1,74 @@
-import StateClass from '../state/state';
-import EventClass from '../../utils/event';
 import BaseModel from '../../utils/database/model.base';
 import DeviceModel from '../../models/device';
-import { DeviceType } from '../../config/entities';
+import EventClass from '../../utils/event';
+import { DeviceCapabilityStateType, DeviceType } from '../../config/entities';
 import { Catch } from '../../utils/decorators/error';
+import { DeviceCommandType } from '../../utils/interfaces';
+import {
+  DeviceCapabilityRegisterType,
+  DeviceCapabilitySettingsSchema,
+  DeviceRegisterType,
+  DevicesActionsType,
+} from '../../config/device';
 
-import { DeviceTypeParameter, FeatureParameter } from '../../utils/interfaces';
-import { AvailableState, EventsType, MqttMessageTypes, StateOwner, TopicsTypes } from '../../config/constants';
+import register from './device.register';
+import exec from './device.exec';
+import setCapability from './device.setCapability';
+import getCapabilityById from './device.getCapabilityById';
+import setCapabilitySettings from './device.setCapabilitySettings';
+import setCapabilityState from './device.setCapabilityState';
+import { glob as Glob } from 'glob';
 
-import getFeatures from './features/features.helper';
-import checkAvailableFeature from './features/checkAvailableFeature';
-import getAvailableFeatures from './subdevice/subdevice.getFeatures';
 /**
  * Device
  */
 export default class Device extends BaseModel<DeviceModel, DeviceType> {
-  public state: StateClass;
-  private event: typeof EventClass;
+  public event: typeof EventClass;
 
-  constructor(event: typeof EventClass, state: StateClass) {
+  constructor(event: typeof EventClass) {
     super(DeviceModel);
     this.event = event;
-    this.state = state;
+
+    Glob.sync('**/*.{js,ts}', { cwd: `${__dirname}/capabilities/` }).forEach(
+      (filename) => {
+        const manager = require(`./capabilities/${filename}`);
+
+        Object.keys(manager.options).forEach((key) => {
+          manager.options[key].actions.forEach((action: DevicesActionsType) => {
+            this.event.on(action, (e) => manager[key].bind(this)(e));
+          });
+        });
+      },
+    );
   }
 
   @Catch()
-  async create(data: Omit<DeviceType, 'id'>) {
-    const device = await super.create(data);
-
-    // Set default state for device
-    await this.state.set({
-      owner: device.id!,
-      ownerType: StateOwner.DEVICE,
-      value: AvailableState.DEVICE_WAITING_CONFIGURATION,
-      last: true,
-    });
-
-    return device;
+  async register(data: Omit<DeviceRegisterType, 'id'>) {
+    return register.call(this, data);
   }
 
   @Catch()
-  async sendCommand(action: string, params: DeviceTypeParameter) {
-    const device = await this.getById(params.deviceId, 'withPlugin');
+  async setCapability(deviceId: string, capability: Omit<DeviceCapabilityRegisterType, 'id'>) {
+    return setCapability.call(this, deviceId, capability);
+  }
 
-    checkAvailableFeature(device, action);
+  @Catch()
+  async getCapabilityById(id: string, scope?: string) {
+    return getCapabilityById.call(this, id, scope!);
+  }
 
-    const featureList = getAvailableFeatures(device.type!, device.subType!);
+  @Catch()
+  async setCapabilitySettings(capabilityId: string, settings: DeviceCapabilitySettingsSchema) {
+    return setCapabilitySettings.call(this, capabilityId, settings);
+  }
 
-    const features = await getFeatures(device.type!, featureList);
+  @Catch()
+  async setCapabilityState(state: Omit<DeviceCapabilityStateType, 'id'>) {
+    return setCapabilityState.call(this, state);
+  }
 
-    const paramFeature: FeatureParameter = {
-      deviceType: device,
-      deviceClass: this,
-      state: params.state,
-    };
-
-    if (device.plugin !== undefined && device.plugin.satelliteId !== undefined) {
-      const { ...newPayload } = paramFeature;
-
-      const message = {
-        receiver: device.plugin.satelliteId,
-        message: {
-          device: device.id,
-          method: action,
-          params: newPayload,
-        },
-        type: MqttMessageTypes.MESSAGE_SEND,
-        topic: TopicsTypes.PLUGIN_EXEC,
-      };
-
-      this.event.emit(EventsType.MQTT_PUBLISH, message);
-    }
-
-    return features[action](paramFeature);
+  @Catch()
+  async exec(identifier: string, command: DeviceCommandType) {
+    return exec.call(this, identifier, command);
   }
 }

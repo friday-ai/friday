@@ -1,5 +1,6 @@
 import { EventEmitter } from 'events';
 import { EventsType } from '../config/constants';
+import { DevicesActionsType } from '../config/device';
 
 /**
  * Event
@@ -7,11 +8,11 @@ import { EventsType } from '../config/constants';
 export default class Event {
   public static emitter = new EventEmitter();
 
-  static emit(event: EventsType, ...args: any) {
+  static emit(event: EventsType | DevicesActionsType, ...args: any) {
     this.emitter.emit(event, ...args);
   }
 
-  static on(event: EventsType, cb: (...args: any[]) => void) {
+  static on(event: EventsType | DevicesActionsType, cb: (...args: any[]) => void) {
     this.emitter.on(event, cb);
   }
 }

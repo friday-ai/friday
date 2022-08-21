@@ -2,7 +2,7 @@ import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/action/:id', () => {
-  it('should return all actions', async () => {
+  it('should return an action', async () => {
     await server
       .get('/api/v1/action/33ab56b0-4064-40d0-b1f4-1e426bff1ea3')
       .expect('Content-Type', /json/)

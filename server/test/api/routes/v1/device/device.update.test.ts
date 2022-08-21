@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
 
 describe('PATCH /api/v1/device/:id', () => {
@@ -11,15 +11,15 @@ describe('PATCH /api/v1/device/:id', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body.name, 'Device update');
+        expect(res.body.name).to.equal('Device update');
       });
   });
 
   it('should not found device to update', async () => {
     await server
-      .patch('/api/v1/device/449b2033-105f-4c18-91e8-a56ad1831796')
+      .patch('/api/v1/device/wrong')
       .send({
-        name: 'Action update',
+        name: 'Device update',
       })
       .expect(404);
   });

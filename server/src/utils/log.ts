@@ -26,7 +26,7 @@ export default class Log {
   static title(text: string) {
     if (env !== 'test') {
       // tslint:disable-next-line: no-console
-      console.log('\x1b[7m.: %s :.\x1b[0m\n', text.toUpperCase());
+      console.log('\x1b[7m.: %s :.\x1b[0m', text.toUpperCase());
     }
   }
 

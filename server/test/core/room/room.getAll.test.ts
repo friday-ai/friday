@@ -40,46 +40,28 @@ describe('Room.listAll', () => {
 
     expect(rooms).to.be.an('array');
     rooms.forEach((r) => {
-      expect(r).to.have.property('id');
-      expect(r).to.have.property('name');
-      expect(r).to.have.property('houseId');
+      expect(r).to.contains.keys(
+        ['id', 'name', 'houseId'],
+      );
 
-      expect(r.house).to.be.an('object');
-      expect(r.house).to.have.property('id');
-      expect(r.house).to.have.property('name');
-      expect(r.house).to.have.property('latitude');
-      expect(r.house).to.have.property('longitude');
+      expect(r.state).to.be.an('object');
+      expect(r.state).to.contains.keys(
+        ['id', 'owner', 'ownerType', 'value'],
+      );
 
-      // TODO: The state cannot must be null
-      if (r.state !== null) {
-        expect(r.state).to.be.an('object');
-        expect(r.state).to.have.property('id');
-        expect(r.state).to.have.property('owner');
-        expect(r.state).to.have.property('ownerType');
-        expect(r.state).to.have.property('value');
-      }
+      expect(r.satellites).to.be.an('array');
+      r.satellites!.forEach((s) => {
+        expect(s).to.contains.keys(
+          ['id', 'name', 'roomId'],
+        );
+      });
 
-      if (r.devices !== null) {
-        expect(r.devices).to.be.an('array');
-        r.devices!.forEach((d) => {
-          expect(d).to.have.property('id');
-          expect(d).to.have.property('name');
-          expect(d).to.have.property('type');
-          expect(d).to.have.property('subType');
-          expect(d).to.have.property('variable');
-          expect(d).to.have.property('unit');
-          expect(d).to.have.property('value');
-        });
-      }
-
-      if (r.satellites !== null) {
-        expect(r.satellites).to.be.an('array');
-        r.satellites!.forEach((s) => {
-          expect(s).to.have.property('id');
-          expect(s).to.have.property('name');
-          expect(s).to.have.property('roomId');
-        });
-      }
+      expect(r.devices).to.be.an('array');
+      r.devices!.forEach((d) => {
+        expect(d).to.contains.keys(
+          ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
+        );
+      });
     });
   });
 
@@ -88,14 +70,14 @@ describe('Room.listAll', () => {
 
     expect(rooms).to.be.an('array');
     rooms.forEach((r) => {
-      expect(r).to.have.property('id');
-      expect(r).to.have.property('name');
-      expect(r).to.have.property('houseId');
+      expect(r).to.contains.keys(
+        ['id', 'name', 'houseId'],
+      );
 
-      expect(r.house).to.have.property('id');
-      expect(r.house).to.have.property('name');
-      expect(r.house).to.have.property('latitude');
-      expect(r.house).to.have.property('longitude');
+      expect(r.house).to.be.an('object');
+      expect(r.house).to.contains.keys(
+        ['id', 'name', 'latitude', 'longitude'],
+      );
     });
   });
 
@@ -104,18 +86,14 @@ describe('Room.listAll', () => {
 
     expect(rooms).to.be.an('array');
     rooms.forEach((r) => {
-      expect(r).to.have.property('id');
-      expect(r).to.have.property('name');
-      expect(r).to.have.property('houseId');
+      expect(r).to.contains.keys(
+        ['id', 'name', 'houseId'],
+      );
 
-      // TODO: The state cannot must be null
-      if (r.state !== null) {
-        expect(r.state).to.be.an('object');
-        expect(r.state).to.have.property('id');
-        expect(r.state).to.have.property('owner');
-        expect(r.state).to.have.property('ownerType');
-        expect(r.state).to.have.property('value');
-      }
+      expect(r.state).to.be.an('object');
+      expect(r.state).to.contains.keys(
+        ['id', 'owner', 'ownerType', 'value'],
+      );
     });
   });
 
@@ -124,22 +102,16 @@ describe('Room.listAll', () => {
 
     expect(rooms).to.be.an('array');
     rooms.forEach((r) => {
-      expect(r).to.have.property('id');
-      expect(r).to.have.property('name');
-      expect(r).to.have.property('houseId');
+      expect(r).to.contains.keys(
+        ['id', 'name', 'houseId'],
+      );
 
-      if (r.devices !== null) {
-        expect(r.devices).to.be.an('array');
-        r.devices!.forEach((d) => {
-          expect(d).to.have.property('id');
-          expect(d).to.have.property('name');
-          expect(d).to.have.property('type');
-          expect(d).to.have.property('subType');
-          expect(d).to.have.property('variable');
-          expect(d).to.have.property('unit');
-          expect(d).to.have.property('value');
-        });
-      }
+      expect(r.devices).to.be.an('array');
+      r.devices!.forEach((d) => {
+        expect(d).to.contains.keys(
+          ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
+        );
+      });
     });
   });
 
@@ -148,18 +120,16 @@ describe('Room.listAll', () => {
 
     expect(rooms).to.be.an('array');
     rooms.forEach((r) => {
-      expect(r).to.have.property('id');
-      expect(r).to.have.property('name');
-      expect(r).to.have.property('houseId');
+      expect(r).to.contains.keys(
+        ['id', 'name', 'houseId'],
+      );
 
-      if (r.satellites !== null) {
-        expect(r.satellites).to.be.an('array');
-        r.satellites!.forEach((s) => {
-          expect(s).to.have.property('id');
-          expect(s).to.have.property('name');
-          expect(s).to.have.property('roomId');
-        });
-      }
+      expect(r.satellites).to.be.an('array');
+      r.satellites!.forEach((s) => {
+        expect(s).to.contains.keys(
+          ['id', 'name', 'roomId'],
+        );
+      });
     });
   });
 });
