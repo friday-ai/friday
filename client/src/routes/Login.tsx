@@ -35,6 +35,7 @@ const Login: React.FC = () => {
       }
     );
   };
+
   return (
     <div className="h-full flex flex-col items-center justify-center space-y-8">
       <img className="mx-auto" src={Favicon} alt="Friday icon" width="50" height="50" />

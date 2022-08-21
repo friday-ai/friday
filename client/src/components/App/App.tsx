@@ -29,7 +29,7 @@ const App: React.FC = () => {
     document.title = `Friday | ${name}`;
   }, [location, dispatch]);
 
-  return useAppSelector(serverOffline) ? (
+  return useAppSelector(serverOffline) || app.userCount === -1 ? (
     <ServerDown />
   ) : (
     <Routes>

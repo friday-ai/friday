@@ -17,7 +17,11 @@ const useApp = () => {
   const routes = useMemo(() => init(api), [api]);
 
   useEffect(() => {
-    routes.users.getCount().then((users) => setUserCount(users));
+    routes.users
+      .getCount()
+      .then((users) => setUserCount(users))
+      .catch(() => setUserCount(-1));
+
     auth.checkSession();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
