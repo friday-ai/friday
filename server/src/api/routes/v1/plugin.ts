@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  FridayRouter, Get, Patch, Delete,
-} from '../../../utils/decorators/route';
+import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
 /**
@@ -31,24 +29,18 @@ export default class PluginRouter {
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response
    * {
-   *   id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
    *   name: 'Zwave',
    *   version: '1.2.0',
-   *   url: 'fake url',
-   *   enabled: true,
-   *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f'
+   *   tag: 'latest',
    * },
    */
-  /*
   @Post({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'plugin',
+    path: '/', authenticated: true, rateLimit: false, aclMethod: 'install', aclResource: 'plugin',
   })
-  create = async (req: Request, res: Response) => {
-    const plugin = await this.friday.plugin.create(req.body);
-    res.status(201).json(plugin);
-  };
-
-   */
+    install = async (req: Request, res: Response) => {
+      const plugin = await this.friday.plugin.install(req.body);
+      res.status(201).json(plugin);
+    };
 
   /**
    * Update a plugin
