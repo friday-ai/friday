@@ -1,6 +1,9 @@
 import { assert, expect } from 'chai';
 import Variable from '../../../src/core/variable/variable';
-import { NotFoundError } from '../../../src/utils/decorators/error';
+import {
+  BadParametersError,
+  NotFoundError,
+} from '../../../src/utils/decorators/error';
 
 let variable: Variable;
 
@@ -31,5 +34,13 @@ describe('Variable.update', () => {
     });
 
     await assert.isRejected(promise, NotFoundError);
+  });
+
+  it('should not update an variable with empty id', async () => {
+    const promise = variable.update('', {
+      value: 'value_updated',
+    });
+
+    await assert.isRejected(promise, BadParametersError);
   });
 });

@@ -26,7 +26,11 @@ export default async function setCapabilitySettings(
     throw new BadParametersError({ name: 'Friday set capability settings', message: 'Capability id is empty', metadata: settings });
   }
 
-  let capabilitySettings = await DeviceCapabilitySettings.findByPk(capabilityId);
+  let capabilitySettings = await DeviceCapabilitySettings.findOne({
+    where: {
+      capabilityId: capabilityId,
+    },
+  });
 
   // If old settings exist, update it
   if (capabilitySettings !== null) {

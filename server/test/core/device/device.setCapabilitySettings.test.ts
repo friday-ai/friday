@@ -25,6 +25,19 @@ describe('Device.setCapabilitySettings', () => {
     expect(newSettings.settings?.step).to.equal(1);
   });
 
+  it('should update a capability settings', async () => {
+    const newSettings = await device.setCapabilitySettings('2e6a90de-b05c-47ca-8895-59b23953531c', {
+      min: 5,
+      max: 80,
+      step: 1,
+    });
+
+    expect(newSettings).to.be.an('object');
+    expect(newSettings.settings?.min).to.equal(5);
+    expect(newSettings.settings?.max).to.equal(80);
+    expect(newSettings.settings?.step).to.equal(1);
+  });
+
   it('should not set a capability settings with empty capability id', async () => {
     const promise = device.setCapabilitySettings('', {
       min: 0,

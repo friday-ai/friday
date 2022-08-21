@@ -23,6 +23,22 @@ describe('Device.setCapability', () => {
     expect(newCapability.defaultName).to.equal('New capability for test');
   });
 
+  it('should set a capability with his settings', async () => {
+    const newCapability = await device.setCapability('14541459-2672-4755-b57a-6c6955b47f17', {
+      defaultName: 'New capability for test',
+      type: DevicesCapabilityType.BRIGHTNESS,
+      settings: {
+        min: 0,
+        max: 100,
+        step: 1,
+      },
+    });
+
+    expect(newCapability).to.be.an('object');
+    expect(newCapability.defaultName).to.equal('New capability for test');
+    expect(newCapability.settings?.min).to.equal(0);
+  });
+
   it('should not set a capability with empty device id', async () => {
     const promise = device.setCapability('', {
       defaultName: 'New capability for test',
