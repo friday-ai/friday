@@ -60,6 +60,13 @@ export interface PluginType {
   state: StateType;
 }
 
+export interface PluginInstallType {
+  name: string;
+  version: string;
+  repoTag: string;
+  satelliteId: string;
+}
+
 export interface SatelliteType {
   id: string;
   name: string;

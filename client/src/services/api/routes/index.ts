@@ -8,6 +8,7 @@ import Variables from './variables';
 import Houses from './houses';
 import Rooms from './rooms';
 import System from './system';
+import Plugins from './plugins';
 
 export interface RoutesType {
   scenes: Scenes;
@@ -17,6 +18,7 @@ export interface RoutesType {
   houses: Houses;
   rooms: Rooms;
   system: System;
+  plugins: Plugins;
 }
 
 export const init = (instance: HttpClient | DemoClient): RoutesType => {
@@ -28,5 +30,6 @@ export const init = (instance: HttpClient | DemoClient): RoutesType => {
     houses: new Houses(instance),
     rooms: new Rooms(instance),
     system: new System(instance),
+    plugins: new Plugins(instance),
   };
 };
