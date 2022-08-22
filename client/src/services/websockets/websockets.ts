@@ -1,20 +1,23 @@
 import React from 'react';
 import { SessionType } from '../../utils/interfaces';
 import { WebsocketMessageType } from '../../utils/constants';
+import Emitter from '../emitter/emitter';
 
 const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
+
+type ReactDispatch = React.Dispatch<React.SetStateAction<SessionType>>;
 
 class Websockets {
   public socket: WebSocket | null;
   public session: SessionType;
   public setSession: React.Dispatch<React.SetStateAction<SessionType>>;
-  public listeners: { [key: string]: (message: string) => void };
+  public emitter: Emitter;
 
-  constructor(session: SessionType, setSession: React.Dispatch<React.SetStateAction<SessionType>>) {
+  constructor(session: SessionType, setSession: ReactDispatch, emitter: Emitter) {
     this.socket = null;
     this.session = session;
     this.setSession = setSession;
-    this.listeners = {};
+    this.emitter = emitter;
   }
 
   connect(session: SessionType, retryCount = 0) {
@@ -49,15 +52,8 @@ class Websockets {
 
     this.socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      const listener = this.listeners[data.type];
-      if (listener) {
-        listener(data.message);
-      }
+      this.emitter.emit(data.type, data.message);
     };
-  }
-
-  addListener(event: WebsocketMessageType, listener: (message: string) => void) {
-    this.listeners[event] = listener;
   }
 
   send(message: string) {

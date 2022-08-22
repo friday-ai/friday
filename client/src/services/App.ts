@@ -6,14 +6,16 @@ import { init } from './api/routes';
 import Auth from './auth/auth';
 import { SessionType } from '../utils/interfaces';
 import Websockets from './websockets/websockets';
+import Emitter from './emitter/emitter';
 
 const isDemo = import.meta.env.VITE_DEMO_MODE;
+const emitter = new Emitter();
 
 const useApp = () => {
   const [userCount, setUserCount] = useState(0);
   const [session, setSession] = useState<SessionType>((JSON.parse(localStorage.getItem('session') || '{}') as SessionType) || {});
 
-  const ws = useMemo(() => new Websockets(session, setSession), [session]);
+  const ws = useMemo(() => new Websockets(session, setSession, emitter), [session]);
 
   const updateSession = useCallback(
     (s: SessionType) => {
@@ -44,6 +46,7 @@ const useApp = () => {
     logout: auth.logout,
     hasSession: auth.hasSession,
     signup: auth.signup,
+    emitter,
     userCount,
     ...routes,
   };

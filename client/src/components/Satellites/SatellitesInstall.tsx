@@ -4,6 +4,7 @@ import useForm from '../../services/hooks/useForm';
 
 import Modal from '../Modal/Modal';
 import FaviconLoader from '../Loader/Loader';
+import Countdown from '../Countdown/Countdown';
 
 import useSharedApp from '../../services/App';
 
@@ -24,7 +25,7 @@ interface PluginType {
 const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpenModal }) => {
   const [loading, setLoading] = useState(false);
   const [pluginInstalled, setPluginInstalled] = useState(false);
-  const { plugins, ws } = useSharedApp();
+  const { plugins, emitter } = useSharedApp();
   const { onSubmit, onChange, data, errors } = useForm<PluginType>({
     initialValues: {
       name: '',
@@ -67,28 +68,26 @@ const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpe
     }
   };
 
-  const handleInstall = useCallback((message: string) => {
+  const handleInstall = useCallback((_: string) => {
     setLoading(true);
-    console.log('handleInstall', message);
   }, []);
 
   const handleInstalled = useCallback(
-    (message: string) => {
+    (_: string) => {
       setPluginInstalled(true);
       setTimeout(() => {
         setOpenModal(false);
         setPluginInstalled(false);
         setLoading(false);
       }, 5000);
-      console.log('handleInstalled', message);
     },
     [setOpenModal, setPluginInstalled, setLoading]
   );
 
   useEffect(() => {
-    ws.addListener(WebsocketMessageType.PLUGIN_INSTALLING, handleInstall);
-    ws.addListener(WebsocketMessageType.PLUGIN_INSTALLED, handleInstalled);
-  }, [ws, handleInstall, handleInstalled]);
+    emitter.addListener(WebsocketMessageType.PLUGIN_INSTALLING, handleInstall);
+    emitter.addListener(WebsocketMessageType.PLUGIN_INSTALLED, handleInstalled);
+  }, [emitter, handleInstall, handleInstalled]);
 
   return (
     <Modal open={openModal} hasActionsButtons={!loading} onConfirm={handleSubmit} onClose={() => setOpenModal(false)}>
@@ -102,6 +101,7 @@ const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpe
             <div className="swap-on text-center flex flex-col place-items-center">
               <h3 className="font-bold text-lg">Plugin installed</h3>
               <Icon icon="mdi:checkbox-marked-circle-outline" className="w-32 h-32 place-self-center grow text-success" />
+              <Countdown start={pluginInstalled} count={5} />
             </div>
           </div>
         </div>
