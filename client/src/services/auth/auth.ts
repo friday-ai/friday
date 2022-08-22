@@ -1,4 +1,3 @@
-import React from 'react';
 import axios, { AxiosError, AxiosRequestHeaders } from 'axios';
 import { SessionType, UserType } from '../../utils/interfaces';
 
@@ -6,10 +5,9 @@ const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
 
 class Auth {
   public session: SessionType;
+  public setSession: (session: SessionType) => void;
 
-  public setSession: React.Dispatch<React.SetStateAction<SessionType>>;
-
-  constructor(session: SessionType, setSession: React.Dispatch<React.SetStateAction<SessionType>>) {
+  constructor(session: SessionType, setSession: (session: SessionType) => void) {
     this.session = session;
     this.setSession = setSession;
   }

@@ -43,4 +43,14 @@ export enum AvailableState {
   DEVICE_WAITING_CONFIGURATION = 'device.waiting.configuration',
 }
 
+export enum WebsocketMessageType {
+  // Authentication
+  AUTHENTICATION = 'authenticate',
+  // Plugin
+  PLUGIN_INSTALLING = 'plugin.installing',
+  PLUGIN_INSTALLED = 'plugin.installed',
+  // Error
+  INVALID_ACCESS_TOKEN = 'invalid_access_token',
+}
+
 export const DEFAULT_COORDS: [number, number] = [48.8583, 2.2945];

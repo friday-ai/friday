@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useBetween } from 'use-between';
 import DemoClient from './api/DemoClient';
 import HttpClient from './api/HttpClient';
 import { init } from './api/routes';
 import Auth from './auth/auth';
 import { SessionType } from '../utils/interfaces';
+import Websockets from './websockets/websockets';
 
 const isDemo = import.meta.env.VITE_DEMO_MODE;
 
@@ -12,7 +13,18 @@ const useApp = () => {
   const [userCount, setUserCount] = useState(0);
   const [session, setSession] = useState<SessionType>((JSON.parse(localStorage.getItem('session') || '{}') as SessionType) || {});
 
-  const auth = useMemo(() => new Auth(session, setSession), [session]);
+  const ws = useMemo(() => new Websockets(session, setSession), [session]);
+
+  const updateSession = useCallback(
+    (s: SessionType) => {
+      localStorage.setItem('session', JSON.stringify(s));
+      setSession(s);
+      ws.connect(s);
+    },
+    [ws]
+  );
+
+  const auth = useMemo(() => new Auth(session, updateSession), [session, updateSession]);
   const api = useMemo(() => (isDemo ? new DemoClient() : new HttpClient(auth)), [auth]);
   const routes = useMemo(() => init(api), [api]);
 
@@ -26,6 +38,7 @@ const useApp = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
+    ws,
     session,
     login: auth.login,
     logout: auth.logout,
