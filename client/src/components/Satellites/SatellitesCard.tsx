@@ -97,7 +97,7 @@ const SatelliteCard: React.FC<SatelliteCardProps> = ({ satellite }) => {
           </Dropdown>
         </div>
       </div>
-      <div className="collapse-content">
+      <div className="collapse-content grid-container grid-cols-minmax-280">
         <AnimatedList renderItem={(item) => <PluginCard plugin={item} />} items={satellite.plugins} />
       </div>
     </div>
