@@ -5,13 +5,14 @@ import { SatelliteType } from '../utils/interfaces';
 import useSharedApp from '../services/App';
 import SatelliteCard from '../components/Satellites/SatellitesCard';
 import AnimatedList from '../components/AnimatedList/AnimatedList';
+import SatellitesInstall from '../components/Satellites/SatellitesInstall';
 
 let satellitesList: SatelliteType[] = [];
 
 const Satellites: React.FC = () => {
   const { satellites } = useSharedApp();
-
   const [filteredSatellites, setFilteredSatellites] = useState<SatelliteType[]>([]);
+  const [openInstallModal, setOpenInstallModal] = useState(false);
 
   useEffect(() => {
     satellites.getAll().then((res) => {
@@ -24,7 +25,7 @@ const Satellites: React.FC = () => {
 
   return (
     <div>
-      <SatellitesToolbar onSearch={() => null} onFilter={() => null} onSort={() => null} onCreate={() => null} />
+      <SatellitesToolbar onSearch={() => null} onFilter={() => null} onSort={() => null} onCreate={() => setOpenInstallModal(true)} />
 
       <div className="mx-7 space-y-2 bg-base-100 border border-base-300 rounded-btn p-4">
         <div className="grid grid-flow-col auto-cols-fr text-center items-center font-bold pl-4 pr-16">
@@ -37,6 +38,8 @@ const Satellites: React.FC = () => {
         </div>
         <AnimatedList renderItem={(item) => <SatelliteCard satellite={item} />} items={filteredSatellites} />
       </div>
+
+      <SatellitesInstall openModal={openInstallModal} setOpenModal={(value) => setOpenInstallModal(value)} />
     </div>
   );
 };
