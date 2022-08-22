@@ -17,6 +17,9 @@ export enum DevicesActionsType {
   TURN_ON = 'action.devices.commands.turn_on',
   TURN_OFF = 'action.devices.commands.turn_off',
   SET_BRIGHTNESS = 'action.devices.commands.set_brightness',
+  COLOR = 'action.devices.commands.set_color',
+  COLD = 'action.devices.commands.cold',
+  WARM = 'action.devices.commands.warm',
 }
 
 type OnOffSettings = null;
