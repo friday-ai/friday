@@ -2,24 +2,20 @@
 import { expect } from 'chai';
 import { Container } from 'dockerode';
 import Docker from '../../../../../src/core/docker/docker';
-import Event from '../../../../../src/utils/event';
-import Variable from '../../../../../src/core/variable/variable';
-import State from '../../../../../src/core/state/state';
 import Plugin from '../../../../../src/core/plugin/plugin';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 
+let plugin: Plugin;
+let docker: Docker;
 let container: Container;
 
 describe('DELETE /api/v1/plugin/:id', () => {
-  const event = Event;
-  const variable = new Variable();
-  const state = new State(event, variable);
-  const docker = new Docker();
-  const plugin = new Plugin(docker, state);
-
   // Create a fake container and save docker id on plugin
   beforeEach(async function () {
+    plugin = global.FRIDAY.plugin;
+    docker = global.FRIDAY.docker;
+
     this.timeout(15000);
     container = await docker.createContainer({
       Image: 'alpine',
