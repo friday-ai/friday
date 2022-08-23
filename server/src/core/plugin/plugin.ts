@@ -5,6 +5,7 @@ import { PluginType } from '../../config/entities';
 import PluginModel from '../../models/plugin';
 import { Catch } from '../../utils/decorators/error';
 import { PluginInstallOptions } from '../../utils/interfaces';
+import EventClass from '../../utils/event';
 
 import heartbeat from './plugin.heartbeat';
 import install from './plugin.install';
@@ -14,11 +15,13 @@ import stop from './plugin.stop';
  * Plugin
  */
 export default class Plugin extends BaseModel<PluginModel, PluginType> {
+  public event: typeof EventClass;
   public docker: DockerClass;
   public state: StateClass;
 
-  constructor(docker: DockerClass, state: StateClass) {
+  constructor(event: typeof EventClass, docker: DockerClass, state: StateClass) {
     super(PluginModel);
+    this.event = event;
     this.docker = docker;
     this.state = state;
   }

@@ -1,7 +1,7 @@
 import PluginClass from './plugin';
 import { PluginType } from '../../config/entities';
 import { PluginInstallOptions } from '../../utils/interfaces';
-import { AvailableState, StateOwner } from '../../config/constants';
+import { AvailableState, EventsType, StateOwner, WebsocketMessageTypes } from '../../config/constants';
 import error, { NotFoundError } from '../../utils/decorators/error';
 import logger from '../../utils/log';
 
@@ -23,7 +23,20 @@ export default async function install(this: PluginClass, options: PluginInstallO
   try {
     logger.info(`Installing plugin ${options.name}`);
 
-    await this.docker.pull(options.repoTag);
+    this.event.emit(EventsType.WEBSOCKET_SEND_ALL, {
+      type: WebsocketMessageTypes.PLUGIN_INSTALLING,
+      message: {},
+    });
+
+    const cb = (stream: string) => {
+      this.event.emit(EventsType.WEBSOCKET_SEND_ALL, {
+        type: WebsocketMessageTypes.PLUGIN_INSTALLING,
+        message: stream,
+      });
+    };
+
+    await this.docker.pull(options.repoTag, cb);
+
     const container = await this.docker.createContainer({
       name: options.name,
       Image: options.repoTag,
@@ -45,6 +58,11 @@ export default async function install(this: PluginClass, options: PluginInstallO
       owner: plugin.id!,
       ownerType: StateOwner.PLUGIN,
       value: AvailableState.PLUGIN_INSTALLED,
+    });
+
+    this.event.emit(EventsType.WEBSOCKET_SEND_ALL, {
+      type: WebsocketMessageTypes.PLUGIN_INSTALLED,
+      message: { plugin },
     });
 
     await this.docker.start(container.id);

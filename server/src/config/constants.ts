@@ -147,6 +147,9 @@ export enum EventsType {
 export enum WebsocketMessageTypes {
   // Authentication
   AUTHENTICATION = 'authenticate',
+  // Plugin
+  PLUGIN_INSTALLING = 'plugin.installing',
+  PLUGIN_INSTALLED = 'plugin.installed',
   // Device
   DEVICE_VALUE = 'device.value',
   // Mqtt

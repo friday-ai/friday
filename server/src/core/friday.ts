@@ -43,7 +43,7 @@ export default class Friday {
   public satellite = new Satellite(this.state);
   public device = new Device(this.event);
   public user = new User(this.state);
-  public plugin = new Plugin(this.docker, this.state);
+  public plugin = new Plugin(this.event, this.docker, this.state);
 
   public action = new Action();
   public scene = new Scene();
