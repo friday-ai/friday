@@ -20,4 +20,17 @@ describe('Device.color', () => {
       '{"device":"LIGHT-10","method":"action.devices.commands.color","params":{"value":"10, 224, 0"}}',
     );
   });
+
+  it('should not change color', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.COLOR, {
+      id: 'fake',
+      value: '10, 224, 0',
+    });
+
+    await wait(80);
+    expect(listener.called).equal(false);
+  });
 });
