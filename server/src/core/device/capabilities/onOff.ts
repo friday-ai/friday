@@ -14,10 +14,10 @@ export const options: CapabilityManagerParamsList = {
  * @param args
  */
 export async function setOnOff(this: DeviceClass, args: { id: string, value: boolean }): Promise<DeviceCapabilityStateType> {
-  return await this.exec(
+  return this.exec(
     args.id, {
       action: args.value ? DevicesActionsType.TURN_ON : DevicesActionsType.TURN_OFF,
-      params: {},
+      params: { value: args.value },
     }
   );
 }

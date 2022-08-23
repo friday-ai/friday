@@ -11,13 +11,14 @@ enum DevicesClassesType {
 enum DevicesCapabilityType {
   ONOFF = 'onoff',
   BRIGHTNESS = 'brightness',
+  HUE = 'hue',
 }
 
 export enum DevicesActionsType {
   TURN_ON = 'action.devices.commands.turn_on',
   TURN_OFF = 'action.devices.commands.turn_off',
   SET_BRIGHTNESS = 'action.devices.commands.set_brightness',
-  COLOR = 'action.devices.commands.set_color',
+  COLOR = 'action.devices.commands.color',
   COLD = 'action.devices.commands.cold',
   WARM = 'action.devices.commands.warm',
 }

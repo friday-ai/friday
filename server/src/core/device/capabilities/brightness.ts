@@ -14,9 +14,9 @@ export const options: CapabilityManagerParamsList = {
  * @param args
  */
 export async function setBrightness(this: DeviceClass, args: { id: string, value: number }): Promise<DeviceCapabilityStateType> {
-  return await this.exec(
-      args.id, {
-        action: DevicesActionsType.SET_BRIGHTNESS, params: { value: args.value }
-      }
+  return this.exec(
+    args.id, {
+      action: DevicesActionsType.SET_BRIGHTNESS, params: { value: args.value },
+    },
   );
 }

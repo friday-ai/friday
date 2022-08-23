@@ -12,7 +12,7 @@ export default async function exec(
   command: DeviceCommandType,
 ): Promise<DeviceCapabilityStateType> {
   const capability = await this.getCapabilityById(identifier);
-  const device = await this.getById(identifier);
+  const device = await this.getById(capability.deviceId!);
 
   // TODO: check if action is available for this device
   const message = {
