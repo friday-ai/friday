@@ -51,7 +51,7 @@ async function coldWarm(this: DeviceClass, args: { id: string, value: boolean })
 
   return this.exec(
     args.id, {
-      action: args.value ? DevicesActionsType.COLD : DevicesActionsType.WARM, params: {},
+      action: args.value ? DevicesActionsType.COLD : DevicesActionsType.WARM, params: { value: args.value },
     },
   );
 }
