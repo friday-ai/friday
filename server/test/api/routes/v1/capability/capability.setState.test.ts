@@ -14,7 +14,7 @@ describe('POST /api/v1/capability/:id', () => {
       .post('/api/v1/capability/d39593a9-f54a-4823-8d6c-017be8f57eed')
       .send({
         action: DevicesActionsType.TURN_ON,
-        value: 'ON',
+        value: true,
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -22,7 +22,28 @@ describe('POST /api/v1/capability/:id', () => {
         await wait(80);
         expect(listener.called).equal(true);
         expect(listener.args[0][0].message).to.equal(
-          '{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{}}',
+          '{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{"value":true}}',
+        );
+      });
+  });
+
+  it('should set off', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/d39593a9-f54a-4823-8d6c-017be8f57eed')
+      .send({
+        action: DevicesActionsType.TURN_OFF,
+        value: false,
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(true);
+        expect(listener.args[0][0].message).to.equal(
+          '{"device":"LIGHT-10","method":"action.devices.commands.turn_off","params":{"value":false}}',
         );
       });
   });
@@ -35,7 +56,7 @@ describe('POST /api/v1/capability/:id', () => {
       .post('/api/v1/capability/wrong')
       .send({
         action: DevicesActionsType.TURN_ON,
-        value: null,
+        value: true,
       })
       .expect('Content-Type', /json/)
       .expect(200)

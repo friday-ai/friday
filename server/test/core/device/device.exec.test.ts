@@ -17,14 +17,14 @@ describe('Device.exec', () => {
     const listener = sinon.spy();
     global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
 
-    await device.exec('22b5b9ce-cd9e-404a-8c31-97350d684fd3', { action: DevicesActionsType.TURN_ON, params: {} });
+    await device.exec('d4b11be4-30fa-4bc4-9b65-482d5c63c0bc', { action: DevicesActionsType.TURN_ON, params: { value: 1 } });
 
     await wait(20);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{}}');
+    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{"value":1}}');
   });
 
-  it('should not exec a device action with wrong device id', async () => {
+  it('should not exec a device action with wrong capability id', async () => {
     const promise = device.exec('wrong', { action: DevicesActionsType.TURN_ON, params: {} });
     await assert.isRejected(promise, NotFoundError);
   });
