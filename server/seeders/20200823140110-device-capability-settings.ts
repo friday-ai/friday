@@ -31,6 +31,27 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: '8837d35c-d643-49de-bf71-a51d0e504bef',
+        capabilityId: 'c0afdcbd-7d11-479f-a946-57107504295c',
+        settings: '{"min":0,"max":1,"step":1}',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: 'bc6e71f9-96d3-4f04-af99-e27b6e8b4d2c',
+        capabilityId: '2808a1f3-a6a1-407b-a936-db71d74b8a30',
+        settings: '{"min":0,"max":6500,"unit":"Kelvin"}', // see https://reductionrevolution.com.au/blogs/how-to/colour-temperature
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '5d82aa39-7a98-461d-9c57-90725ccfc3b3',
+        capabilityId: 'b2250d79-4d9f-4b5f-a02c-3600950f8b94',
+        settings: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

@@ -10,6 +10,12 @@ export const options: CapabilityManagerParamsList = {
   coldWarm: {
     actions: [DevicesActionsType.COLD, DevicesActionsType.WARM],
   },
+  colorTemp: {
+    actions: [DevicesActionsType.COLOR_TEMP],
+  },
+  white: {
+    actions: [DevicesActionsType.WHITE],
+  },
 };
 
 const RGB_MAX_VALUE = 255;
@@ -32,11 +38,12 @@ function checkRGB(rgb: Color) {
  * @param args
  */
 async function color(this: DeviceClass, args: { id: string, value: Color }): Promise<DeviceCapabilityStateType> {
-  checkRGB(args.value);
+  const rgb: Color = args.value;
+  checkRGB(rgb);
 
   return this.exec(
     args.id, {
-      action: DevicesActionsType.COLOR, params: { value: args.value },
+      action: DevicesActionsType.COLOR, params: { value: `${rgb.red}, ${rgb.green}, ${rgb.blue}` },
     },
   );
 }
@@ -56,7 +63,37 @@ async function coldWarm(this: DeviceClass, args: { id: string, value: boolean })
   );
 }
 
+/**
+ * colorTemp device capability
+ * @param args
+ *
+ */
+async function colorTemp(this: DeviceClass, args: { id: string, value: number }): Promise<DeviceCapabilityStateType> {
+
+  return this.exec(
+    args.id, {
+      action: DevicesActionsType.COLOR_TEMP, params: { value: args.value },
+    },
+  );
+}
+
+/**
+ * white device capability
+ * @param args
+ *
+ */
+async function white(this: DeviceClass, args: { id: string, value: boolean | null }): Promise<DeviceCapabilityStateType> {
+
+  return this.exec(
+    args.id, {
+      action: DevicesActionsType.WHITE, params: { value: '255, 255, 255' },
+    },
+  );
+}
+
 export {
   color,
   coldWarm,
+  colorTemp,
+  white,
 };

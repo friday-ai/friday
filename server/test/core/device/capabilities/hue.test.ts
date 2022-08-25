@@ -11,7 +11,11 @@ describe('Device.color', () => {
 
     global.FRIDAY.event.emit(DevicesActionsType.COLOR, {
       id: '9da3f67d-37b9-498d-bc48-efb45c60591a',
-      value: '10, 224, 0',
+      value: {
+        red: 10,
+        green: 224,
+        blue: 0,
+      },
     });
 
     await wait(80);
@@ -39,7 +43,7 @@ describe('Device.color', () => {
     global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
 
     global.FRIDAY.event.emit(DevicesActionsType.COLD, {
-      id: '9da3f67d-37b9-498d-bc48-efb45c60591a',
+      id: 'c0afdcbd-7d11-479f-a946-57107504295c',
       value: 1,
     });
 
@@ -55,7 +59,7 @@ describe('Device.color', () => {
     global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
 
     global.FRIDAY.event.emit(DevicesActionsType.WARM, {
-      id: '9da3f67d-37b9-498d-bc48-efb45c60591a',
+      id: 'c0afdcbd-7d11-479f-a946-57107504295c',
       value: 0,
     });
 
@@ -63,6 +67,37 @@ describe('Device.color', () => {
     expect(listener.called).equal(true);
     expect(listener.args[0][0].message).to.equal(
       '{"device":"LIGHT-10","method":"action.devices.commands.warm","params":{"value":0}}',
+    );
+  });
+
+  it('should change to color temperature', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.COLOR_TEMP, {
+      id: '2808a1f3-a6a1-407b-a936-db71d74b8a30',
+      value: 2300,
+    });
+
+    await wait(80);
+    expect(listener.called).equal(true);
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","method":"action.devices.commands.color_temp","params":{"value":2300}}',
+    );
+  });
+
+  it('should change to white color', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.WHITE, {
+      id: 'b2250d79-4d9f-4b5f-a02c-3600950f8b94',
+    });
+
+    await wait(80);
+    expect(listener.called).equal(true);
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","method":"action.devices.commands.white","params":{"value":"255, 255, 255"}}',
     );
   });
 });
