@@ -18,6 +18,6 @@ export async function setOnOff(this: DeviceClass, args: { id: string, value: boo
     args.id, {
       action: args.value ? DevicesActionsType.TURN_ON : DevicesActionsType.TURN_OFF,
       params: { value: args.value },
-    }
+    },
   );
 }

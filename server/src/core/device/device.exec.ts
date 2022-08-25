@@ -1,7 +1,7 @@
 import DeviceClass from './device';
 import { EventsType, MqttMessageTypes, TopicsTypes } from '../../config/constants';
 import { DeviceCommandType } from '../../utils/interfaces';
-import {DeviceCapabilityStateType} from '../../config/entities';
+import { DeviceCapabilityStateType } from '../../config/entities';
 
 /**
  * Device exec
