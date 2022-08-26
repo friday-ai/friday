@@ -25,13 +25,53 @@ describe('Device.color', () => {
     );
   });
 
+  it('should not change color, param rgb error', async () => {
+    const listener = sinon.spy();
+
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.COLOR, {
+      id: '9da3f67d-37b9-498d-bc48-efb45c60591a',
+      value: {
+        red: 10,
+        green: 224,
+        blue: null,
+      },
+    });
+
+    await wait(80);
+    expect(listener.called).equal(false);
+  });
+
+  it('should not change color, range error', async () => {
+    const listener = sinon.spy();
+
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.COLOR, {
+      id: '9da3f67d-37b9-498d-bc48-efb45c60591a',
+      value: {
+        red: 10,
+        green: 224,
+        blue: 3000,
+      },
+    });
+
+    await wait(80);
+    expect(listener.called).equal(false);
+  });
+
   it('should not change color', async () => {
     const listener = sinon.spy();
     global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
 
     global.FRIDAY.event.emit(DevicesActionsType.COLOR, {
       id: 'fake',
-      value: '10, 224, 0',
+      value: {
+        red: 10,
+        green: 224,
+        blue: 0,
+      },
     });
 
     await wait(80);
@@ -52,6 +92,19 @@ describe('Device.color', () => {
     expect(listener.args[0][0].message).to.equal(
       '{"device":"LIGHT-10","method":"action.devices.commands.cold","params":{"value":1}}',
     );
+  });
+
+  it('should make error to change cold or warm white', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.COLD, {
+      id: 'c0afdcbd-7d11-479f-a946-57107504295c',
+      value: null,
+    });
+
+    await wait(80);
+    expect(listener.called).equal(false);
   });
 
   it('should change to warm white', async () => {

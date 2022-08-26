@@ -2,6 +2,7 @@ import DeviceClass from '../device';
 import { DeviceCapabilityStateType } from '../../../config/entities';
 import { DevicesActionsType } from '../../../config/device';
 import { CapabilityManagerParamsList, Color } from '../../../utils/interfaces';
+import { checkBoolValue, checkRGB } from '../../../utils/checkCapabilitiesValue';
 
 export const options: CapabilityManagerParamsList = {
   color: {
@@ -17,21 +18,6 @@ export const options: CapabilityManagerParamsList = {
     actions: [DevicesActionsType.WHITE],
   },
 };
-
-const RGB_MAX_VALUE = 255;
-const RGB_MIN_VALUE = 0;
-
-function checkRange(name: string, colorType: number) {
-  if (colorType > RGB_MAX_VALUE || colorType < RGB_MIN_VALUE) {
-    throw new Error(`The color ${name} must be in this range 0 to 255, actual is ${colorType}`);
-  }
-}
-
-function checkRGB(rgb: Color) {
-  checkRange('red', rgb.red);
-  checkRange('blue', rgb.blue);
-  checkRange('green', rgb.green);
-}
 
 /**
  * color device capability
@@ -55,6 +41,7 @@ async function color(this: DeviceClass, args: { id: string, value: Color }): Pro
  * if args.value = 1 then cold method else warm method
  */
 async function coldWarm(this: DeviceClass, args: { id: string, value: boolean }): Promise<DeviceCapabilityStateType> {
+  checkBoolValue(args.value);
 
   return this.exec(
     args.id, {

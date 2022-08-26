@@ -2,6 +2,7 @@ import DeviceClass from '../device';
 import { DeviceCapabilityStateType } from '../../../config/entities';
 import { DevicesActionsType } from '../../../config/device';
 import { CapabilityManagerParamsList } from '../../../utils/interfaces';
+import { checkBoolValue } from '../../../utils/checkCapabilitiesValue';
 
 export const options: CapabilityManagerParamsList = {
   setOnOff: {
@@ -14,6 +15,8 @@ export const options: CapabilityManagerParamsList = {
  * @param args
  */
 export async function setOnOff(this: DeviceClass, args: { id: string, value: boolean }): Promise<DeviceCapabilityStateType> {
+  checkBoolValue(args.value);
+
   return this.exec(
     args.id, {
       action: args.value ? DevicesActionsType.TURN_ON : DevicesActionsType.TURN_OFF,

@@ -21,6 +21,18 @@ describe('Device.onOff', () => {
     );
   });
 
+  it('should not set on with wrong value', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.SET_BRIGHTNESS, {
+      id: 'd39593a9-f54a-4823-8d6c-017be8f57eed',
+      value: 110,
+    });
+
+    expect(listener.called).equal(false);
+  });
+
   it('should not set on with wrong capability id', async () => {
     const listener = sinon.spy();
     global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
