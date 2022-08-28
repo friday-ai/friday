@@ -64,4 +64,40 @@ describe('POST /api/v1/capability/:id', () => {
         expect(listener.called).equal(false);
       });
   });
+
+  it('should not set on with wrong boolean', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/d39593a9-f54a-4823-8d6c-017be8f57eed')
+      .send({
+        action: DevicesActionsType.TURN_ON,
+        value: 2,
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(false);
+      });
+  });
+
+  it('should not set cold with wrong boolean', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/c0afdcbd-7d11-479f-a946-57107504295c')
+      .send({
+        action: DevicesActionsType.COLD,
+        value: 2,
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(false);
+      });
+  });
 });

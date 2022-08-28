@@ -21,6 +21,54 @@ describe('Device.onOff', () => {
     );
   });
 
+  it('should set on with boolean true', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.TURN_ON, {
+      id: 'd39593a9-f54a-4823-8d6c-017be8f57eed',
+      value: true,
+    });
+
+    await wait(80);
+    expect(listener.called).equal(true);
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{"value":true}}',
+    );
+  });
+
+  it('should set off', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.TURN_ON, {
+      id: 'd39593a9-f54a-4823-8d6c-017be8f57eed',
+      value: 0,
+    });
+
+    await wait(80);
+    expect(listener.called).equal(true);
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","method":"action.devices.commands.turn_off","params":{"value":0}}',
+    );
+  });
+
+  it('should set off with boolean false', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.TURN_ON, {
+      id: 'd39593a9-f54a-4823-8d6c-017be8f57eed',
+      value: false,
+    });
+
+    await wait(80);
+    expect(listener.called).equal(true);
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","method":"action.devices.commands.turn_off","params":{"value":false}}',
+    );
+  });
+
   it('should not set on with wrong value', async () => {
     const listener = sinon.spy();
     global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
