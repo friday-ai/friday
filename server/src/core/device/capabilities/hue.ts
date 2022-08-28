@@ -2,7 +2,7 @@ import DeviceClass from '../device';
 import { DeviceCapabilityStateType } from '../../../config/entities';
 import { DevicesActionsType } from '../../../config/device';
 import { CapabilityManagerParamsList, Color } from '../../../utils/interfaces';
-import { checkBoolValue, checkRGB } from '../../../utils/checkCapabilitiesValue';
+import logger from '../../../utils/log';
 
 export const options: CapabilityManagerParamsList = {
   color: {
@@ -18,6 +18,50 @@ export const options: CapabilityManagerParamsList = {
     actions: [DevicesActionsType.WHITE],
   },
 };
+
+const RGB_MAX_VALUE = 255;
+const RGB_MIN_VALUE = 0;
+const ACCEPTED_BOOL_VALUE = [
+  true,
+  false,
+  1,
+  0,
+];
+
+function checkRGBProperties(rgb: Color) {
+  if (
+    !rgb.hasOwnProperty('red') || rgb.red === null || rgb.red === undefined
+    || !rgb.hasOwnProperty('blue') || rgb.blue === null || rgb.blue === undefined
+    || !rgb.hasOwnProperty('green') || rgb.green === null || rgb.green === undefined
+  ) {
+    const message = 'This value can be to a good RGB format. ({red: number[0 to 255], green: number[0 to 255], blue: number[0 to 255])';
+    logger.error(message);
+    throw new Error(message);
+  }
+}
+
+function checkRange(name: string, colorType: number) {
+  if (colorType > RGB_MAX_VALUE || colorType < RGB_MIN_VALUE) {
+    const message = `The color ${name} must be in this range ${RGB_MIN_VALUE} to ${RGB_MAX_VALUE}, actual is ${colorType}`;
+    logger.error(message);
+    throw new Error(message);
+  }
+}
+
+function checkRGB(rgb: Color) {
+  checkRGBProperties(rgb);
+  checkRange('red', rgb.red);
+  checkRange('blue', rgb.blue);
+  checkRange('green', rgb.green);
+}
+
+function checkBoolValue(val: any) {
+  if (!ACCEPTED_BOOL_VALUE.includes(val)) {
+    const message = `The value must be a boolean format (${ACCEPTED_BOOL_VALUE.toString()}), actual is ${val}`;
+    logger.error(message);
+    throw new Error(message);
+  }
+}
 
 /**
  * color device capability
