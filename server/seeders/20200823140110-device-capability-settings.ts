@@ -52,6 +52,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 'aedd9623-2312-4e2f-bb8b-40d8cb2a9c73',
+        capabilityId: 'fefff2d0-c37c-4b04-829d-6980af072ca5',
+        settings: '{"min":15,"max":45}',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

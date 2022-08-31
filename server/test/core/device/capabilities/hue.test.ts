@@ -153,4 +153,33 @@ describe('Device.color', () => {
       '{"device":"LIGHT-10","method":"action.devices.commands.white","params":{"value":"255, 255, 255"}}',
     );
   });
+
+  it('should change saturation', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.SATURATION, {
+      id: 'fefff2d0-c37c-4b04-829d-6980af072ca5',
+      value: '30',
+    });
+
+    await wait(80);
+    expect(listener.called).equal(true);
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","method":"action.devices.commands.saturation","params":{"value":"30"}}',
+    );
+  });
+
+  it('should not change saturation with bad value range', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    global.FRIDAY.event.emit(DevicesActionsType.SATURATION, {
+      id: 'fefff2d0-c37c-4b04-829d-6980af072ca5',
+      value: '100',
+    });
+
+    await wait(80);
+    expect(listener.called).equal(false);
+  });
 });

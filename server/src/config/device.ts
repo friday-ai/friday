@@ -15,6 +15,7 @@ enum DevicesCapabilityType {
   COLDWARM = 'coldwarm',
   COLORTEMP = 'colortemp',
   WHITE = 'white',
+  SATURATION = 'saturation',
 }
 
 export enum DevicesActionsType {
@@ -26,6 +27,7 @@ export enum DevicesActionsType {
   WARM = 'action.devices.commands.warm',
   COLOR_TEMP = 'action.devices.commands.color_temp',
   WHITE = 'action.devices.commands.white',
+  SATURATION = 'action.devices.commands.saturation',
 }
 
 type OnOffSettings = null;

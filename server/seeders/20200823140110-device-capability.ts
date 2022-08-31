@@ -74,6 +74,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 'fefff2d0-c37c-4b04-829d-6980af072ca5',
+        defaultName: 'Switch',
+        name: '',
+        type: DevicesCapabilityType.SATURATION,
+        roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+        deviceId: '22b5b9ce-cd9e-404a-8c31-97350d684fd3',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

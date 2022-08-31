@@ -1,6 +1,6 @@
 import DeviceClass from '../device';
 import { DeviceCapabilityStateType } from '../../../config/entities';
-import { DevicesActionsType } from '../../../config/device';
+import { DeviceCapabilitySettingsSchema, DevicesActionsType } from '../../../config/device';
 import { CapabilityManagerParamsList, Color } from '../../../utils/interfaces';
 import logger from '../../../utils/log';
 
@@ -17,6 +17,9 @@ export const options: CapabilityManagerParamsList = {
   white: {
     actions: [DevicesActionsType.WHITE],
   },
+  saturation: {
+    actions: [DevicesActionsType.SATURATION],
+  },
 };
 
 const RGB_MAX_VALUE = 255;
@@ -27,6 +30,8 @@ const ACCEPTED_BOOL_VALUE = [
   1,
   0,
 ];
+const SATURATION_MAX_VALUE = 100;
+const SATURATION_MIN_VALUE = 0;
 
 function checkRGBProperties(rgb: Color) {
   if (
@@ -58,6 +63,16 @@ function checkRGB(rgb: Color) {
 function checkBoolValue(val: any) {
   if (!ACCEPTED_BOOL_VALUE.includes(val)) {
     const message = `The value must be a boolean format (${ACCEPTED_BOOL_VALUE.toString()}), actual is ${val}`;
+    logger.error(message);
+    throw new Error(message);
+  }
+}
+
+function checkSaturationRange(val: number, capabilitySettings: DeviceCapabilitySettingsSchema | undefined) {
+  const saturationMax = capabilitySettings?.settings.max || SATURATION_MAX_VALUE;
+  const saturationMin = capabilitySettings?.settings.min || SATURATION_MIN_VALUE;
+  if (val > saturationMax || val < saturationMin) {
+    const message = `The number must be in this range ${saturationMin} to ${saturationMax}, actual is ${val}`;
     logger.error(message);
     throw new Error(message);
   }
@@ -122,9 +137,20 @@ async function white(this: DeviceClass, args: { id: string, value: boolean | nul
   );
 }
 
+async function saturation(this: DeviceClass, args: { id: string, value: number }): Promise<DeviceCapabilityStateType> {
+  const capabilitySettings = await this.getCapabilityById(args.id);
+  checkSaturationRange(args.value, capabilitySettings.settings);
+  return this.exec(
+    args.id, {
+      action: DevicesActionsType.SATURATION, params: { value: args.value },
+    },
+  );
+}
+
 export {
   color,
   coldWarm,
   colorTemp,
   white,
+  saturation,
 };
