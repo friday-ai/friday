@@ -59,6 +59,27 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 'a5941192-7ba5-4174-816f-4eb536ae07db',
+        capabilityId: '5ed78e9c-25ed-44cb-b769-6292f9090023',
+        settings: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '969ae42a-7180-43ca-b234-e2111a206cd9',
+        capabilityId: '5ed78e9c-25ed-44cb-b769-6292f9090023',
+        settings: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '3a4ce479-e26d-4df5-8239-714840bc982e',
+        capabilityId: '8e90fc03-2487-4c96-bec0-f2c73c73168a',
+        settings: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

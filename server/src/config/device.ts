@@ -16,6 +16,9 @@ enum DevicesCapabilityType {
   COLORTEMP = 'colortemp',
   WHITE = 'white',
   SATURATION = 'saturation',
+  OPENCLOSE = 'openclose',
+  TEMPERATURE = 'temperature',
+  HUMIDITY = 'humidity',
 }
 
 export enum DevicesActionsType {
@@ -28,6 +31,10 @@ export enum DevicesActionsType {
   COLOR_TEMP = 'action.devices.commands.color_temp',
   WHITE = 'action.devices.commands.white',
   SATURATION = 'action.devices.commands.saturation',
+  OPEN = 'action.devices.commands.open',
+  CLOSE = 'action.devices.commands.close',
+  SET_TEMPERATURE = 'action.devices.commands.set_temperature',
+  SET_HUMIDITY = 'action.devices.commands.set_humidity',
 }
 
 type OnOffSettings = null;

@@ -36,6 +36,22 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: '440d1887-65c6-4f35-b179-cd58db2fc935',
+        defaultName: 'Door sensor',
+        defaultManufacturer: 'Xioami',
+        defaultModel: 'Aqara',
+        name: '',
+        manufacturer: '',
+        model: '',
+        type: DevicesType.PHYSICAL,
+        pluginSelector: 'SENSOR-10',
+        viaDevice: '',
+        roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+        pluginId: '88b48273-15e6-4729-9199-0682677475f4',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>
