@@ -52,6 +52,22 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: '51d31033-08db-40b8-9eef-5c5cdb2a20d5',
+        defaultName: 'Energy sensor',
+        defaultManufacturer: 'SONOFF',
+        defaultModel: 'Sensor',
+        name: '',
+        manufacturer: '',
+        model: '',
+        type: DevicesType.PHYSICAL,
+        pluginSelector: 'SENSOR-20',
+        viaDevice: '',
+        roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+        pluginId: '88b48273-15e6-4729-9199-0682677475f4',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

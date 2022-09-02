@@ -19,6 +19,9 @@ enum DevicesCapabilityType {
   OPENCLOSE = 'openclose',
   TEMPERATURE = 'temperature',
   HUMIDITY = 'humidity',
+  INTENSITY = 'intensity',
+  POWER = 'power',
+  WATER = 'water',
 }
 
 export enum DevicesActionsType {
@@ -35,6 +38,9 @@ export enum DevicesActionsType {
   CLOSE = 'action.devices.commands.close',
   SET_TEMPERATURE = 'action.devices.commands.set_temperature',
   SET_HUMIDITY = 'action.devices.commands.set_humidity',
+  SET_POWER_CONSUMPTION = 'action.devices.commands.set_power_consumption',
+  SET_INTENSITY_CONSUMPTION = 'action.devices.commands.set_intensity_consumption',
+  SET_WATER_CONSUMPTION = 'action.devices.commands.set_water_consumption',
 }
 
 type OnOffSettings = null;

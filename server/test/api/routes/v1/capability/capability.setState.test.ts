@@ -100,4 +100,22 @@ describe('POST /api/v1/capability/:id', () => {
         expect(listener.called).equal(false);
       });
   });
+
+  it('should not set water with wrong value type', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/e3b066ee-7974-4d92-9587-cd113f26c4f4')
+      .send({
+        action: DevicesActionsType.SET_WATER_CONSUMPTION,
+        value: 'BAD_FORMAT',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(false);
+      });
+  });
 });

@@ -80,6 +80,27 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: '483fbd6c-3a19-4a62-9461-b51b2494136b',
+        capabilityId: '6252b82d-5c45-48c1-8938-4f066a3c8028',
+        settings: '{"unit":"W"}',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '602e1b9b-35a2-4e78-a254-06bd261da503',
+        capabilityId: 'fe0a0a04-986a-455d-94f0-b710c6944014',
+        settings: '{"unit":"mA"}',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id: '51bc2b86-a26c-4a47-8afa-780120f03644',
+        capabilityId: 'e3b066ee-7974-4d92-9587-cd113f26c4f4',
+        settings: '{"unit":"m3"}',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>
