@@ -108,6 +108,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: '23b28d51-09f1-4ad0-9907-6a99538ecefb',
+        capabilityId: 'fe8d3c87-0927-49ce-a19b-bacd78754880',
+        settings: '{"unit":"lux"}',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

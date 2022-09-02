@@ -154,6 +154,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 'fe8d3c87-0927-49ce-a19b-bacd78754880',
+        defaultName: 'Sensor',
+        name: '',
+        type: DevicesCapabilityType.LUMINOSITY,
+        roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+        deviceId: '83a74e82-b8a5-4a76-9919-d64bc53d7995',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

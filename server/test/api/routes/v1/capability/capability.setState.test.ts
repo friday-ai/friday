@@ -118,4 +118,22 @@ describe('POST /api/v1/capability/:id', () => {
         expect(listener.called).equal(false);
       });
   });
+
+  it('should not set luminosity with wrong value type', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/fe8d3c87-0927-49ce-a19b-bacd78754880')
+      .send({
+        action: DevicesActionsType.SET_LUMINOSITY,
+        value: 'BAD_FORMAT',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(false);
+      });
+  });
 });
