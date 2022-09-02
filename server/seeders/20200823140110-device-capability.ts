@@ -144,6 +144,16 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: 'f7710371-928a-4b2e-8a27-b00de697fded',
+        defaultName: 'Sensor',
+        name: '',
+        type: DevicesCapabilityType.MOTION,
+        roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+        deviceId: '83a74e82-b8a5-4a76-9919-d64bc53d7995',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

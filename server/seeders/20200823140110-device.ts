@@ -68,6 +68,22 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: '83a74e82-b8a5-4a76-9919-d64bc53d7995',
+        defaultName: 'Motion sensor',
+        defaultManufacturer: 'Netatmo',
+        defaultModel: 'Sensor',
+        name: '',
+        manufacturer: '',
+        model: '',
+        type: DevicesType.PHYSICAL,
+        pluginSelector: 'SENSOR-30',
+        viaDevice: '',
+        roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+        pluginId: '88b48273-15e6-4729-9199-0682677475f4',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>

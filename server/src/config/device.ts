@@ -22,6 +22,7 @@ enum DevicesCapabilityType {
   INTENSITY = 'intensity',
   POWER = 'power',
   WATER = 'water',
+  MOTION = 'motion',
 }
 
 export enum DevicesActionsType {
@@ -41,6 +42,7 @@ export enum DevicesActionsType {
   SET_POWER_CONSUMPTION = 'action.devices.commands.set_power_consumption',
   SET_INTENSITY_CONSUMPTION = 'action.devices.commands.set_intensity_consumption',
   SET_WATER_CONSUMPTION = 'action.devices.commands.set_water_consumption',
+  SET_MOTION = 'action.devices.commands.set_motion',
 }
 
 type OnOffSettings = null;

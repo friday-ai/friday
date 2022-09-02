@@ -101,6 +101,13 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: '2137c8fa-01c3-4ac7-9e78-ecc943e621cf',
+        capabilityId: 'f7710371-928a-4b2e-8a27-b00de697fded',
+        settings: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]),
 
   down: (queryInterface: QueryInterface) =>
