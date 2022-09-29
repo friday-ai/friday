@@ -14,7 +14,7 @@ describe('POST /api/v1/capability/:id', () => {
       .post('/api/v1/capability/d39593a9-f54a-4823-8d6c-017be8f57eed')
       .send({
         action: DevicesActionsType.TURN_ON,
-        value: 'ON',
+        value: true,
       })
       .expect('Content-Type', /json/)
       .expect(200)
@@ -22,7 +22,28 @@ describe('POST /api/v1/capability/:id', () => {
         await wait(80);
         expect(listener.called).equal(true);
         expect(listener.args[0][0].message).to.equal(
-          '{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{}}',
+          '{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{"value":true}}',
+        );
+      });
+  });
+
+  it('should set off', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/d39593a9-f54a-4823-8d6c-017be8f57eed')
+      .send({
+        action: DevicesActionsType.TURN_OFF,
+        value: false,
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(true);
+        expect(listener.args[0][0].message).to.equal(
+          '{"device":"LIGHT-10","method":"action.devices.commands.turn_off","params":{"value":false}}',
         );
       });
   });
@@ -35,11 +56,83 @@ describe('POST /api/v1/capability/:id', () => {
       .post('/api/v1/capability/wrong')
       .send({
         action: DevicesActionsType.TURN_ON,
-        value: null,
+        value: true,
       })
       .expect('Content-Type', /json/)
       .expect(200)
       .then((_) => {
+        expect(listener.called).equal(false);
+      });
+  });
+
+  it('should not set on with wrong boolean', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/d39593a9-f54a-4823-8d6c-017be8f57eed')
+      .send({
+        action: DevicesActionsType.TURN_ON,
+        value: 2,
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(false);
+      });
+  });
+
+  it('should not set cold with wrong boolean', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/c0afdcbd-7d11-479f-a946-57107504295c')
+      .send({
+        action: DevicesActionsType.COLD,
+        value: 2,
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(false);
+      });
+  });
+
+  it('should not set water with wrong value type', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/e3b066ee-7974-4d92-9587-cd113f26c4f4')
+      .send({
+        action: DevicesActionsType.SET_WATER_CONSUMPTION,
+        value: 'BAD_FORMAT',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
+        expect(listener.called).equal(false);
+      });
+  });
+
+  it('should not set luminosity with wrong value type', async () => {
+    const listener = sinon.spy();
+    global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
+
+    await server
+      .post('/api/v1/capability/fe8d3c87-0927-49ce-a19b-bacd78754880')
+      .send({
+        action: DevicesActionsType.SET_LUMINOSITY,
+        value: 'BAD_FORMAT',
+      })
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(async (_) => {
+        await wait(80);
         expect(listener.called).equal(false);
       });
   });
