@@ -1,4 +1,7 @@
+/* eslint @typescript-eslint/no-var-requires: "off" */
 const defaultTheme = require('tailwindcss/defaultTheme');
+const daisyui = require('daisyui');
+const themes = require('daisyui/src/colors/themes');
 
 module.exports = {
   mode: 'jit',
@@ -85,12 +88,12 @@ module.exports = {
     },
   },
   variants: {},
-  plugins: [require('daisyui')],
+  plugins: [daisyui],
   daisyui: {
     themes: [
       {
         light: {
-          ...require('daisyui/src/colors/themes')['[data-theme=light]'],
+          ...themes['[data-theme=light]'],
           primary: '#121C42',
           secondary: '#004d73',
           accent: '#007fbd',
