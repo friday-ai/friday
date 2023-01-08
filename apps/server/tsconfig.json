@@ -23,7 +23,7 @@
     ],
     "rootDirs": ["./src", "../"],
   },
-  "extends": "../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "include": [
     "src/**/*",
     "src/models/*",

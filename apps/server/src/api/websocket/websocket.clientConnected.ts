@@ -20,6 +20,7 @@ export default async function clientConnected(this: WebsocketServer, message: We
     await this.friday.session.validateAccessToken(message.accessToken!);
     const user = await this.friday.user.getById(message.sender);
 
+    /*
     if (!this.clients[user.id!]) {
       this.clients[user.id!] = [];
     }
@@ -31,6 +32,7 @@ export default async function clientConnected(this: WebsocketServer, message: We
         ws,
       });
     }
+    */
 
     this.user = user;
     this.isAuthenticated = true;
