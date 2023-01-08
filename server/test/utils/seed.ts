@@ -11,17 +11,20 @@ const files = readdirSync(SEEDERS_PATH);
 const seeds = files.map((file) => require(join(SEEDERS_PATH, file)));
 const reversedSeed = seeds.slice().reverse();
 
-const callLater = () => new Promise((resolve) => {
-  setTimeout(resolve, 10);
-});
-
 const seedDb = async () => {
-  await promise.mapSeries(seeds, (seed) => callLater().then(() => seed.up(database.getQueryInterface())));
+  const queryInterface = database.getQueryInterface();
+  await promise.each(seeds, async (seed) => {
+    await seed.up(queryInterface);
+  });
 };
 
 const cleanDb = async () => {
-  await promise.mapSeries(reversedSeed, (seed) => callLater().then(() => seed.down(database.getQueryInterface())));
+  const queryInterface = database.getQueryInterface();
+  await promise.each(reversedSeed, async (seed) => {
+    await seed.down(queryInterface);
+  });
 };
+
 
 export {
   seedDb,
