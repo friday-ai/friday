@@ -9,7 +9,7 @@ interface ModalProps {
   onClose?: VoidFunction;
 }
 
-const Modal: React.FC<ModalProps> = ({ children, open, hasActionsButtons, onConfirm, onClose }) => {
+function Modal({ children, open, hasActionsButtons, onConfirm, onClose }: ModalProps) {
   return (
     <div className={`modal ${open ? 'modal-open' : ''}`}>
       <div className="modal-box max-w-none min-w-[32rem] w-auto">
@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({ children, open, hasActionsButtons, onConf
       </div>
     </div>
   );
-};
+}
 
 Modal.defaultProps = {
   hasActionsButtons: true,

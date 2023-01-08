@@ -7,7 +7,7 @@ interface SwitchProps {
   cb: (state: boolean) => void;
 }
 
-const Switch: React.FC<SwitchProps> = ({ id, label, checked, cb }) => {
+function Switch({ id, label, checked, cb }: SwitchProps) {
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     cb(event.target.checked);
   };
@@ -20,6 +20,6 @@ const Switch: React.FC<SwitchProps> = ({ id, label, checked, cb }) => {
       </label>
     </div>
   );
-};
+}
 
 export default Switch;

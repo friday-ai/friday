@@ -20,7 +20,7 @@ const item = {
   },
 };
 
-const Brand: React.FC = () => {
+function Brand() {
   return (
     <motion.div className="centered-container" variants={container} initial="hidden" animate="visible">
       <div key="logo">
@@ -34,6 +34,6 @@ const Brand: React.FC = () => {
       </motion.h3>
     </motion.div>
   );
-};
+}
 
 export default Brand;

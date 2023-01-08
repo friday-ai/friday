@@ -3,7 +3,7 @@ import { SVGProps } from '../../utils/interfaces';
 import { useAppSelector } from '../../services/store/store';
 import { themeColors } from '../App/app.reducer';
 
-const UndrawServerDown: React.FC<SVGProps> = ({ className = '', height = '699', width = '1119.60911' }) => {
+function UndrawServerDown({ className = '', height = '699', width = '1119.60911' }: SVGProps) {
   const colors = useAppSelector(themeColors);
   return (
     <svg
@@ -128,6 +128,6 @@ const UndrawServerDown: React.FC<SVGProps> = ({ className = '', height = '699', 
       />
     </svg>
   );
-};
+}
 
 export default UndrawServerDown;

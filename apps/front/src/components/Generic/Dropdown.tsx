@@ -13,7 +13,7 @@ interface DropdownProps {
   children: React.ReactNode;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ title, className, btnText, btnStyle, icon, iconStyle, containerStyle, placement, children }) => {
+function Dropdown({ title, className, btnText, btnStyle, icon, iconStyle, containerStyle, placement, children }: DropdownProps) {
   return (
     <div title={title} className={`dropdown ${placement} ${className}`}>
       <button type="button" tabIndex={0} className={btnStyle}>
@@ -23,7 +23,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, className, btnText, btnStyle
       <div className={`dropdown-base text-base-content border border-base-300 ${containerStyle}`}>{children}</div>
     </div>
   );
-};
+}
 
 Dropdown.defaultProps = {
   className: '',

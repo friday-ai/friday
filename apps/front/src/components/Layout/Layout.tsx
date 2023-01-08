@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import Drawer from '../Drawer/Drawer';
 import Header from '../Header/Header';
 
-const Layout: React.FC = () => {
+function Layout() {
   return (
     <div className="h-full flex bg-base-200">
       <Drawer />
@@ -17,6 +17,6 @@ const Layout: React.FC = () => {
       <Toaster position="top-right" containerStyle={{ top: '75px', right: '30px' }} />
     </div>
   );
-};
+}
 
 export default Layout;

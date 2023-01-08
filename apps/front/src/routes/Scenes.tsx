@@ -12,7 +12,7 @@ import AnimatedList from '../components/AnimatedList/AnimatedList';
 
 let sceneList: SceneType[] = [];
 
-const Scenes: React.FC = () => {
+function Scenes() {
   const { scenes } = useSharedApp();
   const [filteredScenes, setFilteredScenes] = useState<SceneType[]>([]);
   const [searchField, setSearchField] = useState('');
@@ -29,6 +29,7 @@ const Scenes: React.FC = () => {
         setFilteredScenes(sceneList);
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.error(err);
       });
   }, [scenes]);
@@ -118,6 +119,6 @@ const Scenes: React.FC = () => {
       )}
     </div>
   );
-};
+}
 
 export default Scenes;

@@ -3,7 +3,7 @@ import { SVGProps } from '../../utils/interfaces';
 import { useAppSelector } from '../../services/store/store';
 import { themeColors } from '../App/app.reducer';
 
-const Favicon: React.FC<SVGProps> = ({ className = '', height = '250', width = '206' }) => {
+function Favicon({ className = '', height = '250', width = '206' }: SVGProps) {
   const colors = useAppSelector(themeColors);
   return (
     <svg
@@ -20,6 +20,6 @@ const Favicon: React.FC<SVGProps> = ({ className = '', height = '250', width = '
       <path d="M102.941 95.5884L154.412 150.735V209.559L102.941 158.088V95.5884Z" fill={colors.primary} />
     </svg>
   );
-};
+}
 
 export default Favicon;

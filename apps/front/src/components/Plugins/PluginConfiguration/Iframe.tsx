@@ -12,7 +12,7 @@ interface PluginIframeProps {
   setPluginState?: (state: number) => void;
 }
 
-const PluginIframe: React.FC<PluginIframeProps> = ({ plugin, url, hidden, setPluginState }) => {
+function PluginIframe({ plugin, url, hidden, setPluginState }: PluginIframeProps) {
   const selectedTheme = useAppSelector(theme);
   const frame = useRef<HTMLIFrameElement>(null);
   const [id] = useState(randomStr(15));
@@ -89,7 +89,7 @@ const PluginIframe: React.FC<PluginIframeProps> = ({ plugin, url, hidden, setPlu
       onLoad={onLoad}
     />
   );
-};
+}
 
 PluginIframe.defaultProps = {
   hidden: false,

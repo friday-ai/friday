@@ -160,7 +160,7 @@ export interface DeviceCapabilityStateType {
 
 type OnOffSettings = null;
 
-interface BrightnessSettings extends Record<string, any> {
+interface BrightnessSettings extends Record<string, number> {
   min: number;
   max: number;
   step: number;

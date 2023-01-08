@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import useSharedApp from '../App';
 
-const RequireAuth: React.FC = () => {
+function RequireAuth() {
   const app = useSharedApp();
   const location = useLocation();
 
@@ -17,6 +17,6 @@ const RequireAuth: React.FC = () => {
   }
 
   return <Outlet />;
-};
+}
 
 export default RequireAuth;

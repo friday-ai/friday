@@ -4,13 +4,13 @@ import { Icon } from '@iconify/react';
 
 type IconType = 'success' | 'warning' | 'info' | 'error';
 
-interface Props {
+interface MakeNotificationProps {
   title: string;
   message?: string;
   type: IconType;
 }
 
-const NotificationIcon: React.FC<{ type: IconType }> = ({ type }) => {
+function NotificationIcon({ type }: { type: IconType }) {
   switch (type) {
     case 'success':
       return <Icon icon="ic:round-check-circle-outline" className="w-6 h-6 text-green-500" />;
@@ -21,9 +21,9 @@ const NotificationIcon: React.FC<{ type: IconType }> = ({ type }) => {
     default:
       return <Icon icon="ic:outline-info" className="w-6 h-6 text-blue-400" />;
   }
-};
+}
 
-const MakeNotification = (props: Props) => {
+function MakeNotification(props: MakeNotificationProps) {
   const { title, message, type } = props;
 
   toast.custom((options) => (
@@ -41,7 +41,7 @@ const MakeNotification = (props: Props) => {
       </div>
     </div>
   ));
-};
+}
 
 interface NotificationType {
   title: string;

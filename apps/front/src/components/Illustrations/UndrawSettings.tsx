@@ -3,7 +3,7 @@ import { SVGProps } from '../../utils/interfaces';
 import { useAppSelector } from '../../services/store/store';
 import { themeColors } from '../App/app.reducer';
 
-const UndrawSettings: React.FC<SVGProps> = ({ className = '', height = '577.34774', width = '676.65833' }) => {
+function UndrawSettings({ className = '', height = '577.34774', width = '676.65833' }: SVGProps) {
   const colors = useAppSelector(themeColors);
   return (
     <svg
@@ -161,6 +161,6 @@ const UndrawSettings: React.FC<SVGProps> = ({ className = '', height = '577.3477
       <path d="M937.32917,738.67387h-381a1,1,0,0,1,0-2h381a1,1,0,0,1,0,2Z" transform="translate(-261.67083 -161.32613)" fill="#cacaca" />
     </svg>
   );
-};
+}
 
 export default UndrawSettings;

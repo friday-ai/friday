@@ -11,7 +11,7 @@ interface ThemesListProps {
   selected: string;
 }
 
-const ThemeList = ({ list, change, selected }: ThemesListProps): JSX.Element => {
+function ThemeList({ list, change, selected }: ThemesListProps): JSX.Element {
   return (
     <>
       {list.map((t) => (
@@ -34,9 +34,9 @@ const ThemeList = ({ list, change, selected }: ThemesListProps): JSX.Element => 
       ))}
     </>
   );
-};
+}
 
-const ThemeSwitcher: React.FC = () => {
+function ThemeSwitcher() {
   const dispatch = useAppDispatch();
   const selectedTheme = useAppSelector(theme);
 
@@ -63,6 +63,6 @@ const ThemeSwitcher: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default ThemeSwitcher;

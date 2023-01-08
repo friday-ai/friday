@@ -3,7 +3,7 @@ import { SVGProps } from '../../utils/interfaces';
 import { useAppSelector } from '../../services/store/store';
 import { themeColors } from '../App/app.reducer';
 
-const Logo: React.FC<SVGProps> = ({ className = '', height = '34', width = '144' }) => {
+function Logo({ className = '', height = '34', width = '144' }: SVGProps) {
   const colors = useAppSelector(themeColors);
   return (
     <svg
@@ -24,6 +24,6 @@ const Logo: React.FC<SVGProps> = ({ className = '', height = '34', width = '144'
       />
     </svg>
   );
-};
+}
 
 export default Logo;

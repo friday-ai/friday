@@ -9,9 +9,12 @@ interface ModalConfirmProps {
   onCancel?: VoidFunction;
 }
 
-const ModalConfirm = ({ title, message, onOk, onCancel = () => null }: ModalConfirmProps): void => {
+function ModalConfirm({ title, message, onOk, onCancel = () => null }: ModalConfirmProps) {
   // Get modal element in DOM
-  const root = createRoot(document.getElementById('modal')!);
+  const modal = document.getElementById('modal');
+  if (modal === null) return;
+
+  const root = createRoot(modal);
 
   const close = (confirmed: boolean) => {
     document.getElementsByClassName('modal')[0].classList.remove('modal-open');
@@ -63,6 +66,6 @@ const ModalConfirm = ({ title, message, onOk, onCancel = () => null }: ModalConf
   };
 
   render();
-};
+}
 
 export default ModalConfirm;

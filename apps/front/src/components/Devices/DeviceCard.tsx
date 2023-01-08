@@ -8,7 +8,7 @@ interface DeviceCardProps {
   device: DeviceType;
 }
 
-const DeviceCard: React.FC<DeviceCardProps> = ({ device }) => {
+function DeviceCard({ device }: DeviceCardProps) {
   const onOffCpapbility = device.capabilities?.filter((c) => c.type === 'onoff')[0];
   const brightnessCapability = device.capabilities?.filter((c) => c.type === 'brightness')[0];
 
@@ -21,6 +21,6 @@ const DeviceCard: React.FC<DeviceCardProps> = ({ device }) => {
   }
 
   return <div className="card-base">Device Not supported, :/</div>;
-};
+}
 
 export default DeviceCard;

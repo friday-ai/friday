@@ -21,7 +21,7 @@ const history: Settings[] = [
   { code: 'unlimited', name: 'unlimited' },
 ];
 
-const Settings: React.FC<{ submit: (units: string, history: string) => void }> = ({ submit }) => {
+function Settings({ submit }: { submit: (units: string, history: string) => void }) {
   const navigate = useNavigate();
   const [settings, setSettings] = useState({ units: 'us', history: '3 month' });
 
@@ -78,6 +78,6 @@ const Settings: React.FC<{ submit: (units: string, history: string) => void }> =
       </button>
     </div>
   );
-};
+}
 
 export default Settings;

@@ -9,7 +9,7 @@ import Logo from '../Illustrations/Logo';
 import Favicon from '../Illustrations/Favicon';
 import getRouteName from '../../utils/routes';
 
-const Drawer: React.FC = () => {
+function Drawer() {
   const dispatch = useAppDispatch();
   const isSidebarOpen = useAppSelector(drawerToggled);
   const location = useLocation();
@@ -42,7 +42,7 @@ const Drawer: React.FC = () => {
         <ul className="menu p-2 overflow-hidden">
           <li className="mb-3">
             <Link
-              to=""
+              to="/"
               aria-label="dashboard"
               onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
               className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${getRouteName(location.pathname) === 'Dashboard' && 'active'}`}
@@ -119,6 +119,6 @@ const Drawer: React.FC = () => {
       </nav>
     </aside>
   );
-};
+}
 
 export default Drawer;

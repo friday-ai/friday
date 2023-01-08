@@ -14,7 +14,7 @@ interface CheckboxGroupProps {
   canUncheckAll?: boolean;
 }
 
-const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ checkboxes, onChange, hasCheckAll, canUncheckAll }) => {
+function CheckboxGroup({ checkboxes, onChange, hasCheckAll, canUncheckAll }: CheckboxGroupProps) {
   const [values, setValues] = useState(checkboxes);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ checkboxes, onChange, has
       ))}
     </>
   );
-};
+}
 
 CheckboxGroup.defaultProps = {
   hasCheckAll: false,

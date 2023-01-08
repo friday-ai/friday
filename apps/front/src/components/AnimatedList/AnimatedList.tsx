@@ -1,7 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion, usePresence } from 'framer-motion';
 
-const ListItem = ({ children }: { children: React.ReactNode }) => {
+function ListItem({ children }: { children: React.ReactNode }) {
   const [isPresent, safeToRemove] = usePresence();
 
   return (
@@ -27,14 +27,14 @@ const ListItem = ({ children }: { children: React.ReactNode }) => {
       {children}
     </motion.div>
   );
-};
+}
 
 interface AnimatedListProps<T> {
   renderItem: (item: T) => React.ReactNode;
   items: T[];
 }
 
-const AnimatedList = <T,>({ items, renderItem }: AnimatedListProps<T>) => {
+function AnimatedList<T>({ items, renderItem }: AnimatedListProps<T>) {
   return (
     <AnimatePresence>
       {items.map((item) => (
@@ -42,6 +42,6 @@ const AnimatedList = <T,>({ items, renderItem }: AnimatedListProps<T>) => {
       ))}
     </AnimatePresence>
   );
-};
+}
 
 export default AnimatedList;

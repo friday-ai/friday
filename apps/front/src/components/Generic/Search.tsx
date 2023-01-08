@@ -6,7 +6,7 @@ interface SearchProps {
   onSearch: (value: string) => void;
 }
 
-const Search: React.FC<SearchProps> = ({ value, onSearch }) => {
+function Search({ value, onSearch }: SearchProps) {
   return (
     <div className="form-control ml-2 mr-2 sm:mr-5 w-40 sm:w-auto">
       <label id="search" htmlFor="search" className="relative">
@@ -33,6 +33,6 @@ const Search: React.FC<SearchProps> = ({ value, onSearch }) => {
       </label>
     </div>
   );
-};
+}
 
 export default Search;

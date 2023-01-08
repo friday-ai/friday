@@ -6,7 +6,7 @@ import Favicon from '../assets/favicon_black.svg';
 import Tooltip from '../components/Generic/Tooltip';
 import useSharedApp from '../services/App';
 
-const Login: React.FC = () => {
+function Login() {
   const app = useSharedApp();
   const navigate = useNavigate();
   const [error, setError] = useState('');
@@ -104,6 +104,6 @@ const Login: React.FC = () => {
       </span>
     </div>
   );
-};
+}
 
 export default Login;

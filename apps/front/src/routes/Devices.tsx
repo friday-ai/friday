@@ -6,7 +6,7 @@ import UndrawEmpty from '../components/Illustrations/UndrawEmpty';
 
 import { DeviceType } from '../utils/interfaces';
 
-const Devices: React.FC = () => {
+function Devices() {
   const { devices } = useSharedApp();
   const [filterdDevices, setFilteredDevices] = useState<DeviceType[]>([]);
 
@@ -32,6 +32,6 @@ const Devices: React.FC = () => {
       )}
     </div>
   );
-};
+}
 
 export default Devices;

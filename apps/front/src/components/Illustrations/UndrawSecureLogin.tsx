@@ -1,10 +1,10 @@
 import React from 'react';
 import { SVGProps } from '../../utils/interfaces';
-import { useAppSelector } from '../../services/store/store';
-import { themeColors } from '../App/app.reducer';
+// import { useAppSelector } from '../../services/store/store';
+// import { themeColors } from '../App/app.reducer';
 
-const UndrawSecureLogin: React.FC<SVGProps> = ({ className = '', height = '400', width = '400' }) => {
-  const colors = useAppSelector(themeColors);
+function UndrawSecureLogin({ className = '', height = '400', width = '400' }: SVGProps) {
+  // const colors = useAppSelector(themeColors);
   return (
     <svg
       id="f2ef7d3c-3379-45e6-8007-6e6f16c2d34b"
@@ -70,6 +70,6 @@ const UndrawSecureLogin: React.FC<SVGProps> = ({ className = '', height = '400',
       <path d="m 250.406,209.01612 a 4.00607,4.00607 0 1 0 0,8.01214 h 81.266 a 4.00607,4.00607 0 1 0 0,-8.01214 z" fill="#e6e6e6" id="path34" />
     </svg>
   );
-};
+}
 
 export default UndrawSecureLogin;

@@ -24,7 +24,7 @@ const getBorderColor = (state: AvailableState): string => {
   }
 };
 
-const SatelliteState: React.FC<{ state: AvailableState }> = ({ state }) => {
+function SatelliteState({ state }) {
   switch (state) {
     case AvailableState.SATELLITE_CONNECTED:
       return <Badge text="online" type="badge-success" />;
@@ -39,13 +39,13 @@ const SatelliteState: React.FC<{ state: AvailableState }> = ({ state }) => {
     default:
       return <Badge text="errored" type="badge-error" />;
   }
-};
+}
 
 interface SatelliteCardProps {
   satellite: SatelliteType;
 }
 
-const SatelliteCard: React.FC<SatelliteCardProps> = ({ satellite }) => {
+function SatelliteCard({ satellite }: SatelliteCardProps) {
   return (
     <div className={`collapse w-full rounded-box collapse-arrow overflow-visible border ${getBorderColor(satellite.state.value)}`}>
       <input type="checkbox" />
@@ -102,6 +102,6 @@ const SatelliteCard: React.FC<SatelliteCardProps> = ({ satellite }) => {
       </div>
     </div>
   );
-};
+}
 
 export default SatelliteCard;

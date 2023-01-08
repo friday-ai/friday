@@ -9,8 +9,11 @@ type ReactDispatch = React.Dispatch<React.SetStateAction<SessionType>>;
 
 class Websockets {
   public socket: WebSocket | null;
+
   public session: SessionType;
+
   public setSession: React.Dispatch<React.SetStateAction<SessionType>>;
+
   public emitter: Emitter;
 
   constructor(session: SessionType, setSession: ReactDispatch, emitter: Emitter) {
@@ -39,6 +42,7 @@ class Websockets {
     };
 
     this.socket.onclose = (e) => {
+      // eslint-disable-next-line no-console
       console.error(e);
       if (e.reason === WebsocketMessageType.INVALID_ACCESS_TOKEN) {
         localStorage.removeItem('session');

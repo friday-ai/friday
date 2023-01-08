@@ -9,7 +9,7 @@ interface RadioProps {
   onChange: (value: string) => void;
 }
 
-const Radio: React.FC<RadioProps> = ({ label, name, alt, isSelected, value, onChange }) => {
+function Radio({ label, name, alt, isSelected, value, onChange }: RadioProps) {
   return (
     <div className="form-control">
       <label htmlFor={`${label}+${value}+${name}`} className="cursor-pointer label justify-start gap-3">
@@ -29,7 +29,7 @@ const Radio: React.FC<RadioProps> = ({ label, name, alt, isSelected, value, onCh
       </label>
     </div>
   );
-};
+}
 
 Radio.defaultProps = {
   alt: '',
@@ -48,7 +48,7 @@ interface RadioGroupProps {
   onChange: (values: string) => void;
 }
 
-const RadioGroup: React.FC<RadioGroupProps> = ({ radios, name, selected, onChange }) => {
+function RadioGroup({ radios, name, selected, onChange }: RadioGroupProps) {
   return (
     <>
       {radios.map((radio) => (
@@ -64,6 +64,6 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ radios, name, selected, onChang
       ))}
     </>
   );
-};
+}
 
 export { RadioGroup, Radio };

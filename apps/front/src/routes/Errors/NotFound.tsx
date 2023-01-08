@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import UndrawNotFound from '../../components/Illustrations/UndrawNotFound';
 
-const NotFound: React.FC = () => {
+function NotFound() {
   return (
     <div className="geo-background centered-container">
       <UndrawNotFound className="self-center" width="500" height="300" />
@@ -13,6 +13,6 @@ const NotFound: React.FC = () => {
       </Link>
     </div>
   );
-};
+}
 
 export default NotFound;

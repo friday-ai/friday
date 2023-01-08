@@ -1,7 +1,7 @@
 import React from 'react';
 import UndrawServerDown from '../../components/Illustrations/UndrawServerDown';
 
-const ServerDown: React.FC = () => {
+function ServerDown() {
   return (
     <div className="geo-background centered-container">
       <UndrawServerDown className="self-center" width="500" height="550" />
@@ -9,6 +9,6 @@ const ServerDown: React.FC = () => {
       <span className="mt-3 text-lg text-center">Please restart your machine and try again in a few moments</span>
     </div>
   );
-};
+}
 
 export default ServerDown;

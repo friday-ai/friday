@@ -5,6 +5,7 @@ const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
 
 class Auth {
   public session: SessionType;
+
   public setSession: (session: SessionType) => void;
 
   constructor(session: SessionType, setSession: (session: SessionType) => void) {

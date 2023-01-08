@@ -1,11 +1,12 @@
-import {defineConfig} from 'vite'
-import react from '@vitejs/plugin-react'
-import {VitePWA} from 'vite-plugin-pwa'
+/* eslint-disable import/no-extraneous-dependencies */
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   server: {
     https: process.env.HTTPS === 'true',
-    port: parseInt(process.env.PORT) || 3001
+    port: Number(process.env.PORT) || 3001,
   },
   plugins: [
     react(),
@@ -25,21 +26,21 @@ export default defineConfig({
           {
             src: 'android-chrome-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
-          },
-          {
-            src: 'android-chrome-512x512.png',
-            sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
           },
           {
             src: 'android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'maskable'
-          }
-        ]
-      }
-    })
-  ]
-})
+          },
+          {
+            src: 'android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
+      },
+    }),
+  ],
+});

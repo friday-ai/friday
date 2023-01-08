@@ -1,10 +1,10 @@
 import React from 'react';
 import { SVGProps } from '../../utils/interfaces';
-import { useAppSelector } from '../../services/store/store';
-import { themeColors } from '../App/app.reducer';
+// import { useAppSelector } from '../../services/store/store';
+// import { themeColors } from '../App/app.reducer';
 
-const UndrawWorld: React.FC<SVGProps> = ({ className = '', height = '400', width = '400' }) => {
-  const colors = useAppSelector(themeColors);
+function UndrawWorld({ className = '', height = '400', width = '400' }: SVGProps) {
+  // const colors = useAppSelector(themeColors);
   return (
     <svg
       id="f2ef7d3c-3379-45e6-8007-6e6f16c2d34b"
@@ -130,6 +130,6 @@ const UndrawWorld: React.FC<SVGProps> = ({ className = '', height = '400', width
       />
     </svg>
   );
-};
+}
 
 export default UndrawWorld;

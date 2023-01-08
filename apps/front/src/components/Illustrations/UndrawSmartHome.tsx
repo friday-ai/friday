@@ -3,7 +3,7 @@ import { SVGProps } from '../../utils/interfaces';
 import { useAppSelector } from '../../services/store/store';
 import { themeColors } from '../App/app.reducer';
 
-const UndrawSmartHome: React.FC<SVGProps> = ({ className = '', height = '674.11409', width = '830.41865' }) => {
+function UndrawSmartHome({ className = '', height = '674.11409', width = '830.41865' }: SVGProps) {
   const colors = useAppSelector(themeColors);
   return (
     <svg
@@ -287,6 +287,6 @@ const UndrawSmartHome: React.FC<SVGProps> = ({ className = '', height = '674.114
       />
     </svg>
   );
-};
+}
 
 export default UndrawSmartHome;

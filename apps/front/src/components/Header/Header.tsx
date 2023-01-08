@@ -7,7 +7,7 @@ import { currentView, drawerToggled, toggleDrawer } from '../App/app.reducer';
 import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import useApp from '../../services/App';
 
-const Header: React.FC = () => {
+function Header() {
   const dispatch = useAppDispatch();
   const isSidebarOpen = useAppSelector(drawerToggled);
   const view = useAppSelector(currentView);
@@ -63,6 +63,6 @@ const Header: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Header;

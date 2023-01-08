@@ -24,7 +24,7 @@ interface PluginType {
   satelliteId: string;
 }
 
-const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpenModal, satellites }) => {
+function SatellitesInstall({ openModal, setOpenModal, satellites }: SatellitesInstallProps) {
   const [loading, setLoading] = useState(false);
   const [pluginInstalled, setPluginInstalled] = useState(false);
   const { plugins, emitter } = useSharedApp();
@@ -185,6 +185,6 @@ const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpe
       )}
     </Modal>
   );
-};
+}
 
 export default SatellitesInstall;

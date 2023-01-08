@@ -3,7 +3,7 @@ import { SVGProps } from '../../utils/interfaces';
 import { useAppSelector } from '../../services/store/store';
 import { themeColors } from '../App/app.reducer';
 
-const UndrawUnauthorized: React.FC<SVGProps> = ({ className = '', height = '748.00219', width = '1080.0487' }) => {
+function UndrawUnauthorized({ className = '', height = '748.00219', width = '1080.0487' }: SVGProps) {
   const colors = useAppSelector(themeColors);
   return (
     <svg
@@ -135,6 +135,6 @@ const UndrawUnauthorized: React.FC<SVGProps> = ({ className = '', height = '748.
       />
     </svg>
   );
-};
+}
 
 export default UndrawUnauthorized;

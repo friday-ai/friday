@@ -7,7 +7,7 @@ interface CheckboxProps {
   onCheckedChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ label, value, checked, onCheckedChange }) => {
+function Checkbox({ label, value, checked, onCheckedChange }: CheckboxProps) {
   return (
     <div className="form-control">
       <label htmlFor={`${label}+${value}+${Math.random()}`} className="cursor-pointer label">
@@ -24,6 +24,6 @@ const Checkbox: React.FC<CheckboxProps> = ({ label, value, checked, onCheckedCha
       </label>
     </div>
   );
-};
+}
 
 export default Checkbox;

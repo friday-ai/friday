@@ -11,7 +11,7 @@ interface SceneCardProps {
   onStatusChange: (scene: SceneType, value: string) => void;
 }
 
-const SceneCard: React.FC<SceneCardProps> = ({ scene, onSceneClick, onStatusChange }) => {
+function SceneCard({ scene, onSceneClick, onStatusChange }: SceneCardProps) {
   const [status, setStatus] = useState(scene.status);
 
   const onChange = (value: boolean) => {
@@ -77,6 +77,6 @@ const SceneCard: React.FC<SceneCardProps> = ({ scene, onSceneClick, onStatusChan
       </button>
     </div>
   );
-};
+}
 
 export default SceneCard;

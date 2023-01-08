@@ -8,7 +8,7 @@ class Capabilities {
     this.api = api;
   }
 
-  setState = async (id: string, params: any): Promise<{ success: boolean }> => {
+  setState = async (id: string, params: { value: boolean | number }): Promise<{ success: boolean }> => {
     return this.api.post(`/api/v1/capability/${id}`, params);
   };
 }

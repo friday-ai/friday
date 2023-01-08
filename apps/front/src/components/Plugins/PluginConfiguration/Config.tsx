@@ -9,7 +9,7 @@ interface ConfigProps {
   url: string;
 }
 
-const Config: React.FC<ConfigProps> = ({ plugin, title, url }) => {
+function Config({ plugin, title, url }: ConfigProps) {
   return (
     <div className="mx-7 space-y-5 p-4 text-center centered-container">
       <h1 className="text-3xl font-bold">Plugin first configuration</h1>
@@ -23,6 +23,6 @@ const Config: React.FC<ConfigProps> = ({ plugin, title, url }) => {
       </div>
     </div>
   );
-};
+}
 
 export default Config;

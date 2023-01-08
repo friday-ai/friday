@@ -5,7 +5,7 @@ interface TabsProps {
   children: JSX.Element | JSX.Element[];
 }
 
-const Tabs: React.FC<TabsProps> = ({ defaultTab, children }) => {
+function Tabs({ defaultTab, children }: TabsProps) {
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [childs] = useState(Array.isArray(children) ? children.filter(Boolean) : children);
 
@@ -35,6 +35,6 @@ const Tabs: React.FC<TabsProps> = ({ defaultTab, children }) => {
       )}
     </div>
   );
-};
+}
 
 export default Tabs;

@@ -12,7 +12,7 @@ interface House {
   roomName: string;
 }
 
-const House: React.FC<{ submit: (name: string, position: [number, number], rooms: string[]) => void }> = ({ submit }) => {
+function House({ submit }: { submit: (name: string, position: [number, number], rooms: string[]) => void }) {
   const navigate = useNavigate();
 
   const { onSubmit, onChange, onUpdate, data, errors, setCustomErrors } = useForm<House>({
@@ -144,6 +144,6 @@ const House: React.FC<{ submit: (name: string, position: [number, number], rooms
       </button>
     </form>
   );
-};
+}
 
 export default House;

@@ -5,7 +5,7 @@ interface PluginDevicesProps {
   values: { [key: string]: string }[];
 }
 
-const PluginDevices: React.FC<PluginDevicesProps> = ({ keys, values }) => {
+function PluginDevices({ keys, values }: PluginDevicesProps) {
   return (
     <table className="table w-full">
       <thead>
@@ -32,6 +32,6 @@ const PluginDevices: React.FC<PluginDevicesProps> = ({ keys, values }) => {
       </tbody>
     </table>
   );
-};
+}
 
 export default PluginDevices;

@@ -4,7 +4,7 @@ import Search from '../Generic/Search';
 import Dropdown from '../Generic/Dropdown';
 import CheckboxGroup from '../Generic/Checkbox/CheckboxGroup';
 
-interface Props {
+interface SatellitesToolbarProps {
   onSearch: (value: string) => void;
   onFilter: (value: string[]) => void;
   onSort: (value: string) => void;
@@ -18,7 +18,7 @@ const checkboxFilters = [
   { label: 'Not Configured', value: 'not_configured', checked: true },
 ];
 
-const SatellitesToolbar: React.FC<Props> = ({ onSearch, onFilter, onSort, onCreate }) => {
+function SatellitesToolbar({ onSearch, onFilter, onSort, onCreate }: SatellitesToolbarProps) {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('a-z');
 
@@ -75,6 +75,6 @@ const SatellitesToolbar: React.FC<Props> = ({ onSearch, onFilter, onSort, onCrea
       </div>
     </div>
   );
-};
+}
 
 export default SatellitesToolbar;

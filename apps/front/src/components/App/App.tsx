@@ -19,7 +19,7 @@ import getRouteName from '../../utils/routes';
 import ServerDown from '../../routes/Errors/ServerDown';
 import PluginConfiguration from '../../routes/Plugin/Configuration';
 
-const App: React.FC = () => {
+function App() {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const app = useSharedApp();
@@ -51,6 +51,6 @@ const App: React.FC = () => {
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-};
+}
 
 export default App;

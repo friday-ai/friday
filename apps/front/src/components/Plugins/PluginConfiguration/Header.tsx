@@ -7,7 +7,7 @@ interface PluginHeaderProps {
   cb?: () => void;
 }
 
-const PluginHeader: React.FC<PluginHeaderProps> = ({ logo, badges, action, cb }) => {
+function PluginHeader({ logo, badges, action, cb }: PluginHeaderProps) {
   return (
     <div className="flex flex-row gap-3">
       <img src={logo} alt="" className="h-full w-[30%]" />
@@ -28,7 +28,7 @@ const PluginHeader: React.FC<PluginHeaderProps> = ({ logo, badges, action, cb })
       </div>
     </div>
   );
-};
+}
 
 PluginHeader.defaultProps = {
   badges: undefined,

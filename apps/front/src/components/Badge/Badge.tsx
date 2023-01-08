@@ -6,9 +6,9 @@ interface BadgeProps {
   type?: '' | 'badge-primary' | 'badge-secondary' | 'badge-accent' | 'badge-ghost' | 'badge-info' | 'badge-success' | 'badge-warning' | 'badge-error';
 }
 
-const Badge: React.FC<BadgeProps> = ({ text, size, type }) => {
+function Badge({ text, size, type }: BadgeProps) {
   return <div className={`badge p-3 ${type} ${size} badge-outline truncate`}>{text}</div>;
-};
+}
 
 Badge.defaultProps = {
   size: '',

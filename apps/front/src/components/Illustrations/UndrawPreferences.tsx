@@ -3,7 +3,7 @@ import { SVGProps } from '../../utils/interfaces';
 import { useAppSelector } from '../../services/store/store';
 import { themeColors } from '../App/app.reducer';
 
-const UndrawGPS: React.FC<SVGProps> = ({ className = '', height = '504.65117', width = '738.41777' }) => {
+function UndrawGPS({ className = '', height = '504.65117', width = '738.41777' }: SVGProps) {
   const colors = useAppSelector(themeColors);
   return (
     <svg
@@ -169,6 +169,6 @@ const UndrawGPS: React.FC<SVGProps> = ({ className = '', height = '504.65117', w
       <path d="M552.50416,492.36869h-270a1,1,0,1,1,0-2h270a1,1,0,0,1,0,2Z" transform="translate(-230.79112 -197.67441)" fill="#3f3d56" />
     </svg>
   );
-};
+}
 
 export default UndrawGPS;

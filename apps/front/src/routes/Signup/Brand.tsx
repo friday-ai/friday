@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Favicon from '../../components/Illustrations/Favicon';
 
-const Brand: React.FC = () => {
+function Brand() {
   const navigate = useNavigate();
 
   const container = {
@@ -37,6 +37,6 @@ const Brand: React.FC = () => {
       </motion.button>
     </motion.div>
   );
-};
+}
 
 export default Brand;

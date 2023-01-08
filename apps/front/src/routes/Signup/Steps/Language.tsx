@@ -15,7 +15,7 @@ const languages: Language[] = [
   { code: 'pt', name: 'Portuguese' },
 ];
 
-const Language: React.FC<{ submit: (code: string) => void }> = ({ submit }) => {
+function Language({ submit }: { submit: (code: string) => void }) {
   const navigate = useNavigate();
   const [language, setLanguage] = useState<Language>({ code: 'en', name: 'English' });
 
@@ -54,6 +54,6 @@ const Language: React.FC<{ submit: (code: string) => void }> = ({ submit }) => {
       </button>
     </div>
   );
-};
+}
 
 export default Language;

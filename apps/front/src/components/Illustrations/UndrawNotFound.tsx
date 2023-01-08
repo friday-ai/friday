@@ -3,7 +3,7 @@ import { SVGProps } from '../../utils/interfaces';
 import { useAppSelector } from '../../services/store/store';
 import { themeColors } from '../App/app.reducer';
 
-const UndrawNotFound: React.FC<SVGProps> = ({ className = '', height = '584.231', width = '1074.392' }) => {
+function UndrawNotFound({ className = '', height = '584.231', width = '1074.392' }: SVGProps) {
   const colors = useAppSelector(themeColors);
   return (
     <svg
@@ -258,6 +258,6 @@ const UndrawNotFound: React.FC<SVGProps> = ({ className = '', height = '584.231'
       <circle cx="460.946" cy="355.1155" r="5" fill={colors.primary} opacity="0.3" />
     </svg>
   );
-};
+}
 
 export default UndrawNotFound;

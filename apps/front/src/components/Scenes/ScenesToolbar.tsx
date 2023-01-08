@@ -4,7 +4,7 @@ import Dropdown from '../Generic/Dropdown';
 import Search from '../Generic/Search';
 import CheckboxGroup from '../Generic/Checkbox/CheckboxGroup';
 
-interface Props {
+interface ScenesToolbarProps {
   onSearch: (value: string) => void;
   onFilter: (value: string[]) => void;
   onSort: (value: string) => void;
@@ -17,7 +17,7 @@ const checkboxFilters = [
   { label: 'Errored', value: 'errored', checked: true },
 ];
 
-const ScenesToolbar: React.FC<Props> = ({ onSearch, onFilter, onSort, onCreate }) => {
+function ScenesToolbar({ onSearch, onFilter, onSort, onCreate }: ScenesToolbarProps) {
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('a-z');
 
@@ -74,6 +74,6 @@ const ScenesToolbar: React.FC<Props> = ({ onSearch, onFilter, onSort, onCreate }
       </div>
     </div>
   );
-};
+}
 
 export default ScenesToolbar;

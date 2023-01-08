@@ -9,7 +9,7 @@ import SatellitesInstall from '../components/Satellites/SatellitesInstall';
 
 let satellitesList: SatelliteType[] = [];
 
-const Satellites: React.FC = () => {
+function Satellites() {
   const { satellites } = useSharedApp();
   const [filteredSatellites, setFilteredSatellites] = useState<SatelliteType[]>([]);
   const [openInstallModal, setOpenInstallModal] = useState(false);
@@ -42,6 +42,6 @@ const Satellites: React.FC = () => {
       <SatellitesInstall openModal={openInstallModal} satellites={satellitesList} setOpenModal={(value) => setOpenInstallModal(value)} />
     </div>
   );
-};
+}
 
 export default Satellites;

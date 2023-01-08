@@ -30,7 +30,7 @@ const animation = {
   },
 };
 
-const Signup: React.FC = () => {
+function Signup() {
   const app = useSharedApp();
   const navigate = useNavigate();
   const [language, setLanguage] = useState('en');
@@ -94,6 +94,6 @@ const Signup: React.FC = () => {
       </motion.div>
     </AnimatePresence>
   );
-};
+}
 
 export default Signup;

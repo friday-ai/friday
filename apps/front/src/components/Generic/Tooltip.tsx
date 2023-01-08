@@ -8,13 +8,13 @@ interface TooltipProps {
   type?: '' | 'tooltip-primary' | 'tooltip-secondary' | 'tooltip-accent' | 'tooltip-info' | 'tooltip-success' | 'tooltip-warning' | 'tooltip-error';
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ children, msg, condition, placement, type }) => {
+function Tooltip({ children, msg, condition, placement, type }: TooltipProps) {
   return (
     <div data-tip={msg} className={`tooltip ${type} ${placement} ${!condition && 'tooltip-hidden'} items-start`}>
       {children}
     </div>
   );
-};
+}
 
 Tooltip.defaultProps = {
   condition: true,

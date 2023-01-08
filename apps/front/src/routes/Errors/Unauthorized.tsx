@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import UndrawUnauthorized from '../../components/Illustrations/UndrawUnauthorized';
 
-const Unauthorized: React.FC = () => {
+function Unauthorized() {
   return (
     <div className="geo-background centered-container">
       <UndrawUnauthorized className="self-center" width="500" height="550" />
@@ -13,6 +13,6 @@ const Unauthorized: React.FC = () => {
       </Link>
     </div>
   );
-};
+}
 
 export default Unauthorized;

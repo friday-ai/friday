@@ -44,7 +44,7 @@ interface PluginSchema {
   }[];
 }
 
-const PluginConfiguration: React.FC = () => {
+function PluginConfiguration() {
   const [openManagerModal, setOpenManagerModal] = useState(false);
   const [pluginState, setPluginState] = useState(1);
   const [data, setData] = useState<PluginSchema>({ root: {}, config: {} });
@@ -132,6 +132,6 @@ const PluginConfiguration: React.FC = () => {
         ))}
     </div>
   );
-};
+}
 
 export default PluginConfiguration;

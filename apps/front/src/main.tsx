@@ -8,16 +8,19 @@ import App from './components/App/App';
 import store from './services/store/store';
 
 const container = document.getElementById('root');
-const root = createRoot(container!);
 
-root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
-);
+if (container !== null) {
+  const root = createRoot(container);
 
-registerSW();
+  root.render(
+    <React.StrictMode>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </React.StrictMode>
+  );
+
+  registerSW();
+}

@@ -7,7 +7,7 @@ interface PluginCardProps {
   plugin: PluginType;
 }
 
-const PluginCard: React.FC<PluginCardProps> = ({ plugin }) => {
+function PluginCard({ plugin }: PluginCardProps) {
   return (
     <div className="card-base shadow-none border border-gray-300">
       {plugin.name}
@@ -16,6 +16,6 @@ const PluginCard: React.FC<PluginCardProps> = ({ plugin }) => {
       </Link>
     </div>
   );
-};
+}
 
 export default PluginCard;

@@ -5,7 +5,7 @@ interface CountdownProps {
   count: number;
 }
 
-const Countdown: React.FC<CountdownProps> = ({ start, count }) => {
+function Countdown({ start, count }: CountdownProps) {
   useEffect(() => {
     if (start) {
       let counter = count;
@@ -25,6 +25,6 @@ const Countdown: React.FC<CountdownProps> = ({ start, count }) => {
       <span id="countdown" />
     </span>
   );
-};
+}
 
 export default Countdown;

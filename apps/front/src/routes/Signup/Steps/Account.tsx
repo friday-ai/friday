@@ -12,7 +12,7 @@ interface Auth {
   passwordRepeat: string;
 }
 
-const Account: React.FC<{ submit: (username: string, email: string, password: string) => void }> = ({ submit }) => {
+function Account({ submit }: { submit: (username: string, email: string, password: string) => void }) {
   const navigate = useNavigate();
   const [passwordShown, setPasswordShown] = useState(true);
   const { onSubmit, onChange, data, errors } = useForm<Auth>({
@@ -162,6 +162,6 @@ const Account: React.FC<{ submit: (username: string, email: string, password: st
       </button>
     </form>
   );
-};
+}
 
 export default Account;

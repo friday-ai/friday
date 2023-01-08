@@ -13,7 +13,7 @@ interface LightCardProps {
 
 // TODO: This complexity of state management will be do in backend
 
-const LightCard: React.FC<LightCardProps> = ({ onoff, brightness }) => {
+function LightCard({ onoff, brightness }: LightCardProps) {
   const { capabilities } = useSharedApp();
   const [state, setState] = useState(0);
 
@@ -89,7 +89,7 @@ const LightCard: React.FC<LightCardProps> = ({ onoff, brightness }) => {
       <Switch id={`light-${onoff?.id}`} label="" checked={state === 1} cb={(s: boolean) => onChange(s)} />
     </div>
   );
-};
+}
 
 LightCard.defaultProps = {
   onoff: undefined,

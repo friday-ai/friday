@@ -11,7 +11,7 @@ interface MapProps {
   onNewMarker: (latitude: number, longitude: number) => void;
 }
 
-const Map: React.FC<MapProps> = ({ markers, onNewMarker }) => {
+function Map({ markers, onNewMarker }: MapProps) {
   return (
     <MapContainer className="w-full h-full card" center={DEFAULT_COORDS} zoom={15}>
       <TileLayer
@@ -28,7 +28,7 @@ const Map: React.FC<MapProps> = ({ markers, onNewMarker }) => {
       ))}
     </MapContainer>
   );
-};
+}
 
 Map.defaultProps = {
   markers: [],
