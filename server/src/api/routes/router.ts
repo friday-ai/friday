@@ -10,6 +10,8 @@ import authMiddleware from '../middlewares/authMiddleware';
 import Friday from '../../core/friday';
 import aclMiddleware from '../middlewares/aclMiddleware';
 
+const env = process.env.NODE_ENV || 'production';
+
 /**
  * Express router
  * @description Create express router object.
@@ -20,7 +22,7 @@ import aclMiddleware from '../middlewares/aclMiddleware';
  */
 export default function router(friday: Friday): Router {
   const routerObject = Router();
-  
+
   const routers = Glob
     .sync('**/*.{js,ts}', { cwd: `${__dirname}/` })
     .map((filename) => require(`./${filename}`).default)
@@ -42,7 +44,7 @@ export default function router(friday: Friday): Router {
         routerParams.push(aclMiddleware(route.aclMethod, route.aclResource));
       }
       // if the route need rate limit
-      if (route.rateLimit) {
+      if (route.rateLimit && env === 'production') {
         routerParams.push(rateLimitMiddleware);
       }
       // add the controller at the end of the array
