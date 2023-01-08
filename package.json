@@ -3,44 +3,20 @@
   "version": "1.0.0",
   "description": "Server and web app of the Friday assistant",
   "main": "index.js",
-  "per-env": {
-    "production": {
-      "env": "prod"
-    },
-    "development": {
-      "env": "dev"
-    }
+  "engines": {
+    "node": "18.x",
+    "pnpm": "7.x"
   },
   "scripts": {
-    "postinstallold": "npm run install-server && npm run install-client",
     "start": "per-env",
-    "start:": "npm run start:production",
-    "build": "npm run build-server && npm run build-client",
-    "start:production": "npm run start-server:prod & npm run start-client:prod",
-    "prestart:development": "yarn",
-    "start:development": "concurrently -k -p \"none\" \"npm run start-server:dev\" \"npm run start-client:dev\"",
-    "test": "npm run test-server && npm run test-client",
-    "coverage": "npm run coverage-server && npm run coverage-client",
-    "coverage:junit": "npm run coverage-server:junit",
-    "lint": "npm run lint-server && npm run lint-client",
-    "lint:fix": "npm run lint-server:fix && npm run lint-client:fix",
-    "install-server": "cd server && yarn",
-    "build-server": "cd server && npm run build",
-    "start-server:prod": "cd server && npm run start:prod",
-    "start-server:dev": "cd server && npm run start:dev",
-    "test-server": "cd server && npm run test",
-    "coverage-server": "cd server && npm run coverage",
-    "coverage-server:junit": "cd server && npm run coverage:junit",
-    "lint-server": "cd server && npm run lint",
-    "lint-server:fix": "cd server && npm run lint:fix",
-    "install-client": "cd client && yarn",
-    "build-client": "cd client && npm run build",
-    "start-client:prod": "cd client && npm run start:prod",
-    "start-client:dev": "cd client && npm run start:dev",
-    "test-client": "cd client && npm run test",
-    "coverage-client": "cd client && npm run coverage",
-    "lint-client": "cd client && npm run lint",
-    "lint-client:fix": "cd client && npm run lint:fix"
+    "start:prod": "pnpm -r --filter \"./apps/*\" start:prod",
+    "start:dev": "pnpm -r --filter \"./apps/*\" start:dev",
+    "build": "pnpm -r --filter \"./apps/*\" build",
+    "test": "pnpm -r --filter \"./apps/*\" test",
+    "coverage": "pnpm -r --filter \"./apps/*\" coverage",
+    "coverage:junit": "pnpm -r --filter \"./apps/server\" coverage:junit",
+    "lint": "pnpm -r --filter \"./apps/*\" lint",
+    "lint:fix": "pnpm -r --filter \"./apps/*\" lint:fix"
   },
   "license": "MIT",
   "repository": {

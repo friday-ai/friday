@@ -5,19 +5,15 @@
   "license": "MIT",
   "scripts": {
     "start": "per-env",
-    "start:prod": "npm run -s serve",
-    "start:dev": "npm run -s dev",
-    "start:demo": "npm run -s demo",
-    "dev": "cross-env NODE_ENV=development vite --host",
+    "start:prod": "cross-env NODE_ENV=production http-server dist -p 1444",
+    "start:dev": "cross-env NODE_ENV=development vite --host",
+    "start:demo": "cross-env NODE_ENV=production tsc && vite build --mode staging && http-server dist",
     "build": "cross-env NODE_ENV=production tsc && vite build --mode production",
-    "preview": "npm run build && vite preview --host",
-    "preview:https": "cross-env HTTPS=true npm run preview",
-    "serve": "cross-env NODE_ENV=production http-server dist -p 1444",
-    "demo": "cross-env NODE_ENV=production tsc && vite build --mode staging && http-server dist",
-    "test": "echo \"Error: tests are not yet implemented\" && exit 1",
+    "preview": "pnpm build && vite preview --host",
+    "preview:https": "cross-env HTTPS=true pnpm run preview",
     "format": "prettier --write src/**/*.{js,jsx,ts,tsx}",
-    "lint": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx ./src\"",
-    "lint:fix": "concurrently -k -n \"ESLint\" -c \"blue\" \"eslint --ext .js,.jsx,.ts,.tsx --fix ./src\""
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src"
   },
   "dependencies": {
     "@iconify/react": "^3.2.2",
