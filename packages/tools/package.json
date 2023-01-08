@@ -1,0 +1,16 @@
+{
+  "name": "@friday/tools",
+  "version": "1.0.0",
+  "description": "Friday: Tools (Eslint, Prettier)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mathieu Andrade",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-typescript-prettier": "^5.0.0"
+  }
+}
