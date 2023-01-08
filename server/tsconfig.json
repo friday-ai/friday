@@ -20,8 +20,10 @@
     "typeRoots": [
       "./src/types",
       "./node_modules/@types"
-    ]
+    ],
+    "rootDirs": ["./src", "../"],
   },
+  "extends": "../tsconfig.json",
   "include": [
     "src/**/*",
     "src/models/*",
