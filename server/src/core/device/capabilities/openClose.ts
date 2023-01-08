@@ -5,8 +5,8 @@ import { CapabilityManagerParamsList } from '../../../utils/interfaces';
 import logger from '../../../utils/log';
 
 export const options: CapabilityManagerParamsList = {
-  setOnOff: {
-    actions: [DevicesActionsType.TURN_ON, DevicesActionsType.TURN_OFF],
+  openClose: {
+    actions: [DevicesActionsType.OPEN, DevicesActionsType.CLOSE],
   },
 };
 
@@ -26,15 +26,15 @@ function checkBoolValue(val: any) {
 }
 
 /**
- * OnOff device capability
+ * openClose device capability
  * @param args
  */
-export async function setOnOff(this: DeviceClass, args: { id: string, value: boolean }): Promise<DeviceCapabilityStateType> {
+export async function openClose(this: DeviceClass, args: { id: string, value: boolean }): Promise<DeviceCapabilityStateType> {
   checkBoolValue(args.value);
 
   return this.exec(
     args.id, {
-      action: args.value ? DevicesActionsType.TURN_ON : DevicesActionsType.TURN_OFF,
+      action: args.value ? DevicesActionsType.OPEN : DevicesActionsType.CLOSE,
       params: { value: args.value },
     },
   );

@@ -1,6 +1,7 @@
 import DeviceClass from './device';
 import { EventsType, MqttMessageTypes, TopicsTypes } from '../../config/constants';
 import { DeviceCommandType } from '../../utils/interfaces';
+import { DeviceCapabilityStateType } from '../../config/entities';
 
 /**
  * Device exec
@@ -9,8 +10,9 @@ export default async function exec(
   this: DeviceClass,
   identifier: string,
   command: DeviceCommandType,
-): Promise<void> {
-  const device = await this.getById(identifier);
+): Promise<DeviceCapabilityStateType> {
+  const capability = await this.getCapabilityById(identifier);
+  const device = await this.getById(capability.deviceId!);
 
   // TODO: check if action is available for this device
   const message = {
@@ -24,7 +26,12 @@ export default async function exec(
     topic: TopicsTypes.PLUGIN_EXEC,
   };
 
+  const state = await this.setCapabilityState({
+    capabilityId: capability.id,
+    value: command.params.value,
+  });
+
   this.event.emit(EventsType.MQTT_PUBLISH, message);
 
-  return;
+  return state;
 }
