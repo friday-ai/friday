@@ -6,8 +6,8 @@ const themes: ThemeType[] = [
     value: 'light',
   },
   {
-    name: 'Black',
-    value: 'black',
+    name: 'Dark',
+    value: 'dark',
   },
   {
     name: 'separator',
@@ -38,8 +38,8 @@ const themes: ThemeType[] = [
     value: 'cyberpunk',
   },
   {
-    name: 'Dark',
-    value: 'dark',
+    name: 'Black',
+    value: 'black',
   },
   {
     name: 'Dracula',

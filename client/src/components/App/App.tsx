@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from '../../services/store/store';
 import useSharedApp from '../../services/App';
 import getRouteName from '../../utils/routes';
 import ServerDown from '../../routes/Errors/ServerDown';
+import PluginConfiguration from '../../routes/Plugin/Configuration';
 
 const App: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -41,7 +42,10 @@ const App: React.FC = () => {
           <Route index element={<Dashboard />} />
           <Route path="devices" element={<Devices />} />
           <Route path="scenes" element={<Scenes />} />
-          <Route path="satellites" element={<Satellites />} />
+          <Route path="satellites">
+            <Route index element={<Satellites />} />
+            <Route path="plugin/configuration/:name/:id" element={<PluginConfiguration />} />
+          </Route>
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />

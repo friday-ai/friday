@@ -78,9 +78,10 @@ const Drawer: React.FC = () => {
               to="satellites"
               aria-label="satellites"
               onClick={() => isSidebarOpen && dispatch(toggleDrawer())}
-              className={`space-x-2 ${!isSidebarOpen && 'justify-center'} ${
-                getRouteName(location.pathname) === 'Satellites and Plugins' && 'active'
-              }`}
+              className={`space-x-2 ${!isSidebarOpen && 'justify-center'}
+              ${getRouteName(location.pathname) === 'Satellites and Plugins' && 'active'}
+                ${getRouteName(location.pathname) === 'Plugin Configuration' && 'active'}
+              `}
             >
               <Icon icon="codicon:extensions" className="w-6 h-6" />
               <span className={`${!isSidebarOpen && 'lg:hidden'}`}>Plugins</span>

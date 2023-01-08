@@ -16,5 +16,27 @@ const updateThemeColor = () => {
   return colors;
 };
 
+const getCssTheme = (theme = 'light') => {
+  const cssRules = [...document.styleSheets];
+  const cssTheme: CSSStyleRule[] = [];
+
+  cssRules.forEach((css) => {
+    try {
+      const rules = [...css.cssRules] as CSSStyleRule[];
+
+      rules.forEach((rule: CSSStyleRule) => {
+        if (rule.selectorText && rule.selectorText.startsWith(`[data-theme="${theme}"]`)) {
+          cssTheme.push(rule);
+        }
+      });
+      return true;
+    } catch (err) {
+      return false;
+    }
+  });
+
+  return cssTheme.map((css) => css.cssText);
+};
+
 export default updateThemeColor;
-export { getColors };
+export { getColors, getCssTheme };

@@ -20,6 +20,10 @@ const routes = [
     path: '/dashboard/satellites',
   },
   {
+    name: 'Plugin',
+    path: '/dashboard/satellites/plugin/configuration/*',
+  },
+  {
     name: 'Settings',
     path: '/dashboard/settings',
   },
@@ -47,7 +51,19 @@ const routes = [
 
 const getRouteName = (path: string): string => {
   const routeFound = routes.find((route) => route.path === path);
-  const name = routeFound ? routeFound.name : 'Dashboard';
+  let name = routeFound?.name || '';
+
+  if (name === '') {
+    routes.forEach((route) => {
+      if (route.path.includes('*')) {
+        const p = route.path.replace('/*', '');
+        if (path.includes(p)) {
+          name = route.name;
+        }
+      }
+    });
+  }
+
   return name;
 };
 

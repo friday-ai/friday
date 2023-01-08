@@ -110,3 +110,60 @@ export interface Marker {
   title: string;
   position: [number, number];
 }
+
+export interface DeviceType {
+  id?: string;
+  defaultName?: string;
+  defaultManufacturer?: string;
+  defaultModel?: string;
+  name?: string;
+  type?: string;
+  manufacturer?: string;
+  model?: string;
+  pluginSelector?: string;
+  viaDevice?: string;
+  roomId?: string;
+  pluginId?: string;
+  device?: DeviceType;
+  room?: RoomType;
+  plugin?: PluginType;
+  capabilities?: DeviceCapabilityType[];
+}
+
+export interface DeviceCapabilityType {
+  id?: string;
+  defaultName?: string;
+  name?: string;
+  type?: 'onoff' | 'brightness';
+  deviceId?: string;
+  roomId?: string;
+  device?: DeviceType;
+  room?: RoomType;
+  settings?: DeviceCapabilitySettingsType;
+  state?: DeviceCapabilityStateType;
+}
+
+export interface DeviceCapabilitySettingsType {
+  id?: string;
+  settings?: DeviceCapabilitySettingsSchema;
+  capabilityId?: string;
+  capability?: DeviceCapabilityType;
+}
+
+export interface DeviceCapabilityStateType {
+  id?: string;
+  value?: string | number | boolean;
+  last?: boolean;
+  capabilityId?: string;
+  capability?: DeviceCapabilityType;
+}
+
+type OnOffSettings = null;
+
+interface BrightnessSettings extends Record<string, any> {
+  min: number;
+  max: number;
+  step: number;
+}
+
+export type DeviceCapabilitySettingsSchema = OnOffSettings | BrightnessSettings;

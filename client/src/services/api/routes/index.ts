@@ -1,6 +1,8 @@
 import HttpClient from '../HttpClient';
 import DemoClient from '../DemoClient';
 
+import Capabilities from './capabilities';
+import Devices from './devices';
 import Scenes from './scenes';
 import Satellites from './satellites';
 import Users from './users';
@@ -11,6 +13,8 @@ import System from './system';
 import Plugins from './plugins';
 
 export interface RoutesType {
+  capabilities: Capabilities;
+  devices: Devices;
   scenes: Scenes;
   satellites: Satellites;
   users: Users;
@@ -23,6 +27,8 @@ export interface RoutesType {
 
 export const init = (instance: HttpClient | DemoClient): RoutesType => {
   return {
+    capabilities: new Capabilities(instance),
+    devices: new Devices(instance),
     scenes: new Scenes(instance),
     satellites: new Satellites(instance),
     users: new Users(instance),

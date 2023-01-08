@@ -12,7 +12,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ children, open, hasActionsButtons, onConfirm, onClose }) => {
   return (
     <div className={`modal ${open ? 'modal-open' : ''}`}>
-      <div className="modal-box">
+      <div className="modal-box max-w-none min-w-[32rem] w-auto">
         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" type="button" onClick={() => (onClose ? onClose() : () => null)}>
           <Icon icon="ic:round-close" className="w-5 h-5" />
         </button>

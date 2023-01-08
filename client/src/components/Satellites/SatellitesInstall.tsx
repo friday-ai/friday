@@ -9,9 +9,11 @@ import Countdown from '../Countdown/Countdown';
 import useSharedApp from '../../services/App';
 
 import { WebsocketMessageType } from '../../utils/constants';
+import { SatelliteType } from '../../utils/interfaces';
 
 interface SatellitesInstallProps {
   openModal: boolean;
+  satellites: SatelliteType[];
   setOpenModal: (openModal: boolean) => void;
 }
 
@@ -22,7 +24,7 @@ interface PluginType {
   satelliteId: string;
 }
 
-const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpenModal }) => {
+const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpenModal, satellites }) => {
   const [loading, setLoading] = useState(false);
   const [pluginInstalled, setPluginInstalled] = useState(false);
   const { plugins, emitter } = useSharedApp();
@@ -31,7 +33,7 @@ const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpe
       name: '',
       version: '',
       repoTag: '',
-      satelliteId: 'e972445c-d2d9-4277-915e-7621f953440c',
+      satelliteId: '',
     },
     validations: {
       name: {
@@ -168,8 +170,12 @@ const SatellitesInstall: React.FC<SatellitesInstallProps> = ({ openModal, setOpe
             <label htmlFor="plugin-repoTag" className="label">
               <span className="label-text">Satellite where plugin will be installed</span>
             </label>
-            <select className="select select-bordered" defaultValue="e972445c-d2d9-4277-915e-7621f953440c" onChange={onChange('satelliteId')}>
-              <option value="e972445c-d2d9-4277-915e-7621f953440c">Master</option>
+            <select className="select select-bordered" onChange={onChange('satelliteId')}>
+              {satellites.map((satellite) => (
+                <option key={satellite.id} value={satellite.id}>
+                  {satellite.name}
+                </option>
+              ))}
             </select>
             <label htmlFor="username" className={`label p-0 pt-1 ${errors.satelliteId ? 'visible' : 'invisible'}`}>
               <span className="label-text-alt text-error">{errors.satelliteId}</span>

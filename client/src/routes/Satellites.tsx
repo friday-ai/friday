@@ -39,7 +39,7 @@ const Satellites: React.FC = () => {
         <AnimatedList renderItem={(item) => <SatelliteCard satellite={item} />} items={filteredSatellites} />
       </div>
 
-      <SatellitesInstall openModal={openInstallModal} setOpenModal={(value) => setOpenInstallModal(value)} />
+      <SatellitesInstall openModal={openInstallModal} satellites={satellitesList} setOpenModal={(value) => setOpenInstallModal(value)} />
     </div>
   );
 };
