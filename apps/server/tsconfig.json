@@ -1,41 +1,5 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "strict": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noUnusedLocals": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "useUnknownInCatchVariables": false,
-    "sourceMap": true,
-    "skipLibCheck": true,
-    "outDir": "dist",
-    "baseUrl": "./src",
-    "typeRoots": [
-      "./src/types",
-      "./node_modules/@types"
-    ],
-    "rootDirs": ["./src", "../"],
-  },
-  "extends": "../../tsconfig.json",
-  "include": [
-    "src/**/*",
-    "src/models/*",
-    "seeders/*",
-    "migrations/*",
-    "test/**/*",
-    ".eslintrc.js"
-  ],
-  "exclude": [
-    "src/node_modules"
-  ],
-  "ts-node": {
-    "files": true
-  }
+  "extends": "../../packages/tools/typescript.config.json",
+  "include": ["src/**/*", "src/models/*", "seeders/*", "migrations/*", "test/**/*", ".eslintrc.js"],
+  "exclude": ["src/node_modules"]
 }

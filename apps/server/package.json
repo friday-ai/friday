@@ -23,13 +23,8 @@
     "type": "git",
     "url": "git+https://github.com/friday-ai/friday.git"
   },
-  "nodemonConfig": {
-    "watch": [
-      "./src",
-      "./test"
-    ],
-    "ext": ".js, .ts"
-  },
+  "prettier": "../../packages/tools/prettier.config.js",
+  "nodemonConfig": "../../packages/tools/nodemon.config.js",
   "nyc": {
     "exclude": [
       "src/api/routes/router.ts",
@@ -92,17 +87,11 @@
     "@types/mocha": "^10.0.1",
     "@types/sinon": "^10.0.13",
     "@types/supertest": "^2.0.12",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
     "aedes": "^0.48.1",
     "chai": "^4.3.7",
     "chai-as-promised": "^7.1.1",
     "chai-like": "^1.1.1",
     "chai-things": "^0.2.0",
-    "eslint": "^8.31.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-tsdoc": "^0.2.17",
     "mocha": "^10.2.0",
     "mocha-junit-reporter": "^2.2.0",
     "nodemon": "^2.0.20",

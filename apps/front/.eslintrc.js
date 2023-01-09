@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['../../packages/tools/eslint.config.js'],
+  extends: ['../../packages/tools/eslint/eslint.config.front.js'],
 };

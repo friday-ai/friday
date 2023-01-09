@@ -1,26 +1,12 @@
 module.exports = {
-  extends: ['airbnb-typescript-prettier'],
-  parserOptions: {
-    parser: '@typescript-eslint/parser',
-  },
-  globals: {
-    document: true,
-    navigator: true,
-    window: true,
-    describe: true,
-    it: true,
-    should: true,
-    beforeEach: true,
-    afterEach: true,
-    before: true,
-    after: true,
-  },
+  extends: ['./eslint.config.base.js'],
   rules: {
     '@typescript-eslint/no-unused-vars': [2, { args: 'all', argsIgnorePattern: '^_' }],
+    'import/no-cycle': 0,
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['test/**/*.{js,ts}'],
+        devDependencies: ['**/*.test.{js,ts}', '**/*.config.{js,ts}'],
       },
     ],
     'jsx-a11y/label-has-associated-control': [
