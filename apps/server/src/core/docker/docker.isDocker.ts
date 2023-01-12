@@ -21,7 +21,7 @@ const hasDockerInstalled = () => {
  * const runOnDocker = friday.docker.isDocker();
  * ````
  */
-export default function isDocker(): Boolean {
+export default function isDocker(): boolean {
   try {
     return hasDockerEnv() || hasDockerCGroup();
   } catch (e) {

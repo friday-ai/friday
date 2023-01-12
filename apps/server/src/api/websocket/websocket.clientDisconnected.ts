@@ -6,16 +6,10 @@ import logger from '../../utils/log';
  * Client disconnected
  */
 export default function clientDisconnected(this: WebsocketServer, ws: WebSocket) {
-  if (!this.clients[this.user.id!]) {
-    this.clients[this.user.id!] = [];
-  }
-  const connectionIndex = this.clients[this.user.id!].findIndex((elem: { client: WebSocket; }) => elem.client === ws);
+  const userId = Object.keys(this.clients).find((key) => this.clients[key].ws === ws);
 
-  if (connectionIndex !== -1) {
-    this.clients[this.user.id!].splice(connectionIndex, 1);
-  }
-
-  if (this.user.userName !== undefined) {
-    logger.info(`User ${this.user.userName!} disconnected of websocket`);
+  if (userId !== undefined) {
+    logger.info(`User ${this.clients[userId].user.userName} disconnected of websocket`);
+    delete this.clients[userId];
   }
 }

@@ -10,7 +10,4 @@ function compare(password: string, passwordHash: string): Promise<boolean> {
   return bcrypt.compare(password, passwordHash);
 }
 
-export {
-  hash,
-  compare,
-};
+export { hash, compare };

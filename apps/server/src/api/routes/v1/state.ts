@@ -34,12 +34,16 @@ export default class StateRouter {
    * }
    */
   @Post({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'state',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'create',
+    aclResource: 'state',
   })
-    create = async (req: Request, res: Response) => {
-      const state = await this.friday.state.set(req.body);
-      res.json(state);
-    };
+  create = async (req: Request, res: Response) => {
+    const state = await this.friday.state.set(req.body);
+    res.json(state);
+  };
 
   /**
    * Get a state by owner
@@ -57,10 +61,14 @@ export default class StateRouter {
    * }
    */
   @Get({
-    path : '/:owner', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'state',
+    path: '/:owner',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'state',
   })
-    getByOwner = async (req: Request, res: Response) => {
-      const state = await this.friday.state.getByOwner(req.params.owner);
-      res.json(state);
-    };
+  getByOwner = async (req: Request, res: Response) => {
+    const state = await this.friday.state.getByOwner(req.params.owner);
+    res.json(state);
+  };
 }

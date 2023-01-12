@@ -14,7 +14,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { StateOwner } from '../config/constants';
+import { StateAttributes, StateOwner, StateCreationAttributes } from '@friday/shared';
 import User from './user';
 import Satellite from './satellite';
 import Room from './room';
@@ -32,62 +32,62 @@ import { isOwnerExisting } from '../utils/database/validation';
   tableName: 'state',
   underscored: false,
 })
-export default class State extends Model {
+export default class State extends Model<StateAttributes, StateCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('owner', (value) => isOwnerExisting(value, ['user', 'room', 'house', 'satellite', 'plugin']))
   @Column(DataType.UUIDV4)
-    owner!: string;
+  owner!: string;
 
   @AllowNull(false)
   @Column
-    ownerType!: StateOwner;
+  ownerType!: StateOwner;
 
   @AllowNull(false)
   @Column
-    value!: string;
+  value!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Default(true)
   @Column
-    last!: boolean;
+  last!: boolean;
 
   @BelongsTo(() => User, {
     foreignKey: 'owner',
     constraints: false,
   })
-    user?: User;
+  user?: User;
 
   @BelongsTo(() => Room, {
     foreignKey: 'owner',
     constraints: false,
   })
-    room?: Room;
+  room?: Room;
 
   @BelongsTo(() => House, {
     foreignKey: 'owner',
     constraints: false,
   })
-    house?: House;
+  house?: House;
 
   @BelongsTo(() => Plugin, {
     foreignKey: 'owner',
     constraints: false,
   })
-    plugin?: Plugin;
+  plugin?: Plugin;
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'owner',
     constraints: false,
   })
-    satellite?: Satellite;
+  satellite?: Satellite;
 }

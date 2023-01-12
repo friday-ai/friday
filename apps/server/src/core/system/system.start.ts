@@ -11,14 +11,13 @@ export default async function start(this: System): Promise<string> {
   if (userCount >= 1 && houseCount >= 1) {
     // Find id of master
     const satellites = await this.satellite.listAll();
-    let master = satellites.filter((s) => s.name === 'Master')[0];
+    const master = satellites.filter((s) => s.name === 'Master')[0];
 
     await this.scheduler.init();
 
     logger.success('Friday system started');
-    return master.id!;
-  } else {
-    logger.info('Friday is not initialized, please complete signup steps');
-    return '';
+    return master.id;
   }
+  logger.info('Friday is not initialized, please complete signup steps');
+  return '';
 }

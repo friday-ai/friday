@@ -1,7 +1,6 @@
+import { DcsAttributes, DcsCreationAttributes, DeviceCapabilitySettingsSchema } from '@friday/shared';
 import DeviceCapabilitySettings from '../../models/device_capability_settings';
 import DeviceClass from './device';
-import { DeviceCapabilitySettingsType } from '../../config/entities';
-import { DeviceCapabilitySettingsSchema } from '../../config/device';
 import logger from '../../utils/log';
 import { BadParametersError } from '../../utils/decorators/error';
 
@@ -13,10 +12,9 @@ import { BadParametersError } from '../../utils/decorators/error';
 export default async function setCapabilitySettings(
   this: DeviceClass,
   capabilityId: string,
-  settings: DeviceCapabilitySettingsSchema,
-): Promise<DeviceCapabilitySettingsType> {
-
-  const settingsToCreate: DeviceCapabilitySettingsType = {
+  settings: DeviceCapabilitySettingsSchema
+): Promise<DcsAttributes> {
+  const settingsToCreate: DcsCreationAttributes = {
     settings,
     capabilityId,
   };
@@ -28,7 +26,7 @@ export default async function setCapabilitySettings(
 
   let capabilitySettings = await DeviceCapabilitySettings.findOne({
     where: {
-      capabilityId: capabilityId,
+      capabilityId,
     },
   });
 
@@ -37,12 +35,10 @@ export default async function setCapabilitySettings(
     capabilitySettings.settings = settings;
     await capabilitySettings.save();
   } else {
-    capabilitySettings = await DeviceCapabilitySettings.create({ ...settingsToCreate });
+    capabilitySettings = await DeviceCapabilitySettings.create(settingsToCreate);
   }
 
-  logger.success(
-    `New capability settings registered for capability ${capabilityId}`,
-  );
+  logger.success(`New capability settings registered for capability ${capabilityId}`);
 
-  return <DeviceCapabilitySettingsType>capabilitySettings.get({ plain: true });
+  return <DcsAttributes>capabilitySettings.get({ plain: true });
 }

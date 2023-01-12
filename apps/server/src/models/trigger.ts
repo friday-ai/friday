@@ -14,8 +14,8 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
+import { TriggerAttributes, AvailableConditions, TriggerCreationAttributes } from '@friday/shared';
 import Scene from './scene';
-import { AvailableConditions } from '../config/constants';
 
 /**
  * Trigger model
@@ -33,36 +33,36 @@ import { AvailableConditions } from '../config/constants';
   tableName: 'trigger',
   underscored: false,
 })
-export default class Trigger extends Model {
+export default class Trigger extends Model<TriggerAttributes, TriggerCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-    name!: string;
+  name!: string;
 
   @AllowNull(false)
   @Column
-    description!: string;
+  description!: string;
 
   @AllowNull(false)
   @Column
-    type!: AvailableConditions;
+  type!: AvailableConditions;
 
   @AllowNull(false)
   @Column(DataType.JSON)
-    rules: any;
+  rules: unknown;
 
   @HasMany(() => Scene, {
     foreignKey: 'triggerId',
     constraints: false,
   })
-    scenes!: Scene[];
+  scenes!: Scene[];
 }

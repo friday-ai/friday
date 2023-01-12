@@ -1,6 +1,6 @@
+import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '@friday/shared';
 import System from './system';
 import { CoreError } from '../../utils/decorators/error';
-import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '../../config/constants';
 import { version as packageVersion } from '../../../package.json';
 
 /**
@@ -15,13 +15,14 @@ export default async function init(this: System): Promise<string> {
   if (!master) {
     // So create it
     const room = await this.room.listAll({ take: 1 });
-    master = await this.satellite.create({ name: 'Master', roomId: room[0].id });
+    master = await this.satellite.create({ name: 'Master', roomId: room[0].id, lastHeartbeat: new Date() });
 
     // Create state of Master
     await this.state.set({
-      owner: master.id!,
+      owner: master.id,
       ownerType: StateOwner.SATELLITE,
       value: AvailableState.SATELLITE_CONNECTED,
+      last: true,
     });
 
     // And update/create main variables
@@ -35,8 +36,7 @@ export default async function init(this: System): Promise<string> {
     // await this.variable.create(SystemVariablesNames.NUMBER_OF_BACKUPS, { owner: master.id });
     await this.variable.update(SystemVariablesNames.HISTORY_STATE_IN_DAYS, { owner: master.id });
 
-    return master.id!;
-  } else {
-    throw new CoreError({ name: 'Friday init error', message: 'Master satellite already exists' });
+    return master.id;
   }
+  throw new CoreError({ name: 'Friday init error', message: 'Master satellite already exists' });
 }

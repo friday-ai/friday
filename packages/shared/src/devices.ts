@@ -1,14 +1,14 @@
-enum DevicesType {
+export enum DevicesTypes {
   PHYSICAL = 'physical',
   VIRTUAL = 'virtual',
   SERVICE = 'service',
 }
 
-enum DevicesClassesType {
+export enum DevicesClasses {
   LIGHT = 'light',
 }
 
-enum DevicesCapabilityType {
+export enum DevicesCapabilities {
   ONOFF = 'onoff',
   BRIGHTNESS = 'brightness',
   COLOR = 'color',
@@ -26,7 +26,7 @@ enum DevicesCapabilityType {
   LUMINOSITY = 'luminosity',
 }
 
-export enum DevicesActionsType {
+export enum DevicesActions {
   TURN_ON = 'action.devices.commands.turn_on',
   TURN_OFF = 'action.devices.commands.turn_off',
   SET_BRIGHTNESS = 'action.devices.commands.set_brightness',
@@ -47,9 +47,14 @@ export enum DevicesActionsType {
   SET_LUMINOSITY = 'action.devices.commands.set_luminosity',
 }
 
-type OnOffSettings = null;
+export type DeviceCommand = {
+  action: DevicesActions;
+  params: { value: boolean | string | number };
+};
 
-interface BrightnessSettings extends Record<string, any> {
+export type OnOffSettings = null;
+
+export interface BrightnessSettings extends Record<string, number> {
   min: number;
   max: number;
   step: number;
@@ -57,33 +62,24 @@ interface BrightnessSettings extends Record<string, any> {
 
 export type DeviceCapabilitySettingsSchema = OnOffSettings | BrightnessSettings;
 
-interface DeviceCapabilitySettingsRegisterType {
-  type: DevicesCapabilityType;
+export type DeviceCapabilitySettingsRegisterAttributes = {
+  type: DevicesCapabilities;
   value: DeviceCapabilitySettingsSchema;
-}
+};
 
-interface DeviceCapabilityRegisterType {
+export type DeviceCapabilityRegisterAttributes = {
   defaultName: string;
-  type: DevicesCapabilityType;
+  type: DevicesCapabilities;
   settings?: DeviceCapabilitySettingsSchema;
-}
+};
 
-interface DeviceRegisterType {
+export type DeviceRegisterAttributes = {
   defaultName: string;
   defaultManufacturer: string;
   defaultModel: string;
-  type: DevicesType;
+  type: DevicesTypes;
   viaDevice?: string;
   pluginSelector?: string;
   pluginId: string;
-  capabilities?: DeviceCapabilityRegisterType[];
-}
-
-export {
-  DevicesType,
-  DevicesClassesType,
-  DevicesCapabilityType,
-  DeviceRegisterType,
-  DeviceCapabilityRegisterType,
-  DeviceCapabilitySettingsRegisterType,
+  capabilities?: DeviceCapabilityRegisterAttributes[];
 };

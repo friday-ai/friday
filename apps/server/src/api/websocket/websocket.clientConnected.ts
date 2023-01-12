@@ -9,7 +9,7 @@ import { BadParametersError } from '../../utils/decorators/error';
  */
 export default async function clientConnected(this: WebsocketServer, message: WebsocketMessagePayload, ws: WebSocket) {
   try {
-    if (message.accessToken === null) {
+    if (message.accessToken === undefined) {
       throw new BadParametersError({
         name: 'Websocket authentication',
         message: 'Access token not found',
@@ -17,25 +17,12 @@ export default async function clientConnected(this: WebsocketServer, message: We
       });
     }
 
-    await this.friday.session.validateAccessToken(message.accessToken!);
+    await this.friday.session.validateAccessToken(message.accessToken);
     const user = await this.friday.user.getById(message.sender);
 
-    /*
-    if (!this.clients[user.id!]) {
-      this.clients[user.id!] = [];
-    }
-    const connectionIndex = this.clients[user.id!].findIndex((elem: { client: WebSocket; }) => elem.client === ws);
-
-    if (connectionIndex === -1) {
-      this.clients[user.id!].push({
-        user,
-        ws,
-      });
-    }
-    */
-
-    this.user = user;
+    this.clients[user.id] = { user, ws };
     this.isAuthenticated = true;
+
     logger.info(`User ${user.userName} connected in websocket.`);
   } catch (e) {
     logger.error('Websocket authentication failed.');

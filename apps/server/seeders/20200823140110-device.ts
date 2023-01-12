@@ -1,7 +1,7 @@
 import { QueryInterface } from 'sequelize';
-import { DevicesType } from '../src/config/device';
+import { DevicesTypes } from '@friday/shared';
 
-module.exports = {
+export default {
   up: (queryInterface: QueryInterface) =>
     queryInterface.bulkInsert('device', [
       {
@@ -12,7 +12,7 @@ module.exports = {
         name: '',
         manufacturer: '',
         model: '',
-        type: DevicesType.PHYSICAL,
+        type: DevicesTypes.PHYSICAL,
         pluginSelector: 'LIGHT-10',
         viaDevice: '',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
@@ -28,7 +28,7 @@ module.exports = {
         name: '',
         manufacturer: '',
         model: '',
-        type: DevicesType.PHYSICAL,
+        type: DevicesTypes.PHYSICAL,
         pluginSelector: 'LIGHT-10',
         viaDevice: '',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
@@ -44,7 +44,7 @@ module.exports = {
         name: '',
         manufacturer: '',
         model: '',
-        type: DevicesType.PHYSICAL,
+        type: DevicesTypes.PHYSICAL,
         pluginSelector: 'SENSOR-10',
         viaDevice: '',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
@@ -60,7 +60,7 @@ module.exports = {
         name: '',
         manufacturer: '',
         model: '',
-        type: DevicesType.PHYSICAL,
+        type: DevicesTypes.PHYSICAL,
         pluginSelector: 'SENSOR-20',
         viaDevice: '',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
@@ -76,7 +76,7 @@ module.exports = {
         name: '',
         manufacturer: '',
         model: '',
-        type: DevicesType.PHYSICAL,
+        type: DevicesTypes.PHYSICAL,
         pluginSelector: 'SENSOR-30',
         viaDevice: '',
         roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
@@ -86,6 +86,5 @@ module.exports = {
       },
     ]),
 
-  down: (queryInterface: QueryInterface) =>
-    queryInterface.bulkDelete('device', {}, {}),
+  down: (queryInterface: QueryInterface) => queryInterface.bulkDelete('device', {}, {}),
 };

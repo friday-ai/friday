@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  FridayRouter, Get, Patch, Post, Delete,
-} from '../../../utils/decorators/route';
+import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
 /**
@@ -34,12 +32,16 @@ export default class RoomRouter {
    * }
    */
   @Post({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'room',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'create',
+    aclResource: 'room',
   })
-    create = async (req: Request, res: Response) => {
-      const room = await this.friday.room.create(req.body);
-      res.status(201).json(room);
-    };
+  create = async (req: Request, res: Response) => {
+    const room = await this.friday.room.create(req.body);
+    res.status(201).json(room);
+  };
 
   /**
    * Update an room
@@ -57,12 +59,16 @@ export default class RoomRouter {
    * }
    */
   @Patch({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'room',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'room',
   })
-    update = async (req: Request, res: Response) => {
-      const room = await this.friday.room.update(req.params.id, req.body);
-      res.json(room);
-    };
+  update = async (req: Request, res: Response) => {
+    const room = await this.friday.room.update(req.params.id, req.body);
+    res.json(room);
+  };
 
   /**
    * Delete an room by id
@@ -77,14 +83,18 @@ export default class RoomRouter {
    * }
    */
   @Delete({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'room',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'delete',
+    aclResource: 'room',
   })
-    destroy = async (req: Request, res: Response) => {
-      await this.friday.room.destroy(req.params.id);
-      res.json({
-        success: true,
-      });
-    };
+  destroy = async (req: Request, res: Response) => {
+    await this.friday.room.destroy(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
 
   /**
    * List All rooms
@@ -101,12 +111,16 @@ export default class RoomRouter {
    * }]
    */
   @Get({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'room',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'room',
   })
-    listAll = async (req: Request, res: Response) => {
-      const rooms = await this.friday.room.listAll(req.query);
-      res.json(rooms);
-    };
+  listAll = async (req: Request, res: Response) => {
+    const rooms = await this.friday.room.listAll(req.query);
+    res.json(rooms);
+  };
 
   /**
    * Get an room by id
@@ -123,11 +137,15 @@ export default class RoomRouter {
    * }
    */
   @Get({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'room',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'room',
   })
-    getById = async (req: Request, res: Response) => {
-      const scope = req.query.scope as string;
-      const room = await this.friday.room.getById(req.params.id, scope);
-      res.json(room);
-    };
+  getById = async (req: Request, res: Response) => {
+    const scope = req.query.scope as string;
+    const room = await this.friday.room.getById(req.params.id, scope);
+    res.json(room);
+  };
 }

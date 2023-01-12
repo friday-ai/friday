@@ -2,9 +2,9 @@ import { Model, ModelCtor } from 'sequelize-typescript';
 import { Catch, NotFoundError } from '../decorators/error';
 import { PartialModel } from './model.partial';
 
-export interface BaseModelType<T> {
-  create(data: Omit<T, 'id'>): Promise<T>;
-  update(identifier: string, data: Omit<T, 'id'>): Promise<T>;
+export interface BaseModelType<T, C> {
+  create(data: C): Promise<Omit<T, 'password'>>;
+  update(identifier: string, data: Partial<Omit<T, 'id'>>): Promise<Omit<T, 'password'>>;
   destroy(identifier: string): Promise<void>;
 }
 
@@ -13,7 +13,7 @@ export interface BaseModelType<T> {
  * Abstract class that implements the base CRUD operations. (create, update, delete, listAll, getById, count)
  * So that other repository inherit from the base model passing their model and get some boilerplate.
  */
-export default abstract class BaseModel<M extends Model, T> extends PartialModel<M, T> implements BaseModelType<T> {
+export default abstract class BaseModel<M extends Model, T, C> extends PartialModel<M, T> implements BaseModelType<T, C> {
   protected model: ModelCtor<M>;
 
   protected constructor(model: ModelCtor<M>) {
@@ -22,13 +22,13 @@ export default abstract class BaseModel<M extends Model, T> extends PartialModel
   }
 
   @Catch()
-  async create(data: Omit<T, 'id'>): Promise<T> {
+  async create(data: C): Promise<Omit<T, 'password'>> {
     const entity = await this.model.create(data as M['_creationAttributes']);
     return <T>entity.get({ plain: true });
   }
 
   @Catch()
-  async update(identifier: string, data: Omit<T, 'id'>): Promise<T> {
+  async update(identifier: string, data: Partial<Omit<T, 'id'>>): Promise<Omit<T, 'password'>> {
     const entity = await this.model.findByPk(identifier);
 
     if (entity === null) {

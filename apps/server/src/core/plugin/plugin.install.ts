@@ -1,14 +1,14 @@
+import { PluginAttributes, StateOwner, WebsocketMessageTypes, AvailableState } from '@friday/shared';
 import PluginClass from './plugin';
-import { PluginType } from '../../config/entities';
 import { PluginInstallOptions } from '../../utils/interfaces';
-import { AvailableState, EventsType, StateOwner, WebsocketMessageTypes } from '../../config/constants';
+import { EventsType } from '../../config/constants';
 import error, { NotFoundError } from '../../utils/decorators/error';
 import logger from '../../utils/log';
 
 /**
  * Install a plugin.
  * @param {PluginInstallOptions} options - Name of container, version and repo or tag of image
- * @returns {Promise<PluginType>} Resolve with created plugin.
+ * @returns {Promise<PluginAttributes>} Resolve with created plugin.
  * @example
  * ````
  * friday.plugin.install({
@@ -19,7 +19,7 @@ import logger from '../../utils/log';
  * });
  * ````
  */
-export default async function install(this: PluginClass, options: PluginInstallOptions): Promise<PluginType> {
+export default async function install(this: PluginClass, options: PluginInstallOptions): Promise<PluginAttributes> {
   try {
     logger.info(`Installing plugin ${options.name}`);
 
@@ -52,12 +52,14 @@ export default async function install(this: PluginClass, options: PluginInstallO
       url: 'TODO',
       version: options.version,
       satelliteId: options.satelliteId,
+      lastHeartbeat: new Date(),
     });
 
     await this.state.set({
-      owner: plugin.id!,
+      owner: plugin.id,
       ownerType: StateOwner.PLUGIN,
       value: AvailableState.PLUGIN_INSTALLED,
+      last: true,
     });
 
     this.event.emit(EventsType.WEBSOCKET_SEND_ALL, {
@@ -73,11 +75,17 @@ export default async function install(this: PluginClass, options: PluginInstallO
   } catch (e) {
     if (e.message.includes('HTTP code 404')) {
       throw new NotFoundError({
-        name: e.name, message: e.message, cause: e, metadata: options,
+        name: e.name,
+        message: e.message,
+        cause: e,
+        metadata: options,
       });
     }
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: options,
+      name: e.name,
+      message: e.message,
+      cause: e,
+      metadata: options,
     });
   }
 }

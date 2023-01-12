@@ -1,6 +1,5 @@
+import { SessionAttributes, SessionCreationAttributes, UserAttributes } from '@friday/shared';
 import Session from '../../models/session';
-import { SessionType } from '../../config/entities';
-import { UserType } from  '../../config/entities';
 import SessionClass from './session';
 import { generateRefreshToken, generateAccessToken } from '../../utils/jwt';
 
@@ -8,7 +7,7 @@ import { generateRefreshToken, generateAccessToken } from '../../utils/jwt';
  * Create a session.
  * @param {UserType} user - A user object.
  * @param {string} userAgent
- * @returns {Promise<SessionType>} Resolve with created session.
+ * @returns {Promise<SessionAttributes>} Resolve with created session.
  * @example
  * ````
  * friday.session.create({
@@ -20,18 +19,19 @@ import { generateRefreshToken, generateAccessToken } from '../../utils/jwt';
  * });
  * ````
  */
-export default async function create(this: SessionClass, user: UserType, userAgent?: string): Promise<SessionType> {
+export default async function create(this: SessionClass, user: Omit<UserAttributes, 'password'>, userAgent?: string): Promise<SessionAttributes> {
   const { refreshToken, refreshTokenHash, refreshTokenValidity } = await generateRefreshToken();
-  const newSession: {} = {
+  const newSession: SessionCreationAttributes = {
     refreshToken: refreshTokenHash,
     validUntil: new Date(Date.now() + refreshTokenValidity * 1000),
     userId: user.id,
-    userAgent,
+    userAgent: userAgent || '',
+    revoked: false,
   };
 
   const createdSession = await Session.create(newSession);
-  const sessionToReturn = <SessionType>createdSession.get({ plain: true });
-  sessionToReturn.accessToken = generateAccessToken(user.id!, user.role!, sessionToReturn.id!, this.secretJwt);
+  const sessionToReturn = <SessionAttributes>createdSession.get({ plain: true });
+  sessionToReturn.accessToken = generateAccessToken(user.id, user.role, sessionToReturn.id, this.secretJwt);
   sessionToReturn.user = user;
   sessionToReturn.refreshToken = refreshToken;
 

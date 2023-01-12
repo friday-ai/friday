@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  FridayRouter, Get, Patch, Post, Delete,
-} from '../../../utils/decorators/route';
+import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
 /**
@@ -38,12 +36,16 @@ export default class VariableRouter {
    * }
    */
   @Post({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'variable',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'create',
+    aclResource: 'variable',
   })
-    create = async (req: Request, res: Response) => {
-      const variable = await this.friday.variable.create(req.body);
-      res.status(201).json(variable);
-    };
+  create = async (req: Request, res: Response) => {
+    const variable = await this.friday.variable.create(req.body);
+    res.status(201).json(variable);
+  };
 
   /**
    * Update a variable
@@ -63,12 +65,16 @@ export default class VariableRouter {
    * }
    */
   @Patch({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'variable',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'variable',
   })
-    update = async (req: Request, res: Response) => {
-      const variable = await this.friday.variable.update(req.params.id, req.body);
-      res.json(variable);
-    };
+  update = async (req: Request, res: Response) => {
+    const variable = await this.friday.variable.update(req.params.id, req.body);
+    res.json(variable);
+  };
 
   /**
    * Delete a variable by id
@@ -83,14 +89,18 @@ export default class VariableRouter {
    * }
    */
   @Delete({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'variable',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'delete',
+    aclResource: 'variable',
   })
-    destroy = async (req: Request, res: Response) => {
-      await this.friday.variable.destroy(req.params.id);
-      res.json({
-        success: true,
-      });
-    };
+  destroy = async (req: Request, res: Response) => {
+    await this.friday.variable.destroy(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
 
   /**
    * Get value variables
@@ -109,11 +119,15 @@ export default class VariableRouter {
    * }
    */
   @Get({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'variable',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'variable',
   })
-    getValue = async (req: Request, res: Response) => {
-      const key = req.query.key as string;
-      const variables = await this.friday.variable.getValue(key);
-      res.json(variables);
-    };
+  getValue = async (req: Request, res: Response) => {
+    const key = req.query.key as string;
+    const variables = await this.friday.variable.getValue(key);
+    res.json(variables);
+  };
 }

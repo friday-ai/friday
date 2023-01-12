@@ -1,5 +1,5 @@
+import { SessionAttributes, UserAttributes } from '@friday/shared';
 import { Catch } from '../../utils/decorators/error';
-import { SessionType, UserType } from '../../config/entities';
 import SessionModel from '../../models/session';
 import { PartialModel } from '../../utils/database/model.partial';
 
@@ -13,7 +13,7 @@ import { GetOptions } from '../../utils/interfaces';
 /**
  * Session
  */
-export default class Session extends PartialModel<SessionModel, SessionType> {
+export default class Session extends PartialModel<SessionModel, SessionAttributes> {
   readonly secretJwt: string;
 
   constructor(secretJwt: string) {
@@ -22,7 +22,7 @@ export default class Session extends PartialModel<SessionModel, SessionType> {
   }
 
   @Catch()
-  async create(user: UserType, userAgent?: string) {
+  async create(user: Omit<UserAttributes, 'password'>, userAgent?: string) {
     return create.call(this, user, userAgent);
   }
 

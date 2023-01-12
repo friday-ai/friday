@@ -1,7 +1,7 @@
 import { QueryInterface } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 
-module.exports = {
+export default {
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
     await queryInterface.createTable('device_capability_state', {
       id: {
@@ -33,6 +33,5 @@ module.exports = {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) =>
-    queryInterface.dropTable('device_capability_state'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('device_capability_state'),
 };

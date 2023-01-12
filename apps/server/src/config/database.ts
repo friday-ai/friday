@@ -46,9 +46,4 @@ const closeConnection = async () => {
   await database.close();
 };
 
-export {
-  database,
-  umzug,
-  init,
-  closeConnection,
-};
+export { database, umzug, init, closeConnection };

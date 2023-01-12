@@ -1,25 +1,24 @@
+import { VariableAttributes } from '@friday/shared';
 import Variable from '../../models/variable';
-import { VariableType } from '../../config/entities';
 import { BadParametersError, NotFoundError } from '../../utils/decorators/error';
 
 /**
  * Update a variable.
  * @param {String} idOrKey - Id or key of variable
  * @param {VariableType} data - A variable object.
- * @returns {Promise<VariableType>} Resolve with updated variable.
+ * @returns {Promise<VariableAttributes>} Resolve with updated variable.
  * @example
  * ````
  * friday.variable.update(
  * '47728070-a1d2-4aaf-9930-47dc82fc1771',
  * {
- *   id: '47728070-a1d2-4aaf-9930-47dc82fc1771'
- *   key: 'variable update'
+ *   key: 'variable updated'
  * });
  * ````
  */
-export default async function update(idOrKey: string, data: VariableType): Promise<VariableType> {
+export default async function update(idOrKey: string, data: Partial<VariableAttributes>): Promise<VariableAttributes> {
   if (!idOrKey || idOrKey === '') {
-    throw new BadParametersError({ name: 'Update an Variable', message: 'Variable\'s id or key must be specified', metadata: data });
+    throw new BadParametersError({ name: 'Update an Variable', message: "Variable's id or key must be specified", metadata: data });
   }
 
   let variable = await Variable.findByPk(idOrKey);
@@ -38,5 +37,5 @@ export default async function update(idOrKey: string, data: VariableType): Promi
   }
 
   await variable.update(data);
-  return <VariableType>variable.get({ plain: true });
+  return <VariableAttributes>variable.get({ plain: true });
 }

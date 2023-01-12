@@ -1,18 +1,13 @@
+import { DcstAttributes, DeviceCommand } from '@friday/shared';
 import DeviceClass from './device';
 import { EventsType, MqttMessageTypes, TopicsTypes } from '../../config/constants';
-import { DeviceCommandType } from '../../utils/interfaces';
-import { DeviceCapabilityStateType } from '../../config/entities';
 
 /**
  * Device exec
  */
-export default async function exec(
-  this: DeviceClass,
-  identifier: string,
-  command: DeviceCommandType,
-): Promise<DeviceCapabilityStateType> {
+export default async function exec(this: DeviceClass, identifier: string, command: DeviceCommand): Promise<DcstAttributes> {
   const capability = await this.getCapabilityById(identifier);
-  const device = await this.getById(capability.deviceId!);
+  const device = await this.getById(capability.deviceId);
 
   // TODO: check if action is available for this device
   const message = {

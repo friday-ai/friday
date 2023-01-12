@@ -1,7 +1,7 @@
 import { QueryInterface } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 
-module.exports = {
+export default {
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
     await queryInterface.createTable('plugin', {
       id: {

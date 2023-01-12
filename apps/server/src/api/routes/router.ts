@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 import Glob from 'glob';
@@ -23,8 +24,7 @@ const env = process.env.NODE_ENV || 'production';
 export default function router(friday: Friday): Router {
   const routerObject = Router();
 
-  const routers = Glob
-    .sync('**/*.{js,ts}', { cwd: `${__dirname}/` })
+  const routers = Glob.sync('**/*.{js,ts}', { cwd: `${__dirname}/` })
     .map((filename) => require(`./${filename}`).default)
     .filter((routerClass) => routerClass !== undefined)
     .filter((routerClass) => Reflect.hasOwnMetadata('prefix', routerClass));

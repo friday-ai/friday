@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
+import { SessionAttributes } from '@friday/shared';
 import SessionClass from './session';
 import { UnauthorizedError } from '../../utils/decorators/error';
-import { SessionType } from '../../config/entities';
 import { AccessTokenType } from '../../utils/interfaces';
 
 /**
@@ -17,13 +17,13 @@ export default async function validateAccessToken(this: SessionClass, token: str
     audience: 'user',
   });
 
-  const session: SessionType = await this.getById(decoded.session);
+  const session: SessionAttributes = await this.getById(decoded.session);
 
   if (session.revoked === true) {
     throw new UnauthorizedError({ name: 'Validate access token', message: 'Session was revoked.', metadata: token });
   }
 
-  if (session.validUntil! < new Date()) {
+  if (session.validUntil === undefined || session.validUntil < new Date()) {
     throw new UnauthorizedError({ name: 'Validate access token', message: 'Session has expired.', metadata: token });
   }
 

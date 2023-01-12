@@ -17,6 +17,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
+import { RoomAttributes, RoomCreationAttributes } from '@friday/shared';
 import House from './house';
 import Satellite from './satellite';
 import Device from './device';
@@ -55,48 +56,48 @@ import { isOwnerExisting } from '../utils/database/validation';
   tableName: 'room',
   underscored: false,
 })
-export default class Room extends Model {
+export default class Room extends Model<RoomAttributes, RoomCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-    name!: string;
+  name!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('houseId', (value) => isOwnerExisting(value, ['house']))
   @Column(DataType.UUIDV4)
-    houseId!: string;
+  houseId!: string;
 
   @BelongsTo(() => House, {
     foreignKey: 'houseId',
     constraints: false,
   })
-    house!: House;
+  house!: House;
 
   @HasMany(() => Device, {
     foreignKey: 'roomId',
     constraints: false,
   })
-    devices!: Device[];
+  devices!: Device[];
 
   @HasMany(() => Satellite, {
     foreignKey: 'roomId',
     constraints: false,
   })
-    satellites!: Satellite[];
+  satellites!: Satellite[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-    state!: State;
+  state!: State;
 }

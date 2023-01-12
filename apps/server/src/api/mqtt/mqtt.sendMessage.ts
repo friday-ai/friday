@@ -17,10 +17,12 @@ export default function sendMessage(this: MqttServer, message: MqttMessagePayloa
         metadata: { message, options },
       });
     }
+
     if (typeof message.message === 'object') {
       message.message = JSON.stringify(message.message);
     }
-    if ((<any>Object).values(TopicsTypes).includes(message.topic)) {
+
+    if (Object.values(TopicsTypes).includes(message.topic)) {
       const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
 
       let finalTopic = `${TopicHeaderPub}/${message.topic}`;
@@ -36,7 +38,10 @@ export default function sendMessage(this: MqttServer, message: MqttMessagePayloa
     }
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: { message, options },
+      name: e.name,
+      message: e.message,
+      cause: e,
+      metadata: { message, options },
     });
   }
 }

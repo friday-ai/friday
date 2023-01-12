@@ -30,7 +30,7 @@ import logger from '../utils/log';
  */
 export default class Friday {
   readonly secretJwt: string = generateJwtSecret();
-  public masterId: string = '';
+  public masterId = '';
 
   public event = Event;
   public scheduler = new Scheduler(this.event, jobs);
@@ -54,8 +54,7 @@ export default class Friday {
   public mqttSecret: object = {};
   public mode: FridayMode = FridayMode.NOMINAL;
 
-  private system = new System(this.variable, this.house, this.room,
-    this.satellite, this.user, this.state, this.scheduler, database);
+  private system = new System(this.variable, this.house, this.room, this.satellite, this.user, this.state, this.scheduler, database);
 
   /**
    * Start friday

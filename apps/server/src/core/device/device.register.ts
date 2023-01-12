@@ -1,28 +1,17 @@
+import { DeviceAttributes, DeviceCreationAttributes } from '@friday/shared';
 import DeviceClass from './device';
-import { DeviceType } from '../../config/entities';
-import { DeviceRegisterType } from '../../config/device';
 
 /**
  * Device register
  */
-export default async function register(this: DeviceClass, device: DeviceRegisterType): Promise<DeviceType> {
-  const deviceToCreate : DeviceType = {
-    defaultManufacturer: device.defaultManufacturer,
-    defaultName: device.defaultName,
-    defaultModel: device.defaultModel,
-    type: device.type,
-    pluginSelector: device.pluginSelector,
-    viaDevice: device.viaDevice || undefined,
-    pluginId: device.pluginId,
-  };
-
-  const newDevice = await this.create(deviceToCreate);
+export default async function register(this: DeviceClass, device: DeviceCreationAttributes): Promise<DeviceAttributes> {
+  const newDevice = await this.create(device);
 
   if (device.capabilities) {
-    for (const capability of device.capabilities) {
-      await this.setCapability(newDevice.id!, capability);
-    }
+    device.capabilities.forEach(async (capbility) => {
+      await this.setCapability(newDevice.id, capbility);
+    });
   }
 
-  return this.getById(newDevice.id!, 'withCapabilities');
+  return this.getById(newDevice.id, 'withCapabilities');
 }

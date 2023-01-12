@@ -35,12 +35,16 @@ export default class PluginRouter {
    * },
    */
   @Post({
-    path: '/', authenticated: true, rateLimit: false, aclMethod: 'install', aclResource: 'plugin',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'install',
+    aclResource: 'plugin',
   })
-    install = async (req: Request, res: Response) => {
-      const plugin = await this.friday.plugin.install(req.body);
-      res.status(201).json(plugin);
-    };
+  install = async (req: Request, res: Response) => {
+    const plugin = await this.friday.plugin.install(req.body);
+    res.status(201).json(plugin);
+  };
 
   /**
    * Update a plugin
@@ -61,12 +65,16 @@ export default class PluginRouter {
    * },
    */
   @Patch({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'plugin',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'plugin',
   })
-    update = async (req: Request, res: Response) => {
-      const plugin = await this.friday.plugin.update(req.params.id, req.body);
-      res.json(plugin);
-    };
+  update = async (req: Request, res: Response) => {
+    const plugin = await this.friday.plugin.update(req.params.id, req.body);
+    res.json(plugin);
+  };
 
   /**
    * Delete a plugin
@@ -81,14 +89,18 @@ export default class PluginRouter {
    * }
    */
   @Delete({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'plugin',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'delete',
+    aclResource: 'plugin',
   })
-    destroy = async (req: Request, res: Response) => {
-      await this.friday.plugin.destroy(req.params.id);
-      res.json({
-        success: true,
-      });
-    };
+  destroy = async (req: Request, res: Response) => {
+    await this.friday.plugin.destroy(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
 
   /**
    * List All plugins
@@ -108,12 +120,16 @@ export default class PluginRouter {
    * }],
    */
   @Get({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'plugin',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'plugin',
   })
-    listAll = async (req: Request, res: Response) => {
-      const plugins = await this.friday.plugin.listAll(req.query);
-      res.json(plugins);
-    };
+  listAll = async (req: Request, res: Response) => {
+    const plugins = await this.friday.plugin.listAll(req.query);
+    res.json(plugins);
+  };
 
   /**
    * Get a plugin by id
@@ -133,11 +149,15 @@ export default class PluginRouter {
    * },
    */
   @Get({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'plugin',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'plugin',
   })
-    getById = async (req: Request, res: Response) => {
-      const scope = req.query.scope as string;
-      const plugin = await this.friday.plugin.getById(req.params.id, scope);
-      res.json(plugin);
-    };
+  getById = async (req: Request, res: Response) => {
+    const scope = req.query.scope as string;
+    const plugin = await this.friday.plugin.getById(req.params.id, scope);
+    res.json(plugin);
+  };
 }

@@ -1,10 +1,10 @@
 import * as WebSocket from 'ws';
+import { UserAttributes } from '@friday/shared';
 import Friday from '../../core/friday';
 import handleMessage from './websocket.handleMessage';
 import clientConnected from './websocket.clientConnected';
 import clientDisconnected from './websocket.clientDisconnected';
 import sendMessage from './websocket.sendMessage';
-import { UserType } from '../../config/entities';
 import { EventsType } from '../../config/constants';
 
 /**
@@ -13,9 +13,9 @@ import { EventsType } from '../../config/constants';
 export default class WebsocketServer {
   public friday: Friday;
   public wss: WebSocket.Server;
-  public clients: { [x : string]: any } = [];
-  public user: UserType = {};
-  public isAuthenticated: boolean = false;
+  public clients: Record<string, { user: UserAttributes; ws: WebSocket }> = {};
+  public isAuthenticated = false;
+
   public clientConnected = clientConnected;
   public clientDisconnected = clientDisconnected;
   public handleMessage = handleMessage;
@@ -35,7 +35,6 @@ export default class WebsocketServer {
    */
   start() {
     this.wss.on('connection', (ws: WebSocket) => {
-      this.user = {};
       this.isAuthenticated = false;
 
       ws.on('close', () => {
@@ -50,7 +49,7 @@ export default class WebsocketServer {
         if (!this.isAuthenticated) {
           ws.terminate();
         }
-      // tslint:disable-next-line: align
+        // tslint:disable-next-line: align
       }, 5000);
     });
   }

@@ -1,5 +1,5 @@
+import { SessionAttributes } from '@friday/shared';
 import { NotFoundError, UnauthorizedError } from '../../utils/decorators/error';
-import { SessionType } from '../../config/entities';
 import Session from '../../models/session';
 import { hashToken } from '../../utils/jwt';
 
@@ -8,11 +8,11 @@ import { hashToken } from '../../utils/jwt';
  * @description Validate a refresh token.
  * @param {string} token - The refresh token to verify.
  * @param {string} scope - Scope option. (Optional)
- * @returns {Promise<SessionType>} Resolve with an session object.
+ * @returns {Promise<SessionAttributes>} Resolve with an session object.
  * @example
  * friday.session.validateRefreshToken('test');
  */
-export default async function validateRefreshToken(token: string, scope?: string): Promise<SessionType> {
+export default async function validateRefreshToken(token: string, scope?: string): Promise<SessionAttributes> {
   let session;
 
   if (scope !== '' && scope !== null && scope !== undefined) {
@@ -33,13 +33,13 @@ export default async function validateRefreshToken(token: string, scope?: string
     throw new NotFoundError({ name: 'Validate refresh token', message: 'Refresh token session not found.', metadata: token });
   }
 
-  const sessionToReturn = <SessionType>session.get({ plain: true });
+  const sessionToReturn = <SessionAttributes>session.get({ plain: true });
 
   if (sessionToReturn.revoked === true) {
     throw new UnauthorizedError({ name: 'Validate refresh token', message: 'Session was revoked.', metadata: token });
   }
 
-  if (sessionToReturn.validUntil! < new Date()) {
+  if (sessionToReturn.validUntil === undefined || sessionToReturn.validUntil < new Date()) {
     throw new UnauthorizedError({ name: 'Validate refresh token', message: 'Session has expired.', metadata: token });
   }
 

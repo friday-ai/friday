@@ -14,7 +14,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { VariableOwner } from '../config/constants';
+import { VariableAttributes, VariableOwner, VariableCreationAttributes } from '@friday/shared';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';
@@ -30,51 +30,51 @@ import { isOwnerExisting } from '../utils/database/validation';
   tableName: 'variable',
   underscored: false,
 })
-export default class Variable extends Model {
+export default class Variable extends Model<VariableAttributes, VariableCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-    key!: string;
+  key!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-    value!: string;
+  value!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('owner', (value) => isOwnerExisting(value, ['user', 'satellite', 'plugin']))
   @Column(DataType.UUIDV4)
-    owner!: string;
+  owner!: string;
 
   @AllowNull(false)
   @Column
-    ownerType!: VariableOwner;
+  ownerType!: VariableOwner;
 
   @BelongsTo(() => User, {
     foreignKey: 'owner',
     constraints: false,
   })
-    user?: User;
+  user?: User;
 
   @BelongsTo(() => Plugin, {
     foreignKey: 'owner',
     constraints: false,
   })
-    plugin?: Plugin;
+  plugin?: Plugin;
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'owner',
     constraints: false,
   })
-    satellite?: Satellite;
+  satellite?: Satellite;
 }

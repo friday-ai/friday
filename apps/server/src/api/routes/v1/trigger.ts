@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  FridayRouter, Get, Patch, Post, Delete,
-} from '../../../utils/decorators/route';
+import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 
 /**
@@ -41,12 +39,16 @@ export default class TriggerRouter {
    * }
    */
   @Post({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'trigger',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'create',
+    aclResource: 'trigger',
   })
-    create = async (req: Request, res: Response) => {
-      const trigger = await this.friday.trigger.create(req.body);
-      res.status(201).json(trigger);
-    };
+  create = async (req: Request, res: Response) => {
+    const trigger = await this.friday.trigger.create(req.body);
+    res.status(201).json(trigger);
+  };
 
   /**
    * Update a trigger
@@ -69,12 +71,16 @@ export default class TriggerRouter {
    * }
    */
   @Patch({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'trigger',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'trigger',
   })
-    update = async (req: Request, res: Response) => {
-      const trigger = await this.friday.trigger.update(req.params.id, req.body);
-      res.json(trigger);
-    };
+  update = async (req: Request, res: Response) => {
+    const trigger = await this.friday.trigger.update(req.params.id, req.body);
+    res.json(trigger);
+  };
 
   /**
    * Delete a trigger by id
@@ -89,14 +95,18 @@ export default class TriggerRouter {
    * }
    */
   @Delete({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'trigger',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'delete',
+    aclResource: 'trigger',
   })
-    destroy = async (req: Request, res: Response) => {
-      await this.friday.trigger.destroy(req.params.id);
-      res.json({
-        success: true,
-      });
-    };
+  destroy = async (req: Request, res: Response) => {
+    await this.friday.trigger.destroy(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
 
   /**
    * List All triggers
@@ -118,12 +128,16 @@ export default class TriggerRouter {
    * }]
    */
   @Get({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'trigger',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'trigger',
   })
-    listAll = async (req: Request, res: Response) => {
-      const triggers = await this.friday.trigger.listAll(req.query);
-      res.json(triggers);
-    };
+  listAll = async (req: Request, res: Response) => {
+    const triggers = await this.friday.trigger.listAll(req.query);
+    res.json(triggers);
+  };
 
   /**
    * Get a trigger by id
@@ -145,11 +159,15 @@ export default class TriggerRouter {
    * }
    */
   @Get({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'trigger',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'trigger',
   })
-    getById = async (req: Request, res: Response) => {
-      const scope = req.query.scope as string;
-      const trigger = await this.friday.trigger.getById(req.params.id, scope);
-      res.json(trigger);
-    };
+  getById = async (req: Request, res: Response) => {
+    const scope = req.query.scope as string;
+    const trigger = await this.friday.trigger.getById(req.params.id, scope);
+    res.json(trigger);
+  };
 }

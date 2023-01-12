@@ -1,8 +1,5 @@
-import { AvailableState, EventsType, MqttMessageTypes, TopicsTypes, WebsocketMessageTypes } from '../config/constants';
-import DeviceClass from '../core/device/device';
-import User from '../core/user/user';
-import { DeviceType } from '../config/entities';
-import { DevicesActionsType } from '../config/device';
+import { DevicesActions, WebsocketMessageTypes } from '@friday/shared';
+import { EventsType, MqttMessageTypes, TopicsTypes } from '../config/constants';
 
 /**
  * Options for core functions type 'getAll'
@@ -20,7 +17,7 @@ export interface ErrorType {
   name: string;
   message: string;
   cause?: Error;
-  metadata?: any;
+  metadata?: unknown;
 }
 
 /**
@@ -58,18 +55,6 @@ export interface KVArr<T> {
   [Key: string]: T;
 }
 
-export interface MqttOptions {
-  port: number;
-  host?: string;
-  hostname?: string
-  path?: string
-  protocol?: 'wss' | 'ws' | 'mqtt' | 'mqtts' | 'tcp' | 'ssl' | 'wx' | 'wxs';
-  keepalive?: number;
-  username?: string;
-  password?: string;
-  qos?: 0 | 1 | 2;
-}
-
 /**
  * Options for sending mqtt message
  */
@@ -88,57 +73,25 @@ export interface MqttMessagePayload {
   receiver?: string;
 }
 
-/**
- * Interface for plugin container
- */
-export interface Color {
-  red: number,
-  green: number,
-  blue: number
-}
-
 export interface PluginInstallOptions {
-  name: string,
+  name: string;
   repoTag: string;
   version: string;
   satelliteId: string;
 }
 
 export interface DeviceCommandType {
-  action: DevicesActionsType;
-  params: any;
+  action: DevicesActions;
+  params: unknown;
 }
 
 export interface CapabilityManagerParams {
-  actions: DevicesActionsType[]
+  actions: DevicesActions[];
 }
 
 export interface CapabilityManagerParamsList {
-  [key: string]: CapabilityManagerParams
+  [key: string]: CapabilityManagerParams;
 }
-
-export interface FeatureParameter {
-  deviceType: DeviceType,
-  deviceClass: DeviceClass
-  userClass?: User
-  userId?: string
-  state?: AvailableState | number | Color
-  rgb?: Color
-}
-
-export interface DeviceTypeParameter {
-  deviceId: string,
-  state: AvailableState | number | Color
-}
-
-export type NestedObjects = KVArr<string>;
-
-export type DeviceSubtypeList = KVArr<NestedObjects>;
-
-export type DeviceTypeCommonFeature = KVArr<NestedObjects>;
-
-export type DeviceSubtypeFeatureList = KVArr<KVArr<NestedObjects>>;
-
 
 /**
  * Access token interface

@@ -81,6 +81,7 @@ importers:
   apps/server:
     specifiers:
       '@fnando/keyring': ^0.4.0
+      '@friday/shared': workspace:*
       '@mathieu_andrade/apidoc-markdown': ^1.0.5
       '@types/bcrypt': ^5.0.0
       '@types/bluebird': ^3.5.38
@@ -144,6 +145,7 @@ importers:
       ws: ^8.12.0
     dependencies:
       '@fnando/keyring': 0.4.0
+      '@friday/shared': link:../../packages/shared
       '@types/bcrypt': 5.0.0
       '@types/bluebird': 3.5.38
       '@types/compression': 1.7.2
@@ -206,6 +208,9 @@ importers:
       typedoc: 0.23.24_typescript@4.9.4
       typedoc-plugin-external-module-map: 1.3.2_typedoc@0.23.24
       typedoc-plugin-markdown: 3.14.0_typedoc@0.23.24
+
+  packages/shared:
+    specifiers: {}
 
   packages/tools:
     specifiers:

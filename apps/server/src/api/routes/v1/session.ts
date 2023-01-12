@@ -24,12 +24,16 @@ export default class SessionRouter {
    * @apiVersion 1.0.0
    */
   @Post({
-    path : '/access_token', authenticated: false, rateLimit: true, aclMethod: 'create', aclResource: 'session',
+    path: '/access_token',
+    authenticated: false,
+    rateLimit: true,
+    aclMethod: 'create',
+    aclResource: 'session',
   })
-    getAccessToken = async (req: Request, res: Response) => {
-      const session = await this.friday.session.getAccessToken(req.body.refreshToken);
-      res.json(session);
-    };
+  getAccessToken = async (req: Request, res: Response) => {
+    const session = await this.friday.session.getAccessToken(req.body.refreshToken);
+    res.json(session);
+  };
 
   /**
    * Revoke an session
@@ -40,12 +44,16 @@ export default class SessionRouter {
    * @apiVersion 1.0.0
    */
   @Patch({
-    path : '/revoke/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'session',
+    path: '/revoke/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'session',
   })
-    revoke = async (req: Request, res: Response) => {
-      const session = await this.friday.session.revoke(req.params.id);
-      res.json(session);
-    };
+  revoke = async (req: Request, res: Response) => {
+    const session = await this.friday.session.revoke(req.params.id);
+    res.json(session);
+  };
 
   /**
    * List All sessions
@@ -56,10 +64,14 @@ export default class SessionRouter {
    * @apiVersion 1.0.0
    */
   @Get({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'session',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'session',
   })
-    listAll = async (req: Request, res: Response) => {
-      const sessions = await this.friday.session.listAll(req.query);
-      res.json(sessions);
-    };
+  listAll = async (req: Request, res: Response) => {
+    const sessions = await this.friday.session.listAll(req.query);
+    res.json(sessions);
+  };
 }

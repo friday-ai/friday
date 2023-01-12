@@ -2,8 +2,12 @@
 /* eslint-disable max-classes-per-file */
 import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtoken';
 import {
-  BadParametersError, NotFoundError, DatabaseUniqueConstraintError,
-  DatabaseValidationError, AuthError, UnauthorizedError,
+  BadParametersError,
+  NotFoundError,
+  DatabaseUniqueConstraintError,
+  DatabaseValidationError,
+  AuthError,
+  UnauthorizedError,
 } from './decorators/error';
 
 import { ErrorType } from './interfaces';
@@ -14,10 +18,10 @@ import { ErrorType } from './interfaces';
  * @extends {Error}
  */
 export class BaseHttpError extends Error {
-  public status: number = 500;
-  public code: string = 'SERVER_ERROR';
+  public status = 500;
+  public code = 'SERVER_ERROR';
   public cause?: Error;
-  public metadata?: Object;
+  public metadata?: unknown;
 
   constructor(err: ErrorType) {
     super();

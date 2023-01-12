@@ -6,6 +6,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-unused-vars': [2, { args: 'all', argsIgnorePattern: '^_' }],
     'import/no-cycle': 0,
+    'class-methods-use-this': 0,
     semi: 0, // this cause a conflict with typescript rules
     '@typescript-eslint/semi': ['error', 'always'],
     quotes: [
@@ -60,12 +61,12 @@ module.exports = {
     'import/no-extraneous-dependencies': [
       'error',
       {
-        devDependencies: ['test.{ts,tsx}', 'test-*.{ts,tsx}', '**/*{.,_}{test,spec}.{ts,tsx}', '**/test/**/*.{ts,tsx}'],
+        devDependencies: ['test.{js,jsx,ts,tsx}', 'test-*.{js,jsx,ts,tsx}', '**/test/**/*.{js,jsx,ts,tsx}'],
       },
     ],
     'max-len': [
       'error',
-      130,
+      135,
       2,
       {
         ignoreUrls: true,

@@ -2,7 +2,7 @@ import Server from './api/app';
 import Friday from './core/friday';
 import logger from './utils/log';
 
-const port = parseInt(process.env.SERVER_PORT!, 10) || 3000;
+const port = parseInt(process.env.SERVER_PORT || '3000', 10);
 
 (async () => {
   try {

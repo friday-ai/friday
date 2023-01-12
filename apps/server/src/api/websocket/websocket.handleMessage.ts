@@ -1,6 +1,6 @@
 import * as WebSocket from 'ws';
+import { WebsocketMessageTypes } from '@friday/shared';
 import { WebsocketMessagePayload } from '../../utils/interfaces';
-import { WebsocketMessageTypes } from '../../config/constants';
 import logger from '../../utils/log';
 import WebsocketServer from '.';
 

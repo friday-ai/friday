@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-useless-constructor */
-/* eslint-disable max-classes-per-file */
 /* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable max-classes-per-file */
 import { UniqueConstraintError, ValidationError } from 'sequelize';
 import { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
 import { ErrorType } from '../interfaces';
@@ -116,7 +117,7 @@ export class PlatformNotCompatible extends CoreError {
  * @returns {CoreError} Resolve with an error instance.
  */
 export default function error(err: ErrorType): CoreError {
-  switch (err.cause!.constructor) {
+  switch (err.cause?.constructor) {
     case DatabaseValidationError:
     case ValidationError:
       return new DatabaseValidationError(err);
@@ -153,7 +154,7 @@ export const Catch = () => (_: any, __: string, descriptor: PropertyDescriptor) 
   const originalMethod = descriptor.value;
 
   // rewrite original method with custom wrapper
-  descriptor.value = function (...args: any[]) {
+  descriptor.value = function f(...args: any[]) {
     try {
       const result = originalMethod.apply(this, args);
 
@@ -163,7 +164,10 @@ export const Catch = () => (_: any, __: string, descriptor: PropertyDescriptor) 
         return result.catch((e: any) => {
           logger.error(e);
           throw error({
-            name: e.name, message: e.message, cause: e, metadata: args,
+            name: e.name,
+            message: e.message,
+            cause: e,
+            metadata: args,
           });
         });
       }
@@ -173,7 +177,10 @@ export const Catch = () => (_: any, __: string, descriptor: PropertyDescriptor) 
     } catch (e) {
       logger.error(e);
       throw error({
-        name: e.name, message: e.message, cause: e, metadata: args,
+        name: e.name,
+        message: e.message,
+        cause: e,
+        metadata: args,
       });
     }
   };

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
+import { SatelliteAttributes, AvailableState } from '@friday/shared';
 import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 import { encrypt } from '../../../utils/keyring';
-import { AvailableState, FridayMode } from '../../../config/constants';
-import { SatelliteType } from '../../../config/entities';
+import { FridayMode } from '../../../config/constants';
 
 /**
  * System router
@@ -30,31 +30,38 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'system',
   })
-    getVersion = async (_: Request, res: Response) => {
-      const version = await this.friday.getVersion();
-      res.json(version);
-    };
+  getVersion = async (_: Request, res: Response) => {
+    const version = await this.friday.getVersion();
+    res.json(version);
+  };
 
   /**
    * Init Friday
    */
   @Post({
-    path : '/init', authenticated: true, rateLimit: true, aclMethod: 'read', aclResource: 'system',
+    path: '/init',
+    authenticated: true,
+    rateLimit: true,
+    aclMethod: 'read',
+    aclResource: 'system',
   })
-    init = async (_: Request, res: Response) => {
+  init = async (_: Request, res: Response) => {
     // This route is only active at first start for security reasons
-      if (this.friday.mode === FridayMode.INIT) {
-        const result = await this.friday.init();
-        res.status(200).json({
-          success: result,
-        });
-      } else {
-        res.sendStatus(404);
-      }
-    };
-
+    if (this.friday.mode === FridayMode.INIT) {
+      const result = await this.friday.init();
+      res.status(200).json({
+        success: result,
+      });
+    } else {
+      res.sendStatus(404);
+    }
+  };
 
   /**
    * get master id
@@ -70,9 +77,14 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path : '/info', authenticated: false, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+    path: '/info',
+    authenticated: false,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'system',
   })
-    masterInfo = async (_: Request, res: Response) => res.json({
+  masterInfo = async (_: Request, res: Response) =>
+    res.json({
       masterId: this.friday.masterId,
     });
 
@@ -91,22 +103,25 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path : '/mqtt/config', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'system',
+    path: '/mqtt/config',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'system',
   })
-    configMqtt = async (_: Request, res: Response) => {
-      const satellites = await this.friday.satellite.listAll({ scope: 'withState' });
+  configMqtt = async (_: Request, res: Response) => {
+    const satellites = await this.friday.satellite.listAll({ scope: 'withState' });
 
-      const satellite = satellites.filter((s: SatelliteType) =>
-        s.state!.value === AvailableState.SATELLITE_WAITING_CONFIGURATION);
+    const satellite = satellites.filter((s: SatelliteAttributes) => s.state.value === AvailableState.SATELLITE_WAITING_CONFIGURATION);
 
-      if (satellite.length === 0) {
-        return res.status(404).json('Satellite is not configured !');
-      }
+    if (satellite.length === 0) {
+      return res.status(404).json('Satellite is not configured !');
+    }
 
-      const satelliteId = satellite[0].id;
-      return res.json({
-        mqttInfo: encrypt(JSON.stringify(this.friday.mqttSecret), satelliteId!)[0],
-        satelliteId: encrypt(satelliteId!, this.friday.masterId)[0],
-      });
-    };
+    const satelliteId = satellite[0].id;
+    return res.json({
+      mqttInfo: encrypt(JSON.stringify(this.friday.mqttSecret), satelliteId)[0],
+      satelliteId: encrypt(satelliteId, this.friday.masterId)[0],
+    });
+  };
 }

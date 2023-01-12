@@ -1,7 +1,7 @@
 import { Model, ModelCtor } from 'sequelize-typescript';
+import { WhereOptions } from 'sequelize';
 import { Catch, NotFoundError } from '../decorators/error';
 import { GetOptions } from '../interfaces';
-import { WhereOptions } from 'sequelize';
 
 const DEFAULT_OPTIONS: GetOptions = {
   scope: '',

@@ -15,10 +15,7 @@ const env = process.env.NODE_ENV || 'production';
  * @returns {string} The hash of the token.
  */
 export function hashToken(token: string) {
-  return crypto
-    .createHash('sha256')
-    .update(token)
-    .digest('hex');
+  return crypto.createHash('sha256').update(token).digest('hex');
 }
 
 /**
@@ -62,9 +59,7 @@ export function generateAccessToken(userId: string, role: string, sessionId: str
  * @returns {Promise} Resolving with refreshToken, refreshTokenHash and refreshTokenValidity.
  */
 export async function generateRefreshToken() {
-  const refreshToken = (await randomBytes(Math.ceil(tokenLength / 2)))
-    .toString('hex')
-    .slice(0, tokenLength);
+  const refreshToken = (await randomBytes(Math.ceil(tokenLength / 2))).toString('hex').slice(0, tokenLength);
   const refreshTokenHash = hashToken(refreshToken);
 
   return {

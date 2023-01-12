@@ -1,12 +1,12 @@
+import { DcAttributes } from '@friday/shared';
 import DeviceClass from './device';
 import DeviceCapability from '../../models/device_capability';
-import { DeviceCapabilityType } from '../../config/entities';
 import { NotFoundError } from '../../utils/decorators/error';
 
 /**
  * Get device capability by id
  */
-export default async function getCapabilityById(this: DeviceClass, id: string, scope: string): Promise<DeviceCapabilityType> {
+export default async function getCapabilityById(this: DeviceClass, id: string, scope: string): Promise<DcAttributes> {
   let capability;
 
   if (scope !== '' && scope !== null && scope !== undefined) {
@@ -19,5 +19,5 @@ export default async function getCapabilityById(this: DeviceClass, id: string, s
     throw new NotFoundError({ name: 'Friday get capability by id', message: 'Capability not found', metadata: id });
   }
 
-  return <DeviceCapabilityType>capability?.get({ plain: true });
+  return <DcAttributes>capability.get({ plain: true });
 }

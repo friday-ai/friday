@@ -1,0 +1,13 @@
+{
+  "name": "@friday/shared",
+  "version": "1.0.0",
+  "description": "Friday: Shared utilites",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Mathieu Andrade",
+  "license": "MIT",
+  "prettier": "../tools/prettier.config.js"
+}

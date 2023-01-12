@@ -19,13 +19,13 @@ import {
   Validate,
 } from 'sequelize-typescript';
 
+import { PluginAttributes, PluginCreationAttributes } from '@friday/shared';
 import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';
 import Device from './device';
 import { isOwnerExisting } from '../utils/database/validation';
 import { DatabaseValidationError } from '../utils/decorators/error';
-import { PluginType } from '../config/entities';
 
 /**
  * Plugin model
@@ -59,38 +59,38 @@ import { PluginType } from '../config/entities';
   tableName: 'plugin',
   underscored: false,
 })
-export default class Plugin extends Model {
+export default class Plugin extends Model<PluginAttributes, PluginCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-    dockerId!: string;
+  dockerId!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-    name!: string;
+  name!: string;
 
   @AllowNull(false)
   @Column
-    version!: string;
+  version!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-    url!: string;
+  url!: string;
 
   @AllowNull(false)
   @Column
-    enabled!: boolean;
+  enabled!: boolean;
 
   @AllowNull(false)
   @NotEmpty
@@ -100,7 +100,7 @@ export default class Plugin extends Model {
       // Check plugin isn't already install;
       const satellite = await Satellite.scope('withPlugins').findByPk(this.satelliteId);
       if (satellite !== null && typeof satellite.plugins !== 'undefined') {
-        satellite.get({ plain: true }).plugins.forEach((plugin: PluginType) => {
+        satellite.get({ plain: true }).plugins.forEach((plugin: PluginAttributes) => {
           if (plugin.name === this.name) {
             throw new DatabaseValidationError({
               message: 'plugin already install on this satellite',
@@ -112,36 +112,36 @@ export default class Plugin extends Model {
     },
   })
   @Column(DataType.UUIDV4)
-    satelliteId!: string;
+  satelliteId!: string;
 
   @AllowNull(false)
   @IsDate
   @NotEmpty
   @Default(new Date())
   @Column({ type: DataType.DATE })
-    lastHeartbeat!: Date;
+  lastHeartbeat!: Date;
 
   @BelongsTo(() => Satellite, {
     foreignKey: 'satelliteId',
     constraints: false,
   })
-    satellite!: Satellite;
+  satellite!: Satellite;
 
   @HasMany(() => Device, {
     foreignKey: 'pluginId',
     constraints: false,
   })
-    devices!: Device[];
+  devices!: Device[];
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',
     constraints: false,
   })
-    variables?: Variable[];
+  variables?: Variable[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-    state?: State;
+  state?: State;
 }

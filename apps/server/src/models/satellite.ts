@@ -18,6 +18,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
+import { SatelliteAttributes, SatelliteCreationAttributes } from '@friday/shared';
 import Room from './room';
 import State from './state';
 import Variable from './variable';
@@ -56,55 +57,55 @@ import { isOwnerExisting } from '../utils/database/validation';
   tableName: 'satellite',
   underscored: false,
 })
-export default class Satellite extends Model {
+export default class Satellite extends Model<SatelliteAttributes, SatelliteCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-    name!: string;
+  name!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('roomId', (value) => isOwnerExisting(value, ['room']))
   @Column(DataType.UUIDV4)
-    roomId!: string;
+  roomId!: string;
 
   @AllowNull(false)
   @IsDate
   @NotEmpty
   @Default(new Date())
   @Column({ type: DataType.DATE })
-    lastHeartbeat!: Date;
+  lastHeartbeat!: Date;
 
   @BelongsTo(() => Room, {
     foreignKey: 'roomId',
     constraints: false,
   })
-    room!: Room;
+  room!: Room;
 
   @HasMany(() => Variable, {
     foreignKey: 'owner',
     constraints: false,
   })
-    variables?: Variable[];
+  variables?: Variable[];
 
   @HasMany(() => Plugin, {
     foreignKey: 'satelliteId',
     constraints: false,
   })
-    plugins?: Plugin[];
+  plugins?: Plugin[];
 
   @HasOne(() => State, {
     foreignKey: 'owner',
     constraints: false,
   })
-    state!: State;
+  state!: State;
 }

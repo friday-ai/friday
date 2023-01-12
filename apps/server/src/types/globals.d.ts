@@ -1,3 +1,5 @@
+/* eslint-disable vars-on-top */
+/* eslint-disable no-var */
 import Friday from '../core/friday';
 import Server from '../api/app';
 import MqttServer from '../api/mqtt';

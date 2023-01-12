@@ -16,6 +16,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
+import { SceneAttributes, SceneCreationAttributes } from '@friday/shared';
 import Trigger from './trigger';
 import Action from './action';
 import { isOwnerExisting } from '../utils/database/validation';
@@ -44,24 +45,24 @@ import { isOwnerExisting } from '../utils/database/validation';
   tableName: 'scene',
   underscored: false,
 })
-export default class Scene extends Model {
+export default class Scene extends Model<SceneAttributes, SceneCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-    name!: string;
+  name!: string;
 
   @AllowNull(false)
   @Column
-    description!: string;
+  description!: string;
 
   @Is('triggerId', async (value) => {
     if (value !== undefined) {
@@ -69,17 +70,17 @@ export default class Scene extends Model {
     }
   })
   @Column(DataType.UUIDV4)
-    triggerId!: string;
+  triggerId!: string;
 
   @BelongsTo(() => Trigger, {
     foreignKey: 'triggerId',
     constraints: false,
   })
-    trigger!: Trigger;
+  trigger!: Trigger;
 
   @HasMany(() => Action, {
     foreignKey: 'sceneId',
     constraints: false,
   })
-    actions!: Action[];
+  actions!: Action[];
 }

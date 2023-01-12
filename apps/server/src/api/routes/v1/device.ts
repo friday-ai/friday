@@ -44,12 +44,16 @@ export default class DeviceRouter {
    * }
    */
   @Post({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'device',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'create',
+    aclResource: 'device',
   })
-    register = async (req: Request, res: Response) => {
-      const device = await this.friday.device.register(req.body);
-      res.status(201).json(device);
-    };
+  register = async (req: Request, res: Response) => {
+    const device = await this.friday.device.register(req.body);
+    res.status(201).json(device);
+  };
 
   /**
    * Update a device
@@ -73,12 +77,16 @@ export default class DeviceRouter {
    * }
    */
   @Patch({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'device',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'device',
   })
-    update = async (req: Request, res: Response) => {
-      const device = await this.friday.device.update(req.params.id, req.body);
-      res.json(device);
-    };
+  update = async (req: Request, res: Response) => {
+    const device = await this.friday.device.update(req.params.id, req.body);
+    res.json(device);
+  };
 
   /**
    * Delete a device
@@ -93,14 +101,18 @@ export default class DeviceRouter {
    * }
    */
   @Delete({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'device',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'delete',
+    aclResource: 'device',
   })
-    destroy = async (req: Request, res: Response) => {
-      await this.friday.device.destroy(req.params.id);
-      res.json({
-        success: true,
-      });
-    };
+  destroy = async (req: Request, res: Response) => {
+    await this.friday.device.destroy(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
 
   /**
    * List All devices
@@ -123,12 +135,16 @@ export default class DeviceRouter {
    * }]
    */
   @Get({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'device',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'device',
   })
-    listAll = async (req: Request, res: Response) => {
-      const devices = await this.friday.device.listAll(req.query);
-      res.json(devices);
-    };
+  listAll = async (req: Request, res: Response) => {
+    const devices = await this.friday.device.listAll(req.query);
+    res.json(devices);
+  };
 
   /**
    * Get a device by id
@@ -151,11 +167,15 @@ export default class DeviceRouter {
    * }
    */
   @Get({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'device',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'device',
   })
-    getById = async (req: Request, res: Response) => {
-      const scope = req.query.scope as string;
-      const device = await this.friday.device.getById(req.params.id, scope);
-      res.json(device);
-    };
+  getById = async (req: Request, res: Response) => {
+    const scope = req.query.scope as string;
+    const device = await this.friday.device.getById(req.params.id, scope);
+    res.json(device);
+  };
 }

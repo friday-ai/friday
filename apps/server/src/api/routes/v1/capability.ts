@@ -19,10 +19,14 @@ export default class ActionRouter {
    * @apiName setState
    */
   @Post({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'capability',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'capability',
   })
-    setState = async (req: Request, res: Response) => {
-      this.friday.event.emit(req.body.action, { id: req.params.id, value: req.body.value });
-      res.status(200).json({ success: true });
-    };
+  setState = async (req: Request, res: Response) => {
+    this.friday.event.emit(req.body.action, { id: req.params.id, value: req.body.value });
+    res.status(200).json({ success: true });
+  };
 }

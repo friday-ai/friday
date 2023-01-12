@@ -13,6 +13,8 @@ import saveVersion from './system.saveVersion';
 import start from './system.start';
 import shutdown from './system.shutdown';
 
+import * as DBType from '../../config/database';
+
 /**
  * System
  */
@@ -24,11 +26,19 @@ export default class System {
   public user: UserClass;
   public state: StateClass;
   public scheduler: SchedulerClass;
-  public database: any;
+  public database: typeof DBType;
   public env = process.env.NODE_ENV || 'production';
 
-  constructor(variable: VariableClass, house: HouseClass, room: RoomClass, satellite: SatelliteClass,
-    user: UserClass, state: StateClass, scheduler: SchedulerClass, database: any) {
+  constructor(
+    variable: VariableClass,
+    house: HouseClass,
+    room: RoomClass,
+    satellite: SatelliteClass,
+    user: UserClass,
+    state: StateClass,
+    scheduler: SchedulerClass,
+    database: typeof DBType
+  ) {
     this.variable = variable;
     this.house = house;
     this.room = room;

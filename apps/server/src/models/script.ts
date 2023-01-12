@@ -1,16 +1,6 @@
-import {
-  AllowNull,
-  Column,
-  DataType,
-  Default,
-  DefaultScope,
-  IsUUID,
-  Model,
-  NotEmpty,
-  PrimaryKey,
-  Table,
-  Unique,
-} from 'sequelize-typescript';
+import { AllowNull, Column, DataType, Default, DefaultScope, IsUUID, Model, NotEmpty, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+
+import { ScriptAttributes, ScriptCreationAttributes } from '@friday/shared';
 
 /**
  * Script model
@@ -22,23 +12,23 @@ import {
   tableName: 'script',
   underscored: false,
 })
-export default class Script extends Model {
+export default class Script extends Model<ScriptAttributes, ScriptCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
   @Column
-    name!: string;
+  name!: string;
 
   @AllowNull(false)
   @Default('')
   @Column
-    code!: string;
+  code!: string;
 }

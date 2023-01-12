@@ -1,7 +1,7 @@
+import { PluginAttributes, PluginCreationAttributes } from '@friday/shared';
 import DockerClass from '../docker/docker';
 import StateClass from '../state/state';
 import BaseModel from '../../utils/database/model.base';
-import { PluginType } from '../../config/entities';
 import PluginModel from '../../models/plugin';
 import { Catch } from '../../utils/decorators/error';
 import { PluginInstallOptions } from '../../utils/interfaces';
@@ -14,7 +14,7 @@ import stop from './plugin.stop';
 /**
  * Plugin
  */
-export default class Plugin extends BaseModel<PluginModel, PluginType> {
+export default class Plugin extends BaseModel<PluginModel, PluginAttributes, PluginCreationAttributes> {
   public event: typeof EventClass;
   public docker: DockerClass;
   public state: StateClass;
@@ -29,13 +29,13 @@ export default class Plugin extends BaseModel<PluginModel, PluginType> {
   @Catch()
   async destroy(id: string): Promise<void> {
     const plugin = await super.getById(id);
-    await this.docker.remove(plugin.dockerId!);
+    await this.docker.remove(plugin.dockerId);
 
     return super.destroy(id);
   }
 
   @Catch()
-  async install(options: PluginInstallOptions): Promise<PluginType> {
+  async install(options: PluginInstallOptions): Promise<PluginAttributes> {
     return install.call(this, options);
   }
 

@@ -1,16 +1,15 @@
+import { UserAttributes, UserCreationAttributes, AvailableState, StateOwner } from '@friday/shared';
 import BaseModel from '../../utils/database/model.base';
 import UserModel from '../../models/user';
-import { UserType } from '../../config/entities';
 import { Catch } from '../../utils/decorators/error';
 import StateClass from '../state/state';
-import { AvailableState, StateOwner } from '../../config/constants';
 
 import login from './user.login';
 
 /**
  * User
  */
-export default class User extends BaseModel<UserModel, UserType> {
+export default class User extends BaseModel<UserModel, UserAttributes, UserCreationAttributes> {
   public state: StateClass;
 
   constructor(state: StateClass) {
@@ -19,25 +18,17 @@ export default class User extends BaseModel<UserModel, UserType> {
   }
 
   @Catch()
-  async create(data: Omit<UserType, 'id'>) {
+  async create(data: UserCreationAttributes): Promise<Omit<UserAttributes, 'password'>> {
     const user = await super.create(data);
 
     // Set default state for user
     await this.state.set({
-      owner: user.id!,
+      owner: user.id,
       ownerType: StateOwner.USER,
       value: AvailableState.USER_AT_HOME,
       last: true,
     });
 
-    delete user.password;
-    return user;
-  }
-
-  @Catch()
-  async update(identifier: string, data: Omit<UserType, 'id'>) {
-    const user = await super.update(identifier, data);
-    delete user.password;
     return user;
   }
 
@@ -46,4 +37,3 @@ export default class User extends BaseModel<UserModel, UserType> {
     return login(email, password);
   }
 }
-

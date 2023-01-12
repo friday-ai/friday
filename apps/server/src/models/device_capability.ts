@@ -15,12 +15,13 @@ import {
   Table,
   Unique,
 } from 'sequelize-typescript';
+
+import { DcAttributes, DevicesCapabilities, DcCreationAttributes } from '@friday/shared';
 import { isOwnerExisting } from '../utils/database/validation';
 import Room from './room';
 import Device from './device';
 import DeviceCapabilityState from './device_capability_state';
 import DeviceCapabilitySettings from './device_capability_settings';
-import { DevicesCapabilityType } from '../config/device';
 
 /**
  * Device capability model
@@ -55,63 +56,63 @@ import { DevicesCapabilityType } from '../config/device';
   tableName: 'device_capability',
   underscored: false,
 })
-export default class DeviceCapability extends Model {
+export default class DeviceCapability extends Model<DcAttributes, DcCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-    defaultName!: string;
+  defaultName!: string;
 
   @AllowNull(true)
   @Column
-    name!: string;
+  name!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Column
-    type!: DevicesCapabilityType;
+  type!: DevicesCapabilities;
 
   @AllowNull(false)
   @NotEmpty
   @Is('deviceId', (value) => isOwnerExisting(value, ['device']))
   @Column(DataType.UUIDV4)
-    deviceId!: string;
+  deviceId!: string;
 
   @NotEmpty
   @AllowNull(true)
-  @Is('roomId', (value) => value !== undefined ? isOwnerExisting(value, ['room']) : true)
+  @Is('roomId', (value) => (value !== undefined ? isOwnerExisting(value, ['room']) : true))
   @Column(DataType.UUIDV4)
-    roomId!: string;
+  roomId!: string;
 
   @BelongsTo(() => Device, {
     foreignKey: 'deviceId',
     constraints: false,
   })
-    device!: Device;
+  device!: Device;
 
   // TODO: get by default device room if is not set
   @BelongsTo(() => Room, {
     foreignKey: 'roomId',
     constraints: false,
   })
-    room!: Room;
+  room!: Room;
 
   @HasOne(() => DeviceCapabilitySettings, {
     foreignKey: 'capabilityId',
     constraints: false,
   })
-    settings!: DeviceCapabilitySettings;
+  settings!: DeviceCapabilitySettings;
 
   @HasOne(() => DeviceCapabilityState, {
     foreignKey: 'capabilityId',
     constraints: false,
   })
-    state!: DeviceCapabilityState;
+  state!: DeviceCapabilityState;
 }

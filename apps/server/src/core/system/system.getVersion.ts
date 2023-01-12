@@ -1,17 +1,17 @@
+import { SystemVariablesNames } from '@friday/shared';
 import error, { NotFoundError } from '../../utils/decorators/error';
 import System from './system';
-import { SystemVariablesNames } from '../../config/constants';
 import { version as packageVersion } from '../../../package.json';
 
 /**
  * Get actual version and last saved version of Friday
  * @returns {Promise<Array<String>>} Resolve with an array
  */
-export default async function getVersion(this: System): Promise<Array<String>> {
-  let savedVersion: string = '';
+export default async function getVersion(this: System): Promise<Array<string>> {
+  let savedVersion = '';
   try {
     const variable = await this.variable.getValue(SystemVariablesNames.FRIDAY_VERSION);
-    savedVersion = variable.value!;
+    savedVersion = variable.value;
     return [packageVersion, savedVersion];
   } catch (e) {
     if (e.constructor === NotFoundError) {

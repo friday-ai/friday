@@ -1,8 +1,8 @@
+import { StateCreationAttributes } from '@friday/shared';
 import EventClass from '../../utils/event';
 import VariableClass from '../variable/variable';
 import { EventsType } from '../../config/constants';
 import { Catch } from '../../utils/decorators/error';
-import { StateType } from '../../config/entities';
 
 import set from './state.set';
 import getByOwner from './state.getByOwner';
@@ -25,7 +25,7 @@ export default class State {
   }
 
   @Catch()
-  async set(data: StateType) {
+  async set(data: StateCreationAttributes) {
     return set(data);
   }
 

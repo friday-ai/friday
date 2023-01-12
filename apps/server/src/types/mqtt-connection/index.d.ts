@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare module 'mqtt-connection' {
   import { Duplex } from 'stream';
   import * as mqtt from 'mqtt-packet';

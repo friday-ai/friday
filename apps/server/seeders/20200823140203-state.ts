@@ -1,7 +1,7 @@
 import { QueryInterface } from 'sequelize';
-import { AvailableState, StateOwner } from '../src/config/constants';
+import { AvailableState, StateOwner } from '@friday/shared';
 
-module.exports = {
+export default {
   up: (queryInterface: QueryInterface) =>
     queryInterface.bulkInsert('state', [
       {
@@ -69,6 +69,5 @@ module.exports = {
       },
     ]),
 
-  down: (queryInterface: QueryInterface) =>
-    queryInterface.bulkDelete('state', {}, {}),
+  down: (queryInterface: QueryInterface) => queryInterface.bulkDelete('state', {}, {}),
 };

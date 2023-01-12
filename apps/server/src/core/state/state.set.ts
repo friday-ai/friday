@@ -1,11 +1,11 @@
+import { StateAttributes, StateCreationAttributes } from '@friday/shared';
 import State from '../../models/state';
-import { StateType } from '../../config/entities';
 import logger from '../../utils/log';
 
 /**
  * Set a state.
  * @param {StateType} data -A state object.
- * @returns {Promise<StateType[]>} Resolve with state.
+ * @returns {Promise<StateAttributes>} Resolve with state.
  * @example
  * ````
  * friday.state.set({
@@ -16,7 +16,7 @@ import logger from '../../utils/log';
  * });
  * ````
  */
-export default async function set(data: StateType): Promise<StateType> {
+export default async function set(data: StateCreationAttributes): Promise<StateAttributes> {
   // Check if old state exist
   const existingState = await State.findOne({
     where: {
@@ -27,15 +27,15 @@ export default async function set(data: StateType): Promise<StateType> {
 
   // If old state exist, update it
   if (existingState !== null) {
-    const plainStateToUpdate = <StateType>existingState.get({ plain: true });
+    const plainStateToUpdate = <StateAttributes>existingState.get({ plain: true });
     plainStateToUpdate.last = false;
     await existingState.update(plainStateToUpdate);
   }
 
   // And then, create the new state
-  const newState = await State.create({ ...data });
+  const newState = await State.create(data);
 
   logger.success(`State ${data.value} created for ${data.ownerType} ${data.owner}`);
 
-  return <StateType>newState.get({ plain: true });
+  return <StateAttributes>newState.get({ plain: true });
 }

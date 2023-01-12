@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import {
-  FridayRouter, Get, Patch, Post, Delete,
-} from '../../../utils/decorators/route';
+import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 import { FridayMode } from '../../../config/constants';
 
@@ -35,12 +33,16 @@ export default class SatelliteRouter {
    * }
    */
   @Post({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'create', aclResource: 'satellite',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'create',
+    aclResource: 'satellite',
   })
-    create = async (req: Request, res: Response) => {
-      const satellite = await this.friday.satellite.create(req.body);
-      res.status(201).json(satellite);
-    };
+  create = async (req: Request, res: Response) => {
+    const satellite = await this.friday.satellite.create(req.body);
+    res.status(201).json(satellite);
+  };
 
   /**
    * Update a satellite
@@ -58,12 +60,16 @@ export default class SatelliteRouter {
    * }
    */
   @Patch({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'update', aclResource: 'satellite',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'satellite',
   })
-    update = async (req: Request, res: Response) => {
-      const satellite = await this.friday.satellite.update(req.params.id, req.body);
-      res.json(satellite);
-    };
+  update = async (req: Request, res: Response) => {
+    const satellite = await this.friday.satellite.update(req.params.id, req.body);
+    res.json(satellite);
+  };
 
   /**
    * Delete a satellite by id
@@ -78,14 +84,18 @@ export default class SatelliteRouter {
    * }
    */
   @Delete({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'delete', aclResource: 'satellite',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'delete',
+    aclResource: 'satellite',
   })
-    destroy = async (req: Request, res: Response) => {
-      await this.friday.satellite.destroy(req.params.id);
-      res.json({
-        success: true,
-      });
-    };
+  destroy = async (req: Request, res: Response) => {
+    await this.friday.satellite.destroy(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
 
   /**
    * List All satellites
@@ -102,12 +112,16 @@ export default class SatelliteRouter {
    * }]
    */
   @Get({
-    path : '/', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'satellite',
+    path: '/',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'satellite',
   })
-    listAll = async (req: Request, res: Response) => {
-      const satellites = await this.friday.satellite.listAll(req.query);
-      res.json(satellites);
-    };
+  listAll = async (req: Request, res: Response) => {
+    const satellites = await this.friday.satellite.listAll(req.query);
+    res.json(satellites);
+  };
 
   /**
    * discover a satellite
@@ -124,26 +138,34 @@ export default class SatelliteRouter {
    * }
    */
   @Get({
-    path : '/discovery', authenticated: false, rateLimit: false, aclMethod: 'discovery', aclResource: 'satellite',
+    path: '/discovery',
+    authenticated: false,
+    rateLimit: false,
+    aclMethod: 'discovery',
+    aclResource: 'satellite',
   })
-    discovery = async (_: Request, res: Response) => {
-      if (this.friday.mode === FridayMode.CONFIG_SATELLITE) {
-        this.friday.mode = FridayMode.NOMINAL;
-        res.status(200).json({
-          mode: 'config',
-        });
-      }
-    };
+  discovery = async (_: Request, res: Response) => {
+    if (this.friday.mode === FridayMode.CONFIG_SATELLITE) {
+      this.friday.mode = FridayMode.NOMINAL;
+      res.status(200).json({
+        mode: 'config',
+      });
+    }
+  };
 
   @Get({
-    path : '/login', authenticated: false, rateLimit: false, aclMethod: 'login', aclResource: 'satellite',
+    path: '/login',
+    authenticated: false,
+    rateLimit: false,
+    aclMethod: 'login',
+    aclResource: 'satellite',
   })
-    login = async (req: Request, res: Response) => {
-      const url = `http://${req.query.ip}:8080/login`;
-      // redirect to url
-      console.log(url);
-      res.json();
-    };
+  login = async (_req: Request, res: Response) => {
+    // const url = `http://${req.query.ip}:8080/login`;
+    // redirect to url
+    // console.log(url);
+    res.json();
+  };
 
   /**
    * Get a satellite by id
@@ -160,11 +182,15 @@ export default class SatelliteRouter {
    * }
    */
   @Get({
-    path : '/:id', authenticated: true, rateLimit: false, aclMethod: 'read', aclResource: 'satellite',
+    path: '/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'satellite',
   })
-    getById = async (req: Request, res: Response) => {
-      const scope = req.query.scope as string;
-      const satellite = await this.friday.satellite.getById(req.params.id, scope);
-      res.json(satellite);
-    };
+  getById = async (req: Request, res: Response) => {
+    const scope = req.query.scope as string;
+    const satellite = await this.friday.satellite.getById(req.params.id, scope);
+    res.json(satellite);
+  };
 }

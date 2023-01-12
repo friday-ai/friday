@@ -1,6 +1,6 @@
 import { QueryInterface } from 'sequelize';
 
-module.exports = {
+export default {
   up: (queryInterface: QueryInterface) =>
     queryInterface.bulkInsert('device_capability_settings', [
       {
@@ -117,6 +117,5 @@ module.exports = {
       },
     ]),
 
-  down: (queryInterface: QueryInterface) =>
-    queryInterface.bulkDelete('device_capability_settings', {}, {}),
+  down: (queryInterface: QueryInterface) => queryInterface.bulkDelete('device_capability_settings', {}, {}),
 };

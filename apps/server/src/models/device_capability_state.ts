@@ -13,9 +13,11 @@ import {
   Table,
   Unique,
 } from 'sequelize-typescript';
+
+import { DcstCreationAttributes, DcstAttributes } from '@friday/shared';
 import Device from './device';
-import { isOwnerExisting } from '../utils/database/validation';
 import DeviceCapability from './device_capability';
+import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Device capability state model
@@ -27,34 +29,34 @@ import DeviceCapability from './device_capability';
   tableName: 'device_capability_state',
   underscored: false,
 })
-export default class DeviceCapabilityState extends Model {
+export default class DeviceCapabilityState extends Model<DcstAttributes, DcstCreationAttributes> {
   @IsUUID(4)
   @AllowNull(false)
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
   @Column({ type: DataType.UUIDV4 })
-    id!: string;
+  id!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Is('capabilityId', (value) => isOwnerExisting(value, ['device_capability']))
   @Column(DataType.UUIDV4)
-    capabilityId!: string;
+  capabilityId!: string;
 
   @AllowNull(false)
   @Column
-    value!: string;
+  value!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Default(true)
   @Column
-    last!: boolean;
+  last!: boolean;
 
   @BelongsTo(() => Device, {
     foreignKey: 'capabilityId',
     constraints: false,
   })
-    capability?: DeviceCapability;
+  capability?: DeviceCapability;
 }

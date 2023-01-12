@@ -1,9 +1,10 @@
-import * as http from 'http';
+import http, { Server as ServerType } from 'http';
 import express, { RequestHandler } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import compression from 'compression';
 import * as WebSocket from 'ws';
+import { MqttOptions } from '@friday/shared';
 import router from './routes/router';
 import logger from '../utils/log';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';
@@ -11,7 +12,6 @@ import errorMiddleware from './middlewares/errorMiddleware';
 import WebsocketServer from './websocket/index';
 import Friday from '../core/friday';
 import MqttServer from './mqtt';
-import { MqttOptions } from '../utils/interfaces';
 
 const defaultMqttOptions: MqttOptions = {
   port: 1883,
@@ -23,12 +23,12 @@ const defaultMqttOptions: MqttOptions = {
  * Server class
  */
 export default class Server {
-  public server!: any;
-  public websocketServer!: any;
+  public server!: ServerType;
+  public websocketServer!: WebsocketServer;
   public mqttServer!: MqttServer;
   readonly port: number;
   readonly mqttOptions: MqttOptions;
-  readonly friday: any;
+  readonly friday: Friday;
 
   constructor(port: number, friday: Friday, mqttOptions?: MqttOptions) {
     this.port = port;

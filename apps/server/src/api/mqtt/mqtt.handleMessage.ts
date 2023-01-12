@@ -1,17 +1,10 @@
-import {
-  TopicHeaderSub,
-  TopicToSubscribe as Topics,
-} from '../../config/constants';
+import { TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
 
 import MqttServer from './index';
 import error from '../../utils/decorators/error';
 import logger from '../../utils/log';
 
-export default function handleMessage(
-  this: MqttServer,
-  topic: string,
-  message: string,
-) {
+export default function handleMessage(this: MqttServer, topic: string, message: string) {
   try {
     const finalTopic = topic.replace(TopicHeaderSub, '');
 

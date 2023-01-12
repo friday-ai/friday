@@ -23,6 +23,6 @@ export default async function pull(this: Docker, repoTag: string, onProgress = l
       }
       return output;
     },
-    onProgress,
+    onProgress
   );
 }

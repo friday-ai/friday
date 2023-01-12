@@ -1,19 +1,19 @@
+import { VariableAttributes } from '@friday/shared';
 import Variable from '../../models/variable';
-import { VariableType } from '../../config/entities';
 import { BadParametersError, NotFoundError } from '../../utils/decorators/error';
 
 /**
  * Get a variable value by key.
  * @param {String} key - Key of variable.
- * @returns {Promise<VariableType>} Resolve with variable.
+ * @returns {Promise<VariableAttributes>} Resolve with variable.
  * @example
  * ````
  * friday.variable.getValue('key');
  * ````
  */
-export default async function getValue(key: string): Promise<VariableType> {
+export default async function getValue(key: string): Promise<VariableAttributes> {
   if (key === '') {
-    throw new BadParametersError({ name: 'Get value of an Variable', message: 'Variable\'s key can not be empty', metadata: key });
+    throw new BadParametersError({ name: 'Get value of an Variable', message: "Variable's key can not be empty", metadata: key });
   }
 
   const variable = await Variable.findOne({
@@ -26,5 +26,5 @@ export default async function getValue(key: string): Promise<VariableType> {
     throw new NotFoundError({ name: 'Get value of an Variable', message: 'Variable not found', metadata: key });
   }
 
-  return <VariableType>variable.get({ plain: true });
+  return <VariableAttributes>variable.get({ plain: true });
 }

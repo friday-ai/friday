@@ -58,7 +58,10 @@ export default function sendMessage(this: WebSocketServer, message: WebsocketMes
     */
   } catch (e) {
     throw error({
-      name: e.name, message: e.message, cause: e, metadata: options,
+      name: e.name,
+      message: e.message,
+      cause: e,
+      metadata: options,
     });
   }
 }
