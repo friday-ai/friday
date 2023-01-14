@@ -10,7 +10,7 @@ export const options: CapabilityManagerParamsList = {
 };
 
 function checkValueType(val: number) {
-  if (Number.isNaN(val)) {
+  if (Number.isNaN(Number(val))) {
     const message = `The value must be a number, actual format is ${typeof val} : ${val}`;
     logger.error(message);
     throw new Error(message);

@@ -1,6 +1,6 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
-import { admin, guest } from '../../../../utils/apiToken';
+import { admin, habitant, guest } from '../../../../utils/apiToken';
 
 describe('GET /api/v1/variable/:key', () => {
   it('should return a variable value', async () => {
@@ -13,13 +13,8 @@ describe('GET /api/v1/variable/:key', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
-          id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
-          key: 'test_key0',
-          value: 'test_value0',
-          owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-          ownerType: 'user',
-        });
+        expect(res.body).to.contains.keys(['id', 'key', 'value', 'owner', 'ownerType']);
+        expect(res.body.key).to.equal('test_key0');
       });
   });
 
@@ -33,19 +28,14 @@ describe('GET /api/v1/variable/:key', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
-          id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
-          key: 'test_key0',
-          value: 'test_value0',
-          owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-          ownerType: 'user',
-        });
+        expect(res.body).to.contains.keys(['id', 'key', 'value', 'owner', 'ownerType']);
+        expect(res.body.key).to.equal('test_key0');
       });
   });
 
   it('habitant should have to read a variable value', async () => {
     await server
-      .get('/api/v1/variable', admin)
+      .get('/api/v1/variable', habitant)
       .query({
         key: 'test_key0',
       })
@@ -53,17 +43,12 @@ describe('GET /api/v1/variable/:key', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
-          id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
-          key: 'test_key0',
-          value: 'test_value0',
-          owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-          ownerType: 'user',
-        });
+        expect(res.body).to.contains.keys(['id', 'key', 'value', 'owner', 'ownerType']);
+        expect(res.body.key).to.equal('test_key0');
       });
   });
 
-  it('guest should\'t have to read a variable value', async () => {
+  it("guest should't have to read a variable value", async () => {
     await server
       .get('/api/v1/variable', guest)
       .query({

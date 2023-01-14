@@ -1,9 +1,10 @@
 import { Model, ModelCtor } from 'sequelize-typescript';
 import { Catch, NotFoundError } from '../decorators/error';
+import { exclude, pick } from '../object';
 import { PartialModel } from './model.partial';
 
 export interface BaseModelType<T, C> {
-  create(data: C): Promise<Omit<T, 'password'>>;
+  create(data: C): Promise<Omit<T, 'password' | 'createdAt' | 'updatedAt'>>;
   update(identifier: string, data: Partial<Omit<T, 'id'>>): Promise<Omit<T, 'password'>>;
   destroy(identifier: string): Promise<void>;
 }
@@ -15,16 +16,25 @@ export interface BaseModelType<T, C> {
  */
 export default abstract class BaseModel<M extends Model, T, C> extends PartialModel<M, T> implements BaseModelType<T, C> {
   protected model: ModelCtor<M>;
+  protected creationKeys: string[] | undefined;
 
-  protected constructor(model: ModelCtor<M>) {
+  protected constructor(model: ModelCtor<M>, creationKeys?: string[]) {
     super(model);
     this.model = model;
+    this.creationKeys = creationKeys;
   }
 
   @Catch()
-  async create(data: C): Promise<Omit<T, 'password'>> {
-    const entity = await this.model.create(data as M['_creationAttributes']);
-    return <T>entity.get({ plain: true });
+  async create(data: C): Promise<Omit<T, 'password' | 'createdAt' | 'updatedAt'>> {
+    let entity: M;
+    if (this.creationKeys !== undefined) {
+      const pickedData = pick(data as never, this.creationKeys);
+      entity = await this.model.create(pickedData as M['_creationAttributes']);
+    } else {
+      entity = await this.model.create(data as M['_creationAttributes']);
+    }
+
+    return exclude(<T>entity.get({ plain: true }));
   }
 
   @Catch()
@@ -36,7 +46,7 @@ export default abstract class BaseModel<M extends Model, T, C> extends PartialMo
     }
 
     await entity.update(data);
-    return <T>entity.get({ plain: true });
+    return exclude(<T>entity.get({ plain: true }));
   }
 
   @Catch()

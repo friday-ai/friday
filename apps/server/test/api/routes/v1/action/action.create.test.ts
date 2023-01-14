@@ -1,11 +1,10 @@
 import { expect, assert } from 'chai';
+import { ActionsType } from '@friday/shared';
 import server from '../../../../utils/request';
-import { ActionsType } from '../../../../../src/config/constants';
 
 describe('POST /api/v1/action', () => {
-  it('should return Created', async () => {
+  it('should return create an action', async () => {
     const action = {
-      id: 'b1ed196e-2754-43f0-8c86-728f043c9c07',
       name: 'action test',
       description: 'action test description',
       type: ActionsType.LIGHT_TURN_ON,
@@ -22,14 +21,34 @@ describe('POST /api/v1/action', () => {
       .expect(201)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, action);
+        assert.deepInclude(res.body, action);
       });
   });
 
-  it('should not create a action with an existing name', async () => {
+  it('should not create an action with a provided id', async () => {
+    const action = {
+      id: '228f118c-be02-4c34-b38e-345a304fd71d',
+      name: 'Random action',
+      description: 'action test description',
+      type: ActionsType.LIGHT_TURN_ON,
+      subType: '',
+      variableKey: 'action test variable key',
+      variableValue: 'action test variable value',
+      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
+    };
+
+    await server
+      .post('/api/v1/action')
+      .send(action)
+      .expect(201)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(action.id);
+        expect(res.body.name).to.equal('Random action');
+      });
+  });
+
+  it('should not create an action with an existing name', async () => {
     await server
       .post('/api/v1/action')
       .send({
@@ -45,7 +64,7 @@ describe('POST /api/v1/action', () => {
       .expect(409);
   });
 
-  it('should not create a action with an empty name', async () => {
+  it('should not create an action with an empty name', async () => {
     await server
       .post('/api/v1/action')
       .send({
@@ -61,7 +80,7 @@ describe('POST /api/v1/action', () => {
       .expect(422);
   });
 
-  it('should not create a action with an empty scene', async () => {
+  it('should not create an action with an empty scene', async () => {
     await server
       .post('/api/v1/action')
       .send({
@@ -77,7 +96,7 @@ describe('POST /api/v1/action', () => {
       .expect(422);
   });
 
-  it('should not create a action with a wrong scene', async () => {
+  it('should not create an action with a wrong scene', async () => {
     await server
       .post('/api/v1/action')
       .send({

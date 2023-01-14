@@ -1,4 +1,4 @@
-import { assert, expect } from 'chai';
+import { assert } from 'chai';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 import Room from '../../../src/core/room/room';
 
@@ -10,14 +10,14 @@ describe('Room.create', () => {
   });
 
   it('should create a room', async () => {
-    const createdRoom = await room.create({
+    const roomToCreate = {
       name: 'A room test',
       houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
-    });
+    };
 
-    expect(createdRoom).to.have.property('id');
-    expect(createdRoom).to.have.property('name');
-    expect(createdRoom).to.have.property('houseId');
+    const createdRoom = await room.create(roomToCreate);
+
+    assert.deepInclude(createdRoom, roomToCreate);
   });
 
   it('should not create a room with an existing name', async () => {

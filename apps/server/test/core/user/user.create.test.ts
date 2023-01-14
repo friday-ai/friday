@@ -1,4 +1,5 @@
 import { assert, expect } from 'chai';
+import { AvailableLanguages, UserRole } from '@friday/shared';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 import User from '../../../src/core/user/user';
 
@@ -10,13 +11,18 @@ describe('User.create', () => {
   });
 
   it('should create a user', async () => {
-    const createdUser = await user.create({
+    const userToCreate = {
       userName: 'JohnPepperwood',
       email: 'test@test.com',
       password: 'mysuperpassword',
       theme: 'light',
-    });
+      language: AvailableLanguages.EN,
+      role: UserRole.HABITANT,
+    };
 
+    const createdUser = await user.create(userToCreate);
+
+    expect(createdUser.userName).to.equal('JohnPepperwood');
     expect(createdUser).not.to.have.property('password');
   });
 
@@ -26,6 +32,8 @@ describe('User.create', () => {
       email: 'john@pepperwood.com',
       password: 'mysuperpassword',
       theme: 'light',
+      language: AvailableLanguages.EN,
+      role: UserRole.HABITANT,
     });
 
     await assert.isRejected(promise, DatabaseUniqueConstraintError);
@@ -37,6 +45,8 @@ describe('User.create', () => {
       email: 'johnpepperwood',
       password: 'mysuperpassword',
       theme: 'light',
+      language: AvailableLanguages.EN,
+      role: UserRole.HABITANT,
     });
 
     await assert.isRejected(promise, DatabaseValidationError);
@@ -48,6 +58,8 @@ describe('User.create', () => {
       email: 'john@pepperwood.com',
       password: 'test',
       theme: 'light',
+      language: AvailableLanguages.EN,
+      role: UserRole.HABITANT,
     });
 
     await assert.isRejected(promise, DatabaseValidationError);
@@ -59,6 +71,8 @@ describe('User.create', () => {
       email: 'john@pepperwood.com',
       password: '',
       theme: 'light',
+      language: AvailableLanguages.EN,
+      role: UserRole.HABITANT,
     });
 
     await assert.isRejected(promise, DatabaseValidationError);
@@ -70,6 +84,8 @@ describe('User.create', () => {
       email: 'john@pepperwood.com',
       password: 'mysuperpassword',
       theme: 'light',
+      language: AvailableLanguages.EN,
+      role: UserRole.HABITANT,
     });
 
     await assert.isRejected(promise, DatabaseValidationError);
@@ -81,6 +97,8 @@ describe('User.create', () => {
       email: '',
       password: 'mysuperpassword',
       theme: 'light',
+      language: AvailableLanguages.EN,
+      role: UserRole.HABITANT,
     });
 
     await assert.isRejected(promise, DatabaseValidationError);

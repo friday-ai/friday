@@ -1,11 +1,10 @@
-import { assert, expect } from 'chai';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 
 describe('POST /api/v1/user', () => {
   it('should create a user', async () => {
     const user = {
-      id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
       userName: 'JohnPepperwood',
       email: 'test@test.com',
       password: 'mysuperpassword',
@@ -19,23 +18,35 @@ describe('POST /api/v1/user', () => {
       .expect(201)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, {
-          id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-          userName: 'JohnPepperwood',
-          email: 'test@test.com',
-          theme: 'light',
-          language: 'en',
-          role: 'habitant',
-        });
+        expect(res.body.userName).to.equal(user.userName);
+        expect(res.body).not.to.have.property('password');
+      });
+  });
+
+  it('should not create a user with a provided id', async () => {
+    const user = {
+      id: '2bd34624-e0b6-4703-b033-7b7411d96766',
+      userName: 'RandomJohnPepperwood',
+      email: 'test@test.com',
+      password: 'mysuperpassword',
+      theme: 'light',
+    };
+
+    await server
+      .post('/api/v1/user')
+      .send(user)
+      .expect('Content-Type', /json/)
+      .expect(201)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(user.id);
+        expect(res.body.userName).to.equal('RandomJohnPepperwood');
+        expect(res.body).not.to.have.property('password');
       });
   });
 
   it('admin should have to create a user', async () => {
     const user = {
-      id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
       userName: 'JohnPepperwood',
       email: 'test@test.com',
       password: 'mysuperpassword',
@@ -49,21 +60,12 @@ describe('POST /api/v1/user', () => {
       .expect(201)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, {
-          id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
-          userName: 'JohnPepperwood',
-          email: 'test@test.com',
-          theme: 'light',
-          language: 'en',
-          role: 'habitant',
-        });
+        expect(res.body.userName).to.equal(user.userName);
+        expect(res.body).not.to.have.property('password');
       });
   });
 
-  it('habitant should\'t have to create a user', async () => {
+  it("habitant should't have to create a user", async () => {
     const user = {
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
       userName: 'JohnPepperwood',
@@ -72,14 +74,10 @@ describe('POST /api/v1/user', () => {
       theme: 'light',
     };
 
-    await server
-      .post('/api/v1/user', habitant)
-      .send(user)
-      .expect('Content-Type', /json/)
-      .expect(403);
+    await server.post('/api/v1/user', habitant).send(user).expect('Content-Type', /json/).expect(403);
   });
 
-  it('guest should\'t have to create a user', async () => {
+  it("guest should't have to create a user", async () => {
     const user = {
       id: '0cd30aef-9c4e-4a23-88e3-3547971296e5',
       userName: 'JohnPepperwood',
@@ -88,11 +86,7 @@ describe('POST /api/v1/user', () => {
       theme: 'light',
     };
 
-    await server
-      .post('/api/v1/user', guest)
-      .send(user)
-      .expect('Content-Type', /json/)
-      .expect(403);
+    await server.post('/api/v1/user', guest).send(user).expect('Content-Type', /json/).expect(403);
   });
 
   it('should not create a user with an existing email', async () => {

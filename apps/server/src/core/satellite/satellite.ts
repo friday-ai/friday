@@ -1,4 +1,4 @@
-import { SatelliteAttributes, SatelliteCreationAttributes, AvailableState, StateOwner } from '@friday/shared';
+import { SatelliteAttributes, SatelliteCreationAttributes, AvailableState, StateOwner, SatelliteCreationKeys } from '@friday/shared';
 import BaseModel from '../../utils/database/model.base';
 import SatelliteModel from '../../models/satellite';
 import { Catch } from '../../utils/decorators/error';
@@ -14,7 +14,7 @@ export default class Satellite extends BaseModel<SatelliteModel, SatelliteAttrib
   public state: StateClass;
 
   constructor(state: StateClass) {
-    super(SatelliteModel);
+    super(SatelliteModel, SatelliteCreationKeys);
     this.state = state;
   }
 

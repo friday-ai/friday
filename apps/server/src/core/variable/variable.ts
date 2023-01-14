@@ -1,4 +1,4 @@
-import { VariableAttributes, VariableCreationAttributes } from '@friday/shared';
+import { VariableAttributes, VariableCreationAttributes, VariableCreationKeys } from '@friday/shared';
 import BaseModel from '../../utils/database/model.base';
 import VariableModel from '../../models/variable';
 import { Catch } from '../../utils/decorators/error';
@@ -11,7 +11,7 @@ import getValue from './variable.getValue';
  */
 export default class Variable extends BaseModel<VariableModel, VariableAttributes, VariableCreationAttributes> {
   constructor() {
-    super(VariableModel);
+    super(VariableModel, VariableCreationKeys);
   }
 
   @Catch()

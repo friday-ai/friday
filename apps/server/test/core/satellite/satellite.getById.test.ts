@@ -13,9 +13,7 @@ describe('Satellite.getById', () => {
     const satelliteReturned = await satellite.getById('a7ef5f08-2bad-4489-95bf-b73fcf894d8f');
 
     expect(satelliteReturned).to.be.an('object');
-    expect(satelliteReturned).to.contains.keys(
-      ['id', 'name', 'roomId', 'lastHeartbeat'],
-    );
+    expect(satelliteReturned).to.contains.keys(['id', 'name', 'roomId', 'lastHeartbeat']);
   });
 
   it('should return a satellite with full scope', async () => {
@@ -47,7 +45,7 @@ describe('Satellite.getById', () => {
 
     if (satelliteReturned.variables !== null) {
       expect(satelliteReturned.variables).to.be.an('array');
-      satelliteReturned.variables!.forEach((v) => {
+      satelliteReturned.variables?.forEach((v) => {
         expect(v).to.be.an('object');
         expect(v).to.have.property('id');
         expect(v).to.have.property('key');
@@ -59,7 +57,7 @@ describe('Satellite.getById', () => {
 
     if (satelliteReturned.plugins !== null) {
       expect(satelliteReturned.plugins).to.be.an('array');
-      satelliteReturned.plugins!.forEach((p) => {
+      satelliteReturned.plugins?.forEach((p) => {
         expect(p).to.be.an('object');
         expect(p).to.have.property('id');
         expect(p).to.have.property('name');
@@ -122,7 +120,7 @@ describe('Satellite.getById', () => {
 
     if (satelliteReturned.variables !== null) {
       expect(satelliteReturned.variables).to.be.an('array');
-      satelliteReturned.variables!.forEach((v) => {
+      satelliteReturned.variables?.forEach((v) => {
         expect(v).to.be.an('object');
         expect(v).to.have.property('id');
         expect(v).to.have.property('key');
@@ -146,7 +144,7 @@ describe('Satellite.getById', () => {
 
     if (satelliteReturned.plugins !== null) {
       expect(satelliteReturned.plugins).to.be.an('array');
-      satelliteReturned.plugins!.forEach((p) => {
+      satelliteReturned.plugins?.forEach((p) => {
         expect(p).to.be.an('object');
         expect(p).to.have.property('id');
         expect(p).to.have.property('name');

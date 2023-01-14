@@ -1,4 +1,4 @@
-import { ScriptAttributes, ScriptCreationAttributes } from '@friday/shared';
+import { ScriptAttributes, ScriptCreationAttributes, ScriptCreationKeys } from '@friday/shared';
 import BaseModel from '../../utils/database/model.base';
 import ScriptModel from '../../models/script';
 
@@ -7,6 +7,6 @@ import ScriptModel from '../../models/script';
  */
 export default class Script extends BaseModel<ScriptModel, ScriptAttributes, ScriptCreationAttributes> {
   constructor() {
-    super(ScriptModel);
+    super(ScriptModel, ScriptCreationKeys);
   }
 }

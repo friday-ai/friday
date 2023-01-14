@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { assert, expect } from 'chai';
 import Dockerode, { Container } from 'dockerode';
 import Docker from '../../../src/core/docker/docker';
@@ -14,7 +13,7 @@ describe('Docker.getContainer', () => {
     docker.dockerode = new Dockerode();
   });
 
-  before(async function () {
+  before(async function before() {
     this.timeout(15000);
     container = await docker.createContainer({
       Image: 'alpine',

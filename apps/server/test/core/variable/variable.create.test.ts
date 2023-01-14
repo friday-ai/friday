@@ -1,5 +1,5 @@
-import { assert, expect } from 'chai';
-import { VariableOwner } from '../../../src/config/constants';
+import { assert } from 'chai';
+import { VariableOwner } from '@friday/shared';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 import Variable from '../../../src/core/variable/variable';
 
@@ -11,17 +11,16 @@ describe('Variable.create', () => {
   });
 
   it('should create a variable', async () => {
-    const createdVariable = await variable.create({
+    const variableToCreate = {
       key: 'key_test',
       value: 'value_test',
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
       ownerType: VariableOwner.USER,
-    });
+    };
 
-    expect(createdVariable).to.have.property('key');
-    expect(createdVariable).to.have.property('value');
-    expect(createdVariable).to.have.property('owner');
-    expect(createdVariable).to.have.property('ownerType');
+    const createdVariable = await variable.create(variableToCreate);
+
+    assert.deepInclude(createdVariable, variableToCreate);
   });
 
   it('should not create a variable with an existing key', async () => {

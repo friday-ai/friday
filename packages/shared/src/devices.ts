@@ -62,11 +62,6 @@ export interface BrightnessSettings extends Record<string, number> {
 
 export type DeviceCapabilitySettingsSchema = OnOffSettings | BrightnessSettings;
 
-export type DeviceCapabilitySettingsRegisterAttributes = {
-  type: DevicesCapabilities;
-  value: DeviceCapabilitySettingsSchema;
-};
-
 export type DeviceCapabilityRegisterAttributes = {
   defaultName: string;
   type: DevicesCapabilities;

@@ -31,7 +31,7 @@ describe('PATCH /api/v1/user/:id', () => {
       });
   });
 
-  it('habitant shouldn\'t have to update a user', async () => {
+  it("habitant shouldn't have to update a user", async () => {
     await server
       .patch('/api/v1/user/0cd30aef-9c4e-4a23-81e3-3547971296e5', habitant)
       .send({
@@ -40,7 +40,7 @@ describe('PATCH /api/v1/user/:id', () => {
       .expect(403);
   });
 
-  it('guest shouldn\'t have to update a user', async () => {
+  it("guest shouldn't have to update a user", async () => {
     await server
       .patch('/api/v1/user/0cd30aef-9c4e-4a23-81e3-3547971296e5', guest)
       .send({

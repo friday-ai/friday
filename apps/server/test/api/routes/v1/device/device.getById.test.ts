@@ -1,6 +1,6 @@
 import { expect } from 'chai';
+import { DcAttributes } from '@friday/shared';
 import server from '../../../../utils/request';
-import { DeviceType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/device/:id', () => {
   it('should return a device', async () => {
@@ -9,9 +9,9 @@ describe('GET /api/v1/device/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const device = res.body as DeviceType;
-        expect(device).to.be.an('object');
-        expect(device).to.contains.keys([
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.equal('22b5b9ce-cd9e-404a-8c31-97350d684fd3');
+        expect(res.body).to.contains.keys([
           'id',
           'defaultName',
           'defaultManufacturer',
@@ -35,9 +35,9 @@ describe('GET /api/v1/device/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const device = res.body as DeviceType;
-        expect(device).to.be.an('object');
-        expect(device).to.contains.keys([
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.equal('22b5b9ce-cd9e-404a-8c31-97350d684fd3');
+        expect(res.body).to.contains.keys([
           'id',
           'defaultName',
           'defaultManufacturer',
@@ -52,16 +52,9 @@ describe('GET /api/v1/device/:id', () => {
           'pluginId',
         ]);
 
-        expect(device.capabilities).to.be.an('array');
-        device.capabilities!.forEach((c) => {
-          expect(c).to.contains.keys([
-            'id',
-            'defaultName',
-            'name',
-            'type',
-            'deviceId',
-            'roomId',
-          ]);
+        expect(res.body.capabilities).to.be.an('array');
+        res.body.capabilities.forEach((c: DcAttributes) => {
+          expect(c).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
         });
       });
   });
@@ -73,9 +66,9 @@ describe('GET /api/v1/device/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const device = res.body as DeviceType;
-        expect(device).to.be.an('object');
-        expect(device).to.contains.keys([
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.equal('22b5b9ce-cd9e-404a-8c31-97350d684fd3');
+        expect(res.body).to.contains.keys([
           'id',
           'defaultName',
           'defaultManufacturer',
@@ -91,16 +84,9 @@ describe('GET /api/v1/device/:id', () => {
           'capabilities',
         ]);
 
-        expect(device.capabilities).to.be.an('array');
-        device.capabilities!.forEach((c) => {
-          expect(c).to.contains.keys([
-            'id',
-            'defaultName',
-            'name',
-            'type',
-            'deviceId',
-            'roomId',
-          ]);
+        expect(res.body.capabilities).to.be.an('array');
+        res.body.capabilities.forEach((c: DcAttributes) => {
+          expect(c).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
           expect(c.settings).to.be.an('object');
         });
       });

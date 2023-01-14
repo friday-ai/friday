@@ -1,6 +1,6 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
+import { RoomAttributes } from '@friday/shared';
 import server from '../../../../utils/request';
-import { RoomType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/house/:id', () => {
   it('should return a house', async () => {
@@ -10,12 +10,8 @@ describe('GET /api/v1/house/:id', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
-          id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
-          name: 'Main House test',
-          latitude: '34.0012295',
-          longitude: '-118.8067245',
-        });
+        expect(res.body).to.contains.keys(['id', 'name', 'latitude', 'longitude']);
+        expect(res.body.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
       });
   });
 
@@ -26,28 +22,18 @@ describe('GET /api/v1/house/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const house = res.body;
-        expect(house).to.be.an('object');
-        expect(house).to.contains.keys(
-          ['id', 'name', 'latitude', 'longitude', 'rooms', 'state'],
-        );
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'rooms', 'state']);
+        expect(res.body.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
 
-        if (house.state !== null) {
-          expect(house.state).to.be.an('object');
-          expect(house.state).to.contains.keys(
-            ['id', 'owner', 'ownerType', 'value'],
-          );
-        }
+        expect(res.body.state).to.be.an('object');
+        expect(res.body.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
 
-        if (house.rooms !== null) {
-          expect(house.rooms).to.be.an('array');
-          house.rooms!.forEach((room: RoomType) => {
-            expect(room).to.be.an('object');
-            expect(room).to.contains.keys(
-              ['id', 'name', 'houseId'],
-            );
-          });
-        }
+        expect(res.body.rooms).to.be.an('array');
+        res.body.rooms?.forEach((room: RoomAttributes) => {
+          expect(room).to.be.an('object');
+          expect(room).to.contains.keys(['id', 'name', 'houseId']);
+        });
       });
   });
 
@@ -58,18 +44,12 @@ describe('GET /api/v1/house/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const house = res.body;
-        expect(house).to.be.an('object');
-        expect(house).to.contains.keys(
-          ['id', 'name', 'latitude', 'longitude', 'state'],
-        );
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'state']);
+        expect(res.body.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
 
-        if (house.state !== null) {
-          expect(house.state).to.be.an('object');
-          expect(house.state).to.contains.keys(
-            ['id', 'owner', 'ownerType', 'value'],
-          );
-        }
+        expect(res.body.state).to.be.an('object');
+        expect(res.body.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
       });
   });
 
@@ -80,21 +60,19 @@ describe('GET /api/v1/house/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const house = res.body;
-        expect(house).to.be.an('object');
-        expect(house).to.contains.keys(
-          ['id', 'name', 'latitude', 'longitude', 'rooms'],
-        );
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'rooms']);
+        expect(res.body.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
 
-        if (house.rooms !== null) {
-          expect(house.rooms).to.be.an('array');
-          house.rooms!.forEach((room: RoomType) => {
-            expect(room).to.be.an('object');
-            expect(room).to.contains.keys(
-              ['id', 'name', 'houseId'],
-            );
-          });
-        }
+        expect(res.body.rooms).to.be.an('array');
+        res.body.rooms.forEach((room: RoomAttributes) => {
+          expect(room).to.be.an('object');
+          expect(room).to.contains.keys(['id', 'name', 'houseId']);
+        });
       });
+  });
+
+  it('should not found a housen', async () => {
+    await server.patch('/api/v1/house/163c08d4-c707-44b9-8ce0-37a45efeb05d').expect(404);
   });
 });

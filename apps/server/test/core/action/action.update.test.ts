@@ -18,8 +18,7 @@ describe('Action.update', () => {
   });
 
   it('should not found action to update', async () => {
-    const promise = action.update('163c08d4-c707-44b9-8ce0-37a45efeb05d', {
-    });
+    const promise = action.update('163c08d4-c707-44b9-8ce0-37a45efeb05d', {});
 
     await assert.isRejected(promise, NotFoundError);
   });

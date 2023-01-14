@@ -1,12 +1,11 @@
 import { expect, assert } from 'chai';
+import { VariableOwner } from '@friday/shared';
 import server from '../../../../utils/request';
-import { VariableOwner } from '../../../../../src/config/constants';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 
 describe('POST /api/v1/variable', () => {
   it('should create a variable', async () => {
     const variable = {
-      id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
       key: 'key_test',
       value: 'value_test',
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
@@ -20,30 +19,32 @@ describe('POST /api/v1/variable', () => {
       .expect(201)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, variable);
+        assert.deepInclude(res.body, variable);
       });
   });
 
-  it('admin should\'t have to create a variable', async () => {
+  it('should not create a variable with a provided id', async () => {
     const variable = {
       id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
-      key: 'key_test',
+      key: 'random_key',
       value: 'value_test',
       owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
       ownerType: VariableOwner.USER,
     };
 
     await server
-      .post('/api/v1/variable', admin)
+      .post('/api/v1/variable')
       .send(variable)
       .expect('Content-Type', /json/)
-      .expect(403);
+      .expect(201)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(variable.id);
+        expect(res.body.key).to.equal('random_key');
+      });
   });
 
-  it('habitant should\'t have to create a variable', async () => {
+  it("admin should't have to create a variable", async () => {
     const variable = {
       id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
       key: 'key_test',
@@ -52,14 +53,10 @@ describe('POST /api/v1/variable', () => {
       ownerType: VariableOwner.USER,
     };
 
-    await server
-      .post('/api/v1/variable', habitant)
-      .send(variable)
-      .expect('Content-Type', /json/)
-      .expect(403);
+    await server.post('/api/v1/variable', admin).send(variable).expect('Content-Type', /json/).expect(403);
   });
 
-  it('guest should\'t have to create a variable', async () => {
+  it("habitant should't have to create a variable", async () => {
     const variable = {
       id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
       key: 'key_test',
@@ -68,11 +65,19 @@ describe('POST /api/v1/variable', () => {
       ownerType: VariableOwner.USER,
     };
 
-    await server
-      .post('/api/v1/variable', guest)
-      .send(variable)
-      .expect('Content-Type', /json/)
-      .expect(403);
+    await server.post('/api/v1/variable', habitant).send(variable).expect('Content-Type', /json/).expect(403);
+  });
+
+  it("guest should't have to create a variable", async () => {
+    const variable = {
+      id: 'a675b2e6-9d1d-40f5-943b-86785e894735',
+      key: 'key_test',
+      value: 'value_test',
+      owner: 'c6f6ed8a-80d0-4a90-8c3f-470b9ca3696a',
+      ownerType: VariableOwner.USER,
+    };
+
+    await server.post('/api/v1/variable', guest).send(variable).expect('Content-Type', /json/).expect(403);
   });
 
   it('should not create a variable with an existing key', async () => {

@@ -1,5 +1,5 @@
-/* eslint-disable func-names */
 import sinon, { assert } from 'sinon';
+import * as database from '../../../src/config/database';
 import User from '../../../src/core/user/user';
 import Variable from '../../../src/core/variable/variable';
 import Room from '../../../src/core/room/room';
@@ -12,9 +12,8 @@ import jobs from '../../../src/config/jobs';
 import System from '../../../src/core/system/system';
 
 describe('System.shutdown', () => {
-  const databaseStub = {
-    closeConnection: sinon.stub(),
-  };
+  const databaseStub = database;
+  databaseStub.closeConnection = sinon.stub();
 
   const event = Event;
   const variable = new Variable();
@@ -26,7 +25,8 @@ describe('System.shutdown', () => {
   const scheduler = new Scheduler(event, jobs);
   const system = new System(variable, house, room, satellite, user, state, scheduler, databaseStub);
 
-  let sandbox: sinon.SinonSandbox, exitStub: sinon.SinonSpy<any, any>;
+  let sandbox: sinon.SinonSandbox;
+  let exitStub: sinon.SinonSpy;
 
   beforeEach(() => {
     sandbox = sinon.createSandbox();
@@ -37,7 +37,7 @@ describe('System.shutdown', () => {
     sandbox.restore();
   });
 
-  it('should stop friday system', async function () {
+  it('should stop friday system', async function stop() {
     this.timeout(8000);
 
     await system.shutdown();

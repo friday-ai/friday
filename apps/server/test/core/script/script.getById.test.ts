@@ -13,11 +13,8 @@ describe('Script.getById', () => {
     const scriptReturned = await script.getById('d354cede-3895-4dac-8a90-73d970b4617c');
 
     expect(scriptReturned).to.be.an('object');
-    assert.deepEqual(scriptReturned, {
-      id: 'd354cede-3895-4dac-8a90-73d970b4617c',
-      name: 'Test Script',
-      code: 'console.log(\'Hey ! This script is a test ! :)\')',
-    });
+    expect(scriptReturned).to.contains.keys(['id', 'name', 'code']);
+    expect(scriptReturned.id).to.equal('d354cede-3895-4dac-8a90-73d970b4617c');
   });
 
   it('should not found a script', async () => {

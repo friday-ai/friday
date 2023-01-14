@@ -12,8 +12,6 @@ describe('DELETE /api/v1/satellite/:id', () => {
   });
 
   it('should not found satellite to delete', async () => {
-    await server
-      .delete('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894333')
-      .expect(404);
+    await server.delete('/api/v1/satellite/a7ef5f08-2bad-4489-95bf-b73fcf894333').expect(404);
   });
 });

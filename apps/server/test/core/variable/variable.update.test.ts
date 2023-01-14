@@ -1,9 +1,6 @@
 import { assert, expect } from 'chai';
 import Variable from '../../../src/core/variable/variable';
-import {
-  BadParametersError,
-  NotFoundError,
-} from '../../../src/utils/decorators/error';
+import { BadParametersError, NotFoundError } from '../../../src/utils/decorators/error';
 
 let variable: Variable;
 

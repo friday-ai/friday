@@ -1,20 +1,15 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { MqttOptions } from '@friday/shared';
 import Friday from '../../../src/core/friday';
 import MqttBroker from '../../utils/mqttBroker';
 import MqttServer from '../../../src/api/mqtt';
 import wait from '../../utils/timer';
-import { MqttMessagePayload, MqttOptions } from '../../../src/utils/interfaces';
-import {
-  EventsType,
-  MqttMessageTypes,
-  TopicHeaderSub,
-  TopicsTypes,
-  TopicToSubscribe as Topics,
-} from '../../../src/config/constants';
+import { MqttMessagePayload } from '../../../src/utils/interfaces';
+import { EventsType, MqttMessageTypes, TopicHeaderSub, TopicsTypes, TopicToSubscribe as Topics } from '../../../src/config/constants';
 
 const fakeBroker = new MqttBroker();
-const mqttPort = parseInt(process.env.MQTT_PORT!, 10) || 1884;
+const mqttPort = parseInt(process.env.MQTT_PORT || '1884', 10);
 const mqttOptions: MqttOptions = {
   port: mqttPort,
   host: 'localhost',
@@ -135,14 +130,17 @@ describe('Mqtt.handleMessage', () => {
     const spy = sinon.spy(mqttClient, 'handleMessage');
     await mqttClient.start(mqttOptions);
 
-    fakeBroker.client!.publish({
-      cmd: 'publish',
-      dup: false,
-      qos: 2,
-      retain: false,
-      payload: Buffer.from('this is a test ;)'),
-      topic: TopicsTypes.PLUGIN_EXEC,
-    }, () => {});
+    fakeBroker.client?.publish(
+      {
+        cmd: 'publish',
+        dup: false,
+        qos: 2,
+        retain: false,
+        payload: Buffer.from('this is a test ;)'),
+        topic: TopicsTypes.PLUGIN_EXEC,
+      },
+      () => null
+    );
 
     await wait(30);
 

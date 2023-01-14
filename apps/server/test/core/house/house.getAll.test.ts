@@ -1,4 +1,5 @@
-import { assert, expect } from 'chai';
+import { HouseAttributes } from '@friday/shared';
+import { expect } from 'chai';
 import House from '../../../src/core/house/house';
 
 let house: House;
@@ -12,42 +13,30 @@ describe('House.listAll', () => {
     const houses = await house.listAll();
 
     expect(houses).to.be.an('array');
-    assert.deepEqual(houses, [{
-      id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
-      name: 'Main House test',
-      latitude: '34.0012295',
-      longitude: '-118.8067245',
-    },
-    ]);
+
+    houses.forEach((h: HouseAttributes) => {
+      expect(h).to.be.an('object');
+      expect(h).to.contains.keys(['id', 'name', 'latitude', 'longitude']);
+    });
   });
 
   it('should return all houses with full scope', async () => {
     const houses = await house.listAll({ scope: 'full' });
 
     expect(houses).to.be.an('array');
-    houses.forEach((h) => {
-      expect(h).to.have.property('id');
-      expect(h).to.have.property('name');
-      expect(h).to.have.property('latitude');
-      expect(h).to.have.property('longitude');
 
-      if (h.state !== null) {
-        expect(h.state).to.be.an('object');
-        expect(h.state).to.have.property('id');
-        expect(h.state).to.have.property('owner');
-        expect(h.state).to.have.property('ownerType');
-        expect(h.state).to.have.property('value');
-      }
+    houses.forEach((h: HouseAttributes) => {
+      expect(h).to.be.an('object');
+      expect(h).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'rooms', 'state']);
 
-      if (h.rooms !== null) {
-        expect(h.rooms).to.be.an('array');
-        h.rooms!.forEach((r) => {
-          expect(r).to.be.an('object');
-          expect(r).to.have.property('id');
-          expect(r).to.have.property('name');
-          expect(r).to.have.property('houseId');
-        });
-      }
+      expect(h.state).to.be.an('object');
+      expect(h.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
+
+      expect(h.rooms).to.be.an('array');
+      h.rooms.forEach((room) => {
+        expect(room).to.be.an('object');
+        expect(room).to.contains.keys(['id', 'name', 'houseId']);
+      });
     });
   });
 
@@ -55,20 +44,12 @@ describe('House.listAll', () => {
     const houses = await house.listAll({ scope: 'withState' });
 
     expect(houses).to.be.an('array');
-    houses.forEach((h) => {
-      expect(h).to.have.property('id');
-      expect(h).to.have.property('name');
-      expect(h).to.have.property('latitude');
-      expect(h).to.have.property('longitude');
+    houses.forEach((h: HouseAttributes) => {
+      expect(h).to.be.an('object');
+      expect(h).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'state']);
 
-      // TODO: The state cannot must be null
-      if (h.state !== null) {
-        expect(h.state).to.be.an('object');
-        expect(h.state).to.have.property('id');
-        expect(h.state).to.have.property('owner');
-        expect(h.state).to.have.property('ownerType');
-        expect(h.state).to.have.property('value');
-      }
+      expect(h.state).to.be.an('object');
+      expect(h.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
     });
   });
 
@@ -76,21 +57,15 @@ describe('House.listAll', () => {
     const houses = await house.listAll({ scope: 'withRooms' });
 
     expect(houses).to.be.an('array');
-    houses.forEach((h) => {
-      expect(h).to.have.property('id');
-      expect(h).to.have.property('name');
-      expect(h).to.have.property('latitude');
-      expect(h).to.have.property('longitude');
+    houses.forEach((h: HouseAttributes) => {
+      expect(h).to.be.an('object');
+      expect(h).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'rooms']);
 
-      if (h.rooms !== null) {
-        expect(h.rooms).to.be.an('array');
-        h.rooms!.forEach((r) => {
-          expect(r).to.be.an('object');
-          expect(r).to.have.property('id');
-          expect(r).to.have.property('name');
-          expect(r).to.have.property('houseId');
-        });
-      }
+      expect(h.rooms).to.be.an('array');
+      h.rooms.forEach((room) => {
+        expect(room).to.be.an('object');
+        expect(room).to.contains.keys(['id', 'name', 'houseId']);
+      });
     });
   });
 });

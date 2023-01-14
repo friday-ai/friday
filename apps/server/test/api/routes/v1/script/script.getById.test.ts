@@ -1,4 +1,4 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/script/:id', () => {
@@ -9,11 +9,8 @@ describe('GET /api/v1/script/:id', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
-          id: 'd354cede-3895-4dac-8a90-73d970b4617c',
-          name: 'Test Script',
-          code: 'console.log(\'Hey ! This script is a test ! :)\')',
-        });
+        expect(res.body).to.contains.keys(['id', 'name', 'code']);
+        expect(res.body.id).to.equal('d354cede-3895-4dac-8a90-73d970b4617c');
       });
   });
 });

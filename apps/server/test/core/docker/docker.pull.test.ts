@@ -1,8 +1,7 @@
-/* eslint-disable func-names */
 import { assert, expect } from 'chai';
+import Dockerode from 'dockerode';
 import Docker from '../../../src/core/docker/docker';
 import { CoreError, PlatformNotCompatible } from '../../../src/utils/decorators/error';
-import Dockerode from 'dockerode';
 
 let docker: Docker;
 
@@ -13,7 +12,7 @@ describe('Docker.pull', () => {
     docker.dockerode = new Dockerode();
   });
 
-  it('should pull an image', async function () {
+  it('should pull an image', async function pull() {
     this.timeout(1500);
     await docker.pull('alpine:latest');
     const images = await docker.dockerode?.listImages();

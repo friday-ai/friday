@@ -1,10 +1,10 @@
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
+import { DevicesActions } from '@friday/shared';
 import Device from '../../../src/core/device/device';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 import { EventsType } from '../../../src/config/constants';
 import wait from '../../utils/timer';
-import { DevicesActionsType } from '../../../src/config/device';
 
 let device: Device;
 
@@ -17,7 +17,7 @@ describe('Device.exec', () => {
     const listener = sinon.spy();
     global.FRIDAY.event.on(EventsType.MQTT_PUBLISH, listener);
 
-    await device.exec('d4b11be4-30fa-4bc4-9b65-482d5c63c0bc', { action: DevicesActionsType.TURN_ON, params: { value: 1 } });
+    await device.exec('d4b11be4-30fa-4bc4-9b65-482d5c63c0bc', { action: DevicesActions.TURN_ON, params: { value: 1 } });
 
     await wait(20);
     expect(listener.called).equal(true);
@@ -25,7 +25,7 @@ describe('Device.exec', () => {
   });
 
   it('should not exec a device action with wrong capability id', async () => {
-    const promise = device.exec('wrong', { action: DevicesActionsType.TURN_ON, params: {} });
+    const promise = device.exec('wrong', { action: DevicesActions.TURN_ON, params: { value: 1 } });
     await assert.isRejected(promise, NotFoundError);
   });
 });

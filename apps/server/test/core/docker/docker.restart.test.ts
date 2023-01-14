@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { assert, expect } from 'chai';
 import Dockerode, { Container } from 'dockerode';
 import Docker from '../../../src/core/docker/docker';
@@ -15,7 +14,7 @@ describe('Docker.restart', () => {
     docker.dockerode = new Dockerode();
   });
 
-  before(async function () {
+  before(async function b() {
     this.timeout(15000);
     container = await docker.createContainer({
       Image: 'alpine',
@@ -28,29 +27,31 @@ describe('Docker.restart', () => {
     });
   });
 
-  after(async function () {
+  after(async function a() {
     this.timeout(15000);
     await container.stop();
     await container.remove();
   });
 
-  it('should restart a container', async function () {
+  it('should restart a container', async function restart() {
     this.timeout(15000);
     let containerStatus = '';
 
-    const handler = (e: any) => {
+    const handler = (e: string) => {
       const event = JSON.parse(e);
       containerStatus = event.status;
     };
 
-    const events = await docker.dockerode!.getEvents({ filters: { container: [container.id], type: ['container'] } });
-    events.on('data', handler);
+    if (docker.dockerode) {
+      const events = await docker.dockerode.getEvents({ filters: { container: [container.id], type: ['container'] } });
+      events.on('data', handler);
 
-    await docker.restart(container.id);
-    await wait(1000);
+      await docker.restart(container.id);
+      await wait(1000);
 
-    events.off('data', handler);
-    expect(containerStatus).to.equal('restart');
+      events.off('data', handler);
+      expect(containerStatus).to.equal('restart');
+    }
   });
 
   it('should not restart a container', async () => {

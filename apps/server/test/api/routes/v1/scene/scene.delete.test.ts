@@ -12,8 +12,6 @@ describe('DELETE /api/v1/scene/:id', () => {
   });
 
   it('should not found scene to delete', async () => {
-    await server
-      .delete('/api/v1/scene/2452964a-a225-47dd-9b83-d88d57ed2333')
-      .expect(404);
+    await server.delete('/api/v1/scene/2452964a-a225-47dd-9b83-d88d57ed2333').expect(404);
   });
 });

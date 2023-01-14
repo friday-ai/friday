@@ -1,4 +1,4 @@
-import { assert, expect } from 'chai';
+import { assert } from 'chai';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
 import Plugin from '../../../src/core/plugin/plugin';
 
@@ -10,80 +10,69 @@ describe('Plugin.create', () => {
   });
 
   it('should create a plugin', async () => {
-    const createdPlugin = await plugin.create({
+    const pluginToCreate = {
       dockerId: 'fbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14b5',
       name: 'Fake plugin',
       version: '1.0.0',
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
-    });
+      lastHeartbeat: new Date(),
+    };
 
-    expect(createdPlugin).to.have.property('id');
-    expect(createdPlugin).to.have.property('name');
-    expect(createdPlugin).to.have.property('version');
-    expect(createdPlugin).to.have.property('url');
-    expect(createdPlugin).to.have.property('satelliteId');
+    const createdPlugin = await plugin.create(pluginToCreate);
+
+    assert.deepInclude(createdPlugin, pluginToCreate);
   });
 
   it('should not create same plugin on same satellite', async () => {
-    const createdFirstPlugin = await plugin.create({
+    const pluginToCreate = {
       dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14bf',
       name: 'Fake plugin',
       version: '1.0.0',
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
-    });
+      lastHeartbeat: new Date(),
+    };
 
-    expect(createdFirstPlugin).to.have.property('id');
-    expect(createdFirstPlugin).to.have.property('name');
-    expect(createdFirstPlugin).to.have.property('version');
-    expect(createdFirstPlugin).to.have.property('url');
-    expect(createdFirstPlugin).to.have.property('satelliteId');
+    const firstPluginCreated = await plugin.create(pluginToCreate);
 
-    const createdSecondPlugin = plugin.create({
-      dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14bq',
-      name: 'Fake plugin',
-      version: '1.0.0',
-      url: 'fake url',
-      enabled: true,
-      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
-    });
+    assert.deepInclude(firstPluginCreated, pluginToCreate);
+
+    const createdSecondPlugin = plugin.create(pluginToCreate);
 
     await assert.isRejected(createdSecondPlugin, DatabaseValidationError);
   });
 
   it('should create same plugin on different satellite', async () => {
-    const createdFirstPlugin = await plugin.create({
+    const firstPluginToCreate = {
       dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14bz',
       name: 'Fake plugin2',
       version: '1.5.0',
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
-    });
+      lastHeartbeat: new Date(),
+    };
 
-    expect(createdFirstPlugin).to.have.property('id');
-    expect(createdFirstPlugin).to.have.property('name');
-    expect(createdFirstPlugin).to.have.property('version');
-    expect(createdFirstPlugin).to.have.property('url');
-    expect(createdFirstPlugin).to.have.property('satelliteId');
+    const firstPluginCreated = await plugin.create(firstPluginToCreate);
 
-    const createdSecondPlugin = await plugin.create({
+    assert.deepInclude(firstPluginCreated, firstPluginToCreate);
+
+    const secondPluginToCreate = {
       dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14bc',
       name: 'Fake plugin2',
       version: '1.5.0',
       url: 'fake url',
       enabled: true,
       satelliteId: '4801badb-55d7-4bcd-9bf0-37a6cffe0bb1',
-    });
+      lastHeartbeat: new Date(),
+    };
 
-    expect(createdSecondPlugin).to.have.property('id');
-    expect(createdSecondPlugin).to.have.property('name');
-    expect(createdSecondPlugin).to.have.property('version');
-    expect(createdSecondPlugin).to.have.property('url');
-    expect(createdSecondPlugin).to.have.property('satelliteId');
+    const secondPluginCreated = await plugin.create(secondPluginToCreate);
+
+    assert.deepInclude(secondPluginCreated, secondPluginToCreate);
   });
 
   it('should not create a plugin with an empty url', async () => {
@@ -94,6 +83,7 @@ describe('Plugin.create', () => {
       url: '',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: new Date(),
     });
 
     await assert.isRejected(promise, DatabaseValidationError);
@@ -107,6 +97,7 @@ describe('Plugin.create', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: '',
+      lastHeartbeat: new Date(),
     });
 
     await assert.isRejected(promise, DatabaseValidationError);
@@ -114,11 +105,13 @@ describe('Plugin.create', () => {
 
   it('should not create a plugin with a wrong satellite id', async () => {
     const promise = plugin.create({
+      dockerId: 'cbeb36579197d8c8e2cdd8c722a7d1f5659ec2bcc5e7b69732dd0798e98d14bm',
       name: 'Fake plugin',
       version: '1.0.0',
       url: 'fake url',
       enabled: true,
       satelliteId: '232309e8-54d3-4bcb-8549-cf09251e2940',
+      lastHeartbeat: new Date(),
     });
 
     await assert.isRejected(promise, DatabaseValidationError);
@@ -132,6 +125,7 @@ describe('Plugin.create', () => {
       url: 'fake url',
       enabled: true,
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      lastHeartbeat: new Date(),
     });
 
     await assert.isRejected(promise, DatabaseValidationError);

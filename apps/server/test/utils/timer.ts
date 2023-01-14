@@ -1,3 +1,4 @@
-export default async (time: number) => new Promise((resolve) => {
-  setTimeout(resolve, time);
-});
+export default async (time: number) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });

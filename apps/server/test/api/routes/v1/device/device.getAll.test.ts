@@ -1,6 +1,6 @@
+import { DeviceAttributes } from '@friday/shared';
 import { expect } from 'chai';
 import server from '../../../../utils/request';
-import { DeviceType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/device', () => {
   it('should return all devices', async () => {
@@ -9,9 +9,8 @@ describe('GET /api/v1/device', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const devices = res.body as DeviceType[];
-        expect(devices).to.be.an('array');
-        devices.forEach((d) => {
+        expect(res.body).to.be.an('array');
+        res.body.forEach((d: DeviceAttributes) => {
           expect(d).to.contains.keys([
             'id',
             'defaultName',
@@ -37,9 +36,8 @@ describe('GET /api/v1/device', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const devices = res.body as DeviceType[];
-        expect(devices).to.be.an('array');
-        devices.forEach((d) => {
+        expect(res.body).to.be.an('array');
+        res.body.forEach((d: DeviceAttributes) => {
           expect(d).to.contains.keys([
             'id',
             'defaultName',
@@ -56,15 +54,8 @@ describe('GET /api/v1/device', () => {
           ]);
 
           expect(d.capabilities).to.be.an('array');
-          d.capabilities!.forEach((c) => {
-            expect(c).to.contains.keys([
-              'id',
-              'defaultName',
-              'name',
-              'type',
-              'deviceId',
-              'roomId',
-            ]);
+          d.capabilities.forEach((c) => {
+            expect(c).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
           });
         });
       });

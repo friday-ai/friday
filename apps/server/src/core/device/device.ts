@@ -7,9 +7,11 @@ import {
   DeviceCommand,
   DevicesActions,
   DeviceCreationAttributes,
-  DcCreationAttributes,
+  DeviceCapabilityRegisterAttributes,
   DcstCreationAttributes,
   DeviceCapabilitySettingsSchema,
+  DeviceRegisterAttributes,
+  DeviceCreationKeys,
 } from '@friday/shared';
 
 import { glob as Glob } from 'glob';
@@ -33,7 +35,7 @@ export default class Device extends BaseModel<DeviceModel, DeviceAttributes, Dev
   public event: typeof EventClass;
 
   constructor(event: typeof EventClass) {
-    super(DeviceModel);
+    super(DeviceModel, DeviceCreationKeys);
     this.event = event;
 
     Glob.sync('**/*.{js,ts}', { cwd: `${__dirname}/capabilities/` }).forEach((filename) => {
@@ -48,12 +50,12 @@ export default class Device extends BaseModel<DeviceModel, DeviceAttributes, Dev
   }
 
   @Catch()
-  async register(data: DeviceCreationAttributes) {
+  async register(data: DeviceRegisterAttributes) {
     return register.call(this, data);
   }
 
   @Catch()
-  async setCapability(deviceId: string, capability: DcCreationAttributes) {
+  async setCapability(deviceId: string, capability: DeviceCapabilityRegisterAttributes) {
     return setCapability.call(this, deviceId, capability);
   }
 

@@ -1,6 +1,6 @@
-import { assert, expect } from 'chai';
+import { assert } from 'chai';
+import { ActionCreationAttributes, ActionsType } from '@friday/shared';
 import Action from '../../../src/core/action/action';
-import { ActionsType } from '../../../src/config/constants';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 
 let action: Action;
@@ -11,7 +11,7 @@ describe('Action.create', () => {
   });
 
   it('should create a action', async () => {
-    const createdAction = await action.create({
+    const actionToCreate: ActionCreationAttributes = {
       name: 'action test',
       description: 'action test description',
       type: ActionsType.LIGHT_TURN_ON,
@@ -19,16 +19,11 @@ describe('Action.create', () => {
       variableKey: 'action test variable key',
       variableValue: 'action test variable value',
       sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
-    });
+    };
 
-    expect(createdAction).to.have.property('id');
-    expect(createdAction).to.have.property('name');
-    expect(createdAction).to.have.property('description');
-    expect(createdAction).to.have.property('type');
-    expect(createdAction).to.have.property('subType');
-    expect(createdAction).to.have.property('variableKey');
-    expect(createdAction).to.have.property('variableValue');
-    expect(createdAction).to.have.property('sceneId');
+    const createdAction = await action.create(actionToCreate);
+
+    assert.deepInclude(createdAction, actionToCreate);
   });
 
   it('should not create a action with an existing name', async () => {

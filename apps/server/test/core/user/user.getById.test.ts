@@ -1,5 +1,4 @@
 import { assert, expect } from 'chai';
-import { UserRole } from '../../../src/config/constants';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 import User from '../../../src/core/user/user';
 
@@ -14,70 +13,53 @@ describe('User.getById', () => {
     const userReturned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5');
 
     expect(userReturned).to.be.an('object');
-    assert.deepEqual(userReturned, {
-      id: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      userName: 'JohnPepperwood',
-      email: 'john@pepperwood.com',
-      theme: 'light',
-      role: UserRole.HABITANT,
-    });
+    expect(userReturned).to.contains.keys(['id', 'userName', 'email', 'theme', 'role']);
+    expect(userReturned).to.not.contains.keys(['password']);
+    expect(userReturned.id).to.equal('0cd30aef-9c4e-4a23-81e3-3547971296e5');
   });
 
   it('should return user with full scope', async () => {
     const userReturned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'full');
 
-    expect(userReturned).to.have.property('state');
-    expect(userReturned).to.have.property('variables');
+    expect(userReturned).to.be.an('object');
+    expect(userReturned).to.contains.keys(['id', 'userName', 'email', 'theme', 'role', 'state', 'variables']);
+    expect(userReturned).to.not.contains.keys(['password']);
+    expect(userReturned.id).to.equal('0cd30aef-9c4e-4a23-81e3-3547971296e5');
+
+    expect(userReturned.state).to.be.an('object');
+    expect(userReturned.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
+
     expect(userReturned.variables).to.be.an('array');
-
-    if (userReturned.state !== null) {
-      expect(userReturned.state).to.be.an('object');
-      expect(userReturned.state).to.have.property('id');
-      expect(userReturned.state).to.have.property('owner');
-      expect(userReturned.state).to.have.property('ownerType');
-      expect(userReturned.state).to.have.property('value');
-    }
-
-    userReturned.variables!.forEach((v) => {
-      expect(v).to.have.property('key');
-      expect(v).to.have.property('value');
-      expect(v).to.have.property('owner');
-      expect(v).to.have.property('ownerType');
+    userReturned.variables.forEach((v) => {
+      expect(v).to.be.an('object');
+      expect(v).to.contains.keys(['id', 'key', 'value', 'owner', 'ownerType']);
     });
   });
 
   it('should return user with state', async () => {
     const userReturned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'withState');
 
-    expect(userReturned).to.have.property('id');
-    expect(userReturned).to.have.property('userName');
-    expect(userReturned).to.have.property('role');
-    expect(userReturned).to.have.property('state');
+    expect(userReturned).to.be.an('object');
+    expect(userReturned).to.contains.keys(['id', 'userName', 'email', 'theme', 'role', 'state']);
+    expect(userReturned).to.not.contains.keys(['password']);
+    expect(userReturned.id).to.equal('0cd30aef-9c4e-4a23-81e3-3547971296e5');
 
-    // TODO: The state cannot must be null
-    if (userReturned.state !== null) {
-      expect(userReturned.state).to.be.an('object');
-      expect(userReturned.state).to.have.property('id');
-      expect(userReturned.state).to.have.property('owner');
-      expect(userReturned.state).to.have.property('ownerType');
-      expect(userReturned.state).to.have.property('value');
-    }
+    expect(userReturned.state).to.be.an('object');
+    expect(userReturned.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
   });
 
   it('should return user with variables', async () => {
     const userReturned = await user.getById('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'withVariables');
 
-    expect(userReturned).to.have.property('id');
-    expect(userReturned).to.have.property('userName');
-    expect(userReturned).to.have.property('role');
-    expect(userReturned).to.have.property('variables');
-    expect(userReturned.variables).to.be.an('array');
+    expect(userReturned).to.be.an('object');
+    expect(userReturned).to.contains.keys(['id', 'userName', 'email', 'theme', 'role', 'variables']);
+    expect(userReturned).to.not.contains.keys(['password']);
+    expect(userReturned.id).to.equal('0cd30aef-9c4e-4a23-81e3-3547971296e5');
 
-    userReturned.variables!.forEach((v) => {
-      expect(v).to.have.property('key');
-      expect(v).to.have.property('value');
-      expect(v).to.have.property('owner');
-      expect(v).to.have.property('ownerType');
+    expect(userReturned.variables).to.be.an('array');
+    userReturned.variables.forEach((v) => {
+      expect(v).to.be.an('object');
+      expect(v).to.contains.keys(['id', 'key', 'value', 'owner', 'ownerType']);
     });
   });
 

@@ -12,9 +12,7 @@ describe('Session.listAll', () => {
     const sessions = await session.listAll();
 
     sessions.forEach((s) => {
-      expect(s).to.contains.keys(
-        ['id', 'refreshToken', 'validUntil', 'userId', 'revoked'],
-      );
+      expect(s).to.contains.keys(['id', 'refreshToken', 'revoked', 'validUntil', 'userId']);
       expect(s.revoked).to.equal(false);
     });
   });
@@ -23,12 +21,11 @@ describe('Session.listAll', () => {
     const sessions = await session.listAll({ scope: 'full' });
 
     sessions.forEach((s) => {
-      expect(s).to.contains.keys(
-        ['id', 'refreshToken', 'validUntil', 'userId', 'revoked'],
-      );
+      expect(s).to.contains.keys(['id', 'refreshToken', 'revoked', 'validUntil', 'userId', 'user']);
       expect(s.revoked).to.equal(false);
       expect(s.user).to.be.an('object');
       expect(s.user).not.to.have.property('password');
+      expect(s.user).to.contains.keys(['id', 'userName', 'email', 'theme', 'role']);
     });
   });
 });

@@ -28,7 +28,7 @@ import { hash } from '../utils/password';
  * User model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'userName', 'email', 'theme', 'role'],
+  attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
 }))
 @Scopes(() => ({
   full: {

@@ -1,15 +1,18 @@
+/* eslint-disable import/no-unresolved */
 import net from 'net';
 import events from 'events';
-import Aedes, { Client as AClient } from 'aedes';
+import Aedes, { Connection } from 'aedes';
+import { IncomingMessage } from 'http';
+import { Client } from 'aedes:client';
 
-const mqttPort = parseInt(process.env.MQTT_PORT!, 10) || 1884;
+const mqttPort = parseInt(process.env.MQTT_PORT || '1884', 10);
 
 export default class MqttBroker extends events.EventEmitter {
-  public broker = Aedes();
-  public client: AClient | undefined;
+  public broker = new Aedes();
+  public client: Client | undefined;
 
   start() {
-    const server = new net.Server(this.broker.handle);
+    const server = net.createServer(this.broker.handle as (stream: Connection, request?: IncomingMessage) => Client);
 
     this.broker.on('clientReady', (client) => {
       this.emit('connected', client);

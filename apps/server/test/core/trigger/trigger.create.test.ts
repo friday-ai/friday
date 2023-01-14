@@ -1,6 +1,6 @@
-import { assert, expect } from 'chai';
+import { assert } from 'chai';
+import { AvailableConditions } from '@friday/shared';
 import Trigger from '../../../src/core/trigger/trigger';
-import { AvailableConditions } from '../../../src/config/constants';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
 
 let trigger: Trigger;
@@ -11,7 +11,7 @@ describe('Trigger.create', () => {
   });
 
   it('should create a trigger', async () => {
-    const createdTrigger = await trigger.create({
+    const triggerToCreate = {
       name: 'Test Trigger 2',
       description: 'A trigger for a test :)',
       type: AvailableConditions.DEVICE_VALUE,
@@ -19,13 +19,11 @@ describe('Trigger.create', () => {
         device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
         value: '23',
       }),
-    });
+    };
 
-    expect(createdTrigger).to.have.property('id');
-    expect(createdTrigger).to.have.property('name');
-    expect(createdTrigger).to.have.property('description');
-    expect(createdTrigger).to.have.property('type');
-    expect(createdTrigger).to.have.property('rules');
+    const createdTrigger = await trigger.create(triggerToCreate);
+
+    assert.deepInclude(createdTrigger, triggerToCreate);
   });
 
   it('should not create a trigger with an empty name', async () => {

@@ -13,9 +13,20 @@ describe('Device.listAll', () => {
 
     expect(devices).to.be.an('array');
     devices.forEach((d) => {
-      expect(d).to.contains.keys(
-        ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
-      );
+      expect(d).to.contains.keys([
+        'id',
+        'defaultName',
+        'defaultManufacturer',
+        'defaultModel',
+        'name',
+        'type',
+        'manufacturer',
+        'model',
+        'pluginSelector',
+        'viaDevice',
+        'roomId',
+        'pluginId',
+      ]);
     });
   });
 
@@ -24,15 +35,24 @@ describe('Device.listAll', () => {
 
     expect(devices).to.be.an('array');
     devices.forEach((d) => {
-      expect(d).to.contains.keys(
-        ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
-      );
+      expect(d).to.contains.keys([
+        'id',
+        'defaultName',
+        'defaultManufacturer',
+        'defaultModel',
+        'name',
+        'type',
+        'manufacturer',
+        'model',
+        'pluginSelector',
+        'viaDevice',
+        'roomId',
+        'pluginId',
+      ]);
 
       expect(d.capabilities).to.be.an('array');
-      d.capabilities!.forEach((c) => {
-        expect(c).to.contains.keys(
-          ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
-        );
+      d.capabilities.forEach((c) => {
+        expect(c).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
       });
     });
   });

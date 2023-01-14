@@ -13,24 +13,44 @@ describe('Device.getById', () => {
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3');
 
     expect(deviceReturned).to.be.an('object');
-    expect(deviceReturned).to.contains.keys(
-      ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
-    );
+    expect(deviceReturned).to.contains.keys([
+      'id',
+      'defaultName',
+      'defaultManufacturer',
+      'defaultModel',
+      'name',
+      'type',
+      'manufacturer',
+      'model',
+      'pluginSelector',
+      'viaDevice',
+      'roomId',
+      'pluginId',
+    ]);
   });
 
   it('should return a device with full scope', async () => {
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3', 'full');
 
     expect(deviceReturned).to.be.an('object');
-    expect(deviceReturned).to.contains.keys(
-      ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
-    );
+    expect(deviceReturned).to.contains.keys([
+      'id',
+      'defaultName',
+      'defaultManufacturer',
+      'defaultModel',
+      'name',
+      'type',
+      'manufacturer',
+      'model',
+      'pluginSelector',
+      'viaDevice',
+      'roomId',
+      'pluginId',
+    ]);
 
     expect(deviceReturned.capabilities).to.be.an('array');
-    deviceReturned.capabilities!.forEach((c) => {
-      expect(c).to.contains.keys(
-        ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
-      );
+    deviceReturned.capabilities.forEach((c) => {
+      expect(c).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
     });
   });
 
@@ -38,15 +58,25 @@ describe('Device.getById', () => {
     const deviceReturned = await device.getById('22b5b9ce-cd9e-404a-8c31-97350d684fd3', 'withCapabilities');
 
     expect(deviceReturned).to.be.an('object');
-    expect(deviceReturned).to.contains.keys(
-      ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId', 'capabilities'],
-    );
+    expect(deviceReturned).to.contains.keys([
+      'id',
+      'defaultName',
+      'defaultManufacturer',
+      'defaultModel',
+      'name',
+      'type',
+      'manufacturer',
+      'model',
+      'pluginSelector',
+      'viaDevice',
+      'roomId',
+      'pluginId',
+      'capabilities',
+    ]);
 
     expect(deviceReturned.capabilities).to.be.an('array');
-    deviceReturned.capabilities!.forEach((c) => {
-      expect(c).to.contains.keys(
-        ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
-      );
+    deviceReturned.capabilities.forEach((c) => {
+      expect(c).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
       expect(c.settings).to.be.an('object');
     });
   });

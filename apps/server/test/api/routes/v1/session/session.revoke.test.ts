@@ -8,17 +8,12 @@ describe('PATCH /api/v1/session/revoke/:id', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        expect(res.body).to.contains.keys(
-          ['id', 'refreshToken', 'revoked', 'validUntil', 'userId'],
-        );
+        expect(res.body).to.contains.keys(['id', 'refreshToken', 'revoked', 'validUntil', 'userId']);
         expect(res.body.revoked).to.equal(true);
       });
   });
 
   it('should not revoke a session', async () => {
-    await server
-      .patch('/api/v1/session/revoke')
-      .expect('Content-Type', /json/)
-      .expect(404);
+    await server.patch('/api/v1/session/revoke').expect('Content-Type', /json/).expect(404);
   });
 });

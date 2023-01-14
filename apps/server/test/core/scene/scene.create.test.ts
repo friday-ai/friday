@@ -1,4 +1,4 @@
-import { assert, expect } from 'chai';
+import { assert } from 'chai';
 import Scene from '../../../src/core/scene/scene';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
 
@@ -10,14 +10,14 @@ describe('Scene.create', () => {
   });
 
   it('should create a scene', async () => {
-    const createdScene = await scene.create({
+    const sceneToCreate = {
       name: 'Test Scene 2',
       description: 'A test to create a scene',
-    });
+    };
 
-    expect(createdScene).to.have.property('id');
-    expect(createdScene).to.have.property('name');
-    expect(createdScene).to.have.property('description');
+    const createdScene = await scene.create(sceneToCreate);
+
+    assert.deepInclude(createdScene, sceneToCreate);
   });
 
   it('should not create a scene with an empty name', async () => {

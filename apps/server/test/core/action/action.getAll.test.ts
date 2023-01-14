@@ -1,6 +1,5 @@
-import { assert, expect } from 'chai';
+import { expect } from 'chai';
 import Action from '../../../src/core/action/action';
-import { ActionsType } from '../../../src/config/constants';
 
 let action: Action;
 
@@ -13,27 +12,9 @@ describe('Action.listAll', () => {
     const actions = await action.listAll();
 
     expect(actions).to.be.an('array');
-    assert.deepEqual(actions, [{
-      id: '33ab56b0-4064-40d0-b1f4-1e426bff1ea3',
-      name: 'action1',
-      description: 'action1 description',
-      type: ActionsType.LIGHT_TURN_ON,
-      subType: '',
-      variableKey: 'action1 variable key',
-      variableValue: 'action1 variable value',
-      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
-    },
-    {
-      id: '0e7219cf-690d-4224-a29d-dcaf3642c569',
-      name: 'action2',
-      description: 'action2 description',
-      type: ActionsType.NOTIFICATION_SEND,
-      subType: '',
-      variableKey: 'action2 variable key',
-      variableValue: 'action2 variable value',
-      sceneId: '2452964a-a225-47dd-9b83-d88d57ed280e',
-    },
-    ]);
+    actions.forEach((a) => {
+      expect(a).to.contains.keys(['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']);
+    });
   });
 
   it('should return all actions with full scope', async () => {
@@ -41,20 +22,8 @@ describe('Action.listAll', () => {
 
     expect(actions).to.be.an('array');
     actions.forEach((a) => {
-      expect(a).to.have.property('id');
-      expect(a).to.have.property('name');
-      expect(a).to.have.property('description');
-      expect(a).to.have.property('type');
-      expect(a).to.have.property('subType');
-      expect(a).to.have.property('variableKey');
-      expect(a).to.have.property('variableValue');
-      expect(a).to.have.property('sceneId');
-
-      expect(a.scene).to.be.an('object');
-      expect(a.scene).to.have.property('id');
-      expect(a.scene).to.have.property('name');
-      expect(a.scene).to.have.property('description');
-      expect(a.scene).to.have.property('triggerId');
+      expect(a).to.contains.keys(['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId', 'scene']);
+      expect(a.scene).to.contains.keys(['id', 'name', 'description', 'triggerId']);
     });
   });
 });

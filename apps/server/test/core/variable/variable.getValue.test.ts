@@ -1,6 +1,5 @@
 import { assert, expect } from 'chai';
 import { BadParametersError, NotFoundError } from '../../../src/utils/decorators/error';
-import { VariableOwner } from '../../../src/config/constants';
 import Variable from '../../../src/core/variable/variable';
 
 let variable: Variable;
@@ -14,13 +13,8 @@ describe('Variable.getValue', () => {
     const variableReturned = await variable.getValue('test_key0');
 
     expect(variableReturned).to.be.an('object');
-    assert.deepEqual(variableReturned, {
-      id: 'a2b9ba3a-72f1-4a24-b268-e3813c1e8f32',
-      key: 'test_key0',
-      value: 'test_value0',
-      owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      ownerType: VariableOwner.USER,
-    });
+    expect(variableReturned).to.contains.keys(['id', 'key', 'value', 'owner', 'ownerType']);
+    expect(variableReturned.key).to.equal('test_key0');
   });
 
   it('should not found variable to return', async () => {

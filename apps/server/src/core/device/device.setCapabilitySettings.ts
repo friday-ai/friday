@@ -35,7 +35,7 @@ export default async function setCapabilitySettings(
     capabilitySettings.settings = settings;
     await capabilitySettings.save();
   } else {
-    capabilitySettings = await DeviceCapabilitySettings.create(settingsToCreate);
+    capabilitySettings = await DeviceCapabilitySettings.create({ ...settingsToCreate, ...{ capabilityId } });
   }
 
   logger.success(`New capability settings registered for capability ${capabilityId}`);

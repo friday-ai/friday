@@ -2,16 +2,16 @@ import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiLike from 'chai-like';
 import chaiThings from 'chai-things';
+import { MqttOptions } from '@friday/shared';
 import Server from '../src/api/app';
 import Friday from '../src/core/friday';
 import { cleanDb, seedDb } from './utils/seed';
 import { umzug } from '../src/config/database';
 import logger from '../src/utils/log';
-import { MqttOptions } from '../src/utils/interfaces';
 
-const port = parseInt(process.env.SERVER_PORT!, 10) || 3500;
-const mqttPort = parseInt(process.env.MQTT_PORT!, 10) || 1883;
-const mqttAddress = process.env.MQTT_ADDRESS! || 'localhost';
+const port = parseInt(process.env.SERVER_PORT || '3500', 10);
+const mqttPort = parseInt(process.env.MQTT_PORT || '1883', 10);
+const mqttAddress = process.env.MQTT_ADDRESS || 'localhost';
 
 const mqttOptions: MqttOptions = {
   port: mqttPort,

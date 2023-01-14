@@ -13,9 +13,7 @@ describe('Satellite.listAll', () => {
 
     expect(satellites).to.be.an('array');
     satellites.forEach((s) => {
-      expect(s).to.contains.keys(
-        ['id', 'name', 'roomId', 'lastHeartbeat'],
-      );
+      expect(s).to.contains.keys(['id', 'name', 'roomId', 'lastHeartbeat']);
     });
   });
 
@@ -23,54 +21,27 @@ describe('Satellite.listAll', () => {
     const satellites = await satellite.listAll({ scope: 'full' });
 
     expect(satellites).to.be.an('array');
-
     satellites.forEach((s) => {
-      expect(s).to.have.property('id');
-      expect(s).to.have.property('name');
-      expect(s).to.have.property('roomId');
-      expect(s).to.have.property('lastHeartbeat');
-      expect(s).to.have.property('room');
-      expect(s).to.have.property('state');
-      expect(s).to.have.property('variables');
-      expect(s).to.have.property('plugins');
+      expect(s).to.be.an('object');
+      expect(s).to.contains.keys(['id', 'name', 'roomId', 'lastHeartbeat', 'room', 'state', 'variables', 'plugins']);
 
       expect(s.room).to.be.an('object');
-      expect(s.room).to.have.property('id');
-      expect(s.room).to.have.property('name');
-      expect(s.room).to.have.property('houseId');
+      expect(s.room).to.contains.keys(['id', 'name', 'houseId']);
 
-      if (s.state !== null) {
-        expect(s.state).to.be.an('object');
-        expect(s.state).to.have.property('id');
-        expect(s.state).to.have.property('owner');
-        expect(s.state).to.have.property('ownerType');
-        expect(s.state).to.have.property('value');
-      }
+      expect(s.state).to.be.an('object');
+      expect(s.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
 
-      if (s.variables !== null) {
-        expect(s.variables).to.be.an('array');
-        s.variables!.forEach((v) => {
-          expect(v).to.be.an('object');
-          expect(v).to.have.property('id');
-          expect(v).to.have.property('key');
-          expect(v).to.have.property('value');
-          expect(v).to.have.property('owner');
-          expect(v).to.have.property('ownerType');
-        });
-      }
+      expect(s.variables).to.be.an('array');
+      s.variables.forEach((variable) => {
+        expect(variable).to.be.an('object');
+        expect(variable).to.contains.keys(['id', 'key', 'value', 'owner', 'ownerType']);
+      });
 
-      if (s.plugins !== null) {
-        expect(s.plugins).to.be.an('array');
-        s.plugins!.forEach((p) => {
-          expect(p).to.be.an('object');
-          expect(p).to.have.property('id');
-          expect(p).to.have.property('name');
-          expect(p).to.have.property('version');
-          expect(p).to.have.property('url');
-          expect(p).to.have.property('enabled');
-          expect(p).to.have.property('satelliteId');
-        });
-      }
+      expect(s.plugins).to.be.an('array');
+      s.plugins.forEach((plugin) => {
+        expect(plugin).to.be.an('object');
+        expect(plugin).to.contains.keys(['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat']);
+      });
     });
   });
 
@@ -78,18 +49,12 @@ describe('Satellite.listAll', () => {
     const satellites = await satellite.listAll({ scope: 'withRoom' });
 
     expect(satellites).to.be.an('array');
-
     satellites.forEach((s) => {
-      expect(s).to.have.property('id');
-      expect(s).to.have.property('name');
-      expect(s).to.have.property('roomId');
-      expect(s).to.have.property('lastHeartbeat');
-      expect(s).to.have.property('room');
+      expect(s).to.be.an('object');
+      expect(s).to.contains.keys(['id', 'name', 'roomId', 'lastHeartbeat', 'room']);
 
       expect(s.room).to.be.an('object');
-      expect(s.room).to.have.property('id');
-      expect(s.room).to.have.property('name');
-      expect(s.room).to.have.property('houseId');
+      expect(s.room).to.contains.keys(['id', 'name', 'houseId']);
     });
   });
 
@@ -97,22 +62,12 @@ describe('Satellite.listAll', () => {
     const satellites = await satellite.listAll({ scope: 'withState' });
 
     expect(satellites).to.be.an('array');
-
     satellites.forEach((s) => {
-      expect(s).to.have.property('id');
-      expect(s).to.have.property('name');
-      expect(s).to.have.property('roomId');
-      expect(s).to.have.property('lastHeartbeat');
-      expect(s).to.have.property('state');
+      expect(s).to.be.an('object');
+      expect(s).to.contains.keys(['id', 'name', 'roomId', 'lastHeartbeat', 'state']);
 
-      // TODO: The state cannot must be null
-      if (s.state !== null) {
-        expect(s.state).to.be.an('object');
-        expect(s.state).to.have.property('id');
-        expect(s.state).to.have.property('owner');
-        expect(s.state).to.have.property('ownerType');
-        expect(s.state).to.have.property('value');
-      }
+      expect(s.state).to.be.an('object');
+      expect(s.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
     });
   });
 
@@ -120,25 +75,15 @@ describe('Satellite.listAll', () => {
     const satellites = await satellite.listAll({ scope: 'withVariables' });
 
     expect(satellites).to.be.an('array');
-
     satellites.forEach((s) => {
-      expect(s).to.have.property('id');
-      expect(s).to.have.property('name');
-      expect(s).to.have.property('roomId');
-      expect(s).to.have.property('lastHeartbeat');
-      expect(s).to.have.property('variables');
+      expect(s).to.be.an('object');
+      expect(s).to.contains.keys(['id', 'name', 'roomId', 'lastHeartbeat', 'variables']);
 
-      if (s.variables !== null) {
-        expect(s.variables).to.be.an('array');
-        s.variables!.forEach((v) => {
-          expect(v).to.be.an('object');
-          expect(v).to.have.property('id');
-          expect(v).to.have.property('key');
-          expect(v).to.have.property('value');
-          expect(v).to.have.property('owner');
-          expect(v).to.have.property('ownerType');
-        });
-      }
+      expect(s.variables).to.be.an('array');
+      s.variables.forEach((variable) => {
+        expect(variable).to.be.an('object');
+        expect(variable).to.contains.keys(['id', 'key', 'value', 'owner', 'ownerType']);
+      });
     });
   });
 
@@ -146,26 +91,15 @@ describe('Satellite.listAll', () => {
     const satellites = await satellite.listAll({ scope: 'withPlugins' });
 
     expect(satellites).to.be.an('array');
-
     satellites.forEach((s) => {
-      expect(s).to.have.property('id');
-      expect(s).to.have.property('name');
-      expect(s).to.have.property('roomId');
-      expect(s).to.have.property('lastHeartbeat');
-      expect(s).to.have.property('plugins');
+      expect(s).to.be.an('object');
+      expect(s).to.contains.keys(['id', 'name', 'roomId', 'lastHeartbeat', 'plugins']);
 
-      if (s.plugins !== null) {
-        expect(s.plugins).to.be.an('array');
-        s.plugins!.forEach((p) => {
-          expect(p).to.be.an('object');
-          expect(p).to.have.property('id');
-          expect(p).to.have.property('name');
-          expect(p).to.have.property('version');
-          expect(p).to.have.property('url');
-          expect(p).to.have.property('enabled');
-          expect(p).to.have.property('satelliteId');
-        });
-      }
+      expect(s.plugins).to.be.an('array');
+      s.plugins.forEach((plugin) => {
+        expect(plugin).to.be.an('object');
+        expect(plugin).to.contains.keys(['id', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat']);
+      });
     });
   });
 });

@@ -1,9 +1,6 @@
 import { assert, expect } from 'chai';
 import Device from '../../../src/core/device/device';
-import {
-  BadParametersError,
-  DatabaseValidationError,
-} from '../../../src/utils/decorators/error';
+import { BadParametersError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 
 let device: Device;
 

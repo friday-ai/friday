@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { assert } from 'chai';
 import Dockerode, { Container } from 'dockerode';
 import { NotFoundError } from '../../../src/utils/decorators/error';
@@ -15,7 +14,7 @@ describe('Plugin.destroy', () => {
   });
 
   // Create a fake container and save docker id on plugin
-  beforeEach(async function () {
+  beforeEach(async function beforeEach() {
     this.timeout(15000);
     container = await global.FRIDAY.docker.createContainer({
       Image: 'alpine',
@@ -33,7 +32,7 @@ describe('Plugin.destroy', () => {
     });
   });
 
-  it('should destroy a plugin', async function () {
+  it('should destroy a plugin', async function destroy() {
     this.timeout(30000);
     await plugin.destroy('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
   });

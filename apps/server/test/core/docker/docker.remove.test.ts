@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { assert } from 'chai';
 import Dockerode, { Container } from 'dockerode';
 import Docker from '../../../src/core/docker/docker';
@@ -14,7 +13,7 @@ describe('Docker.remove', () => {
     docker.dockerode = new Dockerode();
   });
 
-  before(async function () {
+  before(async function before() {
     this.timeout(15000);
     container = await docker.createContainer({
       Image: 'alpine',
@@ -27,7 +26,7 @@ describe('Docker.remove', () => {
     });
   });
 
-  it('should remove a container', async function () {
+  it('should remove a container', async function remove() {
     this.timeout(15000);
     await docker.remove(container.id);
     const promise = docker.getContainer(container.id);

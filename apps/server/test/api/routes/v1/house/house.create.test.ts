@@ -4,7 +4,6 @@ import server from '../../../../utils/request';
 describe('POST /api/v1/house', () => {
   it('should create a house', async () => {
     const house = {
-      id: '1e7056cf-f449-471c-a1e5-fb2e5ec7261f',
       name: 'Second House',
       latitude: '34.0012295',
       longitude: '-118.8067245',
@@ -17,10 +16,26 @@ describe('POST /api/v1/house', () => {
       .expect(201)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, house);
+        assert.deepInclude(res.body, house);
+      });
+  });
+
+  it('should not create a house with a provided id', async () => {
+    const house = {
+      id: '228f118c-be02-4c34-b38e-345a304fd71d',
+      name: 'Random house',
+      latitude: '34.0012295',
+      longitude: '-118.8067245',
+    };
+
+    await server
+      .post('/api/v1/house')
+      .send(house)
+      .expect(201)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(house.id);
+        expect(res.body.name).to.equal('Random house');
       });
   });
 

@@ -4,7 +4,6 @@ import server from '../../../../utils/request';
 describe('POST /api/v1/satellite', () => {
   it('should create a satellite', async () => {
     const satellite = {
-      id: '37225fcb-ff7d-40a7-aacc-ee2a041feebd',
       name: 'Satellite 3',
       roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
       lastHeartbeat: '2020-10-28T21:08:00.535Z',
@@ -17,10 +16,27 @@ describe('POST /api/v1/satellite', () => {
       .expect(201)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, satellite);
+        assert.deepInclude(res.body, satellite);
+      });
+  });
+
+  it('should not create a satellite with a provided id', async () => {
+    const satellite = {
+      id: '37225fcb-ff7d-40a7-aacc-ee2a041feebd',
+      name: 'Random Satellite',
+      roomId: 'c97ba085-ba97-4a30-bdd3-b7a62f6514dc',
+      lastHeartbeat: '2020-10-28T21:08:00.535Z',
+    };
+
+    await server
+      .post('/api/v1/satellite')
+      .send(satellite)
+      .expect('Content-Type', /json/)
+      .expect(201)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(satellite.id);
+        expect(res.body.name).to.equal('Random Satellite');
       });
   });
 

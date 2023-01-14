@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { assert, expect } from 'chai';
 import Dockerode, { Container } from 'dockerode';
 import Docker from '../../../src/core/docker/docker';

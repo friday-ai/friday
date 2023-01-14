@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import server from '../../../../utils/request';
 
-const packageVersion: string = process.env.npm_package_version!;
+const packageVersion: string = process.env.npm_package_version || '';
 
 describe('GET /api/v1/system', () => {
   it('should get version of friday', async () => {

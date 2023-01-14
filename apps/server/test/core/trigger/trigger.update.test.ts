@@ -18,7 +18,7 @@ describe('Trigger.update', () => {
   });
 
   it('should not found trigger to update', async () => {
-    const promise = trigger.update('0cd30aef-9c4e-4a23-81e3-3544971296e5', { });
+    const promise = trigger.update('0cd30aef-9c4e-4a23-81e3-3544971296e5', {});
 
     await assert.isRejected(promise, NotFoundError);
   });

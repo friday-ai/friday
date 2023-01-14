@@ -1,8 +1,9 @@
-import { UserAttributes } from '@friday/shared';
+import { SessionCredentials, UserAttributes } from '@friday/shared';
 import User from '../../models/user';
 import { AuthError, NotFoundError } from '../../utils/decorators/error';
 import { compare } from '../../utils/password';
 import logger from '../../utils/log';
+import { exclude } from '../../utils/object';
 
 /**
  * User login
@@ -14,7 +15,7 @@ import logger from '../../utils/log';
  * await friday.user.login('test@test.fr', 'mypassword');
  *
  */
-export default async function login(email: string, password: string): Promise<Omit<UserAttributes, 'password'>> {
+export default async function login(email: string, password: string): Promise<SessionCredentials> {
   const user = await User.findOne({
     where: {
       email,
@@ -35,5 +36,5 @@ export default async function login(email: string, password: string): Promise<Om
 
   logger.success(`User ${user.userName} logged in`);
 
-  return userToReturn;
+  return exclude(userToReturn);
 }

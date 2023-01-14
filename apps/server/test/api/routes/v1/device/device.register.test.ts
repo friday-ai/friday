@@ -1,24 +1,18 @@
-import { expect } from 'chai';
+import { DevicesCapabilities, DevicesTypes } from '@friday/shared';
+import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
-import { DeviceType } from '../../../../../src/config/entities';
-import {
-  DeviceRegisterType,
-  DevicesCapabilityType,
-  DevicesType,
-} from '../../../../../src/config/device';
 
-const fakeDevice: DeviceRegisterType = {
+const fakeDevice = {
   defaultName: 'Dimmer',
   defaultManufacturer: 'Fibaro',
   defaultModel: 'Dimmer Switch',
-  type: DevicesType.PHYSICAL,
+  type: DevicesTypes.PHYSICAL,
   pluginSelector: 'LIGHT-105',
   pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
   capabilities: [
     {
       defaultName: 'Switch-105',
-      type: DevicesCapabilityType.ONOFF,
-      settings: null,
+      type: DevicesCapabilities.ONOFF,
     },
   ],
 };
@@ -31,31 +25,33 @@ describe('POST /api/v1/device', () => {
       .expect('Content-Type', /json/)
       .expect(201)
       .then((res) => {
-        const newDevice = res.body as DeviceType;
+        expect(res.body).to.be.an('object');
+        delete res.body.capabilities[0].id; // Delete id because is not know
+        delete res.body.capabilities[0].deviceId; // Delete id because is not know
+        assert.deepInclude(res.body, fakeDevice);
+      });
+  });
 
-        expect(newDevice).to.be.an('object');
-        expect(newDevice.pluginSelector).to.equal('LIGHT-105');
-        expect(newDevice).to.contains.keys( ['capabilities']);
-        expect(newDevice.capabilities).to.be.an('array');
-        expect(newDevice.capabilities?.length).to.equal(1);
+  it('should not register a device with a provided id', async () => {
+    const newFakeDevice = { ...fakeDevice, id: '0a93526e-92d1-4e61-b8be-c4e8ab5924df' };
+    await server
+      .post('/api/v1/device')
+      .send(newFakeDevice)
+      .expect(201)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(newFakeDevice.id);
+        expect(res.body.defaultName).to.equal('Dimmer');
       });
   });
 
   it('should not register a device with empty plugin id', async () => {
     fakeDevice.pluginId = '';
-    await server
-      .post('/api/v1/device')
-      .send(fakeDevice)
-      .expect('Content-Type', /json/)
-      .expect(422);
+    await server.post('/api/v1/device').send(fakeDevice).expect('Content-Type', /json/).expect(422);
   });
 
   it('should not register a device with wrong plugin id', async () => {
     fakeDevice.pluginId = 'wrong id';
-    await server
-      .post('/api/v1/device')
-      .send(fakeDevice)
-      .expect('Content-Type', /json/)
-      .expect(422);
+    await server.post('/api/v1/device').send(fakeDevice).expect('Content-Type', /json/).expect(422);
   });
 });

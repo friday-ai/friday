@@ -28,7 +28,7 @@ function checkBrightnessRange(val: number, capabilitySettings: DeviceCapabilityS
  */
 export async function setBrightness(this: DeviceClass, args: { id: string; value: number }): Promise<DcstAttributes> {
   const capabilitySettings = await this.getCapabilityById(args.id);
-  checkBrightnessRange(args.value, capabilitySettings.settings);
+  checkBrightnessRange(args.value, capabilitySettings.settings.settings);
 
   return this.exec(args.id, {
     action: DevicesActions.SET_BRIGHTNESS,

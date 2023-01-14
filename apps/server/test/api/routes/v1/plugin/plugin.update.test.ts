@@ -31,7 +31,7 @@ describe('PATCH /api/v1/plugin/:id', () => {
       });
   });
 
-  it('habitant should\'t have access to update a plugin', async () => {
+  it("habitant should't have access to update a plugin", async () => {
     await server
       .patch('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', habitant)
       .send({
@@ -40,7 +40,7 @@ describe('PATCH /api/v1/plugin/:id', () => {
       .expect(403);
   });
 
-  it('guest should\'t have access to update a plugin', async () => {
+  it("guest should't have access to update a plugin", async () => {
     await server
       .patch('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', habitant)
       .send({

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { UserRole } from '../../../src/config/constants';
+import { UserRole } from '@friday/shared';
 import Session from '../../../src/core/session/session';
 
 // tokenHash: 'c090007e57736654afa0b637f0e6e7a6d7dddbe476e2892c0d62fdd601d0807d', // hash of 'refresh-token-test-create'

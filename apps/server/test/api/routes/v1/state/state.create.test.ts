@@ -1,11 +1,10 @@
 import { expect, assert } from 'chai';
+import { AvailableState, StateOwner } from '@friday/shared';
 import server from '../../../../utils/request';
-import { AvailableState, StateOwner } from '../../../../../src/config/constants';
 
 describe('POST /api/v1/state', () => {
   it('should create a state', async () => {
     const state = {
-      id: '9a05e6c3-e36a-4779-bc66-6f7d015920c7',
       owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
       ownerType: StateOwner.USER,
       value: AvailableState.USER_AT_HOME,
@@ -19,10 +18,29 @@ describe('POST /api/v1/state', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, state);
+        assert.deepInclude(res.body, state);
+      });
+  });
+
+  it('should not create a state with a provided id', async () => {
+    const state = {
+      id: '8be88a4d-9379-48d5-b3dc-0f989c65d1d4',
+      owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+      ownerType: StateOwner.USER,
+      value: AvailableState.USER_AT_HOME,
+      last: true,
+    };
+
+    await server
+      .post('/api/v1/state')
+      .send(state)
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(state.id);
+        expect(res.body.owner).to.equal('0cd30aef-9c4e-4a23-81e3-3547971296e5');
+        expect(res.body.ownerType).to.equal(StateOwner.USER);
       });
   });
 

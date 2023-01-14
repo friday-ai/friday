@@ -1,4 +1,4 @@
-import { ActionAttributes, ActionCreationAttributes } from '@friday/shared';
+import { ActionAttributes, ActionCreationAttributes, ActionCreationKeys } from '@friday/shared';
 import BaseModel from '../../utils/database/model.base';
 import ActionModel from '../../models/action';
 
@@ -7,6 +7,6 @@ import ActionModel from '../../models/action';
  */
 export default class Action extends BaseModel<ActionModel, ActionAttributes, ActionCreationAttributes> {
   constructor() {
-    super(ActionModel);
+    super(ActionModel, ActionCreationKeys);
   }
 }

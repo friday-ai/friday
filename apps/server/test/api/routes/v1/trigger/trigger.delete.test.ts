@@ -12,8 +12,6 @@ describe('DELETE /api/v1/trigger/:id', () => {
   });
 
   it('should not found trigger to delete', async () => {
-    await server
-      .delete('/api/v1/trigger/a0f02b72-73e0-4cfd-a049-5caaa0b80333')
-      .expect(404);
+    await server.delete('/api/v1/trigger/a0f02b72-73e0-4cfd-a049-5caaa0b80333').expect(404);
   });
 });

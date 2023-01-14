@@ -1,4 +1,4 @@
-import { RoomAttributes, RoomCreationAttributes, AvailableState, StateOwner } from '@friday/shared';
+import { RoomAttributes, RoomCreationAttributes, AvailableState, StateOwner, RoomsCreationKeys } from '@friday/shared';
 import BaseModel from '../../utils/database/model.base';
 import RoomModel from '../../models/room';
 import StateClass from '../state/state';
@@ -11,7 +11,7 @@ export default class Room extends BaseModel<RoomModel, RoomAttributes, RoomCreat
   public state: StateClass;
 
   constructor(state: StateClass) {
-    super(RoomModel);
+    super(RoomModel, RoomsCreationKeys);
     this.state = state;
   }
 

@@ -1,4 +1,4 @@
-import { UserAttributes, UserCreationAttributes, AvailableState, StateOwner } from '@friday/shared';
+import { UserAttributes, UserCreationAttributes, AvailableState, StateOwner, UserCreationKeys } from '@friday/shared';
 import BaseModel from '../../utils/database/model.base';
 import UserModel from '../../models/user';
 import { Catch } from '../../utils/decorators/error';
@@ -13,7 +13,7 @@ export default class User extends BaseModel<UserModel, UserAttributes, UserCreat
   public state: StateClass;
 
   constructor(state: StateClass) {
-    super(UserModel);
+    super(UserModel, UserCreationKeys);
     this.state = state;
   }
 

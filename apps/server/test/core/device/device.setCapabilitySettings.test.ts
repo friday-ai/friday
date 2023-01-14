@@ -1,9 +1,6 @@
 import { assert, expect } from 'chai';
 import Device from '../../../src/core/device/device';
-import {
-  BadParametersError,
-  DatabaseValidationError,
-} from '../../../src/utils/decorators/error';
+import { BadParametersError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 
 let device: Device;
 
@@ -13,29 +10,31 @@ describe('Device.setCapabilitySettings', () => {
   });
 
   it('should set a capability settings', async () => {
-    const newSettings = await device.setCapabilitySettings('2e6a90de-b05c-47ca-8895-59b23953531c', {
+    const settings = {
       min: 0,
       max: 100,
       step: 1,
-    });
+    };
+
+    const newSettings = await device.setCapabilitySettings('2e6a90de-b05c-47ca-8895-59b23953531c', settings);
 
     expect(newSettings).to.be.an('object');
-    expect(newSettings.settings?.min).to.equal(0);
-    expect(newSettings.settings?.max).to.equal(100);
-    expect(newSettings.settings?.step).to.equal(1);
+    expect(newSettings.capabilityId).to.equal('2e6a90de-b05c-47ca-8895-59b23953531c');
+    assert.deepInclude(newSettings.settings, settings);
   });
 
   it('should update a capability settings', async () => {
-    const newSettings = await device.setCapabilitySettings('2e6a90de-b05c-47ca-8895-59b23953531c', {
+    const settings = {
       min: 5,
       max: 80,
       step: 1,
-    });
+    };
+
+    const newSettings = await device.setCapabilitySettings('2e6a90de-b05c-47ca-8895-59b23953531c', settings);
 
     expect(newSettings).to.be.an('object');
-    expect(newSettings.settings?.min).to.equal(5);
-    expect(newSettings.settings?.max).to.equal(80);
-    expect(newSettings.settings?.step).to.equal(1);
+    expect(newSettings.capabilityId).to.equal('2e6a90de-b05c-47ca-8895-59b23953531c');
+    assert.deepInclude(newSettings.settings, settings);
   });
 
   it('should not set a capability settings with empty capability id', async () => {

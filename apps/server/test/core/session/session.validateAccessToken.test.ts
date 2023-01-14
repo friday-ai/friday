@@ -6,10 +6,30 @@ import { generateAccessToken } from '../../../src/utils/jwt';
 let session: Session;
 
 describe('Session.validateAccessToken', () => {
-  const validAccessToken = generateAccessToken('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'HABITANT', '894b93df-a7ab-494c-92f6-7d88ae9164b3', 'secretJwt');
-  const notFoundAccessToken = generateAccessToken('7c5509e3-6966-465e-b88f-694b05f267c6', 'HABITANT', '537f130b-8b6f-444b-8ae7-db6b161f35a9', 'secretJwt');
-  const revokedAccessToken = generateAccessToken('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'HABITANT', '2c23ba16-a4a0-4015-bb1b-7ecba3375260', 'secretJwt');
-  const expiredAccessToken = generateAccessToken('0cd30aef-9c4e-4a23-81e3-3547971296e5', 'HABITANT', 'baebcfc9-8ca0-4803-9f56-15519f05eefd', 'secretJwt');
+  const validAccessToken = generateAccessToken(
+    '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+    'HABITANT',
+    '894b93df-a7ab-494c-92f6-7d88ae9164b3',
+    'secretJwt'
+  );
+  const notFoundAccessToken = generateAccessToken(
+    '7c5509e3-6966-465e-b88f-694b05f267c6',
+    'HABITANT',
+    '537f130b-8b6f-444b-8ae7-db6b161f35a9',
+    'secretJwt'
+  );
+  const revokedAccessToken = generateAccessToken(
+    '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+    'HABITANT',
+    '2c23ba16-a4a0-4015-bb1b-7ecba3375260',
+    'secretJwt'
+  );
+  const expiredAccessToken = generateAccessToken(
+    '0cd30aef-9c4e-4a23-81e3-3547971296e5',
+    'HABITANT',
+    'baebcfc9-8ca0-4803-9f56-15519f05eefd',
+    'secretJwt'
+  );
 
   before(async () => {
     session = global.FRIDAY.session;

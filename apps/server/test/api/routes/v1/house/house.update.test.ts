@@ -11,6 +11,7 @@ describe('PATCH /api/v1/house/:id', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
+        expect(res.body.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
         expect(res.body.name).to.equal('House update');
       });
   });

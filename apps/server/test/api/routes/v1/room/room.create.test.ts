@@ -4,7 +4,6 @@ import server from '../../../../utils/request';
 describe('POST /api/v1/room', () => {
   it('should create a room', async () => {
     const room = {
-      id: 'fe20af06-0e4a-4eee-a028-956ff51c6a16',
       name: 'A room test',
       houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
     };
@@ -16,10 +15,25 @@ describe('POST /api/v1/room', () => {
       .expect(201)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        // See issue, https://github.com/sequelize/sequelize/issues/11566
-        delete res.body.createdAt;
-        delete res.body.updatedAt;
-        assert.deepEqual(res.body, room);
+        assert.deepInclude(res.body, room);
+      });
+  });
+
+  it('should not create a room with a provided id', async () => {
+    const room = {
+      id: 'b14c5677-b1dc-4b26-8829-79168bb5cbb9',
+      name: 'Random room',
+      houseId: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
+    };
+
+    await server
+      .post('/api/v1/room')
+      .send(room)
+      .expect(201)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(room.id);
+        expect(res.body.name).to.equal('Random room');
       });
   });
 

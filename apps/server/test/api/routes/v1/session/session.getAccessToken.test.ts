@@ -10,14 +10,14 @@ describe('POST /api/v1/session/access_token', () => {
       })
       .expect(200)
       .then((res) => {
-        const { body } = res;
-        expect(body).to.be.an('object');
-        expect(body).to.contains.keys(
-          ['id', 'refreshToken', 'revoked', 'validUntil', 'userId', 'user', 'accessToken'],
-        );
-        expect(body.revoked).to.equal(false);
-        expect(body.user).to.be.an('object');
-        expect(body.user).not.to.have.property('password');
+        expect(res.body).to.be.an('object');
+
+        expect(res.body).to.contains.keys(['id', 'refreshToken', 'revoked', 'validUntil', 'userId', 'user']);
+        expect(res.body.revoked).to.equal(false);
+
+        expect(res.body.user).to.be.an('object');
+        expect(res.body.user).not.to.have.property('password');
+        expect(res.body.user).to.contains.keys(['id', 'userName', 'email', 'theme', 'role']);
       });
   });
 

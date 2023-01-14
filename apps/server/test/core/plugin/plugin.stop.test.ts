@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { assert, expect } from 'chai';
 import Dockerode, { Container } from 'dockerode';
 import { NotFoundError } from '../../../src/utils/decorators/error';
@@ -15,7 +14,7 @@ describe('Plugin.stop', () => {
   });
 
   // Create a fake container and save docker id on plugin
-  beforeEach(async function () {
+  beforeEach(async function beforeEach() {
     this.timeout(15000);
     container = await global.FRIDAY.docker.createContainer({
       Image: 'alpine',
@@ -29,20 +28,19 @@ describe('Plugin.stop', () => {
 
     await plugin.update('33ddf1e2-3c51-4426-93af-3b0453ac0c1e', {
       dockerId: container.id,
-      satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
     });
 
     // Start container for test
     await container.start();
   });
 
-  after(async function () {
+  after(async function after() {
     this.timeout(15000);
     await container.stop();
     await container.remove();
   });
 
-  it('should stop a plugin', async function () {
+  it('should stop a plugin', async function stop() {
     this.timeout(15000);
     const result = await plugin.stop('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
     expect(result).to.equal(true);

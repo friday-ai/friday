@@ -12,8 +12,6 @@ describe('DELETE /api/v1/room/:id', () => {
   });
 
   it('should not found room to delete', async () => {
-    await server
-      .delete('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f651333')
-      .expect(404);
+    await server.delete('/api/v1/room/c97ba085-ba97-4a30-bdd3-b7a62f651333').expect(404);
   });
 });

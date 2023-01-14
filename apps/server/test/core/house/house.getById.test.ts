@@ -13,76 +13,50 @@ describe('House.getById', () => {
     const houseReturned = await house.getById('ecb7958f-ea9e-4520-819e-be6358dc407c');
 
     expect(houseReturned).to.be.an('object');
-    assert.deepEqual(houseReturned, {
-      id: 'ecb7958f-ea9e-4520-819e-be6358dc407c',
-      name: 'Main House test',
-      latitude: '34.0012295',
-      longitude: '-118.8067245',
-    });
+    expect(houseReturned).to.contains.keys(['id', 'name', 'latitude', 'longitude']);
+    expect(houseReturned.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
   });
 
   it('should return a house with full scope', async () => {
     const houseReturned = await house.getById('ecb7958f-ea9e-4520-819e-be6358dc407c', 'full');
 
-    expect(houseReturned).to.have.property('id');
-    expect(houseReturned).to.have.property('name');
-    expect(houseReturned).to.have.property('latitude');
-    expect(houseReturned).to.have.property('longitude');
+    expect(houseReturned).to.be.an('object');
+    expect(houseReturned).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'state', 'rooms']);
+    expect(houseReturned.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
 
-    if (houseReturned.state !== null) {
-      expect(houseReturned.state).to.be.an('object');
-      expect(houseReturned.state).to.have.property('id');
-      expect(houseReturned.state).to.have.property('owner');
-      expect(houseReturned.state).to.have.property('ownerType');
-      expect(houseReturned.state).to.have.property('value');
-    }
+    expect(houseReturned.state).to.be.an('object');
+    expect(houseReturned.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
 
-    if (houseReturned.rooms !== null) {
-      expect(houseReturned.rooms).to.be.an('array');
-      houseReturned.rooms!.forEach((r) => {
-        expect(r).to.be.an('object');
-        expect(r).to.have.property('id');
-        expect(r).to.have.property('name');
-        expect(r).to.have.property('houseId');
-      });
-    }
+    expect(houseReturned.rooms).to.be.an('array');
+    houseReturned.rooms.forEach((room) => {
+      expect(room).to.be.an('object');
+      expect(room).to.contains.keys(['id', 'name', 'houseId']);
+    });
   });
 
   it('should return a houses with state', async () => {
     const houseReturned = await house.getById('ecb7958f-ea9e-4520-819e-be6358dc407c', 'withState');
 
-    expect(houseReturned).to.have.property('id');
-    expect(houseReturned).to.have.property('name');
-    expect(houseReturned).to.have.property('latitude');
-    expect(houseReturned).to.have.property('longitude');
+    expect(houseReturned).to.be.an('object');
+    expect(houseReturned).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'state']);
+    expect(houseReturned.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
 
-    // TODO: The state cannot must be null
-    if (houseReturned.state !== null) {
-      expect(houseReturned.state).to.be.an('object');
-      expect(houseReturned.state).to.have.property('id');
-      expect(houseReturned.state).to.have.property('owner');
-      expect(houseReturned.state).to.have.property('ownerType');
-      expect(houseReturned.state).to.have.property('value');
-    }
+    expect(houseReturned.state).to.be.an('object');
+    expect(houseReturned.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
   });
 
   it('should return a house with rooms', async () => {
     const houseReturned = await house.getById('ecb7958f-ea9e-4520-819e-be6358dc407c', 'withRooms');
 
-    expect(houseReturned).to.have.property('id');
-    expect(houseReturned).to.have.property('name');
-    expect(houseReturned).to.have.property('latitude');
-    expect(houseReturned).to.have.property('longitude');
+    expect(houseReturned).to.be.an('object');
+    expect(houseReturned).to.contains.keys(['id', 'name', 'latitude', 'longitude', 'rooms']);
+    expect(houseReturned.id).to.equal('ecb7958f-ea9e-4520-819e-be6358dc407c');
 
-    if (houseReturned.rooms !== null) {
-      expect(houseReturned.rooms).to.be.an('array');
-      houseReturned.rooms!.forEach((r) => {
-        expect(r).to.be.an('object');
-        expect(r).to.have.property('id');
-        expect(r).to.have.property('name');
-        expect(r).to.have.property('houseId');
-      });
-    }
+    expect(houseReturned.rooms).to.be.an('array');
+    houseReturned.rooms.forEach((room) => {
+      expect(room).to.be.an('object');
+      expect(room).to.contains.keys(['id', 'name', 'houseId']);
+    });
   });
 
   it('should not found a house', async () => {

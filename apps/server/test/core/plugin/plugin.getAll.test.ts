@@ -13,9 +13,7 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.contains.keys(
-        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-      );
+      expect(p).to.contains.keys(['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat']);
     });
   });
 
@@ -24,32 +22,48 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.contains.keys(
-        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-      );
+      expect(p).to.contains.keys([
+        'id',
+        'dockerId',
+        'name',
+        'version',
+        'url',
+        'enabled',
+        'satelliteId',
+        'lastHeartbeat',
+        'state',
+        'satellite',
+        'devices',
+        'variables',
+      ]);
 
       expect(p.state).to.be.an('object');
-      expect(p.state).to.contains.keys(
-        ['id', 'owner', 'ownerType', 'value'],
-      );
+      expect(p.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
 
       expect(p.satellite).to.be.an('object');
-      expect(p.satellite).to.contains.keys(
-        ['id', 'name', 'roomId'],
-      );
+      expect(p.satellite).to.contains.keys(['id', 'name', 'roomId']);
 
       expect(p.devices).to.be.an('array');
-      p.devices!.forEach((d) => {
-        expect(d).to.contains.keys(
-          ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
-        );
+      p.devices.forEach((d) => {
+        expect(d).to.contains.keys([
+          'id',
+          'defaultName',
+          'defaultManufacturer',
+          'defaultModel',
+          'name',
+          'type',
+          'manufacturer',
+          'model',
+          'pluginSelector',
+          'viaDevice',
+          'roomId',
+          'pluginId',
+        ]);
       });
 
       expect(p.variables).to.be.an('array');
-      p.variables!.forEach((v) => {
-        expect(v).to.contains.keys(
-          ['id', 'value', 'owner', 'ownerType', 'value'],
-        );
+      p.variables.forEach((v) => {
+        expect(v).to.contains.keys(['id', 'value', 'owner', 'ownerType', 'value']);
       });
     });
   });
@@ -59,14 +73,10 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.contains.keys(
-        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-      );
+      expect(p).to.contains.keys(['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat', 'satellite']);
 
       expect(p.satellite).to.be.an('object');
-      expect(p.satellite).to.contains.keys(
-        ['id', 'name', 'roomId'],
-      );
+      expect(p.satellite).to.contains.keys(['id', 'name', 'roomId']);
     });
   });
 
@@ -75,14 +85,10 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.contains.keys(
-        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-      );
+      expect(p).to.contains.keys(['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat', 'state']);
 
       expect(p.state).to.be.an('object');
-      expect(p.state).to.contains.keys(
-        ['id', 'owner', 'ownerType', 'value'],
-      );
+      expect(p.state).to.contains.keys(['id', 'owner', 'ownerType', 'value']);
     });
   });
 
@@ -91,15 +97,24 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.contains.keys(
-        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-      );
+      expect(p).to.contains.keys(['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat', 'devices']);
 
       expect(p.devices).to.be.an('array');
-      p.devices!.forEach((d) => {
-        expect(d).to.contains.keys(
-          ['id', 'defaultName', 'defaultManufacturer', 'defaultModel', 'name', 'type', 'manufacturer', 'model', 'pluginSelector', 'viaDevice', 'roomId', 'pluginId'],
-        );
+      p.devices.forEach((d) => {
+        expect(d).to.contains.keys([
+          'id',
+          'defaultName',
+          'defaultManufacturer',
+          'defaultModel',
+          'name',
+          'type',
+          'manufacturer',
+          'model',
+          'pluginSelector',
+          'viaDevice',
+          'roomId',
+          'pluginId',
+        ]);
       });
     });
   });
@@ -109,15 +124,11 @@ describe('Plugin.listAll', () => {
 
     expect(plugins).to.be.an('array');
     plugins.forEach((p) => {
-      expect(p).to.contains.keys(
-        ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
-      );
+      expect(p).to.contains.keys(['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat', 'variables']);
 
       expect(p.variables).to.be.an('array');
-      p.variables!.forEach((v) => {
-        expect(v).to.contains.keys(
-          ['id', 'value', 'owner', 'ownerType', 'value'],
-        );
+      p.variables.forEach((v) => {
+        expect(v).to.contains.keys(['id', 'value', 'owner', 'ownerType', 'value']);
       });
     });
   });

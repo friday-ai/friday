@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-dynamic-require */
 /* eslint-disable global-require */
 import promise from 'bluebird';
@@ -8,7 +9,7 @@ import { database } from '../../src/config/database';
 const SEEDERS_PATH = join(__filename, '../../../seeders');
 
 const files = readdirSync(SEEDERS_PATH);
-const seeds = files.map((file) => require(join(SEEDERS_PATH, file)));
+const seeds = files.map((file) => require(join(SEEDERS_PATH, file)).default);
 const reversedSeed = seeds.slice().reverse();
 
 const seedDb = async () => {
@@ -25,8 +26,4 @@ const cleanDb = async () => {
   });
 };
 
-
-export {
-  seedDb,
-  cleanDb,
-};
+export { seedDb, cleanDb };

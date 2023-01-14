@@ -1,4 +1,4 @@
-import { HouseAttributes, HouseCreationAttributes, AvailableState, StateOwner } from '@friday/shared';
+import { HouseAttributes, HouseCreationAttributes, AvailableState, StateOwner, HouseCreationKeys } from '@friday/shared';
 import BaseModel from '../../utils/database/model.base';
 import HouseModel from '../../models/house';
 import StateClass from '../state/state';
@@ -11,7 +11,7 @@ export default class House extends BaseModel<HouseModel, HouseAttributes, HouseC
   public state: StateClass;
 
   constructor(state: StateClass) {
-    super(HouseModel);
+    super(HouseModel, HouseCreationKeys);
     this.state = state;
   }
 

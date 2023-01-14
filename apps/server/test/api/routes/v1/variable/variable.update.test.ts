@@ -16,7 +16,7 @@ describe('PATCH /api/v1/variable/:id', () => {
       });
   });
 
-  it('admin should\'t have to update a variable with a id', async () => {
+  it("admin should't have to update a variable with a id", async () => {
     await server
       .patch('/api/v1/variable/a2b9ba3a-72f1-4a24-b268-e3813c1e8f32', admin)
       .send({
@@ -25,7 +25,7 @@ describe('PATCH /api/v1/variable/:id', () => {
       .expect(403);
   });
 
-  it('habitant should\'t have to update a variable with a id', async () => {
+  it("habitant should't have to update a variable with a id", async () => {
     await server
       .patch('/api/v1/variable/a2b9ba3a-72f1-4a24-b268-e3813c1e8f32', habitant)
       .send({
@@ -34,7 +34,7 @@ describe('PATCH /api/v1/variable/:id', () => {
       .expect(403);
   });
 
-  it('guest should\'t have to update a variable with a id', async () => {
+  it("guest should't have to update a variable with a id", async () => {
     await server
       .patch('/api/v1/variable/a2b9ba3a-72f1-4a24-b268-e3813c1e8f32', guest)
       .send({

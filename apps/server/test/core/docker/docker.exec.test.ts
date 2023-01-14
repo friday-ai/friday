@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 import { assert, expect } from 'chai';
 import Dockerode, { Container } from 'dockerode';
 import Docker from '../../../src/core/docker/docker';
@@ -14,7 +13,7 @@ describe('Docker.exec', () => {
     docker.dockerode = new Dockerode();
   });
 
-  before(async function () {
+  before(async function before() {
     this.timeout(15000);
     container = await docker.createContainer({
       Image: 'alpine',
@@ -30,13 +29,13 @@ describe('Docker.exec', () => {
     await container.start();
   });
 
-  after(async function () {
+  after(async function after() {
     this.timeout(15000);
     await container.stop();
     await container.remove();
   });
 
-  it('should run exec on container', async function () {
+  it('should run exec on container', async function run() {
     this.timeout(30000);
     const promise = await docker.exec(container.id, { Cmd: ['echo', 'foo'] });
     expect(promise).to.equal(true);

@@ -1,6 +1,6 @@
+import { SessionAttributes } from '@friday/shared';
 import { expect } from 'chai';
 import server from '../../../../utils/request';
-import { SessionType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/session', () => {
   it('should return all sessions', async () => {
@@ -9,13 +9,10 @@ describe('GET /api/v1/session', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const sessions = res.body;
-        expect(sessions).to.be.an('array');
-        sessions.forEach((session: SessionType) => {
-          expect(session).to.contains.keys(
-            ['id', 'refreshToken', 'validUntil', 'userId', 'revoked'],
-          );
-          expect(session.revoked).to.equal(false);
+        expect(res.body).to.be.an('array');
+        res.body.forEach((s: SessionAttributes) => {
+          expect(s).to.contains.keys(['id', 'refreshToken', 'revoked', 'validUntil', 'userId']);
+          expect(s.revoked).to.equal(false);
         });
       });
   });
@@ -29,15 +26,14 @@ describe('GET /api/v1/session', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const sessions = res.body;
-        expect(sessions).to.be.an('array');
-        sessions.forEach((session: SessionType) => {
-          expect(session).to.contains.keys(
-            ['id', 'refreshToken', 'validUntil', 'userId', 'revoked', 'user'],
-          );
-          expect(session.revoked).to.equal(false);
-          expect(session.user).to.be.an('object');
-          expect(session.user).not.to.have.property('password');
+        expect(res.body).to.be.an('array');
+        res.body.forEach((s: SessionAttributes) => {
+          expect(s).to.contains.keys(['id', 'refreshToken', 'revoked', 'validUntil', 'userId', 'user']);
+          expect(s.revoked).to.equal(false);
+
+          expect(s.user).to.be.an('object');
+          expect(s.user).not.to.have.property('password');
+          expect(s.user).to.contains.keys(['id', 'userName', 'email', 'theme', 'role']);
         });
       });
   });

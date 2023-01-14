@@ -1,4 +1,4 @@
-import { SessionAttributes, UserAttributes } from '@friday/shared';
+import { SessionAttributes, SessionCredentials } from '@friday/shared';
 import { Catch } from '../../utils/decorators/error';
 import SessionModel from '../../models/session';
 import { PartialModel } from '../../utils/database/model.partial';
@@ -22,7 +22,7 @@ export default class Session extends PartialModel<SessionModel, SessionAttribute
   }
 
   @Catch()
-  async create(user: Omit<UserAttributes, 'password'>, userAgent?: string) {
+  async create(user: SessionCredentials, userAgent?: string) {
     return create.call(this, user, userAgent);
   }
 

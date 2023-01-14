@@ -1,4 +1,5 @@
-import { expect, assert } from 'chai';
+import { SceneAttributes } from '@friday/shared';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/trigger/:id', () => {
@@ -9,16 +10,8 @@ describe('GET /api/v1/trigger/:id', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
-          id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
-          name: 'Test',
-          description: 'A trigger test',
-          type: 'device.value',
-          rules: {
-            device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
-            value: '23',
-          },
-        });
+        expect(res.body).to.contains.keys(['id', 'name', 'description', 'type', 'rules']);
+        expect(res.body.id).to.equal('a0f02b72-73e0-4cfd-a049-5caaa0b80514');
       });
   });
 
@@ -32,23 +25,12 @@ describe('GET /api/v1/trigger/:id', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('object');
-        assert.deepEqual(res.body, {
-          id: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
-          name: 'Test',
-          description: 'A trigger test',
-          type: 'device.value',
-          rules: {
-            device: 'cc306435-eb0f-455c-b79d-a684b171e04d',
-            value: '23',
-          },
-          scenes: [
-            {
-              id: '2452964a-a225-47dd-9b83-d88d57ed280e',
-              name: 'Test scene',
-              description: 'A scene for the tests ;) ',
-              triggerId: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
-            },
-          ],
+        expect(res.body).to.contains.keys(['id', 'name', 'description', 'type', 'rules']);
+        expect(res.body.id).to.equal('a0f02b72-73e0-4cfd-a049-5caaa0b80514');
+
+        expect(res.body.scenes).to.be.an('array');
+        res.body.scenes.forEach((s: SceneAttributes) => {
+          expect(s).to.contains.keys(['id', 'name', 'description', 'triggerId']);
         });
       });
   });

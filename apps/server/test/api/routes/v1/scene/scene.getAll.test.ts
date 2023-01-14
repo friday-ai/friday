@@ -1,6 +1,6 @@
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
+import { ActionAttributes, SceneAttributes } from '@friday/shared';
 import server from '../../../../utils/request';
-import { SceneType } from '../../../../../src/config/entities';
 
 describe('GET /api/v1/scene', () => {
   it('should return all scenes', async () => {
@@ -10,13 +10,10 @@ describe('GET /api/v1/scene', () => {
       .expect(200)
       .then((res) => {
         expect(res.body).to.be.an('array');
-        assert.deepEqual(res.body, [{
-          id: '2452964a-a225-47dd-9b83-d88d57ed280e',
-          name: 'Test scene',
-          description: 'A scene for the tests ;) ',
-          triggerId: 'a0f02b72-73e0-4cfd-a049-5caaa0b80514',
-        },
-        ]);
+        res.body.forEach((scene: SceneAttributes) => {
+          expect(scene).to.be.an('object');
+          expect(scene).to.contains.keys(['id', 'name', 'description', 'triggerId']);
+        });
       });
   });
 
@@ -27,25 +24,18 @@ describe('GET /api/v1/scene', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const scenes = res.body;
-        expect(scenes).to.be.an('array');
-        scenes.forEach((scene: SceneType) => {
+        expect(res.body).to.be.an('array');
+        res.body.forEach((scene: SceneAttributes) => {
           expect(scene).to.be.an('object');
-          expect(scene).to.contains.keys(
-            ['id', 'name', 'description', 'triggerId', 'trigger', 'actions'],
-          );
+          expect(scene).to.contains.keys(['id', 'name', 'description', 'triggerId', 'trigger', 'actions']);
+
           expect(scene.trigger).to.be.an('object');
-          expect(scene.trigger).to.contains.keys(
-            ['id', 'name', 'description', 'type', 'rules'],
-          );
+          expect(scene.trigger).to.contains.keys(['id', 'name', 'description', 'type', 'rules']);
+
           expect(scene.actions).to.be.an('array');
-          if (scene.actions != null) {
-            scene.actions!.forEach((action) => {
-              expect(action).to.contains.keys(
-                ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
-              );
-            });
-          }
+          scene.actions?.forEach((action: ActionAttributes) => {
+            expect(action).to.contains.keys(['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']);
+          });
         });
       });
   });
@@ -57,17 +47,12 @@ describe('GET /api/v1/scene', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const scenes = res.body;
-        expect(scenes).to.be.an('array');
-        scenes.forEach((scene: SceneType) => {
+        expect(res.body).to.be.an('array');
+        res.body.forEach((scene: SceneAttributes) => {
           expect(scene).to.be.an('object');
-          expect(scene).to.contains.keys(
-            ['id', 'name', 'description', 'triggerId', 'trigger'],
-          );
+          expect(scene).to.contains.keys(['id', 'name', 'description', 'triggerId', 'trigger']);
           expect(scene.trigger).to.be.an('object');
-          expect(scene.trigger).to.contains.keys(
-            ['id', 'name', 'description', 'type', 'rules'],
-          );
+          expect(scene.trigger).to.contains.keys(['id', 'name', 'description', 'type', 'rules']);
         });
       });
   });
@@ -79,21 +64,15 @@ describe('GET /api/v1/scene', () => {
       .expect('Content-Type', /json/)
       .expect(200)
       .then((res) => {
-        const scenes = res.body;
-        expect(scenes).to.be.an('array');
-        scenes.forEach((scene: SceneType) => {
+        expect(res.body).to.be.an('array');
+        res.body.forEach((scene: SceneAttributes) => {
           expect(scene).to.be.an('object');
-          expect(scene).to.contains.keys(
-            ['id', 'name', 'description', 'triggerId', 'actions'],
-          );
+          expect(scene).to.contains.keys(['id', 'name', 'description', 'triggerId', 'actions']);
           expect(scene.actions).to.be.an('array');
-          if (scene.actions != null) {
-            scene.actions!.forEach((action) => {
-              expect(action).to.contains.keys(
-                ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
-              );
-            });
-          }
+
+          scene.actions.forEach((action: ActionAttributes) => {
+            expect(action).to.contains.keys(['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId']);
+          });
         });
       });
   });

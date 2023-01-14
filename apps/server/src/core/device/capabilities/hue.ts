@@ -2,7 +2,7 @@ import { DevicesActions, DcstAttributes, DeviceCapabilitySettingsSchema, Color }
 import DeviceClass from '../device';
 import { CapabilityManagerParamsList } from '../../../utils/interfaces';
 import logger from '../../../utils/log';
-import checkProperty from '../../../utils/object';
+import { checkProperty } from '../../../utils/object';
 
 export const options: CapabilityManagerParamsList = {
   color: {
@@ -69,7 +69,7 @@ function checkBoolValue(val: boolean | number) {
   }
 }
 
-function checkSaturationRange(val: number, capabilitySettings: DeviceCapabilitySettingsSchema | undefined) {
+function checkSaturationRange(val: number, capabilitySettings: DeviceCapabilitySettingsSchema) {
   const saturationMax = capabilitySettings?.max || SATURATION_MAX_VALUE;
   const saturationMin = capabilitySettings?.min || SATURATION_MIN_VALUE;
   if (val > saturationMax || val < saturationMin) {
@@ -133,8 +133,8 @@ async function white(this: DeviceClass, args: { id: string; value: boolean | nul
 }
 
 async function saturation(this: DeviceClass, args: { id: string; value: number }): Promise<DcstAttributes> {
-  const capabilitySettings = await this.getCapabilityById(args.id);
-  checkSaturationRange(args.value, capabilitySettings.settings);
+  const capability = await this.getCapabilityById(args.id);
+  checkSaturationRange(args.value, capability.settings.settings);
   return this.exec(args.id, {
     action: DevicesActions.SATURATION,
     params: { value: args.value },

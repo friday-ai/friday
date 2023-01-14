@@ -1,4 +1,4 @@
-import { PluginAttributes, PluginCreationAttributes } from '@friday/shared';
+import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys } from '@friday/shared';
 import DockerClass from '../docker/docker';
 import StateClass from '../state/state';
 import BaseModel from '../../utils/database/model.base';
@@ -20,7 +20,7 @@ export default class Plugin extends BaseModel<PluginModel, PluginAttributes, Plu
   public state: StateClass;
 
   constructor(event: typeof EventClass, docker: DockerClass, state: StateClass) {
-    super(PluginModel);
+    super(PluginModel, PluginCreationKeys);
     this.event = event;
     this.docker = docker;
     this.state = state;

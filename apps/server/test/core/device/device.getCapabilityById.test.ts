@@ -13,23 +13,17 @@ describe('Device.getCapabilityById', () => {
     const capabilityReturned = await device.getCapabilityById('d39593a9-f54a-4823-8d6c-017be8f57eed');
 
     expect(capabilityReturned).to.be.an('object');
-    expect(capabilityReturned).to.contains.keys(
-      ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
-    );
+    expect(capabilityReturned).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
   });
 
   it('should return a device capability with full scope', async () => {
     const capabilityReturned = await device.getCapabilityById('d39593a9-f54a-4823-8d6c-017be8f57eed', 'full');
 
     expect(capabilityReturned).to.be.an('object');
-    expect(capabilityReturned).to.contains.keys(
-      ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
-    );
+    expect(capabilityReturned).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
 
     expect(capabilityReturned.state).to.be.an('object');
-    expect(capabilityReturned.state).to.contains.keys(
-      ['id', 'capabilityId', 'value'],
-    );
+    expect(capabilityReturned.state).to.contains.keys(['id', 'capabilityId', 'value']);
   });
 
   it('should not found a device capability', async () => {

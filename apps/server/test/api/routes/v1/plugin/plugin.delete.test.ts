@@ -52,21 +52,15 @@ describe('DELETE /api/v1/plugin/:id', () => {
 });
 
 describe('DELETE /api/v1/plugin/:id', () => {
-  it('habitant should\'t have access to delete a plugin', async () => {
-    await server
-      .delete('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', habitant)
-      .expect(403);
+  it("habitant should't have access to delete a plugin", async () => {
+    await server.delete('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', habitant).expect(403);
   });
 
-  it('guest should\'t have access to delete a plugin', async () => {
-    await server
-      .delete('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', guest)
-      .expect(403);
+  it("guest should't have access to delete a plugin", async () => {
+    await server.delete('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', guest).expect(403);
   });
 
   it('should not found plugin to delete', async () => {
-    await server
-      .delete('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0333')
-      .expect(404);
+    await server.delete('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0333').expect(404);
   });
 });

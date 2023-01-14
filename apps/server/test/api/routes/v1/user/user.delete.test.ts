@@ -21,21 +21,15 @@ describe('DELETE /api/v1/user/:id', () => {
       });
   });
 
-  it('habitant shouldn\'t have to delete a user', async () => {
-    await server
-      .delete('/api/v1/user/0cd30aef-9c4e-4a23-81e3-3547971296e5', habitant)
-      .expect(403);
+  it("habitant shouldn't have to delete a user", async () => {
+    await server.delete('/api/v1/user/0cd30aef-9c4e-4a23-81e3-3547971296e5', habitant).expect(403);
   });
 
-  it('guest shouldn\'t have to delete a user', async () => {
-    await server
-      .delete('/api/v1/user/0cd30aef-9c4e-4a23-81e3-3547971296e5', guest)
-      .expect(403);
+  it("guest shouldn't have to delete a user", async () => {
+    await server.delete('/api/v1/user/0cd30aef-9c4e-4a23-81e3-3547971296e5', guest).expect(403);
   });
 
   it('should not found user to delete', async () => {
-    await server
-      .delete('/api/v1/user/0cd30aef-9c4e-4a23-81e3-354797129333')
-      .expect(404);
+    await server.delete('/api/v1/user/0cd30aef-9c4e-4a23-81e3-354797129333').expect(404);
   });
 });

@@ -15,6 +15,7 @@ describe('POST /api/v1/user/login', () => {
       .then((res) => {
         expect(res.body.revoked).to.equal(false);
         expect(res.body.user.email).to.equal('john@pepperwood.com');
+        expect(res.body).not.to.have.property('password');
       });
   });
 
@@ -30,6 +31,7 @@ describe('POST /api/v1/user/login', () => {
       .then((res) => {
         expect(res.body.revoked).to.equal(false);
         expect(res.body.user.email).to.equal('john@pepperwood.com');
+        expect(res.body).not.to.have.property('password');
       });
   });
 
@@ -45,6 +47,7 @@ describe('POST /api/v1/user/login', () => {
       .then((res) => {
         expect(res.body.revoked).to.equal(false);
         expect(res.body.user.email).to.equal('john@pepperwood.com');
+        expect(res.body).not.to.have.property('password');
       });
   });
 
@@ -60,6 +63,7 @@ describe('POST /api/v1/user/login', () => {
       .then((res) => {
         expect(res.body.revoked).to.equal(false);
         expect(res.body.user.email).to.equal('john@pepperwood.com');
+        expect(res.body).not.to.have.property('password');
       });
   });
 

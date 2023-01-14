@@ -1,4 +1,5 @@
-import { assert, expect } from 'chai';
+import { HouseCreationAttributes } from '@friday/shared';
+import { assert } from 'chai';
 import House from '../../../src/core/house/house';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 
@@ -10,16 +11,14 @@ describe('House.create', () => {
   });
 
   it('should create a house', async () => {
-    const createdHouse = await house.create({
+    const houseToCreate: HouseCreationAttributes = {
       name: 'Second House',
       latitude: '34.0012295',
       longitude: '-118.8067245',
-    });
+    };
+    const createdHouse = await house.create(houseToCreate);
 
-    expect(createdHouse).to.have.property('id');
-    expect(createdHouse).to.have.property('name');
-    expect(createdHouse).to.have.property('latitude');
-    expect(createdHouse).to.have.property('longitude');
+    assert.deepInclude(createdHouse, houseToCreate);
   });
 
   it('should not create a house with an existing name', async () => {
