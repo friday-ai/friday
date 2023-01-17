@@ -17,6 +17,23 @@ describe('PATCH /api/v1/plugin/:id', () => {
       });
   });
 
+  it("should not update a plugin's id", async () => {
+    const plugin = {
+      id: '228f118c-be02-4c34-b38e-345a304fd71d',
+      name: "Plugin's name updated but not his id",
+    };
+
+    await server
+      .patch('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e')
+      .send(plugin)
+      .expect(200)
+      .then((res) => {
+        expect(res.body).to.be.an('object');
+        expect(res.body.id).to.not.equal(plugin.id);
+        expect(res.body.name).to.equal(plugin.name);
+      });
+  });
+
   it('admin should have access to update a plugin', async () => {
     await server
       .patch('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', admin)
