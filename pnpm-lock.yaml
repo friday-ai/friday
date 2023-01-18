@@ -243,6 +243,7 @@ importers:
 
   packages/docker:
     specifiers:
+      '@friday/logger': workspace:*
       '@types/chai': ^4.3.4
       '@types/chai-as-promised': ^7.1.5
       '@types/chai-like': ^1.1.1
@@ -268,6 +269,7 @@ importers:
       sinon: ^15.0.1
       typescript: '*'
     dependencies:
+      '@friday/logger': link:../logger
       '@types/dockerode': 3.3.14
       '@types/node': 18.11.18
       dockerode: 3.3.4

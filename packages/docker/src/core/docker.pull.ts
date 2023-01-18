@@ -1,6 +1,6 @@
+import logger from '@friday/logger';
 import { PlatformNotCompatible } from '../utils/error';
 import Docker from '../index';
-import logger from '../utils/log';
 
 /**
  * Pull an new container image.

@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable max-classes-per-file */
+import logger from '@friday/logger';
 import { ErrorType } from './interfaces';
-import logger from './log';
 
 //      ____                                        __                                          __     _     __
 //     / __ \  ___   _____  ____    _____  ____ _  / /_  ____    _____   _____         __  __  / /_   (_)   / /   _____
