@@ -11,11 +11,11 @@
   "license": "MIT",
   "prettier": "../tools/prettier.config.js",
   "peerDependencies": {
-    "typescript": "*"
+    "typescript": "*",
+    "@types/node": "*"
   },
   "dependencies": {
     "@types/dockerode": "^3.3.14",
-    "@types/node": "^18.11.18",
     "dockerode": "^3.3.4"
   },
   "devDependencies": {

@@ -7,11 +7,11 @@ import logger from '../utils/log';
  * @param {string} repoTag - Container image name (optionally with tag).
  * @param {Function} onProgress - Callback on progress event. (Optional)
  * @example
- * await friday.docker.pull('my-image');
+ * await docker.pull('my-image');
  */
-export default async function pull(this: Docker, repoTag: string, onProgress = logger.info): Promise<any> {
+export default async function pull(this: Docker, repoTag: string, onProgress = logger.info): Promise<void> {
   if (!this.dockerode) {
-    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'Friday not running on Docker' });
+    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'App not running on Docker' });
   }
   const stream = await this.dockerode.pull(repoTag);
 

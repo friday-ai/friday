@@ -7,11 +7,11 @@ import { PlatformNotCompatible } from '../utils/error';
  * @param {string} id - Container id.
  * @param {ExecCreateOptions} options - Command to execute.
  * @example
- * await friday.docker.exec(id, options);
+ * await docker.exec(id, options);
  */
 export default async function exec(this: Docker, id: string, options: ExecCreateOptions): Promise<boolean> {
   if (!this.dockerode) {
-    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'Friday not running on Docker' });
+    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'App not running on Docker' });
   }
 
   const container = await this.getContainer(id);
