@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import server from '../../../../utils/request';
-import { admin, habitant } from '../../../../utils/apiToken';
+import { admin, guest, habitant } from '../../../../utils/apiToken';
 
 describe('PATCH /api/v1/plugin/:id', () => {
   it('should update a plugin', async () => {
@@ -59,7 +59,7 @@ describe('PATCH /api/v1/plugin/:id', () => {
 
   it("guest should't have access to update a plugin", async () => {
     await server
-      .patch('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', habitant)
+      .patch('/api/v1/plugin/33ddf1e2-3c51-4426-93af-3b0453ac0c1e', guest)
       .send({
         name: 'Plugin update',
       })
