@@ -288,6 +288,31 @@ importers:
       prettier: 2.8.2
       sinon: 15.0.1
 
+  packages/logger:
+    specifiers:
+      '@types/node': '*'
+      '@typescript-eslint/eslint-plugin': ^5.48.0
+      '@typescript-eslint/parser': ^5.48.0
+      console-stamp: ^3.1.0
+      eslint: ^8.31.0
+      eslint-config-airbnb-typescript-prettier: ^5.0.0
+      eslint-plugin-import: ^2.26.0
+      eslint-plugin-tsdoc: ^0.2.17
+      prettier: ^2.8.2
+      typescript: '*'
+    dependencies:
+      '@types/node': 18.11.18
+      console-stamp: 3.1.0
+      typescript: 4.9.4
+    devDependencies:
+      '@typescript-eslint/eslint-plugin': 5.48.1_3jon24igvnqaqexgwtxk6nkpse
+      '@typescript-eslint/parser': 5.48.1_iukboom6ndih5an6iafl45j2fe
+      eslint: 8.31.0
+      eslint-config-airbnb-typescript-prettier: 5.0.0_z6jn4luhndly6szzkk2fv4o2bi
+      eslint-plugin-import: 2.26.0_qdjeohovcytra7xto5vgmxssaq
+      eslint-plugin-tsdoc: 0.2.17
+      prettier: 2.8.2
+
   packages/shared:
     specifiers:
       '@typescript-eslint/eslint-plugin': ^5.48.0
@@ -4348,6 +4373,14 @@ packages:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: false
 
+  /console-stamp/3.1.0:
+    resolution: {integrity: sha512-Vt22288o0Hrxb9uYwXMWYuw/Mu8iPSrFPtIiveq9uE0zWXPDDCAIvKZojqnwcyINnJY9tnTeG0neV/MD+2G5+g==}
+    engines: {node: '>=12'}
+    dependencies:
+      chalk: 4.1.2
+      dateformat: 4.6.3
+    dev: false
+
   /content-disposition/0.5.4:
     resolution: {integrity: sha512-FveZTNuGw04cxlAiWbzi6zTAL/lhehaWbTtgluJh4/E95DqMwTmha3KZN1aAWA8cFIhHzMZUvLevkw5Rqk+tSQ==}
     engines: {node: '>= 0.6'}
@@ -4482,6 +4515,10 @@ packages:
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
     dev: true
+
+  /dateformat/4.6.3:
+    resolution: {integrity: sha512-2P0p0pFGzHS5EMnhdxQi7aJN+iMheud0UhG4dlE1DLAlvL8JHjJJTX/CSm4JXwV0Ka5nGk3zC5mcb5bUQUxxMA==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
