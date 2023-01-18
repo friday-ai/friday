@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@fnando/keyring": "^0.4.0",
+    "@friday/docker": "workspace:*",
     "@friday/shared": "workspace:*",
     "@types/bcrypt": "^5.0.0",
     "@types/bluebird": "^3.5.38",

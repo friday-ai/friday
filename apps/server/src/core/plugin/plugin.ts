@@ -1,5 +1,6 @@
 import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys } from '@friday/shared';
-import DockerClass from '../docker/docker';
+import DockerClass from '@friday/docker';
+
 import StateClass from '../state/state';
 import BaseModel from '../../utils/database/model.base';
 import PluginModel from '../../models/plugin';

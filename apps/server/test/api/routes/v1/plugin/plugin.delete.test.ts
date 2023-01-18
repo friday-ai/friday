@@ -1,7 +1,6 @@
-/* eslint-disable func-names */
 import { expect } from 'chai';
 import { Container } from 'dockerode';
-import Docker from '../../../../../src/core/docker/docker';
+import Docker from '@friday/docker';
 import Plugin from '../../../../../src/core/plugin/plugin';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
@@ -12,7 +11,7 @@ let container: Container;
 
 describe('DELETE /api/v1/plugin/:id', () => {
   // Create a fake container and save docker id on plugin
-  beforeEach(async function () {
+  beforeEach(async function beforeEach() {
     plugin = global.FRIDAY.plugin;
     docker = global.FRIDAY.docker;
 

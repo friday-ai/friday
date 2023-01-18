@@ -1,8 +1,9 @@
+import Docker from '@friday/docker';
+
 import * as database from '../config/database';
 import Action from './action/action';
 import Device from './device/device';
 import House from './house/house';
-import Docker from './docker/docker';
 import Plugin from './plugin/plugin';
 import Room from './room/room';
 import Satellite from './satellite/satellite';
