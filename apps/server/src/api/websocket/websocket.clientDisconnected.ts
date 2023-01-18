@@ -1,6 +1,6 @@
 import * as WebSocket from 'ws';
+import logger from '@friday/logger';
 import WebsocketServer from '.';
-import logger from '../../utils/log';
 
 /**
  * Client disconnected

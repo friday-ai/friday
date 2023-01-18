@@ -1,6 +1,6 @@
+import logger from '@friday/logger';
 import MqttServer from './index';
 import error, { BadParametersError } from '../../utils/decorators/error';
-import logger from '../../utils/log';
 import { MqttMessagePayload, MqttSendOptions } from '../../utils/interfaces';
 import { TopicHeaderPub, TopicsTypes } from '../../config/constants';
 

@@ -3,11 +3,11 @@
 import { Client, connect } from 'mqtt';
 import { glob as Glob } from 'glob';
 import { MqttOptions } from '@friday/shared';
+import logger from '@friday/logger';
 import Friday from '../../core/friday';
 import sendMessage from './mqtt.sendMessage';
 import handleMessage from './mqtt.handleMessage';
 import { EventsType, TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
-import logger from '../../utils/log';
 
 /**
  * MQTT manager

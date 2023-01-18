@@ -3,11 +3,11 @@ import chaiAsPromised from 'chai-as-promised';
 import chaiLike from 'chai-like';
 import chaiThings from 'chai-things';
 import { MqttOptions } from '@friday/shared';
+import logger from '@friday/logger';
 import Server from '../src/api/app';
 import Friday from '../src/core/friday';
 import { cleanDb, seedDb } from './utils/seed';
 import { umzug } from '../src/config/database';
-import logger from '../src/utils/log';
 
 const port = parseInt(process.env.SERVER_PORT || '3500', 10);
 const mqttPort = parseInt(process.env.MQTT_PORT || '1883', 10);

@@ -96,6 +96,7 @@ importers:
     specifiers:
       '@fnando/keyring': ^0.4.0
       '@friday/docker': workspace:*
+      '@friday/logger': workspace:*
       '@friday/shared': workspace:*
       '@mathieu_andrade/apidoc-markdown': ^1.0.5
       '@types/bcrypt': ^5.0.0
@@ -106,6 +107,7 @@ importers:
       '@types/chai-things': 0.0.35
       '@types/compression': ^1.7.2
       '@types/cors': ^2.8.13
+      '@types/dockerode': ^3.3.14
       '@types/express': ^4.17.15
       '@types/fs-extra': ^9.0.13
       '@types/glob': ^8.0.0
@@ -131,6 +133,7 @@ importers:
       compression: ^1.7.4
       cors: ^2.8.5
       cross-env: ^7.0.3
+      dockerode: ^3.3.4
       eslint: ^8.31.0
       eslint-config-airbnb-typescript-prettier: ^5.0.0
       eslint-plugin-import: ^2.26.0
@@ -166,10 +169,12 @@ importers:
     dependencies:
       '@fnando/keyring': 0.4.0
       '@friday/docker': link:../../packages/docker
+      '@friday/logger': link:../../packages/logger
       '@friday/shared': link:../../packages/shared
       '@types/bcrypt': 5.0.0
       '@types/bluebird': 3.5.38
       '@types/compression': 1.7.2
+      '@types/dockerode': 3.3.14
       '@types/express': 4.17.15
       '@types/fs-extra': 9.0.13
       '@types/glob': 8.0.0
@@ -185,6 +190,7 @@ importers:
       compression: 1.7.4
       cors: 2.8.5
       cross-env: 7.0.3
+      dockerode: 3.3.4
       express: 4.18.2
       express-rate-limit: 6.7.0_express@4.18.2
       fs-extra: 11.1.0

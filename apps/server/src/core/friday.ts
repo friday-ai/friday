@@ -1,5 +1,6 @@
 import Docker from '@friday/docker';
 
+import logger from '@friday/logger';
 import * as database from '../config/database';
 import Action from './action/action';
 import Device from './device/device';
@@ -23,7 +24,6 @@ import { FridayMode } from '../config/constants';
 import { generateJwtSecret } from '../utils/jwt';
 import jobs from '../config/jobs';
 import error from '../utils/decorators/error';
-import logger from '../utils/log';
 
 /**
  * Friday

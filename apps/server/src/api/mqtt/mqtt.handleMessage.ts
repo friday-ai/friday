@@ -1,8 +1,8 @@
+import logger from '@friday/logger';
 import { TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
 
 import MqttServer from './index';
 import error from '../../utils/decorators/error';
-import logger from '../../utils/log';
 
 export default function handleMessage(this: MqttServer, topic: string, message: string) {
   try {

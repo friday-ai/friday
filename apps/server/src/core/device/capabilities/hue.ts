@@ -1,7 +1,7 @@
 import { DevicesActions, DcstAttributes, DeviceCapabilitySettingsSchema, Color } from '@friday/shared';
+import logger from '@friday/logger';
 import DeviceClass from '../device';
 import { CapabilityManagerParamsList } from '../../../utils/interfaces';
-import logger from '../../../utils/log';
 import { checkProperty } from '../../../utils/object';
 
 export const options: CapabilityManagerParamsList = {

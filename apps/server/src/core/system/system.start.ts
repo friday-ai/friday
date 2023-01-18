@@ -1,5 +1,5 @@
+import logger from '@friday/logger';
 import System from './system';
-import logger from '../../utils/log';
 
 /**
  * Start function of Friday system

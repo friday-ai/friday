@@ -1,7 +1,7 @@
 import { DcstAttributes, DevicesActions } from '@friday/shared';
+import logger from '@friday/logger';
 import DeviceClass from '../device';
 import { CapabilityManagerParamsList } from '../../../utils/interfaces';
-import logger from '../../../utils/log';
 
 export const options: CapabilityManagerParamsList = {
   setOnOff: {

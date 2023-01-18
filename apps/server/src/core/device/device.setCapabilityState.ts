@@ -1,7 +1,7 @@
 import { DcstAttributes, DcstCreationAttributes } from '@friday/shared';
+import logger from '@friday/logger';
 import DeviceCapabilityState from '../../models/device_capability_state';
 import DeviceClass from './device';
-import logger from '../../utils/log';
 import { BadParametersError } from '../../utils/decorators/error';
 
 /**

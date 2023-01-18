@@ -1,7 +1,7 @@
 import { DeviceCapabilityAttributes, DeviceCapabilityRegisterAttributes } from '@friday/shared';
+import logger from '@friday/logger';
 import DeviceCapability from '../../models/device_capability';
 import DeviceClass from './device';
-import logger from '../../utils/log';
 import { BadParametersError } from '../../utils/decorators/error';
 import { exclude } from '../../utils/object';
 

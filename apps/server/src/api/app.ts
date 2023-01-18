@@ -5,8 +5,9 @@ import cors from 'cors';
 import compression from 'compression';
 import * as WebSocket from 'ws';
 import { MqttOptions } from '@friday/shared';
+import logger from '@friday/logger';
+
 import router from './routes/router';
-import logger from '../utils/log';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';
 import errorMiddleware from './middlewares/errorMiddleware';
 import WebsocketServer from './websocket/index';

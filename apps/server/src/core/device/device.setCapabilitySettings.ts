@@ -1,7 +1,7 @@
 import { DcsAttributes, DcsCreationAttributes, DeviceCapabilitySettingsSchema } from '@friday/shared';
+import logger from '@friday/logger';
 import DeviceCapabilitySettings from '../../models/device_capability_settings';
 import DeviceClass from './device';
-import logger from '../../utils/log';
 import { BadParametersError } from '../../utils/decorators/error';
 
 /**

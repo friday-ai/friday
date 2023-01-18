@@ -1,7 +1,7 @@
 import { DevicesActions, DcstAttributes } from '@friday/shared';
+import logger from '@friday/logger';
 import { CapabilityManagerParamsList } from '../../../utils/interfaces';
 import DeviceClass from '../device';
-import logger from '../../../utils/log';
 
 export const options: CapabilityManagerParamsList = {
   setLuminosity: {

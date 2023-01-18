@@ -1,8 +1,8 @@
 import { SessionCredentials, UserAttributes } from '@friday/shared';
+import logger from '@friday/logger';
 import User from '../../models/user';
 import { AuthError, NotFoundError } from '../../utils/decorators/error';
 import { compare } from '../../utils/password';
-import logger from '../../utils/log';
 import { exclude } from '../../utils/object';
 
 /**

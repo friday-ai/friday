@@ -1,6 +1,6 @@
 import schedule from 'node-schedule';
+import logger from '@friday/logger';
 import { JobsInterface } from './interfaces';
-import logger from './log';
 import EventClass from './event';
 
 /**

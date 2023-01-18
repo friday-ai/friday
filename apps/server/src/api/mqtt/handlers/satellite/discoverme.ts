@@ -1,5 +1,5 @@
 import { SatelliteAttributes } from '@friday/shared';
-import logger from '../../../../utils/log';
+import logger from '@friday/logger';
 import Friday from '../../../../core/friday';
 
 /*

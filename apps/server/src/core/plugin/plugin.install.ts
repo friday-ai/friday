@@ -1,9 +1,9 @@
 import { PluginAttributes, StateOwner, WebsocketMessageTypes, AvailableState } from '@friday/shared';
+import logger from '@friday/logger';
 import PluginClass from './plugin';
 import { PluginInstallOptions } from '../../utils/interfaces';
 import { EventsType } from '../../config/constants';
 import error, { NotFoundError } from '../../utils/decorators/error';
-import logger from '../../utils/log';
 
 /**
  * Install a plugin.

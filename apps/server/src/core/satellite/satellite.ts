@@ -1,9 +1,9 @@
 import { SatelliteAttributes, SatelliteCreationAttributes, AvailableState, StateOwner, SatelliteCreationKeys } from '@friday/shared';
+import logger from '@friday/logger';
 import BaseModel from '../../utils/database/model.base';
 import SatelliteModel from '../../models/satellite';
 import { Catch } from '../../utils/decorators/error';
 import StateClass from '../state/state';
-import logger from '../../utils/log';
 
 import heartbeat from './satellite.heartbeat';
 
