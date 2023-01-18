@@ -25,7 +25,7 @@ class HttpClient {
       const { data }: { data: T } = await axios({
         method,
         url,
-        baseURL: `http://localhost:${port}`,
+        baseURL: `http://${window.location.hostname}:${port}`,
         params: query,
         data: body,
         headers: this.auth.getHeaders(),

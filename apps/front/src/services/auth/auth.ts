@@ -17,7 +17,7 @@ class Auth {
     return !!this.session.accessToken;
   };
 
-  getHeaders = (): AxiosRequestHeaders => {
+  getHeaders = (): Partial<AxiosRequestHeaders> => {
     if (!this.hasSession()) {
       return {};
     }
@@ -33,7 +33,7 @@ class Auth {
 
   login = async (email: string, password: string, onSuccess: VoidFunction, onError: (error: string) => void) => {
     try {
-      const { data } = await axios.post<SessionType>(`http://localhost:${port}/api/v1/user/login`, { email, password });
+      const { data } = await axios.post<SessionType>(`http://${window.location.hostname}:${port}/api/v1/user/login`, { email, password });
       localStorage.setItem('session', JSON.stringify(data));
       onSuccess();
       this.setSession(data);
@@ -61,7 +61,7 @@ class Auth {
     this.setSession({});
 
     await axios.patch<SessionType>(
-      `http://localhost:${port}/api/v1/session/revoke/${sessionId}`,
+      `http://${window.location.hostname}:${port}/api/v1/session/revoke/${sessionId}`,
       {},
       {
         headers,
@@ -71,7 +71,7 @@ class Auth {
 
   refreshToken = async () => {
     try {
-      const { data } = await axios.post<SessionType>(`http://localhost:${port}/api/v1/session/access_token`, {
+      const { data } = await axios.post<SessionType>(`http://${window.location.hostname}:${port}/api/v1/session/access_token`, {
         refreshToken: this.session.refreshToken,
       });
 
@@ -83,7 +83,7 @@ class Auth {
   };
 
   signup = async (user: UserType) => {
-    const { data } = await axios.post<SessionType>(`http://localhost:${port}/api/v1/user/signup`, user);
+    const { data } = await axios.post<SessionType>(`http://${window.location.hostname}:${port}/api/v1/user/signup`, user);
     this.setSession(data);
     localStorage.setItem('session', JSON.stringify(data));
   };

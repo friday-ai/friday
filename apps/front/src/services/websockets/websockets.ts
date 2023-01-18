@@ -30,7 +30,7 @@ class Websockets {
       throw new Error('MAX_RETRY_EXCEEDED');
     }
     this.session = session;
-    this.socket = new WebSocket(`ws://localhost:${port}`);
+    this.socket = new WebSocket(`ws://${window.location.hostname}:${port}`);
     this.socket.onopen = () => {
       this.socket?.send(
         JSON.stringify({
