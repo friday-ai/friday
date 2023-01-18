@@ -1,6 +1,6 @@
 import Dockerode, { ContainerCreateOptions, ExecCreateOptions } from 'dockerode';
+import logger from '@friday/logger';
 import { Catch } from './utils/error';
-import logger from './utils/log';
 
 import isDocker from './core/docker.isDocker';
 import getAllContainers from './core/docker.getAllContainers';
