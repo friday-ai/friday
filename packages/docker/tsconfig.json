@@ -1,0 +1,5 @@
+{
+  "extends": "../tools/typescript.config.json",
+  "include": ["src/**/*", "test/**/*", ".eslintrc.js"],
+  "exclude": ["node_modules"]
+}
