@@ -1,9 +1,15 @@
 {
-  "name": "@friday/logger",
+  "name": "@friday-ai/logger",
   "version": "1.0.0",
   "description": "Friday: Log manager",
   "main": "src/index.ts",
+  "publishConfig": {
+    "main": "dist/index.js",
+    "typings": "dist/index.d.ts",
+    "directory": "dist"
+  },
   "scripts": {
+    "prepublish": "tsc --outDir ./dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
