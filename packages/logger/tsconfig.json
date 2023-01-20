@@ -1,6 +1,6 @@
 {
   "extends": "../tools/typescript.config.json",
-  "include": ["src/**/*", ".eslintrc.js", "./package.json"],
+  "include": ["src/**/*", ".eslintrc.js"],
   "compilerOptions": {
     "noEmit": false
   },
