@@ -1,11 +1,12 @@
 {
   "name": "@friday-ai/docker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Friday: Docker utilites",
   "main": "src/index.ts",
   "publishConfig": {
     "main": "dist/index.js",
-    "typings": "dist/index.d.ts"
+    "typings": "dist/index.d.ts",
+    "directory": "dist"
   },
   "scripts": {
     "prepublish": "tsc --project tsconfig.build.json --outDir ./dist",
