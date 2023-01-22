@@ -1,5 +1,5 @@
 import * as WebSocket from 'ws';
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import { WebsocketMessagePayload } from '../../utils/interfaces';
 import WebsocketServer from '.';
 import { BadParametersError } from '../../utils/decorators/error';

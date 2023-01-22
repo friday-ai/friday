@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { DevicesActions } from '@friday/shared';
+import { DevicesActions } from '@friday-ai/shared';
 import { EventsType } from '../../../../src/config/constants';
 import wait from '../../../utils/timer';
 

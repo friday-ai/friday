@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { SatelliteAttributes } from '@friday/shared';
+import { SatelliteAttributes } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/satellite', () => {

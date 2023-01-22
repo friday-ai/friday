@@ -1,4 +1,4 @@
-import { VariableAttributes } from '@friday/shared';
+import { VariableAttributes } from '@friday-ai/shared';
 import Variable from '../../models/variable';
 import { BadParametersError, NotFoundError } from '../../utils/decorators/error';
 

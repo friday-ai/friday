@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DevicesActions } from '@friday/shared';
+import { DevicesActions } from '@friday-ai/shared';
 import { EventEmitter } from 'events';
 import { EventsType } from '../config/constants';
 

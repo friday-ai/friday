@@ -4,7 +4,7 @@
 /* eslint-disable max-classes-per-file */
 import { UniqueConstraintError, ValidationError } from 'sequelize';
 import { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import { ErrorType } from '../interfaces';
 
 //      ____                                        __                                          __     _     __

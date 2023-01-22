@@ -16,7 +16,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { DeviceAttributes, DeviceCreationAttributes, DevicesTypes } from '@friday/shared';
+import { DeviceAttributes, DeviceCreationAttributes, DevicesTypes } from '@friday-ai/shared';
 import Plugin from './plugin';
 import Room from './room';
 import DeviceCapability from './device_capability';

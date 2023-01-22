@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { DeviceAttributes, SatelliteAttributes } from '@friday/shared';
+import { DeviceAttributes, SatelliteAttributes } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/room/:id', () => {

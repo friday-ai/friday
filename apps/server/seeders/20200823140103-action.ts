@@ -1,5 +1,5 @@
 import { QueryInterface } from 'sequelize';
-import { ActionsType } from '@friday/shared';
+import { ActionsType } from '@friday-ai/shared';
 
 export default {
   up: (queryInterface: QueryInterface) =>

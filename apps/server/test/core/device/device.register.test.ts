@@ -1,4 +1,4 @@
-import { DeviceRegisterAttributes, DevicesCapabilities, DevicesTypes } from '@friday/shared';
+import { DeviceRegisterAttributes, DevicesCapabilities, DevicesTypes } from '@friday-ai/shared';
 import { assert, expect } from 'chai';
 import Device from '../../../src/core/device/device';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';

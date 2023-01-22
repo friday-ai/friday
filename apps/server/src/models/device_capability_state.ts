@@ -14,7 +14,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { DcstCreationAttributes, DcstAttributes } from '@friday/shared';
+import { DcstCreationAttributes, DcstAttributes } from '@friday-ai/shared';
 import Device from './device';
 import DeviceCapability from './device_capability';
 import { isOwnerExisting } from '../utils/database/validation';

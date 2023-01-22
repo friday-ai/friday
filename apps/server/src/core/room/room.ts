@@ -1,4 +1,4 @@
-import { RoomAttributes, RoomCreationAttributes, AvailableState, StateOwner, RoomsCreationKeys } from '@friday/shared';
+import { RoomAttributes, RoomCreationAttributes, AvailableState, StateOwner, RoomsCreationKeys } from '@friday-ai/shared';
 import BaseModel from '../../utils/database/model.base';
 import RoomModel from '../../models/room';
 import StateClass from '../state/state';

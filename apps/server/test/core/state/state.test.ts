@@ -1,5 +1,5 @@
 import { assert, expect } from 'chai';
-import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '@friday/shared';
+import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '@friday-ai/shared';
 import State from '../../../src/core/state/state';
 import { DatabaseValidationError, NotFoundError } from '../../../src/utils/decorators/error';
 

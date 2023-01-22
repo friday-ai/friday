@@ -1,4 +1,4 @@
-import { PluginAttributes, VariableAttributes } from '@friday/shared';
+import { PluginAttributes, VariableAttributes } from '@friday-ai/shared';
 import { expect } from 'chai';
 import server from '../../../../utils/request';
 

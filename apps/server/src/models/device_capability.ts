@@ -16,7 +16,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { DcAttributes, DevicesCapabilities, DcCreationAttributes } from '@friday/shared';
+import { DcAttributes, DevicesCapabilities, DcCreationAttributes } from '@friday-ai/shared';
 import { isOwnerExisting } from '../utils/database/validation';
 import Room from './room';
 import Device from './device';

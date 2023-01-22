@@ -1,5 +1,5 @@
 import { QueryInterface } from 'sequelize';
-import { VariableOwner } from '@friday/shared';
+import { VariableOwner } from '@friday-ai/shared';
 import { version as packageVersion } from '../package.json';
 
 export default {

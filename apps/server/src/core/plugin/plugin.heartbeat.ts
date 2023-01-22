@@ -1,4 +1,4 @@
-import { PluginAttributes } from '@friday/shared';
+import { PluginAttributes } from '@friday-ai/shared';
 import { NotFoundError } from '../../utils/decorators/error';
 import Plugin from '../../models/plugin';
 

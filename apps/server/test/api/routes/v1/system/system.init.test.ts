@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { SystemVariablesNames, VariableOwner } from '@friday/shared';
+import { SystemVariablesNames, VariableOwner } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 import * as database from '../../../../../src/config/database';
 

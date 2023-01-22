@@ -1,5 +1,5 @@
-import { DeviceCapabilityAttributes, DeviceCapabilityRegisterAttributes } from '@friday/shared';
-import logger from '@friday/logger';
+import { DeviceCapabilityAttributes, DeviceCapabilityRegisterAttributes } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import DeviceCapability from '../../models/device_capability';
 import DeviceClass from './device';
 import { BadParametersError } from '../../utils/decorators/error';

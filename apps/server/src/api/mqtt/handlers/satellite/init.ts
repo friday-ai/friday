@@ -1,5 +1,5 @@
-import { SatelliteAttributes } from '@friday/shared';
-import logger from '@friday/logger';
+import { SatelliteAttributes } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import Friday from '../../../../core/friday';
 /*
  * @route('friday/master/satellite/init')

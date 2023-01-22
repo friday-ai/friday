@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable max-classes-per-file */
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import { ErrorType } from './interfaces';
 
 //      ____                                        __                                          __     _     __

@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { VariableOwner } from '@friday/shared';
+import { VariableOwner } from '@friday-ai/shared';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 import Variable from '../../../src/core/variable/variable';
 

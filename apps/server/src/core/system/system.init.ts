@@ -1,4 +1,4 @@
-import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '@friday/shared';
+import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '@friday-ai/shared';
 import System from './system';
 import { CoreError } from '../../utils/decorators/error';
 import { version as packageVersion } from '../../../package.json';

@@ -1,5 +1,5 @@
-import { DcsAttributes, DcsCreationAttributes, DeviceCapabilitySettingsSchema } from '@friday/shared';
-import logger from '@friday/logger';
+import { DcsAttributes, DcsCreationAttributes, DeviceCapabilitySettingsSchema } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import DeviceCapabilitySettings from '../../models/device_capability_settings';
 import DeviceClass from './device';
 import { BadParametersError } from '../../utils/decorators/error';

@@ -1,4 +1,4 @@
-import { SessionAttributes } from '@friday/shared';
+import { SessionAttributes } from '@friday-ai/shared';
 import { NotFoundError, UnauthorizedError } from '../../utils/decorators/error';
 import Session from '../../models/session';
 import { hashToken } from '../../utils/jwt';

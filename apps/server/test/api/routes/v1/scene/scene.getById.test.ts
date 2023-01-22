@@ -1,4 +1,4 @@
-import { ActionAttributes } from '@friday/shared';
+import { ActionAttributes } from '@friday-ai/shared';
 import { expect } from 'chai';
 import server from '../../../../utils/request';
 

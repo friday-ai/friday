@@ -1,4 +1,4 @@
-import { DcstAttributes, DeviceCommand } from '@friday/shared';
+import { DcstAttributes, DeviceCommand } from '@friday-ai/shared';
 import DeviceClass from './device';
 import { EventsType, MqttMessageTypes, TopicsTypes } from '../../config/constants';
 

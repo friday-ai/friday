@@ -23,7 +23,7 @@
     "typescript": "*"
   },
   "dependencies": {
-    "@friday/logger": "workspace:*",
+    "@friday-ai/logger": "workspace:*",
     "@types/dockerode": "^3.3.14",
     "dockerode": "^3.3.4"
   },

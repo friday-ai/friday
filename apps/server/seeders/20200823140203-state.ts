@@ -1,5 +1,5 @@
 import { QueryInterface } from 'sequelize';
-import { AvailableState, StateOwner } from '@friday/shared';
+import { AvailableState, StateOwner } from '@friday-ai/shared';
 
 export default {
   up: (queryInterface: QueryInterface) =>

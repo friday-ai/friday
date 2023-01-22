@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { DeviceAttributes, VariableAttributes } from '@friday/shared';
+import { DeviceAttributes, VariableAttributes } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 

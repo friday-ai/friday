@@ -95,9 +95,9 @@ importers:
   apps/server:
     specifiers:
       '@fnando/keyring': ^0.4.0
-      '@friday/docker': workspace:*
-      '@friday/logger': workspace:*
-      '@friday/shared': workspace:*
+      '@friday-ai/docker': workspace:*
+      '@friday-ai/logger': workspace:*
+      '@friday-ai/shared': workspace:*
       '@mathieu_andrade/apidoc-markdown': ^1.0.5
       '@types/bcrypt': ^5.0.0
       '@types/bluebird': ^3.5.38
@@ -168,9 +168,9 @@ importers:
       ws: ^8.12.0
     dependencies:
       '@fnando/keyring': 0.4.0
-      '@friday/docker': link:../../packages/docker
-      '@friday/logger': link:../../packages/logger
-      '@friday/shared': link:../../packages/shared
+      '@friday-ai/docker': link:../../packages/docker
+      '@friday-ai/logger': link:../../packages/logger
+      '@friday-ai/shared': link:../../packages/shared
       '@types/bcrypt': 5.0.0
       '@types/bluebird': 3.5.38
       '@types/compression': 1.7.2
@@ -243,7 +243,7 @@ importers:
 
   packages/docker:
     specifiers:
-      '@friday/logger': workspace:*
+      '@friday-ai/logger': workspace:*
       '@types/chai': ^4.3.4
       '@types/chai-as-promised': ^7.1.5
       '@types/chai-like': ^1.1.1
@@ -269,7 +269,7 @@ importers:
       sinon: ^15.0.1
       typescript: '*'
     dependencies:
-      '@friday/logger': link:../logger
+      '@friday-ai/logger': link:../logger
       '@types/dockerode': 3.3.14
       '@types/node': 18.11.18
       dockerode: 3.3.4

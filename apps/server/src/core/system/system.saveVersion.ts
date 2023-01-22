@@ -1,4 +1,4 @@
-import { VariableAttributes, SystemVariablesNames } from '@friday/shared';
+import { VariableAttributes, SystemVariablesNames } from '@friday-ai/shared';
 import System from './system';
 /**
  * Saves actual version of friday

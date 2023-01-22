@@ -1,6 +1,6 @@
 import { AllowNull, Column, DataType, Default, DefaultScope, IsUUID, Model, NotEmpty, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 
-import { ScriptAttributes, ScriptCreationAttributes } from '@friday/shared';
+import { ScriptAttributes, ScriptCreationAttributes } from '@friday-ai/shared';
 
 /**
  * Script model

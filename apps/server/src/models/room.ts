@@ -17,7 +17,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { RoomAttributes, RoomCreationAttributes } from '@friday/shared';
+import { RoomAttributes, RoomCreationAttributes } from '@friday-ai/shared';
 import House from './house';
 import Satellite from './satellite';
 import Device from './device';

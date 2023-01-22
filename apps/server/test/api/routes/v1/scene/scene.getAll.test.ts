@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { ActionAttributes, SceneAttributes } from '@friday/shared';
+import { ActionAttributes, SceneAttributes } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/scene', () => {

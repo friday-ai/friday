@@ -1,4 +1,4 @@
-import { AvailableState, StateOwner } from '@friday/shared';
+import { AvailableState, StateOwner } from '@friday-ai/shared';
 import PluginClass from './plugin';
 
 /**

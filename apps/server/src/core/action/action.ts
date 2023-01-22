@@ -1,4 +1,4 @@
-import { ActionAttributes, ActionCreationAttributes, ActionCreationKeys } from '@friday/shared';
+import { ActionAttributes, ActionCreationAttributes, ActionCreationKeys } from '@friday-ai/shared';
 import BaseModel from '../../utils/database/model.base';
 import ActionModel from '../../models/action';
 

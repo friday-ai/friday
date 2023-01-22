@@ -4,8 +4,8 @@ import helmet from 'helmet';
 import cors from 'cors';
 import compression from 'compression';
 import * as WebSocket from 'ws';
-import { MqttOptions } from '@friday/shared';
-import logger from '@friday/logger';
+import { MqttOptions } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 
 import router from './routes/router';
 import notFoundMiddleware from './middlewares/notFoundMiddleware';

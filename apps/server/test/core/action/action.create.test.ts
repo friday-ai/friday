@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { ActionCreationAttributes, ActionsType } from '@friday/shared';
+import { ActionCreationAttributes, ActionsType } from '@friday-ai/shared';
 import Action from '../../../src/core/action/action';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 

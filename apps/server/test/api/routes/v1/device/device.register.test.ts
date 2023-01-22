@@ -1,4 +1,4 @@
-import { DevicesCapabilities, DevicesTypes } from '@friday/shared';
+import { DevicesCapabilities, DevicesTypes } from '@friday-ai/shared';
 import { expect, assert } from 'chai';
 import server from '../../../../utils/request';
 

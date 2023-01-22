@@ -14,7 +14,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { VariableAttributes, VariableOwner, VariableCreationAttributes } from '@friday/shared';
+import { VariableAttributes, VariableOwner, VariableCreationAttributes } from '@friday-ai/shared';
 import User from './user';
 import Plugin from './plugin';
 import Satellite from './satellite';

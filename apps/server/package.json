@@ -38,9 +38,9 @@
   },
   "dependencies": {
     "@fnando/keyring": "^0.4.0",
-    "@friday/docker": "workspace:*",
-    "@friday/logger": "workspace:*",
-    "@friday/shared": "workspace:*",
+    "@friday-ai/docker": "workspace:*",
+    "@friday-ai/logger": "workspace:*",
+    "@friday-ai/shared": "workspace:*",
     "@types/bcrypt": "^5.0.0",
     "@types/bluebird": "^3.5.38",
     "@types/compression": "^1.7.2",

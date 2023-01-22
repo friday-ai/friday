@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { MqttOptions } from '@friday/shared';
+import { MqttOptions } from '@friday-ai/shared';
 import Friday from '../../../src/core/friday';
 import MqttBroker from '../../utils/mqttBroker';
 import MqttServer from '../../../src/api/mqtt';

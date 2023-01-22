@@ -1,4 +1,4 @@
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import Server from './api/app';
 import Friday from './core/friday';
 

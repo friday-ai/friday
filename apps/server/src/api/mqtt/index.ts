@@ -2,8 +2,8 @@
 /* eslint-disable global-require,import/no-dynamic-require */
 import { Client, connect } from 'mqtt';
 import { glob as Glob } from 'glob';
-import { MqttOptions } from '@friday/shared';
-import logger from '@friday/logger';
+import { MqttOptions } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import Friday from '../../core/friday';
 import sendMessage from './mqtt.sendMessage';
 import handleMessage from './mqtt.handleMessage';

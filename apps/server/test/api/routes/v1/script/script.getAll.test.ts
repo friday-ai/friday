@@ -1,4 +1,4 @@
-import { ScriptAttributes } from '@friday/shared';
+import { ScriptAttributes } from '@friday-ai/shared';
 import { expect } from 'chai';
 import server from '../../../../utils/request';
 

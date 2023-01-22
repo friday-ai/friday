@@ -1,4 +1,4 @@
-import { DevicesActions, WebsocketMessageTypes } from '@friday/shared';
+import { DevicesActions, WebsocketMessageTypes } from '@friday-ai/shared';
 import { EventsType, MqttMessageTypes, TopicsTypes } from '../config/constants';
 
 /**

@@ -1,4 +1,4 @@
-import { HouseCreationAttributes } from '@friday/shared';
+import { HouseCreationAttributes } from '@friday-ai/shared';
 import { assert } from 'chai';
 import House from '../../../src/core/house/house';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';

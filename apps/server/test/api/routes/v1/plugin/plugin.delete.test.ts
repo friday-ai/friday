@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { Container } from 'dockerode';
-import Docker from '@friday/docker';
+import Docker from '@friday-ai/docker';
 import Plugin from '../../../../../src/core/plugin/plugin';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';

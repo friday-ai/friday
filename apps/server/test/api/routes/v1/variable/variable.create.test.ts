@@ -1,5 +1,5 @@
 import { expect, assert } from 'chai';
-import { VariableOwner } from '@friday/shared';
+import { VariableOwner } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 import { admin, guest, habitant } from '../../../../utils/apiToken';
 

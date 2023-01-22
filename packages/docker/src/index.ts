@@ -1,5 +1,5 @@
 import Dockerode, { ContainerCreateOptions, ExecCreateOptions } from 'dockerode';
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import { Catch } from './utils/error';
 
 import isDocker from './core/docker.isDocker';

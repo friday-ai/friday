@@ -1,4 +1,4 @@
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import { PlatformNotCompatible } from '../utils/error';
 import Docker from '../index';
 

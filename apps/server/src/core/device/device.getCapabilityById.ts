@@ -1,4 +1,4 @@
-import { DcAttributes } from '@friday/shared';
+import { DcAttributes } from '@friday-ai/shared';
 import DeviceClass from './device';
 import DeviceCapability from '../../models/device_capability';
 import { NotFoundError } from '../../utils/decorators/error';

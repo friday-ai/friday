@@ -1,5 +1,5 @@
 import schedule from 'node-schedule';
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import { JobsInterface } from './interfaces';
 import EventClass from './event';
 

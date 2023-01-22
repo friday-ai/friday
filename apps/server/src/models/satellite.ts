@@ -18,7 +18,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { SatelliteAttributes, SatelliteCreationAttributes } from '@friday/shared';
+import { SatelliteAttributes, SatelliteCreationAttributes } from '@friday-ai/shared';
 import Room from './room';
 import State from './state';
 import Variable from './variable';

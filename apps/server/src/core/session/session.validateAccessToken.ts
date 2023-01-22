@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { SessionAttributes } from '@friday/shared';
+import { SessionAttributes } from '@friday-ai/shared';
 import SessionClass from './session';
 import { UnauthorizedError } from '../../utils/decorators/error';
 import { AccessTokenType } from '../../utils/interfaces';

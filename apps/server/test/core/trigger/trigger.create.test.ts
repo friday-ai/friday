@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import { AvailableConditions } from '@friday/shared';
+import { AvailableConditions } from '@friday-ai/shared';
 import Trigger from '../../../src/core/trigger/trigger';
 import { DatabaseValidationError } from '../../../src/utils/decorators/error';
 

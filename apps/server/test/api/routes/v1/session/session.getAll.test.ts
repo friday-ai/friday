@@ -1,4 +1,4 @@
-import { SessionAttributes } from '@friday/shared';
+import { SessionAttributes } from '@friday-ai/shared';
 import { expect } from 'chai';
 import server from '../../../../utils/request';
 

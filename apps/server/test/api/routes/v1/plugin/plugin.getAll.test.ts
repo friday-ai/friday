@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { PluginAttributes } from '@friday/shared';
+import { PluginAttributes } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 import { admin, habitant } from '../../../../utils/apiToken';
 

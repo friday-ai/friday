@@ -19,7 +19,7 @@ import {
   Validate,
 } from 'sequelize-typescript';
 
-import { PluginAttributes, PluginCreationAttributes } from '@friday/shared';
+import { PluginAttributes, PluginCreationAttributes } from '@friday-ai/shared';
 import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';

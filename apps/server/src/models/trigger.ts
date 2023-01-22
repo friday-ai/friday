@@ -14,7 +14,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { TriggerAttributes, AvailableConditions, TriggerCreationAttributes } from '@friday/shared';
+import { TriggerAttributes, AvailableConditions, TriggerCreationAttributes } from '@friday-ai/shared';
 import Scene from './scene';
 
 /**

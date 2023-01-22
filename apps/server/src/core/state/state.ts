@@ -1,4 +1,4 @@
-import { StateCreationAttributes } from '@friday/shared';
+import { StateCreationAttributes } from '@friday-ai/shared';
 import EventClass from '../../utils/event';
 import VariableClass from '../variable/variable';
 import { EventsType } from '../../config/constants';

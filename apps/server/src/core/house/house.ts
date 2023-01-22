@@ -1,4 +1,4 @@
-import { HouseAttributes, HouseCreationAttributes, AvailableState, StateOwner, HouseCreationKeys } from '@friday/shared';
+import { HouseAttributes, HouseCreationAttributes, AvailableState, StateOwner, HouseCreationKeys } from '@friday-ai/shared';
 import BaseModel from '../../utils/database/model.base';
 import HouseModel from '../../models/house';
 import StateClass from '../state/state';

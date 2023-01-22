@@ -1,5 +1,5 @@
 import { assert, expect } from 'chai';
-import { AvailableLanguages, UserRole } from '@friday/shared';
+import { AvailableLanguages, UserRole } from '@friday-ai/shared';
 import { DatabaseUniqueConstraintError, DatabaseValidationError } from '../../../src/utils/decorators/error';
 import User from '../../../src/core/user/user';
 

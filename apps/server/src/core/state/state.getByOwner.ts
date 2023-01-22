@@ -1,5 +1,5 @@
 import sequelize from 'sequelize';
-import { StateAttributes } from '@friday/shared';
+import { StateAttributes } from '@friday-ai/shared';
 import State from '../../models/state';
 import { NotFoundError } from '../../utils/decorators/error';
 

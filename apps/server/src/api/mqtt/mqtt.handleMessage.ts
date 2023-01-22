@@ -1,4 +1,4 @@
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import { TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
 
 import MqttServer from './index';

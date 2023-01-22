@@ -1,5 +1,5 @@
 import { Op } from 'sequelize';
-import { SystemVariablesNames } from '@friday/shared';
+import { SystemVariablesNames } from '@friday-ai/shared';
 import State from '../../models/state';
 import StateClass from './state';
 import { CoreError } from '../../utils/decorators/error';

@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
-import { DevicesActions } from '@friday/shared';
+import { DevicesActions } from '@friday-ai/shared';
 import Device from '../../../src/core/device/device';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 import { EventsType } from '../../../src/config/constants';

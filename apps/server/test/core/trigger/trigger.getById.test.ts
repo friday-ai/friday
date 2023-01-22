@@ -1,5 +1,5 @@
 import { assert, expect } from 'chai';
-import { SceneAttributes } from '@friday/shared';
+import { SceneAttributes } from '@friday-ai/shared';
 import Trigger from '../../../src/core/trigger/trigger';
 import { NotFoundError } from '../../../src/utils/decorators/error';
 

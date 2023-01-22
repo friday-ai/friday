@@ -1,5 +1,5 @@
 import { QueryInterface } from 'sequelize';
-import { AvailableConditions } from '@friday/shared';
+import { AvailableConditions } from '@friday-ai/shared';
 
 export default {
   up: (queryInterface: QueryInterface) =>

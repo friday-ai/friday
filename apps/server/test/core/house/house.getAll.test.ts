@@ -1,4 +1,4 @@
-import { HouseAttributes } from '@friday/shared';
+import { HouseAttributes } from '@friday-ai/shared';
 import { expect } from 'chai';
 import House from '../../../src/core/house/house';
 

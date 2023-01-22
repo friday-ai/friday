@@ -1,5 +1,5 @@
-import { PluginAttributes, StateOwner, WebsocketMessageTypes, AvailableState } from '@friday/shared';
-import logger from '@friday/logger';
+import { PluginAttributes, StateOwner, WebsocketMessageTypes, AvailableState } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import PluginClass from './plugin';
 import { PluginInstallOptions } from '../../utils/interfaces';
 import { EventsType } from '../../config/constants';

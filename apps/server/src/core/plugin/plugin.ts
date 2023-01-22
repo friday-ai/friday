@@ -1,5 +1,5 @@
-import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys } from '@friday/shared';
-import DockerClass from '@friday/docker';
+import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys } from '@friday-ai/shared';
+import DockerClass from '@friday-ai/docker';
 
 import StateClass from '../state/state';
 import BaseModel from '../../utils/database/model.base';

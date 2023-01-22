@@ -1,4 +1,4 @@
-import { UserAttributes } from '@friday/shared';
+import { UserAttributes } from '@friday-ai/shared';
 import { expect } from 'chai';
 import User from '../../../src/core/user/user';
 

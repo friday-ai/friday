@@ -18,7 +18,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { UserAttributes, AvailableLanguages, UserRole, UserCreationAttributes } from '@friday/shared';
+import { UserAttributes, AvailableLanguages, UserRole, UserCreationAttributes } from '@friday-ai/shared';
 import Variable from './variable';
 import State from './state';
 import Session from './session';

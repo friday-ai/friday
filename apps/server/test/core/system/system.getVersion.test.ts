@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { SystemVariablesNames } from '@friday/shared';
+import { SystemVariablesNames } from '@friday-ai/shared';
 import { version as packageVersion } from '../../../package.json';
 import Friday from '../../../src/core/friday';
 

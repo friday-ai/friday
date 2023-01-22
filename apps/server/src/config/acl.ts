@@ -1,4 +1,4 @@
-import { UserRole } from '@friday/shared';
+import { UserRole } from '@friday-ai/shared';
 
 export default {
   [UserRole.SUPERADMIN]: {

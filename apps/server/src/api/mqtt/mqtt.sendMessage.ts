@@ -1,4 +1,4 @@
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import MqttServer from './index';
 import error, { BadParametersError } from '../../utils/decorators/error';
 import { MqttMessagePayload, MqttSendOptions } from '../../utils/interfaces';

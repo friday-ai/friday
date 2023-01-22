@@ -1,5 +1,5 @@
-import { StateAttributes } from '@friday/shared';
-import logger from '@friday/logger';
+import { StateAttributes } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import Friday from '../../../../core/friday';
 
 /*

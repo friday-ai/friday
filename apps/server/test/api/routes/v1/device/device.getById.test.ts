@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { DcAttributes } from '@friday/shared';
+import { DcAttributes } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/device/:id', () => {

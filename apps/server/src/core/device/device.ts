@@ -12,7 +12,7 @@ import {
   DeviceCapabilitySettingsSchema,
   DeviceRegisterAttributes,
   DeviceCreationKeys,
-} from '@friday/shared';
+} from '@friday-ai/shared';
 
 import { glob as Glob } from 'glob';
 

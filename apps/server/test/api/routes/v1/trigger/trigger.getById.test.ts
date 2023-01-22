@@ -1,4 +1,4 @@
-import { SceneAttributes } from '@friday/shared';
+import { SceneAttributes } from '@friday-ai/shared';
 import { expect } from 'chai';
 import server from '../../../../utils/request';
 

@@ -14,7 +14,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { StateAttributes, StateOwner, StateCreationAttributes } from '@friday/shared';
+import { StateAttributes, StateOwner, StateCreationAttributes } from '@friday-ai/shared';
 import User from './user';
 import Satellite from './satellite';
 import Room from './room';

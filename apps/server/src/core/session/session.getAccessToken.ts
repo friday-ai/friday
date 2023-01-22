@@ -1,4 +1,4 @@
-import { SessionAttributes } from '@friday/shared';
+import { SessionAttributes } from '@friday-ai/shared';
 import SessionClass from './session';
 import { generateAccessToken } from '../../utils/jwt';
 import { BadParametersError } from '../../utils/decorators/error';

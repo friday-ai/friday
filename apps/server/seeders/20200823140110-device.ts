@@ -1,5 +1,5 @@
 import { QueryInterface } from 'sequelize';
-import { DevicesTypes } from '@friday/shared';
+import { DevicesTypes } from '@friday-ai/shared';
 
 export default {
   up: (queryInterface: QueryInterface) =>

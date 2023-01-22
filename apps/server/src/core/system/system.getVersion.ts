@@ -1,4 +1,4 @@
-import { SystemVariablesNames } from '@friday/shared';
+import { SystemVariablesNames } from '@friday-ai/shared';
 import error, { NotFoundError } from '../../utils/decorators/error';
 import System from './system';
 import { version as packageVersion } from '../../../package.json';

@@ -1,5 +1,5 @@
 import { expect, assert } from 'chai';
-import { AvailableState, StateOwner } from '@friday/shared';
+import { AvailableState, StateOwner } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 
 describe('POST /api/v1/state', () => {

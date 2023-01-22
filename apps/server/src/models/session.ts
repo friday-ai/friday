@@ -16,7 +16,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { SessionAttributes, SessionCreationAttributes } from '@friday/shared';
+import { SessionAttributes, SessionCreationAttributes } from '@friday-ai/shared';
 import User from './user';
 import { isOwnerExisting } from '../utils/database/validation';
 

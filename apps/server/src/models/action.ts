@@ -15,7 +15,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { ActionAttributes, ActionCreationAttributes, ActionsType } from '@friday/shared';
+import { ActionAttributes, ActionCreationAttributes, ActionsType } from '@friday-ai/shared';
 import Scene from './scene';
 import { isOwnerExisting } from '../utils/database/validation';
 

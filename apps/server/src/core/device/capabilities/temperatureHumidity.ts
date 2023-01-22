@@ -1,4 +1,4 @@
-import { DcstAttributes, DevicesActions } from '@friday/shared';
+import { DcstAttributes, DevicesActions } from '@friday-ai/shared';
 import { CapabilityManagerParamsList } from '../../../utils/interfaces';
 import DeviceClass from '../device';
 

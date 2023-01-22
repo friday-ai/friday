@@ -1,4 +1,4 @@
-import { DevicesCapabilities } from '@friday/shared';
+import { DevicesCapabilities } from '@friday-ai/shared';
 import { assert, expect } from 'chai';
 import Device from '../../../src/core/device/device';
 import { BadParametersError, DatabaseValidationError } from '../../../src/utils/decorators/error';

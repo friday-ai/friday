@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { TriggerAttributes } from '@friday/shared';
+import { TriggerAttributes } from '@friday-ai/shared';
 import Trigger from '../../../src/core/trigger/trigger';
 
 let trigger: Trigger;

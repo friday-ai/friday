@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { RoomAttributes } from '@friday/shared';
+import { RoomAttributes } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/room', () => {

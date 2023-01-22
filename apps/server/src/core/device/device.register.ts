@@ -1,4 +1,4 @@
-import { DeviceAttributes, DeviceRegisterAttributes } from '@friday/shared';
+import { DeviceAttributes, DeviceRegisterAttributes } from '@friday-ai/shared';
 import DeviceClass from './device';
 
 /**

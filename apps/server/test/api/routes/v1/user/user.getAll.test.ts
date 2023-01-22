@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { UserAttributes } from '@friday/shared';
+import { UserAttributes } from '@friday-ai/shared';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/user', () => {

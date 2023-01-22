@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { WebsocketMessageTypes } from '@friday/shared';
+import { WebsocketMessageTypes } from '@friday-ai/shared';
 
 /**
  * Format websocket message

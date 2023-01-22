@@ -1,6 +1,6 @@
 import * as WebSocket from 'ws';
-import { WebsocketMessageTypes } from '@friday/shared';
-import logger from '@friday/logger';
+import { WebsocketMessageTypes } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import { WebsocketMessagePayload } from '../../utils/interfaces';
 import WebsocketServer from '.';
 

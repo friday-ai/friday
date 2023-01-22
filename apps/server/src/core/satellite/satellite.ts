@@ -1,5 +1,5 @@
-import { SatelliteAttributes, SatelliteCreationAttributes, AvailableState, StateOwner, SatelliteCreationKeys } from '@friday/shared';
-import logger from '@friday/logger';
+import { SatelliteAttributes, SatelliteCreationAttributes, AvailableState, StateOwner, SatelliteCreationKeys } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import BaseModel from '../../utils/database/model.base';
 import SatelliteModel from '../../models/satellite';
 import { Catch } from '../../utils/decorators/error';

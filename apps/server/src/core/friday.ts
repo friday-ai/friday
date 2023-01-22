@@ -1,6 +1,6 @@
-import Docker from '@friday/docker';
+import Docker from '@friday-ai/docker';
 
-import logger from '@friday/logger';
+import logger from '@friday-ai/logger';
 import * as database from '../config/database';
 import Action from './action/action';
 import Device from './device/device';

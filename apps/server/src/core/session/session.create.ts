@@ -1,4 +1,4 @@
-import { SessionAttributes, SessionCreationAttributes, SessionCredentials } from '@friday/shared';
+import { SessionAttributes, SessionCreationAttributes, SessionCredentials } from '@friday-ai/shared';
 import Session from '../../models/session';
 import SessionClass from './session';
 import { generateRefreshToken, generateAccessToken } from '../../utils/jwt';

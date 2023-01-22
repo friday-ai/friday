@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { SatelliteAttributes, AvailableState } from '@friday/shared';
+import { SatelliteAttributes, AvailableState } from '@friday-ai/shared';
 import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
 import { encrypt } from '../../../utils/keyring';

@@ -1,5 +1,5 @@
-import { DcstAttributes, DevicesActions } from '@friday/shared';
-import logger from '@friday/logger';
+import { DcstAttributes, DevicesActions } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import { CapabilityManagerParamsList } from '../../../utils/interfaces';
 import DeviceClass from '../device';
 

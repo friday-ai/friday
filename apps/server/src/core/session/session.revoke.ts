@@ -1,4 +1,4 @@
-import { SessionAttributes } from '@friday/shared';
+import { SessionAttributes } from '@friday-ai/shared';
 import Session from '../../models/session';
 import { BadParametersError, NotFoundError } from '../../utils/decorators/error';
 

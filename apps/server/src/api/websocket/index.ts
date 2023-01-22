@@ -1,5 +1,5 @@
 import * as WebSocket from 'ws';
-import { UserAttributes } from '@friday/shared';
+import { UserAttributes } from '@friday-ai/shared';
 import Friday from '../../core/friday';
 import handleMessage from './websocket.handleMessage';
 import clientConnected from './websocket.clientConnected';

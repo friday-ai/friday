@@ -1,4 +1,4 @@
-import { SatelliteAttributes } from '@friday/shared';
+import { SatelliteAttributes } from '@friday-ai/shared';
 import { NotFoundError } from '../../utils/decorators/error';
 import Satellite from '../../models/satellite';
 

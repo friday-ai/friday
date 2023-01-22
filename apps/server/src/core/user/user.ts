@@ -1,4 +1,4 @@
-import { UserAttributes, UserCreationAttributes, AvailableState, StateOwner, UserCreationKeys } from '@friday/shared';
+import { UserAttributes, UserCreationAttributes, AvailableState, StateOwner, UserCreationKeys } from '@friday-ai/shared';
 import BaseModel from '../../utils/database/model.base';
 import UserModel from '../../models/user';
 import { Catch } from '../../utils/decorators/error';

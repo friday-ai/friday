@@ -1,4 +1,4 @@
-import { VariableAttributes, VariableCreationAttributes, VariableCreationKeys } from '@friday/shared';
+import { VariableAttributes, VariableCreationAttributes, VariableCreationKeys } from '@friday-ai/shared';
 import BaseModel from '../../utils/database/model.base';
 import VariableModel from '../../models/variable';
 import { Catch } from '../../utils/decorators/error';

@@ -1,5 +1,5 @@
-import { StateAttributes, StateCreationAttributes, StateCreationKeys } from '@friday/shared';
-import logger from '@friday/logger';
+import { StateAttributes, StateCreationAttributes, StateCreationKeys } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import State from '../../models/state';
 import { exclude, pick } from '../../utils/object';
 

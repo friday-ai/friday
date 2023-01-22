@@ -1,4 +1,4 @@
-import { SessionAttributes, SessionCredentials } from '@friday/shared';
+import { SessionAttributes, SessionCredentials } from '@friday-ai/shared';
 import { Catch } from '../../utils/decorators/error';
 import SessionModel from '../../models/session';
 import { PartialModel } from '../../utils/database/model.partial';

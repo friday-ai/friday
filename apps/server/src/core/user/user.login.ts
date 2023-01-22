@@ -1,5 +1,5 @@
-import { SessionCredentials, UserAttributes } from '@friday/shared';
-import logger from '@friday/logger';
+import { SessionCredentials, UserAttributes } from '@friday-ai/shared';
+import logger from '@friday-ai/logger';
 import User from '../../models/user';
 import { AuthError, NotFoundError } from '../../utils/decorators/error';
 import { compare } from '../../utils/password';

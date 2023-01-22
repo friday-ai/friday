@@ -1,4 +1,4 @@
-import { TriggerAttributes } from '@friday/shared';
+import { TriggerAttributes } from '@friday-ai/shared';
 import { expect } from 'chai';
 import server from '../../../../utils/request';
 
