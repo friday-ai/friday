@@ -24,7 +24,7 @@ const getBorderColor = (state: AvailableState): string => {
   }
 };
 
-function SatelliteState({ state }) {
+function SatelliteState({ state }: { state: AvailableState }) {
   switch (state) {
     case AvailableState.SATELLITE_CONNECTED:
       return <Badge text="online" type="badge-success" />;

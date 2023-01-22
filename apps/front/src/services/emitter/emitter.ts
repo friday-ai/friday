@@ -1,4 +1,4 @@
-type Listener = (args: unknown) => void;
+type Listener = (args: any) => void;
 
 class Emitter {
   private eventHandlers: Record<string, Listener[]> = {};
