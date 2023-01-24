@@ -2,16 +2,14 @@
   "name": "@friday-ai/logger",
   "version": "1.0.1",
   "description": "Friday: Log manager",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "lib/index.js",
-    "typings": "lib/index.d.ts"
-  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "prepublish": "tsc --outDir ./lib",
+    "prepublish": "pnpm build",
+    "build": "tsc --outDir ./lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

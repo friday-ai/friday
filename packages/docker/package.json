@@ -2,16 +2,14 @@
   "name": "@friday-ai/docker",
   "version": "1.0.3",
   "description": "Friday: Docker utilites",
-  "main": "src/index.ts",
-  "publishConfig": {
-    "main": "lib/index.js",
-    "typings": "lib/index.d.ts"
-  },
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
-    "prepublish": "tsc --project tsconfig.build.json --outDir ./lib",
+    "prepublish": "pnpm build",
+    "build": "tsc --project tsconfig.build.json --outDir ./lib",
     "test": "cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/**/*.test.ts -exit"
   },
   "keywords": [],

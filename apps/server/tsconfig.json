@@ -2,7 +2,9 @@
   "extends": "../../packages/tools/typescript.config.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "noEmit": false
+    "noEmit": false,
+    "declaration": false,
+    "declarationMap": false
   },
   "include": ["src/**/*", "src/models/*", "seeders/*", "migrations/*", "test/**/*", ".eslintrc.js"],
   "exclude": ["node_modules"]

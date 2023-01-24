@@ -2,7 +2,7 @@
   "name": "friday-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/src/server.js",
   "scripts": {
     "start": "per-env",
     "start:prod": "cross-env NODE_ENV=production SERVER_PORT=1443 node ./dist/src/server.js",
