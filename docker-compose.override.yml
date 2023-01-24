@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  friday:
-    user: "1000:1000"
-    volumes:
-      # Base
-      - .:/src

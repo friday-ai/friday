@@ -1,14 +1,26 @@
-version: '3'
+version: '3.4'
 
 services:
-  friday:
-    container_name: Friday-ai
-    image: fridayai/friday:dev
+  friday-back:
+    container_name: Friday-ai-back
+    image: fridayai/friday-back:dev
     build:
       context: ./
       dockerfile: ./docker/Dockerfile-development
+      target: back-end
     ports:
       - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - MQTT_HOST=host.docker.internal
+  friday-front:
+    container_name: Friday-ai-front
+    image: fridayai/friday-front:dev
+    build:
+      context: ./
+    depends_on:
+      - friday-back
+    ports:
       - "3001:3001"
     environment:
       - NODE_ENV=development
