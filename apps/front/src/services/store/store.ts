@@ -1,4 +1,4 @@
-import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { combineReducers, configureStore, getDefaultMiddleware, Store } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import appReducer from '../../components/App/app.reducer';
 
@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
   app: appReducer,
 });
 
-const store = configureStore({
+const store: Store = configureStore({
   reducer: rootReducer,
   middleware: [...getDefaultMiddleware()],
   devTools: DEV,
