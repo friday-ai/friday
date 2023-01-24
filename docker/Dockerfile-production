@@ -24,7 +24,7 @@ COPY ../ ./
 
 RUN pnpm fetch \
     && pnpm install -r  \
-    && pnpm --filter "./packages" build \
+    && pnpm --filter "./packages/*" build \
     && pnpm build \
     && pnpm --filter "./apps/server" --prod deploy pruned-server
 
@@ -40,10 +40,10 @@ ENV NODE_ENV production
 
 # Ping friday to check heartbeat
 HEALTHCHECK --interval=10s --retries=5 \
-   CMD curl --fail "http://localhost:1443" || exit 1
+   CMD curl --fail "http://localhost:1444" || exit 1
 
 # Export listening port
-EXPOSE 1443
+EXPOSE 1444
 
 # Friday back ------------------------------------------
 FROM base as back-end
@@ -58,7 +58,7 @@ ENV NODE_ENV production
 
 # Ping friday to check heartbeat
 HEALTHCHECK --interval=10s --retries=5 \
-   CMD curl --fail "http://localhost:1444" || exit 1
+   CMD curl --fail "http://localhost:1443" || exit 1
 
 # Export listening port
-EXPOSE 1444
+EXPOSE 1443
