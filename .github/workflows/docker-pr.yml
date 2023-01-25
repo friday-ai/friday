@@ -17,10 +17,11 @@ jobs:
           apk add docker
           addgroup root docker
           docker pull alpine
+          npm install -g pnpm
 
       - name: Install dependencies
-        working-directory: ./server
-        run: yarn
+        working-directory: .
+        run: pnpm -r install
 
       - uses: actions/checkout@v2
       - name: 'Reviewdog: ESLint'
@@ -30,21 +31,21 @@ jobs:
           reporter: 'github-pr-review'
           fail_on_error: true
           eslint_flags: '--ext .js,.jsx,.ts,.tsx ./'
-          workdir: /server
+          workdir: /apps/server
 
       - name: 'Run Mocha/Chai unit tests'
-        run: yarn run coverage-server:junit
+        run: pnpm coverage-server:junit
 
       - name: 'Publish Unit Test Results'
         uses: EnricoMi/publish-unit-test-result-action@v1.9
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          files: ./server/test-results.xml
+          files: ./apps/server/test-results.xml
 
       - name: 'Upload coverage to Codecov'
         uses: codecov/codecov-action@v2
         if: always()
         with:
           fail_ci_if_error: true
-          directory: ./server/
+          directory: ./apps/server/
