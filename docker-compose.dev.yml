@@ -6,6 +6,8 @@ services:
       dockerfile: ./docker/Dockerfile-development
       target: front-end
     user: "1000:1000"
+    ports:
+      - "3001:3001"
     volumes:
       # Base
       - ./package.json:/src/package.json
@@ -15,6 +17,8 @@ services:
       - ./packages:/src/packages
   friday-front:
     user: "1000:1000"
+    ports:
+      - "3000:3000"
     volumes:
       # Base
       - ./package.json:/src/package.json
