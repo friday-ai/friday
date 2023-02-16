@@ -9,10 +9,12 @@ interface PluginIframeProps {
   plugin: string;
   url: string;
   hidden?: boolean;
+  minWidth?: number;
+  minHeight?: number;
   setPluginState?: (state: number) => void;
 }
 
-function PluginIframe({ plugin, url, hidden, setPluginState }: PluginIframeProps) {
+function PluginIframe({ plugin, url, hidden, minWidth, minHeight, setPluginState }: PluginIframeProps) {
   const selectedTheme = useAppSelector(theme);
   const frame = useRef<HTMLIFrameElement>(null);
   const [id] = useState(randomStr(15));
@@ -26,12 +28,24 @@ function PluginIframe({ plugin, url, hidden, setPluginState }: PluginIframeProps
     [frame, id]
   );
 
-  const setFrameLength = (width: number, height: number) => {
-    if (frame.current !== null) {
-      frame.current.style.height = `${height}px`;
-      frame.current.style.width = `${width + 100}px`;
-    }
-  };
+  const setFrameLength = useCallback(
+    (width: number, height: number) => {
+      if (frame.current !== null) {
+        if (minHeight === 0 && minHeight < height) {
+          frame.current.style.height = `${height}px`;
+        } else {
+          frame.current.style.height = `${minHeight}px`;
+        }
+
+        if (minWidth === 0 && minWidth < width) {
+          frame.current.style.width = `${width + 100}px`;
+        } else {
+          frame.current.style.width = `${minWidth}px`;
+        }
+      }
+    },
+    [minWidth, minHeight]
+  );
 
   const updateTheme = useCallback(() => {
     if (frame.current !== null && hidden !== true) {
@@ -64,7 +78,7 @@ function PluginIframe({ plugin, url, hidden, setPluginState }: PluginIframeProps
             break;
           case 'plugin-state':
             if (setPluginState) {
-              setPluginState(Number(msg.data.state));
+              setPluginState(msg.data.state === 'plugin.waiting.configuration' ? 1 : 0);
             }
             break;
           default:
@@ -72,7 +86,7 @@ function PluginIframe({ plugin, url, hidden, setPluginState }: PluginIframeProps
         }
       }
     });
-  }, [id, frame, setPluginState]);
+  }, [id, frame, setPluginState, setFrameLength]);
 
   useEffect(() => {
     updateTheme();
@@ -81,7 +95,7 @@ function PluginIframe({ plugin, url, hidden, setPluginState }: PluginIframeProps
   return (
     <iframe
       ref={frame}
-      className={`w-full ${hidden && 'hidden'}`}
+      className={`w-full ${hidden === true ? 'hidden' : ''}`}
       id={plugin}
       title={plugin}
       src={url}
@@ -93,6 +107,8 @@ function PluginIframe({ plugin, url, hidden, setPluginState }: PluginIframeProps
 
 PluginIframe.defaultProps = {
   hidden: false,
+  minWidth: 0,
+  minHeight: 0,
   setPluginState: (_state: number) => null,
 };
 

@@ -35,6 +35,8 @@ interface PluginSchema {
   config: {
     title?: string;
     url?: string;
+    minWidth?: number;
+    minHeight?: number;
   };
   modals?: {
     id: string;
@@ -61,10 +63,16 @@ function PluginConfiguration() {
 
   return (
     <div className="m-4">
-      <PluginIframe plugin="zwave" url="http://localhost:9595" hidden={data.root && data.root.url !== undefined} setPluginState={setPluginState} />
+      <PluginIframe plugin="zwave" url="http://localhost:9595" hidden={data.root.url === undefined} setPluginState={setPluginState} />
 
       {pluginState === 1 && data.config && data.config.url !== undefined && (
-        <Config plugin="zwave" title={data.config.title || ''} url={data.config.url} />
+        <Config
+          plugin="zwave"
+          title={data.config.title || ''}
+          url={data.config.url}
+          minWidth={data.config.minWidth}
+          minHeight={data.config.minHeight}
+        />
       )}
 
       {pluginState !== 1 && data.root && data.root.url === undefined && (
