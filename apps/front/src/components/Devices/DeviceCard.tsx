@@ -20,7 +20,7 @@ function DeviceCard({ device }: DeviceCardProps) {
     return <LightCard onoff={onOffCpapbility} />;
   }
 
-  return <div className="card-base">Device Not supported, :/</div>;
+  return <div className="card-base hidden">Device Not supported, :/</div>;
 }
 
 export default DeviceCard;
