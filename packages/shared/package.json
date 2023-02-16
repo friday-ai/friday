@@ -1,6 +1,6 @@
 {
   "name": "@friday-ai/shared",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Friday: Shared utilites",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -20,6 +20,7 @@
     "typescript": "*"
   },
   "devDependencies": {
+    "@types/node": "^18.13.0",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
     "eslint": "^8.31.0",

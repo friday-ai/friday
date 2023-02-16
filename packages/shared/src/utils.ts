@@ -30,3 +30,7 @@ export interface MqttOptions {
 export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 
 export type PartlyRequired<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, K>>;
+
+export type Constructor<T = {}> = new (...args: any[]) => T;
+
+export type UnionToIntersection<T> = (T extends any ? (x: T) => any : never) extends (x: infer R) => any ? R : never;

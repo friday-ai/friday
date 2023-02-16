@@ -65,6 +65,7 @@ export type DeviceCapabilitySettingsSchema = OnOffSettings | BrightnessSettings;
 export type DeviceCapabilityRegisterAttributes = {
   defaultName: string;
   type: DevicesCapabilities;
+  externalId?: string;
   settings?: DeviceCapabilitySettingsSchema;
 };
 
@@ -74,7 +75,7 @@ export type DeviceRegisterAttributes = {
   defaultModel: string;
   type: DevicesTypes;
   viaDevice?: string;
-  pluginSelector?: string;
+  externalId?: string;
   pluginId: string;
   capabilities?: DeviceCapabilityRegisterAttributes[];
 };

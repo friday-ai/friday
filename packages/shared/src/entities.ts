@@ -32,7 +32,7 @@ export type DeviceAttributes = {
   type: DevicesTypes;
   manufacturer: string;
   model: string;
-  pluginSelector: string;
+  externalId: string;
   viaDevice: string;
   roomId: string;
   pluginId: string;
@@ -55,7 +55,7 @@ export const DeviceCreationKeys = [
   'type',
   'manufacturer',
   'model',
-  'pluginSelector',
+  'externalId',
   'viaDevice',
   'roomId',
   'pluginId',
@@ -69,6 +69,7 @@ export type DeviceCapabilityAttributes = {
   defaultName: string;
   name: string;
   type: DevicesCapabilities;
+  externalId: string;
   deviceId: string;
   roomId: string;
   device: DeviceAttributes;
@@ -85,7 +86,7 @@ export type DeviceCapabilityCreationAttributes = PartlyRequired<Partial<Omit<DcA
 /** Syntactic sugar for "DeviceCapabilityCreationAttributes" */
 export type DcCreationAttributes = DeviceCapabilityCreationAttributes;
 
-export const DeviceCapabilityCreationKeys = ['defaultName', 'name', 'type', 'deviceId', 'roomId', 'settings', 'state'];
+export const DeviceCapabilityCreationKeys = ['defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId', 'settings', 'state'];
 
 /** Syntactic sugar for "DeviceCapabilityCreationKeys" */
 export const DcCreationKeys = DeviceCapabilityCreationKeys;
