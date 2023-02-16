@@ -35,7 +35,7 @@ export default {
       model: {
         type: DataType.JSON,
       },
-      pluginSelector: {
+      externalId: {
         type: DataType.STRING,
       },
       viaDevice: {

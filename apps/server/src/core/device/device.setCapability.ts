@@ -20,7 +20,7 @@ export default async function setCapability(
   }
 
   const deviceCapabilityObject = await DeviceCapability.create({
-    ...{ defaultName: capability.defaultName, type: capability.type },
+    ...{ defaultName: capability.defaultName, type: capability.type, externalId: capability.externalId },
     ...{ deviceId },
   });
 

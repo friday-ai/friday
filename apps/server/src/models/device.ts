@@ -35,7 +35,7 @@ import { isOwnerExisting } from '../utils/database/validation';
     'type',
     'manufacturer',
     'model',
-    'pluginSelector',
+    'externalId',
     'viaDevice',
     'roomId',
     'pluginId',
@@ -52,7 +52,7 @@ import { isOwnerExisting } from '../utils/database/validation';
       'type',
       'manufacturer',
       'model',
-      'pluginSelector',
+      'externalId',
       'viaDevice',
       'roomId',
       'pluginId',
@@ -69,7 +69,7 @@ import { isOwnerExisting } from '../utils/database/validation';
       'type',
       'manufacturer',
       'model',
-      'pluginSelector',
+      'externalId',
       'viaDevice',
       'roomId',
       'pluginId',
@@ -86,7 +86,7 @@ import { isOwnerExisting } from '../utils/database/validation';
       'type',
       'manufacturer',
       'model',
-      'pluginSelector',
+      'externalId',
       'viaDevice',
       'roomId',
       'pluginId',
@@ -103,7 +103,7 @@ import { isOwnerExisting } from '../utils/database/validation';
       'type',
       'manufacturer',
       'model',
-      'pluginSelector',
+      'externalId',
       'viaDevice',
       'roomId',
       'pluginId',
@@ -158,7 +158,7 @@ export default class Device extends Model<DeviceAttributes, DeviceCreationAttrib
 
   @AllowNull(true)
   @Column
-  pluginSelector!: string;
+  externalId!: string;
 
   @AllowNull(true)
   @Is('viaDevice', (value) => (value !== undefined ? isOwnerExisting(value, ['device']) : true))

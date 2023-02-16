@@ -21,6 +21,9 @@ export default {
         allowNull: false,
         type: DataType.STRING,
       },
+      externalId: {
+        type: DataType.STRING,
+      },
       deviceId: {
         allowNull: false,
         type: DataType.UUID,

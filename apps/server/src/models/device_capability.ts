@@ -27,24 +27,24 @@ import DeviceCapabilitySettings from './device_capability_settings';
  * Device capability model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
+  attributes: ['id', 'defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId'],
   include: [DeviceCapabilitySettings],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
+    attributes: ['id', 'defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId'],
     include: [Device, Room, DeviceCapabilitySettings, { model: DeviceCapabilityState, where: { last: true } }],
   },
   withRoom: {
-    attributes: ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
+    attributes: ['id', 'defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId'],
     include: [Room],
   },
   withDevice: {
-    attributes: ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
+    attributes: ['id', 'defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId'],
     include: [Device],
   },
   withState: {
-    attributes: ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
+    attributes: ['id', 'defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId'],
     include: [{ model: DeviceCapabilityState, where: { last: true } }],
   },
   withSettings: {
@@ -78,6 +78,10 @@ export default class DeviceCapability extends Model<DcAttributes, DcCreationAttr
   @NotEmpty
   @Column
   type!: DevicesCapabilities;
+
+  @AllowNull(true)
+  @Column
+  externalId!: string;
 
   @AllowNull(false)
   @NotEmpty
