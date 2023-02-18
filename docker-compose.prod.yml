@@ -1,16 +1,26 @@
-version: '3'
+version: '3.4'
 
 services:
-  friday:
+  friday-back:
     labels:
       "autoheal": "true"
-    image: fridayai/friday:latest
+    image: fridayai/friday-back:latest
     build:
-      context: ./
       dockerfile: ./docker/Dockerfile-production
+      target: back-end
+    ports:
+      - "1443:1443"
+    environment:
+      - NODE_ENV=production
+  friday-front:
+    labels:
+      "autoheal": "true"
+    image: fridayai/friday-front:latest
+    build:
+      dockerfile: ./docker/Dockerfile-production
+      target: front-end
     ports:
       - "1444:1444"
-      - "1443:1443"
     environment:
       - NODE_ENV=production
   autoheal:

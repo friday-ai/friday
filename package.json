@@ -11,6 +11,7 @@
     "start": "per-env",
     "start:prod": "pnpm -r --filter \"./apps/*\" start:prod",
     "start:dev": "pnpm -r --filter \"./apps/*\" start:dev",
+    "install:dev": "pnpm install -r --quiet",
     "build": "pnpm -r --filter \"./apps/*\" build",
     "test": "pnpm -r --filter \"./apps/*\" test",
     "coverage": "pnpm -r --filter \"./apps/*\" coverage",
