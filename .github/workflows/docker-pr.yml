@@ -27,7 +27,8 @@ jobs:
               args: [--frozen-lockfile, --strict-peer-dependencies]
             - args: [--global, prettier, typescript]
 
-      - name: 'Reviewdog: ESLint'
+      - uses: actions/checkout@v3
+        name: 'Reviewdog: ESLint'
         uses: yshrsmz/action-eslint@npm-v9
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
