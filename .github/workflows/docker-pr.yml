@@ -17,7 +17,7 @@ jobs:
           apk add docker
           addgroup root docker
           docker pull alpine
-          npm install -g pnpm
+          npm install -g eslint
 
       - name: Install dependencies
         uses: pnpm/action-setup@v2
