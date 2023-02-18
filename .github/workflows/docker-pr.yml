@@ -28,7 +28,7 @@ jobs:
             - args: [--global, prettier, typescript]
 
       - uses: actions/checkout@v3
-        name: 'Reviewdog: ESLint'
+      - name: 'Reviewdog: ESLint'
         uses: yshrsmz/action-eslint@npm-v9
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
