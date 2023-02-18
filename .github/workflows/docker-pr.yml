@@ -17,7 +17,6 @@ jobs:
           apk add docker
           addgroup root docker
           docker pull alpine
-          npm install -g eslint
 
       - name: Install dependencies
         uses: pnpm/action-setup@v2
@@ -29,7 +28,7 @@ jobs:
             - args: [--global, prettier, typescript]
 
       - name: 'Reviewdog: ESLint'
-        uses: reviewdog/action-eslint@v1
+        uses: yshrsmz/action-eslint@npm-v9
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: 'github-pr-review'
