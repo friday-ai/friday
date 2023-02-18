@@ -1,10 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
+import React, { useCallback, useEffect, useState } from 'react';
 import useForm from '../../services/hooks/useForm';
 
-import Modal from '../Modal/Modal';
-import FaviconLoader from '../Loader/Loader';
 import Countdown from '../Countdown/Countdown';
+import FaviconLoader from '../Loader/Loader';
+import Modal from '../Modal/Modal';
 
 import useSharedApp from '../../services/App';
 
@@ -21,7 +21,7 @@ interface PluginType {
   name: string;
   version: string;
   repoTag: string;
-  satelliteId: string;
+  // satelliteId: string;
 }
 
 function SatellitesInstall({ openModal, setOpenModal, satellites }: SatellitesInstallProps) {
@@ -33,7 +33,7 @@ function SatellitesInstall({ openModal, setOpenModal, satellites }: SatellitesIn
       name: '',
       version: '',
       repoTag: '',
-      satelliteId: '',
+      // satelliteId: '',
     },
     validations: {
       name: {
@@ -54,19 +54,21 @@ function SatellitesInstall({ openModal, setOpenModal, satellites }: SatellitesIn
           message: 'The plugin tag cannot be empty',
         },
       },
+      /*
       satelliteId: {
         allowEmpty: {
           value: false,
           message: 'The satellite id cannot be empty',
         },
       },
+      */
     },
   });
 
   const handleSubmit = async () => {
     const res = await onSubmit(null);
     if (res) {
-      await plugins.install(data);
+      await plugins.install({ ...data, satelliteId: satellites[0].id });
     }
   };
 
@@ -166,6 +168,7 @@ function SatellitesInstall({ openModal, setOpenModal, satellites }: SatellitesIn
               <span className="label-text-alt text-error">{errors.repoTag}</span>
             </label>
           </div>
+          {/*
           <div className="form-control">
             <label htmlFor="plugin-repoTag" className="label">
               <span className="label-text">Satellite where plugin will be installed</span>
@@ -181,6 +184,7 @@ function SatellitesInstall({ openModal, setOpenModal, satellites }: SatellitesIn
               <span className="label-text-alt text-error">{errors.satelliteId}</span>
             </label>
           </div>
+          */}
         </form>
       )}
     </Modal>
