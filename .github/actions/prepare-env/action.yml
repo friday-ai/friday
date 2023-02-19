@@ -1,5 +1,5 @@
-name: Setup Monorepo
-description: Prepare and install everything for the monorepo
+name: Setup environment
+description: Prepare and install everything for the project
 author: "MathieuAndrade"
 
 inputs:
@@ -31,3 +31,4 @@ runs:
 
     - name: 📦 Build packages
       run: pnpm --filter "./packages/*" build
+      shell: bash
