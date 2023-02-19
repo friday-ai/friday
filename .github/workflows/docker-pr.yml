@@ -1,55 +1,39 @@
 name: Pull request tests
 
-on: [ pull_request, workflow_dispatch ]
+on: [pull_request, workflow_dispatch]
 
 jobs:
   test-server:
-    name: Server test
     runs-on: ubuntu-latest
-    container:
-      image: node:current-alpine
-
     steps:
-      - uses: actions/checkout@v3
-      - name: Install Prerequisites
-        run: |
-          apk add --no-cache bash curl git
-          apk add docker
-          addgroup root docker
-          docker pull alpine
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v3
 
-      - name: Install dependencies
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7
-          run_install: |
-            - recursive: true
-              args: [--frozen-lockfile, --strict-peer-dependencies]
-            - args: [--global, prettier, typescript]
+      - name: 📦 Prepare environment
+        uses: ./.github/actions/prepare-env
 
-      - uses: actions/checkout@v3
-      - name: 'Reviewdog: ESLint'
-        uses: yshrsmz/action-eslint@npm-v9
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: 'github-pr-review'
-          fail_on_error: true
-          eslint_flags: '--ext .js,.jsx,.ts,.tsx ./'
-          workdir: /apps/server
+      - name: ✅ Run Mocha/Chai unit tests
+        run: pnpm coverage:junit
 
-      - name: 'Run Mocha/Chai unit tests'
-        run: pnpm coverage-server:junit
-
-      - name: 'Publish Unit Test Results'
+      - name: ↗️ Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1.9
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: ./apps/server/test-results.xml
 
-      - name: 'Upload coverage to Codecov'
+      - name: ↗️ Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         if: always()
         with:
           fail_ci_if_error: true
           directory: ./apps/server/
+
+      - name: 👕 ESLint check
+        uses: yshrsmz/action-eslint@npm-v9
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: "github-pr-review"
+          fail_on_error: true
+          eslint_flags: "--ext .js,.jsx,.ts,.tsx ./"
+          workdir: /apps/server
