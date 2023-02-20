@@ -14,9 +14,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: ⬇️ Checkout project code
-      uses: actions/checkout@v1
-
     - name: 📦 Setup pnpm
       uses: pnpm/action-setup@v2
       with:

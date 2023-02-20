@@ -6,6 +6,9 @@ jobs:
   test-server:
     runs-on: ubuntu-latest
     steps:
+      - name: ⬇️ Checkout project code
+        uses: actions/checkout@v1
+
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
 
