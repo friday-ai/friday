@@ -6,30 +6,27 @@ jobs:
   test-server:
     runs-on: ubuntu-latest
     steps:
-      - name: ⬇️ Checkout
-        uses: actions/checkout@v3
-
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
 
       - name: ✅ Run Mocha/Chai unit tests
         run: pnpm coverage:junit
 
-      - name: ↗️ Publish Unit Test Results
+      - name: ⬆️ Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1.9
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           files: ./apps/server/test-results.xml
 
-      - name: ↗️ Upload coverage to Codecov
+      - name: ⬆️ Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         if: always()
         with:
           fail_ci_if_error: true
           directory: ./apps/server/
 
-      - name: 👕 ESLint check
+      - name: 📝 ESLint check
         uses: yshrsmz/action-eslint@npm-v9
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

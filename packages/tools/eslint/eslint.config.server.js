@@ -64,6 +64,7 @@ module.exports = {
         devDependencies: ['test.{js,jsx,ts,tsx}', 'test-*.{js,jsx,ts,tsx}', '**/test/**/*.{js,jsx,ts,tsx}'],
       },
     ],
+    'import/no-import-module-exports': ['error', { exceptions: ['**/migrations/*.{js,ts}'] }],
     'max-len': [
       'error',
       135,
