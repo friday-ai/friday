@@ -1,6 +1,6 @@
+import { DevicesActions } from '@friday-ai/shared';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { DevicesActions } from '@friday-ai/shared';
 import { EventsType } from '../../../../src/config/constants';
 import wait from '../../../utils/timer';
 
@@ -16,7 +16,9 @@ describe('Device.brightness', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.set_brightness","params":{"value":66}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-brightness","method":"action.devices.commands.set_brightness","params":{"value":66}}'
+    );
   });
 
   it('should not set brightness with wrong value', async () => {

@@ -17,7 +17,7 @@ describe('Device.energyConsumption', () => {
     await wait(80);
     expect(listener.called).equal(true);
     expect(listener.args[0][0].message).to.equal(
-      '{"device":"SENSOR-20","method":"action.devices.commands.set_power_consumption","params":{"value":25}}'
+      '{"device":"SENSOR-20","capability":"sensor-power","method":"action.devices.commands.set_power_consumption","params":{"value":25}}'
     );
   });
 
@@ -33,7 +33,7 @@ describe('Device.energyConsumption', () => {
     await wait(80);
     expect(listener.called).equal(true);
     expect(listener.args[0][0].message).to.equal(
-      '{"device":"SENSOR-20","method":"action.devices.commands.set_intensity_consumption","params":{"value":10}}'
+      '{"device":"SENSOR-20","capability":"sensor-intensity","method":"action.devices.commands.set_intensity_consumption","params":{"value":10}}'
     );
   });
 
@@ -49,7 +49,7 @@ describe('Device.energyConsumption', () => {
     await wait(80);
     expect(listener.called).equal(true);
     expect(listener.args[0][0].message).to.equal(
-      '{"device":"SENSOR-20","method":"action.devices.commands.set_water_consumption","params":{"value":1}}'
+      '{"device":"SENSOR-20","capability":"sensor-water","method":"action.devices.commands.set_water_consumption","params":{"value":1}}'
     );
   });
 });

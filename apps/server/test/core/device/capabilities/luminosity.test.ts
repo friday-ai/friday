@@ -1,6 +1,6 @@
-import sinon from 'sinon';
-import { expect } from 'chai';
 import { DevicesActions } from '@friday-ai/shared';
+import { expect } from 'chai';
+import sinon from 'sinon';
 import { EventsType } from '../../../../src/config/constants';
 import wait from '../../../utils/timer';
 
@@ -16,6 +16,8 @@ describe('Device.luminosity', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"SENSOR-30","method":"action.devices.commands.set_luminosity","params":{"value":3200}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"SENSOR-30","capability":"sensor-luminosity","method":"action.devices.commands.set_luminosity","params":{"value":3200}}'
+    );
   });
 });

@@ -1,6 +1,6 @@
+import { DevicesActions } from '@friday-ai/shared';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { DevicesActions } from '@friday-ai/shared';
 import { EventsType } from '../../../../src/config/constants';
 import wait from '../../../utils/timer';
 
@@ -20,7 +20,9 @@ describe('Device.color', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.color","params":{"value":"10, 224, 0"}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-color","method":"action.devices.commands.color","params":{"value":"10, 224, 0"}}'
+    );
   });
 
   it('should not change color, param rgb error', async () => {
@@ -87,7 +89,9 @@ describe('Device.color', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.cold","params":{"value":1}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-cold-warm","method":"action.devices.commands.cold","params":{"value":1}}'
+    );
   });
 
   it('should make error to change cold or warm white', async () => {
@@ -114,7 +118,9 @@ describe('Device.color', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.warm","params":{"value":0}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-cold-warm","method":"action.devices.commands.warm","params":{"value":0}}'
+    );
   });
 
   it('should change to color temperature', async () => {
@@ -128,7 +134,9 @@ describe('Device.color', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.color_temp","params":{"value":2300}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-color-temp","method":"action.devices.commands.color_temp","params":{"value":2300}}'
+    );
   });
 
   it('should change to white color', async () => {
@@ -141,7 +149,9 @@ describe('Device.color', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.white","params":{"value":"255, 255, 255"}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-white","method":"action.devices.commands.white","params":{"value":"255, 255, 255"}}'
+    );
   });
 
   it('should change saturation', async () => {
@@ -155,7 +165,9 @@ describe('Device.color', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.saturation","params":{"value":"30"}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-saturation","method":"action.devices.commands.saturation","params":{"value":"30"}}'
+    );
   });
 
   it('should not change saturation with bad value range', async () => {

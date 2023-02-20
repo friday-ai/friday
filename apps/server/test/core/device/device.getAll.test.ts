@@ -22,7 +22,7 @@ describe('Device.listAll', () => {
         'type',
         'manufacturer',
         'model',
-        'pluginSelector',
+        'externalId',
         'viaDevice',
         'roomId',
         'pluginId',
@@ -44,7 +44,7 @@ describe('Device.listAll', () => {
         'type',
         'manufacturer',
         'model',
-        'pluginSelector',
+        'externalId',
         'viaDevice',
         'roomId',
         'pluginId',
@@ -52,7 +52,7 @@ describe('Device.listAll', () => {
 
       expect(d.capabilities).to.be.an('array');
       d.capabilities.forEach((c) => {
-        expect(c).to.contains.keys(['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId']);
+        expect(c).to.contains.keys(['id', 'defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId']);
       });
     });
   });

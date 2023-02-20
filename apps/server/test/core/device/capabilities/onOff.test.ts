@@ -1,6 +1,6 @@
+import { DevicesActions } from '@friday-ai/shared';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { DevicesActions } from '@friday-ai/shared';
 import { EventsType } from '../../../../src/config/constants';
 import wait from '../../../utils/timer';
 
@@ -16,7 +16,9 @@ describe('Device.onOff', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{"value":1}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-onoff","method":"action.devices.commands.turn_on","params":{"value":1}}'
+    );
   });
 
   it('should set on with boolean true', async () => {
@@ -30,7 +32,9 @@ describe('Device.onOff', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{"value":true}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-onoff","method":"action.devices.commands.turn_on","params":{"value":true}}'
+    );
   });
 
   it('should set off', async () => {
@@ -44,7 +48,9 @@ describe('Device.onOff', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_off","params":{"value":0}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-onoff","method":"action.devices.commands.turn_off","params":{"value":0}}'
+    );
   });
 
   it('should set off with boolean false', async () => {
@@ -58,7 +64,9 @@ describe('Device.onOff', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_off","params":{"value":false}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-onoff","method":"action.devices.commands.turn_off","params":{"value":false}}'
+    );
   });
 
   it('should not set on with wrong value', async () => {

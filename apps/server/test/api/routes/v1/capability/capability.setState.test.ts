@@ -21,7 +21,9 @@ describe('POST /api/v1/capability/:id', () => {
       .then(async (_) => {
         await wait(80);
         expect(listener.called).equal(true);
-        expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{"value":true}}');
+        expect(listener.args[0][0].message).to.equal(
+          '{"device":"LIGHT-10","capability":"switch-onoff","method":"action.devices.commands.turn_on","params":{"value":true}}'
+        );
       });
   });
 
@@ -40,7 +42,9 @@ describe('POST /api/v1/capability/:id', () => {
       .then(async (_) => {
         await wait(80);
         expect(listener.called).equal(true);
-        expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_off","params":{"value":false}}');
+        expect(listener.args[0][0].message).to.equal(
+          '{"device":"LIGHT-10","capability":"switch-onoff","method":"action.devices.commands.turn_off","params":{"value":false}}'
+        );
       });
   });
 

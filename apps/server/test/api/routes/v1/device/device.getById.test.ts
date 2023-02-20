@@ -1,5 +1,5 @@
-import { expect } from 'chai';
 import { DcAttributes } from '@friday-ai/shared';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/device/:id', () => {
@@ -20,7 +20,7 @@ describe('GET /api/v1/device/:id', () => {
           'type',
           'manufacturer',
           'model',
-          'pluginSelector',
+          'externalId',
           'viaDevice',
           'roomId',
           'pluginId',
@@ -46,7 +46,7 @@ describe('GET /api/v1/device/:id', () => {
           'type',
           'manufacturer',
           'model',
-          'pluginSelector',
+          'externalId',
           'viaDevice',
           'roomId',
           'pluginId',
@@ -77,7 +77,7 @@ describe('GET /api/v1/device/:id', () => {
           'type',
           'manufacturer',
           'model',
-          'pluginSelector',
+          'externalId',
           'viaDevice',
           'roomId',
           'pluginId',

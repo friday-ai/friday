@@ -1,6 +1,6 @@
 import { assert, expect } from 'chai';
-import { NotFoundError } from '../../../src/utils/decorators/error';
 import Room from '../../../src/core/room/room';
+import { NotFoundError } from '../../../src/utils/decorators/error';
 
 let room: Room;
 
@@ -46,7 +46,7 @@ describe('Room.getById', () => {
         'type',
         'manufacturer',
         'model',
-        'pluginSelector',
+        'externalId',
         'viaDevice',
         'roomId',
         'pluginId',
@@ -94,7 +94,7 @@ describe('Room.getById', () => {
         'type',
         'manufacturer',
         'model',
-        'pluginSelector',
+        'externalId',
         'viaDevice',
         'roomId',
         'pluginId',

@@ -48,7 +48,7 @@ import DeviceCapabilitySettings from './device_capability_settings';
     include: [{ model: DeviceCapabilityState, where: { last: true } }],
   },
   withSettings: {
-    attributes: ['id', 'defaultName', 'name', 'type', 'deviceId', 'roomId'],
+    attributes: ['id', 'defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId'],
     include: [DeviceCapabilitySettings],
   },
 }))

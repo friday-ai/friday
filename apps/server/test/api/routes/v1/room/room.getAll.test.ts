@@ -1,5 +1,5 @@
-import { expect } from 'chai';
 import { RoomAttributes } from '@friday-ai/shared';
+import { expect } from 'chai';
 import server from '../../../../utils/request';
 
 describe('GET /api/v1/room', () => {
@@ -51,7 +51,7 @@ describe('GET /api/v1/room', () => {
               'type',
               'manufacturer',
               'model',
-              'pluginSelector',
+              'externalId',
               'viaDevice',
               'roomId',
               'pluginId',
@@ -118,7 +118,7 @@ describe('GET /api/v1/room', () => {
               'type',
               'manufacturer',
               'model',
-              'pluginSelector',
+              'externalId',
               'viaDevice',
               'roomId',
               'pluginId',

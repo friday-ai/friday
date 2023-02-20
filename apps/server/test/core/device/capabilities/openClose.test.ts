@@ -1,6 +1,6 @@
-import sinon from 'sinon';
-import { expect } from 'chai';
 import { DevicesActions } from '@friday-ai/shared';
+import { expect } from 'chai';
+import sinon from 'sinon';
 import { EventsType } from '../../../../src/config/constants';
 import wait from '../../../utils/timer';
 
@@ -16,7 +16,9 @@ describe('Device.openclose', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"SENSOR-10","method":"action.devices.commands.open","params":{"value":true}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"SENSOR-10","capability":"sensor-openclose","method":"action.devices.commands.open","params":{"value":true}}'
+    );
   });
 
   it('should set close door', async () => {
@@ -30,7 +32,9 @@ describe('Device.openclose', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"SENSOR-10","method":"action.devices.commands.close","params":{"value":false}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"SENSOR-10","capability":"sensor-openclose","method":"action.devices.commands.close","params":{"value":false}}'
+    );
   });
 
   it('should not set open with wrong value', async () => {

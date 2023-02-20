@@ -1,5 +1,5 @@
 import { DevicesCapabilities, DevicesTypes } from '@friday-ai/shared';
-import { expect, assert } from 'chai';
+import { assert, expect } from 'chai';
 import server from '../../../../utils/request';
 
 const fakeDevice = {
@@ -7,7 +7,7 @@ const fakeDevice = {
   defaultManufacturer: 'Fibaro',
   defaultModel: 'Dimmer Switch',
   type: DevicesTypes.PHYSICAL,
-  pluginSelector: 'LIGHT-105',
+  externalId: 'LIGHT-105',
   pluginId: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e',
   capabilities: [
     {

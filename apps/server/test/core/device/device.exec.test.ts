@@ -1,9 +1,9 @@
+import { DevicesActions } from '@friday-ai/shared';
 import { assert, expect } from 'chai';
 import sinon from 'sinon';
-import { DevicesActions } from '@friday-ai/shared';
+import { EventsType } from '../../../src/config/constants';
 import Device from '../../../src/core/device/device';
 import { NotFoundError } from '../../../src/utils/decorators/error';
-import { EventsType } from '../../../src/config/constants';
 import wait from '../../utils/timer';
 
 let device: Device;
@@ -21,7 +21,9 @@ describe('Device.exec', () => {
 
     await wait(20);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"LIGHT-10","method":"action.devices.commands.turn_on","params":{"value":1}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"LIGHT-10","capability":"switch-onoff","method":"action.devices.commands.turn_on","params":{"value":1}}'
+    );
   });
 
   it('should not exec a device action with wrong capability id', async () => {

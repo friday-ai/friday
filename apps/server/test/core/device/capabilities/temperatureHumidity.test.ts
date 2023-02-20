@@ -1,6 +1,6 @@
-import sinon from 'sinon';
-import { expect } from 'chai';
 import { DevicesActions } from '@friday-ai/shared';
+import { expect } from 'chai';
+import sinon from 'sinon';
 import { EventsType } from '../../../../src/config/constants';
 import wait from '../../../utils/timer';
 
@@ -16,7 +16,9 @@ describe('Device.temperatureHumidity', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"SENSOR-10","method":"action.devices.commands.set_temperature","params":{"value":25}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"SENSOR-10","capability":"sensor-temp","method":"action.devices.commands.set_temperature","params":{"value":25}}'
+    );
   });
 
   it('should set humidity', async () => {
@@ -30,6 +32,8 @@ describe('Device.temperatureHumidity', () => {
 
     await wait(80);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].message).to.equal('{"device":"SENSOR-10","method":"action.devices.commands.set_humidity","params":{"value":50}}');
+    expect(listener.args[0][0].message).to.equal(
+      '{"device":"SENSOR-10","capability":"sensor-humidity","method":"action.devices.commands.set_humidity","params":{"value":50}}'
+    );
   });
 });

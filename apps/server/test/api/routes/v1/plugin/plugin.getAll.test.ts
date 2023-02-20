@@ -1,7 +1,7 @@
-import { expect } from 'chai';
 import { PluginAttributes } from '@friday-ai/shared';
-import server from '../../../../utils/request';
+import { expect } from 'chai';
 import { admin, habitant } from '../../../../utils/apiToken';
+import server from '../../../../utils/request';
 
 describe('GET /api/v1/plugin', () => {
   it('should return all plugins', async () => {
@@ -67,7 +67,7 @@ describe('GET /api/v1/plugin', () => {
               'type',
               'manufacturer',
               'model',
-              'pluginSelector',
+              'externalId',
               'viaDevice',
               'roomId',
               'pluginId',
@@ -126,7 +126,7 @@ describe('GET /api/v1/plugin', () => {
               'type',
               'manufacturer',
               'model',
-              'pluginSelector',
+              'externalId',
               'viaDevice',
               'roomId',
               'pluginId',
@@ -185,7 +185,7 @@ describe('GET /api/v1/plugin', () => {
               'type',
               'manufacturer',
               'model',
-              'pluginSelector',
+              'externalId',
               'viaDevice',
               'roomId',
               'pluginId',
@@ -255,7 +255,7 @@ describe('GET /api/v1/plugin', () => {
               'type',
               'manufacturer',
               'model',
-              'pluginSelector',
+              'externalId',
               'viaDevice',
               'roomId',
               'pluginId',
