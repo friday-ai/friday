@@ -1,18 +1,33 @@
-FROM node:lts-alpine
+FROM node:lts-alpine as base
 
 # System dependencies
-RUN apk add --no-cache sqlite make python3 gcc g++
+RUN apk add --no-cache sqlite make python3 gcc g++ \
+    && npm install -g pnpm
 
+USER node
 # Add friday core
 WORKDIR /src
 
 ENV NODE_ENV development
+
+FROM base as back-end
+
+# Ping friday to check heartbeat
+HEALTHCHECK --interval=50s --retries=12 \
+   CMD curl --fail "http://localhost:3000" || exit 1
+
+# Export listening port
+EXPOSE 3000
+
+CMD pnpm install:dev && pnpm start:dev
+
+FROM base as front-end
 
 # Ping friday to check heartbeat
 HEALTHCHECK --interval=50s --retries=12 \
    CMD curl --fail "http://localhost:3001" || exit 1
 
 # Export listening port
-EXPOSE 3001 9000
+EXPOSE 3001
 
-CMD ["npm" ,"run", "start:development"]
+CMD pnpm install:dev && pnpm start:dev

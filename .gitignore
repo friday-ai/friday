@@ -48,6 +48,7 @@ jspm_packages
 
 # Build files
 dist/
+lib/
 
 # IDE folder
 .idea

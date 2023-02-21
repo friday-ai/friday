@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    "target": "es6",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "jsx": "react",
+    "sourceMap": true,
+    "allowJs": false,
+    "noImplicitAny": true,
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "noImplicitReturns": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "inlineSources": false,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "preserveWatchOutput": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "useUnknownInCatchVariables": false
+  },
+  "ts-node": {
+    "files": true
+  }
+}
