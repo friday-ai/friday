@@ -1,6 +1,6 @@
 {
   "name": "@friday-ai/docker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Friday: Docker utilites",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -23,7 +23,9 @@
   "dependencies": {
     "@friday-ai/logger": "workspace:*",
     "@types/dockerode": "^3.3.14",
-    "dockerode": "^3.3.4"
+    "@types/stream-to-promise": "^2.2.1",
+    "dockerode": "^3.3.4",
+    "stream-to-promise": "^3.0.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",

@@ -1,6 +1,7 @@
 import logger from '@friday-ai/logger';
-import { PlatformNotCompatible } from '../utils/error';
+import streamToPromise from 'stream-to-promise';
 import Docker from '../index';
+import { PlatformNotCompatible } from '../utils/error';
 
 /**
  * Pull an new container image.
@@ -9,20 +10,10 @@ import Docker from '../index';
  * @example
  * await docker.pull('my-image');
  */
-export default async function pull(this: Docker, repoTag: string, onProgress = logger.info): Promise<void> {
+export default async function pull(this: Docker, repoTag: string, _onProgress = logger.info): Promise<void> {
   if (!this.dockerode) {
     throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'App not running on Docker' });
   }
-  const stream = await this.dockerode.pull(repoTag);
 
-  return this.dockerode.modem.followProgress(
-    stream,
-    (finishErr: any, output: any) => {
-      if (finishErr) {
-        throw finishErr;
-      }
-      return output;
-    },
-    onProgress
-  );
+  await streamToPromise(await this.dockerode.pull(repoTag));
 }
