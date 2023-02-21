@@ -13,7 +13,7 @@ jobs:
         uses: ./.github/actions/prepare-env
 
       - name: ✅ Run Mocha/Chai unit tests
-        run: pnpm coverage:junit
+        run: GITHUB_ACTION=true pnpm coverage:junit
 
       - name: ⬆️ Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1.9

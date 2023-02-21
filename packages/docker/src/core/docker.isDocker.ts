@@ -1,5 +1,7 @@
-import fs from 'fs';
 import { execSync } from 'child_process';
+import fs from 'fs';
+
+const enforceEnv = process.env.GITHUB_ACTION || 'false';
 
 const hasDockerEnv = () => fs.existsSync('/.dockerenv');
 const hasDockerCGroup = () => fs.readFileSync('/proc/self/cgroup', 'utf8').includes('docker');
@@ -23,6 +25,9 @@ const hasDockerInstalled = () => {
  */
 export default function isDocker(): boolean {
   try {
+    if (enforceEnv === 'true') {
+      return true;
+    }
     return hasDockerEnv() || hasDockerCGroup();
   } catch (e) {
     return hasDockerInstalled();
