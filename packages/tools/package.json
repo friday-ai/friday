@@ -2,9 +2,6 @@
   "name": "@friday/tools",
   "version": "1.0.0",
   "description": "Friday: Tools (Eslint, Prettier)",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
   "author": "Mathieu Andrade",
   "license": "MIT",

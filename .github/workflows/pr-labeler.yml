@@ -1,0 +1,17 @@
+name: Friday PR Labeler
+
+on: pull_request
+
+jobs:
+  pr-label:
+    name: Label PR With Repos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Label PRs
+        uses: tinkurlab/monorepo-pr-labeler-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_DIRS: "apps|packages"
+        with:
+          prefix: "📦"
+          separator: " "

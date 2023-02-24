@@ -11,6 +11,18 @@ inputs:
     description: Version of pnpm to use
     default: 7.x
 
+  build:
+    description: Whether to build the project or not
+    default: true
+
+  build-only-packages:
+    description: Whether to build only packages or not
+    default: false
+
+  build-command:
+    description: Custom build command to run
+    default: pnpm build
+
 runs:
   using: composite
   steps:
@@ -29,6 +41,13 @@ runs:
       run: pnpm install -r --frozen-lockfile --strict-peer-dependencies
       shell: bash
 
-    - name: 📦 Build packages
-      run: pnpm --filter "./packages/*" build
+    - name: 📦 Build
+      if: ${{ inputs.build == 'true' }}
+      run: |
+        if echo ${{ inputs.build-only-packages }}
+        then
+          pnpm -r --filter "./packages/*" build
+        else
+          ${{ inputs.build-command }}
+        fi
       shell: bash

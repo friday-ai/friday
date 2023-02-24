@@ -9,8 +9,7 @@
   ],
   "scripts": {
     "prepublish": "pnpm build",
-    "build": "tsc --outDir ./lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc --outDir ./lib"
   },
   "keywords": [],
   "author": "Mathieu Andrade",

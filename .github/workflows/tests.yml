@@ -1,0 +1,60 @@
+name: Tests runner
+run-name: Tests runner ${{ github.head_ref || github.run_id }}
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel previous PR/branch runs when a new commit is pushed
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  # Makes sure that the published packages can be require'd without issues in a production environment
+  test-pacakges:
+    name: Packages test
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout project code
+        uses: actions/checkout@v1
+        with:
+          build: false
+
+      - name: 📦 Prepare environment
+        uses: ./.github/actions/prepare-env
+
+      - name: ✅ Run Mocha/Chai unit tests
+        run: GITHUB_ACTION=true pnpm test:packages
+
+  test-server:
+    needs: [test-pacakges]
+    name: Server test
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout project code
+        uses: actions/checkout@v1
+        with:
+          build-only-packages: true
+
+      - name: 📦 Prepare environment
+        uses: ./.github/actions/prepare-env
+
+      - name: ✅ Run Mocha/Chai unit tests
+        run: GITHUB_ACTION=true pnpm coverage:junit
+
+      - name: ⬆️ Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1.9
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          files: ./apps/server/test-results.xml
+
+      - name: ⬆️ Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        if: always()
+        with:
+          fail_ci_if_error: true
+          directory: ./apps/server/

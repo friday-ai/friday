@@ -12,12 +12,14 @@
     "start:prod": "pnpm -r --filter \"./apps/*\" start:prod",
     "start:dev": "pnpm -r --filter \"./apps/*\" start:dev",
     "install:dev": "pnpm install -r --quiet",
-    "build": "pnpm -r --filter \"./apps/*\" build",
-    "test": "pnpm -r --filter \"./apps/*\" test",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "test:apps": "pnpm -r --filter \"./apps/*\" test",
+    "test:packages": "pnpm -r --filter \"./packages/*\" test",
     "coverage": "pnpm -r --filter \"./apps/*\" coverage",
     "coverage:junit": "pnpm -r --filter \"./apps/server\" coverage:junit",
-    "lint": "pnpm -r --filter \"./apps/*\" lint",
-    "lint:fix": "pnpm -r --filter \"./apps/*\" lint:fix"
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix"
   },
   "license": "MIT",
   "repository": {
