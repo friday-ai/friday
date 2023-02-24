@@ -19,11 +19,11 @@ jobs:
     steps:
       - name: ⬇️ Checkout project code
         uses: actions/checkout@v1
-        with:
-          build: false
 
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
+        with:
+          build: false
 
       - name: 📝 ESLint check
         uses: reviewdog/action-eslint@v1

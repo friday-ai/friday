@@ -20,11 +20,11 @@ jobs:
     steps:
       - name: ⬇️ Checkout project code
         uses: actions/checkout@v1
-        with:
-          build: false
 
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
+        with:
+          build-only-packages: true
 
       - name: ✅ Run Mocha/Chai unit tests
         run: GITHUB_ACTION=true pnpm test:packages
@@ -36,11 +36,11 @@ jobs:
     steps:
       - name: ⬇️ Checkout project code
         uses: actions/checkout@v1
-        with:
-          build-only-packages: true
 
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
+        with:
+          build-only-packages: true
 
       - name: ✅ Run Mocha/Chai unit tests
         run: GITHUB_ACTION=true pnpm coverage:junit
