@@ -1,8 +1,6 @@
+import { useTheme } from '@mui/material/styles';
+import { m, type Transition } from 'framer-motion';
 import React from 'react';
-import { motion, Transition } from 'framer-motion';
-import { SVGProps } from '../../utils/interfaces';
-import { useAppSelector } from '../../services/store/store';
-import { themeColors } from '../App/app.reducer';
 
 const transition: Transition = {
   duration: 4,
@@ -11,48 +9,35 @@ const transition: Transition = {
   ease: 'easeInOut',
 };
 
-function FaviconLoader({ className = '', height = '250', width = '206' }: SVGProps) {
-  const colors = useAppSelector(themeColors);
+export default function FaviconLoader() {
+  const theme = useTheme();
+
   return (
-    <svg
-      id="466f8ab7-2527-4c08-a168-e79693ae8f8f"
-      className={className}
-      width={width}
-      height={height}
-      viewBox="0 0 512 512"
-      stroke="currentColor"
-      strokeWidth={3}
-      fill={colors.primary}
-    >
-      <motion.path
-        d="M 46.189883,510.98092 V 211.25131 L 256,1.4411962 V 128.82613 L 136.10856,248.71878 v 262.26214 l -89.918677,0"
+    <div style={{ width: 'fit-content', height: 'fit-content' }}>
+      <svg
+        id="466f8ab7-2527-4c08-a168-e79693ae8f8f"
+        width="inerhit"
+        height="inerhit"
+        viewBox="0 0 1300 1600"
         fill="none"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={transition}
-      />
-      <motion.path
-        d="M 465.81011,510.98092 V 211.25131 L 256,1.4411962 V 128.82613 l 119.89265,119.89265 v 262.26214 l 89.91746,0"
-        fill="none"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={transition}
-      />
-      <motion.path
-        d="M 151.09514,428.55574 V 308.66308 L 256,196.26554 V 323.64966 L 151.09514,428.55574"
-        fill="none"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={transition}
-      />
-      <motion.path
-        d="M 360.90607,428.55574 V 308.66308 L 256,196.26554 v 127.38412 z"
-        fill="none"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={transition}
-      />
-    </svg>
+        stroke={theme.palette.primary.main}
+        strokeWidth="10"
+      >
+        <m.path
+          d="M621 373L265.48 728L265.48 1499.45L3.47987 1499.45L3.47986 619L621 2"
+          initial={{ pathLength: 1 }}
+          animate={{ pathLength: 0 }}
+          transition={transition}
+        />
+        <m.path
+          d="M617.622 372.952L973.142 727.952L973.142 1499.4L1235.14 1499.4L1235.14 618.952L617.622 1.95166"
+          initial={{ pathLength: 1 }}
+          animate={{ pathLength: 0 }}
+          transition={transition}
+        />
+        <m.path d="M621 610L301 932L301 1248L621 932" initial={{ pathLength: 1 }} animate={{ pathLength: 0 }} transition={transition} />
+        <m.path d="M618 610L938 932V1248L618 932" initial={{ pathLength: 1 }} animate={{ pathLength: 0 }} transition={transition} />
+      </svg>
+    </div>
   );
 }
-export default FaviconLoader;

@@ -1,6 +1,8 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig, type PluginOption } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
   server: {
@@ -9,6 +11,8 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    svgr(),
+    visualizer() as PluginOption,
     VitePWA({
       registerType: 'autoUpdate',
       strategies: 'generateSW',
