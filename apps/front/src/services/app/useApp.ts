@@ -31,7 +31,7 @@ const useApp = () => {
   );
 
   const logout = useCallback(async () => {
-    await request('post', `/api/v1/session/revoke/${session?.id}}`);
+    await request('patch', `/api/v1/session/revoke/${session?.id}`);
     setSession(null);
     setHeaders('');
     localStorage.removeItem('session');
