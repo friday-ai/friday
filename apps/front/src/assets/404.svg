@@ -1,0 +1,44 @@
+<svg viewBox="0 0 460 449" stroke="black" stroke-width="3" fill="#D9D9D9" fill-opacity="0.1"  xmlns="http://www.w3.org/2000/svg">
+<path d="M399.5 211L393.5 201H450.5L458 209.5V289L450.5 296.75H392.5L399.5 287.5V211Z" stroke-width="0"/>
+<path d="M400 61L394 51H451L458.5 59.5V139L451 146.75H393L400 137.5V61Z" stroke-width="0"/>
+<path d="M399 361L393 351H450L457.5 359.5V439L450 446.75H392L399 437.5V361Z" stroke-width="0"/>
+<rect x="382" y="297" width="60" height="54" stroke-width="0"/>
+<rect x="382" y="147" width="60" height="54" stroke-width="0"/>
+<rect x="1.5" y="350.5" width="457" height="97" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="1.5" y="50.5" width="457" height="97" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="1.5" y="200.5" width="457" height="97" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="1.5" y="50.5" width="397" height="97" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="1.5" y="200.5" width="397" height="97" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="1.5" y="350.5" width="397" height="97" rx="12.5" stroke-linecap="round" fill="none"/>
+<line x1="21.5" y1="147.5" x2="21.5" y2="198.5" stroke-linecap="round"/>
+<line x1="381.5" y1="147.5" x2="381.5" y2="198.5" stroke-linecap="round"/>
+<line x1="441.5" y1="147.5" x2="441.5" y2="198.5" stroke-linecap="round"/>
+<line x1="21.5" y1="298.5" x2="21.5" y2="349.5" stroke-linecap="round"/>
+<line x1="381.5" y1="298.5" x2="381.5" y2="349.5" stroke-linecap="round"/>
+<line x1="441.5" y1="298.5" x2="441.5" y2="349.5" stroke-linecap="round"/>
+<path d="M76 118.5L109 80.5" stroke-linecap="round"/>
+<path d="M103 118.5L136 80.5" stroke-linecap="round"/>
+<path d="M130 118.5L163 80.5" stroke-linecap="round"/>
+<path d="M157 118.5L190 80.5" stroke-linecap="round"/>
+<path d="M184 118.5L217 80.5" stroke-linecap="round"/>
+<path d="M210 118.5L243 80.5" stroke-linecap="round"/>
+<path d="M237 118.5L270 80.5" stroke-linecap="round"/>
+<path d="M263 118.5L296 80.5" stroke-linecap="round"/>
+<path d="M290 118.5L323 80.5" stroke-linecap="round"/>
+<path d="M325 418L358 380" stroke-linecap="round"/>
+<path d="M316 119L333 99.5" stroke-linecap="round"/>
+<path d="M351 418.5L368 399" stroke-linecap="round"/>
+<path d="M314 400.5L331 381" stroke-linecap="round"/>
+<path d="M65 100.5L82 81" stroke-linecap="round"/>
+<path d="M410 370H429.5M438.5 370H447.5" stroke-linecap="round"/>
+<path d="M409 220H428.5M437.5 220H446.5" stroke-linecap="round"/>
+<path d="M409 70H428.5M437.5 70H446.5" stroke-linecap="round"/>
+<path d="M147 413.5C147.5 396.5 160 385 176 385C192 385 203.5 398 204 413.5" fill="none" stroke-linecap="round"/>
+<path d="M132 232.5L99 265.5" stroke-linecap="round"/>
+<path d="M253.5 232L220.5 265" stroke-linecap="round"/>
+<path d="M99 232.5L132 265.5" stroke-linecap="round"/>
+<path d="M220.5 232L253.5 265" stroke-linecap="round"/>
+<path d="M209.5 48C206.22 48 203.426 47.1036 201.119 45.3108C198.811 43.5035 197.048 40.8872 195.829 37.462C194.61 34.0222 194 29.8682 194 25C194 20.161 194.61 16.0288 195.829 12.6036C197.062 9.16382 198.833 6.54024 201.14 4.73289C203.463 2.91096 206.249 2 209.5 2C212.751 2 215.53 2.91096 217.838 4.73289C220.16 6.54024 221.93 9.16382 223.15 12.6036C224.383 16.0288 225 20.161 225 25C225 29.8682 224.39 34.0222 223.171 37.462C221.952 40.8872 220.189 43.5035 217.881 45.3108C215.574 47.1036 212.78 48 209.5 48ZM209.5 43.1901C212.751 43.1901 215.276 41.616 217.076 38.4677C218.875 35.3194 219.775 30.8302 219.775 25C219.775 21.1229 219.362 17.8216 218.534 15.096C217.722 12.3704 216.546 10.2934 215.008 8.86502C213.484 7.43663 211.648 6.72243 209.5 6.72243C206.278 6.72243 203.76 8.31844 201.946 11.5105C200.132 14.6879 199.225 19.1844 199.225 25C199.225 28.8771 199.631 32.1711 200.444 34.8821C201.257 37.5932 202.425 39.6556 203.949 41.0694C205.487 42.4832 207.338 43.1901 209.5 43.1901Z"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M156 38.5312V34.3295L174.537 5H180.716V34H186.483V38.5312H180.716V47.1818H175.855V38.5312H156ZM175.526 11.5085L161.52 33.6704V34H175.855V11.5085H175.526Z" />
+<path fill-rule="evenodd" clip-rule="evenodd" d="M233 38.5312V34.3295L251.537 5H257.716V34H263.483V38.5312H257.716V47.1818H252.855V38.5312H233ZM252.526 11.5085L238.52 33.6704V34H252.855V11.5085H252.526Z"/>
+</svg>

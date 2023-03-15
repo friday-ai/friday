@@ -75,19 +75,22 @@ const themeLight = createTheme(
         defaultProps: {
           sx: {
             '& .MuiToggleButtonGroup-grouped': {
-              margin: 0.8,
-              border: 0,
+              margin: 0.7,
+              border: 1,
+              borderColor: 'divider',
               padding: 0.8,
               textTransform: 'capitalize',
-              '&.Mui-selected': {
-                color: '#121C42',
-                backgroundColor: 'rgb(18 28 66 / .1)',
-              },
               '&:not(:first-of-type)': {
                 borderRadius: 0.6,
+                borderColor: 'divider',
               },
               '&:first-of-type': {
                 borderRadius: 0.6,
+              },
+              '&.Mui-selected': {
+                color: '#121C42',
+                backgroundColor: 'rgb(18 28 66 / .1)',
+                borderColor: 'rgb(18 28 66 / .3)',
               },
             },
           },
