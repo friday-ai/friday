@@ -53,7 +53,7 @@ export default function App() {
           </IconMenu>
         </Box>
 
-        <Link href="/dashboard" sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
+        <Link href="/dashboard/devices" sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
           <ReactLogo width="1.5em" display="block" fill={theme.palette.primary.main} />
         </Link>
 

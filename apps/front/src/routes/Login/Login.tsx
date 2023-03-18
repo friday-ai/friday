@@ -38,7 +38,7 @@ export default function Login() {
     try {
       const res = await login(email, password);
       if (res) {
-        navigate('/dashboard', { replace: true });
+        navigate('/dashboard/devices', { replace: true });
       }
     } catch (err) {
       if (err.response.status === 404) {
