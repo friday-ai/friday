@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { ReactComponent as ReactLogo } from '../../assets/favicon.svg';
+import { ReactComponent as ReactLogo } from '../../assets/svg/favicon.svg';
 
 import IconMenu from '../Menu/IconMenu';
 import AccountMenu from './AccountMenu';

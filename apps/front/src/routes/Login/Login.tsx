@@ -17,7 +17,7 @@ import { useTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { ReactComponent as ReactLogo } from '../../assets/favicon.svg';
+import { ReactComponent as ReactLogo } from '../../assets/svg/favicon.svg';
 
 import useSharedApp from '../../services/app/useApp';
 

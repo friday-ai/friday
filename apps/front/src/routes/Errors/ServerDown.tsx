@@ -4,7 +4,7 @@ import React from 'react';
 import { useTheme } from '@mui/material/styles';
 
 import { Typography } from '@mui/material';
-import { ReactComponent as ServerError } from '../../assets/server_error.svg';
+import { ReactComponent as ServerError } from '../../assets/svg/server_error.svg';
 
 export default function ServerDown() {
   const theme = useTheme();
