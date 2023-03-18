@@ -25,6 +25,7 @@ const useApp = () => {
       setSession(res);
       setHeaders(`Bearer ${res.accessToken}`);
       localStorage.setItem('session', JSON.stringify(res));
+      localStorage.setItem('i18nextLng', res.user.language || 'en');
       return true;
     },
     [request]
@@ -35,6 +36,7 @@ const useApp = () => {
     setSession(null);
     setHeaders('');
     localStorage.removeItem('session');
+    localStorage.removeItem('i18nextLng');
     return true;
   }, [session, request]);
 

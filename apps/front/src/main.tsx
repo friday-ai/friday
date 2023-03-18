@@ -10,6 +10,7 @@ import { registerSW } from 'virtual:pwa-register';
 import './index.css';
 import Root from './routes/Root';
 import theme from './utils/theme';
+import './utils/i18n';
 
 const queryClient = new QueryClient({
   defaultOptions: {

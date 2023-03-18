@@ -8,6 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import MenuItem from '@mui/material/MenuItem';
 
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import IconMenu from '../Menu/IconMenu';
@@ -17,6 +18,7 @@ import useSharedApp from '../../services/app/useApp';
 export default function AccountMenu() {
   const navigate = useNavigate();
   const { logout } = useSharedApp();
+  const { t } = useTranslation();
 
   const handleNavigation = (_: unknown, page: string | null) => {
     if (page) {
@@ -28,7 +30,7 @@ export default function AccountMenu() {
     <Box sx={{ flexGrow: 0 }}>
       <IconMenu
         id="account-menu"
-        title="Account menu"
+        title={t('dashboard.appBar.userMenu.title')}
         ariaLabel="account of current user"
         ariaControls="account-menu-appbar"
         icon={<Avatar alt="John peperwood" src="https://cdn-icons-png.flaticon.com/512/2202/2202112.png" />}
@@ -39,7 +41,7 @@ export default function AccountMenu() {
             src="https://cdn-icons-png.flaticon.com/512/2202/2202112.png"
             sx={{ width: 24, height: 24, marginRight: '.8rem' }}
           />
-          My account
+          {t('dashboard.appBar.userMenu.profile')}
         </MenuItem>
         <Divider />
         {/*
@@ -54,13 +56,13 @@ export default function AccountMenu() {
           <ListItemIcon>
             <SettingsIcon fontSize="small" />
           </ListItemIcon>
-          Settings
+          {t('dashboard.appBar.userMenu.settings')}
         </MenuItem>
         <MenuItem onClick={() => logout()}>
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
-          Logout
+          {t('dashboard.appBar.userMenu.logout')}
         </MenuItem>
       </IconMenu>
     </Box>

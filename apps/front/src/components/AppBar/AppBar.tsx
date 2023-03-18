@@ -16,6 +16,7 @@ import { useTheme } from '@mui/material/styles';
 
 import React, { useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as ReactLogo } from '../../assets/svg/favicon.svg';
@@ -29,6 +30,7 @@ export default function App() {
   const theme = useTheme();
   const navigate = useNavigate();
   const initialPath = useCurrentPath();
+  const { t } = useTranslation();
 
   const [currentPath, setCurrentPath] = useState(initialPath);
 
@@ -45,10 +47,10 @@ export default function App() {
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, mr: 3 }}>
           <IconMenu id="pages-menu" title="Pages menu" ariaLabel="pages menu" ariaControls="pages-menu-appbar" icon={<MenuIcon />}>
             <MenuItem onClick={() => handleNavigation(null, 'devices')}>
-              <Typography textAlign="center">Dashboard</Typography>
+              <Typography textAlign="center">{t('dashboard.appBar.dashboard')}</Typography>
             </MenuItem>
-            <MenuItem onClick={() => handleNavigation(null, 'settings')}>
-              <Typography textAlign="center">Settings</Typography>
+            <MenuItem onClick={() => handleNavigation(null, 'satellites')}>
+              <Typography textAlign="center">{t('dashboard.appBar.satellites')}</Typography>
             </MenuItem>
           </IconMenu>
         </Box>
@@ -64,14 +66,14 @@ export default function App() {
             <ToggleButton value="devices" aria-label="devices">
               <DashboardIcon fontSize="small" />
               <Typography ml={0.5} textAlign="center">
-                Dashboard
+                {t('dashboard.appBar.dashboard')}
               </Typography>
             </ToggleButton>
 
             <ToggleButton value="satellites" aria-label="satellites">
               <ExtensionIcon fontSize="small" />
               <Typography ml={0.5} textAlign="center">
-                Satellites
+                {t('dashboard.appBar.satellites')}
               </Typography>
             </ToggleButton>
           </ToggleButtonGroup>

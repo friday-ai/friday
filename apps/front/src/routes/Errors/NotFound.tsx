@@ -1,14 +1,17 @@
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import React from 'react';
 
 import { useTheme } from '@mui/material/styles';
 
-import { Typography } from '@mui/material';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import { ReactComponent as ServerError } from '../../assets/svg/404.svg';
 
 export default function NotFound() {
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Box display="flex" flexDirection="column" minHeight="100%" alignItems="center" justifyContent="center" margin={2}>
@@ -16,12 +19,12 @@ export default function NotFound() {
         <ServerError width="inerhit" height="inerhit" stroke={theme.palette.primary.main} fill={theme.palette.primary.main} />
       </div>
       <Typography textAlign="center" variant="h4" fontWeight={700}>
-        Sorry we couldn&apos;t find this page.
+        {t('errors.notFound.title')}
       </Typography>
       <Typography textAlign="center" variant="subtitle1" color={theme.palette.text.secondary}>
-        But dont worry, you can find plenty of other things on homepage.
+        {t('errors.notFound.description')}
       </Typography>
-      <Link href="/dashboard/devices">back to homepage</Link>
+      <Link href="/dashboard/devices">{t('errors.notFound.backToHome')}</Link>
     </Box>
   );
 }

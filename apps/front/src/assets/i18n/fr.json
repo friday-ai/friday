@@ -1,0 +1,38 @@
+{
+  "dashboard": {
+    "appBar": {
+      "dashboard": "Accueil",
+      "satellites": "Satellites",
+      "userMenu": {
+        "logout": "Déconnexion",
+        "profile": "Mon profil",
+        "settings": "Paramètres",
+        "title": "Menu utilisateur"
+      }
+    }
+  },
+  "errors": {
+    "notFound": {
+      "backToHome": "Retour à la page d'accueil",
+      "description": "Mais ne vous inquiétez pas, vous pouvez trouver beaucoup d'autres choses sur la page d'accueil.",
+      "title": "Désolé, nous n'avons pas pu trouver cette page."
+    },
+    "serverDown": {
+      "description": "Veuillez redémarrer votre machine et réessayer dans quelques instants",
+      "subDescription": "Il sera de retour en un rien de temps",
+      "title": "Votre serveur se sent un peu déprimé."
+    }
+  },
+  "login": {
+    "email": "Adresse e-mail",
+    "forgotPassword": "Mot de passe oublié ?",
+    "forgotPasswordMessage": "Contactez l'administrateur pour réinitialiser votre mot de passe",
+    "invalidPassword": "Mot de passe incorrect",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "noAccountMessage": "Contactez l'administrateur pour créer un compte pour vous",
+    "password": "Mot de passe",
+    "signin": "S'identifier",
+    "title": "Connexion",
+    "userNotFound": "Utilisateur non trouvé"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "dashboard": {
+    "appBar": {
+      "dashboard": "Dashboard",
+      "satellites": "Satellites",
+      "userMenu": {
+        "logout": "Logout",
+        "profile": "My profile",
+        "settings": "Settings",
+        "title": "User Menu"
+      }
+    }
+  },
+  "errors": {
+    "notFound": {
+      "backToHome": "Back to homepage",
+      "description": "But dont worry, you can find plenty of other things on homepage.",
+      "title": "Sorry we couldn't find this page."
+    },
+    "serverDown": {
+      "description": "Please restart your machine and try again in a few moments",
+      "subDescription": "He'll be back in no time",
+      "title": "Your server is feeling a little down."
+    }
+  },
+  "login": {
+    "email": "Email address",
+    "forgotPassword": "Forgot your password?",
+    "forgotPasswordMessage": "Contact the administrator to reset your password",
+    "invalidPassword": "Invalid password",
+    "noAccount": "Don't have an account?",
+    "noAccountMessage": "Contact the administrator to create an account for you",
+    "password": "Password",
+    "signin": "Sign In",
+    "title": "Sign In to your account",
+    "userNotFound": "User not found"
+  }
+}

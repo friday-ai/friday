@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as ReactLogo } from '../../assets/svg/favicon.svg';
@@ -25,6 +26,7 @@ export default function Login() {
   const theme = useTheme();
   const navigate = useNavigate();
   const { login } = useSharedApp();
+  const { t } = useTranslation();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,15 +60,15 @@ export default function Login() {
       <Paper sx={{ padding: '2rem', width: 335, '@media (min-width: 600px)': { width: 352 } }}>
         <Stack spacing={4}>
           <Typography variant="h5" fontWeight="bold" color={theme.palette.primary.main} alignSelf="center">
-            Sign In to your account
+            {t('login.title')}
           </Typography>
 
           <TextField
             error={error === 1}
             id="email"
-            label="Email address"
+            label={t('login.email')}
             type="email"
-            helperText={error === 1 ? 'User nor found' : ''}
+            helperText={error === 1 ? t('login.userNotFound') : ''}
             value={email}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               setEmail(event.target.value);
@@ -76,9 +78,9 @@ export default function Login() {
           <div>
             <TextField
               error={error === 2}
-              label="Password"
+              label={t('login.password')}
               id="password"
-              helperText={error === 2 ? 'Incorrect password' : ''}
+              helperText={error === 2 ? t('login.invalidPassword') : ''}
               type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,15 +103,15 @@ export default function Login() {
               }}
             />
 
-            <Tooltip title="Contact the administrator to reset your password" arrow>
+            <Tooltip title={t('login.forgotPasswordMessage')} arrow>
               <Typography variant="caption" color={theme.palette.text.primary}>
-                Forgot your password ?
+                {t('login.forgotPassword')}
               </Typography>
             </Tooltip>
           </div>
 
           <Button variant="contained" onClick={submit}>
-            Sign In
+            {t('login.signin')}
           </Button>
         </Stack>
       </Paper>
@@ -123,9 +125,9 @@ export default function Login() {
         justifyContent="center"
       >
         <Typography variant="body1" mr={1} color={theme.palette.text.primary}>
-          Don&apos;t have an account ?
+          {t('login.noAccount')}
         </Typography>
-        <Tooltip title="Contact the administrator to create an account for you" arrow>
+        <Tooltip title={t('login.noAccountMessage')} arrow>
           <HelpOutline />
         </Tooltip>
       </Box>
