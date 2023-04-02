@@ -40,11 +40,31 @@ const useApp = () => {
     return true;
   }, [session, request]);
 
+  const signUp = useCallback(
+    async (userName: string, email: string, password: string) => {
+      const lang = localStorage.getItem('i18nextLng');
+      const res = await request<SessionAttributes>(
+        'post',
+        '/api/v1/user/signup',
+        {},
+        { userName, email, password, language: lang, role: 'superadmin' }
+      );
+
+      setSession(res);
+      setHeaders(`Bearer ${res.accessToken}`);
+      localStorage.setItem('session', JSON.stringify(res));
+      localStorage.setItem('i18nextLng', res.user.language || 'en');
+      return true;
+    },
+    [request]
+  );
+
   return {
     request,
     initExistingSession,
     login,
     logout,
+    signUp,
     user: session?.user,
     hasSession: !!session,
   };

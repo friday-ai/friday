@@ -16,14 +16,17 @@ import Settings from './Dashboard/Settings';
 import NotFound from './Errors/NotFound';
 import ServerDown from './Errors/ServerDown';
 import Login from './Login/Login';
+import Signup from './Signup/Signup';
 
 export default function Root() {
   const { isLoading, isError, isSuccess, data } = useGetUserCount();
   const { initExistingSession } = useSharedApp();
 
   useEffect(() => {
-    initExistingSession();
-  }, [initExistingSession]);
+    if (isSuccess && data !== 0) {
+      initExistingSession();
+    }
+  }, [isSuccess, data, initExistingSession]);
 
   return (
     <>
@@ -40,11 +43,20 @@ export default function Root() {
       {isSuccess && (
         <Routes>
           {/* Signup route not exist if one or more user has already registered */}
-          {data === 0 && <Route path="/signup" element={<div>signup</div>} />}
+          {data === 0 && <Route path="/signup" element={<Signup />} />}
 
           {/* If one or more user has already registered, redirect him to dashboard */}
           {/* Else redirect him to signup route */}
           <Route path="/" element={data !== 0 ? <Navigate to="/dashboard/devices" replace /> : <Navigate to="/signup" replace />} />
+
+          <Route
+            path="/server-down"
+            element={
+              <AnimationLayout>
+                <ServerDown />
+              </AnimationLayout>
+            }
+          />
 
           <Route path="/login" element={<Login />} />
           <Route element={<RequireAuth />}>

@@ -34,5 +34,56 @@
     "signin": "Sign In",
     "title": "Sign In to your account",
     "userNotFound": "User not found"
+  },
+  "signup": {
+    "account": {
+      "confirmPassword": "Confirm password",
+      "description": "To set up your account, please enter your username, email and password",
+      "email": "Email address",
+      "emailEmpty": "The email cannot be empty.",
+      "emailNotValid": "The email must be valid.",
+      "password": "Password",
+      "passwordEmpty": "The password cannot be empty.",
+      "passwordNotMatch": "The passwords do not match.",
+      "passwordTooShort": "The password needs to be at least 10 characters long.",
+      "title": "Now, let's setup your account",
+      "username": "Username",
+      "usernameEmpty": "The username cannot be empty."
+    },
+    "general": {
+      "start": "Start",
+      "welcome": "Welcome to Friday",
+      "back": "Back",
+      "next": "Next",
+      "fridayInit": "Friday is now initializing, this step can take a few minutes.",
+      "fridayInitDesc": "When Friday is ready, you will be automatically redirected to the dashboard."
+    },
+    "house": {
+      "description": "Enter a name for your home and one or more rooms",
+      "description2": "You can aslo set the location of your home on the map",
+      "houseName": "House name",
+      "nameEmpty": "The house name cannot be empty.",
+      "rooms": "Rooms",
+      "title": "For the last step, set up your home"
+    },
+    "language": {
+      "description": "Choose language of your personal dashboard",
+      "title": "First, let's choose your language"
+    },
+    "time": {
+      "1m": "1 month",
+      "1y": "1 year",
+      "3m": "3 months",
+      "6m": "6 months",
+      "description": "This settings are global and will be applied to all users",
+      "title": "Choose how many time you want to keep your devices states",
+      "unlimited": "Unlimited"
+    },
+    "units": {
+      "description": "This settings are global and will be applied to all users",
+      "metric": "Celsius (°C), Si (Metric)",
+      "us": "Fahrenheit (°F), Mi (Miles)",
+      "title": "Choose units"
+    }
   }
 }

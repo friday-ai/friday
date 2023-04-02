@@ -96,6 +96,58 @@ const themeLight = createTheme(
           },
         },
       },
+      MuiStep: {
+        defaultProps: {
+          sx: {
+            '& .MuiStepLabel-iconContainer': {
+              paddingRight: 0,
+              border: 'solid 1px',
+              borderColor: 'divider',
+              borderRadius: '50%',
+            },
+            '& .MuiStepIcon-root': {
+              width: '1.5em',
+              height: '1.5em',
+            },
+            '& .Mui-disabled .MuiStepIcon-root': {
+              color: 'white',
+            },
+            '& .Mui-disabled .MuiStepIcon-text': {
+              fill: '#121C42',
+            },
+          },
+        },
+      },
+      MuiStepConnector: {
+        defaultProps: {
+          sx: {
+            '&.Mui-active': {
+              '& .MuiStepConnector-line': {
+                borderColor: 'primary.main',
+                borderStyle: 'solid',
+              },
+            },
+            '&.Mui-completed': {
+              '& .MuiStepConnector-line': {
+                borderColor: 'primary.main',
+                borderStyle: 'solid',
+              },
+            },
+            '& .MuiStepConnector-line': {
+              borderColor: 'divider',
+              borderWidth: 1,
+              borderStyle: 'dashed',
+            },
+          },
+        },
+      },
+      MuiMobileStepper: {
+        defaultProps: {
+          sx: {
+            backgroundColor: 'transparent',
+          },
+        },
+      },
     },
   },
   // Add custom properties

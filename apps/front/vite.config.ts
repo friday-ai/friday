@@ -9,6 +9,14 @@ export default defineConfig({
     https: process.env.HTTPS === 'true',
     port: Number(process.env.PORT) || 3001,
   },
+  optimizeDeps: {
+    include: ['@friday-ai/shared'],
+  },
+  build: {
+    commonjsOptions: {
+      include: [/@friday-ai\/shared/, /node_modules/],
+    },
+  },
   plugins: [
     react(),
     svgr(),

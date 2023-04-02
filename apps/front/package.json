@@ -6,7 +6,7 @@
   "scripts": {
     "start": "per-env",
     "start:prod": "cross-env NODE_ENV=production http-server dist -p 1444 -g",
-    "start:dev": "cross-env NODE_ENV=development vite --host",
+    "start:dev": "cross-env NODE_ENV=development vite --host --force",
     "start:demo": "cross-env NODE_ENV=production tsc && vite build --mode staging && http-server dist",
     "build": "cross-env NODE_ENV=production tsc && vite build --mode production",
     "preview": "pnpm build && vite preview --host",

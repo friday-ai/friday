@@ -34,5 +34,56 @@
     "signin": "S'identifier",
     "title": "Connexion",
     "userNotFound": "Utilisateur non trouvé"
+  },
+  "signup": {
+    "account": {
+      "confirmPassword": "Confirmez le mot de passe",
+      "description": "Pour configurer votre compte, veuillez saisir votre nom d'utilisateur, votre email et votre mot de passe",
+      "email": "Adresse e-mail",
+      "emailEmpty": "L'e-mail ne peut pas être vide.",
+      "emailNotValid": "L'e-mail doit être valide.",
+      "password": "Mot de passe",
+      "passwordEmpty": "Le mot de passe ne peut pas être vide.",
+      "passwordNotMatch": "Le mot de passe ne correspond pas.",
+      "passwordTooShort": "Le mot de passe doit comporter au moins 10 caractères.",
+      "title": "Maintenant, configurons votre compte",
+      "username": "Nom d'utilisateur",
+      "usernameEmpty": "Le nom d'utilisateur ne peut pas être vide."
+    },
+    "general": {
+      "start": "Commencer",
+      "welcome": "Bienvenue sur Friday",
+      "back": "Retour",
+      "next": "Suivant",
+      "fridayInit": "Friday est en cours d'initialisation, cette étape peut prendre quelques minutes.",
+      "fridayInitDesc": "Lorsque Frdiay sera prêt, vous serez automatiquement redirigé vers le tableau de bord."
+    },
+    "house": {
+      "description": "Entrez un nom pour votre maison et une ou plusieurs pièces",
+      "description2": "Vous pouvez également définir l'emplacement de votre maison sur la carte",
+      "houseName": "Nom de la maison",
+      "nameEmpty": "Le nom de la maison ne peut pas être vide.",
+      "rooms": "Pièces",
+      "title": "Pour la dernière étape, configurez votre maison"
+    },
+    "language": {
+      "description": "Choisissez la langue de votre tableau de bord personnel",
+      "title": "Tout d'abord, choisissons votre langue"
+    },
+    "time": {
+      "1m": "1 mois",
+      "1y": "1 an",
+      "3m": "3 mois",
+      "6m": "6 mois",
+      "description": "Ces paramètres sont globaux et seront appliqués à tous les utilisateurs",
+      "title": "Choisissez combien de temps vous souhaitez conserver l'état de vos appareils",
+      "unlimited": "Illimité"
+    },
+    "units": {
+      "description": "Ces paramètres sont globaux et seront appliqués à tous les utilisateurs",
+      "metric": "Celsius (°C), Si (métrique)",
+      "us": "Fahrenheit (°F), Mi (Miles)",
+      "title": "Choisissez les unités"
+    }
   }
 }
