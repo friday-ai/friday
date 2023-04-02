@@ -16,6 +16,12 @@ import type { Constructor, UnionToIntersection } from './utils';
 export function applyMixin(target: Constructor, mixin: Constructor, includeConstructor = false): void {
   // Figure out the inheritance chain of the mixin
   const inheritanceChain: Constructor[] = [mixin];
+
+  // If the mixin has no base class, we're done
+  if (inheritanceChain[0] === undefined) {
+    return;
+  }
+
   while (true) {
     const current = inheritanceChain[0];
     const base = Object.getPrototypeOf(current);

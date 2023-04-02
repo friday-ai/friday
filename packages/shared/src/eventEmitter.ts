@@ -5,6 +5,7 @@
  */
 
 import { EventEmitter } from 'events';
+import process from 'node:process';
 import { applyMixin } from './inheritance';
 
 export type EventHandler =
@@ -56,6 +57,9 @@ export interface TypedEventEmitter<TEvents extends Record<keyof TEvents, EventHa
 
 export class TypedEventEmitter<TEvents extends Record<keyof TEvents, EventHandler>> {}
 
-// Make TypedEventEmitter inherit from EventEmitter without actually extending
-// because that causes TypeScript to complain about invalid inheritance
-applyMixin(TypedEventEmitter, EventEmitter);
+// Only apply the mixin if we are in a Node.js environment
+if ('env' in Object.keys(process)) {
+  // Make TypedEventEmitter inherit from EventEmitter without actually extending
+  // because that causes TypeScript to complain about invalid inheritance
+  applyMixin(TypedEventEmitter, EventEmitter);
+}
