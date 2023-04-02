@@ -16,8 +16,8 @@ export default function FaviconLoader() {
     <div style={{ width: 'fit-content', height: 'fit-content' }}>
       <svg
         id="466f8ab7-2527-4c08-a168-e79693ae8f8f"
-        width="inerhit"
-        height="inerhit"
+        width="100%"
+        height="100%"
         viewBox="0 0 1300 1600"
         fill="none"
         stroke={theme.palette.primary.main}
