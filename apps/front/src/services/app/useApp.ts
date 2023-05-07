@@ -13,11 +13,21 @@ const useApp = () => {
   const initExistingSession = useCallback(async () => {
     const s = localStorage.getItem('session') ? (JSON.parse(localStorage.getItem('session') || '{}') as SessionAttributes) : null;
     if (s) {
-      // TODO: Check if session is still valid on server
-      setSession(s);
-      setHeaders(`Bearer ${s.accessToken}`);
+      try {
+        const res = await request<SessionAttributes>('post', '/api/v1/session/access_token', {}, { refreshToken: s.refreshToken });
+        setSession(res);
+        setHeaders(`Bearer ${res.accessToken}`);
+        return true;
+      } catch (error) {
+        setSession(null);
+        setHeaders('');
+        localStorage.removeItem('session');
+        return false;
+      }
+    } else {
+      return false;
     }
-  }, []);
+  }, [request]);
 
   const login = useCallback(
     async (email: string, password: string) => {
