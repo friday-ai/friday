@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
+import { SnackbarProvider } from 'notistack';
+
 import AnimationLayout from '../components/App/AnimationLayout';
 import RequireAuth from '../components/Auth/RequireAuth';
 
@@ -11,12 +13,14 @@ import LoaderSuspense from '../components/Loader/LoaderSuspense';
 import Account from './Dashboard/Account';
 import Dashboard from './Dashboard/Dashboard';
 import Devices from './Dashboard/Devices';
-import Satellites from './Dashboard/Satellites';
+import Satellites from './Dashboard/Satellites/Satellites';
 import Settings from './Dashboard/Settings';
 import NotFound from './Errors/NotFound';
 import ServerDown from './Errors/ServerDown';
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
+
+import { defaultSnackbar, errorSnackbar, infoSnackbar, successSnackbar, warningSnackbar } from '../components/Snackbar/Snackbar';
 
 export default function Root() {
   const navigate = useNavigate();
@@ -76,6 +80,17 @@ export default function Root() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         )}
+        <SnackbarProvider
+          Components={{
+            default: defaultSnackbar,
+            success: successSnackbar,
+            warning: warningSnackbar,
+            error: errorSnackbar,
+            info: infoSnackbar,
+          }}
+          anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+          maxSnack={6}
+        />
       </>
     </LoaderSuspense>
   );

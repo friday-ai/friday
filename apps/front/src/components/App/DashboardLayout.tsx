@@ -7,9 +7,9 @@ import AnimationLayout from './AnimationLayout';
 
 export default function DashboardLayout() {
   return (
-    <Container maxWidth={false} disableGutters>
+    <Container sx={{ padding: 2, paddingTop: 0 }}>
       <AppBar />
-      <Container maxWidth={false}>
+      <Container sx={{ paddingTop: 2 }}>
         <AnimationLayout>
           <Outlet />
         </AnimationLayout>

@@ -8,12 +8,20 @@ declare module '@mui/material/styles' {
       borderRadius: number;
       borderColor: string;
     };
+    chartsTooltip: {
+      background: string;
+      color: string;
+    };
   }
   interface ThemeOptions {
     borders?: {
       border: number;
       borderRadius: number;
       borderColor: string;
+    };
+    chartsTooltip?: {
+      background: string;
+      color: string;
     };
   }
 }
@@ -24,7 +32,7 @@ const themeLight = createTheme(
     palette: {
       mode: 'light',
       background: {
-        default: '#f3f5fc',
+        default: '#f8fafc',
         paper: '#ffffff',
       },
       primary: {
@@ -45,16 +53,30 @@ const themeLight = createTheme(
       fontFamily: 'Inter, sans-serif',
     },
     components: {
+      MuiContainer: {
+        defaultProps: {
+          maxWidth: false,
+          disableGutters: true,
+          sx: {
+            padding: 2,
+          },
+        },
+      },
       MuiAppBar: {
         defaultProps: {
-          color: 'inherit',
+          color: 'transparent',
           elevation: 0,
           variant: 'outlined',
+          sx: {
+            borderTop: 0,
+            borderLeft: 0,
+            borderRight: 0,
+          },
         },
       },
       MuiPaper: {
         defaultProps: {
-          elevation: 4,
+          variant: 'outlined',
         },
       },
       MuiCardContent: {
@@ -66,6 +88,7 @@ const themeLight = createTheme(
       },
       MuiButton: {
         defaultProps: {
+          disableElevation: true,
           sx: {
             borderRadius: '.6rem',
           },
@@ -76,21 +99,19 @@ const themeLight = createTheme(
           sx: {
             '& .MuiToggleButtonGroup-grouped': {
               margin: 0.7,
-              border: 1,
-              borderColor: 'divider',
-              padding: 0.8,
-              textTransform: 'capitalize',
+              padding: 0.5,
+              border: 0,
+              '&.Mui-disabled': {
+                border: 0,
+              },
               '&:not(:first-of-type)': {
                 borderRadius: 0.6,
-                borderColor: 'divider',
               },
               '&:first-of-type': {
                 borderRadius: 0.6,
               },
-              '&.Mui-selected': {
-                color: '#121C42',
-                backgroundColor: 'rgb(18 28 66 / .1)',
-                borderColor: 'rgb(18 28 66 / .3)',
+              '& .Mui-selected': {
+                color: 'primary.main',
               },
             },
           },
@@ -148,6 +169,13 @@ const themeLight = createTheme(
           },
         },
       },
+      MuiSnackbar: {
+        defaultProps: {
+          sx: {
+            position: 'unset',
+          },
+        },
+      },
     },
   },
   // Add custom properties
@@ -156,6 +184,10 @@ const themeLight = createTheme(
       border: 1,
       borderRadius: 0.8,
       borderColor: 'divider',
+    },
+    chartsTooltip: {
+      background: '#fff',
+      color: 'rgba(0, 0, 0, 0.87)',
     },
   }
 );

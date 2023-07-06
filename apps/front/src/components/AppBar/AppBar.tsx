@@ -1,14 +1,13 @@
-import DashboardIcon from '@mui/icons-material/DashboardOutlined';
-import ExtensionIcon from '@mui/icons-material/ExtensionOutlined';
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import MenuIcon from '@mui/icons-material/Menu';
+import SatelliteAltRoundedIcon from '@mui/icons-material/SatelliteAltRounded';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import Link from '@mui/material/Link';
 import MenuItem from '@mui/material/MenuItem';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
@@ -26,6 +25,8 @@ import AccountMenu from './AccountMenu';
 
 import useCurrentPath from '../../utils/useCurrentPath';
 
+const pages = ['devices', 'satellites'];
+
 export default function App() {
   const theme = useTheme();
   const navigate = useNavigate();
@@ -39,6 +40,12 @@ export default function App() {
       setCurrentPath(page.toLowerCase());
       navigate(page.toLowerCase());
     }
+  };
+
+  const handleTabNavigation = (_: unknown, tab: number) => {
+    const page = pages[tab];
+    setCurrentPath(page.toLowerCase());
+    navigate(page.toLowerCase());
   };
 
   return (
@@ -55,28 +62,26 @@ export default function App() {
           </IconMenu>
         </Box>
 
-        <Link href="/dashboard/devices" sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}>
-          <ReactLogo width="1.5em" display="block" fill={theme.palette.primary.main} />
+        <Link href="/dashboard/devices" sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, mr: 3 }}>
+          <ReactLogo width="1.8em" display="block" fill={theme.palette.primary.main} />
         </Link>
 
-        <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', md: 'flex' }, marginY: 2 }} />
-
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, ml: 3 }}>
-          <ToggleButtonGroup exclusive value={currentPath} onChange={handleNavigation} aria-label="pages">
-            <ToggleButton value="devices" aria-label="devices">
-              <DashboardIcon fontSize="small" />
-              <Typography ml={0.5} textAlign="center">
-                {t('dashboard.appBar.dashboard')}
-              </Typography>
-            </ToggleButton>
-
-            <ToggleButton value="satellites" aria-label="satellites">
-              <ExtensionIcon fontSize="small" />
-              <Typography ml={0.5} textAlign="center">
-                {t('dashboard.appBar.satellites')}
-              </Typography>
-            </ToggleButton>
-          </ToggleButtonGroup>
+          <Tabs
+            value={pages.indexOf(currentPath)}
+            onChange={handleTabNavigation}
+            aria-label="main tabs navigation"
+            sx={{ minHeight: 64, '&.MuiTabs-root > div': { display: 'flex' } }}
+          >
+            <Tab id="devices" aria-controls="devices" label={t('dashboard.appBar.dashboard')} icon={<DashboardRoundedIcon />} iconPosition="start" />
+            <Tab
+              id="satellites"
+              aria-controls="satellites"
+              label={t('dashboard.appBar.satellites')}
+              icon={<SatelliteAltRoundedIcon />}
+              iconPosition="start"
+            />
+          </Tabs>
         </Box>
 
         <Link href="/dashboard/devices" sx={{ display: { xs: 'flex', md: 'none' }, mr: 2, flexGrow: 1 }}>
