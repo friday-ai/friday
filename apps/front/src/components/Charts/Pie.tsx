@@ -17,6 +17,16 @@ import { colorToRGBA } from '../../utils/color';
 const margin = 20;
 const legendGlyphSize = 15;
 const colorOpacity = 0.4;
+const padAngle = 0.05;
+
+const emptyArc = {
+  data: { key: 'null', label: 'null', value: 1, color: '#fff' },
+  endAngle: 10,
+  index: 0,
+  startAngle: 0,
+  value: 1,
+  padAngle,
+};
 
 interface PieData {
   key: string;
@@ -74,9 +84,17 @@ export default withTooltip<PieProps, PieData>((props) => {
                   }}
                   cornerRadius={3}
                   startAngle={0}
-                  padAngle={0.05}
+                  padAngle={padAngle}
                 >
                   {(pie) => {
+                    if (pie.arcs.length < 1) {
+                      const arcPath = pie.path(emptyArc) || '';
+                      return (
+                        <g key={`emtpy-arc-${totalLabel}`}>
+                          <path d={arcPath} fill={theme.palette.divider} stroke={theme.palette.divider} strokeWidth={2} />
+                        </g>
+                      );
+                    }
                     return pie.arcs.map((a) => {
                       const { key, color } = a.data;
                       const arcPath = pie.path(a) || '';

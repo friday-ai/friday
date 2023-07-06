@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import RestartAltOutlinedIcon from '@mui/icons-material/RestartAltOutlined';
@@ -12,9 +12,11 @@ import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
-import { formatDistance } from 'date-fns';
 
 import { AvailableState, SatelliteAttributes } from '@friday-ai/shared';
+import { formatDistance } from 'date-fns';
+import { enqueueSnackbar } from 'notistack';
+
 import Pie from '../../../components/Charts/Pie';
 import { SatelliteState } from './States';
 
@@ -24,6 +26,10 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
   const theme = useTheme();
 
   const uptime = formatDistance(new Date(satellite.lastHeartbeat), new Date(), { addSuffix: true });
+
+  const handleAction = useCallback(() => {
+    enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
+  }, []);
 
   return (
     <Paper sx={{ padding: '2rem' }}>
@@ -57,17 +63,17 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
             </Typography>
             <Stack direction="row">
               <Tooltip title="Install new plugin">
-                <IconButton aria-label="install new plugin">
+                <IconButton aria-label="install new plugin" onClick={() => handleAction()}>
                   <AddCircleOutlineOutlinedIcon />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Stop all plugins">
-                <IconButton aria-label="stop all plugins">
+                <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
                   <StopCircleOutlinedIcon />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Restart all plugins">
-                <IconButton aria-label="restart all plugins">
+                <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
                   <RestartAltOutlinedIcon />
                 </IconButton>
               </Tooltip>

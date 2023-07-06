@@ -1,4 +1,4 @@
-import { AvailableState, PluginAttributes, StateOwner } from '@friday-ai/shared';
+import { AvailableState, PluginAttributes } from '@friday-ai/shared';
 import { Theme } from '@mui/material';
 
 // Maybe an api on backend for this ?
