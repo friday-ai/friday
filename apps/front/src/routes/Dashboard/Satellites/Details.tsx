@@ -62,7 +62,14 @@ export default function Details({ satellite }: { satellite: SatelliteAttributes 
             </Typography>
 
             <Paper>
-              <ToggleButtonGroup color="primary" value={filter} onChange={handleFilter} aria-label="plugin filter" size="small">
+              <ToggleButtonGroup
+                color="primary"
+                value={filter}
+                onChange={handleFilter}
+                aria-label="plugin filter"
+                size="small"
+                disabled={satellite.plugins.length < 1}
+              >
                 <ToggleButton value="running">Running</ToggleButton>
                 <ToggleButton value="stopped">Stopped</ToggleButton>
                 <ToggleButton value="errored">Errored</ToggleButton>

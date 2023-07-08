@@ -1,0 +1,55 @@
+<svg viewBox="0 0 409 339" stroke="black" stroke-width="3" fill="#D9D9D9" fill-opacity="0.1" xmlns="http://www.w3.org/2000/svg">
+<path d="M293 167.5L287.687 160H323L330.5 168L331 211.5L323 219H287.687L293 210.5V167.5Z" stroke="none"/>
+<path d="M293.577 74.5L287.5 66L322.5 65.5L331 72.5V117L323.5 125H287.5L293.577 117V74.5Z" stroke="none"/>
+<path d="M293 260.5L287.5 254H323L330.5 262V305.5L324.5 312.5H287L292.5 306.5L293 260.5Z" stroke="none"/>
+
+<rect x="283" y="220" width="38" height="34" />
+<rect x="283" y="125" width="38" height="34" />
+<rect x="45.5" y="253.5" width="286" height="60" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="45.5" y="65.5" width="286" height="60" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="45.5" y="159.5" width="286" height="60" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="45.5" y="65.5" width="248" height="60" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="45.5" y="159.5" width="248" height="60" rx="12.5" stroke-linecap="round" fill="none"/>
+<rect x="45.5" y="253.5" width="248" height="60" rx="12.5" stroke-linecap="round" fill="none"/>
+<line x1="58.5" y1="126.5" x2="58.5" y2="158.5" stroke-linecap="round"/>
+<line x1="283.5" y1="126.5" x2="283.5" y2="158.5" stroke-linecap="round"/>
+<line x1="321.5" y1="126.5" x2="321.5" y2="158.5" stroke-linecap="round"/>
+<line x1="58.5" y1="221.5" x2="58.5" y2="252.5" stroke-linecap="round"/>
+<line x1="283.5" y1="221.5" x2="283.5" y2="252.5" stroke-linecap="round"/>
+<line x1="321.5" y1="220.5" x2="321.5" y2="252.5" stroke-linecap="round"/>
+<path d="M91 107L112 84" stroke-linecap="round"/>
+<path d="M108 107L129 84" stroke-linecap="round"/>
+<path d="M125 107L146 84" stroke-linecap="round"/>
+<path d="M142 107L163 84" stroke-linecap="round"/>
+<path d="M159 107L180 84" stroke-linecap="round"/>
+<path d="M176 107L197 84" stroke-linecap="round"/>
+<path d="M193 107L214 84" stroke-linecap="round"/>
+<path d="M209 107L230 84" stroke-linecap="round"/>
+<path d="M226 107L247 84" stroke-linecap="round"/>
+<path d="M248 295L269 272" stroke-linecap="round"/>
+<path d="M243 108L253 95" stroke-linecap="round"/>
+<path d="M264 295L275 284" stroke-linecap="round"/>
+<path d="M241 285L252 272" stroke-linecap="round"/>
+<path d="M85 97L95 84" stroke-linecap="round"/>
+<path d="M302 265H313.96M319.48 265H325" stroke-linecap="round"/>
+<path d="M300 171H312.48M318.24 171H324" stroke-linecap="round"/>
+<path d="M300 77H312.48M318.24 77H324" stroke-linecap="round"/>
+<path d="M197 179L186 189" stroke-linecap="round"/>
+<path d="M186 190L197 200" stroke-linecap="round"/>
+<path d="M120 179L130 189" stroke-linecap="round"/>
+<path d="M130 190L120 200" stroke-linecap="round"/>
+<path d="M173.5 285.5C173.5 292.028 167.782 297.5 160.5 297.5C153.218 297.5 147.5 292.028 147.5 285.5C147.5 278.972 153.218 273.5 160.5 273.5C167.782 273.5 173.5 278.972 173.5 285.5Z"/>
+
+<circle cx="159.908" cy="36.6228" r="27.44" transform="rotate(-66.5761 159.908 36.6228)"/>
+<circle cx="159.823" cy="36.8233" r="25.5" transform="rotate(-66.5761 159.823 36.8233)" stroke="none"/>
+<line x1="185.045" y1="46.8412" x2="224.757" y2="63.778" stroke-linecap="round" stroke-linejoin="round"/>
+
+<circle cx="356.041" cy="250.761" r="26.8425" transform="rotate(-22.7252 356.041 250.761)" />
+<circle cx="355.845" cy="250.845" r="24.8903" transform="rotate(-22.7252 355.845 250.845)" stroke="none" />
+<line x1="366.92" y1="275.034" x2="383.414" y2="313.794" stroke-linecap="round" stroke-linejoin="round"/>
+
+<circle cx="78.8416" cy="286.274" r="27.44" transform="rotate(72.6965 78.8416 286.274)"/>
+<circle cx="78.775" cy="286.066" r="25.5" transform="rotate(72.6965 78.775 286.066)" stroke="none"/>
+<line x1="53.1251" y1="294.931" x2="11.9797" y2="308.006" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
