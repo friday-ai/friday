@@ -16,17 +16,26 @@ import Typography from '@mui/material/Typography';
 
 import { enqueueSnackbar } from 'notistack';
 
-import { AvailableState, SatelliteAttributes, StateOwner } from '@friday-ai/shared';
+import { AvailableState, PluginAttributes, SatelliteAttributes } from '@friday-ai/shared';
 
 import Menu from '../../../components/Menu/Menu';
 import PluginList from './PluginList';
 import SatelliteCard from './SatelliteCard';
 
 export default function Details({ satellite }: { satellite: SatelliteAttributes }) {
-  const [filter, setFilter] = useState(['running', 'stopped', 'errored', 'waiting-config']);
+  const [filter, setFilter] = useState([
+    AvailableState.PLUGIN_RUNNING,
+    AvailableState.PLUGIN_STOPPED,
+    AvailableState.PLUGIN_ERRORED,
+    AvailableState.PLUGIN_WAITING_CONFIGURATION,
+  ]);
 
-  const handleFilter = (_: React.MouseEvent<HTMLElement>, newFilter: string[]) => {
+  const [plugins, setPlugins] = useState<PluginAttributes[]>(satellite.plugins);
+
+  const handleFilter = (_: React.MouseEvent<HTMLElement>, newFilter: AvailableState[]) => {
     setFilter(newFilter);
+    const filteredPlugins = satellite.plugins.filter((plugin) => newFilter.includes(plugin.state.value as AvailableState));
+    setPlugins(filteredPlugins);
   };
 
   const handleAction = useCallback(() => {
@@ -72,10 +81,10 @@ export default function Details({ satellite }: { satellite: SatelliteAttributes 
                 size="small"
                 disabled={satellite.plugins.length < 1}
               >
-                <ToggleButton value="running">Running</ToggleButton>
-                <ToggleButton value="stopped">Stopped</ToggleButton>
-                <ToggleButton value="errored">Errored</ToggleButton>
-                <ToggleButton value="waiting-config">Waiting Config</ToggleButton>
+                <ToggleButton value={AvailableState.PLUGIN_RUNNING}>Running</ToggleButton>
+                <ToggleButton value={AvailableState.PLUGIN_STOPPED}>Stopped</ToggleButton>
+                <ToggleButton value={AvailableState.PLUGIN_ERRORED}>Errored</ToggleButton>
+                <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>Waiting Config</ToggleButton>
               </ToggleButtonGroup>
             </Paper>
 
@@ -97,15 +106,15 @@ export default function Details({ satellite }: { satellite: SatelliteAttributes 
                 orientation="vertical"
                 disabled={satellite.plugins.length < 1}
               >
-                <ToggleButton value="running">Running</ToggleButton>
-                <ToggleButton value="stopped">Stopped</ToggleButton>
-                <ToggleButton value="errored">Errored</ToggleButton>
-                <ToggleButton value="waiting-config">Waiting Config</ToggleButton>
+                <ToggleButton value={AvailableState.PLUGIN_RUNNING}>Running</ToggleButton>
+                <ToggleButton value={AvailableState.PLUGIN_STOPPED}>Stopped</ToggleButton>
+                <ToggleButton value={AvailableState.PLUGIN_ERRORED}>Errored</ToggleButton>
+                <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>Waiting Config</ToggleButton>
               </ToggleButtonGroup>
             </Menu>
           </Stack>
 
-          <PluginList plugins={satellite.plugins} />
+          <PluginList plugins={plugins} />
         </Stack>
       </Stack>
     </Box>

@@ -68,14 +68,18 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
                   </IconButton>
                 </Tooltip>
                 <Tooltip title="Stop all plugins">
-                  <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
-                    <StopCircleOutlinedIcon />
-                  </IconButton>
+                  <span>
+                    <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                      <StopCircleOutlinedIcon />
+                    </IconButton>
+                  </span>
                 </Tooltip>
                 <Tooltip title="Restart all plugins">
-                  <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
-                    <RestartAltOutlinedIcon />
-                  </IconButton>
+                  <span>
+                    <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                      <RestartAltOutlinedIcon />
+                    </IconButton>
+                  </span>
                 </Tooltip>
               </Stack>
             </Stack>
