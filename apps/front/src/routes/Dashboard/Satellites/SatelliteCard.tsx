@@ -41,7 +41,7 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
           <SatelliteState state={satellite.state.value as AvailableState} />
         </Stack>
 
-        <Stack spacing={2}>
+        <Stack spacing={2} direction={{ xs: 'column', md: 'row', lg: 'column' }} justifyContent="space-between">
           <Stack spacing={6} direction="row" alignItems="start">
             <Stack spacing={1}>
               <Typography color="GrayText">Ip address:</Typography>
@@ -55,34 +55,37 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
             </Stack>
           </Stack>
 
-          <Divider flexItem />
+          <Divider flexItem sx={{ display: { xs: 'flex', md: 'none', lg: 'flex' } }} />
+          <Divider flexItem orientation="vertical" sx={{ display: { xs: 'none', md: 'flex', lg: 'none' } }} />
 
-          <Stack direction="row" alignItems="center">
-            <Typography fontWeight="bold" sx={{ flexGrow: 1 }}>
-              Plugins states
-            </Typography>
-            <Stack direction="row">
-              <Tooltip title="Install new plugin">
-                <IconButton aria-label="install new plugin" onClick={() => handleAction()}>
-                  <AddCircleOutlineOutlinedIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Stop all plugins">
-                <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
-                  <StopCircleOutlinedIcon />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title="Restart all plugins">
-                <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
-                  <RestartAltOutlinedIcon />
-                </IconButton>
-              </Tooltip>
+          <Stack direction="column">
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+              <Typography fontWeight="bold">Plugins states</Typography>
+              <Stack direction="row">
+                <Tooltip title="Install new plugin">
+                  <IconButton aria-label="install new plugin" onClick={() => handleAction()}>
+                    <AddCircleOutlineOutlinedIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Stop all plugins">
+                  <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                    <StopCircleOutlinedIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Restart all plugins">
+                  <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                    <RestartAltOutlinedIcon />
+                  </IconButton>
+                </Tooltip>
+              </Stack>
             </Stack>
-          </Stack>
 
-          <Box sx={{ height: 350 }}>
-            <Pie data={getPluginsStates(satellite.plugins, theme)} totalCount={satellite.plugins.length} totalLabel="Plugins" />
-          </Box>
+            <Box display="flex" alignItems="center" justifyContent="center">
+              <Box sx={{ width: 350, height: 350 }}>
+                <Pie data={getPluginsStates(satellite.plugins, theme)} totalCount={satellite.plugins.length} totalLabel="Plugins" />
+              </Box>
+            </Box>
+          </Stack>
         </Stack>
       </Stack>
     </Paper>

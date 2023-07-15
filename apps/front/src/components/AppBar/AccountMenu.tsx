@@ -11,7 +11,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import IconMenu from '../Menu/IconMenu';
+import Menu from '../Menu/Menu';
 
 import useSharedApp from '../../services/app/useApp';
 
@@ -28,11 +28,12 @@ export default function AccountMenu() {
 
   return (
     <Box sx={{ flexGrow: 0 }}>
-      <IconMenu
+      <Menu
         id="account-menu"
         title={t('dashboard.appBar.userMenu.title')}
         ariaLabel="account of current user"
         ariaControls="account-menu-appbar"
+        buttonType="icon"
         icon={<Avatar alt="John peperwood" src="https://cdn-icons-png.flaticon.com/512/2202/2202112.png" />}
       >
         <MenuItem onClick={() => handleNavigation(null, 'account')}>
@@ -64,7 +65,7 @@ export default function AccountMenu() {
           </ListItemIcon>
           {t('dashboard.appBar.userMenu.logout')}
         </MenuItem>
-      </IconMenu>
+      </Menu>
     </Box>
   );
 }

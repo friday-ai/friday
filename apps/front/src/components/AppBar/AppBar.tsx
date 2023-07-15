@@ -20,7 +20,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ReactComponent as ReactLogo } from '../../assets/svg/favicon.svg';
 
-import IconMenu from '../Menu/IconMenu';
+import Menu from '../Menu/Menu';
 import AccountMenu from './AccountMenu';
 
 import useCurrentPath from '../../utils/useCurrentPath';
@@ -52,14 +52,14 @@ export default function App() {
     <AppBar position="static">
       <Toolbar>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, mr: 3 }}>
-          <IconMenu id="pages-menu" title="Pages menu" ariaLabel="pages menu" ariaControls="pages-menu-appbar" icon={<MenuIcon />}>
+          <Menu id="pages-menu" title="Pages menu" ariaLabel="pages menu" ariaControls="pages-menu-appbar" buttonType="icon" icon={<MenuIcon />}>
             <MenuItem onClick={() => handleNavigation(null, 'devices')}>
               <Typography textAlign="center">{t('dashboard.appBar.dashboard')}</Typography>
             </MenuItem>
             <MenuItem onClick={() => handleNavigation(null, 'satellites')}>
               <Typography textAlign="center">{t('dashboard.appBar.satellites')}</Typography>
             </MenuItem>
-          </IconMenu>
+          </Menu>
         </Box>
 
         <Link href="/dashboard/devices" sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, mr: 3 }}>
