@@ -13,6 +13,7 @@ import LoaderSuspense from '../components/Loader/LoaderSuspense';
 import Account from './Dashboard/Account';
 import Dashboard from './Dashboard/Dashboard';
 import Devices from './Dashboard/Devices';
+import SatellitesDetails from './Dashboard/Satellites/Details';
 import Satellites from './Dashboard/Satellites/Satellites';
 import Settings from './Dashboard/Settings';
 import NotFound from './Errors/NotFound';
@@ -73,7 +74,10 @@ export default function Root() {
               <Route path="dashboard" element={<Dashboard />}>
                 <Route index path="devices" element={<Devices />} />
                 <Route path="account" element={<Account />} />
-                <Route path="satellites" element={<Satellites />} />
+                <Route path="satellites">
+                  <Route index element={<Satellites />} />
+                  <Route path=":id" element={<SatellitesDetails />} />
+                </Route>
                 <Route path="settings" element={<Settings />} />
               </Route>
             </Route>

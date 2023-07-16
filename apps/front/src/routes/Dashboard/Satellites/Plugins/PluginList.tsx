@@ -24,9 +24,9 @@ import Typography from '@mui/material/Typography';
 import { enqueueSnackbar } from 'notistack';
 
 import { AvailableState, PluginAttributes } from '@friday-ai/shared';
-import Menu from '../../../components/Menu/Menu';
-import NoData from '../../Errors/NoData';
-import { PluginState } from './States';
+import Menu from '../../../../components/Menu/Menu';
+import NoData from '../../../Errors/NoData';
+import { PluginState } from '../States';
 
 export default function PluginList({ plugins }: { plugins: PluginAttributes[] }) {
   const handlePluginAction = useCallback(() => {

@@ -21,4 +21,9 @@ export const useGetSatellites = () => {
   return useQuery('getSatellites', () => request<SatelliteAttributes[]>('get', '/api/v1/satellite', { scope: 'full' }));
 };
 
+export const useGetSatelliteById = (id: string) => {
+  const { request } = useApp();
+  return useQuery('getSatelliteById', () => request<SatelliteAttributes>('get', `api/v1/satellite/${id}`, { scope: 'full' }));
+};
+
 export default useSatellite;
