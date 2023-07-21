@@ -2,7 +2,7 @@
 FROM node:lts-alpine as base
 
 # System dependencies
-RUN npm install -g pnpm http-server cross-env \
+RUN npm install -g pnpm@8 http-server cross-env \
     && apk add --no-cache sqlite make curl
 
 WORKDIR /src

@@ -2,7 +2,7 @@ FROM node:lts-alpine as base
 
 # System dependencies
 RUN apk add --no-cache sqlite make python3 gcc g++ \
-    && npm install -g pnpm
+    && npm install -g pnpm@8
 
 USER node
 # Add friday core
