@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import FilterListOutlinedIcon from '@mui/icons-material/FilterListOutlined';
@@ -14,6 +14,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import Fade from '@mui/material/Fade';
 
 import { enqueueSnackbar } from 'notistack';
 
@@ -31,13 +32,14 @@ export default function Details() {
   const { isLoading, data: satellite } = useGetSatelliteById(id || '');
 
   const [filter, setFilter] = useState([
+    AvailableState.PLUGIN_INSTALLED,
     AvailableState.PLUGIN_RUNNING,
     AvailableState.PLUGIN_STOPPED,
     AvailableState.PLUGIN_ERRORED,
     AvailableState.PLUGIN_WAITING_CONFIGURATION,
   ]);
 
-  const [plugins, setPlugins] = useState<PluginAttributes[]>(satellite ? satellite.plugins : []);
+  const [plugins, setPlugins] = useState<PluginAttributes[]>([]);
 
   const handleFilter = (_: React.MouseEvent<HTMLElement>, newFilter: AvailableState[]) => {
     setFilter(newFilter);
@@ -48,6 +50,12 @@ export default function Details() {
   const handleAction = useCallback(() => {
     enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
   }, []);
+
+  useEffect(() => {
+    if (satellite && satellite.plugins) {
+      setPlugins(satellite.plugins);
+    }
+  }, [satellite]);
 
   return (
     <LoaderSuspense isFetching={isLoading}>
@@ -71,7 +79,13 @@ export default function Details() {
                 </Tooltip>
               </Stack>
             </Stack>
-            {satellite && <SatelliteCard satellite={satellite} />}
+            {satellite && (
+              <Fade in={!isLoading} style={{ transitionDelay: '300ms' }}>
+                <Box>
+                  <SatelliteCard satellite={satellite} />
+                </Box>
+              </Fade>
+            )}
           </Stack>
 
           <Stack spacing={2} flexGrow={1}>
@@ -89,6 +103,7 @@ export default function Details() {
                   size="small"
                   disabled={satellite && satellite.plugins.length < 1}
                 >
+                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>Installed</ToggleButton>
                   <ToggleButton value={AvailableState.PLUGIN_RUNNING}>Running</ToggleButton>
                   <ToggleButton value={AvailableState.PLUGIN_STOPPED}>Stopped</ToggleButton>
                   <ToggleButton value={AvailableState.PLUGIN_ERRORED}>Errored</ToggleButton>
@@ -114,6 +129,7 @@ export default function Details() {
                   orientation="vertical"
                   disabled={satellite && satellite.plugins.length < 1}
                 >
+                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>Installed</ToggleButton>
                   <ToggleButton value={AvailableState.PLUGIN_RUNNING}>Running</ToggleButton>
                   <ToggleButton value={AvailableState.PLUGIN_STOPPED}>Stopped</ToggleButton>
                   <ToggleButton value={AvailableState.PLUGIN_ERRORED}>Errored</ToggleButton>
@@ -122,7 +138,11 @@ export default function Details() {
               </Menu>
             </Stack>
 
-            <PluginList plugins={plugins} />
+            <Fade in={!isLoading} style={{ transitionDelay: '300ms' }}>
+              <Box>
+                <PluginList plugins={plugins} />
+              </Box>
+            </Fade>
           </Stack>
         </Stack>
       </Box>

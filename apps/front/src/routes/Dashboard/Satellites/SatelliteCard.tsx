@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 import RestartAltOutlinedIcon from '@mui/icons-material/RestartAltOutlined';
@@ -24,6 +25,7 @@ import { getPluginsStates } from '../../../utils/data';
 
 export default function SatelliteCard({ satellite }: { satellite: SatelliteAttributes }) {
   const theme = useTheme();
+  const navigate = useNavigate();
 
   const uptime = formatDistance(new Date(satellite.lastHeartbeat), new Date(), { addSuffix: true });
 
@@ -63,7 +65,7 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
               <Typography fontWeight="bold">Plugins states</Typography>
               <Stack direction="row">
                 <Tooltip title="Install new plugin">
-                  <IconButton aria-label="install new plugin" onClick={() => handleAction()}>
+                  <IconButton aria-label="install new plugin" onClick={() => navigate('plugins/install')}>
                     <AddCircleOutlineOutlinedIcon />
                   </IconButton>
                 </Tooltip>

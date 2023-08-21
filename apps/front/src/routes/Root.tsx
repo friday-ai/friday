@@ -14,6 +14,7 @@ import Account from './Dashboard/Account';
 import Dashboard from './Dashboard/Dashboard';
 import Devices from './Dashboard/Devices';
 import SatellitesDetails from './Dashboard/Satellites/Details';
+import PluginInstall from './Dashboard/Satellites/Plugins/Install';
 import Satellites from './Dashboard/Satellites/Satellites';
 import Settings from './Dashboard/Settings';
 import NotFound from './Errors/NotFound';
@@ -76,7 +77,10 @@ export default function Root() {
                 <Route path="account" element={<Account />} />
                 <Route path="satellites">
                   <Route index element={<Satellites />} />
-                  <Route path=":id" element={<SatellitesDetails />} />
+                  <Route path=":id">
+                    <Route index element={<SatellitesDetails />} />
+                    <Route path="plugins/install" element={<PluginInstall />} />
+                  </Route>
                 </Route>
                 <Route path="settings" element={<Settings />} />
               </Route>

@@ -19,12 +19,16 @@ export function SatelliteState({ state }: { state: AvailableState }) {
 
 export function PluginState({ state }: { state: AvailableState }) {
   switch (state) {
+    case AvailableState.PLUGIN_INSTALLED:
+      return <Chip label="Installed" color="primary" variant="outlined" size="small" />;
     case AvailableState.PLUGIN_RUNNING:
       return <Chip label="Running" color="success" variant="outlined" size="small" />;
     case AvailableState.PLUGIN_STOPPED:
       return <Chip label="Stopped" color="warning" variant="outlined" size="small" />;
     case AvailableState.PLUGIN_WAITING_CONFIGURATION:
       return <Chip label="Waiting config" color="info" variant="outlined" size="small" />;
+    case AvailableState.PLUGIN_WAITING_INSTALLATION:
+      return <Chip label="Waiting install" color="secondary" variant="outlined" size="small" />;
     default:
       return <Chip label="Errored" color="error" variant="outlined" size="small" />;
   }

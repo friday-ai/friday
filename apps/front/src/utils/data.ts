@@ -5,18 +5,22 @@ import { Theme } from '@mui/material';
 const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
   // Map colors to states
   const colors: { [key: string]: string } = {
+    [AvailableState.PLUGIN_INSTALLED]: theme.palette.primary[theme.palette.mode],
     [AvailableState.PLUGIN_RUNNING]: theme.palette.success[theme.palette.mode],
     [AvailableState.PLUGIN_WAITING_CONFIGURATION]: theme.palette.info[theme.palette.mode],
     [AvailableState.PLUGIN_ERRORED]: theme.palette.error[theme.palette.mode],
     [AvailableState.PLUGIN_STOPPED]: theme.palette.warning[theme.palette.mode],
+    [AvailableState.PLUGIN_WAITING_INSTALLATION]: theme.palette.secondary[theme.palette.mode],
   };
 
   // Map labels translation to states
   const labels: { [key: string]: string } = {
+    [AvailableState.PLUGIN_INSTALLED]: 'Installed',
     [AvailableState.PLUGIN_RUNNING]: 'Running',
     [AvailableState.PLUGIN_WAITING_CONFIGURATION]: 'Waiting config',
     [AvailableState.PLUGIN_ERRORED]: 'Errored',
     [AvailableState.PLUGIN_STOPPED]: 'Stopped',
+    [AvailableState.PLUGIN_WAITING_INSTALLATION]: 'Waiting installation',
   };
 
   // Fisrt filter states of plugins

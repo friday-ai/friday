@@ -59,3 +59,39 @@ body > #root > div {
   transition: all 1s cubic-bezier(1, 0, 0, 1);
 }
 
+.swap {
+  position: relative;
+  display: inline-grid;
+  -webkit-user-select: none;
+  user-select: none;
+  place-content: center;
+}
+
+.swap > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-property: transform, opacity;
+}
+
+.swap-on,
+.swap-off {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.swap .swap-on {
+  opacity: 0;
+}
+
+.swap.swap-active .swap-off {
+  opacity: 0;
+}
+
+.swap.swap-active .swap-on {
+  opacity: 1;
+}
