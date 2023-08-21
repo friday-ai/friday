@@ -24,6 +24,7 @@ jobs:
         uses: ./.github/actions/prepare-env
         with:
           build: false
+          build-only-packages: true
 
       - name: 📝 ESLint check
         uses: reviewdog/action-eslint@v1
