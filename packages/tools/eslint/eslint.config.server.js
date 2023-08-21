@@ -100,6 +100,12 @@ module.exports = {
         exceptAfterSingleLine: true,
       },
     ],
+    'import/no-unresolved': 'error',
+  },
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
     'import/resolver': {
       typescript: {
         project: ['packages/*/tsconfig.json', 'apps/server/tsconfig.json'],
