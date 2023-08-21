@@ -3,10 +3,12 @@ import { useCallback, useState } from 'react';
 import { useBetween } from 'use-between';
 
 import req, { Methods } from './request';
+import useWebsocket from './useWebsocket';
 
 const useApp = () => {
   const [session, setSession] = useState<SessionAttributes | null>(null);
   const [headers, setHeaders] = useState<string>('');
+  const { connect, on, off } = useWebsocket();
 
   const request = useCallback(<T>(method: Methods, url: string, query = {}, body = {}) => req<T>(method, url, headers, query, body), [headers]);
 
@@ -17,6 +19,7 @@ const useApp = () => {
         const res = await request<SessionAttributes>('post', '/api/v1/session/access_token', {}, { refreshToken: s.refreshToken });
         setSession(res);
         setHeaders(`Bearer ${res.accessToken}`);
+        connect(res.accessToken, res.userId);
         return true;
       } catch (error) {
         setSession(null);
@@ -27,7 +30,7 @@ const useApp = () => {
     } else {
       return false;
     }
-  }, [request]);
+  }, [request, connect]);
 
   const login = useCallback(
     async (email: string, password: string) => {
@@ -77,6 +80,7 @@ const useApp = () => {
     signUp,
     user: session?.user,
     hasSession: !!session,
+    ws: { on, off },
   };
 };
 
