@@ -169,6 +169,14 @@ export type PluginAttributes = {
 export type PluginCreationAttributes = Optional<Omit<PluginAttributes, 'id' | 'satellite' | 'devices'>, 'state' | 'variables'>;
 export const PluginCreationKeys = ['dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state', 'variables', 'lastHeartbeat'];
 
+export type PluginInstallAttributes = {
+  name: string;
+  repo: string;
+  version: string;
+  satelliteId: string;
+  variables: Array<{ key: string; value: string }> | [];
+};
+
 /**
  * Room type.
  */

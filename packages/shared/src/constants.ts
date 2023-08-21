@@ -147,6 +147,7 @@ export enum EventsType {
 export enum WebsocketMessageTypes {
   // Authentication
   AUTHENTICATION = 'authenticate',
+  INVALID_ACCESS_TOKEN = 'invalid_access_token',
   // Plugin
   PLUGIN_INSTALLING = 'plugin.installing',
   PLUGIN_INSTALLED = 'plugin.installed',
