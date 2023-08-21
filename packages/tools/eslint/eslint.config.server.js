@@ -100,5 +100,10 @@ module.exports = {
         exceptAfterSingleLine: true,
       },
     ],
+    'import/resolver': {
+      typescript: {
+        project: ['packages/*/tsconfig.json', 'apps/server/tsconfig.json'],
+      },
+    },
   },
 };
