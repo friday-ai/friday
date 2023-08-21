@@ -1,11 +1,10 @@
-import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys } from '@friday-ai/shared';
+import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys, PluginInstallAttributes } from '@friday-ai/shared';
 import DockerClass from '@friday-ai/docker';
 
 import StateClass from '../state/state';
 import BaseModel from '../../utils/database/model.base';
 import PluginModel from '../../models/plugin';
 import { Catch } from '../../utils/decorators/error';
-import { PluginInstallOptions } from '../../utils/interfaces';
 import EventClass from '../../utils/event';
 
 import heartbeat from './plugin.heartbeat';
@@ -36,7 +35,7 @@ export default class Plugin extends BaseModel<PluginModel, PluginAttributes, Plu
   }
 
   @Catch()
-  async install(options: PluginInstallOptions): Promise<PluginAttributes> {
+  async install(options: PluginInstallAttributes): Promise<PluginAttributes> {
     return install.call(this, options);
   }
 

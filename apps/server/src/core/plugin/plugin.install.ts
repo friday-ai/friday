@@ -1,7 +1,6 @@
-import { PluginAttributes, StateOwner, WebsocketMessageTypes, AvailableState } from '@friday-ai/shared';
+import { PluginAttributes, StateOwner, WebsocketMessageTypes, AvailableState, PluginInstallAttributes } from '@friday-ai/shared';
 import logger from '@friday-ai/logger';
 import PluginClass from './plugin';
-import { PluginInstallOptions } from '../../utils/interfaces';
 import { EventsType } from '../../config/constants';
 import error, { NotFoundError } from '../../utils/decorators/error';
 
@@ -19,7 +18,7 @@ import error, { NotFoundError } from '../../utils/decorators/error';
  * });
  * ````
  */
-export default async function install(this: PluginClass, options: PluginInstallOptions): Promise<PluginAttributes> {
+export default async function install(this: PluginClass, options: PluginInstallAttributes): Promise<PluginAttributes> {
   try {
     logger.info(`Installing plugin ${options.name}`);
 
@@ -35,11 +34,11 @@ export default async function install(this: PluginClass, options: PluginInstallO
       });
     };
 
-    await this.docker.pull(options.repoTag, cb);
+    await this.docker.pull(options.repo, cb);
 
     const container = await this.docker.createContainer({
       name: options.name,
-      Image: options.repoTag,
+      Image: options.repo,
     });
 
     logger.info(`Plugin ${options.name} installed`);

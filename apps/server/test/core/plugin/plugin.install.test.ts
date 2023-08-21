@@ -23,8 +23,9 @@ describe('Plugin.install', () => {
     const installedPlugin = await plugin.install({
       name: 'Sample-plugin',
       version: 'v1',
-      repoTag: 'alpine:latest',
+      repo: 'alpine:latest',
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      variables: [],
     });
 
     container = await global.FRIDAY.docker.getContainer(installedPlugin.dockerId || '');
@@ -39,8 +40,9 @@ describe('Plugin.install', () => {
     const promise = plugin.install({
       name: 'Sample-plugin',
       version: 'v1',
-      repoTag: 'fake-plugin:friday',
+      repo: 'fake-plugin:friday',
       satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+      variables: [],
     });
 
     await assert.isRejected(promise, NotFoundError);
