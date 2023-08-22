@@ -14,7 +14,7 @@ import {
   DeviceCreationKeys,
 } from '@friday-ai/shared';
 
-import { glob as Glob } from 'glob';
+import { globSync } from 'glob';
 
 import BaseModel from '../../utils/database/model.base';
 import DeviceModel from '../../models/device';
@@ -38,7 +38,7 @@ export default class Device extends BaseModel<DeviceModel, DeviceAttributes, Dev
     super(DeviceModel, DeviceCreationKeys);
     this.event = event;
 
-    Glob.sync('**/*.{js,ts}', { cwd: `${__dirname}/capabilities/` }).forEach((filename) => {
+    globSync('**/*.{js,ts}', { cwd: `${__dirname}/capabilities/` }).forEach((filename) => {
       const manager = require(`./capabilities/${filename}`);
 
       Object.keys(manager.options).forEach((key) => {
