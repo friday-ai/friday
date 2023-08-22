@@ -23,7 +23,7 @@ jobs:
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
         with:
-          build: false
+          build: true
           build-only-packages: true
 
       - name: 📝 ESLint check
