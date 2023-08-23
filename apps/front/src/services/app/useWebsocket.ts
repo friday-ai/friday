@@ -4,6 +4,7 @@ import { WebsocketMessageTypes } from '@friday-ai/shared';
 
 const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Listener = (args: any) => void;
 type Handlers = Record<WebsocketMessageTypes, Listener[]>;
 
@@ -17,7 +18,7 @@ export interface WebsocketMessagePayload {
 
 const useWebsocket = () => {
   const ws = useRef<WebSocket>();
-  const [handlers, setHandlers] = useState<Handlers>([] as unknown as Handlers);
+  const [handlers, setHandlers] = useState<Handlers>({} as Handlers);
 
   const connect = useCallback(
     (accessToken: string, userId: string) => {
@@ -29,7 +30,7 @@ const useWebsocket = () => {
             JSON.stringify({
               type: WebsocketMessageTypes.AUTHENTICATION,
               data: { accessToken, userId },
-            }),
+            })
           );
         }
       };
@@ -41,6 +42,7 @@ const useWebsocket = () => {
         }
       };
 
+      // eslint-disable-next-line no-console
       ws.current.onclose = (event) => console.error('connection closed', event);
     },
     [handlers]

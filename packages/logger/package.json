@@ -9,7 +9,9 @@
   ],
   "scripts": {
     "prepublish": "pnpm build",
-    "build": "tsc --outDir ./lib"
+    "build": "tsc --outDir ./lib",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src"
   },
   "keywords": [],
   "author": "Mathieu Andrade",

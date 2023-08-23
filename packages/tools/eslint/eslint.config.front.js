@@ -1,5 +1,6 @@
 module.exports = {
   extends: ['./eslint.config.base.js'],
+  plugins: ["react", "jsx-a11y"],
   rules: {
     '@typescript-eslint/no-unused-vars': [2, { args: 'all', argsIgnorePattern: '^_' }],
     'import/no-cycle': 0,

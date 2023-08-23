@@ -1,5 +1,5 @@
 import { useTheme } from '@mui/material/styles';
-import { m, type Transition } from 'framer-motion';
+import { m, Transition } from 'framer-motion';
 import React from 'react';
 
 const transition: Transition = {
