@@ -10,7 +10,9 @@
   "scripts": {
     "prepublish": "pnpm build",
     "build": "tsc --project tsconfig.build.json --outDir ./lib",
-    "test": "cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/**/*.test.ts -exit"
+    "test": "cross-env NODE_ENV=test mocha --recursive -r ts-node/register ./test/setup.ts ./test/**/*.test.ts -exit",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src"
   },
   "keywords": [],
   "author": "Mathieu Andrade",

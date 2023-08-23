@@ -51,3 +51,6 @@ const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
 };
 
 export { getPluginsStates };
+
+// To avoid linter errors, but temporary
+export default getPluginsStates;

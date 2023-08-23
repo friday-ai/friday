@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-declaration-merging */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 /** This file is shamelessly copied from https://github.com/zwave-js/node-zwave-js/tree/master/packages/shared
