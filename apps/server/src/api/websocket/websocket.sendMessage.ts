@@ -1,67 +1,35 @@
-import { WebsocketMessagePayload, WebsocketSendOptions } from '../../utils/interfaces';
+import { NewWebsocketPayload } from '../../utils/interfaces';
 import WebSocketServer from './index';
-import error from '../../utils/decorators/error';
-
-/*
-const DEFAULT_OPTIONS: WebsocketSendOptions = {
-  sendAll: false,
-  sendAdmins: false,
-};
- */
+import error, { BadParametersError } from '../../utils/decorators/error';
 
 /**
  * Send message
  */
-export default function sendMessage(this: WebSocketServer, message: WebsocketMessagePayload, options?: WebsocketSendOptions) {
+export default function sendMessage(this: WebSocketServer, payload: NewWebsocketPayload, toUser = '', sendAll = false) {
   try {
-    // const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
-
-    /*
-    if (mergedOptions.sendAll === false && mergedOptions.sendAdmins ===
-    false && (message.receiver === '' || message.receiver === undefined)) {
-      throw new BadParametersError({ name: 'Send websocket message',
-      message: 'Incorrect params', metadata: mergedOptions });
-    }
-    */
-
-    // console.log(JSON.stringify(this.clients));
-
-    this.wss.clients.forEach((client) => {
-      client.send(JSON.stringify(message));
-    });
-
-    /*
-    if (!this.clients[message.sender]) {
-      throw new NotFoundError({ name: 'Send websocket message',
-      message: 'User\'s connection not found', metadata: mergedOptions });
-    }
-
-    if (mergedOptions.sendAll === true) {
-      this.clients.forEach((connections: [{ user: UserType, ws: WebSocket }]) => {
-        connections.forEach((connection: { user: UserType, ws: WebSocket }) => {
-          connection.ws.send(JSON.stringify(message));
-        });
-      });
-    } else if (mergedOptions.sendAdmins === true) {
-      this.clients.forEach((connections: [{ user: UserType, ws: WebSocket }]) => {
-        connections.forEach((connection: { user: UserType, ws: WebSocket }) => {
-          if (this.user.role === UserRole.ADMIN) {
-            connection.ws.send(JSON.stringify(message));
-          }
-        });
-      });
-    } else {
-      this.clients[message.receiver!].forEach((connection: { ws: WebSocket; }) => {
-        connection.ws.send(JSON.stringify(message));
+    if (toUser === '' && sendAll === false) {
+      throw new BadParametersError({
+        name: 'Send websocket message',
+        message: 'Incorrect params, no user id provided and send all is set as false',
+        metadata: { toUser, sendAll },
       });
     }
-    */
+
+    if (sendAll) {
+      this.wss.clients.forEach((client) => {
+        client.send(JSON.stringify(payload));
+      });
+    }
+
+    if (toUser !== '' && this.clients[toUser] && this.clients[toUser].ws.readyState === WebSocket.OPEN) {
+      this.clients[toUser].ws.send(JSON.stringify(payload));
+    }
   } catch (e) {
     throw error({
       name: e.name,
       message: e.message,
       cause: e,
-      metadata: options,
+      metadata: { toUser, sendAll },
     });
   }
 }

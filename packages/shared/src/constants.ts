@@ -156,10 +156,6 @@ export enum WebsocketMessageTypes {
   // Mqtt
   MQTT_CONNECTED = 'mqtt.connected',
   MQTT_ERROR = 'mqtt.error',
-  // Websocket
-  MESSAGE_SEND = 'message.send',
-  MESSAGE_SEND_ALL = 'message.send.all',
-  MESSAGE_SEND_ADMIN = 'message.send.admin',
 }
 
 export enum MqttMessageTypes {
