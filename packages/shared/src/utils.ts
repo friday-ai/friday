@@ -22,6 +22,7 @@ export interface MqttOptions {
   username?: string;
   password?: string;
   qos?: 0 | 1 | 2;
+  reconnectPeriod?: number;
 }
 
 /**
