@@ -14,12 +14,6 @@ import WebsocketServer from './websocket/index';
 import Friday from '../core/friday';
 import MqttServer from './mqtt';
 
-const defaultMqttOptions: MqttOptions = {
-  port: 1883,
-  host: process.env.MQTT_HOST || 'localhost',
-  protocol: 'mqtt',
-};
-
 /**
  * Server class
  */
@@ -28,12 +22,12 @@ export default class Server {
   public websocketServer!: WebsocketServer;
   public mqttServer!: MqttServer;
   readonly port: number;
-  readonly mqttOptions: MqttOptions;
+  readonly mqttOptions?: MqttOptions;
   readonly friday: Friday;
 
   constructor(port: number, friday: Friday, mqttOptions?: MqttOptions) {
     this.port = port;
-    this.mqttOptions = mqttOptions || defaultMqttOptions;
+    this.mqttOptions = mqttOptions;
     this.friday = friday;
   }
 

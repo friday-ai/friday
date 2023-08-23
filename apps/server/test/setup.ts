@@ -1,17 +1,20 @@
+import logger from '@friday-ai/logger';
+import { MqttOptions } from '@friday-ai/shared';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import chaiLike from 'chai-like';
 import chaiThings from 'chai-things';
-import { MqttOptions } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
 import Server from '../src/api/app';
-import Friday from '../src/core/friday';
-import { cleanDb, seedDb } from './utils/seed';
 import { umzug } from '../src/config/database';
+import Friday from '../src/core/friday';
+import MqttBroker from './utils/mqttBroker';
+import { cleanDb, seedDb } from './utils/seed';
+import wait from './utils/timer';
 
 const port = parseInt(process.env.SERVER_PORT || '3500', 10);
 const mqttPort = parseInt(process.env.MQTT_PORT || '1883', 10);
 const mqttAddress = process.env.MQTT_ADDRESS || 'localhost';
+const fakeBroker = new MqttBroker();
 
 const mqttOptions: MqttOptions = {
   port: mqttPort,
@@ -25,6 +28,11 @@ chai.use(chaiAsPromised);
 before(async function before() {
   this.timeout(16000);
 
+  // Start fake broker
+  fakeBroker.start();
+  // Wait until the fake server was correctly started
+  await wait(80);
+
   // Create Friday core object
   const friday = new Friday();
 
@@ -36,6 +44,7 @@ before(async function before() {
   global.FRIDAY = friday;
   global.TEST_SERVER = await server.start();
   global.MQTT_TEST_SERVER = server.mqttServer;
+  global.FAKE_BROKER = fakeBroker;
 
   try {
     await cleanDb();

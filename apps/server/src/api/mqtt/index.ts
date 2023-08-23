@@ -1,13 +1,22 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require,import/no-dynamic-require */
-import mqtt, { connect } from 'mqtt';
-import { glob as Glob } from 'glob';
-import { MqttOptions } from '@friday-ai/shared';
 import logger from '@friday-ai/logger';
-import Friday from '../../core/friday';
-import sendMessage from './mqtt.sendMessage';
-import handleMessage from './mqtt.handleMessage';
+import { MqttOptions } from '@friday-ai/shared';
+import { glob as Glob } from 'glob';
+import mqtt, { connect } from 'mqtt';
 import { EventsType, TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
+import Friday from '../../core/friday';
+import handleMessage from './mqtt.handleMessage';
+import sendMessage from './mqtt.sendMessage';
+
+// const env = process.env.NODE_ENV || 'production';
+
+const defaultMqttOptions: MqttOptions = {
+  port: 1883,
+  host: process.env.MQTT_HOST || 'localhost',
+  protocol: 'mqtt',
+  reconnectPeriod: 5000,
+};
 
 /**
  * MQTT manager
@@ -19,6 +28,7 @@ export default class MqttServer {
   public sendMessage = sendMessage;
   public handlers: Record<string, (context: Friday, payload: object) => null> = {};
   public handleMessage = handleMessage;
+  public retryTimes = 0;
 
   constructor(friday: Friday) {
     this.friday = friday;
@@ -31,10 +41,13 @@ export default class MqttServer {
     });
   }
 
-  async start(mqttOptions: MqttOptions) {
-    this.MqttClient = connect(mqttOptions);
-    this.MqttClient.on('connect', () => {
-      this.friday.mqttSecret = mqttOptions;
+  async start(mqttOptions?: MqttOptions) {
+    const options = mqttOptions ? Object.assign(defaultMqttOptions, mqttOptions) : defaultMqttOptions;
+
+    this.MqttClient = connect(options);
+
+    this.MqttClient.once('connect', () => {
+      this.friday.mqttSecret = options;
       logger.info('Connected on mqtt broker');
 
       logger.info("Subscribing to friday's topics... ");
@@ -49,16 +62,24 @@ export default class MqttServer {
       });
     });
 
-    this.MqttClient.on('error', (error) => {
-      logger.error(error.message);
+    this.MqttClient.on('error', (_error) => {
+      logger.warning('Error while connecting to MQTT, trying reconnection');
+      this.retryTimes += 1;
+      // TODO: Send warning to front
+      if (this.retryTimes >= 5) {
+        this.stop();
+        logger.warning('MQTT max reconection limit, stop retry');
+      }
     });
 
     return this.MqttClient;
   }
 
   stop() {
-    if (this.MqttClient.connected) {
-      this.MqttClient.end(true);
+    if (this.MqttClient) {
+      this.MqttClient.end();
+      this.MqttClient.removeAllListeners();
+      this.retryTimes = 0;
     }
   }
 }

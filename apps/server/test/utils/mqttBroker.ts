@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import net from 'net';
 import events from 'events';
 import Aedes, { Connection, Client } from 'aedes';

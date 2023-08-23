@@ -1,22 +1,23 @@
+import { MqttOptions } from '@friday-ai/shared';
 import { expect } from 'chai';
 import sinon from 'sinon';
-import { MqttOptions } from '@friday-ai/shared';
-import Friday from '../../../src/core/friday';
-import MqttBroker from '../../utils/mqttBroker';
 import MqttServer from '../../../src/api/mqtt';
-import wait from '../../utils/timer';
+import { EventsType, MqttMessageTypes, TopicHeaderSub, TopicToSubscribe as Topics, TopicsTypes } from '../../../src/config/constants';
+import Friday from '../../../src/core/friday';
 import { MqttMessagePayload } from '../../../src/utils/interfaces';
-import { EventsType, MqttMessageTypes, TopicHeaderSub, TopicsTypes, TopicToSubscribe as Topics } from '../../../src/config/constants';
+import FakeBroker from '../../utils/mqttBroker';
+import wait from '../../utils/timer';
 
-const fakeBroker = new MqttBroker();
 const mqttPort = parseInt(process.env.MQTT_PORT || '1884', 10);
+const mqttAddress = process.env.MQTT_ADDRESS || 'localhost';
 const mqttOptions: MqttOptions = {
   port: mqttPort,
-  host: 'localhost',
+  host: mqttAddress,
 };
 
 let mqttClient: MqttServer;
 let friday: Friday;
+let fakeBroker: FakeBroker;
 
 const fakeMsg: MqttMessagePayload = {
   message: 'this is a test ;)',
@@ -30,11 +31,7 @@ describe('Mqtt.connection', () => {
   before(async () => {
     mqttClient = global.MQTT_TEST_SERVER;
     friday = global.FRIDAY;
-
-    // Start fake broker
-    fakeBroker.start();
-    // Wait until the fake server was correctly started
-    await wait(80);
+    fakeBroker = global.FAKE_BROKER;
   });
 
   it('should connect to MQTT Broker', async () => {
@@ -45,6 +42,7 @@ describe('Mqtt.connection', () => {
     await wait(40);
 
     expect(listener.called).equal(true);
+    mqttClient.stop();
   });
 
   it('should not connect to MQTT Broker', async () => {
@@ -59,6 +57,7 @@ describe('Mqtt.connection', () => {
 
     await wait(30);
     expect(listener.called).equal(true);
+    mqttClient.stop();
   });
 
   it('should subscribe to topics', async () => {
@@ -79,6 +78,7 @@ describe('Mqtt.connection', () => {
     await wait(30);
 
     expect(topicsSubscribed).deep.equal(topicsToSubscribe);
+    mqttClient.stop();
   });
 });
 
@@ -98,6 +98,7 @@ describe('Mqtt.publish', () => {
     await wait(30);
 
     expect(msgReceived).deep.equal({ message: 'this is a test ;)' });
+    mqttClient.stop();
   });
 
   it('should not send message', async () => {
@@ -122,10 +123,16 @@ describe('Mqtt.publish', () => {
 
     expect(spy.callCount).equal(1);
     expect(spy.threw()).to.equal(true);
+    mqttClient.stop();
   });
 });
 
 describe('Mqtt.handleMessage', () => {
+  after(async () => {
+    // Ensure mqtt client is connected after last mqtt test
+    global.MQTT_TEST_SERVER.start(mqttOptions);
+  });
+
   it('should handle a message', async () => {
     const spy = sinon.spy(mqttClient, 'handleMessage');
     await mqttClient.start(mqttOptions);
@@ -145,5 +152,6 @@ describe('Mqtt.handleMessage', () => {
     await wait(30);
 
     expect(spy.calledWith(TopicsTypes.PLUGIN_EXEC, 'this is a test ;)')).to.equal(true);
+    mqttClient.stop();
   });
 });
