@@ -9,6 +9,37 @@
         "settings": "Settings",
         "title": "User Menu"
       }
+    },
+    "satellites": {
+      "configPlugin": "Config plugin",
+      "installedPlugins": "Plugins installed",
+      "installPlugin": "Install plugin",
+      "ipAddress": "IP address",
+      "lastHeartbeat": "Last eartbeat",
+      "location": "Location",
+      "name": "Name",
+      "noDataFound": "No Data found",
+      "pluginsStates": "Plugins states",
+      "resetFilters": "Try installing a plugin or change yours filters",
+      "restartAllPlugins": "Restart all plugins",
+      "restartPlugin": "Restart plugin",
+      "restartSatellite": "Restart satellite",
+      "satellite": "Satellite",
+      "state": "State",
+      "stateConnected": "Connected",
+      "stateDisconnected": "Disconnected",
+      "stateErrored": "Error",
+      "stateInstalled": "Installed",
+      "stateRunning": "Running",
+      "stateStandby": "Stanby",
+      "stateStopped": "Stopped",
+      "stateWaitingConfig": "Waiting config",
+      "stateWaitingInstallation": "Waiting install",
+      "stopAllPlugins": "Stop all plugins",
+      "stopPlugin": "Stop plugin",
+      "stopSatellite": "Stop satellite",
+      "uninstallPlugin": "Uninstall plugin",
+      "uptime": "Uptime"
     }
   },
   "errors": {

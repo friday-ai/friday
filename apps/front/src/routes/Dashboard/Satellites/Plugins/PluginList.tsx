@@ -24,26 +24,31 @@ import Typography from '@mui/material/Typography';
 import { enqueueSnackbar } from 'notistack';
 
 import { AvailableState, PluginAttributes } from '@friday-ai/shared';
+import { useTranslation } from 'react-i18next';
 import Menu from '../../../../components/Menu/Menu';
 import NoData from '../../../Errors/NoData';
 import { PluginState } from '../States';
 
+import { formatDistance } from '../../../../utils/data';
+
 export default function PluginList({ plugins }: { plugins: PluginAttributes[] }) {
+  const { t } = useTranslation();
+
   const handlePluginAction = useCallback(() => {
     enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
   }, []);
 
   return (
     <>
-      {plugins.length < 1 && <NoData title="No data found" subtitle="Try installing a plugin or change yours filters" />}
+      {plugins.length < 1 && <NoData title={t('dashboard.satellites.noDataFound')} subtitle={t('dashboard.satellites.resetFilters')} />}
       {plugins.length > 0 && (
         <TableContainer component={Paper}>
           <Table aria-label="plugin list">
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>State</TableCell>
-                <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>Last heartbeat</TableCell>
+                <TableCell>{t('dashboard.satellites.name')}</TableCell>
+                <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>{t('dashboard.satellites.state')}</TableCell>
+                <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{t('dashboard.satellites.lastHeartbeat')}</TableCell>
                 <TableCell />
               </TableRow>
             </TableHead>
@@ -63,25 +68,25 @@ export default function PluginList({ plugins }: { plugins: PluginAttributes[] })
                   <TableCell sx={{ display: { xs: 'none', sm: 'table-cell' } }}>
                     <PluginState state={plugin.state.value as AvailableState} />
                   </TableCell>
-                  <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{new Date(plugin.lastHeartbeat).toLocaleString()}</TableCell>
+                  <TableCell sx={{ display: { xs: 'none', md: 'table-cell' } }}>{formatDistance(plugin.lastHeartbeat)}</TableCell>
                   <TableCell align="right">
                     <Stack direction="row" justifyContent="flex-end" alignItems="center" sx={{ display: { xs: 'none', md: 'flex' } }}>
-                      <Tooltip title="Stop plugin">
+                      <Tooltip title={t('dashboard.satellites.stopPlugin')}>
                         <IconButton aria-label="stop plugin" onClick={() => handlePluginAction()}>
                           <StopCircleOutlinedIcon />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="Restart plugin">
+                      <Tooltip title={t('dashboard.satellites.restartPlugin')}>
                         <IconButton aria-label="restart plugin" onClick={() => handlePluginAction()}>
                           <RestartAltOutlinedIcon />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="Plugin configuration">
+                      <Tooltip title={t('dashboard.satellites.configPlugin')}>
                         <IconButton aria-label="plugin settings" onClick={() => handlePluginAction()}>
                           <SettingsOutlinedIcon />
                         </IconButton>
                       </Tooltip>
-                      <Tooltip title="Uninstall plugin">
+                      <Tooltip title={t('dashboard.satellites.uninstallPlugin')}>
                         <IconButton aria-label="uninstall plugin" onClick={() => handlePluginAction()}>
                           <DeleteOutlineOutlinedIcon />
                         </IconButton>

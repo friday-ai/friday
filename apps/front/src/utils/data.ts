@@ -1,5 +1,7 @@
 import { AvailableState, PluginAttributes } from '@friday-ai/shared';
 import { Theme } from '@mui/material';
+import { formatDistance as format } from 'date-fns';
+import * as dateLocals from 'date-fns/locale';
 
 // Maybe an api on backend for this ?
 const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
@@ -15,12 +17,12 @@ const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
 
   // Map labels translation to states
   const labels: { [key: string]: string } = {
-    [AvailableState.PLUGIN_INSTALLED]: 'Installed',
-    [AvailableState.PLUGIN_RUNNING]: 'Running',
-    [AvailableState.PLUGIN_WAITING_CONFIGURATION]: 'Waiting config',
-    [AvailableState.PLUGIN_ERRORED]: 'Errored',
-    [AvailableState.PLUGIN_STOPPED]: 'Stopped',
-    [AvailableState.PLUGIN_WAITING_INSTALLATION]: 'Waiting installation',
+    [AvailableState.PLUGIN_INSTALLED]: 'dashboard.satellites.stateInstalled',
+    [AvailableState.PLUGIN_RUNNING]: 'dashboard.satellites.stateRunning',
+    [AvailableState.PLUGIN_WAITING_CONFIGURATION]: 'dashboard.satellites.stateWaitingConfig',
+    [AvailableState.PLUGIN_ERRORED]: 'dashboard.satellites.stateErrored',
+    [AvailableState.PLUGIN_STOPPED]: 'dashboard.satellites.stateStopped',
+    [AvailableState.PLUGIN_WAITING_INSTALLATION]: 'dashboard.satellites.stateWaitingInstall',
   };
 
   // Fisrt filter states of plugins
@@ -50,7 +52,19 @@ const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
   return data;
 };
 
-export { getPluginsStates };
+const formatDistance = (date: Date) => {
+  const language = localStorage.getItem('i18nextLng') || 'en-US';
+  let local = dateLocals.enUS;
 
-// To avoid linter errors, but temporary
-export default getPluginsStates;
+  switch (language) {
+    case 'fr-FR':
+      local = dateLocals.fr;
+      break;
+    default:
+      break;
+  }
+
+  return format(new Date(date), new Date(), { addSuffix: true, locale: local });
+};
+
+export { formatDistance, getPluginsStates };

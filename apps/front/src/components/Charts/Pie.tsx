@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import { useTheme } from '@mui/material/styles';
 
+import { useTranslation } from 'react-i18next';
 import { colorToRGBA } from '../../utils/color';
 
 const margin = 20;
@@ -43,6 +44,7 @@ type PieProps = {
 
 export default withTooltip<PieProps, PieData>((props) => {
   const { data, totalCount, totalLabel, tooltipOpen, tooltipData, tooltipLeft, tooltipTop, showTooltip, hideTooltip } = props;
+  const { t } = useTranslation();
 
   const ordinalColorScale = scaleOrdinal({
     domain: data.map((d) => d.label),
@@ -148,7 +150,7 @@ export default withTooltip<PieProps, PieData>((props) => {
                           <rect fill={colorToRGBA(label.value || '', colorOpacity)} width={legendGlyphSize} height={legendGlyphSize} />
                         </svg>
                         <LegendLabel align="left" margin="0 0 0 4px">
-                          {label.text}
+                          {t(label.text)}
                         </LegendLabel>
                       </LegendItem>
                     ))}
@@ -171,7 +173,7 @@ export default withTooltip<PieProps, PieData>((props) => {
                   <svg width={legendGlyphSize} height={legendGlyphSize}>
                     <rect fill={colorToRGBA(tooltipData.color || '', colorOpacity)} width={legendGlyphSize} height={legendGlyphSize} />
                   </svg>
-                  <span>{tooltipData.label}</span> :<strong>{tooltipData.value}</strong>
+                  <span>{t(tooltipData.label)}</span> :<strong>{tooltipData.value}</strong>
                 </Stack>
               </VisxTooltip>
             )}

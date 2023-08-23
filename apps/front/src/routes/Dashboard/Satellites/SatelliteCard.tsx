@@ -15,19 +15,18 @@ import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
 import { AvailableState, SatelliteAttributes } from '@friday-ai/shared';
-import { formatDistance } from 'date-fns';
 import { enqueueSnackbar } from 'notistack';
 
+import { useTranslation } from 'react-i18next';
 import Pie from '../../../components/Charts/Pie';
 import { SatelliteState } from './States';
 
-import { getPluginsStates } from '../../../utils/data';
+import { formatDistance, getPluginsStates } from '../../../utils/data';
 
 export default function SatelliteCard({ satellite }: { satellite: SatelliteAttributes }) {
   const theme = useTheme();
   const navigate = useNavigate();
-
-  const uptime = formatDistance(new Date(satellite.lastHeartbeat), new Date(), { addSuffix: true });
+  const { t } = useTranslation();
 
   const handleAction = useCallback(() => {
     enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
@@ -46,14 +45,14 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
         <Stack spacing={2} direction={{ xs: 'column', md: 'row', lg: 'column' }} justifyContent="space-between">
           <Stack spacing={6} direction="row" alignItems="start">
             <Stack spacing={1}>
-              <Typography color="GrayText">Ip address:</Typography>
-              <Typography color="GrayText">Location:</Typography>
-              <Typography color="GrayText">Uptime:</Typography>
+              <Typography color="GrayText">{t('dashboard.satellites.ipAddress')}:</Typography>
+              <Typography color="GrayText">{t('dashboard.satellites.location')}:</Typography>
+              <Typography color="GrayText">{t('dashboard.satellites.uptime')}:</Typography>
             </Stack>
             <Stack spacing={1}>
               <Typography fontWeight="500">192.168.3.3</Typography>
               <Typography fontWeight="500">{satellite.room.name}</Typography>
-              <Typography fontWeight="500">{uptime}</Typography>
+              <Typography fontWeight="500">{formatDistance(satellite.lastHeartbeat)}</Typography>
             </Stack>
           </Stack>
 
@@ -62,21 +61,21 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
 
           <Stack direction="column">
             <Stack direction="row" alignItems="center" justifyContent="space-between">
-              <Typography fontWeight="bold">Plugins states</Typography>
+              <Typography fontWeight="bold">{t('dashboard.satellites.pluginsStates')}</Typography>
               <Stack direction="row">
-                <Tooltip title="Install new plugin">
+                <Tooltip title={t('dashboard.satellites.installPlugin')}>
                   <IconButton aria-label="install new plugin" onClick={() => navigate('plugins/install')}>
                     <AddCircleOutlineOutlinedIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Stop all plugins">
+                <Tooltip title={t('dashboard.satellites.stopAllPlugins')}>
                   <span>
                     <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
                       <StopCircleOutlinedIcon />
                     </IconButton>
                   </span>
                 </Tooltip>
-                <Tooltip title="Restart all plugins">
+                <Tooltip title={t('dashboard.satellites.restartAllPlugins')}>
                   <span>
                     <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
                       <RestartAltOutlinedIcon />

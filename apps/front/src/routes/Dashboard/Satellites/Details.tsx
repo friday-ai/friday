@@ -7,6 +7,7 @@ import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined';
 
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import Fade from '@mui/material/Fade';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
@@ -14,12 +15,12 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import Fade from '@mui/material/Fade';
 
 import { enqueueSnackbar } from 'notistack';
 
 import { AvailableState, PluginAttributes } from '@friday-ai/shared';
 
+import { useTranslation } from 'react-i18next';
 import LoaderSuspense from '../../../components/Loader/LoaderSuspense';
 import Menu from '../../../components/Menu/Menu';
 import PluginList from './Plugins/PluginList';
@@ -28,6 +29,7 @@ import SatelliteCard from './SatelliteCard';
 import { useGetSatelliteById } from '../../../services/api/useSatellite';
 
 export default function Details() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { isLoading, data: satellite } = useGetSatelliteById(id || '');
 
@@ -64,15 +66,15 @@ export default function Details() {
           <Stack spacing={2} minWidth={300} maxWidth={{ lg: 550 }}>
             <Stack direction="row" alignItems="center" paddingBottom={0.4}>
               <Typography variant="h6" fontWeight="bold" sx={{ flexGrow: 1 }}>
-                Satellite
+                {t('dashboard.satellites.satellite')}
               </Typography>
               <Stack direction="row">
-                <Tooltip title="Stop satellite">
+                <Tooltip title={t('dashboard.satellites.stopSatellite')}>
                   <IconButton aria-label="stop satellite" onClick={() => handleAction()}>
                     <StopCircleOutlinedIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Restart satellite">
+                <Tooltip title={t('dashboard.satellites.restartSatellite')}>
                   <IconButton aria-label="restart satellite" onClick={() => handleAction()}>
                     <RestartAltOutlinedIcon />
                   </IconButton>
@@ -91,7 +93,7 @@ export default function Details() {
           <Stack spacing={2} flexGrow={1}>
             <Stack direction="row" alignItems="center">
               <Typography variant="h6" fontWeight="bold" sx={{ flexGrow: 1 }}>
-                Installed plugins
+                {t('dashboard.satellites.installedPlugins')}
               </Typography>
 
               <Paper sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -103,11 +105,11 @@ export default function Details() {
                   size="small"
                   disabled={satellite && satellite.plugins.length < 1}
                 >
-                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>Installed</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_RUNNING}>Running</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_STOPPED}>Stopped</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_ERRORED}>Errored</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>Waiting Config</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>{t('dashboard.satellites.stateInstalled')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_RUNNING}>{t('dashboard.satellites.stateRunning')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_STOPPED}>{t('dashboard.satellites.stateStopped')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_ERRORED}>{t('dashboard.satellites.stateErrored')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>{t('dashboard.satellites.stateWaitingConfig')}</ToggleButton>
                 </ToggleButtonGroup>
               </Paper>
 
@@ -129,11 +131,11 @@ export default function Details() {
                   orientation="vertical"
                   disabled={satellite && satellite.plugins.length < 1}
                 >
-                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>Installed</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_RUNNING}>Running</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_STOPPED}>Stopped</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_ERRORED}>Errored</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>Waiting Config</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>{t('dashboard.satellites.stateInstalled')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_RUNNING}>{t('dashboard.satellites.stateRunning')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_STOPPED}>{t('dashboard.satellites.stateStopped')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_ERRORED}>{t('dashboard.satellites.stateErrored')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>{t('dashboard.satellites.stateWaitingConfig')}</ToggleButton>
                 </ToggleButtonGroup>
               </Menu>
             </Stack>
