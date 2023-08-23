@@ -1,11 +1,12 @@
+import logger from '@friday-ai/logger';
+import { UserAttributes, WebsocketMessageTypes } from '@friday-ai/shared';
 import * as WebSocket from 'ws';
-import { UserAttributes } from '@friday-ai/shared';
+import { EventsType } from '../../config/constants';
 import Friday from '../../core/friday';
-import handleMessage from './websocket.handleMessage';
 import clientConnected from './websocket.clientConnected';
 import clientDisconnected from './websocket.clientDisconnected';
 import sendMessage from './websocket.sendMessage';
-import { EventsType } from '../../config/constants';
+import { NewWebsocketPayload } from '../../utils/interfaces';
 
 /**
  * Web socket manager
@@ -18,15 +19,13 @@ export default class WebsocketServer {
 
   public clientConnected = clientConnected;
   public clientDisconnected = clientDisconnected;
-  public handleMessage = handleMessage;
   public sendMessage = sendMessage;
 
   constructor(wss: WebSocket.Server, friday: Friday) {
     this.wss = wss;
     this.friday = friday;
     this.friday.event.on(EventsType.WEBSOCKET_SEND, (event) => this.sendMessage(event));
-    this.friday.event.on(EventsType.WEBSOCKET_SEND_ALL, (event) => this.sendMessage(event, { sendAll: true }));
-    this.friday.event.on(EventsType.WEBSOCKET_SEND_ADMIN, (event) => this.sendMessage(event, { sendAdmins: true }));
+    this.friday.event.on(EventsType.WEBSOCKET_SEND_ALL, (event) => this.sendMessage(event, '', true));
   }
 
   /**
@@ -42,7 +41,13 @@ export default class WebsocketServer {
       });
 
       ws.on('message', async (message: string) => {
-        await this.handleMessage(JSON.parse(message), ws);
+        const payload = JSON.parse(message) as NewWebsocketPayload;
+
+        if (payload.type === WebsocketMessageTypes.AUTHENTICATION) {
+          await this.clientConnected(JSON.stringify(payload.data), ws);
+        } else {
+          logger.warning(`Websocket message type: ${payload.type} not handled`);
+        }
       });
 
       setTimeout(() => {

@@ -20,7 +20,7 @@ const useWebsocket = () => {
   const [handlers, setHandlers] = useState<Handlers>([] as unknown as Handlers);
 
   const connect = useCallback(
-    (accessToken: string, sender: string) => {
+    (accessToken: string, userId: string) => {
       ws.current = new WebSocket(`ws://${window.location.hostname}:${port}`);
 
       ws.current.onopen = () => {
@@ -28,9 +28,8 @@ const useWebsocket = () => {
           ws.current?.send(
             JSON.stringify({
               type: WebsocketMessageTypes.AUTHENTICATION,
-              accessToken,
-              sender,
-            })
+              data: { accessToken, userId },
+            }),
           );
         }
       };

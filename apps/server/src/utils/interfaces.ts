@@ -39,6 +39,11 @@ export interface WebsocketMessagePayload {
   message?: string;
 }
 
+export interface NewWebsocketPayload {
+  type: WebsocketMessageTypes;
+  data: string;
+}
+
 /**
  * Interface for jobs scheduler
  */
