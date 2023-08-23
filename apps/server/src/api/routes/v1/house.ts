@@ -77,7 +77,7 @@ export default class HouseRouter {
    * Delete an house
    * @apiName destroy
    * @apiDescription This route allows you to delete an house
-   * @api {get} /api/v1/house/:id
+   * @api {delete} /api/v1/house/:id
    * @apiGroup House
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response

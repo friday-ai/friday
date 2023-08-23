@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require,import/no-dynamic-require */
-import { Client, connect } from 'mqtt';
+import mqtt, { connect } from 'mqtt';
 import { glob as Glob } from 'glob';
 import { MqttOptions } from '@friday-ai/shared';
 import logger from '@friday-ai/logger';
@@ -15,7 +15,7 @@ import { EventsType, TopicHeaderSub, TopicToSubscribe as Topics } from '../../co
  */
 export default class MqttServer {
   public friday: Friday;
-  public MqttClient!: Client;
+  public MqttClient!: mqtt.MqttClient;
   public sendMessage = sendMessage;
   public handlers: Record<string, (context: Friday, payload: object) => null> = {};
   public handleMessage = handleMessage;

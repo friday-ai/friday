@@ -1,24 +1,43 @@
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { domAnimation, LazyMotion } from 'framer-motion';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import './index.css';
 import { registerSW } from 'virtual:pwa-register';
-import App from './components/App/App';
-import store from './services/store/store';
 
-const container = document.getElementById('root');
+import './index.css';
+import Root from './routes/Root';
+import theme from './utils/theme';
+import './utils/i18n';
 
-if (container !== null) {
-  const root = createRoot(container);
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 3,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
+
+const rootContainer = document.getElementById('root');
+
+if (rootContainer !== null) {
+  const root = createRoot(rootContainer);
 
   root.render(
     <React.StrictMode>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
+      <LazyMotion features={domAnimation}>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <BrowserRouter>
+              <Root />
+            </BrowserRouter>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </LazyMotion>
     </React.StrictMode>
   );
 

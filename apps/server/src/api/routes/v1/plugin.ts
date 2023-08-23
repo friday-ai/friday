@@ -31,7 +31,14 @@ export default class PluginRouter {
    * {
    *   name: 'Zwave',
    *   version: '1.2.0',
-   *   tag: 'latest',
+   *   repo: 'hello-world:latest',
+   *   satelliteId: 'a7ef5f08-2bad-4489-95bf-b73fcf894d8f',
+   *   variables: [
+   *      {
+   *        key: 'variable key',
+   *        value: 'variable value'
+   *      }
+   *   ]
    * },
    */
   @Post({
@@ -50,7 +57,7 @@ export default class PluginRouter {
    * Update a plugin
    * @apiName update
    * @apiDescription This route allows you to update a plugin
-   * @api {post} /api/v1/plugin/:id
+   * @api {patch} /api/v1/plugin/:id
    * @apiGroup Plugin
    * @apiUse PluginParam
    * @apiVersion 1.0.0
@@ -80,7 +87,7 @@ export default class PluginRouter {
    * Delete a plugin
    * @apiName destroy
    * @apiDescription This route allows you to delete a plugin
-   * @api {get} /api/v1/plugin/:id
+   * @api {delete} /api/v1/plugin/:id
    * @apiGroup Plugin
    * @apiVersion 1.0.0
    * @apiSuccessExample {json} Success-Response

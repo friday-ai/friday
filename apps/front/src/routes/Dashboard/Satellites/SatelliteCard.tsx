@@ -1,0 +1,99 @@
+import React, { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import RestartAltOutlinedIcon from '@mui/icons-material/RestartAltOutlined';
+import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined';
+
+import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import Tooltip from '@mui/material/Tooltip';
+import Typography from '@mui/material/Typography';
+import { useTheme } from '@mui/material/styles';
+
+import { AvailableState, SatelliteAttributes } from '@friday-ai/shared';
+import { formatDistance } from 'date-fns';
+import { enqueueSnackbar } from 'notistack';
+
+import Pie from '../../../components/Charts/Pie';
+import { SatelliteState } from './States';
+
+import { getPluginsStates } from '../../../utils/data';
+
+export default function SatelliteCard({ satellite }: { satellite: SatelliteAttributes }) {
+  const theme = useTheme();
+  const navigate = useNavigate();
+
+  const uptime = formatDistance(new Date(satellite.lastHeartbeat), new Date(), { addSuffix: true });
+
+  const handleAction = useCallback(() => {
+    enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
+  }, []);
+
+  return (
+    <Paper sx={{ padding: '2rem' }}>
+      <Stack spacing={3}>
+        <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
+          <Typography variant="h5" fontWeight="bold">
+            {satellite.name}
+          </Typography>
+          <SatelliteState state={satellite.state.value as AvailableState} />
+        </Stack>
+
+        <Stack spacing={2} direction={{ xs: 'column', md: 'row', lg: 'column' }} justifyContent="space-between">
+          <Stack spacing={6} direction="row" alignItems="start">
+            <Stack spacing={1}>
+              <Typography color="GrayText">Ip address:</Typography>
+              <Typography color="GrayText">Location:</Typography>
+              <Typography color="GrayText">Uptime:</Typography>
+            </Stack>
+            <Stack spacing={1}>
+              <Typography fontWeight="500">192.168.3.3</Typography>
+              <Typography fontWeight="500">{satellite.room.name}</Typography>
+              <Typography fontWeight="500">{uptime}</Typography>
+            </Stack>
+          </Stack>
+
+          <Divider flexItem sx={{ display: { xs: 'flex', md: 'none', lg: 'flex' } }} />
+          <Divider flexItem orientation="vertical" sx={{ display: { xs: 'none', md: 'flex', lg: 'none' } }} />
+
+          <Stack direction="column">
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
+              <Typography fontWeight="bold">Plugins states</Typography>
+              <Stack direction="row">
+                <Tooltip title="Install new plugin">
+                  <IconButton aria-label="install new plugin" onClick={() => navigate('plugins/install')}>
+                    <AddCircleOutlineOutlinedIcon />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title="Stop all plugins">
+                  <span>
+                    <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                      <StopCircleOutlinedIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+                <Tooltip title="Restart all plugins">
+                  <span>
+                    <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                      <RestartAltOutlinedIcon />
+                    </IconButton>
+                  </span>
+                </Tooltip>
+              </Stack>
+            </Stack>
+
+            <Box display="flex" alignItems="center" justifyContent="center">
+              <Box sx={{ width: 350, height: 350 }}>
+                <Pie data={getPluginsStates(satellite.plugins, theme)} totalCount={satellite.plugins.length} totalLabel="Plugins" />
+              </Box>
+            </Box>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Paper>
+  );
+}

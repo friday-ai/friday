@@ -10,7 +10,6 @@ on:
 # Cancel previous PR/branch runs when a new commit is pushed
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
 
 jobs:
   lint:
@@ -23,7 +22,8 @@ jobs:
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
         with:
-          build: false
+          build: true
+          build-only-packages: true
 
       - name: 📝 ESLint check
         uses: reviewdog/action-eslint@v1

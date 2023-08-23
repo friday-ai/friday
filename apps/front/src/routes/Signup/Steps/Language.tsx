@@ -1,59 +1,72 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import UndrawWorld from '../../../components/Illustrations/UndrawWorld';
-import Favicon from '../../../components/Illustrations/Favicon';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import MobileStepper from '@mui/material/MobileStepper';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Typography from '@mui/material/Typography';
 
-interface Language {
-  code: string;
-  name: string;
-}
+import { useTheme } from '@mui/material/styles';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const languages: Language[] = [
-  { code: 'en', name: 'English' },
-  { code: 'fr', name: 'Français' },
-  { code: 'es', name: 'Español' },
-  { code: 'pt', name: 'Portuguese' },
-];
+import { SignupProps } from '../Signup';
 
-function Language({ submit }: { submit: (code: string) => void }) {
-  const navigate = useNavigate();
-  const [language, setLanguage] = useState<Language>({ code: 'en', name: 'English' });
+export default function Language({ activeStep, setActiveStep }: SignupProps) {
+  const theme = useTheme();
+  const { t, i18n } = useTranslation();
 
-  const handleNextStep = () => {
-    submit(language.code);
-    navigate('/signup/account');
-  };
+  const [language, setLanguage] = useState('en-EN');
+
+  const handleLanguage = useCallback(
+    (_: unknown, value: string) => {
+      setLanguage(value);
+      localStorage.setItem('i18nextLng', value || 'en-EN');
+      i18n.changeLanguage(value || 'en-EN');
+    },
+    [i18n]
+  );
+
+  // Set default language
+  useEffect(() => {
+    handleLanguage(null, 'en-EN');
+  }, [handleLanguage]);
 
   return (
-    <div className="card-base flex flex-col items-center p-10 h-4/5 w-4/5 xl:w-3/5 overflow-auto">
-      <div className="mb-5 flex-none">
-        <Favicon width="60" height="60" />
-      </div>
+    <>
+      <Box textAlign="center">
+        <Typography variant="h5" fontWeight="bold" color={theme.palette.primary.main}>
+          {t('signup.language.title')}
+        </Typography>
+        <Typography variant="subtitle2" fontWeight="bold" color={theme.palette.text.disabled}>
+          {t('signup.language.description')}
+        </Typography>
+      </Box>
 
-      <span className="text-xl mb-5 flex-none">Choose your language</span>
+      <ToggleButtonGroup orientation="vertical" value={language} exclusive onChange={handleLanguage}>
+        <ToggleButton value="en-EN" aria-label="list">
+          English
+        </ToggleButton>
+        <ToggleButton value="fr-FR" aria-label="module">
+          Français
+        </ToggleButton>
+      </ToggleButtonGroup>
 
-      <div className="flex flex-row grow w-full justify-evenly md:space-x-20">
-        <div className="hidden sm:block">
-          <UndrawWorld width="auto" height="auto" />
-        </div>
-        <div className="flex flex-col space-y-4 basis-full sm:basis-1/2 md:basis-11/12 lg:basis-6/12">
-          <ul className="menu p-2">
-            {languages.map((l) => (
-              <li key={l.code}>
-                <button type="button" className={`${language.code === l.code && 'active'}`} onClick={() => setLanguage(l)}>
-                  {l.name}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <button type="button" className="btn btn-sm self-end flex-none mt-5" onClick={handleNextStep}>
-        Next step
-      </button>
-    </div>
+      <MobileStepper
+        variant="dots"
+        steps={6}
+        position="static"
+        activeStep={activeStep}
+        backButton={
+          <Button variant="contained" size="small" onClick={() => setActiveStep(activeStep - 1)} disabled={activeStep === 0}>
+            {t('signup.general.back')}
+          </Button>
+        }
+        nextButton={
+          <Button variant="contained" size="small" onClick={() => setActiveStep(activeStep + 1)}>
+            {t('signup.general.next')}
+          </Button>
+        }
+      />
+    </>
   );
 }
-
-export default Language;

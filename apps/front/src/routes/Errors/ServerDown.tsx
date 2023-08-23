@@ -1,14 +1,31 @@
-import React from 'react';
-import UndrawServerDown from '../../components/Illustrations/UndrawServerDown';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
-function ServerDown() {
+import { useTheme } from '@mui/material/styles';
+
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { ReactComponent as ServerError } from '../../assets/svg/server_error.svg';
+
+export default function ServerDown() {
+  const theme = useTheme();
+  const { t } = useTranslation();
+
   return (
-    <div className="geo-background centered-container">
-      <UndrawServerDown className="self-center" width="500" height="550" />
-      <h1 className="mt-3 text-4xl font-bold text-center text-primary">Your server is feeling a little down</h1>
-      <span className="mt-3 text-lg text-center">Please restart your machine and try again in a few moments</span>
-    </div>
+    <Box display="flex" flexDirection="column" minHeight="100%" alignItems="center" justifyContent="center" margin={2}>
+      <div style={{ width: 'fit-content', height: 'fit-content', marginBottom: '2rem' }}>
+        <ServerError width="inerhit" height="inerhit" stroke={theme.palette.primary.main} fill={theme.palette.primary.main} />
+      </div>
+      <Typography textAlign="center" variant="h4" fontWeight={700}>
+        {t('errors.serverDown.title')}
+      </Typography>
+      <Typography textAlign="center" variant="subtitle1" color={theme.palette.text.secondary}>
+        {t('errors.serverDown.description')}
+      </Typography>
+      <Typography textAlign="center" variant="subtitle1" color={theme.palette.text.secondary}>
+        {t('errors.serverDown.subDescription')}
+      </Typography>
+    </Box>
   );
 }
-
-export default ServerDown;

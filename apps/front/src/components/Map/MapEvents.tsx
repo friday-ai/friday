@@ -1,11 +1,12 @@
 import { useMapEvents } from 'react-leaflet';
-import round from '../../utils/round';
+
+import { round } from '../../utils/number';
 
 interface MapEventsProps {
   onClick: (latitude: number, longitude: number) => void;
 }
 
-function MapEvents({ onClick }: MapEventsProps) {
+export default function MapEvents({ onClick }: MapEventsProps) {
   useMapEvents({
     click: (e) => {
       onClick(round(e.latlng.lat, 5), round(e.latlng.lng, 5));
@@ -13,5 +14,3 @@ function MapEvents({ onClick }: MapEventsProps) {
   });
   return null;
 }
-
-export default MapEvents;

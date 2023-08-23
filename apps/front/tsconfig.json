@@ -2,6 +2,7 @@
   "extends": "../../packages/tools/typescript.config.json",
   "compilerOptions": {
     "types": ["vite/client", "./node_modules/vite-plugin-pwa/client"],
+    "lib": ["DOM", "ES2022"],
     "module": "es2022"
   },
   "include": ["./src"],

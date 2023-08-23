@@ -5,7 +5,7 @@ interface CountdownProps {
   count: number;
 }
 
-function Countdown({ start, count }: CountdownProps) {
+export default function Countdown({ start, count }: CountdownProps) {
   useEffect(() => {
     if (start) {
       let counter = count;
@@ -26,5 +26,3 @@ function Countdown({ start, count }: CountdownProps) {
     </span>
   );
 }
-
-export default Countdown;

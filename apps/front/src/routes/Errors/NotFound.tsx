@@ -1,18 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import UndrawNotFound from '../../components/Illustrations/UndrawNotFound';
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+import Link from '@mui/material/Link';
 
-function NotFound() {
+import { useTheme } from '@mui/material/styles';
+
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { ReactComponent as ServerError } from '../../assets/svg/404.svg';
+
+export default function NotFound() {
+  const theme = useTheme();
+  const { t } = useTranslation();
+
   return (
-    <div className="geo-background centered-container">
-      <UndrawNotFound className="self-center" width="500" height="300" />
-      <h1 className="mt-3 text-4xl font-bold text-center text-primary">Sorry we couldn&apos;t find this page.</h1>
-      <span className="mt-3 text-lg text-center">But dont worry, you can find plenty of other things on homepage.</span>
-      <Link to="/dashboard" className="btn btn-primary mt-2">
-        back to homepage
-      </Link>
-    </div>
+    <Box display="flex" flexDirection="column" minHeight="100%" alignItems="center" justifyContent="center" margin={2}>
+      <div style={{ width: 'fit-content', height: 'fit-content', marginBottom: '2rem' }}>
+        <ServerError width="inerhit" height="inerhit" stroke={theme.palette.primary.main} fill={theme.palette.primary.main} />
+      </div>
+      <Typography textAlign="center" variant="h4" fontWeight={700}>
+        {t('errors.notFound.title')}
+      </Typography>
+      <Typography textAlign="center" variant="subtitle1" color={theme.palette.text.secondary}>
+        {t('errors.notFound.description')}
+      </Typography>
+      <Link href="/dashboard/devices">{t('errors.notFound.backToHome')}</Link>
+    </Box>
   );
 }
-
-export default NotFound;

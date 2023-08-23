@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useMap, Marker, Popup } from 'react-leaflet';
+import { Marker, Popup, useMap } from 'react-leaflet';
+
 import { DEFAULT_COORDS } from '../../utils/constants';
 
-function LocationMarker() {
+export default function LocationMarker() {
   const [position, setPosition] = useState<[number, number]>(DEFAULT_COORDS);
   const map = useMap();
 
@@ -19,5 +20,3 @@ function LocationMarker() {
     </Marker>
   );
 }
-
-export default LocationMarker;

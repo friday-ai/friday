@@ -1,149 +1,161 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Icon } from '@iconify/react';
-import Favicon from '../../../components/Illustrations/Favicon';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Chip from '@mui/material/Chip';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import MobileStepper from '@mui/material/MobileStepper';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+
+import { useTheme } from '@mui/material/styles';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import Map from '../../../components/Map/Map';
-import useForm from '../../../services/hooks/useForm';
 
-interface House {
-  name: string;
-  position: [number, number];
-  rooms: string[];
-  roomName: string;
-}
+import { SignupProps } from '../Signup';
 
-function House({ submit }: { submit: (name: string, position: [number, number], rooms: string[]) => void }) {
-  const navigate = useNavigate();
+import useHouse from '../../../services/api/useHouse';
+import useRoom from '../../../services/api/useRoom';
 
-  const { onSubmit, onChange, onUpdate, data, errors, setCustomErrors } = useForm<House>({
-    initialValues: {
-      name: '',
-      position: [0, 0],
-      rooms: [],
-      roomName: '',
-    },
-    validations: {
-      name: {
-        allowEmpty: {
-          value: false,
-          message: 'The name of house cannot be empty',
-        },
-      },
-      position: {},
-      rooms: {
-        allowEmpty: {
-          value: false,
-          message: 'You need to add one room or more',
-        },
-      },
-      roomName: {},
-    },
-  });
+export default function House({ activeStep, setActiveStep }: SignupProps) {
+  const theme = useTheme();
+  const { t } = useTranslation();
+  const { createHouse } = useHouse();
+  const { createRoom } = useRoom();
 
-  const handleSubmit = async () => {
-    const res = await onSubmit(null);
+  const [houseName, setHouseName] = useState('');
+  const [houseCoordinates, setHouseCoordinates] = useState<[number, number]>([0, 0]);
+  const [currentRoom, setCurrentRoom] = useState('');
+  const [rooms, setRooms] = useState<string[]>([]);
+
+  const [stepCompleted, setStepCompleted] = useState(true);
+
+  const handleHouseNameChange = (change: string) => {
+    setHouseName(change);
+
+    if (change !== '' && change.replace(/ /g, '') !== '' && rooms.length > 0) {
+      setStepCompleted(true);
+    } else {
+      setStepCompleted(false);
+    }
+  };
+
+  const handleAddRoom = () => {
+    if (currentRoom !== '' && currentRoom.replace(/ /g, '') !== '') {
+      const newRooms = [...rooms, currentRoom];
+
+      setRooms(newRooms);
+      setCurrentRoom('');
+
+      if (newRooms.length > 0 && houseName !== '' && houseName.replace(/ /g, '') !== '') {
+        setStepCompleted(true);
+      }
+    }
+  };
+
+  const handleDeleteRoom = (roomName: string) => {
+    const newRooms = rooms.filter((r) => r !== roomName);
+    setRooms(newRooms);
+
+    if (newRooms.length < 1) {
+      setStepCompleted(false);
+    }
+  };
+
+  const handleNext = async () => {
+    const res = await createHouse.mutateAsync({ name: houseName, latitude: `${houseCoordinates[0]}`, longitude: `${houseCoordinates[1]}` });
+
     if (res) {
-      submit(data.name, data.position, data.rooms);
-      navigate('/signup/final');
-    }
-  };
+      rooms.forEach(async (r) => {
+        await createRoom.mutateAsync({ name: r, houseId: res.id });
+      });
 
-  const AddRoom = async (e: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (e.type === 'keyup' && (e as React.KeyboardEvent).key === 'Enter' && data.roomName.length === 0) {
-      setCustomErrors('roomName', 'The name of room cannot be empty');
-      return;
+      setActiveStep(activeStep + 1);
     }
-
-    if (((e.type === 'keyup' && (e as React.KeyboardEvent).key === 'Enter') || e.type === 'click') && data.roomName.length >= 1) {
-      onUpdate('rooms', [...data.rooms, data.roomName]);
-      onUpdate('roomName', '');
-      setCustomErrors('roomName', '');
-    }
-  };
-
-  const onRemoveRoom = (room: string) => {
-    onUpdate(
-      'rooms',
-      data.rooms.filter((r) => r !== room)
-    );
   };
 
   return (
-    <form className="card-base flex flex-col items-center p-10 h-4/5 w-4/5 xl:w-3/5 overflow-auto">
-      <div className="mb-5 flex-none">
-        <Favicon width="60" height="60" />
-      </div>
+    <>
+      <Box textAlign="center">
+        <Typography variant="h5" fontWeight="bold" color={theme.palette.primary.main}>
+          {t('signup.house.title')}
+        </Typography>
+        <Typography variant="subtitle2" fontWeight="bold" color={theme.palette.text.disabled}>
+          {t('signup.house.description')}
+        </Typography>
+        <Typography variant="subtitle2" fontWeight="bold" color={theme.palette.text.disabled}>
+          {t('signup.house.description2')}
+        </Typography>
+      </Box>
 
-      <span className="text-xl mb-5 flex-none">House information</span>
+      <Map
+        markers={[{ title: houseName, position: houseCoordinates }]}
+        onNewMarker={(latitude, longitude) => setHouseCoordinates([latitude, longitude])}
+      />
 
-      <div className="flex flex-row grow w-full justify-evenly md:space-x-20">
-        <div className="hidden sm:block basis-10/12">
-          <Map
-            markers={[{ title: data.name, position: data.position }]}
-            onNewMarker={(latitude, longitude) => onUpdate('position', [latitude, longitude])}
-          />
-        </div>
-        <div className="flex flex-col space-y-4 basis-full sm:basis-1/2 md:basis-11/12 lg:basis-6/12">
-          <div className="form-control">
-            <label htmlFor="name" className="label">
-              <span className="label-text">Name</span>
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Main house"
-              className={`input input-bordered ${errors.name && 'input-error'}`}
-              value={data.name}
-              onInput={onChange('name')}
-            />
-            <label htmlFor="name" className={`label p-0 pt-1 ${errors.name ? 'visible' : 'invisible'}`}>
-              <span className="label-text-alt text-error">{errors.name}</span>
-            </label>
-          </div>
-          <div className="form-control">
-            <label htmlFor="room" className="label">
-              <span className="label-text">Add all rooms in your home</span>
-            </label>
-            <div className="input-group">
-              <input
-                id="room"
-                name="room"
-                type="text"
-                placeholder="Bedroom"
-                className={`input input-bordered w-full ${(errors.rooms || errors.roomName) && 'input-error'}`}
-                value={data.roomName}
-                onInput={onChange('roomName')}
-                onKeyUp={AddRoom}
-              />
-              <button type="button" className="btn" onClick={AddRoom}>
-                Add
-              </button>
-            </div>
-            <label htmlFor="room" className={`label p-0 pt-1 ${errors.rooms ? 'visible' : 'invisible'}`}>
-              <span className="label-text-alt text-error">{errors.rooms}</span>
-            </label>
-            <label htmlFor="name" className={`label p-0 pt-1 ${errors.roomName ? 'visible' : 'invisible'}`}>
-              <span className="label-text-alt text-error">{errors.roomName}</span>
-            </label>
-            <div className="flex flex-wrap gap-2 py-5">
-              {data.rooms.map((room) => (
-                <button key={room} type="button" className="btn btn-primary btn-outline btn-xs" onClick={() => onRemoveRoom(room)}>
-                  <span className="hidden md:block">{room}</span>
-                  <Icon icon="ic:outline-close" className="w-5 h-5 md:ml-1" />
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      <Stack direction="row" spacing={1}>
+        <TextField
+          label={t('signup.house.houseName')}
+          id="house"
+          type="text"
+          value={houseName}
+          onChange={(event) => {
+            handleHouseNameChange(event.target.value);
+          }}
+        />
 
-      <button type="button" className="btn btn-sm self-end flex-none mt-5" onClick={handleSubmit}>
-        Next step
-      </button>
-    </form>
+        <TextField
+          label={t('signup.house.rooms')}
+          id="rooms"
+          type="text"
+          value={currentRoom}
+          onChange={(event) => {
+            setCurrentRoom(event.target.value);
+          }}
+          InputProps={{
+            onKeyPress: (event) => {
+              const { key } = event;
+              if (key === 'Enter') {
+                handleAddRoom();
+              }
+            },
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton aria-label="add room" onClick={() => handleAddRoom()} edge="end">
+                  <AddCircleOutlineIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Stack>
+
+      <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
+        {rooms.map((r, index) => (
+          <Chip key={`${r}+${index + 1}`} label={r} color="primary" variant="outlined" onDelete={() => handleDeleteRoom(r)} />
+        ))}
+      </Stack>
+
+      <MobileStepper
+        variant="dots"
+        steps={6}
+        position="static"
+        activeStep={activeStep}
+        backButton={
+          <Button variant="contained" size="small" onClick={() => setActiveStep(activeStep - 1)}>
+            {t('signup.general.back')}
+          </Button>
+        }
+        nextButton={
+          <Button variant="contained" size="small" onClick={() => handleNext()} disabled={!stepCompleted}>
+            {t('signup.general.next')}
+          </Button>
+        }
+      />
+    </>
   );
 }
-
-export default House;

@@ -1,205 +1,97 @@
-@import 'tailwindcss/base';
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  opacity: 1;
+}
 
-@import 'tailwindcss/components';
+body > #root {
+  height: 100%;
+}
 
-@import 'tailwindcss/utilities';
+body > #root > div {
+  height: 100%;
+}
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
-::-webkit-scrollbar-thumb{
-  background: #B3AFB3;
+::-webkit-scrollbar-thumb {
+  background: #b3afb3;
   border-radius: 6px;
 }
-::-webkit-scrollbar-thumb:hover{
-  background: #B3AFB3;
+::-webkit-scrollbar-thumb:hover {
+  background: #b3afb3;
 }
-::-webkit-scrollbar-track{
-  background: #F0F0F0;
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
   border-radius: 6px;
-  box-shadow: inset 0 0 0 0 #F0F0F0;
+  box-shadow: inset 0 0 0 0 #f0f0f0;
 }
 
-.geo-background {
+.h-full {
+  height: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.countdown {
+  line-height: 1em;
+  display: inline-flex;
+}
+
+.countdown > * {
+  height: 1em;
+  display: inline-block;
+  overflow-y: hidden;
+}
+
+.countdown > *:before {
   position: relative;
-}
-
-.geo-background::before {
-  content: '';
-  position: fixed;
-  z-index: 1;
-  pointer-events: none;
-  background-image: url(./assets/geometric.svg);
-  bottom: 0;
-  right: -20px;
-  width: 551px;
-  height: 748px;
-}
-
-.geo-background::after {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-  background-image: url(./assets/geometric.svg);
-  -webkit-transform: scaleX(-1) scaleY(-1);
-  transform: scaleX(-1) scaleY(-1);
-  top: 0;
-  left: -20px;
-  width: 551px;
-  height: 748px;
-}
-
- .menu.compact li>button, .menu.compact li>span {
-   font-size: .875rem;
-   line-height: 1.25rem;
-   padding-top: .5rem;
-   padding-bottom: .5rem
- }
-
- .menu li>button.active {
-   --tw-bg-opacity: 1;
-   background-color: hsla(var(--p)/var(--tw-bg-opacity,1));
-   --tw-text-opacity: 1;
-   color: hsla(var(--pc)/var(--tw-text-opacity,1));
- }
-
-
- .menu[class*=p-] li button {
-   border-radius: var(--rounded-btn,.5rem);
- }
-
- .menu li>button, .menu li>span {
-   padding: .75rem 1.25rem;
-   color: currentColor;
- }
-
- .menu :where(li)>button {
-   cursor: pointer;
- }
-
- .menu :where(li)>button, .menu :where(li)>span {
-   display: flex;
-   align-items: center;
-   transition-property: background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;
-   transition-duration: .15s;
-   transition-timing-function: cubic-bezier(.4,0,.2,1);
- }
-
-.menu li>button:hover {
-  --tw-bg-opacity: .1;
-  background-color: hsla(var(--bc)/var(--tw-bg-opacity,1));
-}
-
-.menu li>button.active:hover {
-  --tw-bg-opacity: .7;
-  background-color: hsla(var(--p)/var(--tw-bg-opacity,1));
-}
-
-.divider:after, .divider:before {
-  background-color: hsla(var(--b3)/var(--tw-bg-opacity,1));
-}
-
-.divider-sm:after, .divider-sm:before {
-  height: .05rem;
-}
-
-/*
-:is(.btn, .btn-neutral):not(.btn-lg, .btn-sm, .btn-xs, .btn-circle) {
-  height: 2.5rem;
-  min-height: 2.5rem;
-}
- */
-
-.btn-neutral {
-  --tw-border-opacity: 1;
-  border-color: hsla(var(--b3) / var(--tw-border-opacity));
-  --tw-bg-opacity: 1;
-  background-color: hsla(var(--b1) / var(--tw-bg-opacity));
-}
-
-.checkbox-group label {
-  padding: .25rem .25rem;
-}
-
-.checkbox-group-vertical label {
-  padding: 0 0 .25rem 0;
-}
-
-.tooltip {
-  text-align: inherit;
-}
-
-.tooltip:before {
-  max-width: 14rem;
+  content: '00\a 01\a 02\a 03\a 04\a 05\a 06\a 07\a 08\a 09\a 10\a 11\a 12\a 13\a 14\a 15\a 16\a 17\a 18\a 19\a 20\a 21\a 22\a 23\a 24\a 25\a 26\a 27\a 28\a 29\a 30\a 31\a 32\a 33\a 34\a 35\a 36\a 37\a 38\a 39\a 40\a 41\a 42\a 43\a 44\a 45\a 46\a 47\a 48\a 49\a 50\a 51\a 52\a 53\a 54\a 55\a 56\a 57\a 58\a 59\a 60\a 61\a 62\a 63\a 64\a 65\a 66\a 67\a 68\a 69\a 70\a 71\a 72\a 73\a 74\a 75\a 76\a 77\a 78\a 79\a 80\a 81\a 82\a 83\a 84\a 85\a 86\a 87\a 88\a 89\a 90\a 91\a 92\a 93\a 94\a 95\a 96\a 97\a 98\a 99\a';
+  white-space: pre;
+  top: calc(var(--value) * -1em);
   text-align: center;
-  border-radius: var(--rounded-btn,1rem)
+  transition: all 1s cubic-bezier(1, 0, 0, 1);
 }
 
-.tooltip:hover:before,
-.tooltip:hover:after {
-  z-index: 50
+.swap {
+  position: relative;
+  display: inline-grid;
+  -webkit-user-select: none;
+  user-select: none;
+  place-content: center;
 }
 
-.tooltip-hidden:hover:before,
-.tooltip-hidden:hover:after {
-  opacity: 0
+.swap > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-property: transform, opacity;
 }
 
-.collapse-title, .collapse>input[type=checkbox] {
-  padding: 1rem 4rem 1rem 1rem;
+.swap-on,
+.swap-off {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.collapse-arrow .collapse-title:after {
-  top: 1.6rem;
-  right: 1.6rem;
+.swap .swap-on {
+  opacity: 0;
 }
 
-@media (max-width: 900px) and (max-height: 900px) {
-  .geo-background::before {
-    width: 275px;
-    height: 374px;
-  }
-
-  .geo-background::after {
-    width: 275px;
-    height: 374px;
-  }
+.swap.swap-active .swap-off {
+  opacity: 0;
 }
 
-@media (max-width: 600px) and (max-height: 600px) {
-  .geo-background::before {
-    display: none;
-  }
-
-  .geo-background::after {
-    display: none;
-  }
-}
-
-@layer components {
-  .btn-neutral {
-    @apply btn btn-ghost bordered border-base-300 bg-base-100
-  }
-
-  .card-base {
-    @apply card shadow-md p-5 bg-base-100 border border-base-300 overflow-visible
-  }
-
-  .grid-container {
-    @apply grid gap-5 justify-center
-  }
-
-  .centered-container {
-    @apply flex flex-col content-center justify-center items-center h-full
-  }
-
-  .dropdown-base {
-    @apply mt-16 overflow-y-auto shadow-2xl top-px dropdown-content max-h-96 w-52 rounded-box bg-base-100 space-y-0.5
-  }
-
-  .divider-sm {
-    @apply m-0
-  }
+.swap.swap-active .swap-on {
+  opacity: 1;
 }

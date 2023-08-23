@@ -89,9 +89,8 @@ function buildMetadataRoutes(target: any, propertyKey: string, requestMethode: M
  * FridayRouter('/v1/action')
  */
 // tslint:disable-next-line: naming-convention
-export const FridayRouter =
-  (prefix = ''): ClassDecorator =>
-  (target: any) => {
+export const FridayRouter = (prefix = ''): ClassDecorator => {
+  return (target: any) => {
     Reflect.defineMetadata('prefix', prefix, target);
 
     // Since routes are set by our methods this should almost never be true (except the controller has no methods)
@@ -99,6 +98,7 @@ export const FridayRouter =
       Reflect.defineMetadata('routes', [], target);
     }
   };
+};
 
 /**
  * Decorator factory for '@Get' methode
@@ -107,12 +107,12 @@ export const FridayRouter =
  * Get({ path: '/', authenticated: true, rateLimit: false })
  */
 // tslint:disable-next-line: naming-convention
-export const Get =
-  (options: RouteParam) =>
-  (target: any, propertyKey: string): void => {
+export const Get = (options: RouteParam) => {
+  return (target: any, propertyKey: string): void => {
     const routes = buildMetadataRoutes(target, propertyKey, Methods.GET, options);
     Reflect.defineMetadata('routes', routes, target.constructor);
   };
+};
 
 /**
  * Decorator factory for '@Post' methode
@@ -121,12 +121,12 @@ export const Get =
  * Post({ path: '/', authenticated: true, rateLimit: false })
  */
 // tslint:disable-next-line: naming-convention
-export const Post =
-  (options: RouteParam) =>
-  (target: any, propertyKey: string): void => {
+export const Post = (options: RouteParam) => {
+  return (target: any, propertyKey: string): void => {
     const routes = buildMetadataRoutes(target, propertyKey, Methods.POST, options);
     Reflect.defineMetadata('routes', routes, target.constructor);
   };
+};
 
 /**
  * Decorator factory for '@Patch' methode
@@ -135,12 +135,12 @@ export const Post =
  * Patch({ path: '/:id', authenticated: true, rateLimit: false })
  */
 // tslint:disable-next-line: naming-convention
-export const Patch =
-  (options: RouteParam) =>
-  (target: any, propertyKey: string): void => {
+export const Patch = (options: RouteParam) => {
+  return (target: any, propertyKey: string): void => {
     const routes = buildMetadataRoutes(target, propertyKey, Methods.PATCH, options);
     Reflect.defineMetadata('routes', routes, target.constructor);
   };
+};
 
 /**
  * Decorator factory for '@Delete' methode
@@ -149,9 +149,9 @@ export const Patch =
  * Delete({ path: '/:id', authenticated: true, rateLimit: false })
  */
 // tslint:disable-next-line: naming-convention
-export const Delete =
-  (options: RouteParam) =>
-  (target: any, propertyKey: string): void => {
+export const Delete = (options: RouteParam) => {
+  return (target: any, propertyKey: string): void => {
     const routes = buildMetadataRoutes(target, propertyKey, Methods.DELETE, options);
     Reflect.defineMetadata('routes', routes, target.constructor);
   };
+};

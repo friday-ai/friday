@@ -1,14 +1,26 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig, type PluginOption } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
+import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
   server: {
     https: process.env.HTTPS === 'true',
     port: Number(process.env.PORT) || 3001,
   },
+  optimizeDeps: {
+    include: ['@friday-ai/shared'],
+  },
+  build: {
+    commonjsOptions: {
+      include: [/@friday-ai\/shared/, /node_modules/],
+    },
+  },
   plugins: [
     react(),
+    svgr(),
+    visualizer() as PluginOption,
     VitePWA({
       registerType: 'autoUpdate',
       strategies: 'generateSW',

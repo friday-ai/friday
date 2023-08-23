@@ -16,7 +16,8 @@ describe('Docker.pull', () => {
     this.timeout(1500);
     await docker.pull('alpine:latest');
     const images = await docker.dockerode?.listImages();
-    expect(images).that.contains.something.like({ RepoTags: ['alpine:latest'] });
+    expect(images).to.be.an('array');
+    expect(images?.map((img) => img.RepoTags).flat()).to.contains('alpine:latest');
   });
 
   it('should not pull an image', async () => {

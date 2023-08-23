@@ -9,7 +9,7 @@ inputs:
 
   pnpm-version:
     description: Version of pnpm to use
-    default: 7.x
+    default: 8.x
 
   build:
     description: Whether to build the project or not

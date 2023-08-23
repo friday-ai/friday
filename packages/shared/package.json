@@ -1,6 +1,6 @@
 {
   "name": "@friday-ai/shared",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Friday: Shared utilites",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -19,13 +19,14 @@
     "typescript": "*"
   },
   "devDependencies": {
-    "@types/node": "^18.13.0",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
-    "eslint": "^8.31.0",
-    "eslint-config-airbnb-typescript-prettier": "^5.0.0",
-    "eslint-plugin-import": "^2.26.0",
+    "@types/node": "^20.5.2",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "eslint": "^8.47.0",
+    "eslint-config-airbnb-base-typescript-prettier": "^5.1.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-tsdoc": "^0.2.17",
-    "prettier": "^2.8.2"
+    "prettier": "^3.0.2"
   }
 }
