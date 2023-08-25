@@ -1,12 +1,13 @@
-import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys, PluginInstallAttributes } from '@friday-ai/shared';
 import DockerClass from '@friday-ai/docker';
+import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys, PluginInstallAttributes } from '@friday-ai/shared';
 
-import StateClass from '../state/state';
-import BaseModel from '../../utils/database/model.base';
 import PluginModel from '../../models/plugin';
+import BaseModel from '../../utils/database/model.base';
 import { Catch } from '../../utils/decorators/error';
 import EventClass from '../../utils/event';
+import StateClass from '../state/state';
 
+import uninstall from './plugin.uninstall';
 import heartbeat from './plugin.heartbeat';
 import install from './plugin.install';
 import stop from './plugin.stop';
@@ -27,11 +28,8 @@ export default class Plugin extends BaseModel<PluginModel, PluginAttributes, Plu
   }
 
   @Catch()
-  async destroy(id: string): Promise<void> {
-    const plugin = await super.getById(id);
-    await this.docker.remove(plugin.dockerId);
-
-    return super.destroy(id);
+  async uninstall(id: string): Promise<void> {
+    return uninstall.call(this, id);
   }
 
   @Catch()

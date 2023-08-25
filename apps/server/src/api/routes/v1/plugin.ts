@@ -84,9 +84,9 @@ export default class PluginRouter {
   };
 
   /**
-   * Delete a plugin
-   * @apiName destroy
-   * @apiDescription This route allows you to delete a plugin
+   * Uninstall a plugin
+   * @apiName uninstall
+   * @apiDescription This route allows you to uninstall a plugin
    * @api {delete} /api/v1/plugin/:id
    * @apiGroup Plugin
    * @apiVersion 1.0.0
@@ -102,8 +102,8 @@ export default class PluginRouter {
     aclMethod: 'delete',
     aclResource: 'plugin',
   })
-  destroy = async (req: Request, res: Response) => {
-    await this.friday.plugin.destroy(req.params.id);
+  uninstall = async (req: Request, res: Response) => {
+    await this.friday.plugin.uninstall(req.params.id);
     res.json({
       success: true,
     });
