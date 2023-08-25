@@ -11,7 +11,9 @@
       }
     },
     "satellites": {
+      "areYouSure": "Êtes-vous sûr ?",
       "configPlugin": "Configurer le plugin",
+      "deletePluginMessage": "Cette action <b>ne peut pas</b> être annulée. Cela supprimera définitivement le plugin :",
       "installedPlugins": "Plugins installés",
       "installPlugin": "Installer un plugin",
       "ipAddress": "Adresse IP",

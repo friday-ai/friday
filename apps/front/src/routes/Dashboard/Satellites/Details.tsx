@@ -49,6 +49,12 @@ export default function Details() {
     setPlugins(filteredPlugins);
   };
 
+  const handleRemovePLugin = (pluginId: string) => {
+    const newPlugins = satellite ? satellite.plugins.filter((plugin) => plugin.id !== pluginId) : [];
+    satellite!.plugins = newPlugins;
+    setPlugins(newPlugins);
+  };
+
   const handleAction = useCallback(() => {
     enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
   }, []);
@@ -142,7 +148,7 @@ export default function Details() {
 
             <Fade in={!isLoading} style={{ transitionDelay: '300ms' }}>
               <Box>
-                <PluginList plugins={plugins} />
+                <PluginList plugins={plugins} onRemovePlugin={handleRemovePLugin} />
               </Box>
             </Fade>
           </Stack>

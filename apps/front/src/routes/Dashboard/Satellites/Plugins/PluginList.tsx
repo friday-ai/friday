@@ -21,22 +21,43 @@ import TableRow from '@mui/material/TableRow';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
+import NiceModal from '@ebay/nice-modal-react';
 import { enqueueSnackbar } from 'notistack';
 
 import { AvailableState, PluginAttributes } from '@friday-ai/shared';
 import { useTranslation } from 'react-i18next';
 import Menu from '../../../../components/Menu/Menu';
+import ConfirmDialog from '../../../../components/Modal/Confirm';
 import NoData from '../../../Errors/NoData';
 import { PluginState } from '../States';
 
+import usePlugin from '../../../../services/api/usePlugin';
 import { formatDistance } from '../../../../utils/data';
 
-export default function PluginList({ plugins }: { plugins: PluginAttributes[] }) {
+export default function PluginList({ plugins, onRemovePlugin }: { plugins: PluginAttributes[]; onRemovePlugin: (id: string) => void }) {
   const { t } = useTranslation();
+  const { uninstallPlugin } = usePlugin();
 
   const handlePluginAction = useCallback(() => {
     enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
   }, []);
+
+  const handleDeletePlugin = (name: string, id: string) => {
+    NiceModal.show(ConfirmDialog, {
+      title: t('dashboard.satellites.areYouSure'),
+      content: `${t('dashboard.satellites.deletePluginMessage')} <b>${name}</b>.`,
+      onClose: async (confirm) => {
+        if (confirm) {
+          const res = await uninstallPlugin.mutateAsync(id);
+          if (res.success) {
+            onRemovePlugin(id);
+          } else {
+            enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+          }
+        }
+      },
+    });
+  };
 
   return (
     <>
@@ -87,7 +108,7 @@ export default function PluginList({ plugins }: { plugins: PluginAttributes[] })
                         </IconButton>
                       </Tooltip>
                       <Tooltip title={t('dashboard.satellites.uninstallPlugin')}>
-                        <IconButton aria-label="uninstall plugin" onClick={() => handlePluginAction()}>
+                        <IconButton aria-label="uninstall plugin" onClick={() => handleDeletePlugin(plugin.name, plugin.id)}>
                           <DeleteOutlineOutlinedIcon />
                         </IconButton>
                       </Tooltip>

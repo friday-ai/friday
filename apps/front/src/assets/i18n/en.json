@@ -11,7 +11,9 @@
       }
     },
     "satellites": {
+      "areYouSure": "Are you sure ?",
       "configPlugin": "Config plugin",
+      "deletePluginMessage": "This action <b>cannot</b> be undone. This will permanently delete the plugin :",
       "installedPlugins": "Plugins installed",
       "installPlugin": "Install plugin",
       "ipAddress": "IP address",
