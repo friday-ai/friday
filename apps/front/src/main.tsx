@@ -1,3 +1,4 @@
+import NiceModal from '@ebay/nice-modal-react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { domAnimation, LazyMotion } from 'framer-motion';
@@ -9,8 +10,8 @@ import { registerSW } from 'virtual:pwa-register';
 
 import './index.css';
 import Root from './routes/Root';
-import theme from './utils/theme';
 import './utils/i18n';
+import theme from './utils/theme';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,10 +32,12 @@ if (rootContainer !== null) {
       <LazyMotion features={domAnimation}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <BrowserRouter>
-              <Root />
-            </BrowserRouter>
+            <NiceModal.Provider>
+              <CssBaseline />
+              <BrowserRouter>
+                <Root />
+              </BrowserRouter>
+            </NiceModal.Provider>
           </ThemeProvider>
         </QueryClientProvider>
       </LazyMotion>

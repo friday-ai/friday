@@ -17,6 +17,7 @@
   },
   "prettier": "../../packages/tools/prettier.config.js",
   "dependencies": {
+    "@ebay/nice-modal-react": "^1.2.10",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@friday-ai/shared": "workspace:*",
