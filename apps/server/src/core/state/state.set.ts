@@ -1,5 +1,5 @@
-import { StateAttributes, StateCreationAttributes, StateCreationKeys } from '@friday-ai/shared';
 import logger from '@friday-ai/logger';
+import { StateAttributes, StateCreationAttributes, StateCreationKeys } from '@friday-ai/shared';
 import State from '../../models/state';
 import { exclude, pick } from '../../utils/object';
 
@@ -27,9 +27,9 @@ export default async function set(data: StateCreationAttributes): Promise<StateA
 
   // If old state exist, update it
   if (existingState !== null) {
-    const plainStateToUpdate = <StateAttributes>existingState.get({ plain: true });
-    plainStateToUpdate.last = false;
-    await existingState.update(plainStateToUpdate);
+    await existingState.update({
+      last: false,
+    });
   }
 
   // And then, create the new state
