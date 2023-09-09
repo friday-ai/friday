@@ -1,6 +1,6 @@
 {
   "name": "@friday-ai/docker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Friday: Docker utilites",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
