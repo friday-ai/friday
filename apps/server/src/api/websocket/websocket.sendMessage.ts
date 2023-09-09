@@ -1,11 +1,11 @@
-import { NewWebsocketPayload } from '../../utils/interfaces';
-import WebSocketServer from './index';
+import { WebsocketPayload } from '@friday-ai/shared';
 import error, { BadParametersError } from '../../utils/decorators/error';
+import WebSocketServer from './index';
 
 /**
  * Send message
  */
-export default function sendMessage(this: WebSocketServer, payload: NewWebsocketPayload, toUser = '', sendAll = false) {
+export default function sendMessage(this: WebSocketServer, payload: WebsocketPayload, toUser = '', sendAll = false) {
   try {
     if (toUser === '' && sendAll === false) {
       throw new BadParametersError({
