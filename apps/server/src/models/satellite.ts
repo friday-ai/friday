@@ -19,11 +19,11 @@ import {
 } from 'sequelize-typescript';
 
 import { SatelliteAttributes, SatelliteCreationAttributes } from '@friday-ai/shared';
+import { isOwnerExisting } from '../utils/database/validation';
+import Plugin from './plugin';
 import Room from './room';
 import State from './state';
 import Variable from './variable';
-import Plugin from './plugin';
-import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Satellite model
@@ -34,7 +34,15 @@ import { isOwnerExisting } from '../utils/database/validation';
 @Scopes(() => ({
   full: {
     attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
-    include: [Room, Variable, { model: Plugin, include: [State] }, { model: State, where: { last: true } }],
+    include: [
+      Room,
+      Variable,
+      {
+        model: Plugin,
+        include: [{ model: State, where: { last: true } }],
+      },
+      { model: State, where: { last: true } },
+    ],
   },
   withRoom: {
     attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
