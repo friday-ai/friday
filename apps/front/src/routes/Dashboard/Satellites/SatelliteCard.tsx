@@ -14,7 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
-import { AvailableState, SatelliteAttributes } from '@friday-ai/shared';
+import { AvailableState, PluginAttributes, SatelliteAttributes } from '@friday-ai/shared';
 import { enqueueSnackbar } from 'notistack';
 
 import { useTranslation } from 'react-i18next';
@@ -23,7 +23,7 @@ import { SatelliteState } from './States';
 
 import { formatDistance, getPluginsStates } from '../../../utils/data';
 
-export default function SatelliteCard({ satellite }: { satellite: SatelliteAttributes }) {
+export default function SatelliteCard({ satellite, plugins }: { satellite: SatelliteAttributes; plugins: PluginAttributes[] }) {
   const theme = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -87,7 +87,7 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
 
             <Box display="flex" alignItems="center" justifyContent="center">
               <Box sx={{ width: 350, height: 350 }}>
-                <Pie data={getPluginsStates(satellite.plugins, theme)} totalCount={satellite.plugins.length} totalLabel="Plugins" />
+                <Pie data={getPluginsStates(plugins, theme)} totalCount={plugins.length} totalLabel="Plugins" />
               </Box>
             </Box>
           </Stack>

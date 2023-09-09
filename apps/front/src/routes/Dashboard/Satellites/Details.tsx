@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 
 import { enqueueSnackbar } from 'notistack';
 
-import { AvailableState, PluginAttributes } from '@friday-ai/shared';
+import { AvailableState, PluginAttributes, WebsocketMessageTypes, WebsocketPayload } from '@friday-ai/shared';
 
 import { useTranslation } from 'react-i18next';
 import LoaderSuspense from '../../../components/Loader/LoaderSuspense';
@@ -27,11 +27,13 @@ import PluginList from './Plugins/PluginList';
 import SatelliteCard from './SatelliteCard';
 
 import { useGetSatelliteById } from '../../../services/api/useSatellite';
+import useSharedApp from '../../../services/app/useApp';
 
 export default function Details() {
   const { t } = useTranslation();
   const { id } = useParams();
   const { isLoading, data: satellite } = useGetSatelliteById(id || '');
+  const { ws } = useSharedApp();
 
   const [filter, setFilter] = useState([
     AvailableState.PLUGIN_INSTALLED,
@@ -58,6 +60,36 @@ export default function Details() {
   const handleAction = useCallback(() => {
     enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
   }, []);
+
+  const handlePluginState = (state: AvailableState, payload: unknown) => {
+    let newPlugins = satellite ? satellite.plugins : [];
+    const pluginId = payload as { id: string };
+
+    newPlugins = newPlugins.map((plugin) => {
+      if (plugin.id === pluginId.id) {
+        plugin.state.value = state;
+      }
+      return plugin;
+    });
+
+    setPlugins(newPlugins);
+  };
+
+  useEffect(() => {
+    const pluginStoped = (payload: WebsocketPayload) => handlePluginState(AvailableState.PLUGIN_STOPPED, payload.message);
+    const pluginErrored = (payload: WebsocketPayload) => handlePluginState(AvailableState.PLUGIN_ERRORED, payload.message);
+    const pluginRunning = (payload: WebsocketPayload) => handlePluginState(AvailableState.PLUGIN_RUNNING, payload.message);
+
+    ws.on(WebsocketMessageTypes.PLUGIN_STOPPED, pluginStoped);
+    ws.on(WebsocketMessageTypes.PLUGIN_ERRORED, pluginErrored);
+    ws.on(WebsocketMessageTypes.PLUGIN_RUNNING, pluginRunning);
+
+    return () => {
+      ws.off(WebsocketMessageTypes.PLUGIN_STOPPED, pluginStoped);
+      ws.off(WebsocketMessageTypes.PLUGIN_ERRORED, pluginErrored);
+      ws.off(WebsocketMessageTypes.PLUGIN_RUNNING, pluginRunning);
+    };
+  }, [ws, handlePluginState]);
 
   useEffect(() => {
     if (satellite && satellite.plugins) {
@@ -90,7 +122,7 @@ export default function Details() {
             {satellite && (
               <Fade in={!isLoading} style={{ transitionDelay: '300ms' }}>
                 <Box>
-                  <SatelliteCard satellite={satellite} />
+                  <SatelliteCard satellite={satellite} plugins={plugins} />
                 </Box>
               </Fade>
             )}

@@ -36,7 +36,7 @@ import { formatDistance } from '../../../../utils/data';
 
 export default function PluginList({ plugins, onRemovePlugin }: { plugins: PluginAttributes[]; onRemovePlugin: (id: string) => void }) {
   const { t } = useTranslation();
-  const { uninstallPlugin } = usePlugin();
+  const { stopPlugin, restartPlugin, uninstallPlugin } = usePlugin();
 
   const handlePluginAction = useCallback(() => {
     enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
@@ -48,15 +48,55 @@ export default function PluginList({ plugins, onRemovePlugin }: { plugins: Plugi
       content: `${t('dashboard.satellites.deletePluginMessage')} <b>${name}</b>.`,
       onClose: async (confirm) => {
         if (confirm) {
-          const res = await uninstallPlugin.mutateAsync(id);
-          if (res.success) {
-            onRemovePlugin(id);
-          } else {
-            enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
-          }
+          uninstallPlugin
+            .mutateAsync(id)
+            .then((res) => {
+              if (res.success) {
+                onRemovePlugin(id);
+              } else {
+                enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+              }
+            })
+            .catch(() => {
+              enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+            });
         }
       },
     });
+  };
+
+  const handleStopPlugin = async (id: string) => {
+    enqueueSnackbar('Stopping plugin...', { variant: 'info' });
+
+    stopPlugin
+      .mutateAsync(id)
+      .then((res) => {
+        if (res.success) {
+          enqueueSnackbar('Plugin stopped', { variant: 'success' });
+        } else {
+          enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+        }
+      })
+      .catch(() => {
+        enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+      });
+  };
+
+  const handleRestartPlugin = async (id: string) => {
+    enqueueSnackbar('Restarting plugin...', { variant: 'info' });
+
+    restartPlugin
+      .mutateAsync(id)
+      .then((res) => {
+        if (res.success) {
+          enqueueSnackbar('Plugin Restating', { variant: 'success' });
+        } else {
+          enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+        }
+      })
+      .catch(() => {
+        enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+      });
   };
 
   return (
@@ -93,12 +133,12 @@ export default function PluginList({ plugins, onRemovePlugin }: { plugins: Plugi
                   <TableCell align="right">
                     <Stack direction="row" justifyContent="flex-end" alignItems="center" sx={{ display: { xs: 'none', md: 'flex' } }}>
                       <Tooltip title={t('dashboard.satellites.stopPlugin')}>
-                        <IconButton aria-label="stop plugin" onClick={() => handlePluginAction()}>
+                        <IconButton aria-label="stop plugin" onClick={() => handleStopPlugin(plugin.id)}>
                           <StopCircleOutlinedIcon />
                         </IconButton>
                       </Tooltip>
                       <Tooltip title={t('dashboard.satellites.restartPlugin')}>
-                        <IconButton aria-label="restart plugin" onClick={() => handlePluginAction()}>
+                        <IconButton aria-label="restart plugin" onClick={() => handleRestartPlugin(plugin.id)}>
                           <RestartAltOutlinedIcon />
                         </IconButton>
                       </Tooltip>
