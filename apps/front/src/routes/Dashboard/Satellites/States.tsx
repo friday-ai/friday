@@ -15,7 +15,7 @@ export function SatelliteState({ state }: { state: AvailableState }) {
     case AvailableState.SATELLITE_WAITING_CONFIGURATION:
       return <Chip label={t('dashboard.satellites.stateWaitingConfig')} color="info" variant="outlined" size="small" />;
     default:
-      return <Chip label={t('dashboard.satellites.stateError')} color="error" variant="outlined" size="small" />;
+      return <Chip label={t('dashboard.satellites.stateErrored')} color="error" variant="outlined" size="small" />;
   }
 }
 
@@ -33,6 +33,6 @@ export function PluginState({ state }: { state: AvailableState }) {
     case AvailableState.PLUGIN_WAITING_INSTALLATION:
       return <Chip label={t('dashboard.satellites.stateWaitingInstall')} color="secondary" variant="outlined" size="small" />;
     default:
-      return <Chip label={t('dashboard.satellites.stateError')} color="error" variant="outlined" size="small" />;
+      return <Chip label={t('dashboard.satellites.stateErrored')} color="error" variant="outlined" size="small" />;
   }
 }
