@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
+import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 
 /**
  * Plugin router
@@ -81,6 +81,58 @@ export default class PluginRouter {
   update = async (req: Request, res: Response) => {
     const plugin = await this.friday.plugin.update(req.params.id, req.body);
     res.json(plugin);
+  };
+
+  /**
+   * Stop a plugin
+   * @apiName stop
+   * @apiDescription This route allows you to stop a plugin
+   * @api {patch} /api/v1/plugin/stop/:id
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
+   */
+  @Patch({
+    path: '/stop/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'patch',
+    aclResource: 'plugin',
+  })
+  stop = async (req: Request, res: Response) => {
+    await this.friday.plugin.stop(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
+
+  /**
+   * Restart a plugin
+   * @apiName restart
+   * @apiDescription This route allows you to restart a plugin
+   * @api {patch} /api/v1/plugin/restart/:id
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
+   */
+  @Patch({
+    path: '/restart/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'patch',
+    aclResource: 'plugin',
+  })
+  restart = async (req: Request, res: Response) => {
+    await this.friday.plugin.restart(req.params.id);
+    res.json({
+      success: true,
+    });
   };
 
   /**

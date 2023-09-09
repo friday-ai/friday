@@ -11,6 +11,8 @@ import uninstall from './plugin.uninstall';
 import heartbeat from './plugin.heartbeat';
 import install from './plugin.install';
 import stop from './plugin.stop';
+import restart from './plugin.restart';
+import checkState from './plugin.checkState';
 
 /**
  * Plugin
@@ -45,5 +47,15 @@ export default class Plugin extends BaseModel<PluginModel, PluginAttributes, Plu
   @Catch()
   async stop(id: string) {
     return stop.call(this, id);
+  }
+
+  @Catch()
+  async restart(id: string) {
+    return restart.call(this, id);
+  }
+
+  @Catch()
+  async checkState(id: string) {
+    return checkState.call(this, id);
   }
 }
