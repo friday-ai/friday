@@ -12,11 +12,14 @@ export default async function getContainerState(this: Docker, id: string): Promi
     throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'App not running on Docker' });
   }
 
-  const container = this.dockerode.getContainer(id);
-
-  if (container === null) {
+  // Check if container exist without throwing an error type 404
+  const containers = await this.dockerode.listContainers({ all: true, filters: { id: [id] } });
+  if (containers.length === 0) {
     throw new NotFoundError({ name: 'Get Container by id', message: 'Container not found', metadata: id });
   }
+
+  // If container exist, get manually his instance
+  const container = this.dockerode.getContainer(id);
 
   const infos = await container.inspect();
 
