@@ -9,7 +9,7 @@ import wait from '../../utils/timer';
 let plugin: Plugin;
 let container: Container;
 
-describe('Plugin.stop', () => {
+describe('Plugin.checkstate', () => {
   before(async () => {
     plugin = global.FRIDAY.plugin;
     // Override object for tests
@@ -41,47 +41,22 @@ describe('Plugin.stop', () => {
     await container.remove({ force: true });
   });
 
-  it('should stop a plugin', async function stop() {
+  it('should return state "running" of a plugin', async function stop() {
     this.timeout(15000);
 
     const listener = sinon.spy();
     global.FRIDAY.event.on(EventsType.WEBSOCKET_SEND_ALL, listener);
 
-    const result = await plugin.stop('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
+    const result = await plugin.checkState('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
 
     await wait(80);
-    expect(result).equal(true);
+    expect(result).equal('running');
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].type).to.equal(AvailableState.PLUGIN_STOPPED);
+    expect(listener.args[0][0].type).to.equal(AvailableState.PLUGIN_RUNNING);
   });
 
-  it('should not stop a plugin already stopped', async function stop() {
-    this.timeout(15000);
-    const listener = sinon.spy();
-    global.FRIDAY.event.on(EventsType.WEBSOCKET_SEND_ALL, listener);
-
-    const result = await plugin.stop('33ddf1e2-3c51-4426-93af-3b0453ac0c1e');
-
-    await wait(80);
-    expect(result).equal(true);
-    expect(listener.called).equal(true);
-    expect(listener.args[0][0].type).to.equal(AvailableState.PLUGIN_STOPPED);
-  });
-
-  it('should not found a plugin to stop', async () => {
+  it('should not found a plugin to check', async () => {
     const promise = plugin.stop('580efda9-6fa1-4bef-865f-d4ef04ea57d6');
     await assert.isRejected(promise, NotFoundError);
-  });
-
-  it('should not stop a plugin with wrong docker id', async function stop() {
-    const listener = sinon.spy();
-    global.FRIDAY.event.on(EventsType.WEBSOCKET_SEND_ALL, listener);
-
-    const result = await plugin.stop('88b48273-15e6-4729-9199-0682677475f4');
-
-    await wait(80);
-    expect(result).equal(false);
-    expect(listener.called).equal(true);
-    expect(listener.args[0][0].type).to.equal(AvailableState.PLUGIN_ERRORED);
   });
 });
