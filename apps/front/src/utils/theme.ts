@@ -64,7 +64,7 @@ const themeLight = createTheme(
       },
       MuiAppBar: {
         defaultProps: {
-          color: 'transparent',
+          color: 'inherit',
           elevation: 0,
           variant: 'outlined',
           sx: {

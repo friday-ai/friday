@@ -131,6 +131,8 @@ export default function Login() {
           <HelpOutline />
         </Tooltip>
       </Box>
+
+      <Paper className="primary-gradient"></Paper>
     </Box>
   );
 }
