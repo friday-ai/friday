@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
@@ -19,6 +19,7 @@ import { enqueueSnackbar } from 'notistack';
 
 import { useTranslation } from 'react-i18next';
 import Pie from '../../../components/Charts/Pie';
+import useSatellite from '../../../services/api/useSatellite';
 import { SatelliteState } from './States';
 
 import { formatDistance, getPluginsStates } from '../../../utils/data';
@@ -27,10 +28,41 @@ export default function SatelliteCard({ satellite, plugins }: { satellite: Satel
   const theme = useTheme();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { stopAllPlugins, restartAllPlugins } = useSatellite();
 
-  const handleAction = useCallback(() => {
-    enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
-  }, []);
+  const handleStopAllPlugins = async (id: string) => {
+    enqueueSnackbar('Stopping plugin...', { variant: 'info' });
+
+    stopAllPlugins
+      .mutateAsync(id)
+      .then((res) => {
+        if (res.success) {
+          enqueueSnackbar('Plugins stopped', { variant: 'success' });
+        } else {
+          enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+        }
+      })
+      .catch(() => {
+        enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+      });
+  };
+
+  const handleRestartAllPlugins = async (id: string) => {
+    enqueueSnackbar('Restarting plugins...', { variant: 'info' });
+
+    restartAllPlugins
+      .mutateAsync(id)
+      .then((res) => {
+        if (res.success) {
+          enqueueSnackbar('Plugins Restating', { variant: 'success' });
+        } else {
+          enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+        }
+      })
+      .catch(() => {
+        enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+      });
+  };
 
   return (
     <Paper sx={{ padding: '2rem' }}>
@@ -70,14 +102,22 @@ export default function SatelliteCard({ satellite, plugins }: { satellite: Satel
                 </Tooltip>
                 <Tooltip title={t('dashboard.satellites.stopAllPlugins')}>
                   <span>
-                    <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                    <IconButton
+                      aria-label="stop all plugins"
+                      onClick={() => handleStopAllPlugins(satellite.id)}
+                      disabled={satellite.plugins.length < 1}
+                    >
                       <StopCircleOutlinedIcon />
                     </IconButton>
                   </span>
                 </Tooltip>
                 <Tooltip title={t('dashboard.satellites.restartAllPlugins')}>
                   <span>
-                    <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                    <IconButton
+                      aria-label="restart all plugins"
+                      onClick={() => handleRestartAllPlugins(satellite.id)}
+                      disabled={satellite.plugins.length < 1}
+                    >
                       <RestartAltOutlinedIcon />
                     </IconButton>
                   </span>

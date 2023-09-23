@@ -6,13 +6,17 @@ import useApp from '../app/useApp';
 const useSatellite = () => {
   const { request } = useApp();
   const createSatellite = useMutation((satellite: SatelliteCreationAttributes) =>
-    request<SatelliteAttributes>('post', '/api/v1/stallite', {}, satellite)
+    request<SatelliteAttributes>('post', '/api/v1/satellite', {}, satellite)
   );
-  const deleteSatellite = useMutation((id: string) => request<boolean>('delete', '/api/v1/stallite/:id', { id }));
+  const deleteSatellite = useMutation((id: string) => request<boolean>('delete', '/api/v1/satellite/:id', { id }));
+  const stopAllPlugins = useMutation((id: string) => request<{ success: boolean }>('patch', `/api/v1/satellite/stop/plugins/${id}`, {}));
+  const restartAllPlugins = useMutation((id: string) => request<{ success: boolean }>('patch', `/api/v1/satellite/restart/plugins/${id}`, {}));
 
   return {
     createSatellite,
     deleteSatellite,
+    stopAllPlugins,
+    restartAllPlugins,
   };
 };
 
