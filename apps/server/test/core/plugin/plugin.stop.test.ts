@@ -9,6 +9,11 @@ import wait from '../../utils/timer';
 let plugin: Plugin;
 let container: Container;
 
+const listenerArgs = {
+  type: 'plugin.stopped',
+  message: { id: '33ddf1e2-3c51-4426-93af-3b0453ac0c1e' },
+};
+
 describe('Plugin.stop', () => {
   before(async () => {
     plugin = global.FRIDAY.plugin;
@@ -52,7 +57,7 @@ describe('Plugin.stop', () => {
     await wait(80);
     expect(result).equal(true);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].type).to.equal(AvailableState.PLUGIN_STOPPED);
+    expect(listener.calledWith(listenerArgs)).to.equal(true);
   });
 
   it('should not stop a plugin already stopped', async function stop() {
