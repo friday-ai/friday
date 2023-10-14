@@ -7,6 +7,7 @@ import StopCircleOutlinedIcon from '@mui/icons-material/StopCircleOutlined';
 
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import Fade from '@mui/material/Fade';
 import IconButton from '@mui/material/IconButton';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
@@ -14,22 +15,25 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import Fade from '@mui/material/Fade';
 
 import { enqueueSnackbar } from 'notistack';
 
-import { AvailableState, PluginAttributes } from '@friday-ai/shared';
+import { AvailableState, PluginAttributes, WebsocketMessageTypes, WebsocketPayload } from '@friday-ai/shared';
 
+import { useTranslation } from 'react-i18next';
 import LoaderSuspense from '../../../components/Loader/LoaderSuspense';
 import Menu from '../../../components/Menu/Menu';
 import PluginList from './Plugins/PluginList';
 import SatelliteCard from './SatelliteCard';
 
 import { useGetSatelliteById } from '../../../services/api/useSatellite';
+import useSharedApp from '../../../services/app/useApp';
 
 export default function Details() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { isLoading, data: satellite } = useGetSatelliteById(id || '');
+  const { ws } = useSharedApp();
 
   const [filter, setFilter] = useState([
     AvailableState.PLUGIN_INSTALLED,
@@ -47,9 +51,45 @@ export default function Details() {
     setPlugins(filteredPlugins);
   };
 
+  const handleRemovePLugin = (pluginId: string) => {
+    const newPlugins = satellite ? satellite.plugins.filter((plugin) => plugin.id !== pluginId) : [];
+    satellite!.plugins = newPlugins;
+    setPlugins(newPlugins);
+  };
+
   const handleAction = useCallback(() => {
     enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
   }, []);
+
+  const handlePluginState = (state: AvailableState, payload: unknown) => {
+    let newPlugins = satellite ? satellite.plugins : [];
+    const pluginId = payload as { id: string };
+
+    newPlugins = newPlugins.map((plugin) => {
+      if (plugin.id === pluginId.id) {
+        plugin.state.value = state;
+      }
+      return plugin;
+    });
+
+    setPlugins(newPlugins);
+  };
+
+  useEffect(() => {
+    const pluginStoped = (payload: WebsocketPayload) => handlePluginState(AvailableState.PLUGIN_STOPPED, payload.message);
+    const pluginErrored = (payload: WebsocketPayload) => handlePluginState(AvailableState.PLUGIN_ERRORED, payload.message);
+    const pluginRunning = (payload: WebsocketPayload) => handlePluginState(AvailableState.PLUGIN_RUNNING, payload.message);
+
+    ws.on(WebsocketMessageTypes.PLUGIN_STOPPED, pluginStoped);
+    ws.on(WebsocketMessageTypes.PLUGIN_ERRORED, pluginErrored);
+    ws.on(WebsocketMessageTypes.PLUGIN_RUNNING, pluginRunning);
+
+    return () => {
+      ws.off(WebsocketMessageTypes.PLUGIN_STOPPED, pluginStoped);
+      ws.off(WebsocketMessageTypes.PLUGIN_ERRORED, pluginErrored);
+      ws.off(WebsocketMessageTypes.PLUGIN_RUNNING, pluginRunning);
+    };
+  }, [ws, handlePluginState]);
 
   useEffect(() => {
     if (satellite && satellite.plugins) {
@@ -64,15 +104,15 @@ export default function Details() {
           <Stack spacing={2} minWidth={300} maxWidth={{ lg: 550 }}>
             <Stack direction="row" alignItems="center" paddingBottom={0.4}>
               <Typography variant="h6" fontWeight="bold" sx={{ flexGrow: 1 }}>
-                Satellite
+                {t('dashboard.satellites.satellite')}
               </Typography>
               <Stack direction="row">
-                <Tooltip title="Stop satellite">
+                <Tooltip title={t('dashboard.satellites.stopSatellite')}>
                   <IconButton aria-label="stop satellite" onClick={() => handleAction()}>
                     <StopCircleOutlinedIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Restart satellite">
+                <Tooltip title={t('dashboard.satellites.restartSatellite')}>
                   <IconButton aria-label="restart satellite" onClick={() => handleAction()}>
                     <RestartAltOutlinedIcon />
                   </IconButton>
@@ -82,7 +122,7 @@ export default function Details() {
             {satellite && (
               <Fade in={!isLoading} style={{ transitionDelay: '300ms' }}>
                 <Box>
-                  <SatelliteCard satellite={satellite} />
+                  <SatelliteCard satellite={satellite} plugins={plugins} />
                 </Box>
               </Fade>
             )}
@@ -91,7 +131,7 @@ export default function Details() {
           <Stack spacing={2} flexGrow={1}>
             <Stack direction="row" alignItems="center">
               <Typography variant="h6" fontWeight="bold" sx={{ flexGrow: 1 }}>
-                Installed plugins
+                {t('dashboard.satellites.installedPlugins')}
               </Typography>
 
               <Paper sx={{ display: { xs: 'none', md: 'block' } }}>
@@ -103,11 +143,11 @@ export default function Details() {
                   size="small"
                   disabled={satellite && satellite.plugins.length < 1}
                 >
-                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>Installed</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_RUNNING}>Running</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_STOPPED}>Stopped</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_ERRORED}>Errored</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>Waiting Config</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>{t('dashboard.satellites.stateInstalled')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_RUNNING}>{t('dashboard.satellites.stateRunning')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_STOPPED}>{t('dashboard.satellites.stateStopped')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_ERRORED}>{t('dashboard.satellites.stateErrored')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>{t('dashboard.satellites.stateWaitingConfig')}</ToggleButton>
                 </ToggleButtonGroup>
               </Paper>
 
@@ -129,18 +169,18 @@ export default function Details() {
                   orientation="vertical"
                   disabled={satellite && satellite.plugins.length < 1}
                 >
-                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>Installed</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_RUNNING}>Running</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_STOPPED}>Stopped</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_ERRORED}>Errored</ToggleButton>
-                  <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>Waiting Config</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_INSTALLED}>{t('dashboard.satellites.stateInstalled')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_RUNNING}>{t('dashboard.satellites.stateRunning')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_STOPPED}>{t('dashboard.satellites.stateStopped')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_ERRORED}>{t('dashboard.satellites.stateErrored')}</ToggleButton>
+                  <ToggleButton value={AvailableState.PLUGIN_WAITING_CONFIGURATION}>{t('dashboard.satellites.stateWaitingConfig')}</ToggleButton>
                 </ToggleButtonGroup>
               </Menu>
             </Stack>
 
             <Fade in={!isLoading} style={{ transitionDelay: '300ms' }}>
               <Box>
-                <PluginList plugins={plugins} />
+                <PluginList plugins={plugins} onRemovePlugin={handleRemovePLugin} />
               </Box>
             </Fade>
           </Stack>

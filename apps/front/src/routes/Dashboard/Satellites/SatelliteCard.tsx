@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
@@ -14,24 +14,55 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/material/styles';
 
-import { AvailableState, SatelliteAttributes } from '@friday-ai/shared';
-import { formatDistance } from 'date-fns';
+import { AvailableState, PluginAttributes, SatelliteAttributes } from '@friday-ai/shared';
 import { enqueueSnackbar } from 'notistack';
 
+import { useTranslation } from 'react-i18next';
 import Pie from '../../../components/Charts/Pie';
+import useSatellite from '../../../services/api/useSatellite';
 import { SatelliteState } from './States';
 
-import { getPluginsStates } from '../../../utils/data';
+import { formatDistance, getPluginsStates } from '../../../utils/data';
 
-export default function SatelliteCard({ satellite }: { satellite: SatelliteAttributes }) {
+export default function SatelliteCard({ satellite, plugins }: { satellite: SatelliteAttributes; plugins: PluginAttributes[] }) {
   const theme = useTheme();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const { stopAllPlugins, restartAllPlugins } = useSatellite();
 
-  const uptime = formatDistance(new Date(satellite.lastHeartbeat), new Date(), { addSuffix: true });
+  const handleStopAllPlugins = async (id: string) => {
+    enqueueSnackbar('Stopping plugin...', { variant: 'info' });
 
-  const handleAction = useCallback(() => {
-    enqueueSnackbar('This feature is not implemented yet :(', { variant: 'warning' });
-  }, []);
+    stopAllPlugins
+      .mutateAsync(id)
+      .then((res) => {
+        if (res.success) {
+          enqueueSnackbar('Plugins stopped', { variant: 'success' });
+        } else {
+          enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+        }
+      })
+      .catch(() => {
+        enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+      });
+  };
+
+  const handleRestartAllPlugins = async (id: string) => {
+    enqueueSnackbar('Restarting plugins...', { variant: 'info' });
+
+    restartAllPlugins
+      .mutateAsync(id)
+      .then((res) => {
+        if (res.success) {
+          enqueueSnackbar('Plugins Restating', { variant: 'success' });
+        } else {
+          enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+        }
+      })
+      .catch(() => {
+        enqueueSnackbar("An error has occurred, please check satellite's logs", { variant: 'error' });
+      });
+  };
 
   return (
     <Paper sx={{ padding: '2rem' }}>
@@ -46,14 +77,14 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
         <Stack spacing={2} direction={{ xs: 'column', md: 'row', lg: 'column' }} justifyContent="space-between">
           <Stack spacing={6} direction="row" alignItems="start">
             <Stack spacing={1}>
-              <Typography color="GrayText">Ip address:</Typography>
-              <Typography color="GrayText">Location:</Typography>
-              <Typography color="GrayText">Uptime:</Typography>
+              <Typography color="GrayText">{t('dashboard.satellites.ipAddress')}:</Typography>
+              <Typography color="GrayText">{t('dashboard.satellites.location')}:</Typography>
+              <Typography color="GrayText">{t('dashboard.satellites.uptime')}:</Typography>
             </Stack>
             <Stack spacing={1}>
               <Typography fontWeight="500">192.168.3.3</Typography>
               <Typography fontWeight="500">{satellite.room.name}</Typography>
-              <Typography fontWeight="500">{uptime}</Typography>
+              <Typography fontWeight="500">{formatDistance(satellite.lastHeartbeat)}</Typography>
             </Stack>
           </Stack>
 
@@ -62,23 +93,31 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
 
           <Stack direction="column">
             <Stack direction="row" alignItems="center" justifyContent="space-between">
-              <Typography fontWeight="bold">Plugins states</Typography>
+              <Typography fontWeight="bold">{t('dashboard.satellites.pluginsStates')}</Typography>
               <Stack direction="row">
-                <Tooltip title="Install new plugin">
+                <Tooltip title={t('dashboard.satellites.installPlugin')}>
                   <IconButton aria-label="install new plugin" onClick={() => navigate('plugins/install')}>
                     <AddCircleOutlineOutlinedIcon />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Stop all plugins">
+                <Tooltip title={t('dashboard.satellites.stopAllPlugins')}>
                   <span>
-                    <IconButton aria-label="stop all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                    <IconButton
+                      aria-label="stop all plugins"
+                      onClick={() => handleStopAllPlugins(satellite.id)}
+                      disabled={satellite.plugins.length < 1}
+                    >
                       <StopCircleOutlinedIcon />
                     </IconButton>
                   </span>
                 </Tooltip>
-                <Tooltip title="Restart all plugins">
+                <Tooltip title={t('dashboard.satellites.restartAllPlugins')}>
                   <span>
-                    <IconButton aria-label="restart all plugins" onClick={() => handleAction()} disabled={satellite.plugins.length < 1}>
+                    <IconButton
+                      aria-label="restart all plugins"
+                      onClick={() => handleRestartAllPlugins(satellite.id)}
+                      disabled={satellite.plugins.length < 1}
+                    >
                       <RestartAltOutlinedIcon />
                     </IconButton>
                   </span>
@@ -88,7 +127,7 @@ export default function SatelliteCard({ satellite }: { satellite: SatelliteAttri
 
             <Box display="flex" alignItems="center" justifyContent="center">
               <Box sx={{ width: 350, height: 350 }}>
-                <Pie data={getPluginsStates(satellite.plugins, theme)} totalCount={satellite.plugins.length} totalLabel="Plugins" />
+                <Pie data={getPluginsStates(plugins, theme)} totalCount={plugins.length} totalLabel="Plugins" />
               </Box>
             </Box>
           </Stack>

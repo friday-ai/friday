@@ -10,6 +10,9 @@ importers:
 
   apps/front:
     dependencies:
+      '@ebay/nice-modal-react':
+        specifier: ^1.2.10
+        version: 1.2.10(react-dom@18.2.0)(react@18.2.0)
       '@emotion/react':
         specifier: ^11.11.1
         version: 11.11.1(@types/react@18.2.20)(react@18.2.0)
@@ -2303,6 +2306,16 @@ packages:
       enabled: 2.0.0
       kuler: 2.0.0
     dev: true
+
+  /@ebay/nice-modal-react@1.2.10(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-qNp8vQo5kPRwB9bHlkh8lcwH/0KFWpp58X/b9KaLB/gNlJ3W24nCT2l/qBBSnWgV7NEIq25uLowaPS2mbfpZiw==}
+    peerDependencies:
+      react: '>16.8.0'
+      react-dom: '>16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /@emotion/babel-plugin@11.11.0:
     resolution: {integrity: sha512-m4HEDZleaaCH+XgDDsPF15Ht6wTLsgDTeR3WYj9Q/k76JtWhrJjcP4+/XlG8LGT/Rol9qUfOIztXeA84ATpqPQ==}

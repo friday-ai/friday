@@ -14,6 +14,18 @@ body > #root > div {
   height: 100%;
 }
 
+.primary-gradient {
+  background: linear-gradient(350deg, rgb(6 70 245 / 30%) 0%, rgb(18 28 66 / 0%) 100%);
+  filter: blur(200px);
+  width: 30%;
+  height: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

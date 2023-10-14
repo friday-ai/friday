@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
 import { FridayMode } from '../../../config/constants';
+import Friday from '../../../core/friday';
+import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 
 /**
  * Satellite router
@@ -192,5 +192,57 @@ export default class SatelliteRouter {
     const scope = req.query.scope as string;
     const satellite = await this.friday.satellite.getById(req.params.id, scope);
     res.json(satellite);
+  };
+
+  /**
+   * Stop all plugins of satellite
+   * @apiName stopAllPlugins
+   * @apiDescription This route allows you to stop all plugins of satellite
+   * @api {patch} /api/v1/satellite/stop/plugins/:id
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
+   */
+  @Patch({
+    path: '/stop/plugins/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'satellite',
+  })
+  stopAllPlugins = async (req: Request, res: Response) => {
+    await this.friday.satellite.stopAllPlugins(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
+
+  /**
+   * Restart all plugins of satellite
+   * @apiName restartAll
+   * @apiDescription This route allows you to restart all plugins
+   * @api {patch} /api/v1/satellite/restart/plugins/:id
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
+   */
+  @Patch({
+    path: '/restart/plugins/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'satellite',
+  })
+  restartAllPlugins = async (req: Request, res: Response) => {
+    await this.friday.satellite.restartAllPlugins(req.params.id);
+    res.json({
+      success: true,
+    });
   };
 }

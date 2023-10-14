@@ -1,4 +1,5 @@
 import Container from '@mui/material/Container';
+import Paper from '@mui/material/Paper';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
@@ -7,12 +8,13 @@ import AnimationLayout from './AnimationLayout';
 
 export default function DashboardLayout() {
   return (
-    <Container sx={{ padding: 2, paddingTop: 0 }}>
+    <Container sx={{ paddingTop: 0 }}>
       <AppBar />
-      <Container sx={{ paddingTop: 2 }}>
+      <Container sx={{ padding: 2, paddingTop: 2 }}>
         <AnimationLayout>
           <Outlet />
         </AnimationLayout>
+        <Paper className="primary-gradient"></Paper>
       </Container>
     </Container>
   );

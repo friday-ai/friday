@@ -151,6 +151,11 @@ export enum WebsocketMessageTypes {
   // Plugin
   PLUGIN_INSTALLING = 'plugin.installing',
   PLUGIN_INSTALLED = 'plugin.installed',
+  PLUGIN_ERRORED = 'plugin.errored',
+  PLUGIN_WAITING_INSTALLATION = 'plugin.waiting.installation',
+  PLUGIN_STOPPED = 'plugin.stopped',
+  PLUGIN_RUNNING = 'plugin.running',
+  PLUGIN_WAITING_CONFIGURATION = 'plugin.waiting.configuration',
   // Device
   DEVICE_VALUE = 'device.value',
   // Mqtt

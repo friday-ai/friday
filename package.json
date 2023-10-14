@@ -9,8 +9,8 @@
   },
   "scripts": {
     "start": "per-env",
-    "start:prod": "pnpm -r --filter \"./apps/*\" start:prod",
-    "start:dev": "pnpm -r --filter \"./apps/*\" start:dev",
+    "start:prod": "pnpm --parallel -r --filter \"./apps/*\" start:prod",
+    "start:dev": "pnpm --parallel -r --filter \"./apps/*\" start:dev",
     "install:dev": "pnpm install -r --quiet",
     "build": "pnpm -r build",
     "test": "pnpm -r test",

@@ -1,8 +1,8 @@
-import { PluginAttributes, StateOwner, WebsocketMessageTypes, AvailableState, PluginInstallAttributes } from '@friday-ai/shared';
 import logger from '@friday-ai/logger';
-import PluginClass from './plugin';
+import { AvailableState, PluginAttributes, PluginInstallAttributes, StateOwner, WebsocketMessageTypes } from '@friday-ai/shared';
 import { EventsType } from '../../config/constants';
 import error, { NotFoundError } from '../../utils/decorators/error';
+import PluginClass from './plugin';
 
 /**
  * Install a plugin.
@@ -68,7 +68,12 @@ export default async function install(this: PluginClass, options: PluginInstallA
 
     await this.docker.start(container.id);
 
-    logger.success(`Plugin ${options.name} started`);
+    logger.success(`Plugin ${options.name} installed`);
+
+    // Ensure a check was performed to know the state of plugin
+    setTimeout(() => {
+      this.checkState(plugin.id);
+    }, 2000);
 
     return plugin;
   } catch (e) {

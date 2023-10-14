@@ -1,5 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { WebsocketMessageTypes } from './constants';
+
 /**
  * Color interface
  */
@@ -23,6 +26,14 @@ export interface MqttOptions {
   password?: string;
   qos?: 0 | 1 | 2;
   reconnectPeriod?: number;
+}
+
+/**
+ * Interface for websocket message
+ */
+export interface WebsocketPayload {
+  type: WebsocketMessageTypes;
+  message: unknown;
 }
 
 /**

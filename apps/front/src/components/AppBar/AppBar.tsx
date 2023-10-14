@@ -50,7 +50,7 @@ export default function App() {
 
   return (
     <AppBar position="static">
-      <Toolbar>
+      <Toolbar sx={{ marginX: 2 }}>
         <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, mr: 3 }}>
           <Menu id="pages-menu" title="Pages menu" ariaLabel="pages menu" ariaControls="pages-menu-appbar" buttonType="icon" icon={<MenuIcon />}>
             <MenuItem onClick={() => handleNavigation(null, 'devices')}>

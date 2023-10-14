@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 import Friday from '../../../core/friday';
+import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 
 /**
  * Plugin router
@@ -84,9 +84,61 @@ export default class PluginRouter {
   };
 
   /**
-   * Delete a plugin
-   * @apiName destroy
-   * @apiDescription This route allows you to delete a plugin
+   * Stop a plugin
+   * @apiName stop
+   * @apiDescription This route allows you to stop a plugin
+   * @api {patch} /api/v1/plugin/stop/:id
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
+   */
+  @Patch({
+    path: '/stop/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'plugin',
+  })
+  stop = async (req: Request, res: Response) => {
+    await this.friday.plugin.stop(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
+
+  /**
+   * Restart a plugin
+   * @apiName restart
+   * @apiDescription This route allows you to restart a plugin
+   * @api {patch} /api/v1/plugin/restart/:id
+   * @apiGroup Plugin
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   "success": "true",
+   * }
+   */
+  @Patch({
+    path: '/restart/:id',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'update',
+    aclResource: 'plugin',
+  })
+  restart = async (req: Request, res: Response) => {
+    await this.friday.plugin.restart(req.params.id);
+    res.json({
+      success: true,
+    });
+  };
+
+  /**
+   * Uninstall a plugin
+   * @apiName uninstall
+   * @apiDescription This route allows you to uninstall a plugin
    * @api {delete} /api/v1/plugin/:id
    * @apiGroup Plugin
    * @apiVersion 1.0.0
@@ -102,8 +154,8 @@ export default class PluginRouter {
     aclMethod: 'delete',
     aclResource: 'plugin',
   })
-  destroy = async (req: Request, res: Response) => {
-    await this.friday.plugin.destroy(req.params.id);
+  uninstall = async (req: Request, res: Response) => {
+    await this.friday.plugin.uninstall(req.params.id);
     res.json({
       success: true,
     });

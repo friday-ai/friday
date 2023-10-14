@@ -1,11 +1,10 @@
 import { useCallback, useRef, useState } from 'react';
 
-import { WebsocketMessageTypes } from '@friday-ai/shared';
+import { WebsocketMessageTypes, WebsocketPayload } from '@friday-ai/shared';
 
 const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Listener = (args: any) => void;
+type Listener = (payload: WebsocketPayload) => void;
 type Handlers = Record<WebsocketMessageTypes, Listener[]>;
 
 export interface WebsocketMessagePayload {
@@ -13,7 +12,7 @@ export interface WebsocketMessagePayload {
   sender: string;
   receiver?: string;
   accessToken?: string;
-  message?: string;
+  message?: unknown;
 }
 
 const useWebsocket = () => {
@@ -36,7 +35,7 @@ const useWebsocket = () => {
       };
 
       ws.current.onmessage = (event) => {
-        const data = JSON.parse(event.data) as WebsocketMessagePayload;
+        const data = JSON.parse(event.data) as WebsocketPayload;
         if (handlers[data.type] !== undefined) {
           handlers[data.type].forEach((cb) => cb(data));
         }

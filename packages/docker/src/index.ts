@@ -12,6 +12,7 @@ import remove from './core/docker.remove';
 import pull from './core/docker.pull';
 import createContainer from './core/docker.createContainer';
 import exec from './core/docker.exec';
+import getContainerState from './core/docker.getContainerState';
 
 export default class Docker {
   public dockerode = isDocker() ? new Dockerode() : null;
@@ -59,6 +60,11 @@ export default class Docker {
   @Catch()
   async getAllContainers() {
     return getAllContainers.call(this);
+  }
+
+  @Catch()
+  async getContainerState(id: string) {
+    return getContainerState.call(this, id);
   }
 
   async isDocker() {
