@@ -99,7 +99,7 @@ export default class PluginRouter {
     path: '/stop/:id',
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'patch',
+    aclMethod: 'update',
     aclResource: 'plugin',
   })
   stop = async (req: Request, res: Response) => {
@@ -125,7 +125,7 @@ export default class PluginRouter {
     path: '/restart/:id',
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'patch',
+    aclMethod: 'update',
     aclResource: 'plugin',
   })
   restart = async (req: Request, res: Response) => {

@@ -210,7 +210,7 @@ export default class SatelliteRouter {
     path: '/stop/plugins/:id',
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'patch',
+    aclMethod: 'update',
     aclResource: 'satellite',
   })
   stopAllPlugins = async (req: Request, res: Response) => {
@@ -236,7 +236,7 @@ export default class SatelliteRouter {
     path: '/restart/plugins/:id',
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'patch',
+    aclMethod: 'update',
     aclResource: 'satellite',
   })
   restartAllPlugins = async (req: Request, res: Response) => {

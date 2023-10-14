@@ -27,7 +27,7 @@ export default {
   [UserRole.HABITANT]: {
     grants: [
       {
-        resource: ['*', '!variable', '!plugin', '!user'],
+        resource: ['*', '!variable', '!plugin', '!satellite', '!user'],
         action: '*',
         attributes: ['*'],
       },
@@ -39,6 +39,11 @@ export default {
       {
         resource: 'plugin',
         action: ['read', 'create', 'login', '!create', '!update', '!delete'],
+        attributes: ['*'],
+      },
+      {
+        resource: 'satellite',
+        action: ['read', '!create', '!update', '!delete'],
         attributes: ['*'],
       },
       {
