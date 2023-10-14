@@ -13,11 +13,8 @@ import PluginClass from './plugin';
  */
 export default async function stop(this: PluginClass, id: string): Promise<boolean> {
   try {
-    console.log('plugin.stop', id);
     const plugin = await this.getById(id);
     await this.docker.stop(plugin.dockerId);
-
-    console.log('plugin.stop', plugin);
 
     await this.state.set({
       owner: plugin.id,
@@ -30,8 +27,6 @@ export default async function stop(this: PluginClass, id: string): Promise<boole
       type: WebsocketMessageTypes.PLUGIN_STOPPED,
       message: { id: plugin.id },
     });
-
-    console.log('plugin.stop', 'plugin stoped');
 
     return true;
   } catch (error) {

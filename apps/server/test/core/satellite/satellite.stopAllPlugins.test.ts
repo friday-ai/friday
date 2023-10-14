@@ -1,4 +1,4 @@
-import { AvailableState, EventsType } from '@friday-ai/shared';
+import { EventsType } from '@friday-ai/shared';
 import { assert, expect } from 'chai';
 import { Container } from 'dockerode';
 import sinon from 'sinon';
@@ -7,6 +7,11 @@ import { NotFoundError } from '../../../src/utils/decorators/error';
 
 let satellite: Satellite;
 let container: Container;
+
+const listenerArgs = {
+  type: 'plugin.stopped',
+  message: { id: '88b48273-15e6-4729-9199-0682677475f4' },
+};
 
 describe('Satellite.stopAllPlugins', () => {
   before(async () => {
@@ -49,7 +54,7 @@ describe('Satellite.stopAllPlugins', () => {
 
     await assert.isFulfilled(promise);
     expect(listener.called).equal(true);
-    expect(listener.args[0][0].type).to.equal(AvailableState.PLUGIN_STOPPED);
+    expect(listener.calledWith(listenerArgs)).to.equal(true);
   });
 
   it('should not found satellite', async () => {
