@@ -10,6 +10,7 @@ export default class Event {
   public static emitter = new EventEmitter();
 
   static emit(event: EventsType | DevicesActions, ...args: any) {
+    console.trace(event);
     this.emitter.emit(event, ...args);
   }
 
