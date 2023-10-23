@@ -4,16 +4,13 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AppBar from '../AppBar/AppBar';
-import AnimationLayout from './AnimationLayout';
 
 export default function DashboardLayout() {
   return (
     <Container sx={{ paddingTop: 0 }}>
       <AppBar />
       <Container sx={{ padding: 2, paddingTop: 2 }}>
-        <AnimationLayout>
-          <Outlet />
-        </AnimationLayout>
+        <Outlet />
         <Paper className="primary-gradient"></Paper>
       </Container>
     </Container>

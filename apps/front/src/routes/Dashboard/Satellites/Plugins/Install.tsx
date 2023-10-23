@@ -128,7 +128,7 @@ export default function Install() {
     }
   };
 
-  const handleInstall = useCallback((_: string) => {
+  const handleInstall = useCallback(() => {
     setLoading(true);
   }, []);
 

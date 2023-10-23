@@ -176,6 +176,25 @@ const themeLight = createTheme(
           },
         },
       },
+      MuiList: {
+        defaultProps: {
+          sx: {
+            '&.MuiList-root': {
+              padding: 0,
+            },
+          },
+        },
+      },
+      MuiMenuItem: {
+        defaultProps: {
+          sx: {
+            '&.MuiMenuItem-root': {
+              margin: 0.7,
+              borderRadius: 0.6,
+            },
+          },
+        },
+      },
     },
   },
   // Add custom properties
