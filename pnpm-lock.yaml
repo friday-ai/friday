@@ -264,8 +264,8 @@ importers:
         specifier: ^6.32.1
         version: 6.32.1(sqlite3@5.1.6)
       sequelize-typescript:
-        specifier: ^2.1.5
-        version: 2.1.5(@types/node@20.5.2)(@types/validator@13.11.1)(reflect-metadata@0.1.13)(sequelize@6.32.1)
+        specifier: ^2.1.6
+        version: 2.1.6(@types/node@20.5.2)(@types/validator@13.11.1)(reflect-metadata@0.1.13)(sequelize@6.32.1)
       sqlite3:
         specifier: ^5.1.6
         version: 5.1.6(bluebird@3.7.2)
@@ -10265,8 +10265,8 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: false
 
-  /sequelize-typescript@2.1.5(@types/node@20.5.2)(@types/validator@13.11.1)(reflect-metadata@0.1.13)(sequelize@6.32.1):
-    resolution: {integrity: sha512-x1CNODct8gJyfZPwEZBU5uVGNwgJI2Fda913ZxD5ZtCSRyTDPBTS/0uXciF+MlCpyqjpmoCAPtudQWzw579bzA==}
+  /sequelize-typescript@2.1.6(@types/node@20.5.2)(@types/validator@13.11.1)(reflect-metadata@0.1.13)(sequelize@6.32.1):
+    resolution: {integrity: sha512-Vc2N++3en346RsbGjL3h7tgAl2Y7V+2liYTAOZ8XL0KTw3ahFHsyAUzOwct51n+g70I1TOUDgs06Oh6+XGcFkQ==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       '@types/node': '*'
