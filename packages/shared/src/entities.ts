@@ -1,6 +1,6 @@
 import { ActionsType, AvailableConditions, AvailableLanguages, AvailableState, StateOwner, UserRole, VariableOwner } from './constants';
-import { Color, Optional, PartlyRequired } from './utils';
 import { DeviceCapabilitySettingsSchema, DevicesCapabilities, DevicesTypes } from './devices';
+import { Color, Optional, PartlyRequired } from './utils';
 
 /**
  * Action type
@@ -249,9 +249,10 @@ export type SessionAttributes = {
   accessToken: string;
   userAgent: string;
   user: SessionCredentials;
+  createdAt: Date;
 };
 
-export type SessionCreationAttributes = Omit<SessionAttributes, 'id' | 'user' | 'accessToken'>;
+export type SessionCreationAttributes = Omit<SessionAttributes, 'id' | 'user' | 'accessToken' | 'createdAt'>;
 export type SessionCredentials = Optional<Omit<UserAttributes, 'password' | 'state' | 'variables'>, 'theme' | 'language'>;
 
 export const SessionCreationKeys = ['refreshToken', 'revoked', 'validUntil', 'userId', 'userAgent'];
@@ -311,6 +312,7 @@ export type UserCredentialsAttributes = Optional<
   Omit<UserAttributes, 'id' | 'theme' | 'role' | 'language' | 'state' | 'variables'>,
   'userName' | 'email'
 >;
+export type UserUpdateAttributes = Optional<UserCreationAttributes, 'userName' | 'email' | 'language' | 'password' | 'role'>;
 export const UserCreationKeys = ['userName', 'email', 'password', 'theme', 'role', 'language', 'state'];
 
 /**
