@@ -25,11 +25,28 @@ export default function ErrorBoundary() {
     if (error.code === 'ERR_NETWORK') {
       return <ServerDown />;
     }
+    if (error.response!.status === 401) {
+      window.location.href = '/login';
+    }
     errorMessage = error.message;
   } else if (error instanceof Error) {
+    if (error.message === 'Connection timeout') {
+      return <ServerDown />;
+    }
+
     errorMessage = error.message;
   } else if (typeof error === 'string') {
-    errorMessage = error;
+    const msg = error.replace('Uncaught Error: ', '');
+
+    if (msg === 'Connection timeout') {
+      return <ServerDown />;
+    }
+
+    if (msg === 'Auth failed') {
+      window.location.href = '/login';
+    }
+
+    errorMessage = msg;
   } else {
     errorMessage = 'Unknown error';
   }

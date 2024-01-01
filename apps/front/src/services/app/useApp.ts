@@ -12,25 +12,17 @@ const useApp = () => {
 
   const request = useCallback(<T>(method: Methods, url: string, query = {}, body = {}) => req<T>(method, url, headers, query, body), [headers]);
 
-  const initExistingSession = useCallback(async () => {
+  const init = useCallback(async () => {
     const s = localStorage.getItem('session') ? (JSON.parse(localStorage.getItem('session') || '{}') as SessionAttributes) : null;
     if (s) {
-      try {
-        const res = await request<SessionAttributes>('post', '/api/v1/session/access_token', {}, { refreshToken: s.refreshToken });
-        setSession(res);
-        setHeaders(`Bearer ${res.accessToken}`);
-        connect(res.accessToken, res.userId);
-        return true;
-      } catch (error) {
-        setSession(null);
-        setHeaders('');
-        localStorage.removeItem('session');
-        return false;
-      }
-    } else {
-      return false;
+      setSession(s);
+      setHeaders(`Bearer ${s.accessToken}`);
+      connect(s.accessToken, s.userId);
+      return true;
     }
-  }, [request, connect]);
+
+    return request<number>('get', '/api/v1/user/count');
+  }, []);
 
   const login = useCallback(
     async (email: string, password: string) => {
@@ -39,6 +31,7 @@ const useApp = () => {
       setHeaders(`Bearer ${res.accessToken}`);
       localStorage.setItem('session', JSON.stringify(res));
       localStorage.setItem('i18nextLng', res.user.language || 'en');
+      connect(res.accessToken, res.userId);
       return true;
     },
     [request]
@@ -67,6 +60,7 @@ const useApp = () => {
       setHeaders(`Bearer ${res.accessToken}`);
       localStorage.setItem('session', JSON.stringify(res));
       localStorage.setItem('i18nextLng', res.user.language || 'en');
+      connect(res.accessToken, res.userId);
       return true;
     },
     [request]
@@ -74,7 +68,7 @@ const useApp = () => {
 
   return {
     request,
-    initExistingSession,
+    init,
     login,
     logout,
     signUp,

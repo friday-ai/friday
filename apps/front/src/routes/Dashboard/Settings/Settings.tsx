@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 
 import { Link, Outlet } from 'react-router-dom';
 import AnimationLayout from '../../../components/App/AnimationLayout';
@@ -24,39 +25,46 @@ export default function Settings() {
   return (
     <Box padding={2}>
       <Stack spacing={2} direction={{ xs: 'column', lg: 'row' }}>
-        <Paper sx={{ width: 250, maxWidth: '100%' }}>
-          <MenuList>
-            <MenuItem selected={selected === 0} component={Link} to="/dashboard/settings/system">
-              <ListItemIcon>
-                <PowerSettingsNewIcon />
-              </ListItemIcon>
-              <ListItemText>System</ListItemText>
-            </MenuItem>
+        <Stack spacing={2} maxWidth={250}>
+          <Typography variant="h6" fontWeight="bold">
+            Settings
+          </Typography>
+          <Paper sx={{ width: 250, maxWidth: '100%' }}>
+            <MenuList>
+              <MenuItem selected={selected === 0} component={Link} to="/dashboard/settings/system">
+                <ListItemIcon>
+                  <PowerSettingsNewIcon />
+                </ListItemIcon>
+                <ListItemText>System</ListItemText>
+              </MenuItem>
 
-            <MenuItem selected={selected === 1} component={Link} to="/dashboard/settings/house">
-              <ListItemIcon>
-                <MapsHomeWorkIcon />
-              </ListItemIcon>
-              <ListItemText>House</ListItemText>
-            </MenuItem>
-            <Divider />
-            <MenuItem selected={selected === 2} component={Link} to="/dashboard/settings/users">
-              <ListItemIcon>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText>Users</ListItemText>
-            </MenuItem>
-            <MenuItem selected={selected === 3} component={Link} to="/dashboard/settings/sessions">
-              <ListItemIcon>
-                <SmartphoneIcon />
-              </ListItemIcon>
-              <ListItemText>Sessions</ListItemText>
-            </MenuItem>
-          </MenuList>
-        </Paper>
-        <AnimationLayout>
-          <Outlet />
-        </AnimationLayout>
+              <MenuItem selected={selected === 1} component={Link} to="/dashboard/settings/houses">
+                <ListItemIcon>
+                  <MapsHomeWorkIcon />
+                </ListItemIcon>
+                <ListItemText>House</ListItemText>
+              </MenuItem>
+              <Divider />
+              <MenuItem selected={selected === 2} component={Link} to="/dashboard/settings/users">
+                <ListItemIcon>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <ListItemText>Users</ListItemText>
+              </MenuItem>
+              <MenuItem selected={selected === 3} component={Link} to="/dashboard/settings/sessions">
+                <ListItemIcon>
+                  <SmartphoneIcon />
+                </ListItemIcon>
+                <ListItemText>Sessions</ListItemText>
+              </MenuItem>
+            </MenuList>
+          </Paper>
+        </Stack>
+        <Box flex={1}>
+          <AnimationLayout>
+            <Outlet />
+          </AnimationLayout>
+        </Box>
       </Stack>
     </Box>
   );

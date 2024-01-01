@@ -7,11 +7,11 @@ import Devices from './Dashboard/Devices';
 import SatellitesDetails from './Dashboard/Satellites/Details';
 import PluginInstall from './Dashboard/Satellites/Plugins/Install';
 import Satellites from './Dashboard/Satellites/Satellites';
-import House from './Dashboard/Settings/House';
-import Sessions from './Dashboard/Settings/Sessions';
+import House from './Dashboard/Settings/House/House';
+import Session from './Dashboard/Settings/Session/Session';
 import Settings from './Dashboard/Settings/Settings';
 import System from './Dashboard/Settings/System';
-import Users from './Dashboard/Settings/Users';
+import User from './Dashboard/Settings/User/User';
 import ErrorBoundary from './Errors/ErrorBoundary';
 import Login from './Login/Login';
 import Root from './Root';
@@ -38,9 +38,9 @@ const router: RemixRouter = createBrowserRouter(
 
         <Route path="settings" element={<Settings />}>
           <Route index path="system" element={<System />} />
-          <Route path="house" element={<House />} />
-          <Route path="users" element={<Users />}></Route>
-          <Route path="sessions" element={<Sessions />}></Route>
+          <Route path="houses" element={<House />} />
+          <Route path="users" element={<User />}></Route>
+          <Route path="sessions" element={<Session />}></Route>
         </Route>
       </Route>
     </Route>

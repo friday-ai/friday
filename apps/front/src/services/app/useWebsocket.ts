@@ -41,8 +41,15 @@ const useWebsocket = () => {
         }
       };
 
-      // eslint-disable-next-line no-console
-      ws.current.onclose = (event) => console.error('connection closed', event);
+      ws.current.onclose = (event) => {
+        if (event.reason === 'Auth failed') {
+          throw Error('Auth failed');
+        }
+
+        if (event.code === 1006) {
+          throw Error('Connection timeout');
+        }
+      };
     },
     [handlers]
   );

@@ -10,12 +10,21 @@ interface Props {
 
 export default function LoaderSuspense({ isFetching, children }: Props) {
   const [minimumLoadingTimeExpired, setMinimumLoadingTimeExpired] = useState(false);
+  const [timeoutExceeded, setTimeoutExceeded] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       setMinimumLoadingTimeExpired(true);
     }, 1000);
-  }, []);
+
+    setTimeout(() => {
+      setTimeoutExceeded(true);
+    }, 10000);
+  }, [isFetching]);
+
+  if (timeoutExceeded && isFetching) {
+    throw Error('Connection timeout');
+  }
 
   if (!minimumLoadingTimeExpired && isFetching) {
     return <div />;
@@ -27,6 +36,12 @@ export default function LoaderSuspense({ isFetching, children }: Props) {
         <LoaderLayout />
       </AnimationLayout>
     );
+  }
+
+  // This is to avoid false positive in dev mode (with HMR)
+  if (!isFetching && (minimumLoadingTimeExpired || timeoutExceeded)) {
+    setMinimumLoadingTimeExpired(false);
+    setTimeoutExceeded(false);
   }
 
   return children;

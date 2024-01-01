@@ -26,6 +26,12 @@ declare module '@mui/material/styles' {
   }
 }
 
+declare module '@mui/material/Paper' {
+  interface PaperPropsVariantOverrides {
+    selected: true;
+  }
+}
+
 // TODO: Create a theme for dark mode
 const themeLight = createTheme(
   {
@@ -194,6 +200,19 @@ const themeLight = createTheme(
             },
           },
         },
+      },
+      MuiCard: {
+        variants: [
+          {
+            props: {
+              variant: 'selected',
+            },
+            style: {
+              border: `1.5px solid rgba(18, 28, 66, 0.5)`,
+              // background: `rgba(224, 228, 239, 0.75)`,
+            },
+          },
+        ],
       },
     },
   },

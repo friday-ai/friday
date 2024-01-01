@@ -3,6 +3,8 @@ import { MapContainer, Marker as MapMarker, Popup, TileLayer } from 'react-leafl
 
 import 'leaflet/dist/leaflet.css';
 
+import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material/styles';
 import LocationMarker from './LocationMarker';
 import MapEvents from './MapEvents';
 
@@ -15,21 +17,25 @@ interface MapProps {
 }
 
 export default function Map({ markers, onNewMarker }: MapProps) {
-  return (
-    <MapContainer style={{ minHeight: '200px', width: '100%', height: '100%' }} center={DEFAULT_COORDS} zoom={15}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <MapEvents onClick={onNewMarker} />
-      <LocationMarker />
+  const theme = useTheme();
 
-      {markers?.map((marker) => (
-        <MapMarker key={JSON.stringify(marker)} position={marker.position}>
-          {marker.title !== '' && <Popup>{marker.title}</Popup>}
-        </MapMarker>
-      ))}
-    </MapContainer>
+  return (
+    <Box sx={{ borderRadius: theme.borders.borderRadius }}>
+      <MapContainer style={{ minHeight: '200px', width: '100%', height: '100%', borderRadius: 'inherit' }} center={DEFAULT_COORDS} zoom={15}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <MapEvents onClick={onNewMarker} />
+        <LocationMarker />
+
+        {markers?.map((marker) => (
+          <MapMarker key={JSON.stringify(marker)} position={marker.position}>
+            {marker.title !== '' && <Popup>{marker.title}</Popup>}
+          </MapMarker>
+        ))}
+      </MapContainer>
+    </Box>
   );
 }
 
