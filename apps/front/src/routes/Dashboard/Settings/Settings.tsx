@@ -15,11 +15,13 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
+import { useTranslation } from 'react-i18next';
 import { Link, Outlet } from 'react-router-dom';
 import AnimationLayout from '../../../components/App/AnimationLayout';
 import useSelectedRoute from '../../../utils/useSelectedRoute';
 
 export default function Settings() {
+  const { t } = useTranslation();
   const selected = useSelectedRoute(['*/system', '*/house', '*/users', '*/sessions']);
 
   return (
@@ -35,27 +37,27 @@ export default function Settings() {
                 <ListItemIcon>
                   <PowerSettingsNewIcon />
                 </ListItemIcon>
-                <ListItemText>System</ListItemText>
+                <ListItemText>{t('settings.system.title')}</ListItemText>
               </MenuItem>
 
               <MenuItem selected={selected === 1} component={Link} to="/dashboard/settings/houses">
                 <ListItemIcon>
                   <MapsHomeWorkIcon />
                 </ListItemIcon>
-                <ListItemText>House</ListItemText>
+                <ListItemText>{t('settings.house.title')}</ListItemText>
               </MenuItem>
               <Divider />
               <MenuItem selected={selected === 2} component={Link} to="/dashboard/settings/users">
                 <ListItemIcon>
                   <AccountCircleIcon />
                 </ListItemIcon>
-                <ListItemText>Users</ListItemText>
+                <ListItemText>{t('settings.user.title')}</ListItemText>
               </MenuItem>
               <MenuItem selected={selected === 3} component={Link} to="/dashboard/settings/sessions">
                 <ListItemIcon>
                   <SmartphoneIcon />
                 </ListItemIcon>
-                <ListItemText>Sessions</ListItemText>
+                <ListItemText>{t('settings.sessions.title')}</ListItemText>
               </MenuItem>
             </MenuList>
           </Paper>

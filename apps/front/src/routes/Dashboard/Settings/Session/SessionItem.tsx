@@ -9,10 +9,12 @@ import TabletAndroidOutlinedIcon from '@mui/icons-material/TabletAndroidOutlined
 
 import { SessionAttributes } from '@friday-ai/shared';
 import { Avatar, IconButton, ListItem, ListItemAvatar, ListItemText, Tooltip } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { useSession } from '../../../../services/api/useSession';
 import { formatDistance } from '../../../../utils/data';
 
 export default function SessionItem({ session }: { session: SessionAttributes }) {
+  const { t } = useTranslation();
   const { revokeSession } = useSession();
 
   let icon = <ReportProblemOutlinedIcon />;
@@ -42,8 +44,8 @@ export default function SessionItem({ session }: { session: SessionAttributes })
   return (
     <ListItem
       secondaryAction={
-        <Tooltip title={'Revoke session'}>
-          <IconButton edge="end" aria-label="delete" onClick={hanldeRevokeSession}>
+        <Tooltip title={t('settings.sessions.revoke')}>
+          <IconButton edge="end" aria-label={t('settings.sessions.revoke')} onClick={hanldeRevokeSession}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -52,7 +54,7 @@ export default function SessionItem({ session }: { session: SessionAttributes })
       <ListItemAvatar>
         <Avatar>{icon}</Avatar>
       </ListItemAvatar>
-      <ListItemText primary={label} secondary={`Connexion ${formatDistance(session.createdAt)}`} />
+      <ListItemText primary={label} secondary={`${t('settings.sessions.connected')} ${formatDistance(session.createdAt)}`} />
     </ListItem>
   );
 }

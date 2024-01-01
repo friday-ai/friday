@@ -24,8 +24,8 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
   const handleDeleteUser = async () => {
     if ('id' in user) {
       NiceModal.show(Confirm, {
-        title: t('dashboard.satellites.areYouSure'),
-        content: `${t('dashboard.satellites.deletePluginMessage')} <b>${user.userName}</b>.`,
+        title: t('settings.user.areYouSure'),
+        content: `${t('settings.user.deleteMessage')} <b>${user.userName}</b>.`,
         onClose: async (confirm) => {
           if (confirm) {
             await deleteUser.mutateAsync(user.id);
@@ -47,13 +47,13 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
         subheader={`${user.role}`}
         action={
           <Stack direction="row">
-            <Tooltip title="Select user">
-              <IconButton aria-label="add to favorites" onClick={() => selectUser('id' in user ? user.id : 'newUser')}>
+            <Tooltip title={t('settings.user.select')}>
+              <IconButton aria-label="select user" onClick={() => selectUser('id' in user ? user.id : 'newUser')}>
                 <EditNoteOutlinedIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Delete this user">
-              <IconButton aria-label="delete" onClick={handleDeleteUser} disabled={user.role === UserRole.SUPERADMIN}>
+            <Tooltip title={t('settings.user.delete')}>
+              <IconButton aria-label="delete user" onClick={handleDeleteUser} disabled={user.role === UserRole.SUPERADMIN}>
                 <DeleteOutlineOutlinedIcon />
               </IconButton>
             </Tooltip>

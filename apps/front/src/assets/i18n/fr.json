@@ -1,4 +1,8 @@
 {
+  "app": {
+    "cancel": "Annuler",
+    "ok": "Valider"
+  },
   "dashboard": {
     "appBar": {
       "dashboard": "Accueil",
@@ -67,6 +71,53 @@
     "signin": "S'identifier",
     "title": "Connexion",
     "userNotFound": "Utilisateur non trouvé"
+  },
+  "settings": {
+    "house": {
+      "add": "Créer une nouvelle maison",
+      "areYouSure": "Êtes-vous sûr ?",
+      "delete": "Supprimer cette maison",
+      "deleteMessage": "Cette action <b>ne peut pas</b> être annulée. Cela supprimera définitivement la maison :",
+      "edit": "Editer la maison",
+      "houseName": "Nom de la maison",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "nameEmpty": "Le nom de la maison ne peut pas être vide.",
+      "new": "Nouvelle maison",
+      "rooms": "Pièces",
+      "save": "Sauvegarder",
+      "select": "Sélectionner cette maison",
+      "title": "Maisons"
+    },
+    "sessions": {
+      "connected": "Connexion",
+      "revoke": "Révoquer la session",
+      "title": "Sessions"
+    },
+    "system": {
+      "title": "Système"
+    },
+    "user": {
+      "add": "Créer un nouvel utilisateur",
+      "areYouSure": "Êtes-vous sûr ?",
+      "confirmPassword": "Confirmez le mot de passe",
+      "delete": "Supprimer cet utilisateur",
+      "deleteMessage": "Cette action <b>ne peut pas</b> être annulée. Cela supprimera définitivement l'utilisateur :",
+      "edit": "Editer l'utilisateur",
+      "email": "Adresse e-mail",
+      "emailEmpty": "L'e-mail ne peut pas être vide.",
+      "emailNotValid": "L'e-mail doit être valide.",
+      "new": "Nouvel utilisateur",
+      "password": "Mot de passe",
+      "passwordEmpty": "Le mot de passe ne peut pas être vide.",
+      "passwordNotMatch": "Le mot de passe ne correspond pas.",
+      "passwordTooShort": "Le mot de passe doit comporter au moins 10 caractères.",
+      "save": "Sauvegarder",
+      "select": "Sélectionner cet utilisateur",
+      "title": "Utilisateurs",
+      "username": "Nom d'utilisateur",
+      "usernameEmpty": "Le nom d'utilisateur ne peut pas être vide."
+    }
   },
   "signup": {
     "account": {

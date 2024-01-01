@@ -168,10 +168,10 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
     <Stack spacing={2}>
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h5" fontWeight="bold">
-          Edit User
+          {t('settings.user.edit')}
         </Typography>
         <Button variant={'outlined'} startIcon={<SaveOutlinedIcon />} onClick={handleSave} disabled={!userMustBeSaved || error !== 0}>
-          Save
+          {t('settings.user.save')}
         </Button>
       </Stack>
       <Paper sx={{ padding: '2rem' }}>
@@ -184,10 +184,10 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
           <TextField
             error={error === 1}
             id="username"
-            label={t('signup.account.username')}
+            label={t('settings.user.username')}
             type="text"
             value={userName}
-            helperText={error === 1 ? t('signup.account.usernameEmpty') : ''}
+            helperText={error === 1 ? t('settings.user.usernameEmpty') : ''}
             onChange={(event) => {
               setUserName(event.target.value);
               checkUsername(event.target.value);
@@ -197,10 +197,10 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
           <TextField
             error={error === 2 || error === 3}
             id="email"
-            label={t('signup.account.email')}
+            label={t('settings.user.email')}
             type="email"
             value={email}
-            helperText={(error === 2 && t('signup.account.emailEmpty')) || (error === 3 && t('signup.account.emailNotValid')) || ''}
+            helperText={(error === 2 && t('settings.user.emailEmpty')) || (error === 3 && t('settings.user.emailNotValid')) || ''}
             onChange={(event) => {
               setEmail(event.target.value);
               checkEmail(event.target.value);
@@ -210,11 +210,11 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
           <Stack direction="row" spacing={1}>
             <TextField
               error={error === 4 || error === 5}
-              label={t('signup.account.password')}
+              label={t('settings.user.password')}
               id="password"
               type={showPassword ? 'text' : 'password'}
               value={password}
-              helperText={(error === 4 && t('signup.account.passwordEmpty')) || (error === 5 && t('signup.account.passwordTooShort')) || ''}
+              helperText={(error === 4 && t('settings.user.passwordEmpty')) || (error === 5 && t('settings.user.passwordTooShort')) || ''}
               onChange={(event) => {
                 setPassword(event.target.value);
                 checkPassword(event.target.value);
@@ -232,11 +232,11 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
 
             <TextField
               error={error === 6}
-              label={t('signup.account.confirmPassword')}
+              label={t('settings.user.confirmPassword')}
               id="passwordConfirm"
               type={showPassword ? 'text' : 'password'}
               value={passwordConfirm}
-              helperText={error === 6 ? t('signup.account.passwordNotMatch') : ''}
+              helperText={error === 6 ? t('settings.user.passwordNotMatch') : ''}
               onChange={(event) => {
                 setPasswordConfirm(event.target.value);
                 checkPasswordMatch(password, event.target.value);

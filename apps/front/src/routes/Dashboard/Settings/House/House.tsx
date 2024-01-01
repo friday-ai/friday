@@ -4,12 +4,14 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import { Divider, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 
 import { HouseAttributes, HouseCreationAttributes } from '@friday-ai/shared';
+import { useTranslation } from 'react-i18next';
 import LoaderSuspense from '../../../../components/Loader/LoaderSuspense';
 import { useGetHouses } from '../../../../services/api/useHouse';
 import HouseCard from './HouseCard';
 import HouseDetails from './HouseDetails';
 
 export default function House() {
+  const { t } = useTranslation();
   const { isFetching, isFetchedAfterMount, data: houses } = useGetHouses();
   const [selectedHouse, setSelectedHouse] = useState<HouseAttributes | HouseCreationAttributes>();
   const [newHouse, setNewHouse] = useState(false);
@@ -46,9 +48,9 @@ export default function House() {
         <Stack spacing={2} minWidth={400} maxWidth={{ lg: 550 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between" key="head">
             <Typography variant="h6" fontWeight="bold">
-              Houses
+              {t('settings.house.title')}
             </Typography>
-            <Tooltip title={'Add house'}>
+            <Tooltip title={t('settings.house.add')}>
               <IconButton aria-label="add new house" onClick={addHouse}>
                 <AddCircleOutlineOutlinedIcon />
               </IconButton>

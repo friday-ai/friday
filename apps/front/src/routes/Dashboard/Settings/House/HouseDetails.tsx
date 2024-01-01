@@ -121,7 +121,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
     <Stack spacing={2}>
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h5" fontWeight="bold">
-          Edit House
+          {t('settings.house.edit')}
         </Typography>
         <Button
           variant={'outlined'}
@@ -129,14 +129,14 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
           onClick={handleSave}
           disabled={!(houseMustBeSaved || roomsToCreate.length !== 0 || roomsToDelete.length !== 0)}
         >
-          Save
+          {t('settings.house.save')}
         </Button>
       </Stack>
       <Paper sx={{ padding: '2rem' }}>
         <Stack direction="row" spacing={4} divider={<Divider orientation="vertical" flexItem />}>
           <Stack spacing={2} width={400}>
             <TextField
-              label={t('signup.house.houseName')}
+              label={t('settings.house.houseName')}
               id="house"
               type="text"
               value={houseName}
@@ -153,7 +153,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
             />
 
             <TextField
-              label={'latitude'}
+              label={t('settings.house.latitude')}
               id="latitude"
               type="number"
               value={houseCoordinates[0]}
@@ -163,7 +163,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
             />
 
             <TextField
-              label={'longitude'}
+              label={t('settings.house.longitude')}
               id="longitude"
               type="number"
               value={houseCoordinates[1]}
@@ -175,7 +175,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
 
           <Stack spacing={2} width={400}>
             <TextField
-              label={t('signup.house.rooms')}
+              label={t('settings.house.rooms')}
               id="rooms"
               type="text"
               value={roomName}

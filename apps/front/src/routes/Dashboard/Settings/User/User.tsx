@@ -4,12 +4,14 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 import { Divider, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 
 import { AvailableLanguages, UserAttributes, UserCreationAttributes, UserRole } from '@friday-ai/shared';
+import { useTranslation } from 'react-i18next';
 import LoaderSuspense from '../../../../components/Loader/LoaderSuspense';
 import { useGetUsers } from '../../../../services/api/useUser';
 import UserCard from './UserCard';
 import UserDetails from './UserDetails';
 
 export default function User() {
+  const { t } = useTranslation();
   const { isFetching, isFetchedAfterMount, data: users } = useGetUsers();
   const [selectedUser, setSelectedUser] = useState<UserAttributes | UserCreationAttributes>();
   const [newUser, setNewUser] = useState(false);
@@ -46,9 +48,9 @@ export default function User() {
         <Stack spacing={2} minWidth={400} maxWidth={{ lg: 550 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="h6" fontWeight="bold">
-              Users
+              {t('settings.user.title')}
             </Typography>
-            <Tooltip title={'Add house'}>
+            <Tooltip title={t('settings.user.add')}>
               <IconButton aria-label="add user" onClick={addUser}>
                 <AddCircleOutlineOutlinedIcon />
               </IconButton>

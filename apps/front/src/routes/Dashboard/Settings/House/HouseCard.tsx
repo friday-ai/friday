@@ -24,8 +24,8 @@ export default function HouseCard({ house, selected, selectHouse }: HouseCardPro
   const handleDeleteHouse = async () => {
     if ('id' in house) {
       NiceModal.show(Confirm, {
-        title: t('dashboard.satellites.areYouSure'),
-        content: `${t('dashboard.satellites.deletePluginMessage')} <b>${house.name}</b>.`,
+        title: t('settings.house.areYouSure'),
+        content: `${t('settings.house.deleteMessage')} <b>${house.name}</b>.`,
         onClose: async (confirm) => {
           if (confirm) {
             await deleteHouse.mutateAsync(house.id);
@@ -47,13 +47,13 @@ export default function HouseCard({ house, selected, selectHouse }: HouseCardPro
         subheader={'rooms' in house && house.rooms ? `${house.rooms.length} rooms` : '0 rooms'}
         action={
           <Stack direction="row">
-            <Tooltip title="Select house">
-              <IconButton aria-label="add to favorites" onClick={() => selectHouse('id' in house ? house.id : 'newHouse')}>
+            <Tooltip title={t('settings.house.select')}>
+              <IconButton aria-label="select house" onClick={() => selectHouse('id' in house ? house.id : 'newHouse')}>
                 <EditNoteOutlinedIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title="Delete house">
-              <IconButton aria-label="delete" onClick={handleDeleteHouse}>
+            <Tooltip title={t('settings.house.delete')}>
+              <IconButton aria-label="delete house" onClick={handleDeleteHouse}>
                 <DeleteOutlineOutlinedIcon />
               </IconButton>
             </Tooltip>
