@@ -73,6 +73,7 @@
     "userNotFound": "User not found"
   },
   "settings": {
+    "title": "Settings",
     "house": {
       "add": "Create house",
       "areYouSure": "Are you sure ?",

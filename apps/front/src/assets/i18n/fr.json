@@ -73,6 +73,7 @@
     "userNotFound": "Utilisateur non trouvé"
   },
   "settings": {
+    "title": "Paramètres",
     "house": {
       "add": "Créer une nouvelle maison",
       "areYouSure": "Êtes-vous sûr ?",

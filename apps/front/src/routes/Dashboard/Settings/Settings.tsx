@@ -29,7 +29,7 @@ export default function Settings() {
       <Stack spacing={2} direction={{ xs: 'column', lg: 'row' }}>
         <Stack spacing={2} maxWidth={250}>
           <Typography variant="h6" fontWeight="bold">
-            Settings
+            {t('settings.title')}
           </Typography>
           <Paper sx={{ width: 250, maxWidth: '100%' }}>
             <MenuList>
