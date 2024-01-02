@@ -1,9 +1,9 @@
+import { AvailableState, SatelliteAttributes } from '@friday-ai/shared';
 import { Request, Response } from 'express';
-import { SatelliteAttributes, AvailableState } from '@friday-ai/shared';
-import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
-import { encrypt } from '../../../utils/keyring';
 import { FridayMode } from '../../../config/constants';
+import Friday from '../../../core/friday';
+import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
+import { encrypt } from '../../../utils/keyring';
 
 /**
  * System router
@@ -39,6 +39,33 @@ export default class SystemRouter {
   getVersion = async (_: Request, res: Response) => {
     const version = await this.friday.getVersion();
     res.json(version);
+  };
+
+  /**
+   * Get settings
+   * @apiName getSettings
+   * @apiDescription This route allows you to get friday's settings
+   * @api {get} /api/v1/system/settings
+   * @apiSampleRequest http://localhost:3000
+   * @apiGroup System
+   * @apiVersion 1.0.0
+   * @apiSuccessExample {json} Success-Response
+   * {
+   *   version: "1.0.0",
+   *   untis: "metric"
+   *   history: "1 month"
+   * }
+   */
+  @Get({
+    path: '/settings',
+    authenticated: true,
+    rateLimit: false,
+    aclMethod: 'read',
+    aclResource: 'system',
+  })
+  getSettings = async (_: Request, res: Response) => {
+    const settings = await this.friday.getSettings();
+    res.json(settings);
   };
 
   /**
