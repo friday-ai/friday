@@ -40,11 +40,13 @@ export default function System() {
             <CardContent>
               <Stack spacing={1}>
                 <Typography sx={{ mb: 1.5 }} variant="h6" component="div">
-                  Version de friday
+                  {t('settings.system.version')}
                 </Typography>
-                <Typography>Actuelle: {settings?.version}</Typography>
+                <Typography>
+                  {t('settings.system.installed')}: {settings?.version}
+                </Typography>
                 <Box>
-                  <Chip label="Up to date" color="success" variant="outlined" />
+                  <Chip label={t('settings.system.upToDate')} color="success" variant="outlined" />
                 </Box>
               </Stack>
             </CardContent>
@@ -52,19 +54,19 @@ export default function System() {
           <Card variant="outlined">
             <CardContent>
               <Typography variant="h6" component="div">
-                Historique des appareils
+                {t('settings.system.history')}
               </Typography>
               <Typography sx={{ mb: 1.5 }} variant="body2" color="text.secondary">
-                Période pendant laquelle les états des appareils reste enregistrés.
+                {t('settings.system.historyDescription')}
               </Typography>
               <FormControl fullWidth>
-                <InputLabel id="time">Time</InputLabel>
+                <InputLabel id="time">{t('settings.system.historyTitle')}</InputLabel>
                 <Select labelId="time" id="time-select" label="Time" value={history} onChange={(e) => handleHistoryChange(e.target.value)}>
-                  <MenuItem value="1 month">{t('signup.time.1m')}</MenuItem>
-                  <MenuItem value="3 months">{t('signup.time.3m')}</MenuItem>
-                  <MenuItem value="6 months">{t('signup.time.6m')}</MenuItem>
-                  <MenuItem value="1 year">{t('signup.time.1y')}</MenuItem>
-                  <MenuItem value="unlimited">{t('signup.time.unlimited')}</MenuItem>
+                  <MenuItem value="1 month">{t('settings.system.1m')}</MenuItem>
+                  <MenuItem value="3 months">{t('settings.system.3m')}</MenuItem>
+                  <MenuItem value="6 months">{t('settings.system.6m')}</MenuItem>
+                  <MenuItem value="1 year">{t('settings.system.1y')}</MenuItem>
+                  <MenuItem value="unlimited">{t('settings.system.unlimited')}</MenuItem>
                 </Select>
               </FormControl>
             </CardContent>
@@ -72,16 +74,16 @@ export default function System() {
           <Card variant="outlined">
             <CardContent>
               <Typography variant="h6" component="div">
-                Unitées
+                {t('settings.system.units')}
               </Typography>
               <Typography sx={{ mb: 1.5 }} variant="body2" color="text.secondary">
-                Unités utilisées pour l'affichage des données
+                {t('settings.system.unitsDescription')}
               </Typography>
               <FormControl fullWidth>
-                <InputLabel id="units">Units</InputLabel>
+                <InputLabel id="units">{t('settings.system.units')}</InputLabel>
                 <Select labelId="units" id="units-select" label="Units" value={units} onChange={(e) => handleUnitsChange(e.target.value)}>
-                  <MenuItem value="metric">{t('signup.units.metric')}</MenuItem>
-                  <MenuItem value="us">{t('signup.units.us')}</MenuItem>
+                  <MenuItem value="metric">{t('settings.system.metric')}</MenuItem>
+                  <MenuItem value="us">{t('settings.system.us')}</MenuItem>
                 </Select>
               </FormControl>
             </CardContent>

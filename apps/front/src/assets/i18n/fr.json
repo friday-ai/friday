@@ -97,7 +97,23 @@
       "title": "Sessions"
     },
     "system": {
-      "title": "Système"
+      "1m": "1 mois",
+      "1y": "1 an",
+      "3m": "3 mois",
+      "6m": "6 mois",
+      "history": "Historique",
+      "historyDescription": "Période pendant laquelle les états des appareils reste enregistrés.",
+      "historyTitle": "Historique des appareils",
+      "installed": "Actuelle",
+      "metric": "Celsius (°C), Si (métrique)",
+      "saved": "Paramétre souvegardé",
+      "title": "Système",
+      "units": "Unitées",
+      "unitsDescription": "Unités utilisées pour l'affichage des données",
+      "unlimited": "Illimité",
+      "upToDate": "Vous êtes à jour",
+      "us": "Fahrenheit (°F), Mi (Miles)",
+      "version": "Version de Friday"
     },
     "user": {
       "add": "Créer un nouvel utilisateur",
