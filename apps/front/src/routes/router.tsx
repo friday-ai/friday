@@ -10,7 +10,7 @@ import Satellites from './Dashboard/Satellites/Satellites';
 import House from './Dashboard/Settings/House/House';
 import Session from './Dashboard/Settings/Session/Session';
 import Settings from './Dashboard/Settings/Settings';
-import System from './Dashboard/Settings/System';
+import System from './Dashboard/Settings/System/System';
 import User from './Dashboard/Settings/User/User';
 import ErrorBoundary from './Errors/ErrorBoundary';
 import Login from './Login/Login';
