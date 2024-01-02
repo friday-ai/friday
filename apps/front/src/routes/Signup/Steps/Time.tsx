@@ -28,7 +28,7 @@ export default function Time({ activeStep, setActiveStep }: SignupProps) {
   };
 
   const handleNext = () => {
-    createVariable.mutate({ key: 'system_units', value: time, owner: app.user?.id || '', ownerType: VariableOwner.USER });
+    createVariable.mutate({ key: 'history_state_in_days', value: time, owner: app.user?.id || '', ownerType: VariableOwner.USER });
     setActiveStep(activeStep + 1);
   };
 
