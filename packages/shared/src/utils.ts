@@ -37,6 +37,15 @@ export interface WebsocketPayload {
 }
 
 /**
+ * Settings interface
+ */
+export interface SystemSettings {
+  version: string;
+  units: string;
+  history: string;
+}
+
+/**
  * Type helper for making certain fields of an object optional. This is helpful
  * for creating the comlpex `CreationAttributes` of database.
  * // Shamelessly copied from https://github.com/sequelize/sequelize/blob/main/src/utils/types.ts
