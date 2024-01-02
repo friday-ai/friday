@@ -104,7 +104,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
 
     // Ensure house still selected
     selectHouse(houseId);
-    enqueueSnackbar('House saved', { variant: 'success' });
+    enqueueSnackbar(t('settings.house.saved'), { variant: 'success' });
   };
 
   /** This is necessary because it is the parent component which
@@ -120,7 +120,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
   return (
     <Stack spacing={2}>
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
-        <Typography variant="h5" fontWeight="bold">
+        <Typography variant="h6" fontWeight="bold">
           {t('settings.house.edit')}
         </Typography>
         <Button

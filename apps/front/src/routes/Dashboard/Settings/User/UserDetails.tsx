@@ -144,7 +144,7 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
 
     // Ensure user still selected
     selectUser(userId);
-    enqueueSnackbar('User saved', { variant: 'success' });
+    enqueueSnackbar(t('settings.user.saved'), { variant: 'success' });
   };
 
   /** This is necessary because it is the parent component which
@@ -167,7 +167,7 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
   return (
     <Stack spacing={2}>
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
-        <Typography variant="h5" fontWeight="bold">
+        <Typography variant="h6" fontWeight="bold">
           {t('settings.user.edit')}
         </Typography>
         <Button variant={'outlined'} startIcon={<SaveOutlinedIcon />} onClick={handleSave} disabled={!userMustBeSaved || error !== 0}>
@@ -245,7 +245,7 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
           </Stack>
 
           <FormControl fullWidth>
-            <InputLabel id="role">Role</InputLabel>
+            <InputLabel id="role">{t('settings.user.role')}</InputLabel>
             <Select
               labelId="role"
               id="role-select"
@@ -254,15 +254,15 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
               onChange={(e) => setRole(e.target.value as UserRole)}
               disabled={user.role === UserRole.SUPERADMIN}
             >
-              <MenuItem value="superadmin">SuperAdmin</MenuItem>
-              <MenuItem value="admin">Admin</MenuItem>
-              <MenuItem value="habitant">Habitant</MenuItem>
-              <MenuItem value="guest">Guest</MenuItem>
+              <MenuItem value="superadmin">{t('settings.user.superadmin')}</MenuItem>
+              <MenuItem value="admin">{t('settings.user.admin')}</MenuItem>
+              <MenuItem value="habitant">{t('settings.user.habitant')}</MenuItem>
+              <MenuItem value="guest">{t('settings.user.guest')}</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl fullWidth>
-            <InputLabel id="language">Language</InputLabel>
+            <InputLabel id="language">{t('settings.user.language')}</InputLabel>
             <Select labelId="language" id="language-select" value={language} onChange={(e) => handleLanguage(e.target.value)} label="Language">
               <MenuItem value="en">English</MenuItem>
               <MenuItem value="fr">Français</MenuItem>
