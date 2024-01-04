@@ -10,6 +10,7 @@ import { WebsocketMessageTypes } from '@friday-ai/shared';
 import { Box, Button, Divider, IconButton, InputAdornment, Paper, Stack, TextField, Tooltip, Typography } from '@mui/material';
 import { debounce } from '@mui/material/utils';
 
+import { useTranslation } from 'react-i18next';
 import Countdown from '../../../../components/Countdown/Countdown';
 import FaviconLoader from '../../../../components/Loader/Loader';
 
@@ -24,6 +25,7 @@ interface PluginVars {
 
 export default function Install() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { id } = useParams();
   const { installPlugin } = usePlugin();
   const { ws } = useSharedApp();
@@ -91,13 +93,13 @@ export default function Install() {
     switch (repoExisting) {
       case 1:
         return (
-          <Tooltip title="Repo found">
+          <Tooltip title={t('dashboard.plugin.repoFound')}>
             <CheckIcon color="success" />
           </Tooltip>
         );
       case 2:
         return (
-          <Tooltip title="Repo not found">
+          <Tooltip title={t('dashboard.plugin.repoNotFound')}>
             <CloseIcon color="error" />
           </Tooltip>
         );
@@ -160,15 +162,15 @@ export default function Install() {
               </IconButton>
             </Stack>
             <Stack>
-              <Typography variant="caption">Go back to satellite page</Typography>
+              <Typography variant="caption">{t('dashboard.plugin.goBack')}</Typography>
               <Typography variant="h5" fontWeight="bold">
-                Install plugin
+                {t('dashboard.plugin.installPlugin')}
               </Typography>
             </Stack>
           </Stack>
           <Stack justifyContent="center">
             <Button variant="outlined" onClick={() => install()}>
-              Install
+              {t('dashboard.plugin.install')}
             </Button>
           </Stack>
         </Stack>
@@ -177,14 +179,14 @@ export default function Install() {
             <div className={`swap ${pluginInstalled && 'swap-active'}`}>
               <div className="swap-on">
                 <Typography marginBottom={2} variant="h5">
-                  Plugin installed
+                  {t('dashboard.plugin.pluginInstalled')}
                 </Typography>
                 <CheckCircleOutlineOutlinedIcon color="success" sx={{ fontSize: 100, marginBottom: 2 }} />
                 <Countdown start={pluginInstalled} count={5} />
               </div>
               <div className="swap-off">
                 <Typography marginBottom={2} variant="h5">
-                  Installing plugin
+                  {t('dashboard.plugin.pluginInstalling')}
                 </Typography>
                 <FaviconLoader />
               </div>
@@ -193,22 +195,22 @@ export default function Install() {
         ) : (
           <Stack spacing={4} direction="row" divider={<Divider orientation="vertical" flexItem />}>
             <Stack spacing={4} flex={1}>
-              <Typography variant="h6">Plugin information</Typography>
+              <Typography variant="h6">{t('dashboard.plugin.pluginInformation')}</Typography>
               <TextField
                 id="plugin-name"
-                label="Name of plugin"
+                label={t('dashboard.plugin.pluginName')}
                 type="text"
                 error={error === 1}
-                helperText={error === 1 ? 'Name of plugin invalid' : ''}
+                helperText={error === 1 ? t('dashboard.plugin.pluginNameInvalid') : ''}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <TextField
                 id="plugin-repo"
-                label="Repository"
+                label={t('dashboard.plugin.repo')}
                 type="text"
                 error={error === 2}
-                helperText={error === 2 ? 'Repo of plugin invalid' : ''}
+                helperText={error === 2 ? t('dashboard.plugin.repoInvalid') : ''}
                 value={repo}
                 onChange={(e) => {
                   checkRepo(e.target.value);
@@ -220,33 +222,33 @@ export default function Install() {
               />
               <TextField
                 id="plugin-version"
-                label="Version"
+                label={t('dashboard.plugin.version')}
                 type="text"
                 error={error === 3}
-                helperText={error === 3 ? 'Version of plugin invalid' : ''}
+                helperText={error === 3 ? t('dashboard.plugin.versionInvalid') : ''}
                 value={version}
                 onChange={(e) => setVersion(e.target.value)}
               />
             </Stack>
             <Stack spacing={4} flex={1}>
-              <Typography variant="h6">Variables</Typography>
+              <Typography variant="h6">{t('dashboard.plugin.variables')}</Typography>
               {pluginvVars.length !== 0 && (
                 <>
                   {pluginvVars.map((variable) => {
                     return (
                       <Paper sx={{ padding: '1rem' }} key={`plugin-var-key-${variable.id}`}>
                         <Stack spacing={2} alignContent="center">
-                          <Typography variant="body2">Variable information</Typography>
+                          <Typography variant="body2">{t('dashboard.plugin.variableInformation')}</Typography>
                           <TextField
                             id="plugin-var-key"
-                            label="Key"
+                            label={t('dashboard.plugin.key')}
                             type="text"
                             value={variable.key}
                             onChange={(e) => updateVar(variable.id, e.target.value, variable.value)}
                           />
                           <TextField
                             id="plugin-var-value"
-                            label="Value"
+                            label={t('dashboard.plugin.value')}
                             type="text"
                             value={variable.value}
                             onChange={(e) => updateVar(variable.id, variable.key, e.target.value)}
@@ -258,7 +260,7 @@ export default function Install() {
                 </>
               )}
               <Button variant="outlined" color="inherit" sx={{ height: '80px', borderStyle: 'dashed' }} onClick={addPluginVar}>
-                Add a variable
+                {t('dashboard.plugin.addVariable')}
               </Button>
             </Stack>
           </Stack>

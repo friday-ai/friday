@@ -46,6 +46,27 @@
       "stopSatellite": "Arrêter le satellite",
       "uninstallPlugin": "Désinstaller le plugin",
       "uptime": "Démarré"
+    },
+    "plugin": {
+      "addVariable": "Ajouter une variable",
+      "goBack": "Retourner à la page satellite",
+      "install": "Installer",
+      "installPlugin": "Installer un plugin",
+      "key": "Clé",
+      "pluginInformation": "Informations du plugin",
+      "pluginInstalled": "Plugin installé",
+      "pluginInstalling": "Installation du plugin",
+      "pluginName": "Nom du plugin",
+      "pluginNameInvalid": "Nom invalid",
+      "repo": "Dépot",
+      "repoFound": "Dépot trouvé",
+      "repoInvalid": "Dépot invalid",
+      "repoNotFound": "Dépot non trouvé",
+      "value": "Valeur",
+      "variableInformation": "Informations de la variable",
+      "variables": "Variables",
+      "version": "Version",
+      "versionInvalid": "Version invalid"
     }
   },
   "errors": {

@@ -46,6 +46,27 @@
       "stopSatellite": "Stop satellite",
       "uninstallPlugin": "Uninstall plugin",
       "uptime": "Uptime"
+    },
+    "plugin": {
+      "addVariable": "Add variable",
+      "goBack": "Go back to satellite page",
+      "install": "Install",
+      "installPlugin": "Install plugin",
+      "key": "Key",
+      "pluginInformation": "Plugin's informations",
+      "pluginInstalled": "Plugin installed",
+      "pluginInstalling": "Installing plugin",
+      "pluginName": "Plugin name",
+      "pluginNameInvalid": "Invalid name",
+      "repo": "Repository",
+      "repoFound": "Repository found",
+      "repoInvalid": "Invalid repository",
+      "repoNotFound": "Repository not found",
+      "value": "Value",
+      "variableInformation": "Variable's informations",
+      "variables": "Variables",
+      "version": "Version",
+      "versionInvalid": "Invalid version"
     }
   },
   "errors": {
