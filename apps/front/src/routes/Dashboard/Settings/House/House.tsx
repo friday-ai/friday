@@ -44,8 +44,8 @@ export default function House() {
 
   return (
     <LoaderSuspense isFetching={isFetching && !isFetchedAfterMount}>
-      <Stack spacing={2} direction={{ xs: 'column', lg: 'row' }} divider={<Divider orientation="vertical" flexItem />} justifyContent="center">
-        <Stack spacing={2} minWidth={400} maxWidth={{ lg: 550 }}>
+      <Stack spacing={2} direction={{ xs: 'column', xl: 'row' }} divider={<Divider orientation="vertical" flexItem />} justifyContent="center">
+        <Stack spacing={2} maxWidth={{ xl: 550 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between" key="head">
             <Typography variant="h6" fontWeight="bold">
               {t('settings.house.title')}
@@ -57,16 +57,18 @@ export default function House() {
             </Tooltip>
           </Stack>
 
-          {houses &&
-            selectedHouse &&
-            houses.map((house) => (
-              <HouseCard
-                key={house.id}
-                house={house}
-                selected={'id' in selectedHouse && selectedHouse.id === house.id}
-                selectHouse={handleSelectHouse}
-              />
-            ))}
+          <Stack spacing={2} direction={{ xs: 'row', xl: 'column' }} overflow={'auto'} justifyContent={{ xs: 'unset', md: 'center' }}>
+            {houses &&
+              selectedHouse &&
+              houses.map((house) => (
+                <HouseCard
+                  key={house.id}
+                  house={house}
+                  selected={'id' in selectedHouse && selectedHouse.id === house.id}
+                  selectHouse={handleSelectHouse}
+                />
+              ))}
+          </Stack>
 
           {newHouse && selectedHouse && <HouseCard key="newHouse" house={selectedHouse} selected selectHouse={handleSelectHouse} />}
         </Stack>

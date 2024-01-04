@@ -7,7 +7,6 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import IconButton from '@mui/material/IconButton';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -17,6 +16,7 @@ import Paper from '@mui/material/Paper';
 import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 
 import { debounce } from '@mui/material/utils';
@@ -170,11 +170,13 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
         <Typography variant="h6" fontWeight="bold">
           {t('settings.user.edit')}
         </Typography>
-        <Button variant={'outlined'} startIcon={<SaveOutlinedIcon />} onClick={handleSave} disabled={!userMustBeSaved || error !== 0}>
-          {t('settings.user.save')}
-        </Button>
+        <Tooltip title={t('settings.user.save')}>
+          <IconButton aria-label="save user" onClick={handleSave} disabled={!userMustBeSaved || error !== 0}>
+            <SaveOutlinedIcon />
+          </IconButton>
+        </Tooltip>
       </Stack>
-      <Paper sx={{ padding: '2rem' }}>
+      <Paper sx={{ padding: '2rem', maxWidth: { xs: 400, sm: 600 }, alignSelf: 'center' }}>
         <Stack spacing={3}>
           <Box display={'flex'} justifyContent={'center'}>
             <Avatar sx={{ width: 112, height: 112 }}>
@@ -207,7 +209,7 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
             }}
           />
 
-          <Stack direction="row" spacing={1}>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <TextField
               error={error === 4 || error === 5}
               label={t('settings.user.password')}

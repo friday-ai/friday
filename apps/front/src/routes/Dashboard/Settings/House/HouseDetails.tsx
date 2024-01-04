@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
-import { Button, Chip, Divider, IconButton, InputAdornment, Paper, Stack, TextField, Typography } from '@mui/material';
+import { Chip, Divider, IconButton, InputAdornment, Paper, Stack, TextField, Tooltip, Typography } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';
 
@@ -123,18 +123,20 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
         <Typography variant="h6" fontWeight="bold">
           {t('settings.house.edit')}
         </Typography>
-        <Button
-          variant={'outlined'}
-          startIcon={<SaveOutlinedIcon />}
-          onClick={handleSave}
-          disabled={!(houseMustBeSaved || roomsToCreate.length !== 0 || roomsToDelete.length !== 0)}
-        >
-          {t('settings.house.save')}
-        </Button>
+
+        <Tooltip title={t('settings.house.save')}>
+          <IconButton
+            aria-label="save house"
+            onClick={handleSave}
+            disabled={!(houseMustBeSaved || roomsToCreate.length !== 0 || roomsToDelete.length !== 0)}
+          >
+            <SaveOutlinedIcon />
+          </IconButton>
+        </Tooltip>
       </Stack>
-      <Paper sx={{ padding: '2rem' }}>
-        <Stack direction="row" spacing={4} divider={<Divider orientation="vertical" flexItem />}>
-          <Stack spacing={2} width={400}>
+      <Paper sx={{ padding: '2rem', alignSelf: 'center' }}>
+        <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
+          <Stack spacing={2} minWidth={{ xs: 250, lg: 400 }}>
             <TextField
               label={t('settings.house.houseName')}
               id="house"
@@ -173,7 +175,10 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
             />
           </Stack>
 
-          <Stack spacing={2} width={400}>
+          <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', md: 'block' } }} />
+          <Divider flexItem sx={{ display: { xs: 'block', md: 'none' } }} />
+
+          <Stack spacing={2} maxWidth={350}>
             <TextField
               label={t('settings.house.rooms')}
               id="rooms"

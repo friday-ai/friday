@@ -36,15 +36,17 @@ export default function HouseCard({ house, selected, selectHouse }: HouseCardPro
   };
 
   return (
-    <Card variant={selected ? 'selected' : 'outlined'}>
+    <Card variant={selected ? 'selected' : 'outlined'} sx={{ minWidth: { xs: 250, md: 320, lg: 400 } }}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">
             <GiteOutlinedIcon />
           </Avatar>
         }
+        titleTypographyProps={{ noWrap: true, width: { xs: 60, sm: 90, md: 120, lg: 200 } }}
+        subheaderTypographyProps={{ noWrap: true, width: { xs: 60, sm: 90, md: 120, lg: 200 } }}
         title={house.name}
-        subheader={'rooms' in house && house.rooms ? `${house.rooms.length} rooms` : '0 rooms'}
+        subheader={'rooms' in house && house.rooms ? `${house.rooms.length} ${t('settings.house.rooms')}` : t('settings.house.noRooms')}
         action={
           <Stack direction="row">
             <Tooltip title={t('settings.house.select')}>

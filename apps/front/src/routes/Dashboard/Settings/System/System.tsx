@@ -30,12 +30,10 @@ export default function System() {
   return (
     <LoaderSuspense isFetching={isFetching && !isFetchedAfterMount}>
       <Stack spacing={2}>
-        <Box textAlign={'center'}>
-          <Typography variant="h6" fontWeight="bold">
-            {t('settings.system.title')}
-          </Typography>
-        </Box>
-        <Stack direction={'row'} spacing={2} justifyContent={'center'}>
+        <Typography variant="h6" fontWeight="bold">
+          {t('settings.system.title')}
+        </Typography>
+        <Stack direction={'row'} spacing={2} justifyContent={'center'} useFlexGap flexWrap="wrap">
           <Card variant="outlined">
             <CardContent>
               <Stack spacing={1}>

@@ -36,7 +36,7 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
   };
 
   return (
-    <Card variant={selected ? 'selected' : 'outlined'}>
+    <Card variant={selected ? 'selected' : 'outlined'} sx={{ minWidth: { xs: 250, md: 320, lg: 400 } }}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">
@@ -45,6 +45,8 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
         }
         title={user.userName}
         subheader={`${user.role}`}
+        titleTypographyProps={{ noWrap: true, width: { xs: 60, sm: 90, md: 120, lg: 200 } }}
+        subheaderTypographyProps={{ noWrap: true, width: { xs: 60, sm: 90, md: 120, lg: 200 } }}
         action={
           <Stack direction="row">
             <Tooltip title={t('settings.user.select')}>

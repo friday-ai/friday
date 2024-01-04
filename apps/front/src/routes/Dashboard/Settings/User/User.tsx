@@ -45,7 +45,7 @@ export default function User() {
   return (
     <LoaderSuspense isFetching={isFetching && !isFetchedAfterMount}>
       <Stack spacing={2} direction={{ xs: 'column', lg: 'row' }} divider={<Divider orientation="vertical" flexItem />} justifyContent="center">
-        <Stack spacing={2} minWidth={400} maxWidth={{ lg: 550 }}>
+        <Stack spacing={2} maxWidth={{ lg: 550 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="h6" fontWeight="bold">
               {t('settings.user.title')}
@@ -56,11 +56,14 @@ export default function User() {
               </IconButton>
             </Tooltip>
           </Stack>
-          {users &&
-            selectedUser &&
-            users.map((user) => (
-              <UserCard key={user.id} user={user} selected={'id' in selectedUser && selectedUser.id === user.id} selectUser={handleSelectUser} />
-            ))}
+
+          <Stack spacing={2} direction={{ xs: 'row', lg: 'column' }} overflow={'auto'} justifyContent={{ xs: 'unset', md: 'center' }}>
+            {users &&
+              selectedUser &&
+              users.map((user) => (
+                <UserCard key={user.id} user={user} selected={'id' in selectedUser && selectedUser.id === user.id} selectUser={handleSelectUser} />
+              ))}
+          </Stack>
 
           {newUser && selectedUser && <UserCard key="newHouse" user={selectedUser} selected selectUser={handleSelectUser} />}
         </Stack>

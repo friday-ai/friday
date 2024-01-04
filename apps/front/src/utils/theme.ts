@@ -195,6 +195,7 @@ const themeLight = createTheme(
         defaultProps: {
           sx: {
             '&.MuiMenuItem-root': {
+              minHeight: 'auto',
               margin: 0.7,
               borderRadius: 0.6,
             },
@@ -213,6 +214,13 @@ const themeLight = createTheme(
             },
           },
         ],
+      },
+      MuiTab: {
+        defaultProps: {
+          sx: {
+            minHeight: 54,
+          },
+        },
       },
     },
   },

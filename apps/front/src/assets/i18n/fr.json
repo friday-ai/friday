@@ -85,6 +85,7 @@
       "longitude": "Longitude",
       "nameEmpty": "Le nom de la maison ne peut pas être vide.",
       "new": "Nouvelle maison",
+      "noRooms": "Aucune pièce",
       "rooms": "Pièces",
       "save": "Sauvegarder",
       "saved": "Maison sauvegardée",

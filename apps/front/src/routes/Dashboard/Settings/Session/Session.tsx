@@ -14,7 +14,7 @@ export default function Sessions() {
   return (
     <LoaderSuspense isFetching={isFetching}>
       <Box display={'flex'} justifyContent={'center'}>
-        <Stack spacing={2} minWidth={800} maxWidth={{ lg: 1000 }}>
+        <Stack spacing={2}>
           <Typography variant="h6" fontWeight="bold">
             {t('settings.sessions.title')}
           </Typography>

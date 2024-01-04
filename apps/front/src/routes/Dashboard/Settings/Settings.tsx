@@ -13,6 +13,8 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
 import Typography from '@mui/material/Typography';
 
 import { useTranslation } from 'react-i18next';
@@ -27,11 +29,11 @@ export default function Settings() {
   return (
     <Box padding={2}>
       <Stack spacing={2} direction={{ xs: 'column', lg: 'row' }}>
-        <Stack spacing={2} maxWidth={250}>
+        <Stack spacing={2} maxWidth={{ lg: 250 }}>
           <Typography variant="h6" fontWeight="bold">
             {t('settings.title')}
           </Typography>
-          <Paper sx={{ width: 250, maxWidth: '100%' }}>
+          <Paper sx={{ width: 250, maxWidth: '100%', display: { xs: 'none', lg: 'block' } }}>
             <MenuList>
               <MenuItem selected={selected === 0} component={Link} to="/dashboard/settings/system">
                 <ListItemIcon>
@@ -39,7 +41,6 @@ export default function Settings() {
                 </ListItemIcon>
                 <ListItemText>{t('settings.system.title')}</ListItemText>
               </MenuItem>
-
               <MenuItem selected={selected === 1} component={Link} to="/dashboard/settings/houses">
                 <ListItemIcon>
                   <MapsHomeWorkIcon />
@@ -60,6 +61,47 @@ export default function Settings() {
                 <ListItemText>{t('settings.sessions.title')}</ListItemText>
               </MenuItem>
             </MenuList>
+          </Paper>
+
+          <Paper sx={{ display: { xs: 'block', lg: 'none' }, alignSelf: { xs: 'auto', sm: 'center' } }}>
+            <Tabs aria-label="basic tabs example" variant="scrollable" scrollButtons allowScrollButtonsMobile centered value={selected}>
+              <Tab
+                id="system"
+                component={Link}
+                to="/dashboard/settings/system"
+                aria-controls="system"
+                label={t('settings.system.title')}
+                icon={<PowerSettingsNewIcon />}
+                iconPosition="start"
+              />
+              <Tab
+                id="house"
+                component={Link}
+                to="/dashboard/settings/houses"
+                aria-controls="house"
+                label={t('settings.house.title')}
+                icon={<MapsHomeWorkIcon />}
+                iconPosition="start"
+              />
+              <Tab
+                id="user"
+                component={Link}
+                to="/dashboard/settings/users"
+                aria-controls="user"
+                label={t('settings.user.title')}
+                icon={<AccountCircleIcon />}
+                iconPosition="start"
+              />
+              <Tab
+                id="session"
+                component={Link}
+                to="/dashboard/settings/sessions"
+                aria-controls="session"
+                label={t('settings.sessions.title')}
+                icon={<SmartphoneIcon />}
+                iconPosition="start"
+              />
+            </Tabs>
           </Paper>
         </Stack>
         <Box flex={1}>

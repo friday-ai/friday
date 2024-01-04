@@ -43,6 +43,7 @@ export default function SessionItem({ session }: { session: SessionAttributes })
 
   return (
     <ListItem
+      sx={{ width: { xs: 300, sm: 500, md: 700 } }}
       secondaryAction={
         <Tooltip title={t('settings.sessions.revoke')}>
           <IconButton edge="end" aria-label={t('settings.sessions.revoke')} onClick={hanldeRevokeSession}>
@@ -54,7 +55,12 @@ export default function SessionItem({ session }: { session: SessionAttributes })
       <ListItemAvatar>
         <Avatar>{icon}</Avatar>
       </ListItemAvatar>
-      <ListItemText primary={label} secondary={`${t('settings.sessions.connected')} ${formatDistance(session.createdAt)}`} />
+      <ListItemText
+        primaryTypographyProps={{ noWrap: true }}
+        primary={label}
+        secondaryTypographyProps={{ noWrap: true }}
+        secondary={`${t('settings.sessions.connected')} ${formatDistance(session.createdAt)}`}
+      />
     </ListItem>
   );
 }
