@@ -26,6 +26,12 @@ declare module '@mui/material/styles' {
   }
 }
 
+declare module '@mui/material/Paper' {
+  interface PaperPropsVariantOverrides {
+    selected: true;
+  }
+}
+
 // TODO: Create a theme for dark mode
 const themeLight = createTheme(
   {
@@ -173,6 +179,46 @@ const themeLight = createTheme(
         defaultProps: {
           sx: {
             position: 'unset',
+          },
+        },
+      },
+      MuiList: {
+        defaultProps: {
+          sx: {
+            '&.MuiList-root': {
+              padding: 0,
+            },
+          },
+        },
+      },
+      MuiMenuItem: {
+        defaultProps: {
+          sx: {
+            '&.MuiMenuItem-root': {
+              minHeight: 'auto',
+              margin: 0.7,
+              borderRadius: 0.6,
+            },
+          },
+        },
+      },
+      MuiCard: {
+        variants: [
+          {
+            props: {
+              variant: 'selected',
+            },
+            style: {
+              border: `1.5px solid rgba(18, 28, 66, 0.5)`,
+              // background: `rgba(224, 228, 239, 0.75)`,
+            },
+          },
+        ],
+      },
+      MuiTab: {
+        defaultProps: {
+          sx: {
+            minHeight: 54,
           },
         },
       },

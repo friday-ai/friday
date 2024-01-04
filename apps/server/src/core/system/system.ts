@@ -1,17 +1,18 @@
-import VariableClass from '../variable/variable';
+import { Catch } from '../../utils/decorators/error';
+import SchedulerClass from '../../utils/scheduler';
 import HouseClass from '../house/house';
 import RoomClass from '../room/room';
 import SatelliteClass from '../satellite/satellite';
-import UserClass from '../user/user';
 import StateClass from '../state/state';
-import SchedulerClass from '../../utils/scheduler';
-import { Catch } from '../../utils/decorators/error';
+import UserClass from '../user/user';
+import VariableClass from '../variable/variable';
 
+import getSettings from './system.getSettings';
 import getVersion from './system.getVersion';
 import init from './system.init';
 import saveVersion from './system.saveVersion';
-import start from './system.start';
 import shutdown from './system.shutdown';
+import start from './system.start';
 
 import * as DBType from '../../config/database';
 
@@ -52,6 +53,11 @@ export default class System {
   @Catch()
   async getVersion() {
     return getVersion.call(this);
+  }
+
+  @Catch()
+  async getSettings() {
+    return getSettings.call(this);
   }
 
   @Catch()

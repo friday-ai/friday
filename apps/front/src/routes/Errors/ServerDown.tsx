@@ -13,7 +13,7 @@ export default function ServerDown() {
   const { t } = useTranslation();
 
   return (
-    <Box display="flex" flexDirection="column" minHeight="100%" alignItems="center" justifyContent="center" margin={2}>
+    <Box display="flex" flexDirection="column" minHeight="100%" alignItems="center" justifyContent="center" padding={2}>
       <div style={{ width: 'fit-content', height: 'fit-content', marginBottom: '2rem' }}>
         <ServerError width="inerhit" height="inerhit" stroke={theme.palette.primary.main} fill={theme.palette.primary.main} />
       </div>

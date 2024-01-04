@@ -1,4 +1,8 @@
 {
+  "app": {
+    "cancel": "Cancel",
+    "ok": "Ok"
+  },
   "dashboard": {
     "appBar": {
       "dashboard": "Dashboard",
@@ -67,6 +71,79 @@
     "signin": "Sign In",
     "title": "Sign In to your account",
     "userNotFound": "User not found"
+  },
+  "settings": {
+    "title": "Settings",
+    "house": {
+      "add": "Create house",
+      "areYouSure": "Are you sure ?",
+      "delete": "Delete house",
+      "deleteMessage": "This action <b>cannot</b> be undone. This will permanently delete this house :",
+      "edit": "Edit house",
+      "houseName": "House name",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "nameEmpty": "The house name cannot be empty.",
+      "new": "New house",
+      "noRooms": "No room",
+      "rooms": "Rooms",
+      "save": "Save",
+      "saved": "House saved",
+      "select": "Select house",
+      "title": "Houses"
+    },
+    "sessions": {
+      "connected": "Connected",
+      "revoke": "Revoke session",
+      "title": "Sessions"
+    },
+    "system": {
+      "1m": "1 month",
+      "1y": "1 year",
+      "3m": "3 months",
+      "6m": "6 months",
+      "history": "History",
+      "historyDescription": "Period during which device states remain recorded.",
+      "historyTitle": "Devices's history",
+      "installed": "Installed",
+      "metric": "Celsius (°C), Si (Metric)",
+      "saved": "Settings saved",
+      "title": "System",
+      "units": "Units",
+      "unitsDescription": "Units used for displaying data",
+      "unlimited": "Unlimited",
+      "upToDate": "Up to date",
+      "us": "Fahrenheit (°F), Mi (Miles)",
+      "version": "Friday's version"
+    },
+    "user": {
+      "add": "Create user",
+      "admin": "Admin",
+      "areYouSure": "Are you sure ?",
+      "confirmPassword": "Confirm password",
+      "delete": "Delete user",
+      "deleteMessage": "This action <b>cannot</b> be undone. This will permanently delete this user :",
+      "edit": "Edit user",
+      "email": "Email address",
+      "emailEmpty": "The email cannot be empty.",
+      "emailNotValid": "The email must be valid.",
+      "guest": "Guest",
+      "habitant": "Habitant",
+      "language": "Language",
+      "new": "New user",
+      "password": "Password",
+      "passwordEmpty": "The password cannot be empty.",
+      "passwordNotMatch": "The passwords do not match.",
+      "passwordTooShort": "The password needs to be at least 10 characters long.",
+      "role": "Role",
+      "save": "Save",
+      "saved": "User saved",
+      "select": "Select user",
+      "superadmin": "Super admin",
+      "title": "Users",
+      "username": "Username",
+      "usernameEmpty": "The username cannot be empty."
+    }
   },
   "signup": {
     "account": {

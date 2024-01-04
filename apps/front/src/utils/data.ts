@@ -53,11 +53,11 @@ const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
 };
 
 const formatDistance = (date: Date) => {
-  const language = localStorage.getItem('i18nextLng') || 'en-US';
+  const language = localStorage.getItem('i18nextLng') || 'en';
   let local = dateLocals.enUS;
 
   switch (language) {
-    case 'fr-FR':
+    case 'fr':
       local = dateLocals.fr;
       break;
     default:

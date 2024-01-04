@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 import NiceModal, { useModal } from '@ebay/nice-modal-react';
 import { Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 export interface ConfirmationDialogProps {
   title: string;
@@ -16,6 +17,7 @@ export interface ConfirmationDialogProps {
 }
 
 export default NiceModal.create(({ title, content, onClose }: ConfirmationDialogProps) => {
+  const { t } = useTranslation();
   const modal = useModal();
 
   const handleClose = (confirm: boolean) => {
@@ -36,10 +38,10 @@ export default NiceModal.create(({ title, content, onClose }: ConfirmationDialog
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={() => handleClose(false)} variant={'contained'}>
-          Cancel
+          {t('app.cancel')}
         </Button>
         <Button onClick={() => handleClose(true)} variant={'outlined'}>
-          Ok
+          {t('app.ok')}
         </Button>
       </DialogActions>
     </Dialog>

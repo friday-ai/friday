@@ -1,12 +1,20 @@
 import { RoomAttributes, RoomCreationAttributes } from '@friday-ai/shared';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import useApp from '../app/useApp';
 
 const useRoom = () => {
   const { request } = useApp();
-  const createRoom = useMutation((room: RoomCreationAttributes) => request<RoomAttributes>('post', '/api/v1/room', {}, room));
-  const deleteRoom = useMutation((id: string) => request<boolean>('delete', '/api/v1/room/:id', { id }));
+  const queryClient = useQueryClient();
+
+  const createRoom = useMutation({
+    mutationFn: (room: RoomCreationAttributes) => request<RoomAttributes>('post', '/api/v1/room', {}, room),
+    onSuccess: () => {
+      queryClient.fetchQuery({ queryKey: ['getHouses'] });
+    },
+  });
+
+  const deleteRoom = useMutation({ mutationFn: (id: string) => request<boolean>('delete', '/api/v1/room/:id', { id }) });
 
   return {
     createRoom,

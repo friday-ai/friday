@@ -1,4 +1,5 @@
 import { DevicesActions, WebsocketMessageTypes } from '@friday-ai/shared';
+import { Order } from 'sequelize';
 import { EventsType, MqttMessageTypes, TopicsTypes } from '../config/constants';
 
 /**
@@ -8,6 +9,7 @@ export interface GetOptions {
   scope?: string;
   take?: number;
   skip?: number;
+  order?: Order;
 }
 
 /**

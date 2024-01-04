@@ -17,13 +17,13 @@ import Trigger from './trigger/trigger';
 import User from './user/user';
 import Variable from './variable/variable';
 
-import Event from '../utils/event';
-import Scheduler from '../utils/scheduler';
 import * as Constants from '../config/constants';
 import { FridayMode } from '../config/constants';
-import { generateJwtSecret } from '../utils/jwt';
 import jobs from '../config/jobs';
 import error from '../utils/decorators/error';
+import Event from '../utils/event';
+import { generateJwtSecret } from '../utils/jwt';
+import Scheduler from '../utils/scheduler';
 
 /**
  * Friday
@@ -100,6 +100,13 @@ export default class Friday {
     const version = await this.system.getVersion();
     // Return only package version
     return version[0];
+  }
+
+  /**
+   * Gets settings
+   */
+  async getSettings() {
+    return this.system.getSettings();
   }
 
   /**

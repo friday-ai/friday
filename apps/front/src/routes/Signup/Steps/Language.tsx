@@ -15,20 +15,20 @@ export default function Language({ activeStep, setActiveStep }: SignupProps) {
   const theme = useTheme();
   const { t, i18n } = useTranslation();
 
-  const [language, setLanguage] = useState('en-EN');
+  const [language, setLanguage] = useState('en');
 
   const handleLanguage = useCallback(
     (_: unknown, value: string) => {
       setLanguage(value);
-      localStorage.setItem('i18nextLng', value || 'en-EN');
-      i18n.changeLanguage(value || 'en-EN');
+      localStorage.setItem('i18nextLng', value || 'en');
+      i18n.changeLanguage(value || 'en');
     },
     [i18n]
   );
 
   // Set default language
   useEffect(() => {
-    handleLanguage(null, 'en-EN');
+    handleLanguage(null, 'en');
   }, [handleLanguage]);
 
   return (
@@ -43,10 +43,10 @@ export default function Language({ activeStep, setActiveStep }: SignupProps) {
       </Box>
 
       <ToggleButtonGroup orientation="vertical" value={language} exclusive onChange={handleLanguage}>
-        <ToggleButton value="en-EN" aria-label="list">
+        <ToggleButton value="en" aria-label="list">
           English
         </ToggleButton>
-        <ToggleButton value="fr-FR" aria-label="module">
+        <ToggleButton value="fr" aria-label="module">
           Français
         </ToggleButton>
       </ToggleButtonGroup>

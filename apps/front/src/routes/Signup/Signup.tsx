@@ -6,7 +6,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
 import { useTheme } from '@mui/material/styles';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +21,7 @@ import Time from './Steps/Time';
 import Units from './Steps/Units';
 
 import useSystem from '../../services/api/useSystem';
+import request from '../../services/app/request';
 
 // Welcome
 // Step 0: Choose your language
@@ -55,10 +56,23 @@ export default function Signup() {
       });
 
       if (res) {
-        navigate('/dashboard/devices');
+        navigate('/dashboard');
       }
     }, 3000);
   };
+
+  // Prevent user to acces this route if instance is already configured
+  useEffect(() => {
+    request<number>('get', '/api/v1/user/count', '')
+      .then((count) => {
+        if (count !== 0) {
+          navigate('/login');
+        }
+      })
+      .catch((error) => {
+        throw error;
+      });
+  });
 
   return (
     <Container maxWidth="sm">

@@ -1,4 +1,8 @@
 {
+  "app": {
+    "cancel": "Annuler",
+    "ok": "Valider"
+  },
   "dashboard": {
     "appBar": {
       "dashboard": "Accueil",
@@ -67,6 +71,79 @@
     "signin": "S'identifier",
     "title": "Connexion",
     "userNotFound": "Utilisateur non trouvé"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "house": {
+      "add": "Créer une nouvelle maison",
+      "areYouSure": "Êtes-vous sûr ?",
+      "delete": "Supprimer cette maison",
+      "deleteMessage": "Cette action <b>ne peut pas</b> être annulée. Cela supprimera définitivement la maison :",
+      "edit": "Editer la maison",
+      "houseName": "Nom de la maison",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "nameEmpty": "Le nom de la maison ne peut pas être vide.",
+      "new": "Nouvelle maison",
+      "noRooms": "Aucune pièce",
+      "rooms": "Pièces",
+      "save": "Sauvegarder",
+      "saved": "Maison sauvegardée",
+      "select": "Sélectionner cette maison",
+      "title": "Maisons"
+    },
+    "sessions": {
+      "connected": "Connexion",
+      "revoke": "Révoquer la session",
+      "title": "Sessions"
+    },
+    "system": {
+      "1m": "1 mois",
+      "1y": "1 an",
+      "3m": "3 mois",
+      "6m": "6 mois",
+      "history": "Historique",
+      "historyDescription": "Période pendant laquelle les états des appareils reste enregistrés.",
+      "historyTitle": "Historique des appareils",
+      "installed": "Actuelle",
+      "metric": "Celsius (°C), Si (métrique)",
+      "saved": "Paramétre souvegardé",
+      "title": "Système",
+      "units": "Unitées",
+      "unitsDescription": "Unités utilisées pour l'affichage des données",
+      "unlimited": "Illimité",
+      "upToDate": "Vous êtes à jour",
+      "us": "Fahrenheit (°F), Mi (Miles)",
+      "version": "Version de Friday"
+    },
+    "user": {
+      "add": "Créer un nouvel utilisateur",
+      "admin": "Administrateur",
+      "areYouSure": "Êtes-vous sûr ?",
+      "confirmPassword": "Confirmez le mot de passe",
+      "delete": "Supprimer cet utilisateur",
+      "deleteMessage": "Cette action <b>ne peut pas</b> être annulée. Cela supprimera définitivement l'utilisateur :",
+      "edit": "Editer l'utilisateur",
+      "email": "Adresse e-mail",
+      "emailEmpty": "L'e-mail ne peut pas être vide.",
+      "emailNotValid": "L'e-mail doit être valide.",
+      "guest": "Invité",
+      "habitant": "Habitant",
+      "language": "Language",
+      "new": "Nouvel utilisateur",
+      "password": "Mot de passe",
+      "passwordEmpty": "Le mot de passe ne peut pas être vide.",
+      "passwordNotMatch": "Le mot de passe ne correspond pas.",
+      "passwordTooShort": "Le mot de passe doit comporter au moins 10 caractères.",
+      "role": "Rôle",
+      "save": "Sauvegarder",
+      "saved": "Utilisateur sauvegardé",
+      "select": "Sélectionner cet utilisateur",
+      "superadmin": "Super administrateur",
+      "title": "Utilisateurs",
+      "username": "Nom d'utilisateur",
+      "usernameEmpty": "Le nom d'utilisateur ne peut pas être vide."
+    }
   },
   "signup": {
     "account": {

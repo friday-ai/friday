@@ -9,22 +9,15 @@ import MenuItem from '@mui/material/MenuItem';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Menu from '../Menu/Menu';
 
 import useSharedApp from '../../services/app/useApp';
 
 export default function AccountMenu() {
-  const navigate = useNavigate();
   const { logout } = useSharedApp();
   const { t } = useTranslation();
-
-  const handleNavigation = (_: unknown, page: string | null) => {
-    if (page) {
-      navigate(page.toLowerCase());
-    }
-  };
 
   return (
     <Box sx={{ flexGrow: 0 }}>
@@ -36,7 +29,7 @@ export default function AccountMenu() {
         buttonType="icon"
         icon={<Avatar alt="John peperwood" src="https://cdn-icons-png.flaticon.com/512/2202/2202112.png" />}
       >
-        <MenuItem onClick={() => handleNavigation(null, 'account')}>
+        <MenuItem component={Link} to="/dashboard/settings/users">
           <Avatar
             alt="John peperwood"
             src="https://cdn-icons-png.flaticon.com/512/2202/2202112.png"
@@ -53,7 +46,7 @@ export default function AccountMenu() {
         Add another account
       </MenuItem>
       */}
-        <MenuItem onClick={() => handleNavigation(null, 'settings')}>
+        <MenuItem component={Link} to="/dashboard/settings/system">
           <ListItemIcon>
             <SettingsIcon fontSize="small" />
           </ListItemIcon>

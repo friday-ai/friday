@@ -1,5 +1,5 @@
-import { Model, ModelCtor } from 'sequelize-typescript';
 import { WhereOptions } from 'sequelize';
+import { Model, ModelCtor } from 'sequelize-typescript';
 import { Catch, NotFoundError } from '../decorators/error';
 import { GetOptions } from '../interfaces';
 
@@ -7,6 +7,7 @@ const DEFAULT_OPTIONS: GetOptions = {
   scope: '',
   take: 20,
   skip: 0,
+  order: [],
 };
 
 export interface PartialModelType<T> {
@@ -55,12 +56,14 @@ export abstract class PartialModel<M extends Model, T> implements PartialModelTy
       entities = await this.model.scope(mergedOptions.scope).findAll({
         limit: mergedOptions.take,
         offset: mergedOptions.skip,
+        order: mergedOptions.order,
         where,
       });
     } else {
       entities = await this.model.findAll({
         limit: mergedOptions.take,
         offset: mergedOptions.skip,
+        order: mergedOptions.order,
         where,
       });
     }

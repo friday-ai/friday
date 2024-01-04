@@ -184,4 +184,5 @@ export enum SystemVariablesNames {
   FRIDAY_VERSION = 'friday_version',
   HISTORY_STATE_IN_DAYS = 'history_state_in_days',
   NUMBER_OF_BACKUPS = 'number_of_backups',
+  UNITS = 'system_units',
 }

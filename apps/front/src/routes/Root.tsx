@@ -1,105 +1,71 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { SnackbarProvider } from 'notistack';
 
-import AnimationLayout from '../components/App/AnimationLayout';
-import RequireAuth from '../components/Auth/RequireAuth';
-
-import { useGetUserCount } from '../services/api/useUser';
 import useSharedApp from '../services/app/useApp';
 
 import LoaderSuspense from '../components/Loader/LoaderSuspense';
-import Account from './Dashboard/Account';
-import Dashboard from './Dashboard/Dashboard';
-import Devices from './Dashboard/Devices';
-import SatellitesDetails from './Dashboard/Satellites/Details';
-import PluginInstall from './Dashboard/Satellites/Plugins/Install';
-import Satellites from './Dashboard/Satellites/Satellites';
-import Settings from './Dashboard/Settings';
-import NotFound from './Errors/NotFound';
-import ServerDown from './Errors/ServerDown';
-import Login from './Login/Login';
-import Signup from './Signup/Signup';
-
 import { defaultSnackbar, errorSnackbar, infoSnackbar, successSnackbar, warningSnackbar } from '../components/Snackbar/Snackbar';
+import useError from '../utils/useError';
 
 export default function Root() {
+  const { init } = useSharedApp();
+  const { pathname } = useLocation();
+  const { handleError } = useError();
   const navigate = useNavigate();
 
-  const { isLoading, isError, isSuccess, data } = useGetUserCount();
-  const { initExistingSession, hasSession } = useSharedApp();
-
-  const [loadingSession, setLoadingSession] = useState(false);
-
+  const [isLoadingSession, setLoadingSession] = useState(true);
   useEffect(() => {
-    if (isSuccess && data !== 0 && !hasSession) {
-      setLoadingSession(true);
-      initExistingSession().then((res) => {
-        if (!res) {
-          navigate('/login');
-        }
-        setLoadingSession(false);
-      });
+    // If the user tries to access the opening pages, let's do nothing
+    if (/login|signup/.test(pathname)) {
+      setLoadingSession(false);
+      return;
     }
-  }, [isSuccess, data, initExistingSession, hasSession, navigate]);
+
+    init()
+      .then((res) => {
+        // It response is typeof number, then there is no session in local storage
+        if (typeof res === 'number') {
+          // Redirect user to appropriate route
+          if (res !== 0) {
+            navigate('/login');
+          } else {
+            navigate('/signup');
+          }
+        }
+
+        // But else, and, if the pathname is empty, redirect user to dashbaord
+        if (pathname === '/') {
+          navigate('/dashboard');
+        }
+
+        setLoadingSession(false);
+      })
+      .catch((error) => {
+        // Throw error to redirect user to ErrorBoundary component
+        throw error;
+      });
+
+    window.onerror = handleError;
+  }, []);
 
   return (
-    <LoaderSuspense isFetching={isLoading || loadingSession}>
-      <>
-        {isError && !loadingSession && (
-          <AnimationLayout>
-            <ServerDown />
-          </AnimationLayout>
-        )}
-        {isSuccess && !loadingSession && (
-          <Routes>
-            {/* Signup route not exist if one or more user has already registered */}
-            {data === 0 && <Route path="/signup" element={<Signup />} />}
-
-            {/* If one or more user has already registered, redirect him to dashboard */}
-            {/* Else redirect him to signup route */}
-            <Route path="/" element={data !== 0 ? <Navigate to="/dashboard/devices" replace /> : <Navigate to="/signup" replace />} />
-
-            <Route
-              path="/server-down"
-              element={
-                <AnimationLayout>
-                  <ServerDown />
-                </AnimationLayout>
-              }
-            />
-
-            <Route path="/login" element={<Login />} />
-            <Route element={<RequireAuth />}>
-              <Route path="dashboard" element={<Dashboard />}>
-                <Route index path="devices" element={<Devices />} />
-                <Route path="account" element={<Account />} />
-                <Route path="satellites">
-                  <Route index element={<Satellites />} />
-                  <Route path=":id">
-                    <Route index element={<SatellitesDetails />} />
-                    <Route path="plugins/install" element={<PluginInstall />} />
-                  </Route>
-                </Route>
-                <Route path="settings" element={<Settings />} />
-              </Route>
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        )}
-        <SnackbarProvider
-          Components={{
-            default: defaultSnackbar,
-            success: successSnackbar,
-            warning: warningSnackbar,
-            error: errorSnackbar,
-            info: infoSnackbar,
-          }}
-          anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
-          maxSnack={6}
-        />
-      </>
-    </LoaderSuspense>
+    <>
+      <LoaderSuspense isFetching={isLoadingSession}>
+        <Outlet></Outlet>
+      </LoaderSuspense>
+      <SnackbarProvider
+        Components={{
+          default: defaultSnackbar,
+          success: successSnackbar,
+          warning: warningSnackbar,
+          error: errorSnackbar,
+          info: infoSnackbar,
+        }}
+        anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+        maxSnack={6}
+      />
+    </>
   );
 }

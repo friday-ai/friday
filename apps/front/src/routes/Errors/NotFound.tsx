@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles';
 
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link as RouterLink } from 'react-router-dom';
 
 import { ReactComponent as ServerError } from '../../assets/svg/404.svg';
 
@@ -24,7 +25,9 @@ export default function NotFound() {
       <Typography textAlign="center" variant="subtitle1" color={theme.palette.text.secondary}>
         {t('errors.notFound.description')}
       </Typography>
-      <Link href="/dashboard/devices">{t('errors.notFound.backToHome')}</Link>
+      <Link component={RouterLink} to="/dashboard">
+        {t('errors.notFound.backToHome')}
+      </Link>
     </Box>
   );
 }

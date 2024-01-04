@@ -28,7 +28,7 @@ export default function Units({ activeStep, setActiveStep }: SignupProps) {
   };
 
   const handleNext = () => {
-    createVariable.mutate({ key: 'history_state_in_days', value: units, owner: app.user?.id || '', ownerType: VariableOwner.USER });
+    createVariable.mutate({ key: 'system_units', value: units, owner: app.user?.id || '', ownerType: VariableOwner.USER });
     setActiveStep(activeStep + 1);
   };
 
