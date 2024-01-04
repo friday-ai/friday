@@ -12,7 +12,7 @@ export default function System() {
   const { t } = useTranslation();
   const { updateVariable } = useVariable();
   const { isFetching, isFetchedAfterMount, data: settings } = useGetSystemSettings();
-  const [history, setHistory] = useState(settings?.history || '1 month');
+  const [history, setHistory] = useState(settings?.history || '30');
   const [units, setUnits] = useState(settings?.units || 'metric');
 
   const handleHistoryChange = async (h: string) => {
@@ -60,11 +60,11 @@ export default function System() {
               <FormControl fullWidth>
                 <InputLabel id="time">{t('settings.system.historyTitle')}</InputLabel>
                 <Select labelId="time" id="time-select" label="Time" value={history} onChange={(e) => handleHistoryChange(e.target.value)}>
-                  <MenuItem value="1 month">{t('settings.system.1m')}</MenuItem>
-                  <MenuItem value="3 months">{t('settings.system.3m')}</MenuItem>
-                  <MenuItem value="6 months">{t('settings.system.6m')}</MenuItem>
-                  <MenuItem value="1 year">{t('settings.system.1y')}</MenuItem>
-                  <MenuItem value="unlimited">{t('settings.system.unlimited')}</MenuItem>
+                  <MenuItem value="30">{t('settings.system.1m')}</MenuItem>
+                  <MenuItem value="90">{t('settings.system.3m')}</MenuItem>
+                  <MenuItem value="180">{t('settings.system.6m')}</MenuItem>
+                  <MenuItem value="365">{t('settings.system.1y')}</MenuItem>
+                  <MenuItem value="0">{t('settings.system.unlimited')}</MenuItem>
                 </Select>
               </FormControl>
             </CardContent>

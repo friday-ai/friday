@@ -21,7 +21,7 @@ export default function Time({ activeStep, setActiveStep }: SignupProps) {
   const { t } = useTranslation();
   const { createVariable } = useVariable();
 
-  const [time, setTime] = useState('1 month');
+  const [time, setTime] = useState('30');
 
   const handleChange = (_: unknown, newTime: string) => {
     setTime(newTime);
@@ -34,7 +34,7 @@ export default function Time({ activeStep, setActiveStep }: SignupProps) {
 
   // Set default time
   useEffect(() => {
-    handleChange(null, '1 month');
+    handleChange(null, '30');
   }, []);
 
   return (
@@ -49,19 +49,19 @@ export default function Time({ activeStep, setActiveStep }: SignupProps) {
       </Box>
 
       <ToggleButtonGroup orientation="vertical" value={time} exclusive onChange={handleChange}>
-        <ToggleButton value="1 month" aria-label="list">
+        <ToggleButton value="30" aria-label="list">
           {t('signup.time.1m')}
         </ToggleButton>
-        <ToggleButton value="3 months" aria-label="module">
+        <ToggleButton value="90" aria-label="module">
           {t('signup.time.3m')}
         </ToggleButton>
-        <ToggleButton value="6 months" aria-label="module">
+        <ToggleButton value="180" aria-label="module">
           {t('signup.time.6m')}
         </ToggleButton>
-        <ToggleButton value="1 year" aria-label="module">
+        <ToggleButton value="365" aria-label="module">
           {t('signup.time.1y')}
         </ToggleButton>
-        <ToggleButton value="unlimited" aria-label="module">
+        <ToggleButton value="0" aria-label="module">
           {t('signup.time.unlimited')}
         </ToggleButton>
       </ToggleButtonGroup>

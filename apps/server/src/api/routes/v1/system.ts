@@ -53,7 +53,7 @@ export default class SystemRouter {
    * {
    *   version: "1.0.0",
    *   untis: "metric"
-   *   history: "1 month"
+   *   history: "30"
    * }
    */
   @Get({

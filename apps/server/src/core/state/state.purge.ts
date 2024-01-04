@@ -1,8 +1,8 @@
-import { Op } from 'sequelize';
 import { SystemVariablesNames } from '@friday-ai/shared';
+import { Op } from 'sequelize';
 import State from '../../models/state';
-import StateClass from './state';
 import { CoreError } from '../../utils/decorators/error';
+import StateClass from './state';
 
 /**
  * Purge states.

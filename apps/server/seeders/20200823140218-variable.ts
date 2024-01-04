@@ -62,7 +62,7 @@ export default {
       {
         id: 'a7ef5f08-2bad-4489-95bf-b73fcf694d8f',
         key: 'history_state_in_days',
-        value: '1 month',
+        value: '30',
         owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
         ownerType: 'satellite',
         createdAt: new Date(),

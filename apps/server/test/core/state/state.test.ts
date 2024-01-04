@@ -1,5 +1,5 @@
 import { assert, expect } from 'chai';
-import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '@friday-ai/shared';
+import { AvailableState, StateOwner } from '@friday-ai/shared';
 import State from '../../../src/core/state/state';
 import { DatabaseValidationError, NotFoundError } from '../../../src/utils/decorators/error';
 
@@ -69,13 +69,6 @@ describe('State.purge', () => {
   });
 
   it('should purge all states', async () => {
-    await global.FRIDAY.variable.create({
-      key: SystemVariablesNames.HISTORY_STATE_IN_DAYS,
-      value: '30',
-      owner: '0cd30aef-9c4e-4a23-81e3-3547971296e5',
-      ownerType: VariableOwner.SATELLITE,
-    });
-
     const promise = state.purge();
     await assert.isFulfilled(promise);
   });
