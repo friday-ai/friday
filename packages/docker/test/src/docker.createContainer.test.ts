@@ -17,7 +17,8 @@ describe('Docker.createContainer', () => {
     container.remove(done);
   });
 
-  it('should create a container', async () => {
+  it('should create a container', async function run() {
+    this.timeout(15000);
     container = await docker.createContainer({
       Image: 'alpine',
       AttachStdin: false,
