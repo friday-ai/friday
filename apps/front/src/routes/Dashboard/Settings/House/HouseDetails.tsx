@@ -125,13 +125,15 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
         </Typography>
 
         <Tooltip title={t('settings.house.save')}>
-          <IconButton
-            aria-label="save house"
-            onClick={handleSave}
-            disabled={!(houseMustBeSaved || roomsToCreate.length !== 0 || roomsToDelete.length !== 0)}
-          >
-            <SaveOutlinedIcon />
-          </IconButton>
+          <span>
+            <IconButton
+              aria-label="save house"
+              onClick={handleSave}
+              disabled={!(houseMustBeSaved || roomsToCreate.length !== 0 || roomsToDelete.length !== 0)}
+            >
+              <SaveOutlinedIcon />
+            </IconButton>
+          </span>
         </Tooltip>
       </Stack>
       <Paper sx={{ padding: '2rem', alignSelf: 'center' }}>

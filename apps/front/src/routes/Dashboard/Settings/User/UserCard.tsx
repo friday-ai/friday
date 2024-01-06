@@ -55,9 +55,11 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
               </IconButton>
             </Tooltip>
             <Tooltip title={t('settings.user.delete')}>
-              <IconButton aria-label="delete user" onClick={handleDeleteUser} disabled={user.role === UserRole.SUPERADMIN}>
-                <DeleteOutlineOutlinedIcon />
-              </IconButton>
+              <span>
+                <IconButton aria-label="delete user" onClick={handleDeleteUser} disabled={user.role === UserRole.SUPERADMIN}>
+                  <DeleteOutlineOutlinedIcon />
+                </IconButton>
+              </span>
             </Tooltip>
           </Stack>
         }

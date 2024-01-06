@@ -33,10 +33,8 @@ export default function Root() {
           } else {
             navigate('/signup');
           }
-        }
-
-        // But else, and, if the pathname is empty, redirect user to dashbaord
-        if (pathname === '/') {
+        } else if (pathname === '/') {
+          // But else, and, if the pathname is empty, redirect user to dashbaord
           navigate('/dashboard');
         }
 

@@ -43,7 +43,7 @@ export default function ErrorBoundary() {
     }
 
     if (msg === 'Auth failed') {
-      window.location.href = '/login';
+      window.location.href = '/';
     }
 
     errorMessage = msg;

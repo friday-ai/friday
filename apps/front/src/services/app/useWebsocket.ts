@@ -43,6 +43,8 @@ const useWebsocket = () => {
 
       ws.current.onclose = (event) => {
         if (event.reason === 'Auth failed') {
+          localStorage.removeItem('session');
+          localStorage.removeItem('i18nextLng');
           throw Error('Auth failed');
         }
 

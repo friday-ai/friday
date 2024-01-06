@@ -171,9 +171,11 @@ export default function UserDetails({ user, selectUser }: UserDetailsProps) {
           {t('settings.user.edit')}
         </Typography>
         <Tooltip title={t('settings.user.save')}>
-          <IconButton aria-label="save user" onClick={handleSave} disabled={!userMustBeSaved || error !== 0}>
-            <SaveOutlinedIcon />
-          </IconButton>
+          <span>
+            <IconButton aria-label="save user" onClick={handleSave} disabled={!userMustBeSaved || error !== 0}>
+              <SaveOutlinedIcon />
+            </IconButton>
+          </span>
         </Tooltip>
       </Stack>
       <Paper sx={{ padding: '2rem', maxWidth: { xs: 400, sm: 600 }, alignSelf: 'center' }}>

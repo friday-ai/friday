@@ -172,6 +172,7 @@ const themeLight = createTheme(
         defaultProps: {
           sx: {
             backgroundColor: 'transparent',
+            border: 'none',
           },
         },
       },

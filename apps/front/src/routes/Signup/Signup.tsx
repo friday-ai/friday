@@ -72,7 +72,7 @@ export default function Signup() {
       .catch((error) => {
         throw error;
       });
-  });
+  }, []);
 
   return (
     <Container maxWidth="sm">

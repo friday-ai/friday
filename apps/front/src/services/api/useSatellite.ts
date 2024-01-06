@@ -26,7 +26,7 @@ const useSatellite = () => {
 
 export const useGetSatellites = () => {
   const { request } = useApp();
-  return useQuery({ queryKey: ['getSatellites'], queryFn: () => request<SatelliteAttributes[]>('get', '/api/v1/satellite', { scope: 'full' }) });
+  return useQuery({ queryKey: ['getSatellites'], queryFn: () => request<SatelliteAttributes[]>('get', '/api/v1/satellite') });
 };
 
 export const useGetSatelliteById = (id: string) => {

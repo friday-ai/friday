@@ -64,7 +64,7 @@ export default function Settings() {
           </Paper>
 
           <Paper sx={{ display: { xs: 'block', lg: 'none' }, alignSelf: { xs: 'auto', sm: 'center' } }}>
-            <Tabs aria-label="basic tabs example" variant="scrollable" scrollButtons allowScrollButtonsMobile centered value={selected}>
+            <Tabs aria-label="basic tabs example" variant="scrollable" scrollButtons allowScrollButtonsMobile value={selected}>
               <Tab
                 id="system"
                 component={Link}

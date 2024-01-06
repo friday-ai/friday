@@ -59,7 +59,13 @@ export default function System() {
               </Typography>
               <FormControl fullWidth>
                 <InputLabel id="time">{t('settings.system.historyTitle')}</InputLabel>
-                <Select labelId="time" id="time-select" label="Time" value={history} onChange={(e) => handleHistoryChange(e.target.value)}>
+                <Select
+                  labelId="time"
+                  id="time-select"
+                  label={t('settings.system.historyTitle')}
+                  value={history}
+                  onChange={(e) => handleHistoryChange(e.target.value)}
+                >
                   <MenuItem value="30">{t('settings.system.1m')}</MenuItem>
                   <MenuItem value="90">{t('settings.system.3m')}</MenuItem>
                   <MenuItem value="180">{t('settings.system.6m')}</MenuItem>
@@ -79,7 +85,13 @@ export default function System() {
               </Typography>
               <FormControl fullWidth>
                 <InputLabel id="units">{t('settings.system.units')}</InputLabel>
-                <Select labelId="units" id="units-select" label="Units" value={units} onChange={(e) => handleUnitsChange(e.target.value)}>
+                <Select
+                  labelId="units"
+                  id="units-select"
+                  label={t('settings.system.units')}
+                  value={units}
+                  onChange={(e) => handleUnitsChange(e.target.value)}
+                >
                   <MenuItem value="metric">{t('settings.system.metric')}</MenuItem>
                   <MenuItem value="us">{t('settings.system.us')}</MenuItem>
                 </Select>
