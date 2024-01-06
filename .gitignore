@@ -30,6 +30,7 @@ build
 # Dependency directories
 node_modules
 jspm_packages
+.pnpm-store
 
 # Optional npm cache directory
 .npm
