@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { defineConfig, type PluginOption } from 'vite';
+import { defineConfig, PluginOption } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import svgr from 'vite-plugin-svgr';
 
@@ -19,7 +19,10 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    svgr(),
+    svgr({
+      svgrOptions: { exportType: 'named', ref: true, svgo: false, titleProp: true },
+      include: '**/*.svg',
+    }),
     visualizer() as PluginOption,
     VitePWA({
       registerType: 'autoUpdate',
