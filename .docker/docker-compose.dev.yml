@@ -1,0 +1,80 @@
+version: "3.9"
+
+services:
+  builder:
+    container_name: builder-dev
+    image: fridayai/friday-builder:dev
+    build:
+      context: ../
+      dockerfile: ./.docker/Dockerfile-development
+      target: builder
+    restart: on-failure
+    volumes:
+      - ../.pnpm-store:/src/.pnpm-store
+      - ../apps:/src/apps
+      - ../packages:/src/packages
+      - ../package.json:/src/package.json
+      - ../pnpm-lock.yaml:/src/pnpm-lock.yaml
+      - ../pnpm-workspace.yaml:/src/pnpm-workspace.yaml
+      - ../node_modules:/src/node_modules
+
+  server:
+    container_name: server-dev
+    image: fridayai/friday-server:dev
+    build:
+      context: ../
+      dockerfile: ./.docker/Dockerfile-development
+      target: server
+    depends_on:
+      builder:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - MQTT_HOST=host.docker.internal
+    volumes:
+      - ../.pnpm-store:/src/.pnpm-store
+      - ../apps/server:/src/apps/server
+      - ../packages:/src/packages
+      - ../package.json:/src/package.json
+      - ../pnpm-lock.yaml:/src/pnpm-lock.yaml
+      - ../pnpm-workspace.yaml:/src/pnpm-workspace.yaml
+      - ../node_modules:/src/node_modules
+
+  front:
+    container_name: front-dev
+    image: fridayai/friday-front:dev
+    build:
+      context: ../
+      dockerfile: ./.docker/Dockerfile-development
+      target: front
+    depends_on:
+      builder:
+        condition: service_healthy
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ../.pnpm-store:/src/.pnpm-store
+      - ../apps/front:/src/apps/front
+      - ../packages:/src/packages
+      - ../package.json:/src/package.json
+      - ../pnpm-lock.yaml:/src/pnpm-lock.yaml
+      - ../pnpm-workspace.yaml:/src/pnpm-workspace.yaml
+      - ../node_modules:/src/node_modules
+
+  broker:
+    container_name: broker-dev
+    image: eclipse-mosquitto:latest
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ../.docker/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ../.docker/mosquitto/data:/mosquitto/data
+    environment:
+      - TZ=Europe/Paris
+    user: 1000:1000
