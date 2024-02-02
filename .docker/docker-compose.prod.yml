@@ -1,0 +1,62 @@
+version: "3.9"
+
+services:
+  server:
+    container_name: friday-server
+    image: fridayai/friday-server:latest
+    labels:
+      "autoheal": "true"
+    build:
+      context: ../
+      dockerfile: ./.docker/Dockerfile-production
+      target: server
+    ports:
+      - "1443:1443"
+    environment:
+      - NODE_ENV=production
+      - MQTT_HOST=host.docker.internal
+
+  front:
+    container_name: friday-front
+    image: fridayai/friday-front:latest
+    build:
+      context: ../
+      dockerfile: ./.docker/Dockerfile-production
+      target: front
+    depends_on:
+      - server
+    ports:
+      - "1444:1444"
+    environment:
+      - NODE_ENV=production
+
+  broker:
+    container_name: broker
+    image: eclipse-mosquitto:latest
+    restart: always
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ../.docker/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ../.docker/mosquitto/data:/mosquitto/data
+    environment:
+      - TZ=Europe/Paris
+    user: 1000:1000
+
+  autoheal:
+    container_name: Friday-ai-autoheal
+    image: willfarrell/autoheal
+    restart: always
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      - AUTOHEAL_INTERVAL=10
+
+  watchtower:
+    container_name: Friday-ai-watchtower
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup
