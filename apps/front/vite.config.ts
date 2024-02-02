@@ -6,7 +6,6 @@ import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
   server: {
-    https: process.env.HTTPS === 'true',
     port: Number(process.env.PORT) || 3001,
   },
   optimizeDeps: {
