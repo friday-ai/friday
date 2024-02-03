@@ -2,14 +2,17 @@
   "name": "@friday-ai/shared",
   "version": "1.0.9",
   "description": "Friday: Shared utilites",
-  "main": "lib/index.js",
-  "typings": "lib/index.d.ts",
+  "source": "src/index.ts",
+  "main": "lib/main.js",
+  "module": "lib/module.js",
+  "types": "lib/types.d.ts",
+  "typings": "lib/types.d.ts",
   "files": [
     "lib/"
   ],
   "scripts": {
     "prepublish": "pnpm build",
-    "build": "tsc --outDir ./lib",
+    "build": "parcel build",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
     "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src"
   },
@@ -21,6 +24,8 @@
     "typescript": "*"
   },
   "devDependencies": {
+    "@parcel/packager-ts": "2.11.0",
+    "@parcel/transformer-typescript-types": "2.11.0",
     "@types/node": "^20.10.6",
     "@typescript-eslint/eslint-plugin": "^6.18.0",
     "@typescript-eslint/parser": "^6.18.0",
@@ -29,6 +34,7 @@
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-tsdoc": "^0.2.17",
+    "parcel": "^2.11.0",
     "prettier": "^3.1.1"
   }
 }

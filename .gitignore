@@ -51,6 +51,7 @@ jspm_packages
 dist/
 lib/
 vite.config.*.mjs
+.parcel-cache
 
 # IDE folder
 .idea
