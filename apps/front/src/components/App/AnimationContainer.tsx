@@ -1,5 +1,4 @@
 import { AnimatePresence, m, MotionStyle } from 'framer-motion';
-import React from 'react';
 
 interface AnimationContainerProps {
   children: React.ReactNode;

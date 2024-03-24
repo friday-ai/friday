@@ -6,7 +6,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 
 import { useTheme } from '@mui/material/styles';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SignupProps } from '../Signup';
@@ -23,7 +23,7 @@ export default function Language({ activeStep, setActiveStep }: SignupProps) {
       localStorage.setItem('i18nextLng', value || 'en');
       i18n.changeLanguage(value || 'en');
     },
-    [i18n]
+    [i18n],
   );
 
   // Set default language

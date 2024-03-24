@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 
 import { useTheme } from '@mui/material/styles';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,7 +42,7 @@ export default function Login() {
       if (res) {
         navigate('/dashboard', { replace: true });
       }
-    } catch (err) {
+    } catch (err: any) {
       if (err.response.status === 404) {
         setError(1);
       } else if (err.response.status === 403) {

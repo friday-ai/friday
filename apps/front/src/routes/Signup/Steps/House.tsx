@@ -11,10 +11,10 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
 import { useTheme } from '@mui/material/styles';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Map from '../../../components/Map/Map';
+import CustomMap from '../../../components/Map/Map';
 
 import { SignupProps } from '../Signup';
 
@@ -92,7 +92,7 @@ export default function House({ activeStep, setActiveStep }: SignupProps) {
         </Typography>
       </Box>
 
-      <Map
+      <CustomMap
         markers={[{ title: houseName, position: houseCoordinates }]}
         onNewMarker={(latitude, longitude) => setHouseCoordinates([latitude, longitude])}
       />

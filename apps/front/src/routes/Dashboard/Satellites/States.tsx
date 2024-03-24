@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Chip from '@mui/material/Chip';
 
 import { AvailableState } from '@friday-ai/shared';

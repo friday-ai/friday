@@ -1,5 +1,3 @@
-import React from 'react';
-
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import GiteOutlinedIcon from '@mui/icons-material/GiteOutlined';
@@ -14,7 +12,7 @@ import useHouse from '../../../../services/api/useHouse';
 interface HouseCardProps {
   house: HouseAttributes | HouseCreationAttributes;
   selected: boolean;
-  selectHouse: (id: string) => void;
+  selectHouse: (_id: string) => void;
 }
 
 export default function HouseCard({ house, selected, selectHouse }: HouseCardProps) {
@@ -26,7 +24,7 @@ export default function HouseCard({ house, selected, selectHouse }: HouseCardPro
       NiceModal.show(Confirm, {
         title: t('settings.house.areYouSure'),
         content: `${t('settings.house.deleteMessage')} <b>${house.name}</b>.`,
-        onClose: async (confirm) => {
+        onClose: async (confirm: boolean) => {
           if (confirm) {
             await deleteHouse.mutateAsync(house.id);
           }

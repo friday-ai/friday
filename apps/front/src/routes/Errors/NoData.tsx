@@ -3,8 +3,6 @@ import Box from '@mui/material/Box';
 
 import { useTheme } from '@mui/material/styles';
 
-import React from 'react';
-
 import { ReactComponent as NoFound } from '../../assets/svg/no_data.svg';
 
 export default function NoData({ title, subtitle }: { title: string; subtitle: string }) {

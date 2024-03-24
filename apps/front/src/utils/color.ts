@@ -46,9 +46,9 @@ const colorToRGBA = (color: string, alpha: number): string => {
   // Check if the color is in RGBA format
   const rgbMatch = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/i);
   if (rgbMatch) {
-    const red = parseInt(rgbMatch[1], 10);
-    const green = parseInt(rgbMatch[2], 10);
-    const blue = parseInt(rgbMatch[3], 10);
+    const red = parseInt(rgbMatch[1] || '', 10);
+    const green = parseInt(rgbMatch[2] || '', 10);
+    const blue = parseInt(rgbMatch[3] || '', 10);
 
     if (red >= 0 && red <= 255 && green >= 0 && green <= 255 && blue >= 0 && blue <= 255) {
       return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
@@ -58,9 +58,9 @@ const colorToRGBA = (color: string, alpha: number): string => {
   // Check if the color is in HEX format
   const hexMatch = color.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
   if (hexMatch) {
-    const red = parseInt(hexMatch[1], 16);
-    const green = parseInt(hexMatch[2], 16);
-    const blue = parseInt(hexMatch[3], 16);
+    const red = parseInt(hexMatch[1] || '', 16);
+    const green = parseInt(hexMatch[2] || '', 16);
+    const blue = parseInt(hexMatch[3] || '', 16);
 
     if (!Number.isNaN(red) && !Number.isNaN(green) && !Number.isNaN(blue)) {
       return `rgba(${red}, ${green}, ${blue}, ${alpha})`;
@@ -70,9 +70,9 @@ const colorToRGBA = (color: string, alpha: number): string => {
   // Check if the color is in HSL format
   const hslMatch = color.match(/^hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)$/i);
   if (hslMatch) {
-    const hue = parseInt(hslMatch[1], 10);
-    const saturation = parseInt(hslMatch[2], 10);
-    const lightness = parseInt(hslMatch[3], 10);
+    const hue = parseInt(hslMatch[1] || '', 10);
+    const saturation = parseInt(hslMatch[2] || '', 10);
+    const lightness = parseInt(hslMatch[3] || '', 10);
 
     if (hue >= 0 && hue <= 360 && saturation >= 0 && saturation <= 100 && lightness >= 0 && lightness <= 100) {
       const converted = hslToRGB(hue, saturation, lightness);

@@ -4,7 +4,6 @@ import Link from '@mui/material/Link';
 
 import { useTheme } from '@mui/material/styles';
 
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 

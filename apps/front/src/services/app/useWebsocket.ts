@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 
 import { WebsocketMessageTypes, WebsocketPayload } from '@friday-ai/shared';
 
-const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
+const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10) || 3000;
 
 type Listener = (payload: WebsocketPayload) => void;
 type Handlers = Record<WebsocketMessageTypes, Listener[]>;
@@ -29,7 +29,7 @@ const useWebsocket = () => {
             JSON.stringify({
               type: WebsocketMessageTypes.AUTHENTICATION,
               data: { accessToken, userId },
-            })
+            }),
           );
         }
       };
@@ -53,7 +53,7 @@ const useWebsocket = () => {
         }
       };
     },
-    [handlers]
+    [handlers],
   );
 
   const on = useCallback(
@@ -67,7 +67,7 @@ const useWebsocket = () => {
       newHandlers[event].push(callback);
       setHandlers(newHandlers);
     },
-    [handlers, setHandlers]
+    [handlers, setHandlers],
   );
 
   const off = useCallback(
@@ -79,7 +79,7 @@ const useWebsocket = () => {
         setHandlers(newHandlers);
       }
     },
-    [handlers, setHandlers]
+    [handlers, setHandlers],
   );
 
   return { connect, on, off, send: ws.current?.send };

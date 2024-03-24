@@ -1,4 +1,3 @@
-import React from 'react';
 import { MapContainer, Marker as MapMarker, Popup, TileLayer } from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
@@ -16,7 +15,7 @@ interface MapProps {
   onNewMarker: (latitude: number, longitude: number) => void;
 }
 
-export default function Map({ markers, onNewMarker }: MapProps) {
+export default function CustomMap({ markers, onNewMarker }: MapProps) {
   const theme = useTheme();
 
   return (
@@ -39,6 +38,6 @@ export default function Map({ markers, onNewMarker }: MapProps) {
   );
 }
 
-Map.defaultProps = {
+CustomMap.defaultProps = {
   markers: [],
 };

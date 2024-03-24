@@ -1,6 +1,5 @@
 import { useTheme } from '@mui/material/styles';
 import { m, Transition } from 'framer-motion';
-import React from 'react';
 
 const transition: Transition = {
   duration: 4,

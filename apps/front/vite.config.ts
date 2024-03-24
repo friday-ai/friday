@@ -3,6 +3,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig, PluginOption } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import svgr from 'vite-plugin-svgr';
+import { nodePolyfills } from 'vite-plugin-node-polyfills'
 
 export default defineConfig({
   server: {
@@ -23,6 +24,12 @@ export default defineConfig({
       include: '**/*.svg',
     }),
     visualizer() as PluginOption,
+    nodePolyfills({
+      exclude: [
+        'process',
+      ],
+      protocolImports: true,
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       strategies: 'generateSW',

@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 
 import { useTheme } from '@mui/material/styles';
 import { debounce } from '@mui/material/utils';
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { SignupProps } from '../Signup';
@@ -57,7 +57,7 @@ export default function Account({ activeStep, setActiveStep }: SignupProps) {
 
         setError(0);
       }, 500),
-    []
+    [],
   );
 
   const checkEmail = useMemo(
@@ -79,7 +79,7 @@ export default function Account({ activeStep, setActiveStep }: SignupProps) {
 
         setError(0);
       }, 500),
-    []
+    [],
   );
 
   const checkPassword = useMemo(
@@ -101,7 +101,7 @@ export default function Account({ activeStep, setActiveStep }: SignupProps) {
 
         setError(0);
       }, 500),
-    []
+    [],
   );
 
   const checkPasswordMatch = useMemo(
@@ -117,7 +117,7 @@ export default function Account({ activeStep, setActiveStep }: SignupProps) {
         setError(0);
         setStepCompleted(true);
       }, 500),
-    []
+    [],
   );
 
   const sendUser = async () => {

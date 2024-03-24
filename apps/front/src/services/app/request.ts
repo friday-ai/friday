@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export type Methods = 'get' | 'post' | 'patch' | 'delete';
 
-const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10);
+const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10) || 3000;
 
 const request = async <T>(method: Methods, url: string, header: string, query = {}, body = {}) => {
   const { data }: { data: T } = await axios<T>({

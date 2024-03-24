@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import AnimationLayout from '../App/AnimationLayout';
 import LoaderLayout from './LoaderLayout';

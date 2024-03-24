@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Navigate, useLocation } from 'react-router-dom';
 
 import LoaderSuspense from '../../../components/Loader/LoaderSuspense';
@@ -10,14 +8,14 @@ export default function Satellites() {
   const location = useLocation();
   const { isLoading, isSuccess, data } = useGetSatellites();
 
-  if (!isSuccess) {
+  if (!isSuccess || data === undefined || data[0] === undefined) {
     return null;
   }
 
   return (
     <LoaderSuspense isFetching={isLoading}>
       <>
-        <Navigate to={`${data[0].id}`} state={{ from: location }} />{' '}
+        <Navigate to={`${data[0].id}`} state={{ from: location }} />
       </>
     </LoaderSuspense>
   );

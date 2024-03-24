@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { localPoint } from '@visx/event';
 import { Group } from '@visx/group';

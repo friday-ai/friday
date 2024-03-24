@@ -1,24 +1,21 @@
-import React from 'react';
-
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 
 import { CustomContentProps, SnackbarContent } from 'notistack';
+import { forwardRef } from 'react';
 
-const defaultSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
+const defaultSnackbar = forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
   const { id, message } = props;
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <SnackbarContent ref={ref}>
       <Snackbar open key={id} message={message} />
     </SnackbarContent>
   );
 });
 
-const successSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
+const successSnackbar = forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
   const { id, message } = props;
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <SnackbarContent ref={ref}>
       <Snackbar open key={id}>
         <Alert severity="success" variant="filled" sx={{ minWidth: 288 }}>
@@ -29,10 +26,9 @@ const successSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((pr
   );
 });
 
-const errorSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
+const errorSnackbar = forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
   const { id, message } = props;
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <SnackbarContent ref={ref}>
       <Snackbar open key={id}>
         <Alert severity="error" variant="filled" sx={{ minWidth: 288 }}>
@@ -43,10 +39,9 @@ const errorSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((prop
   );
 });
 
-const warningSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
+const warningSnackbar = forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
   const { id, message } = props;
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <SnackbarContent ref={ref}>
       <Snackbar open key={id}>
         <Alert severity="warning" variant="filled" sx={{ minWidth: 288 }}>
@@ -57,10 +52,9 @@ const warningSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((pr
   );
 });
 
-const infoSnackbar = React.forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
+const infoSnackbar = forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
   const { id, message } = props;
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
     <SnackbarContent ref={ref}>
       <Snackbar open key={id}>
         <Alert severity="info" variant="filled" sx={{ minWidth: 288 }}>

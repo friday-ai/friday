@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 
 import { HouseAttributes, HouseCreationAttributes } from '@friday-ai/shared';
 import { enqueueSnackbar } from 'notistack';
-import Map from '../../../../components/Map/Map';
+import CustomMap from '../../../../components/Map/Map';
 import useHouse from '../../../../services/api/useHouse';
 import useRoom from '../../../../services/api/useRoom';
 
@@ -149,7 +149,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
               }}
             />
 
-            <Map
+            <CustomMap
               markers={[{ title: houseName, position: houseCoordinates }]}
               onNewMarker={(latitude, longitude) => {
                 setHouseCoordinates([latitude, longitude]);
