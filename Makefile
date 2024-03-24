@@ -4,9 +4,7 @@ build:
 		build --no-cache
 
 prod:
-	@docker-compose -f docker-compose.yml \
-		-f docker-compose.prod.yml \
-		up -d --remove-orphans
+	@docker-compose -f .docker/docker-compose.prod.yml up -d --remove-orphans
 
 dev:
 	@docker compose -f docker-compose.yml \

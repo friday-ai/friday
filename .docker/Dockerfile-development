@@ -3,7 +3,7 @@ FROM node:18-alpine as base
 
 # System dependencies
 RUN apk add --no-cache sqlite make python3 gcc g++ \
-    && npm install -g pnpm@8
+    && npm install -g pnpm@8 turbo
 
 USER node
 WORKDIR /src
@@ -17,7 +17,7 @@ HEALTHCHECK --interval=1s --retries=3600 \
   CMD test -f ./task_finished.txt || exit 1
 
 # Start container
-CMD pnpm install && pnpm --filter "./packages/*" build && touch task_finished.txt && sleep 4s
+CMD pnpm install && turbo build && touch task_finished.txt && sleep 4s
 
 # Friday server image -------------------------------------
 FROM base as server

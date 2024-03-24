@@ -4,8 +4,6 @@ services:
   server:
     container_name: friday-server
     image: fridayai/friday-server:latest
-    labels:
-      "autoheal": "true"
     build:
       context: ../
       dockerfile: ./.docker/Dockerfile-production
@@ -31,7 +29,7 @@ services:
       - NODE_ENV=production
 
   broker:
-    container_name: broker
+    container_name: friday-broker
     image: eclipse-mosquitto:latest
     restart: always
     ports:
@@ -44,17 +42,8 @@ services:
       - TZ=Europe/Paris
     user: 1000:1000
 
-  autoheal:
-    container_name: Friday-ai-autoheal
-    image: willfarrell/autoheal
-    restart: always
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    environment:
-      - AUTOHEAL_INTERVAL=10
-
   watchtower:
-    container_name: Friday-ai-watchtower
+    container_name: friday-watchtower
     image: containrrr/watchtower
     restart: always
     volumes:

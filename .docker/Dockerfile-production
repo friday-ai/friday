@@ -2,17 +2,20 @@
 FROM node:18-alpine as base
 
 # System dependencies
-RUN npm install -g pnpm@8 http-server cross-env \
-    && apk add --no-cache sqlite make curl
+RUN apk add --no-cache curl
 
 WORKDIR /src
 
-COPY ../package.json .
-
-CMD pnpm start:prod
+CMD npm run start:prod
 
 # builder ------------------------------------------------
 FROM base as builder
+
+# System dependencies
+RUN apk add --no-cache sqlite make
+
+# Builder dependencies
+RUN npm install -g pnpm@8 turbo
 
 WORKDIR /usr/src
 
@@ -23,23 +26,20 @@ COPY ../ ./
 
 RUN pnpm fetch \
     && pnpm install -r  \
-    && pnpm --filter "./packages/*" build \
-    && pnpm build \
-    && pnpm --filter "./apps/server" --prod deploy pruned-server
+    && turbo build
 
 # Friday front -------------------------------------------
 FROM base as front
 
-# Add friday core
-COPY --from=builder /usr/src/apps/front/dist ./apps/front/dist
+# Front dependencies
+RUN npm install -g http-server
 
-COPY ../apps/front/package.json ./apps/front/
+# Add friday core
+COPY --from=builder /usr/src/apps/front/dist ./dist
+
+COPY ../apps/front/package.json ./
 
 ENV NODE_ENV production
-
-# Ping friday to check heartbeat
-HEALTHCHECK --interval=10s --retries=5 \
-   CMD curl --fail "http://localhost:1444" || exit 1
 
 # Export listening port
 EXPOSE 1444
@@ -47,17 +47,16 @@ EXPOSE 1444
 # Friday back ------------------------------------------
 FROM base as server
 
-# Add friday core
-COPY --from=builder /usr/src/apps/server/dist ./apps/server/dist
-COPY --from=builder /usr/src/pruned-server/node_modules ./apps/server/node_modules
+# Server dependencies
+RUN npm install mqtt sqlite3 ssh2
+RUN npm install -g cross-env
 
-COPY ../apps/server/package.json ./apps/server/
+# Add friday core
+COPY --from=builder /usr/src/apps/server/dist ./dist
+
+COPY ../apps/server/package.json ./
 
 ENV NODE_ENV production
-
-# Ping friday to check heartbeat @todo : change url for heartbeat url
-HEALTHCHECK --interval=10s --retries=5 \
-   CMD curl --fail "http://localhost:1443/api/v1/user/count" || exit 1
 
 # Export listening port
 EXPOSE 1443
