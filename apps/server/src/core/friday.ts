@@ -63,6 +63,8 @@ export default class Friday {
   async start() {
     try {
       await database.init();
+      await database.umzug.up();
+
       this.masterId = await this.system.start();
 
       // If masterId is empty, is because master satellite not initialized

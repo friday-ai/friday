@@ -1,7 +1,8 @@
 import { QueryInterface } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 
-module.exports = {
+export default {
+  name: '20200823170803-create-action',
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
     await queryInterface.createTable('action', {
       id: {

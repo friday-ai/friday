@@ -1,7 +1,8 @@
 import { QueryInterface } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 
-module.exports = {
+export default {
+  name: '20220711073422-create-device-capability',
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
     await queryInterface.createTable('device_capability', {
       id: {

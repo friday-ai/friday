@@ -1,7 +1,8 @@
 import { QueryInterface } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 
-module.exports = {
+export default {
+  name: '20200823171132-create-plugin',
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
     await queryInterface.createTable('plugin', {
       id: {
@@ -16,7 +17,6 @@ module.exports = {
         type: DataType.STRING,
       },
       name: {
-        unique: true,
         allowNull: false,
         type: DataType.STRING,
       },
@@ -31,12 +31,6 @@ module.exports = {
       enabled: {
         allowNull: false,
         type: DataType.JSON,
-      },
-      unite: {
-        type: DataType.STRING,
-      },
-      value: {
-        type: DataType.STRING,
       },
       satelliteId: {
         allowNull: false,

@@ -3,6 +3,7 @@ import { SequelizeStorage, Umzug } from 'umzug';
 import path from 'path';
 import { KVArr } from '../utils/interfaces';
 
+import migrations from '../../migrations';
 const env = process.env.NODE_ENV || 'production';
 
 const DATABASE_NAME: KVArr<string> = {
@@ -25,9 +26,7 @@ const database = new Sequelize({
 
 // Migrations
 const umzug = new Umzug({
-  migrations: {
-    glob: path.join(__dirname, '../../migrations/*.ts'),
-  },
+  migrations: [...migrations],
   context: database.getQueryInterface(),
   storage: new SequelizeStorage({ sequelize: database }),
   logger: console,
