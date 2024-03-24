@@ -18,11 +18,11 @@ import {
 } from 'sequelize-typescript';
 
 import { RoomAttributes, RoomCreationAttributes } from '@friday-ai/shared';
+import { isOwnerExisting } from '../utils/database/validation';
+import Device from './device';
 import House from './house';
 import Satellite from './satellite';
-import Device from './device';
 import State from './state';
-import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Room model
@@ -62,13 +62,13 @@ export default class Room extends Model<RoomAttributes, RoomCreationAttributes> 
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)

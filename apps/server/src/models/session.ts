@@ -42,27 +42,27 @@ export default class Session extends Model<SessionAttributes, SessionCreationAtt
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   refreshToken!: string;
 
   @AllowNull(false)
   @Default(false)
-  @Column
+  @Column(DataType.BOOLEAN)
   revoked!: boolean;
 
-  @Column
+  @Column(DataType.STRING)
   userAgent!: string;
 
   @AllowNull(false)
   @NotEmpty
   @IsDate
-  @Column({ type: DataType.DATE })
+  @Column(DataType.DATE)
   validUntil!: Date;
 
   @NotEmpty

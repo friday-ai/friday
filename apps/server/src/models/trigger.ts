@@ -14,7 +14,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { TriggerAttributes, AvailableConditions, TriggerCreationAttributes } from '@friday-ai/shared';
+import { AvailableConditions, TriggerAttributes, TriggerCreationAttributes } from '@friday-ai/shared';
 import Scene from './scene';
 
 /**
@@ -39,21 +39,21 @@ export default class Trigger extends Model<TriggerAttributes, TriggerCreationAtt
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   description!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.ENUM(...Object.values(AvailableConditions)))
   type!: AvailableConditions;
 
   @AllowNull(false)

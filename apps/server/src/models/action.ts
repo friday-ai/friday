@@ -41,31 +41,31 @@ export default class Action extends Model<ActionAttributes, ActionCreationAttrib
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   description!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.ENUM(...Object.values(ActionsType)))
   type!: ActionsType;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   subType!: string;
 
-  @Column
+  @Column(DataType.STRING)
   variableKey!: string;
 
-  @Column
+  @Column(DataType.STRING)
   variableValue!: string;
 
   @NotEmpty

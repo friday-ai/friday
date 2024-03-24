@@ -14,11 +14,11 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { VariableAttributes, VariableOwner, VariableCreationAttributes } from '@friday-ai/shared';
-import User from './user';
+import { VariableAttributes, VariableCreationAttributes, VariableOwner } from '@friday-ai/shared';
+import { isOwnerExisting } from '../utils/database/validation';
 import Plugin from './plugin';
 import Satellite from './satellite';
-import { isOwnerExisting } from '../utils/database/validation';
+import User from './user';
 
 /**
  * Variable model
@@ -36,18 +36,18 @@ export default class Variable extends Model<VariableAttributes, VariableCreation
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   key!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   value!: string;
 
   @AllowNull(false)
@@ -57,7 +57,7 @@ export default class Variable extends Model<VariableAttributes, VariableCreation
   owner!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.ENUM(...Object.values(VariableOwner)))
   ownerType!: VariableOwner;
 
   @BelongsTo(() => User, {

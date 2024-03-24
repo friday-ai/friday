@@ -17,9 +17,9 @@ import {
 } from 'sequelize-typescript';
 
 import { SceneAttributes, SceneCreationAttributes } from '@friday-ai/shared';
-import Trigger from './trigger';
-import Action from './action';
 import { isOwnerExisting } from '../utils/database/validation';
+import Action from './action';
+import Trigger from './trigger';
 
 /**
  * Scene model
@@ -51,17 +51,17 @@ export default class Scene extends Model<SceneAttributes, SceneCreationAttribute
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   description!: string;
 
   @Is('triggerId', async (value) => {

@@ -35,7 +35,7 @@ export default class DeviceCapabilityState extends Model<DcstAttributes, DcstCre
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
@@ -45,13 +45,13 @@ export default class DeviceCapabilityState extends Model<DcstAttributes, DcstCre
   capabilityId!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   value!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Default(true)
-  @Column
+  @Column(DataType.STRING)
   last!: boolean;
 
   @BelongsTo(() => Device, {

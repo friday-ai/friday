@@ -14,7 +14,7 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { DeviceCapabilitySettingsSchema, DcsCreationAttributes, DcsAttributes } from '@friday-ai/shared';
+import type { DeviceCapabilitySettingsSchema, DcsCreationAttributes, DcsAttributes } from '@friday-ai/shared';
 import Device from './device';
 import DeviceCapability from './device_capability';
 import { isOwnerExisting } from '../utils/database/validation';
@@ -35,7 +35,7 @@ export default class DeviceCapabilitySettings extends Model<DcsAttributes, DcsCr
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)

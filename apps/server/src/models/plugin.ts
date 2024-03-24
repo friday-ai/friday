@@ -20,12 +20,12 @@ import {
 } from 'sequelize-typescript';
 
 import { PluginAttributes, PluginCreationAttributes } from '@friday-ai/shared';
+import { isOwnerExisting } from '../utils/database/validation';
+import { DatabaseValidationError } from '../utils/decorators/error';
+import Device from './device';
 import Satellite from './satellite';
 import State from './state';
 import Variable from './variable';
-import Device from './device';
-import { isOwnerExisting } from '../utils/database/validation';
-import { DatabaseValidationError } from '../utils/decorators/error';
 
 /**
  * Plugin model
@@ -65,31 +65,31 @@ export default class Plugin extends Model<PluginAttributes, PluginCreationAttrib
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   dockerId!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   version!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   url!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.BOOLEAN)
   enabled!: boolean;
 
   @AllowNull(false)
@@ -118,7 +118,7 @@ export default class Plugin extends Model<PluginAttributes, PluginCreationAttrib
   @IsDate
   @NotEmpty
   @Default(new Date())
-  @Column({ type: DataType.DATE })
+  @Column(DataType.DATE)
   lastHeartbeat!: Date;
 
   @BelongsTo(() => Satellite, {

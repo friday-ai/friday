@@ -16,12 +16,12 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { DcAttributes, DevicesCapabilities, DcCreationAttributes } from '@friday-ai/shared';
+import { DcAttributes, DcCreationAttributes, DevicesCapabilities } from '@friday-ai/shared';
 import { isOwnerExisting } from '../utils/database/validation';
-import Room from './room';
 import Device from './device';
-import DeviceCapabilityState from './device_capability_state';
 import DeviceCapabilitySettings from './device_capability_settings';
+import DeviceCapabilityState from './device_capability_state';
+import Room from './room';
 
 /**
  * Device capability model
@@ -62,25 +62,25 @@ export default class DeviceCapability extends Model<DcAttributes, DcCreationAttr
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   defaultName!: string;
 
   @AllowNull(true)
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.ENUM(...Object.values(DevicesCapabilities)))
   type!: DevicesCapabilities;
 
   @AllowNull(true)
-  @Column
+  @Column(DataType.STRING)
   externalId!: string;
 
   @AllowNull(false)

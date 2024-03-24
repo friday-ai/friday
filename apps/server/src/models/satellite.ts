@@ -71,13 +71,13 @@ export default class Satellite extends Model<SatelliteAttributes, SatelliteCreat
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
@@ -90,7 +90,7 @@ export default class Satellite extends Model<SatelliteAttributes, SatelliteCreat
   @IsDate
   @NotEmpty
   @Default(new Date())
-  @Column({ type: DataType.DATE })
+  @Column(DataType.DATE)
   lastHeartbeat!: Date;
 
   @BelongsTo(() => Room, {
