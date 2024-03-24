@@ -1,23 +1,29 @@
 {
-  "name": "@friday/tools",
-  "version": "1.0.0",
-  "description": "Friday: Tools (Eslint, Prettier)",
-  "keywords": [],
-  "author": "Mathieu Andrade",
-  "license": "MIT",
+  "name": "@friday-ai/tools",
+  "version": "0.0.0",
+  "files": [
+    "eslint/base.js",
+    "eslint/react-internal.js",
+    "typescript/base.json",
+    "typescript/react-library.json",
+    "config/prettier.config.js"
+  ],
   "peerDependencies": {
-    "typescript": "*"
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.18.0",
-    "@typescript-eslint/parser": "^6.18.0",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
     "eslint": "^8.56.0",
     "eslint-config-airbnb-base-typescript-prettier": "^5.1.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-turbo": "^1.11.3",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-only-warn": "^1.1.0",
     "eslint-plugin-tsdoc": "^0.2.17",
-    "prettier": "^3.1.1"
+    "prettier": "^3.2.5"
   }
 }
