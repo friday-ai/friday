@@ -1,12 +1,12 @@
-import { StateCreationAttributes } from '@friday-ai/shared';
-import EventClass from '../../utils/event';
-import VariableClass from '../variable/variable';
+import type { StateCreationAttributes } from '@friday-ai/shared';
 import { EventsType } from '../../config/constants';
 import { Catch } from '../../utils/decorators/error';
+import EventClass from '../../utils/event';
+import VariableClass from '../variable/variable';
 
-import set from './state.set';
 import getByOwner from './state.getByOwner';
 import purge from './state.purge';
+import set from './state.set';
 
 /**
  * State

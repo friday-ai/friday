@@ -14,9 +14,6 @@ import Event from '../../../src/utils/event';
 import Scheduler from '../../../src/utils/scheduler';
 
 describe('System.shutdown', () => {
-  const databaseStub = database;
-  databaseStub.closeConnection = sinon.stub();
-
   const event = Event;
   const variable = new Variable();
   const state = new State(event, variable);

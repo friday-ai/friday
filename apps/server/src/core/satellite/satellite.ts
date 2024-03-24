@@ -1,14 +1,15 @@
-import { SatelliteAttributes, SatelliteCreationAttributes, AvailableState, StateOwner, SatelliteCreationKeys } from '@friday-ai/shared';
 import logger from '@friday-ai/logger';
-import BaseModel from '../../utils/database/model.base';
+import type { SatelliteAttributes, SatelliteCreationAttributes } from '@friday-ai/shared';
+import { AvailableState, SatelliteCreationKeys, StateOwner } from '@friday-ai/shared';
 import SatelliteModel from '../../models/satellite';
+import BaseModel from '../../utils/database/model.base';
 import { Catch } from '../../utils/decorators/error';
-import StateClass from '../state/state';
 import PluginClass from '../plugin/plugin';
+import StateClass from '../state/state';
 
 import heartbeat from './satellite.heartbeat';
-import stopAllPlugins from './satellite.stopAllPlugins';
 import restartAllPlugins from './satellite.restartAllPlugins';
+import stopAllPlugins from './satellite.stopAllPlugins';
 
 /**
  * Satellite

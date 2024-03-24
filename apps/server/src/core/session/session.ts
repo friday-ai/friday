@@ -1,9 +1,9 @@
-import { SessionAttributes, SessionCredentials } from '@friday-ai/shared';
+import type { SessionAttributes, SessionCredentials } from '@friday-ai/shared';
 import SessionModel from '../../models/session';
 import { PartialModel } from '../../utils/database/model.partial';
 import { Catch } from '../../utils/decorators/error';
 
-import { GetOptions } from '../../utils/interfaces';
+import type { GetOptions } from '../../utils/interfaces';
 import create from './session.create';
 import getAccessToken from './session.getAccessToken';
 import revoke from './session.revoke';

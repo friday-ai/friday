@@ -1,7 +1,7 @@
-import net from 'net';
+import Aedes, { Client, Connection } from 'aedes';
 import events from 'events';
-import Aedes, { Connection, Client } from 'aedes';
 import { IncomingMessage } from 'http';
+import net from 'net';
 
 const mqttPort = parseInt(process.env.MQTT_PORT || '1884', 10);
 

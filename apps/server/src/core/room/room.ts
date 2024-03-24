@@ -1,8 +1,9 @@
-import { RoomAttributes, RoomCreationAttributes, AvailableState, StateOwner, RoomsCreationKeys } from '@friday-ai/shared';
-import BaseModel from '../../utils/database/model.base';
+import type { RoomAttributes, RoomCreationAttributes } from '@friday-ai/shared';
+import { AvailableState, RoomsCreationKeys, StateOwner } from '@friday-ai/shared';
 import RoomModel from '../../models/room';
-import StateClass from '../state/state';
+import BaseModel from '../../utils/database/model.base';
 import { Catch } from '../../utils/decorators/error';
+import StateClass from '../state/state';
 
 /**
  * Room
