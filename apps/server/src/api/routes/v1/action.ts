@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
+import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
 
 import Friday from '../../../core/friday';
 
@@ -16,7 +16,7 @@ import Friday from '../../../core/friday';
  */
 @FridayRouter('/v1/action')
 export default class ActionRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;

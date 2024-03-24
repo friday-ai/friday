@@ -16,7 +16,7 @@ import { FridayMode } from '../../../config/constants';
  */
 @FridayRouter('/v1/user')
 export default class UserRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;
