@@ -1,4 +1,4 @@
-import Dockerode, { ContainerCreateOptions, ExecCreateOptions } from 'dockerode';
+import Dockerode from 'dockerode';
 import logger from '@friday-ai/logger';
 import { Catch } from './utils/error';
 
@@ -18,7 +18,7 @@ export default class Docker {
   public dockerode = isDocker() ? new Dockerode() : null;
 
   @Catch()
-  async createContainer(options: ContainerCreateOptions) {
+  async createContainer(options: Dockerode.ContainerCreateOptions) {
     return createContainer.call(this, options);
   }
 
@@ -48,7 +48,7 @@ export default class Docker {
   }
 
   @Catch()
-  async exec(id: string, options: ExecCreateOptions) {
+  async exec(id: string, options: Dockerode.ExecCreateOptions) {
     return exec.call(this, id, options);
   }
 

@@ -1,8 +1,5 @@
 {
-  "extends": "../tools/typescript.config.json",
-  "include": ["src/**/*", "test/**/*", ".eslintrc.js"],
-  "compilerOptions": {
-    "noEmit": false
-  },
-  "exclude": ["node_modules"]
+  "extends": "@friday-ai/tools/typescript/base.json",
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "lib"]
 }
