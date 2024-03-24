@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-/* eslint-disable class-methods-use-this */
 
 import consoleStamp from 'console-stamp';
 
 const env = process.env.NODE_ENV || 'production';
+
 /**
  * Log utils
  * @class Log
