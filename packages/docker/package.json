@@ -14,7 +14,7 @@
   "scripts": {
     "prepublish": "pnpm run build",
     "test": "cross-env NODE_ENV=test mocha --recursive -r tsx ./test/setup.ts ./test/**/*.test.ts -exit",
-    "test:pacakges": "cross-env NODE_ENV=test mocha --recursive -r tsx ./test/setup.ts ./test/**/*.test.ts -exit",
+    "test:packages": "cross-env NODE_ENV=test mocha --recursive -r tsx ./test/setup.ts ./test/**/*.test.ts -exit",
     "build": "tsup",
     "build:packages": "tsup",
     "lint": "eslint --ext .ts,.tsx ./src",
