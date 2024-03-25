@@ -4,9 +4,9 @@
   "description": "Server and web app of the Friday assistant",
   "main": "index.js",
   "scripts": {
-    "build:packages": "turbo build:packages",
-    "test:packages": "turbo test:packages",
-    "coverage:junit": "turbo coverage:junit"
+    "build:packages": "turbo build:packages --cache-dir=.turbo",
+    "test:packages": "turbo test:packages --cache-dir=.turbo",
+    "coverage:junit": "turbo coverage:junit --cache-dir=.turbo"
   },
   "keywords": [],
   "author": "",

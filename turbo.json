@@ -22,9 +22,13 @@
       "dependsOn": ["^build"]
     },
     "build:packages": {
-      "outputs": ["lib/**", "dist/**"]
+      "outputs": ["lib/**", "dist/**"],
+      "dependsOn": ["^build:shared", "^build:logger"]
     },
     "build:shared": {
+      "outputs": ["lib/**", "dist/**"]
+    },
+    "build:logger": {
       "outputs": ["lib/**", "dist/**"]
     },
     "build:server": {
