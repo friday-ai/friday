@@ -54,7 +54,7 @@ runs:
       run: |
         if echo ${{ inputs.build-only-packages }}
         then
-          turbo build:packages
+          pnpm build:packages
         else
           ${{ inputs.build-command }}
         fi

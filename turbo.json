@@ -37,6 +37,7 @@
     },
     "test:packages": {},
     "test:server": {},
+    "coverage:junit": {},
     "test": {},
     "lint": {}
   }
