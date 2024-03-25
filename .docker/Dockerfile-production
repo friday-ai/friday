@@ -1,0 +1,62 @@
+# base image node ----------------------------------------
+FROM node:18-alpine as base
+
+# System dependencies
+RUN apk add --no-cache curl
+
+WORKDIR /src
+
+CMD npm run start:prod
+
+# builder ------------------------------------------------
+FROM base as builder
+
+# System dependencies
+RUN apk add --no-cache sqlite make
+
+# Builder dependencies
+RUN npm install -g pnpm@8 turbo
+
+WORKDIR /usr/src
+
+COPY ../pnpm-lock.yaml ./
+COPY ../*.npmrc ./
+
+COPY ../ ./
+
+RUN pnpm fetch \
+    && pnpm install -r  \
+    && turbo build
+
+# Friday front -------------------------------------------
+FROM base as front
+
+# Front dependencies
+RUN npm install -g http-server
+
+# Add friday core
+COPY --from=builder /usr/src/apps/front/dist ./dist
+
+COPY ../apps/front/package.json ./
+
+ENV NODE_ENV production
+
+# Export listening port
+EXPOSE 1444
+
+# Friday back ------------------------------------------
+FROM base as server
+
+# Server dependencies
+RUN npm install mqtt sqlite3 ssh2
+RUN npm install -g cross-env
+
+# Add friday core
+COPY --from=builder /usr/src/apps/server/dist ./dist
+
+COPY ../apps/server/package.json ./
+
+ENV NODE_ENV production
+
+# Export listening port
+EXPOSE 1443

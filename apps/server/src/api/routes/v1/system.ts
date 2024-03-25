@@ -10,7 +10,7 @@ import { encrypt } from '../../../utils/keyring';
  */
 @FridayRouter('/v1/system')
 export default class SystemRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;

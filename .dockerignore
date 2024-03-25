@@ -20,3 +20,8 @@ node.d.ts
 .git
 docker
 .github
+.pnpm-store
+node_modules
+lib
+dist
+.turbo

@@ -65,7 +65,7 @@ export default class Server {
     this.server = http.createServer(app);
 
     // initialize the WebSocket server instance
-    const wss = new WebSocket.Server({ server: this.server });
+    const wss = new WebSocket.WebSocketServer({ server: this.server });
     this.websocketServer = new WebsocketServer(wss, this.friday);
 
     // start WebSocket server

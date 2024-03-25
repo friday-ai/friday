@@ -8,7 +8,7 @@ import Friday from '../../../core/friday';
  */
 @FridayRouter('/v1/capability')
 export default class ActionRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;

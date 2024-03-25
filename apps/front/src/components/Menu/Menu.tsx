@@ -4,7 +4,7 @@ import MuiMenu from '@mui/material/Menu';
 import { SxProps, Theme } from '@mui/material/styles';
 import Tooltip from '@mui/material/Tooltip';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface MenuProps {
   id: string;

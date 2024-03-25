@@ -1,13 +1,15 @@
-import bcrypt from 'bcrypt';
+import { pbkdf2Sync, randomBytes } from 'crypto';
 
-const SALT_ROUNDS = 10;
-
-function hash(password: string): Promise<string> {
-  return bcrypt.hash(password, SALT_ROUNDS);
+function hash(password: string): string {
+  const salt = randomBytes(16).toString('hex');
+  const passwordHash = pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex');
+  return `${passwordHash}.${salt}`;
 }
 
-function compare(password: string, passwordHash: string): Promise<boolean> {
-  return bcrypt.compare(password, passwordHash);
+function compare(password: string, passwordHash: string): boolean {
+  const [hashedPassword, salt] = passwordHash.split('.');
+  const newHash = pbkdf2Sync(password, salt, 10000, 512, 'sha512').toString('hex');
+  return newHash === hashedPassword;
 }
 
-export { hash, compare };
+export { compare, hash };

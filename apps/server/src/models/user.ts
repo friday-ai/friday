@@ -18,11 +18,11 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { UserAttributes, AvailableLanguages, UserRole, UserCreationAttributes } from '@friday-ai/shared';
-import Variable from './variable';
-import State from './state';
-import Session from './session';
+import { AvailableLanguages, UserAttributes, UserCreationAttributes, UserRole } from '@friday-ai/shared';
 import { hash } from '../utils/password';
+import Session from './session';
+import State from './state';
+import Variable from './variable';
 
 /**
  * User model
@@ -54,39 +54,39 @@ export default class User extends Model<UserAttributes, UserCreationAttributes> 
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   userName!: string;
 
   @AllowNull(false)
   @Unique
   @IsEmail
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   email!: string;
 
   @AllowNull(false)
   @Length({ min: 10 })
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   password!: string;
 
   @AllowNull(true)
-  @Column
+  @Column(DataType.STRING)
   theme!: string;
 
   @AllowNull(false)
   @Default(UserRole.HABITANT)
-  @Column
+  @Column(DataType.ENUM(...Object.values(UserRole)))
   role!: UserRole;
 
   @AllowNull(false)
   @Default(AvailableLanguages.EN)
-  @Column
+  @Column(DataType.ENUM(...Object.values(AvailableLanguages)))
   language!: AvailableLanguages;
 
   @HasMany(() => Variable, {

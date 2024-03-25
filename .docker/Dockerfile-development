@@ -1,0 +1,34 @@
+# Base image node ----------------------------------------
+FROM node:18-alpine as base
+
+# System dependencies
+RUN apk add --no-cache sqlite make python3 gcc g++ \
+    && npm install -g pnpm@8 turbo
+
+USER node
+WORKDIR /src
+
+RUN pnpm config set store-dir .pnpm-store && pnpm config set node-linker hoisted
+
+# Friday builder image -----------------------------------
+FROM base as builder
+
+HEALTHCHECK --interval=1s --retries=3600 \
+  CMD test -f ./task_finished.txt || exit 1
+
+# Start container
+CMD pnpm install && turbo build && touch task_finished.txt && sleep 4s
+
+# Friday server image -------------------------------------
+FROM base as server
+
+# Start container
+EXPOSE 3001
+CMD pnpm start:dev
+
+# Friday front image -------------------------------------
+FROM base as front
+
+# Start container
+EXPOSE 3001
+CMD pnpm start:dev

@@ -50,21 +50,21 @@ export default class House extends Model<HouseAttributes, HouseCreationAttribute
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   latitude!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   longitude!: string;
 
   @HasMany(() => Room, {

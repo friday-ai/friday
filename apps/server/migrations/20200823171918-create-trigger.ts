@@ -1,7 +1,8 @@
 import { QueryInterface } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 
-module.exports = {
+export default {
+  name: '20200823171918-create-trigger',
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
     await queryInterface.createTable('trigger', {
       id: {

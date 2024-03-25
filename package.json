@@ -3,30 +3,16 @@
   "version": "1.0.0",
   "description": "Server and web app of the Friday assistant",
   "main": "index.js",
-  "engines": {
-    "node": "18.x",
-    "pnpm": "8.x"
-  },
   "scripts": {
-    "start": "per-env",
-    "start:prod": "pnpm --parallel -r --filter \"./apps/*\" start:prod",
-    "start:dev": "pnpm --parallel -r --filter \"./apps/*\" start:dev",
-    "install:dev": "pnpm install -r --quiet",
-    "build": "pnpm -r build",
-    "test": "pnpm -r test",
-    "test:apps": "pnpm -r --filter \"./apps/*\" test",
-    "test:packages": "pnpm -r --filter \"./packages/*\" test",
-    "coverage": "pnpm -r --filter \"./apps/*\" coverage",
-    "coverage:junit": "pnpm -r --filter \"./apps/server\" coverage:junit",
-    "lint": "pnpm -r lint",
-    "lint:fix": "pnpm -r lint:fix"
+    "build:packages": "turbo build:packages --cache-dir=.turbo",
+    "test:packages": "turbo test:packages --cache-dir=.turbo",
+    "coverage:junit": "turbo coverage:junit --cache-dir=.turbo"
   },
+  "keywords": [],
+  "author": "",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/friday-ai/friday.git"
-  },
-  "bugs": {
-    "url": "https://github.com/friday-ai/friday/issues"
+  "devDependencies": {
+    "@friday-ai/tools": "workspace:^",
+    "turbo": "^1.12.2"
   }
 }

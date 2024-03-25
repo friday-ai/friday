@@ -1,0 +1,48 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "NODE_ENV",
+    "GITHUB_ACTION",
+    "SERVER_PORT",
+    "VITE_SERVER_PORT",
+    "MQTT_HOST",
+    "MQTT_PORT",
+    "MQTT_ADDRESS",
+    "npm_package_version"
+  ],
+  "pipeline": {
+    "start:dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build:packages"]
+    },
+    "build": {
+      "outputs": ["lib/**", "dist/**"],
+      "dependsOn": ["^build"]
+    },
+    "build:packages": {
+      "outputs": ["lib/**", "dist/**"],
+      "dependsOn": ["^build:shared", "^build:logger"]
+    },
+    "build:shared": {
+      "outputs": ["lib/**", "dist/**"]
+    },
+    "build:logger": {
+      "outputs": ["lib/**", "dist/**"]
+    },
+    "build:server": {
+      "dependsOn": ["^build:packages"],
+      "outputs": ["lib/**", "dist/**"]
+    },
+    "build:front": {
+      "dependsOn": ["^build:shared"],
+      "outputs": ["lib/**", "dist/**"]
+    },
+    "test:packages": {},
+    "test:server": {},
+    "coverage:junit": {},
+    "test": {},
+    "lint": {}
+  }
+}

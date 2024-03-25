@@ -1,1 +1,3 @@
-{}
+{
+  "extends": "@friday-ai/tools/typescript/base.json"
+}

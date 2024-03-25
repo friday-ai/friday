@@ -10,7 +10,7 @@ import Friday from '../../../core/friday';
  */
 @FridayRouter('/v1/script')
 export default class ScriptRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;

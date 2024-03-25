@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
@@ -46,7 +46,7 @@ export default function PluginList({ plugins, onRemovePlugin }: { plugins: Plugi
     NiceModal.show(ConfirmDialog, {
       title: t('dashboard.satellites.areYouSure'),
       content: `${t('dashboard.satellites.deletePluginMessage')} <b>${name}</b>.`,
-      onClose: async (confirm) => {
+      onClose: async (confirm: boolean) => {
         if (confirm) {
           uninstallPlugin
             .mutateAsync(id)

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
@@ -56,7 +56,7 @@ export default function Install() {
           return { id: varId, key, value };
         }
         return variable;
-      })
+      }),
     );
   };
 
@@ -86,7 +86,7 @@ export default function Install() {
           })
           .catch((_err) => setRepoExisting(2));
       }, 500),
-    []
+    [],
   );
 
   const getIcon = () => {

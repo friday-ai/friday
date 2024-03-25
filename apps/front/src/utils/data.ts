@@ -46,7 +46,7 @@ const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
   const data: { key: string; label: string; value: number; color: string }[] = [];
 
   Object.keys(statesCount).forEach((key) => {
-    data.push({ key, label: labels[key], color: colors[key], value: statesCount[key] });
+    data.push({ key, label: labels[key]!, color: colors[key]!, value: statesCount[key]! });
   });
 
   return data;

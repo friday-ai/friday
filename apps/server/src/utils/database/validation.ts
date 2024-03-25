@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable global-require */
 /* eslint-disable import/prefer-default-export */
 import promise from 'bluebird';
-import { join } from 'path';
 import { NotFoundError } from '../decorators/error';
 
-const MODELS_PATH = join(__filename, '../../../models');
+import { modelsObj } from '../../models/index';
+
 const callLater = () =>
   new Promise((resolve) => {
     setTimeout(resolve, 10);
@@ -18,7 +15,7 @@ const callLater = () =>
  * @param {Array<string>} owners
  */
 export const isOwnerExisting = async (id: string, owners: Array<string>): Promise<void> => {
-  const models = owners.map((file) => require(join(MODELS_PATH, file)).default);
+  const models = owners.map((file) => modelsObj[file]);
   const result: Array<unknown> = [];
   await promise.mapSeries(models, (model) => callLater().then(async () => result.push(await model.findByPk(id))));
 

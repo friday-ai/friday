@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import React from 'react';
 
 import FaviconLoader from './Loader';
 

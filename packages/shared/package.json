@@ -3,32 +3,29 @@
   "version": "1.0.9",
   "description": "Friday: Shared utilites",
   "main": "lib/index.js",
+  "module": "lib/index.mjs",
   "typings": "lib/index.d.ts",
   "files": [
     "lib/"
   ],
-  "scripts": {
-    "prepublish": "pnpm build",
-    "build": "tsc --outDir ./lib",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src",
-    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx --fix ./src"
-  },
-  "keywords": [],
   "author": "Mathieu Andrade",
   "license": "MIT",
-  "prettier": "../tools/prettier.config.js",
+  "scripts": {
+    "prepublish": "pnpm run build",
+    "build": "tsup",
+    "build:packages": "tsup",
+    "build:shared": "tsup",
+    "type": "tsc src/index.ts --declaration --emitDeclarationOnly --skipLibCheck --esModuleInterop --outFile lib/types.d.ts",
+    "lint": "eslint --ext .ts,.tsx ./src",
+    "lint:fix": "eslint --ext .ts,.tsx --fix ./src"
+  },
+  "prettier": "@friday-ai/tools/configs/prettier.config.js",
   "peerDependencies": {
-    "typescript": "*"
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "@types/node": "^20.10.6",
-    "@typescript-eslint/eslint-plugin": "^6.18.0",
-    "@typescript-eslint/parser": "^6.18.0",
-    "eslint": "^8.56.0",
-    "eslint-config-airbnb-base-typescript-prettier": "^5.1.0",
-    "eslint-import-resolver-typescript": "^3.6.1",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-tsdoc": "^0.2.17",
-    "prettier": "^3.1.1"
+    "@friday-ai/tools": "workspace:^",
+    "tsup": "^8.0.2"
   }
 }

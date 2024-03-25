@@ -11,7 +11,7 @@ import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorator
  */
 @FridayRouter('/v1/satellite')
 export default class SatelliteRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;

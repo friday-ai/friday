@@ -17,10 +17,10 @@ import {
 } from 'sequelize-typescript';
 
 import { DeviceAttributes, DeviceCreationAttributes, DevicesTypes } from '@friday-ai/shared';
+import { isOwnerExisting } from '../utils/database/validation';
+import DeviceCapability from './device_capability';
 import Plugin from './plugin';
 import Room from './room';
-import DeviceCapability from './device_capability';
-import { isOwnerExisting } from '../utils/database/validation';
 
 /**
  * Device model
@@ -121,43 +121,43 @@ export default class Device extends Model<DeviceAttributes, DeviceCreationAttrib
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   defaultName!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   defaultManufacturer!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   defaultModel!: string;
 
   @AllowNull(true)
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
   @NotEmpty
-  @Column
+  @Column(DataType.ENUM(...Object.values(DevicesTypes)))
   type!: DevicesTypes;
 
   @AllowNull(true)
-  @Column
+  @Column(DataType.STRING)
   manufacturer!: string;
 
   @AllowNull(true)
-  @Column
+  @Column(DataType.STRING)
   model!: string;
 
   @AllowNull(true)
-  @Column
+  @Column(DataType.STRING)
   externalId!: string;
 
   @AllowNull(true)

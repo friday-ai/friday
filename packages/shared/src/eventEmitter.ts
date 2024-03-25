@@ -5,7 +5,7 @@
  * thanks to @AlCalzone and his team for this great work!
  */
 
-import { EventEmitter } from 'events';
+import { EventEmitter } from 'node:events';
 import process from 'node:process';
 import { applyMixin } from './inheritance';
 

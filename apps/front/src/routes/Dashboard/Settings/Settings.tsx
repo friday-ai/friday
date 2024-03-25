@@ -1,5 +1,3 @@
-import React from 'react';
-
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MapsHomeWorkIcon from '@mui/icons-material/MapsHomeWork';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';

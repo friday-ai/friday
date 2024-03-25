@@ -1,7 +1,11 @@
+const config = require('@friday-ai/tools/eslint/base');
+
+/** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: ['../tools/eslint/eslint.config.server.js'],
+  ...config,
+  root: true,
+  parser: '@typescript-eslint/parser',
   parserOptions: {
-    tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json'],
+    project: './tsconfig.json',
   },
 };

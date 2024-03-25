@@ -1,7 +1,8 @@
 import { QueryInterface } from 'sequelize';
 import { DataType } from 'sequelize-typescript';
 
-module.exports = {
+export default {
+  name: '20200823171723-create-session',
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
     await queryInterface.createTable('session', {
       id: {

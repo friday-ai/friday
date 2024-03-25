@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Marker, Popup, useMap } from 'react-leaflet';
 
+import { LocationEvent } from 'leaflet';
 import { DEFAULT_COORDS } from '../../utils/constants';
 
 export default function LocationMarker() {
@@ -8,7 +9,7 @@ export default function LocationMarker() {
   const map = useMap();
 
   useEffect(() => {
-    map.locate().on('locationfound', (e) => {
+    map.locate().on('locationfound', (e: LocationEvent) => {
       setPosition([e.latlng.lat, e.latlng.lng]);
       map.flyTo(e.latlng, map.getZoom());
     });

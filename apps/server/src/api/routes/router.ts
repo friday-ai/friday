@@ -1,15 +1,14 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable global-require */
-import { globSync } from 'glob';
+import { RequestHandler, Router } from 'express';
 import 'reflect-metadata';
-import { Router } from 'express';
+
+import Friday from '../../core/friday';
 import { RouteDefinition } from '../../utils/decorators/route';
-import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
+import aclMiddleware from '../middlewares/aclMiddleware';
 import asyncMiddleware from '../middlewares/asyncMiddleware';
 import authMiddleware from '../middlewares/authMiddleware';
-import Friday from '../../core/friday';
-import aclMiddleware from '../middlewares/aclMiddleware';
+import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
+
+import routersV1 from './v1/index';
 
 const env = process.env.NODE_ENV || 'production';
 
@@ -24,12 +23,7 @@ const env = process.env.NODE_ENV || 'production';
 export default function router(friday: Friday): Router {
   const routerObject = Router();
 
-  const routers = globSync('**/*.{js,ts}', { cwd: `${__dirname}/` })
-    .map((filename) => require(`./${filename}`).default)
-    .filter((routerClass) => routerClass !== undefined)
-    .filter((routerClass) => Reflect.hasOwnMetadata('prefix', routerClass));
-
-  routers.forEach((RouterClass) => {
+  routersV1.forEach((RouterClass) => {
     const instance = new RouterClass(friday);
     const prefix = Reflect.getMetadata('prefix', RouterClass);
     const routes = <RouteDefinition[]>Reflect.getMetadata('routes', RouterClass);
@@ -47,9 +41,12 @@ export default function router(friday: Friday): Router {
       if (route.rateLimit && env === 'production') {
         routerParams.push(rateLimitMiddleware);
       }
+
+      const handler = instance[route.methodName as keyof typeof instance] as RequestHandler;
+
       // add the controller at the end of the array
       // wrapped on async middleware
-      routerParams.push(asyncMiddleware(instance[route.methodName]));
+      routerParams.push(asyncMiddleware(handler));
 
       routerObject[route.requestMethod](`/api${prefix}${route.path}`, ...routerParams);
     });

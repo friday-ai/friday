@@ -1,32 +1,28 @@
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable global-require */
-/* eslint-disable @typescript-eslint/no-var-requires */
-
-import {
-  DeviceAttributes,
-  DeviceCommand,
-  DevicesActions,
-  DeviceCreationAttributes,
-  DeviceCapabilityRegisterAttributes,
+import type {
   DcstCreationAttributes,
+  DeviceAttributes,
+  DeviceCapabilityRegisterAttributes,
   DeviceCapabilitySettingsSchema,
+  DeviceCommand,
+  DeviceCreationAttributes,
   DeviceRegisterAttributes,
-  DeviceCreationKeys,
 } from '@friday-ai/shared';
 
-import { globSync } from 'glob';
+import { DeviceCreationKeys, DevicesActions } from '@friday-ai/shared';
 
-import BaseModel from '../../utils/database/model.base';
 import DeviceModel from '../../models/device';
-import EventClass from '../../utils/event';
+import BaseModel from '../../utils/database/model.base';
 import { Catch } from '../../utils/decorators/error';
+import EventClass from '../../utils/event';
 
-import register from './device.register';
 import exec from './device.exec';
-import setCapability from './device.setCapability';
 import getCapabilityById from './device.getCapabilityById';
+import register from './device.register';
+import setCapability from './device.setCapability';
 import setCapabilitySettings from './device.setCapabilitySettings';
 import setCapabilityState from './device.setCapabilityState';
+
+import capabilities from './capabilities';
 
 /**
  * Device
@@ -38,12 +34,14 @@ export default class Device extends BaseModel<DeviceModel, DeviceAttributes, Dev
     super(DeviceModel, DeviceCreationKeys);
     this.event = event;
 
-    globSync('**/*.{js,ts}', { cwd: `${__dirname}/capabilities/` }).forEach((filename) => {
-      const manager = require(`./capabilities/${filename}`);
+    Object.values(capabilities).forEach((capability) => {
+      Object.keys(capability.options).forEach((key) => {
+        capability.options[key].actions.forEach((action: DevicesActions) => {
+          // Dynamically create type of capability
+          type capabilityType = Omit<typeof capability, 'options'>;
+          const fn = capability[key as keyof capabilityType] as (...args: unknown[]) => void;
 
-      Object.keys(manager.options).forEach((key) => {
-        manager.options[key].actions.forEach((action: DevicesActions) => {
-          this.event.on(action, (e) => manager[key].bind(this)(e));
+          this.event.on(action, (e) => fn.bind(this)(e));
         });
       });
     });

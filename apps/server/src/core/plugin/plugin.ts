@@ -1,5 +1,6 @@
 import DockerClass from '@friday-ai/docker';
-import { PluginAttributes, PluginCreationAttributes, PluginCreationKeys, PluginInstallAttributes } from '@friday-ai/shared';
+import type { PluginAttributes, PluginCreationAttributes, PluginInstallAttributes } from '@friday-ai/shared';
+import { PluginCreationKeys } from '@friday-ai/shared';
 
 import PluginModel from '../../models/plugin';
 import BaseModel from '../../utils/database/model.base';
@@ -7,12 +8,12 @@ import { Catch } from '../../utils/decorators/error';
 import EventClass from '../../utils/event';
 import StateClass from '../state/state';
 
-import uninstall from './plugin.uninstall';
+import checkState from './plugin.checkState';
 import heartbeat from './plugin.heartbeat';
 import install from './plugin.install';
-import stop from './plugin.stop';
 import restart from './plugin.restart';
-import checkState from './plugin.checkState';
+import stop from './plugin.stop';
+import uninstall from './plugin.uninstall';
 
 /**
  * Plugin

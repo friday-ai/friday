@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 
 import Dashboard from './Dashboard/Dashboard';
@@ -43,8 +41,8 @@ const router: RemixRouter = createBrowserRouter(
           <Route path="sessions" element={<Session />}></Route>
         </Route>
       </Route>
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 export default router;

@@ -1,6 +1,5 @@
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import AppBar from '../AppBar/AppBar';

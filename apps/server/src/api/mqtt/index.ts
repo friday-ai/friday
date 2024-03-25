@@ -1,15 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable global-require,import/no-dynamic-require */
 import logger from '@friday-ai/logger';
 import { MqttOptions } from '@friday-ai/shared';
-import { glob as Glob } from 'glob';
 import mqtt, { connect } from 'mqtt';
 import { EventsType, TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
 import Friday from '../../core/friday';
 import handleMessage from './mqtt.handleMessage';
 import sendMessage from './mqtt.sendMessage';
 
-// const env = process.env.NODE_ENV || 'production';
+import MqttHandlers, { handlerFnType } from './handlers';
 
 const defaultMqttOptions: MqttOptions = {
   port: 1883,
@@ -26,18 +23,18 @@ export default class MqttServer {
   public friday: Friday;
   public MqttClient!: mqtt.MqttClient;
   public sendMessage = sendMessage;
-  public handlers: Record<string, (context: Friday, payload: object) => null> = {};
+  public handlers: Record<string, handlerFnType> = {};
   public handleMessage = handleMessage;
   public retryTimes = 0;
+  public retryInterval: NodeJS.Timeout | null = null;
 
   constructor(friday: Friday) {
     this.friday = friday;
     this.friday.event.on(EventsType.MQTT_PUBLISH, (event) => this.sendMessage(event));
     this.friday.event.on(EventsType.MQTT_PUBLISH_ALL, (event) => this.sendMessage(event, { sendAll: true }));
 
-    Glob.sync('**/*.{js,ts}', { cwd: `${__dirname}/handlers/` }).forEach((filename) => {
-      const topic = filename.replace(/.js|.ts/gi, '');
-      this.handlers[topic] = require(`./handlers/${filename}`).default;
+    Object.keys(MqttHandlers).forEach((topic) => {
+      this.handlers[topic] = MqttHandlers[topic];
     });
   }
 
@@ -60,11 +57,17 @@ export default class MqttServer {
       this.MqttClient.on('message', (topic, message) => {
         this.handleMessage(topic, message.toString());
       });
+
+      clearInterval(this.retryInterval!);
+      this.retryInterval = null;
     });
 
     this.MqttClient.on('error', (_error) => {
       logger.warning('Error while connecting to MQTT, trying reconnection');
       this.retryTimes += 1;
+    });
+
+    this.retryInterval = setInterval(() => {
       // TODO: Send warning to front
       if (this.retryTimes >= 5) {
         this.stop();

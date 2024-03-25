@@ -1,7 +1,9 @@
 import { Sequelize } from 'sequelize-typescript';
 import { SequelizeStorage, Umzug } from 'umzug';
-import path from 'path';
 import { KVArr } from '../utils/interfaces';
+
+import migrations from '../../migrations';
+import { modelsArr } from '../models';
 
 const env = process.env.NODE_ENV || 'production';
 
@@ -20,14 +22,12 @@ const database = new Sequelize({
   },
   logging: false,
   storage: DATABASE_NAME[env],
-  models: [path.join(__dirname, '../models')],
+  models: modelsArr,
 });
 
 // Migrations
 const umzug = new Umzug({
-  migrations: {
-    glob: path.join(__dirname, '../../migrations/*.ts'),
-  },
+  migrations: [...migrations],
   context: database.getQueryInterface(),
   storage: new SequelizeStorage({ sequelize: database }),
   logger: console,
@@ -43,7 +43,11 @@ const init = async () => {
 };
 
 const closeConnection = async () => {
-  await database.close();
+  if (env === 'test') {
+    return null;
+  }
+
+  return database.close();
 };
 
-export { database, umzug, init, closeConnection };
+export { closeConnection, database, init, umzug };

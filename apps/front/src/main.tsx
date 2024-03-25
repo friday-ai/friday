@@ -3,7 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LazyMotion, domAnimation } from 'framer-motion';
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 import { registerSW } from 'virtual:pwa-register';
@@ -29,7 +29,7 @@ if (rootContainer !== null) {
   const root = createRoot(rootContainer);
 
   root.render(
-    <React.StrictMode>
+    <StrictMode>
       <LazyMotion features={domAnimation}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
@@ -40,7 +40,7 @@ if (rootContainer !== null) {
           </ThemeProvider>
         </QueryClientProvider>
       </LazyMotion>
-    </React.StrictMode>
+    </StrictMode>,
   );
 
   registerSW();

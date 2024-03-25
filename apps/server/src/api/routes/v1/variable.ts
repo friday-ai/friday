@@ -12,7 +12,7 @@ import Friday from '../../../core/friday';
  */
 @FridayRouter('/v1/variable')
 export default class VariableRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;

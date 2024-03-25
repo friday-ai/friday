@@ -10,7 +10,7 @@ import Friday from '../../../core/friday';
  */
 @FridayRouter('/v1/room')
 export default class RoomRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;

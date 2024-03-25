@@ -1,5 +1,3 @@
-import React from 'react';
-
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
@@ -26,7 +24,7 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
       NiceModal.show(Confirm, {
         title: t('settings.user.areYouSure'),
         content: `${t('settings.user.deleteMessage')} <b>${user.userName}</b>.`,
-        onClose: async (confirm) => {
+        onClose: async (confirm: boolean) => {
           if (confirm) {
             await deleteUser.mutateAsync(user.id);
           }

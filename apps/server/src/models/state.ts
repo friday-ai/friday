@@ -14,13 +14,13 @@ import {
   Unique,
 } from 'sequelize-typescript';
 
-import { StateAttributes, StateOwner, StateCreationAttributes } from '@friday-ai/shared';
-import User from './user';
-import Satellite from './satellite';
-import Room from './room';
+import { StateAttributes, StateCreationAttributes, StateOwner } from '@friday-ai/shared';
+import { isOwnerExisting } from '../utils/database/validation';
 import House from './house';
 import Plugin from './plugin';
-import { isOwnerExisting } from '../utils/database/validation';
+import Room from './room';
+import Satellite from './satellite';
+import User from './user';
 
 /**
  * State model
@@ -38,7 +38,7 @@ export default class State extends Model<StateAttributes, StateCreationAttribute
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
@@ -48,17 +48,17 @@ export default class State extends Model<StateAttributes, StateCreationAttribute
   owner!: string;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.ENUM(...Object.values(StateOwner)))
   ownerType!: StateOwner;
 
   @AllowNull(false)
-  @Column
+  @Column(DataType.STRING)
   value!: string;
 
   @AllowNull(false)
   @NotEmpty
   @Default(true)
-  @Column
+  @Column(DataType.BOOLEAN)
   last!: boolean;
 
   @BelongsTo(() => User, {

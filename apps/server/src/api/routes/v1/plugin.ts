@@ -13,7 +13,7 @@ import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorator
  */
 @FridayRouter('/v1/plugin')
 export default class PluginRouter {
-  readonly friday: Friday;
+  private readonly friday: Friday;
 
   constructor(friday: Friday) {
     this.friday = friday;

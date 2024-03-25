@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Box, List, Paper, Stack, Typography } from '@mui/material';
 
 import { useTranslation } from 'react-i18next';

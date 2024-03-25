@@ -1,4 +1,3 @@
-import React from 'react';
 import uaParser from 'useragent-parser-js';
 
 import DeleteIcon from '@mui/icons-material/Delete';

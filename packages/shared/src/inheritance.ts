@@ -58,7 +58,7 @@ type Constructors<T extends any[]> = { [K in keyof T]: Constructor<T[K]> };
  */
 export function AllOf<T extends any[]>(...BaseClasses: Constructors<T>): Constructor<UnionToIntersection<T[number]>> {
   const [First, ...Others] = BaseClasses;
-  const ret = class AllOf extends First {};
+  const ret = class AllOf extends First! {};
   for (const base of Others) {
     applyMixin(ret, base);
   }

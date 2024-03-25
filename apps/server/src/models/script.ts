@@ -18,17 +18,17 @@ export default class Script extends Model<ScriptAttributes, ScriptCreationAttrib
   @PrimaryKey
   @Unique
   @Default(DataType.UUIDV4)
-  @Column({ type: DataType.UUIDV4 })
+  @Column(DataType.UUIDV4)
   id!: string;
 
   @AllowNull(false)
   @Unique
   @NotEmpty
-  @Column
+  @Column(DataType.STRING)
   name!: string;
 
   @AllowNull(false)
   @Default('')
-  @Column
+  @Column(DataType.STRING)
   code!: string;
 }
