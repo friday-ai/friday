@@ -41,12 +41,20 @@ runs:
       run: pnpm install -r --frozen-lockfile --strict-peer-dependencies
       shell: bash
 
+    - name: Cache turbo build setup
+      uses: actions/cache@v4
+      with:
+        path: .turbo
+        key: ${{ runner.os }}-turbo-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-turbo-
+
     - name: 📦 Build
       if: ${{ inputs.build == 'true' }}
       run: |
         if echo ${{ inputs.build-only-packages }}
         then
-          pnpm -r --filter "./packages/*" build
+          turbo build:packages
         else
           ${{ inputs.build-command }}
         fi

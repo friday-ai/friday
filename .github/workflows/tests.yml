@@ -26,7 +26,7 @@ jobs:
           build-only-packages: true
 
       - name: ✅ Run Mocha/Chai unit tests
-        run: GITHUB_ACTION=true pnpm test:packages
+        run: GITHUB_ACTION=true turbo test:packages
 
   test-server:
     needs: [test-pacakges]
@@ -42,7 +42,7 @@ jobs:
           build-only-packages: true
 
       - name: ✅ Run Mocha/Chai unit tests
-        run: GITHUB_ACTION=true pnpm coverage:junit
+        run: GITHUB_ACTION=true turbo coverage:junit
 
       - name: ⬆️ Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1.9
