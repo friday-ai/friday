@@ -29,20 +29,19 @@ RUN pnpm fetch \
     && turbo build
 
 # Friday front -------------------------------------------
-FROM base as front
+FROM joseluisq/static-web-server:2-alpine as front
 
-# Front dependencies
-RUN npm install -g http-server
+WORKDIR /src
 
 # Add friday core
 COPY --from=builder /usr/src/apps/front/dist ./dist
-
-COPY ../apps/front/package.json ./
 
 ENV NODE_ENV production
 
 # Export listening port
 EXPOSE 1444
+
+CMD static-web-server --port 1444 --root ./dist
 
 # Friday back ------------------------------------------
 FROM base as server
