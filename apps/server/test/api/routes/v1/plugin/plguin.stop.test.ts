@@ -12,6 +12,7 @@ let container: Container;
 describe('PATCH /api/v1/plugin/stop/:id', () => {
   // Create a fake container and save docker id on plugin
   before(async function before() {
+    this.timeout(15000);
     plugin = global.FRIDAY.plugin;
     docker = global.FRIDAY.docker;
 
