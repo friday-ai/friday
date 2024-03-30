@@ -1,6 +1,6 @@
 {
   "name": "@friday-ai/tools",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "files": [
     "eslint/base.js",
     "eslint/react-internal.js",
