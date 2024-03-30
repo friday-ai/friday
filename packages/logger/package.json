@@ -1,6 +1,6 @@
 {
   "name": "@friday-ai/logger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Friday: Log manager",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
