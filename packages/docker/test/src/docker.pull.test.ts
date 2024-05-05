@@ -1,35 +1,35 @@
-import { assert, expect } from 'chai';
-import Dockerode from 'dockerode';
-import Docker from '../../src/index';
-import { CoreError, PlatformNotCompatible } from '../../src/utils/error';
+import { assert, expect } from "chai";
+import Dockerode from "dockerode";
+import type Docker from "../../src/index";
+import { CoreError, PlatformNotCompatible } from "../../src/utils/error";
 
 let docker: Docker;
 
-describe('Docker.pull', () => {
+describe("Docker.pull", () => {
   before(async () => {
     docker = global.DOCKER;
     // Override object for tests
     docker.dockerode = new Dockerode();
   });
 
-  it('should pull an image', async function pull() {
+  it("should pull an image", async function pull() {
     this.timeout(1500);
-    await docker.pull('alpine:latest');
+    await docker.pull("alpine:latest");
     const images = await docker.dockerode?.listImages();
-    expect(images).to.be.an('array');
-    expect(images?.map((img) => img.RepoTags).flat()).to.contains('alpine:latest');
+    expect(images).to.be.an("array");
+    expect(images?.flatMap((img) => img.RepoTags)).to.contains("alpine:latest");
   });
 
-  it('should not pull an image', async () => {
-    const promise = docker.pull('ubuntu:azeaze');
+  it("should not pull an image", async () => {
+    const promise = docker.pull("ubuntu:azeaze");
     await assert.isRejected(promise, CoreError);
   });
 
-  it('should not pull an image', async () => {
+  it("should not pull an image", async () => {
     // Override object to force throw for tests
     docker.dockerode = null;
 
-    const promise = docker.pull('alpine:latest');
+    const promise = docker.pull("alpine:latest");
     await assert.isRejected(promise, PlatformNotCompatible);
   });
 });

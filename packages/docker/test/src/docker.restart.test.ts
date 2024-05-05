@@ -1,23 +1,22 @@
-import { assert, expect } from 'chai';
-import Dockerode, { Container } from 'dockerode';
-import Docker from '../../src/index';
-import { NotFoundError, PlatformNotCompatible } from '../../src/utils/error';
-import wait from '../utils/timer';
+import { assert, expect } from "chai";
+import Dockerode, { type Container } from "dockerode";
+import type Docker from "../../src/index";
+import { NotFoundError, PlatformNotCompatible } from "../../src/utils/error";
+import wait from "../utils/timer";
 
 let docker: Docker;
 let container: Container;
 
-describe('Docker.restart', () => {
-  before(async () => {
+describe("Docker.restart", () => {
+  before(async function before() {
+    this.timeout(15000);
+
     docker = global.DOCKER;
     // Override object for tests
     docker.dockerode = new Dockerode();
-  });
 
-  before(async function b() {
-    this.timeout(15000);
     container = await docker.createContainer({
-      Image: 'alpine',
+      Image: "alpine",
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
@@ -33,9 +32,9 @@ describe('Docker.restart', () => {
     await container.remove();
   });
 
-  it('should restart a container', async function restart() {
+  it("should restart a container", async function restart() {
     this.timeout(15000);
-    let containerStatus = '';
+    let containerStatus = "";
 
     const handler = (e: string) => {
       const event = JSON.parse(e);
@@ -43,23 +42,23 @@ describe('Docker.restart', () => {
     };
 
     if (docker.dockerode) {
-      const events = await docker.dockerode.getEvents({ filters: { container: [container.id], type: ['container'] } });
-      events.on('data', handler);
+      const events = await docker.dockerode.getEvents({ filters: { container: [container.id], type: ["container"] } });
+      events.on("data", handler);
 
       await docker.restart(container.id);
       await wait(1000);
 
-      events.off('data', handler);
-      expect(containerStatus).to.equal('restart');
+      events.off("data", handler);
+      expect(containerStatus).to.equal("restart");
     }
   });
 
-  it('should not restart a container', async () => {
-    const promise = docker.restart('71501a8ab0f8');
+  it("should not restart a container", async () => {
+    const promise = docker.restart("71501a8ab0f8");
     await assert.isRejected(promise, NotFoundError);
   });
 
-  it('should not restart a container', async () => {
+  it("should not restart a container", async () => {
     // Override object to force throw for tests
     docker.dockerode = null;
 

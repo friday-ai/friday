@@ -1,9 +1,5 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-useless-constructor */
-/* eslint-disable max-classes-per-file */
-import logger from '@friday-ai/logger';
-import { ErrorType } from './interfaces';
+import logger from "@friday-ai/logger";
+import type { ErrorType } from "./interfaces";
 
 //      ____                                        __                                          __     _     __
 //     / __ \  ___   _____  ____    _____  ____ _  / /_  ____    _____   _____         __  __  / /_   (_)   / /   _____
@@ -87,7 +83,7 @@ export const Catch = () => (_: any, __: string, descriptor: PropertyDescriptor) 
       const result = originalMethod.apply(this, args);
 
       // check if method is asynchronous
-      if (result && typeof result.then === 'function' && typeof result.catch === 'function') {
+      if (result && typeof result.then === "function" && typeof result.catch === "function") {
         // return promise
         return result.catch((e: any) => {
           logger.error(e);

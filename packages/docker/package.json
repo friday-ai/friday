@@ -1,13 +1,11 @@
 {
   "name": "@friday-ai/docker",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Friday: Docker utilites",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
   "typings": "lib/index.d.ts",
-  "files": [
-    "lib/"
-  ],
+  "files": ["lib/"],
   "keywords": [],
   "author": "Mathieu Andrade",
   "license": "MIT",
@@ -17,15 +15,14 @@
     "test:packages": "cross-env NODE_ENV=test mocha --recursive -r tsx ./test/setup.ts ./test/**/*.test.ts -exit",
     "build": "tsup",
     "build:packages": "tsup",
-    "lint": "eslint --ext .ts,.tsx ./src",
-    "lint:fix": "eslint --ext .ts,.tsx --fix ./src"
+    "lint": "biome check --apply ./src ./test"
   },
-  "prettier": "@friday-ai/tools/configs/prettier.config.js",
   "peerDependencies": {
     "@types/node": "^20.11.16",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.7.2",
     "@friday-ai/tools": "workspace:^",
     "@types/chai": "^4.3.12",
     "@types/chai-as-promised": "^7.1.8",

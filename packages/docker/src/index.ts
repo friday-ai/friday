@@ -1,18 +1,18 @@
-import Dockerode from 'dockerode';
-import logger from '@friday-ai/logger';
-import { Catch } from './utils/error';
+import logger from "@friday-ai/logger";
+import Dockerode from "dockerode";
+import { Catch } from "./utils/error";
 
-import isDocker from './core/docker.isDocker';
-import getAllContainers from './core/docker.getAllContainers';
-import getContainer from './core/docker.getContainer';
-import start from './core/docker.start';
-import stop from './core/docker.stop';
-import restart from './core/docker.restart';
-import remove from './core/docker.remove';
-import pull from './core/docker.pull';
-import createContainer from './core/docker.createContainer';
-import exec from './core/docker.exec';
-import getContainerState from './core/docker.getContainerState';
+import createContainer from "./core/docker.createContainer";
+import exec from "./core/docker.exec";
+import getAllContainers from "./core/docker.getAllContainers";
+import getContainer from "./core/docker.getContainer";
+import getContainerState from "./core/docker.getContainerState";
+import isDocker from "./core/docker.isDocker";
+import pull from "./core/docker.pull";
+import remove from "./core/docker.remove";
+import restart from "./core/docker.restart";
+import start from "./core/docker.start";
+import stop from "./core/docker.stop";
 
 export default class Docker {
   public dockerode = isDocker() ? new Dockerode() : null;
