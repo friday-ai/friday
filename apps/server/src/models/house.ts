@@ -13,35 +13,35 @@ import {
   Scopes,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { HouseAttributes, HouseCreationAttributes } from '@friday-ai/shared';
+import type { HouseAttributes, HouseCreationAttributes } from "@friday-ai/shared";
 
-import Room from './room';
-import State from './state';
+import Room from "./room";
+import State from "./state";
 
 /**
  * House model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'latitude', 'longitude'],
+  attributes: ["id", "name", "latitude", "longitude"],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'latitude', 'longitude'],
+    attributes: ["id", "name", "latitude", "longitude"],
     include: [Room, { model: State, where: { last: true } }],
   },
   withRooms: {
-    attributes: ['id', 'name', 'latitude', 'longitude'],
+    attributes: ["id", "name", "latitude", "longitude"],
     include: [Room],
   },
   withState: {
-    attributes: ['id', 'name', 'latitude', 'longitude'],
+    attributes: ["id", "name", "latitude", "longitude"],
     include: [{ model: State, where: { last: true } }],
   },
 }))
 @Table({
-  tableName: 'house',
+  tableName: "house",
   underscored: false,
 })
 export default class House extends Model<HouseAttributes, HouseCreationAttributes> {
@@ -68,13 +68,13 @@ export default class House extends Model<HouseAttributes, HouseCreationAttribute
   longitude!: string;
 
   @HasMany(() => Room, {
-    foreignKey: 'houseId',
+    foreignKey: "houseId",
     constraints: false,
   })
   rooms!: Room[];
 
   @HasOne(() => State, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   state!: State;

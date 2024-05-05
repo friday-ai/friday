@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
+import type { Request, Response } from "express";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
-import Friday from '../../../core/friday';
+import type Friday from "../../../core/friday";
 
 /**
  * Action router
@@ -14,7 +14,7 @@ import Friday from '../../../core/friday';
  * @apiParam {String} variable Value Value to give to the object affected by the action.
  * @apiParam {UUIDV4} sceneId Identifier of the scene to which the action belongs.
  */
-@FridayRouter('/v1/action')
+@FridayRouter("/v1/action")
 export default class ActionRouter {
   private readonly friday: Friday;
 
@@ -44,11 +44,11 @@ export default class ActionRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'action',
+    aclMethod: "create",
+    aclResource: "action",
   })
   create = async (req: Request, res: Response) => {
     const action = await this.friday.action.create(req.body);
@@ -77,11 +77,11 @@ export default class ActionRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'action',
+    aclMethod: "update",
+    aclResource: "action",
   })
   update = async (req: Request, res: Response) => {
     const action = await this.friday.action.update(req.params.id, req.body);
@@ -102,11 +102,11 @@ export default class ActionRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'action',
+    aclMethod: "delete",
+    aclResource: "action",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.action.destroy(req.params.id);
@@ -136,11 +136,11 @@ export default class ActionRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'action',
+    aclMethod: "read",
+    aclResource: "action",
   })
   listAll = async (req: Request, res: Response) => {
     const actions = await this.friday.action.listAll(req.query);
@@ -167,11 +167,11 @@ export default class ActionRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'action',
+    aclMethod: "read",
+    aclResource: "action",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;

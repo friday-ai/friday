@@ -1,10 +1,10 @@
-import { QueryInterface } from 'sequelize';
-import { DataType } from 'sequelize-typescript';
+import type { QueryInterface } from "sequelize";
+import { DataType } from "sequelize-typescript";
 
 export default {
-  name: '20200823171612-create-script',
+  name: "20200823171612-create-script",
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
-    await queryInterface.createTable('script', {
+    await queryInterface.createTable("script", {
       id: {
         unique: true,
         allowNull: false,
@@ -30,5 +30,5 @@ export default {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('script'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable("script"),
 };

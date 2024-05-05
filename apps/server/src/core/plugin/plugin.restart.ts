@@ -1,6 +1,6 @@
-import logger from '@friday-ai/logger';
-import { AvailableState, EventsType, StateOwner, WebsocketMessageTypes } from '@friday-ai/shared';
-import PluginClass from './plugin';
+import logger from "@friday-ai/logger";
+import { AvailableState, EventsType, StateOwner, WebsocketMessageTypes } from "@friday-ai/shared";
+import type PluginClass from "./plugin";
 
 /**
  * Restart a plugin.
@@ -35,8 +35,8 @@ export default async function restart(this: PluginClass, id: string): Promise<bo
 
     return true;
   } catch (error) {
-    if (error.message.includes('Container not found')) {
-      logger.warning('Container not exist');
+    if (error.message.includes("Container not found")) {
+      logger.warning("Container not exist");
 
       await this.state.set({
         owner: id,

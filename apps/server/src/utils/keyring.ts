@@ -1,9 +1,9 @@
-import { keyring } from '@fnando/keyring';
-import { SALT_KEY } from '../config/constants';
+import { keyring } from "@fnando/keyring";
+import { SALT_KEY } from "../config/constants";
 
 function getEncryptedKey(key: string) {
   return {
-    1: Buffer.from(key).toString('base64').slice(0, 43),
+    1: Buffer.from(key).toString("base64").slice(0, 43),
   };
 }
 
@@ -20,5 +20,5 @@ export function encrypt(textToEncrypt: string, key: string) {
 export function decrypt(encrypted: string, key: string) {
   const encryptor = getEncryptor(key);
 
-  return encryptor.decrypt(encrypted, '1');
+  return encryptor.decrypt(encrypted, "1");
 }

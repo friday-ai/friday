@@ -1,7 +1,7 @@
-import schedule from 'node-schedule';
-import logger from '@friday-ai/logger';
-import { JobsInterface } from './interfaces';
-import EventClass from './event';
+import logger from "@friday-ai/logger";
+import schedule from "node-schedule";
+import type EventClass from "./event";
+import type { JobsInterface } from "./interfaces";
 
 /**
  * Friday scheduler
@@ -17,9 +17,9 @@ export default class Scheduler {
   }
 
   init = async () => {
-    this.jobs.forEach((job) => {
+    for (const job of this.jobs) {
       this.run(job);
-    });
+    }
   };
 
   run = async (job: JobsInterface) => {

@@ -1,6 +1,6 @@
-import { DcstAttributes, DevicesActions } from '@friday-ai/shared';
-import { CapabilityManagerParamsList } from '../../../utils/interfaces';
-import DeviceClass from '../device';
+import { type DcstAttributes, DevicesActions } from "@friday-ai/shared";
+import type { CapabilityManagerParamsList } from "../../../utils/interfaces";
+import type DeviceClass from "../device";
 
 export const options: CapabilityManagerParamsList = {
   setTemperature: {

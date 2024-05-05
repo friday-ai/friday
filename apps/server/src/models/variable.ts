@@ -12,22 +12,22 @@ import {
   PrimaryKey,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { VariableAttributes, VariableCreationAttributes, VariableOwner } from '@friday-ai/shared';
-import { isOwnerExisting } from '../utils/database/validation';
-import Plugin from './plugin';
-import Satellite from './satellite';
-import User from './user';
+import { type VariableAttributes, type VariableCreationAttributes, VariableOwner } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import Plugin from "./plugin";
+import Satellite from "./satellite";
+import User from "./user";
 
 /**
  * Variable model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'key', 'value', 'owner', 'ownerType'],
+  attributes: ["id", "key", "value", "owner", "ownerType"],
 }))
 @Table({
-  tableName: 'variable',
+  tableName: "variable",
   underscored: false,
 })
 export default class Variable extends Model<VariableAttributes, VariableCreationAttributes> {
@@ -52,7 +52,7 @@ export default class Variable extends Model<VariableAttributes, VariableCreation
 
   @AllowNull(false)
   @NotEmpty
-  @Is('owner', (value) => isOwnerExisting(value, ['user', 'satellite', 'plugin']))
+  @Is("owner", (value) => isOwnerExisting(value, ["user", "satellite", "plugin"]))
   @Column(DataType.UUIDV4)
   owner!: string;
 
@@ -61,19 +61,19 @@ export default class Variable extends Model<VariableAttributes, VariableCreation
   ownerType!: VariableOwner;
 
   @BelongsTo(() => User, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   user?: User;
 
   @BelongsTo(() => Plugin, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   plugin?: Plugin;
 
   @BelongsTo(() => Satellite, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   satellite?: Satellite;

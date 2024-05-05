@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Script router
@@ -8,7 +8,7 @@ import Friday from '../../../core/friday';
  * @apiParam {String} name Name of the script.
  * @apiParam {JSON} code Code of the script.
  */
-@FridayRouter('/v1/script')
+@FridayRouter("/v1/script")
 export default class ScriptRouter {
   private readonly friday: Friday;
 
@@ -32,11 +32,11 @@ export default class ScriptRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'script',
+    aclMethod: "create",
+    aclResource: "script",
   })
   create = async (req: Request, res: Response) => {
     const script = await this.friday.script.create(req.body);
@@ -59,11 +59,11 @@ export default class ScriptRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'script',
+    aclMethod: "update",
+    aclResource: "script",
   })
   update = async (req: Request, res: Response) => {
     const script = await this.friday.script.update(req.params.id, req.body);
@@ -83,11 +83,11 @@ export default class ScriptRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'script',
+    aclMethod: "delete",
+    aclResource: "script",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.script.destroy(req.params.id);
@@ -111,11 +111,11 @@ export default class ScriptRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'script',
+    aclMethod: "read",
+    aclResource: "script",
   })
   listAll = async (req: Request, res: Response) => {
     const scripts = await this.friday.script.listAll(req.query);
@@ -137,11 +137,11 @@ export default class ScriptRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'script',
+    aclMethod: "read",
+    aclResource: "script",
   })
   getById = async (req: Request, res: Response) => {
     const script = await this.friday.script.getById(req.params.id);

@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 //      ____                                        __                                          __     _     __
 //     / __ \  ___   _____  ____    _____  ____ _  / /_  ____    _____   _____         __  __  / /_   (_)   / /   _____
 //    / / / / / _ \ / ___/ / __ \  / ___/ / __ `/ / __/ / __ \  / ___/  / ___/        / / / / / __/  / /   / /   / ___/
@@ -12,10 +9,10 @@
  * Route methode enumerator
  */
 enum Methods {
-  GET = 'get',
-  POST = 'post',
-  PATCH = 'patch',
-  DELETE = 'delete',
+  GET = "get",
+  POST = "post",
+  PATCH = "patch",
+  DELETE = "delete",
 }
 
 /**
@@ -48,19 +45,20 @@ export interface RouteParam {
  * @param {string} propertyKey
  * @param {Methods} requestMethode
  * @param {RouteParam} options
- * @returns {Promise<RouteDefinition[]>} Resolve with route array.
+ * @returns {RouteDefinition[]} Resolve with route array.
  * @example
  * buildMetadataRoutes(target, propertyKey, Methods.GET, options);
  */
-function buildMetadataRoutes(target: any, propertyKey: string, requestMethode: Methods, options: RouteParam) {
+// biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
+function buildMetadataRoutes(target: any, propertyKey: string, requestMethode: Methods, options: RouteParam): RouteDefinition[] {
   // In case this is the first route to be registered the `routes` metadata is likely to be undefined at this point.
   // To prevent any further validation simply set it to an empty array here.
-  if (!Reflect.hasMetadata('routes', target.constructor)) {
-    Reflect.defineMetadata('routes', [], target.constructor);
+  if (!Reflect.hasMetadata("routes", target.constructor)) {
+    Reflect.defineMetadata("routes", [], target.constructor);
   }
 
   // Get the routes stored so far, extend it by the new route and re-set the metadata.
-  const routes = <RouteDefinition[]>Reflect.getMetadata('routes', target.constructor);
+  const routes = <RouteDefinition[]>Reflect.getMetadata("routes", target.constructor);
 
   routes.push({
     requestMethod: requestMethode,
@@ -89,13 +87,14 @@ function buildMetadataRoutes(target: any, propertyKey: string, requestMethode: M
  * FridayRouter('/v1/action')
  */
 // tslint:disable-next-line: naming-convention
-export const FridayRouter = (prefix = ''): ClassDecorator => {
+export const FridayRouter = (prefix = ""): ClassDecorator => {
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   return (target: any) => {
-    Reflect.defineMetadata('prefix', prefix, target);
+    Reflect.defineMetadata("prefix", prefix, target);
 
     // Since routes are set by our methods this should almost never be true (except the controller has no methods)
-    if (!Reflect.hasMetadata('routes', target)) {
-      Reflect.defineMetadata('routes', [], target);
+    if (!Reflect.hasMetadata("routes", target)) {
+      Reflect.defineMetadata("routes", [], target);
     }
   };
 };
@@ -108,9 +107,10 @@ export const FridayRouter = (prefix = ''): ClassDecorator => {
  */
 // tslint:disable-next-line: naming-convention
 export const Get = (options: RouteParam) => {
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   return (target: any, propertyKey: string): void => {
     const routes = buildMetadataRoutes(target, propertyKey, Methods.GET, options);
-    Reflect.defineMetadata('routes', routes, target.constructor);
+    Reflect.defineMetadata("routes", routes, target.constructor);
   };
 };
 
@@ -122,9 +122,10 @@ export const Get = (options: RouteParam) => {
  */
 // tslint:disable-next-line: naming-convention
 export const Post = (options: RouteParam) => {
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   return (target: any, propertyKey: string): void => {
     const routes = buildMetadataRoutes(target, propertyKey, Methods.POST, options);
-    Reflect.defineMetadata('routes', routes, target.constructor);
+    Reflect.defineMetadata("routes", routes, target.constructor);
   };
 };
 
@@ -136,9 +137,10 @@ export const Post = (options: RouteParam) => {
  */
 // tslint:disable-next-line: naming-convention
 export const Patch = (options: RouteParam) => {
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   return (target: any, propertyKey: string): void => {
     const routes = buildMetadataRoutes(target, propertyKey, Methods.PATCH, options);
-    Reflect.defineMetadata('routes', routes, target.constructor);
+    Reflect.defineMetadata("routes", routes, target.constructor);
   };
 };
 
@@ -150,8 +152,9 @@ export const Patch = (options: RouteParam) => {
  */
 // tslint:disable-next-line: naming-convention
 export const Delete = (options: RouteParam) => {
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   return (target: any, propertyKey: string): void => {
     const routes = buildMetadataRoutes(target, propertyKey, Methods.DELETE, options);
-    Reflect.defineMetadata('routes', routes, target.constructor);
+    Reflect.defineMetadata("routes", routes, target.constructor);
   };
 };

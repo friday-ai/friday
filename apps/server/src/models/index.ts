@@ -1,22 +1,22 @@
-import { ModelCtor } from 'sequelize-typescript';
-import { KVArr } from '../utils/interfaces';
+import type { ModelCtor } from "sequelize-typescript";
+import type { KVArr } from "../utils/interfaces";
 
-import Action from './action';
-import Device from './device';
-import DeviceCapability from './device_capability';
-import DeviceCapabilitySettings from './device_capability_settings';
-import DeviceCapabilityState from './device_capability_state';
-import House from './house';
-import Plugin from './plugin';
-import Room from './room';
-import Satellite from './satellite';
-import Scene from './scene';
-import Script from './script';
-import Session from './session';
-import State from './state';
-import Trigger from './trigger';
-import User from './user';
-import Variable from './variable';
+import Action from "./action";
+import Device from "./device";
+import DeviceCapability from "./device_capability";
+import DeviceCapabilitySettings from "./device_capability_settings";
+import DeviceCapabilityState from "./device_capability_state";
+import House from "./house";
+import Plugin from "./plugin";
+import Room from "./room";
+import Satellite from "./satellite";
+import Scene from "./scene";
+import Script from "./script";
+import Session from "./session";
+import State from "./state";
+import Trigger from "./trigger";
+import User from "./user";
+import Variable from "./variable";
 
 const modelsArr = [
   Action,

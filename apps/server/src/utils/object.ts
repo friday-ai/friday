@@ -23,7 +23,7 @@ export function pick<T, K extends keyof T>(object: T, keys: K[]): T {
         return { [key]: object[key] };
       }
       return null;
-    })
+    }),
   );
 }
 
@@ -32,7 +32,7 @@ export function pick<T, K extends keyof T>(object: T, keys: K[]): T {
  * @param entity T
  * @returns T
  */
-export function exclude<T>(object: T, keysToExclude = ['password', 'createdAt', 'updatedAt']): T {
+export function exclude<T>(object: T, keysToExclude = ["password", "createdAt", "updatedAt"]): T {
   const filtered = Object.entries(object as never).filter(([key, _val]) => !keysToExclude.includes(key));
 
   return <T>Object.fromEntries(filtered);

@@ -1,4 +1,4 @@
-import SatelliteClass from './satellite';
+import type SatelliteClass from "./satellite";
 
 /**
  * Restart all plugins of satellite.
@@ -10,7 +10,7 @@ import SatelliteClass from './satellite';
  * ````
  */
 export default async function restartAllPlugins(this: SatelliteClass, id: string): Promise<boolean[]> {
-  const satellite = await this.getById(id, 'withPlugins');
+  const satellite = await this.getById(id, "withPlugins");
 
   const result = satellite.plugins.map((plugin) => {
     return this.plugin.restart(plugin.id);

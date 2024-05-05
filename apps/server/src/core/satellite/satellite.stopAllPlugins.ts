@@ -1,4 +1,4 @@
-import SatelliteClass from './satellite';
+import type SatelliteClass from "./satellite";
 
 /**
  * Stop all plugins of satellite.
@@ -10,7 +10,7 @@ import SatelliteClass from './satellite';
  * ````
  */
 export default async function stopAllPlugins(this: SatelliteClass, id: string): Promise<boolean[]> {
-  const satellite = await this.getById(id, 'withPlugins');
+  const satellite = await this.getById(id, "withPlugins");
 
   const result = satellite.plugins.map((plugin) => {
     return this.plugin.stop(plugin.id);

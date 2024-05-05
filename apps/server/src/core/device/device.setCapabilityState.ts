@@ -1,16 +1,16 @@
-import { DcstAttributes, DcstCreationAttributes } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import DeviceCapabilityState from '../../models/device_capability_state';
-import DeviceClass from './device';
-import { BadParametersError } from '../../utils/decorators/error';
+import logger from "@friday-ai/logger";
+import type { DcstAttributes, DcstCreationAttributes } from "@friday-ai/shared";
+import DeviceCapabilityState from "../../models/device_capability_state";
+import { BadParametersError } from "../../utils/decorators/error";
+import type DeviceClass from "./device";
 
 /**
  * Device capability state
  * @param state
  */
 export default async function setCapabilityState(this: DeviceClass, state: DcstCreationAttributes): Promise<DcstAttributes> {
-  if (state.capabilityId === '' || state.capabilityId === undefined || state.capabilityId === null) {
-    throw new BadParametersError({ name: 'Friday set capability state', message: 'Capability id is empty', metadata: state });
+  if (state.capabilityId === "" || state.capabilityId === undefined || state.capabilityId === null) {
+    throw new BadParametersError({ name: "Friday set capability state", message: "Capability id is empty", metadata: state });
   }
 
   // TODO: check if state value is valid for capability

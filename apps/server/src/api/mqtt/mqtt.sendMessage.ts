@@ -1,8 +1,8 @@
-import logger from '@friday-ai/logger';
-import MqttServer from './index';
-import error, { BadParametersError } from '../../utils/decorators/error';
-import { MqttMessagePayload, MqttSendOptions } from '../../utils/interfaces';
-import { TopicHeaderPub, TopicsTypes } from '../../config/constants';
+import logger from "@friday-ai/logger";
+import { TopicHeaderPub, TopicsTypes } from "../../config/constants";
+import error, { BadParametersError } from "../../utils/decorators/error";
+import type { MqttMessagePayload, MqttSendOptions } from "../../utils/interfaces";
+import type MqttServer from "./index";
 
 const DEFAULT_OPTIONS: MqttSendOptions = {
   sendAll: false,
@@ -10,15 +10,15 @@ const DEFAULT_OPTIONS: MqttSendOptions = {
 
 export default function sendMessage(this: MqttServer, message: MqttMessagePayload, options?: MqttSendOptions) {
   try {
-    if (typeof message.topic === 'undefined') {
+    if (typeof message.topic === "undefined") {
       throw new BadParametersError({
-        name: 'Send mqtt message',
-        message: 'Incorrect params topic',
+        name: "Send mqtt message",
+        message: "Incorrect params topic",
         metadata: { message, options },
       });
     }
 
-    if (typeof message.message === 'object') {
+    if (typeof message.message === "object") {
       message.message = JSON.stringify(message.message);
     }
 
@@ -27,10 +27,10 @@ export default function sendMessage(this: MqttServer, message: MqttMessagePayloa
 
       let finalTopic = `${TopicHeaderPub}/${message.topic}`;
 
-      if (mergedOptions.sendAll === false && typeof message.receiver !== 'undefined') {
+      if (mergedOptions.sendAll === false && typeof message.receiver !== "undefined") {
         finalTopic = `${TopicHeaderPub}${message.receiver}/${message.topic}`;
-      } else if (mergedOptions.sendAll === false && typeof message.receiver === 'undefined') {
-        throw new BadParametersError({ name: 'Send mqtt message', message: 'Incorrect params', metadata: { mergedOptions, message } });
+      } else if (mergedOptions.sendAll === false && typeof message.receiver === "undefined") {
+        throw new BadParametersError({ name: "Send mqtt message", message: "Incorrect params", metadata: { mergedOptions, message } });
       }
 
       logger.info(`Publish to ${finalTopic} (${message.message})`);

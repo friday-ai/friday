@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { FridayMode } from '../../../config/constants';
-import Friday from '../../../core/friday';
-import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
+import type { Request, Response } from "express";
+import { FridayMode } from "../../../config/constants";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Satellite router
@@ -9,7 +9,7 @@ import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorator
  * @apiParam {String} name Name of the satellite.
  * @apiParam {UUIDV4} roomId Identifier of the room to which the satellite belongs.
  */
-@FridayRouter('/v1/satellite')
+@FridayRouter("/v1/satellite")
 export default class SatelliteRouter {
   private readonly friday: Friday;
 
@@ -33,11 +33,11 @@ export default class SatelliteRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'satellite',
+    aclMethod: "create",
+    aclResource: "satellite",
   })
   create = async (req: Request, res: Response) => {
     const satellite = await this.friday.satellite.create(req.body);
@@ -60,11 +60,11 @@ export default class SatelliteRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'satellite',
+    aclMethod: "update",
+    aclResource: "satellite",
   })
   update = async (req: Request, res: Response) => {
     const satellite = await this.friday.satellite.update(req.params.id, req.body);
@@ -84,11 +84,11 @@ export default class SatelliteRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'satellite',
+    aclMethod: "delete",
+    aclResource: "satellite",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.satellite.destroy(req.params.id);
@@ -112,11 +112,11 @@ export default class SatelliteRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'satellite',
+    aclMethod: "read",
+    aclResource: "satellite",
   })
   listAll = async (req: Request, res: Response) => {
     const satellites = await this.friday.satellite.listAll(req.query);
@@ -138,27 +138,27 @@ export default class SatelliteRouter {
    * }
    */
   @Get({
-    path: '/discovery',
+    path: "/discovery",
     authenticated: false,
     rateLimit: false,
-    aclMethod: 'discovery',
-    aclResource: 'satellite',
+    aclMethod: "discovery",
+    aclResource: "satellite",
   })
   discovery = async (_: Request, res: Response) => {
     if (this.friday.mode === FridayMode.CONFIG_SATELLITE) {
       this.friday.mode = FridayMode.NOMINAL;
       res.status(200).json({
-        mode: 'config',
+        mode: "config",
       });
     }
   };
 
   @Get({
-    path: '/login',
+    path: "/login",
     authenticated: false,
     rateLimit: false,
-    aclMethod: 'login',
-    aclResource: 'satellite',
+    aclMethod: "login",
+    aclResource: "satellite",
   })
   login = async (_req: Request, res: Response) => {
     // const url = `http://${req.query.ip}:8080/login`;
@@ -182,11 +182,11 @@ export default class SatelliteRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'satellite',
+    aclMethod: "read",
+    aclResource: "satellite",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
@@ -207,11 +207,11 @@ export default class SatelliteRouter {
    * }
    */
   @Patch({
-    path: '/stop/plugins/:id',
+    path: "/stop/plugins/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'satellite',
+    aclMethod: "update",
+    aclResource: "satellite",
   })
   stopAllPlugins = async (req: Request, res: Response) => {
     await this.friday.satellite.stopAllPlugins(req.params.id);
@@ -233,11 +233,11 @@ export default class SatelliteRouter {
    * }
    */
   @Patch({
-    path: '/restart/plugins/:id',
+    path: "/restart/plugins/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'satellite',
+    aclMethod: "update",
+    aclResource: "satellite",
   })
   restartAllPlugins = async (req: Request, res: Response) => {
     await this.friday.satellite.restartAllPlugins(req.params.id);

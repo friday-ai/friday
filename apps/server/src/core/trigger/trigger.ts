@@ -1,6 +1,6 @@
-import { TriggerAttributes, TriggerCreationAttributes, TriggerCreationKeys } from '@friday-ai/shared';
-import BaseModel from '../../utils/database/model.base';
-import TriggerModel from '../../models/trigger';
+import { type TriggerAttributes, type TriggerCreationAttributes, TriggerCreationKeys } from "@friday-ai/shared";
+import TriggerModel from "../../models/trigger";
+import BaseModel from "../../utils/database/model.base";
 
 /**
  * Trigger

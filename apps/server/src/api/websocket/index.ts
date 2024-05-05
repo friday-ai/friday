@@ -1,12 +1,12 @@
-import logger from '@friday-ai/logger';
-import { UserAttributes, WebsocketMessageTypes } from '@friday-ai/shared';
-import * as WebSocket from 'ws';
-import { EventsType } from '../../config/constants';
-import Friday from '../../core/friday';
-import clientConnected from './websocket.clientConnected';
-import clientDisconnected from './websocket.clientDisconnected';
-import sendMessage from './websocket.sendMessage';
-import { NewWebsocketPayload } from '../../utils/interfaces';
+import logger from "@friday-ai/logger";
+import { type UserAttributes, WebsocketMessageTypes } from "@friday-ai/shared";
+import type * as WebSocket from "ws";
+import { EventsType } from "../../config/constants";
+import type Friday from "../../core/friday";
+import type { NewWebsocketPayload } from "../../utils/interfaces";
+import clientConnected from "./websocket.clientConnected";
+import clientDisconnected from "./websocket.clientDisconnected";
+import sendMessage from "./websocket.sendMessage";
 
 /**
  * Web socket manager
@@ -25,7 +25,7 @@ export default class WebsocketServer {
     this.wss = wss;
     this.friday = friday;
     this.friday.event.on(EventsType.WEBSOCKET_SEND, (event) => this.sendMessage(event));
-    this.friday.event.on(EventsType.WEBSOCKET_SEND_ALL, (event) => this.sendMessage(event, '', true));
+    this.friday.event.on(EventsType.WEBSOCKET_SEND_ALL, (event) => this.sendMessage(event, "", true));
   }
 
   /**
@@ -33,14 +33,14 @@ export default class WebsocketServer {
    * @memberof WebSocketServer
    */
   start() {
-    this.wss.on('connection', (ws: WebSocket) => {
+    this.wss.on("connection", (ws: WebSocket) => {
       this.isAuthenticated = false;
 
-      ws.on('close', () => {
+      ws.on("close", () => {
         this.clientDisconnected(ws);
       });
 
-      ws.on('message', async (message: string) => {
+      ws.on("message", async (message: string) => {
         const payload = JSON.parse(message) as NewWebsocketPayload;
 
         if (payload.type === WebsocketMessageTypes.AUTHENTICATION) {

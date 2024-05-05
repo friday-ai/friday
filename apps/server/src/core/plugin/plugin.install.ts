@@ -1,8 +1,8 @@
-import logger from '@friday-ai/logger';
-import { AvailableState, PluginAttributes, PluginInstallAttributes, StateOwner, WebsocketMessageTypes } from '@friday-ai/shared';
-import { EventsType } from '../../config/constants';
-import error, { NotFoundError } from '../../utils/decorators/error';
-import PluginClass from './plugin';
+import logger from "@friday-ai/logger";
+import { AvailableState, type PluginAttributes, type PluginInstallAttributes, StateOwner, WebsocketMessageTypes } from "@friday-ai/shared";
+import { EventsType } from "../../config/constants";
+import error, { NotFoundError } from "../../utils/decorators/error";
+import type PluginClass from "./plugin";
 
 /**
  * Install a plugin.
@@ -48,7 +48,7 @@ export default async function install(this: PluginClass, options: PluginInstallA
       name: options.name,
       dockerId: container.id,
       enabled: true,
-      url: 'TODO',
+      url: "TODO",
       version: options.version,
       satelliteId: options.satelliteId,
       lastHeartbeat: new Date(),
@@ -77,7 +77,7 @@ export default async function install(this: PluginClass, options: PluginInstallA
 
     return plugin;
   } catch (e) {
-    if (e.message.includes('HTTP code 404')) {
+    if (e.message.includes("HTTP code 404")) {
       throw new NotFoundError({
         name: e.name,
         message: e.message,

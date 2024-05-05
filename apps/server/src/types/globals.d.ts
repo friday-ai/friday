@@ -1,9 +1,7 @@
-/* eslint-disable vars-on-top */
-/* eslint-disable no-var */
-import { Server } from 'http';
-import Friday from '../core/friday';
-import MqttServer from '../api/mqtt';
-import FakeBroker from '../../test/utils/mqttBroker';
+import type { Server } from "node:http";
+import type FakeBroker from "../../test/utils/mqttBroker";
+import type MqttServer from "../api/mqtt";
+import type Friday from "../core/friday";
 
 declare global {
   var FRIDAY: Friday;
@@ -11,5 +9,3 @@ declare global {
   var MQTT_TEST_SERVER: MqttServer;
   var FAKE_BROKER: FakeBroker;
 }
-
-export {};

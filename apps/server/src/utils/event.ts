@@ -1,19 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { DevicesActions } from '@friday-ai/shared';
-import { EventEmitter } from 'events';
-import { EventsType } from '../config/constants';
+import { EventEmitter } from "node:events";
+import type { DevicesActions } from "@friday-ai/shared";
+import type { EventsType } from "../config/constants";
 
 /**
  * Event
  */
-export default class Event {
-  public static emitter = new EventEmitter();
+const Event = {
+  emitter: new EventEmitter(),
 
-  static emit(event: EventsType | DevicesActions, ...args: any) {
-    this.emitter.emit(event, ...args);
-  }
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
+  emit(event: EventsType | DevicesActions, ...args: any) {
+    Event.emitter.emit(event, ...args);
+  },
 
-  static on(event: EventsType | DevicesActions, cb: (...args: any[]) => void) {
-    this.emitter.on(event, cb);
-  }
-}
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
+  on(event: EventsType | DevicesActions, cb: (...args: any[]) => void) {
+    Event.emitter.on(event, cb);
+  },
+};
+
+export default Event;

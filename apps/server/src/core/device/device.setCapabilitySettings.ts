@@ -1,8 +1,8 @@
-import { DcsAttributes, DcsCreationAttributes, DeviceCapabilitySettingsSchema } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import DeviceCapabilitySettings from '../../models/device_capability_settings';
-import DeviceClass from './device';
-import { BadParametersError } from '../../utils/decorators/error';
+import logger from "@friday-ai/logger";
+import type { DcsAttributes, DcsCreationAttributes, DeviceCapabilitySettingsSchema } from "@friday-ai/shared";
+import DeviceCapabilitySettings from "../../models/device_capability_settings";
+import { BadParametersError } from "../../utils/decorators/error";
+import type DeviceClass from "./device";
 
 /**
  * Settings of device capability
@@ -12,7 +12,7 @@ import { BadParametersError } from '../../utils/decorators/error';
 export default async function setCapabilitySettings(
   this: DeviceClass,
   capabilityId: string,
-  settings: DeviceCapabilitySettingsSchema
+  settings: DeviceCapabilitySettingsSchema,
 ): Promise<DcsAttributes> {
   const settingsToCreate: DcsCreationAttributes = {
     settings,
@@ -20,8 +20,8 @@ export default async function setCapabilitySettings(
   };
 
   // TODO: check if settings is valid for capability
-  if (capabilityId === '') {
-    throw new BadParametersError({ name: 'Friday set capability settings', message: 'Capability id is empty', metadata: settings });
+  if (capabilityId === "") {
+    throw new BadParametersError({ name: "Friday set capability settings", message: "Capability id is empty", metadata: settings });
   }
 
   let capabilitySettings = await DeviceCapabilitySettings.findOne({

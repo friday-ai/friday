@@ -1,20 +1,20 @@
-import { EventsType } from './constants';
-import { JobsInterface } from '../utils/interfaces';
+import type { JobsInterface } from "../utils/interfaces";
+import { EventsType } from "./constants";
 
 const jobs: Array<JobsInterface> = [
   {
-    name: 'Friday backup',
-    rule: '0 0 * * *', // everyday at midnight
+    name: "Friday backup",
+    rule: "0 0 * * *", // everyday at midnight
     event: EventsType.SYSTEM_BACKUP,
   },
   {
-    name: 'Check Friday update',
-    rule: '30 0 * * *', // everyday at midnight thirty
+    name: "Check Friday update",
+    rule: "30 0 * * *", // everyday at midnight thirty
     event: EventsType.SYSTEM_CHECK_UPDATE,
   },
   {
-    name: 'Purge states',
-    rule: '0 1 * * *', // everyday at 1am
+    name: "Purge states",
+    rule: "0 1 * * *", // everyday at 1am
     event: EventsType.STATES_PURGE,
   },
 ];

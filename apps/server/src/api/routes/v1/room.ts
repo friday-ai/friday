@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Room router
@@ -8,7 +8,7 @@ import Friday from '../../../core/friday';
  * @apiParam {String} name Name of the house.
  * @apiParam {UUIDV4} houseId Identifier of the house to which the room belongs.
  */
-@FridayRouter('/v1/room')
+@FridayRouter("/v1/room")
 export default class RoomRouter {
   private readonly friday: Friday;
 
@@ -32,11 +32,11 @@ export default class RoomRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'room',
+    aclMethod: "create",
+    aclResource: "room",
   })
   create = async (req: Request, res: Response) => {
     const room = await this.friday.room.create(req.body);
@@ -59,11 +59,11 @@ export default class RoomRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'room',
+    aclMethod: "update",
+    aclResource: "room",
   })
   update = async (req: Request, res: Response) => {
     const room = await this.friday.room.update(req.params.id, req.body);
@@ -83,11 +83,11 @@ export default class RoomRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'room',
+    aclMethod: "delete",
+    aclResource: "room",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.room.destroy(req.params.id);
@@ -111,11 +111,11 @@ export default class RoomRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'room',
+    aclMethod: "read",
+    aclResource: "room",
   })
   listAll = async (req: Request, res: Response) => {
     const rooms = await this.friday.room.listAll(req.query);
@@ -137,11 +137,11 @@ export default class RoomRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'room',
+    aclMethod: "read",
+    aclResource: "room",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;

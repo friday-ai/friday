@@ -1,4 +1,4 @@
-import rateLimit from 'express-rate-limit';
+import rateLimit from "express-rate-limit";
 
 export default rateLimit({
   windowMs: 30 * 60 * 1000, // 30 minutes

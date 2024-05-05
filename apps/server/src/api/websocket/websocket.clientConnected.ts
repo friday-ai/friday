@@ -1,7 +1,7 @@
-import * as WebSocket from 'ws';
-import logger from '@friday-ai/logger';
-import WebsocketServer from '.';
-import { BadParametersError } from '../../utils/decorators/error';
+import logger from "@friday-ai/logger";
+import type * as WebSocket from "ws";
+import type WebsocketServer from ".";
+import { BadParametersError } from "../../utils/decorators/error";
 
 interface AuthPayload {
   accessToken: string;
@@ -17,8 +17,8 @@ export default async function clientConnected(this: WebsocketServer, payload: st
   try {
     if (authPayload.accessToken === undefined) {
       throw new BadParametersError({
-        name: 'Websocket authentication',
-        message: 'Access token not found',
+        name: "Websocket authentication",
+        message: "Access token not found",
         metadata: authPayload,
       });
     }
@@ -31,7 +31,7 @@ export default async function clientConnected(this: WebsocketServer, payload: st
 
     logger.info(`User ${user.userName} connected in websocket.`);
   } catch (e) {
-    logger.error('Websocket authentication failed.');
-    ws.close(4000, 'Auth failed');
+    logger.error("Websocket authentication failed.");
+    ws.close(4000, "Auth failed");
   }
 }

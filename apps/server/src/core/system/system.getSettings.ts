@@ -1,6 +1,6 @@
-import { SystemVariablesNames, SystemSettings } from '@friday-ai/shared';
-import error from '../../utils/decorators/error';
-import System from './system';
+import { type SystemSettings, SystemVariablesNames } from "@friday-ai/shared";
+import error from "../../utils/decorators/error";
+import type System from "./system";
 
 /**
  * Get actual version and last saved version of Friday

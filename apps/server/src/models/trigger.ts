@@ -12,25 +12,25 @@ import {
   Scopes,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { AvailableConditions, TriggerAttributes, TriggerCreationAttributes } from '@friday-ai/shared';
-import Scene from './scene';
+import { AvailableConditions, type TriggerAttributes, type TriggerCreationAttributes } from "@friday-ai/shared";
+import Scene from "./scene";
 
 /**
  * Trigger model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'description', 'type', 'rules'],
+  attributes: ["id", "name", "description", "type", "rules"],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'description', 'type', 'rules'],
+    attributes: ["id", "name", "description", "type", "rules"],
     include: [Scene],
   },
 }))
 @Table({
-  tableName: 'trigger',
+  tableName: "trigger",
   underscored: false,
 })
 export default class Trigger extends Model<TriggerAttributes, TriggerCreationAttributes> {
@@ -61,7 +61,7 @@ export default class Trigger extends Model<TriggerAttributes, TriggerCreationAtt
   rules: unknown;
 
   @HasMany(() => Scene, {
-    foreignKey: 'triggerId',
+    foreignKey: "triggerId",
     constraints: false,
   })
   scenes!: Scene[];

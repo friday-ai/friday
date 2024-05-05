@@ -1,20 +1,20 @@
-import { Sequelize } from 'sequelize-typescript';
-import { SequelizeStorage, Umzug } from 'umzug';
-import { KVArr } from '../utils/interfaces';
+import { Sequelize } from "sequelize-typescript";
+import { SequelizeStorage, Umzug } from "umzug";
+import type { KVArr } from "../utils/interfaces";
 
-import migrations from '../../migrations';
-import { modelsArr } from '../models';
+import migrations from "../../migrations";
+import { modelsArr } from "../models";
 
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || "production";
 
 const DATABASE_NAME: KVArr<string> = {
-  production: './friday.db',
-  development: './friday-development.db',
-  test: ':memory:',
+  production: "./friday.db",
+  development: "./friday-development.db",
+  test: ":memory:",
 };
 
 const database = new Sequelize({
-  dialect: 'sqlite',
+  dialect: "sqlite",
   pool: {
     max: 5,
     min: 0,
@@ -34,7 +34,7 @@ const umzug = new Umzug({
 });
 
 const init = async () => {
-  if (env === 'test') {
+  if (env === "test") {
     // Drop tables for tests
     await database.sync({ force: true });
   } else {
@@ -43,7 +43,7 @@ const init = async () => {
 };
 
 const closeConnection = async () => {
-  if (env === 'test') {
+  if (env === "test") {
     return null;
   }
 

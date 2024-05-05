@@ -1,9 +1,9 @@
-declare module '@fnando/keyring' {
+declare module "@fnando/keyring" {
   export type Keys = { [key: string]: string };
 
   export type Options = {
     // The Encryption Algorithm, defaults to aes-128-cbc if unset
-    encryption?: 'aes-128-cbc' | 'aes-192-cbc' | 'aes-256-cbc';
+    encryption?: "aes-128-cbc" | "aes-192-cbc" | "aes-256-cbc";
 
     // Any random string that will append to the message when generating SHA1
     digestSalt: string;

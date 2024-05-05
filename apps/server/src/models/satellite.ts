@@ -16,24 +16,24 @@ import {
   Scopes,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { SatelliteAttributes, SatelliteCreationAttributes } from '@friday-ai/shared';
-import { isOwnerExisting } from '../utils/database/validation';
-import Plugin from './plugin';
-import Room from './room';
-import State from './state';
-import Variable from './variable';
+import type { SatelliteAttributes, SatelliteCreationAttributes } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import Plugin from "./plugin";
+import Room from "./room";
+import State from "./state";
+import Variable from "./variable";
 
 /**
  * Satellite model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
+  attributes: ["id", "name", "roomId", "lastHeartbeat"],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
+    attributes: ["id", "name", "roomId", "lastHeartbeat"],
     include: [
       Room,
       Variable,
@@ -45,24 +45,24 @@ import Variable from './variable';
     ],
   },
   withRoom: {
-    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
+    attributes: ["id", "name", "roomId", "lastHeartbeat"],
     include: [Room],
   },
   withState: {
-    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
+    attributes: ["id", "name", "roomId", "lastHeartbeat"],
     include: [{ model: State, where: { last: true } }],
   },
   withVariables: {
-    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
+    attributes: ["id", "name", "roomId", "lastHeartbeat"],
     include: [Variable],
   },
   withPlugins: {
-    attributes: ['id', 'name', 'roomId', 'lastHeartbeat'],
+    attributes: ["id", "name", "roomId", "lastHeartbeat"],
     include: [Plugin],
   },
 }))
 @Table({
-  tableName: 'satellite',
+  tableName: "satellite",
   underscored: false,
 })
 export default class Satellite extends Model<SatelliteAttributes, SatelliteCreationAttributes> {
@@ -82,7 +82,7 @@ export default class Satellite extends Model<SatelliteAttributes, SatelliteCreat
 
   @AllowNull(false)
   @NotEmpty
-  @Is('roomId', (value) => isOwnerExisting(value, ['room']))
+  @Is("roomId", (value) => isOwnerExisting(value, ["room"]))
   @Column(DataType.UUIDV4)
   roomId!: string;
 
@@ -94,25 +94,25 @@ export default class Satellite extends Model<SatelliteAttributes, SatelliteCreat
   lastHeartbeat!: Date;
 
   @BelongsTo(() => Room, {
-    foreignKey: 'roomId',
+    foreignKey: "roomId",
     constraints: false,
   })
   room!: Room;
 
   @HasMany(() => Variable, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   variables?: Variable[];
 
   @HasMany(() => Plugin, {
-    foreignKey: 'satelliteId',
+    foreignKey: "satelliteId",
     constraints: false,
   })
   plugins?: Plugin[];
 
   @HasOne(() => State, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   state!: State;

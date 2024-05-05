@@ -1,10 +1,10 @@
-import { QueryInterface } from 'sequelize';
-import { DataType } from 'sequelize-typescript';
+import type { QueryInterface } from "sequelize";
+import { DataType } from "sequelize-typescript";
 
 export default {
-  name: '20200823171132-create-plugin',
+  name: "20200823171132-create-plugin",
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
-    await queryInterface.createTable('plugin', {
+    await queryInterface.createTable("plugin", {
       id: {
         unique: true,
         allowNull: false,
@@ -50,5 +50,5 @@ export default {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('plugin'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable("plugin"),
 };

@@ -1,6 +1,6 @@
-import * as WebSocket from 'ws';
-import logger from '@friday-ai/logger';
-import WebsocketServer from '.';
+import logger from "@friday-ai/logger";
+import type * as WebSocket from "ws";
+import type WebsocketServer from ".";
 
 /**
  * Client disconnected

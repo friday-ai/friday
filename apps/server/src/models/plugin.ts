@@ -17,46 +17,46 @@ import {
   Table,
   Unique,
   Validate,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { PluginAttributes, PluginCreationAttributes } from '@friday-ai/shared';
-import { isOwnerExisting } from '../utils/database/validation';
-import { DatabaseValidationError } from '../utils/decorators/error';
-import Device from './device';
-import Satellite from './satellite';
-import State from './state';
-import Variable from './variable';
+import type { PluginAttributes, PluginCreationAttributes } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import { DatabaseValidationError } from "../utils/decorators/error";
+import Device from "./device";
+import Satellite from "./satellite";
+import State from "./state";
+import Variable from "./variable";
 
 /**
  * Plugin model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+  attributes: ["id", "dockerId", "name", "version", "url", "enabled", "satelliteId", "lastHeartbeat"],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ["id", "dockerId", "name", "version", "url", "enabled", "satelliteId", "lastHeartbeat"],
     include: [Satellite, Device, Variable, { model: State, where: { last: true } }],
   },
   withSatellite: {
-    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ["id", "dockerId", "name", "version", "url", "enabled", "satelliteId", "lastHeartbeat"],
     include: [Satellite],
   },
   withState: {
-    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ["id", "dockerId", "name", "version", "url", "enabled", "satelliteId", "lastHeartbeat"],
     include: [{ model: State, where: { last: true } }],
   },
   withDevices: {
-    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ["id", "dockerId", "name", "version", "url", "enabled", "satelliteId", "lastHeartbeat"],
     include: [Device],
   },
   withVariables: {
-    attributes: ['id', 'dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'lastHeartbeat'],
+    attributes: ["id", "dockerId", "name", "version", "url", "enabled", "satelliteId", "lastHeartbeat"],
     include: [Variable],
   },
 }))
 @Table({
-  tableName: 'plugin',
+  tableName: "plugin",
   underscored: false,
 })
 export default class Plugin extends Model<PluginAttributes, PluginCreationAttributes> {
@@ -94,20 +94,22 @@ export default class Plugin extends Model<PluginAttributes, PluginCreationAttrib
 
   @AllowNull(false)
   @NotEmpty
-  @Is('satelliteId', (value) => isOwnerExisting(value, ['satellite']))
+  @Is("satelliteId", (value) => isOwnerExisting(value, ["satellite"]))
   @Validate({
     async isNotAlreadyInstall(this: Plugin) {
       // Check plugin isn't already install;
-      const satellite = await Satellite.scope('withPlugins').findByPk(this.satelliteId);
-      if (satellite !== null && typeof satellite.plugins !== 'undefined') {
-        satellite.get({ plain: true }).plugins.forEach((plugin: PluginAttributes) => {
+      const satellite = await Satellite.scope("withPlugins").findByPk(this.satelliteId);
+      if (satellite !== null && typeof satellite.plugins !== "undefined") {
+        const plugins = satellite.get({ plain: true }).plugins;
+
+        for (const plugin of plugins) {
           if (plugin.name === this.name) {
             throw new DatabaseValidationError({
-              message: 'plugin already install on this satellite',
-              name: 'plugin.already.install',
+              message: "plugin already install on this satellite",
+              name: "plugin.already.install",
             });
           }
-        });
+        }
       }
     },
   })
@@ -122,25 +124,25 @@ export default class Plugin extends Model<PluginAttributes, PluginCreationAttrib
   lastHeartbeat!: Date;
 
   @BelongsTo(() => Satellite, {
-    foreignKey: 'satelliteId',
+    foreignKey: "satelliteId",
     constraints: false,
   })
   satellite!: Satellite;
 
   @HasMany(() => Device, {
-    foreignKey: 'pluginId',
+    foreignKey: "pluginId",
     constraints: false,
   })
   devices!: Device[];
 
   @HasMany(() => Variable, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   variables?: Variable[];
 
   @HasOne(() => State, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   state?: State;

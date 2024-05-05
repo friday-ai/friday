@@ -1,7 +1,7 @@
-import { DevicesActions, DcstAttributes } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import { CapabilityManagerParamsList } from '../../../utils/interfaces';
-import DeviceClass from '../device';
+import logger from "@friday-ai/logger";
+import { type DcstAttributes, DevicesActions } from "@friday-ai/shared";
+import type { CapabilityManagerParamsList } from "../../../utils/interfaces";
+import type DeviceClass from "../device";
 
 export const options: CapabilityManagerParamsList = {
   setPowerConsumption: {

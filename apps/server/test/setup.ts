@@ -1,19 +1,19 @@
-import logger from '@friday-ai/logger';
-import { MqttOptions } from '@friday-ai/shared';
-import chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
-import chaiLike from 'chai-like';
-import chaiThings from 'chai-things';
-import Server from '../src/api/app';
-import { umzug } from '../src/config/database';
-import Friday from '../src/core/friday';
-import MqttBroker from './utils/mqttBroker';
-import { cleanDb, seedDb } from './utils/seed';
-import wait from './utils/timer';
+import logger from "@friday-ai/logger";
+import type { MqttOptions } from "@friday-ai/shared";
+import chai from "chai";
+import chaiAsPromised from "chai-as-promised";
+import chaiLike from "chai-like";
+import chaiThings from "chai-things";
+import Server from "../src/api/app";
+import { umzug } from "../src/config/database";
+import Friday from "../src/core/friday";
+import MqttBroker from "./utils/mqttBroker";
+import { cleanDb, seedDb } from "./utils/seed";
+import wait from "./utils/timer";
 
-const port = parseInt(process.env.SERVER_PORT || '3500', 10);
-const mqttPort = parseInt(process.env.MQTT_PORT || '1883', 10);
-const mqttAddress = process.env.MQTT_ADDRESS || 'localhost';
+const port = Number.parseInt(process.env.SERVER_PORT || "3500", 10);
+const mqttPort = Number.parseInt(process.env.MQTT_PORT || "1883", 10);
+const mqttAddress = process.env.MQTT_ADDRESS || "localhost";
 const fakeBroker = new MqttBroker();
 
 const mqttOptions: MqttOptions = {
@@ -49,7 +49,7 @@ before(async function before() {
   try {
     await cleanDb();
   } catch (e) {
-    logger.warning('Impossible to clean database, ignoring error');
+    logger.warning("Impossible to clean database, ignoring error");
   }
   try {
     await umzug.up();

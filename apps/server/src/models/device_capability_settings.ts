@@ -12,21 +12,21 @@ import {
   PrimaryKey,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import type { DeviceCapabilitySettingsSchema, DcsCreationAttributes, DcsAttributes } from '@friday-ai/shared';
-import Device from './device';
-import DeviceCapability from './device_capability';
-import { isOwnerExisting } from '../utils/database/validation';
+import type { DcsAttributes, DcsCreationAttributes, DeviceCapabilitySettingsSchema } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import Device from "./device";
+import type DeviceCapability from "./device_capability";
 
 /**
  * Device capability settings model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'capabilityId', 'settings'],
+  attributes: ["id", "capabilityId", "settings"],
 }))
 @Table({
-  tableName: 'device_capability_settings',
+  tableName: "device_capability_settings",
   underscored: false,
 })
 export default class DeviceCapabilitySettings extends Model<DcsAttributes, DcsCreationAttributes> {
@@ -40,7 +40,7 @@ export default class DeviceCapabilitySettings extends Model<DcsAttributes, DcsCr
 
   @AllowNull(false)
   @NotEmpty
-  @Is('capabilityId', (value) => isOwnerExisting(value, ['device_capability']))
+  @Is("capabilityId", (value) => isOwnerExisting(value, ["device_capability"]))
   @Column(DataType.UUIDV4)
   capabilityId!: string;
 
@@ -49,7 +49,7 @@ export default class DeviceCapabilitySettings extends Model<DcsAttributes, DcsCr
   settings!: DeviceCapabilitySettingsSchema;
 
   @BelongsTo(() => Device, {
-    foreignKey: 'capabilityId',
+    foreignKey: "capabilityId",
     constraints: false,
   })
   capability?: DeviceCapability;

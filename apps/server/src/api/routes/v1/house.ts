@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * House router
@@ -9,7 +9,7 @@ import Friday from '../../../core/friday';
  * @apiParam {String} latitude Latitude of the house.
  * @apiParam {String} longitude Longitude of the house.
  */
-@FridayRouter('/v1/house')
+@FridayRouter("/v1/house")
 export default class HouseRouter {
   private readonly friday: Friday;
 
@@ -34,11 +34,11 @@ export default class HouseRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'house',
+    aclMethod: "create",
+    aclResource: "house",
   })
   create = async (req: Request, res: Response) => {
     const house = await this.friday.house.create(req.body);
@@ -62,11 +62,11 @@ export default class HouseRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'house',
+    aclMethod: "update",
+    aclResource: "house",
   })
   update = async (req: Request, res: Response) => {
     const house = await this.friday.house.update(req.params.id, req.body);
@@ -86,11 +86,11 @@ export default class HouseRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'house',
+    aclMethod: "delete",
+    aclResource: "house",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.house.destroy(req.params.id);
@@ -115,11 +115,11 @@ export default class HouseRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'house',
+    aclMethod: "read",
+    aclResource: "house",
   })
   listAll = async (req: Request, res: Response) => {
     const houses = await this.friday.house.listAll(req.query);
@@ -142,11 +142,11 @@ export default class HouseRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'house',
+    aclMethod: "read",
+    aclResource: "house",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;

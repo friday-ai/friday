@@ -1,18 +1,18 @@
-import http, { Server as ServerType } from 'http';
-import express, { RequestHandler } from 'express';
-import helmet from 'helmet';
-import cors from 'cors';
-import compression from 'compression';
-import * as WebSocket from 'ws';
-import { MqttOptions } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
+import http, { type Server as ServerType } from "node:http";
+import logger from "@friday-ai/logger";
+import type { MqttOptions } from "@friday-ai/shared";
+import compression from "compression";
+import cors from "cors";
+import express, { type RequestHandler } from "express";
+import helmet from "helmet";
+import * as WebSocket from "ws";
 
-import router from './routes/router';
-import notFoundMiddleware from './middlewares/notFoundMiddleware';
-import errorMiddleware from './middlewares/errorMiddleware';
-import WebsocketServer from './websocket/index';
-import Friday from '../core/friday';
-import MqttServer from './mqtt';
+import type Friday from "../core/friday";
+import errorMiddleware from "./middlewares/errorMiddleware";
+import notFoundMiddleware from "./middlewares/notFoundMiddleware";
+import MqttServer from "./mqtt";
+import router from "./routes/router";
+import WebsocketServer from "./websocket/index";
 
 /**
  * Server class
@@ -56,7 +56,7 @@ export default class Server {
     app.use(router(this.friday));
 
     // if not API routes was found
-    app.use('/api', notFoundMiddleware);
+    app.use("/api", notFoundMiddleware);
 
     // loading error middleware
     app.use(errorMiddleware);
@@ -76,7 +76,7 @@ export default class Server {
     await this.mqttServer.start(this.mqttOptions);
 
     this.server.listen(this.port, () => {
-      logger.title('Friday server started !');
+      logger.title("Friday server started !");
       logger.info(`Friday server is available at localhost:${this.port}`);
     });
 

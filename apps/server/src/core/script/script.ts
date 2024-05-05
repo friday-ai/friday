@@ -1,6 +1,6 @@
-import { ScriptAttributes, ScriptCreationAttributes, ScriptCreationKeys } from '@friday-ai/shared';
-import BaseModel from '../../utils/database/model.base';
-import ScriptModel from '../../models/script';
+import { type ScriptAttributes, type ScriptCreationAttributes, ScriptCreationKeys } from "@friday-ai/shared";
+import ScriptModel from "../../models/script";
+import BaseModel from "../../utils/database/model.base";
 
 /**
  * Script

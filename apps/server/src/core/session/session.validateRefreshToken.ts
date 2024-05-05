@@ -1,7 +1,7 @@
-import { SessionAttributes } from '@friday-ai/shared';
-import { NotFoundError, UnauthorizedError } from '../../utils/decorators/error';
-import Session from '../../models/session';
-import { hashToken } from '../../utils/jwt';
+import type { SessionAttributes } from "@friday-ai/shared";
+import Session from "../../models/session";
+import { NotFoundError, UnauthorizedError } from "../../utils/decorators/error";
+import { hashToken } from "../../utils/jwt";
 
 /**
  * Validate refresh token
@@ -13,9 +13,9 @@ import { hashToken } from '../../utils/jwt';
  * friday.session.validateRefreshToken('test');
  */
 export default async function validateRefreshToken(token: string, scope?: string): Promise<SessionAttributes> {
-  let session;
+  let session: Session | null;
 
-  if (scope !== '' && scope !== null && scope !== undefined) {
+  if (scope !== "" && scope !== null && scope !== undefined) {
     session = await Session.scope(scope).findOne({
       where: {
         refreshToken: hashToken(token),
@@ -30,17 +30,17 @@ export default async function validateRefreshToken(token: string, scope?: string
   }
 
   if (session === null) {
-    throw new NotFoundError({ name: 'Validate refresh token', message: 'Refresh token session not found.', metadata: token });
+    throw new NotFoundError({ name: "Validate refresh token", message: "Refresh token session not found.", metadata: token });
   }
 
   const sessionToReturn = <SessionAttributes>session.get({ plain: true });
 
   if (sessionToReturn.revoked === true) {
-    throw new UnauthorizedError({ name: 'Validate refresh token', message: 'Session was revoked.', metadata: token });
+    throw new UnauthorizedError({ name: "Validate refresh token", message: "Session was revoked.", metadata: token });
   }
 
   if (sessionToReturn.validUntil === undefined || sessionToReturn.validUntil < new Date()) {
-    throw new UnauthorizedError({ name: 'Validate refresh token', message: 'Session has expired.', metadata: token });
+    throw new UnauthorizedError({ name: "Validate refresh token", message: "Session has expired.", metadata: token });
   }
 
   return sessionToReturn;

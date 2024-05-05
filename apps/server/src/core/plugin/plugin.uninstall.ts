@@ -1,5 +1,5 @@
-import logger from '@friday-ai/logger';
-import PluginClass from './plugin';
+import logger from "@friday-ai/logger";
+import type PluginClass from "./plugin";
 
 /**
  * Uninstall a plugin.
@@ -16,8 +16,8 @@ export default async function uninstall(this: PluginClass, id: string): Promise<
     await this.docker.remove(plugin.dockerId);
     return this.destroy(id);
   } catch (error) {
-    if (error.message.includes('Container not found')) {
-      logger.warning('Container not exist, removing plugin from database');
+    if (error.message.includes("Container not found")) {
+      logger.warning("Container not exist, removing plugin from database");
       return this.destroy(id);
     }
 

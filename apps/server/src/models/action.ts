@@ -13,26 +13,26 @@ import {
   Scopes,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { ActionAttributes, ActionCreationAttributes, ActionsType } from '@friday-ai/shared';
-import Scene from './scene';
-import { isOwnerExisting } from '../utils/database/validation';
+import { type ActionAttributes, type ActionCreationAttributes, ActionsType } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import Scene from "./scene";
 
 /**
  * Action model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
+  attributes: ["id", "name", "description", "type", "subType", "variableKey", "variableValue", "sceneId"],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'description', 'type', 'subType', 'variableKey', 'variableValue', 'sceneId'],
+    attributes: ["id", "name", "description", "type", "subType", "variableKey", "variableValue", "sceneId"],
     include: [Scene],
   },
 }))
 @Table({
-  tableName: 'action',
+  tableName: "action",
   underscored: false,
 })
 export default class Action extends Model<ActionAttributes, ActionCreationAttributes> {
@@ -69,12 +69,12 @@ export default class Action extends Model<ActionAttributes, ActionCreationAttrib
   variableValue!: string;
 
   @NotEmpty
-  @Is('sceneId', (value) => isOwnerExisting(value, ['scene']))
+  @Is("sceneId", (value) => isOwnerExisting(value, ["scene"]))
   @Column(DataType.UUIDV4)
   sceneId!: string;
 
   @BelongsTo(() => Scene, {
-    foreignKey: 'sceneId',
+    foreignKey: "sceneId",
     constraints: false,
   })
   scene!: Scene;

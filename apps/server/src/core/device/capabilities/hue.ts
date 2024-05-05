@@ -1,8 +1,8 @@
-import { DevicesActions, DcstAttributes, DeviceCapabilitySettingsSchema, Color } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import DeviceClass from '../device';
-import { CapabilityManagerParamsList } from '../../../utils/interfaces';
-import { checkProperty } from '../../../utils/object';
+import logger from "@friday-ai/logger";
+import { type Color, type DcstAttributes, type DeviceCapabilitySettingsSchema, DevicesActions } from "@friday-ai/shared";
+import type { CapabilityManagerParamsList } from "../../../utils/interfaces";
+import { checkProperty } from "../../../utils/object";
+import type DeviceClass from "../device";
 
 export const options: CapabilityManagerParamsList = {
   color: {
@@ -30,17 +30,17 @@ const SATURATION_MIN_VALUE = 0;
 
 function checkRGBProperties(rgb: Color) {
   if (
-    !checkProperty(rgb, 'red') ||
+    !checkProperty(rgb, "red") ||
     rgb.red === null ||
     rgb.red === undefined ||
-    !checkProperty(rgb, 'blue') ||
+    !checkProperty(rgb, "blue") ||
     rgb.blue === null ||
     rgb.blue === undefined ||
-    !checkProperty(rgb, 'green') ||
+    !checkProperty(rgb, "green") ||
     rgb.green === null ||
     rgb.green === undefined
   ) {
-    const message = 'This value can be to a good RGB format. ({red: number[0 to 255], green: number[0 to 255], blue: number[0 to 255])';
+    const message = "This value can be to a good RGB format. ({red: number[0 to 255], green: number[0 to 255], blue: number[0 to 255])";
     logger.error(message);
     throw new Error(message);
   }
@@ -56,9 +56,9 @@ function checkRange(name: string, colorType: number) {
 
 function checkRGB(rgb: Color) {
   checkRGBProperties(rgb);
-  checkRange('red', rgb.red);
-  checkRange('blue', rgb.blue);
-  checkRange('green', rgb.green);
+  checkRange("red", rgb.red);
+  checkRange("blue", rgb.blue);
+  checkRange("green", rgb.green);
 }
 
 function checkBoolValue(val: boolean | number) {
@@ -128,7 +128,7 @@ async function colorTemp(this: DeviceClass, args: { id: string; value: number })
 async function white(this: DeviceClass, args: { id: string; value: boolean | null }): Promise<DcstAttributes> {
   return this.exec(args.id, {
     action: DevicesActions.WHITE,
-    params: { value: '255, 255, 255' },
+    params: { value: "255, 255, 255" },
   });
 }
 

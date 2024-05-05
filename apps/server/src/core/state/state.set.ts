@@ -1,7 +1,7 @@
-import logger from '@friday-ai/logger';
-import { StateAttributes, StateCreationAttributes, StateCreationKeys } from '@friday-ai/shared';
-import State from '../../models/state';
-import { exclude, pick } from '../../utils/object';
+import logger from "@friday-ai/logger";
+import { type StateAttributes, type StateCreationAttributes, StateCreationKeys } from "@friday-ai/shared";
+import State from "../../models/state";
+import { exclude, pick } from "../../utils/object";
 
 /**
  * Set a state.

@@ -1,11 +1,11 @@
-import { Model, ModelCtor } from 'sequelize-typescript';
-import { Catch, NotFoundError } from '../decorators/error';
-import { exclude, pick } from '../object';
-import { PartialModel } from './model.partial';
+import type { Model, ModelCtor } from "sequelize-typescript";
+import { Catch, NotFoundError } from "../decorators/error";
+import { exclude, pick } from "../object";
+import { PartialModel } from "./model.partial";
 
 export interface BaseModelType<T, C> {
-  create(data: C): Promise<Omit<T, 'password' | 'createdAt' | 'updatedAt'>>;
-  update(identifier: string, data: Partial<Omit<T, 'id'>>): Promise<Omit<T, 'password'>>;
+  create(data: C): Promise<Omit<T, "password" | "createdAt" | "updatedAt">>;
+  update(identifier: string, data: Partial<Omit<T, "id">>): Promise<Omit<T, "password">>;
   destroy(identifier: string): Promise<void>;
 }
 
@@ -25,24 +25,24 @@ export default abstract class BaseModel<M extends Model, T, C> extends PartialMo
   }
 
   @Catch()
-  async create(data: C): Promise<Omit<T, 'password' | 'createdAt' | 'updatedAt'>> {
+  async create(data: C): Promise<Omit<T, "password" | "createdAt" | "updatedAt">> {
     let entity: M;
     if (this.creationKeys !== undefined) {
       const pickedData = pick(data as never, this.creationKeys);
-      entity = await this.model.create(pickedData as M['_creationAttributes']);
+      entity = await this.model.create(pickedData as M["_creationAttributes"]);
     } else {
-      entity = await this.model.create(data as M['_creationAttributes']);
+      entity = await this.model.create(data as M["_creationAttributes"]);
     }
 
     return exclude(<T>entity.get({ plain: true }));
   }
 
   @Catch()
-  async update(identifier: string, data: Partial<Omit<T, 'id'>>): Promise<Omit<T, 'password'>> {
+  async update(identifier: string, data: Partial<Omit<T, "id">>): Promise<Omit<T, "password">> {
     const entity = await this.model.findByPk(identifier);
 
     if (entity === null) {
-      throw new NotFoundError({ name: 'Friday update', message: 'Entity not found', metadata: identifier });
+      throw new NotFoundError({ name: "Friday update", message: "Entity not found", metadata: identifier });
     }
 
     await entity.update(data);
@@ -54,7 +54,7 @@ export default abstract class BaseModel<M extends Model, T, C> extends PartialMo
     const entity = await this.model.findByPk(identifier);
 
     if (entity === null) {
-      throw new NotFoundError({ name: 'Friday destroy', message: 'Entity not found', metadata: identifier });
+      throw new NotFoundError({ name: "Friday destroy", message: "Entity not found", metadata: identifier });
     }
 
     return entity.destroy();

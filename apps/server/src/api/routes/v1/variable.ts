@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Variable router
@@ -10,7 +10,7 @@ import Friday from '../../../core/friday';
  * @apiParam {String} owner Owner's id of the variable.
  * @apiParam {VariableOwner} ownerType Owner type of the variable.
  */
-@FridayRouter('/v1/variable')
+@FridayRouter("/v1/variable")
 export default class VariableRouter {
   private readonly friday: Friday;
 
@@ -36,11 +36,11 @@ export default class VariableRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'variable',
+    aclMethod: "create",
+    aclResource: "variable",
   })
   create = async (req: Request, res: Response) => {
     const variable = await this.friday.variable.create(req.body);
@@ -65,11 +65,11 @@ export default class VariableRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'variable',
+    aclMethod: "update",
+    aclResource: "variable",
   })
   update = async (req: Request, res: Response) => {
     const variable = await this.friday.variable.update(req.params.id, req.body);
@@ -89,11 +89,11 @@ export default class VariableRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'variable',
+    aclMethod: "delete",
+    aclResource: "variable",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.variable.destroy(req.params.id);
@@ -119,11 +119,11 @@ export default class VariableRouter {
    * }
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'variable',
+    aclMethod: "read",
+    aclResource: "variable",
   })
   getValue = async (req: Request, res: Response) => {
     const key = req.query.key as string;

@@ -1,7 +1,7 @@
-import { SessionAttributes } from '@friday-ai/shared';
-import SessionClass from './session';
-import { generateAccessToken } from '../../utils/jwt';
-import { BadParametersError } from '../../utils/decorators/error';
+import type { SessionAttributes } from "@friday-ai/shared";
+import { BadParametersError } from "../../utils/decorators/error";
+import { generateAccessToken } from "../../utils/jwt";
+import type SessionClass from "./session";
 
 /**
  * Get a new access token.
@@ -11,10 +11,10 @@ import { BadParametersError } from '../../utils/decorators/error';
  * friday.session.getAccessToken('test');
  */
 export default async function getAccessToken(this: SessionClass, token: string): Promise<SessionAttributes> {
-  const session: SessionAttributes = await this.validateRefreshToken(token, 'full');
+  const session: SessionAttributes = await this.validateRefreshToken(token, "full");
 
   if (session.user === undefined || session.user.id === undefined || session.user.role === undefined || session.id === undefined) {
-    throw new BadParametersError({ name: 'Get a access token', message: 'Incorrect params' });
+    throw new BadParametersError({ name: "Get a access token", message: "Incorrect params" });
   }
 
   session.accessToken = generateAccessToken(session.user.id, session.user.role, session.id, this.secretJwt);
