@@ -1,7 +1,7 @@
-import { AvailableState, PluginAttributes } from '@friday-ai/shared';
-import { Theme } from '@mui/material';
-import { formatDistance as format } from 'date-fns';
-import * as dateLocals from 'date-fns/locale';
+import { AvailableState, type PluginAttributes } from "@friday-ai/shared";
+import type { Theme } from "@mui/material";
+import { formatDistance as format } from "date-fns";
+import * as dateLocals from "date-fns/locale";
 
 // Maybe an api on backend for this ?
 const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
@@ -17,12 +17,12 @@ const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
 
   // Map labels translation to states
   const labels: { [key: string]: string } = {
-    [AvailableState.PLUGIN_INSTALLED]: 'dashboard.satellites.stateInstalled',
-    [AvailableState.PLUGIN_RUNNING]: 'dashboard.satellites.stateRunning',
-    [AvailableState.PLUGIN_WAITING_CONFIGURATION]: 'dashboard.satellites.stateWaitingConfig',
-    [AvailableState.PLUGIN_ERRORED]: 'dashboard.satellites.stateErrored',
-    [AvailableState.PLUGIN_STOPPED]: 'dashboard.satellites.stateStopped',
-    [AvailableState.PLUGIN_WAITING_INSTALLATION]: 'dashboard.satellites.stateWaitingInstall',
+    [AvailableState.PLUGIN_INSTALLED]: "dashboard.satellites.stateInstalled",
+    [AvailableState.PLUGIN_RUNNING]: "dashboard.satellites.stateRunning",
+    [AvailableState.PLUGIN_WAITING_CONFIGURATION]: "dashboard.satellites.stateWaitingConfig",
+    [AvailableState.PLUGIN_ERRORED]: "dashboard.satellites.stateErrored",
+    [AvailableState.PLUGIN_STOPPED]: "dashboard.satellites.stateStopped",
+    [AvailableState.PLUGIN_WAITING_INSTALLATION]: "dashboard.satellites.stateWaitingInstall",
   };
 
   // Fisrt filter states of plugins
@@ -33,31 +33,31 @@ const getPluginsStates = (plugins: PluginAttributes[], theme: Theme) => {
   // Then count the number of each state
   const statesCount: { [key: string]: number } = {};
 
-  states.forEach((state) => {
+  for (const state of states) {
     const { value } = state;
     if (statesCount[value]) {
       statesCount[value] += 1;
     } else {
       statesCount[value] = 1;
     }
-  });
+  }
 
   // Finally, build data object
   const data: { key: string; label: string; value: number; color: string }[] = [];
 
-  Object.keys(statesCount).forEach((key) => {
-    data.push({ key, label: labels[key]!, color: colors[key]!, value: statesCount[key]! });
-  });
+  for (const key of Object.keys(statesCount)) {
+    data.push({ key, label: labels[key], color: colors[key], value: statesCount[key] });
+  }
 
   return data;
 };
 
 const formatDistance = (date: Date) => {
-  const language = localStorage.getItem('i18nextLng') || 'en';
+  const language = localStorage.getItem("i18nextLng") || "en";
   let local = dateLocals.enUS;
 
   switch (language) {
-    case 'fr':
+    case "fr":
       local = dateLocals.fr;
       break;
     default:

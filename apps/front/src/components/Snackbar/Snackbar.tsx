@@ -1,8 +1,8 @@
-import Alert from '@mui/material/Alert';
-import Snackbar from '@mui/material/Snackbar';
+import Alert from "@mui/material/Alert";
+import Snackbar from "@mui/material/Snackbar";
 
-import { CustomContentProps, SnackbarContent } from 'notistack';
-import { forwardRef } from 'react';
+import { type CustomContentProps, SnackbarContent } from "notistack";
+import { forwardRef } from "react";
 
 const defaultSnackbar = forwardRef<HTMLDivElement, CustomContentProps>((props, ref) => {
   const { id, message } = props;

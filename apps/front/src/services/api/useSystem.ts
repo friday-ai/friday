@@ -1,11 +1,11 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 
-import { SystemSettings } from '@friday-ai/shared';
-import useApp from '../app/useApp';
+import type { SystemSettings } from "@friday-ai/shared";
+import useApp from "../app/useApp";
 
 const useSystem = () => {
   const { request } = useApp();
-  const initSystem = useMutation({ mutationFn: () => request<boolean>('post', '/api/v1/system/init') });
+  const initSystem = useMutation({ mutationFn: () => request<boolean>("post", "/api/v1/system/init") });
 
   return {
     initSystem,
@@ -15,8 +15,8 @@ const useSystem = () => {
 export const useGetSystemSettings = () => {
   const { request } = useApp();
   return useQuery({
-    queryKey: ['getSystemSettings'],
-    queryFn: () => request<SystemSettings>('get', '/api/v1/system/settings'),
+    queryKey: ["getSystemSettings"],
+    queryFn: () => request<SystemSettings>("get", "/api/v1/system/settings"),
   });
 };
 

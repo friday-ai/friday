@@ -1,19 +1,19 @@
-import { SessionAttributes } from '@friday-ai/shared';
-import { useCallback, useState } from 'react';
-import { useBetween } from 'use-between';
+import type { SessionAttributes } from "@friday-ai/shared";
+import { useCallback, useState } from "react";
+import { useBetween } from "use-between";
 
-import req, { Methods } from './request';
-import useWebsocket from './useWebsocket';
+import req, { type Methods } from "./request";
+import useWebsocket from "./useWebsocket";
 
 const useApp = () => {
   const [session, setSession] = useState<SessionAttributes | null>(null);
-  const [headers, setHeaders] = useState<string>('');
+  const [headers, setHeaders] = useState<string>("");
   const { connect, on, off } = useWebsocket();
 
   const request = useCallback(<T>(method: Methods, url: string, query = {}, body = {}) => req<T>(method, url, headers, query, body), [headers]);
 
   const init = useCallback(async () => {
-    const s = localStorage.getItem('session') ? (JSON.parse(localStorage.getItem('session') || '{}') as SessionAttributes) : null;
+    const s = localStorage.getItem("session") ? (JSON.parse(localStorage.getItem("session") || "{}") as SessionAttributes) : null;
     if (s) {
       setSession(s);
       setHeaders(`Bearer ${s.accessToken}`);
@@ -21,49 +21,49 @@ const useApp = () => {
       return true;
     }
 
-    return request<number>('get', '/api/v1/user/count');
-  }, []);
+    return request<number>("get", "/api/v1/user/count");
+  }, [request, connect]);
 
   const login = useCallback(
     async (email: string, password: string) => {
-      const res = await request<SessionAttributes>('post', '/api/v1/user/login', {}, { email, password });
+      const res = await request<SessionAttributes>("post", "/api/v1/user/login", {}, { email, password });
       setSession(res);
       setHeaders(`Bearer ${res.accessToken}`);
-      localStorage.setItem('session', JSON.stringify(res));
-      localStorage.setItem('i18nextLng', res.user.language || 'en');
+      localStorage.setItem("session", JSON.stringify(res));
+      localStorage.setItem("i18nextLng", res.user.language || "en");
       connect(res.accessToken, res.userId);
       return true;
     },
-    [request]
+    [request, connect],
   );
 
   const logout = useCallback(async () => {
-    await request('patch', `/api/v1/session/revoke/${session?.id}`);
+    await request("patch", `/api/v1/session/revoke/${session?.id}`);
     setSession(null);
-    setHeaders('');
-    localStorage.removeItem('session');
-    localStorage.removeItem('i18nextLng');
+    setHeaders("");
+    localStorage.removeItem("session");
+    localStorage.removeItem("i18nextLng");
     return true;
   }, [session, request]);
 
   const signUp = useCallback(
     async (userName: string, email: string, password: string) => {
-      const lang = localStorage.getItem('i18nextLng');
+      const lang = localStorage.getItem("i18nextLng");
       const res = await request<SessionAttributes>(
-        'post',
-        '/api/v1/user/signup',
+        "post",
+        "/api/v1/user/signup",
         {},
-        { userName, email, password, language: lang, role: 'superadmin' }
+        { userName, email, password, language: lang, role: "superadmin" },
       );
 
       setSession(res);
       setHeaders(`Bearer ${res.accessToken}`);
-      localStorage.setItem('session', JSON.stringify(res));
-      localStorage.setItem('i18nextLng', res.user.language || 'en');
+      localStorage.setItem("session", JSON.stringify(res));
+      localStorage.setItem("i18nextLng", res.user.language || "en");
       connect(res.accessToken, res.userId);
       return true;
     },
-    [request]
+    [request, connect],
   );
 
   return {

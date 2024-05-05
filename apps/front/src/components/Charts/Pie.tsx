@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { localPoint } from '@visx/event';
-import { Group } from '@visx/group';
-import { LegendItem, LegendLabel, LegendOrdinal } from '@visx/legend';
-import ParentSize from '@visx/responsive/lib/components/ParentSize';
-import { scaleOrdinal } from '@visx/scale';
-import { Pie as VisxPie } from '@visx/shape';
-import { Tooltip as VisxTooltip, defaultStyles, withTooltip } from '@visx/tooltip';
+import { localPoint } from "@visx/event";
+import { Group } from "@visx/group";
+import { LegendItem, LegendLabel, LegendOrdinal } from "@visx/legend";
+import ParentSize from "@visx/responsive/lib/components/ParentSize";
+import { scaleOrdinal } from "@visx/scale";
+import { Pie as VisxPie } from "@visx/shape";
+import { Tooltip as VisxTooltip, defaultStyles, withTooltip } from "@visx/tooltip";
 
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import { useTheme } from '@mui/material/styles';
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 
-import { useTranslation } from 'react-i18next';
-import { colorToRGBA } from '../../utils/color';
+import { useTranslation } from "react-i18next";
+import { colorToRGBA } from "../../utils/color";
 
 const margin = 20;
 const legendGlyphSize = 15;
@@ -21,7 +21,7 @@ const colorOpacity = 0.4;
 const padAngle = 0.05;
 
 const emptyArc = {
-  data: { key: 'null', label: 'null', value: 1, color: '#fff' },
+  data: { key: "null", label: "null", value: 1, color: "#fff" },
   endAngle: 10,
   index: 0,
   startAngle: 0,
@@ -72,6 +72,7 @@ export default withTooltip<PieProps, PieData>((props) => {
         return (
           <>
             <svg width={width} height={height}>
+              <title>Pie</title>
               <Group top={top} left={left}>
                 <VisxPie
                   data={data}
@@ -90,7 +91,7 @@ export default withTooltip<PieProps, PieData>((props) => {
                 >
                   {(pie) => {
                     if (pie.arcs.length < 1) {
-                      const arcPath = pie.path(emptyArc) || '';
+                      const arcPath = pie.path(emptyArc) || "";
                       return (
                         <g key={`emtpy-arc-${totalLabel}`}>
                           <path d={arcPath} fill={theme.palette.divider} stroke={theme.palette.divider} strokeWidth={2} />
@@ -99,10 +100,10 @@ export default withTooltip<PieProps, PieData>((props) => {
                     }
                     return pie.arcs.map((a) => {
                       const { key, color } = a.data;
-                      const arcPath = pie.path(a) || '';
+                      const arcPath = pie.path(a) || "";
                       return (
                         <g
-                          style={{ cursor: 'pointer' }}
+                          style={{ cursor: "pointer" }}
                           key={`arc-${key}`}
                           onMouseEnter={(_) => {
                             if (tooltipTimeout) clearTimeout(tooltipTimeout);
@@ -140,14 +141,15 @@ export default withTooltip<PieProps, PieData>((props) => {
                 </>
               </Group>
             </svg>
-            <Box sx={{ position: 'relative', bottom: '30px' }}>
+            <Box sx={{ position: "relative", bottom: "30px" }}>
               <LegendOrdinal scale={ordinalColorScale}>
                 {(labels) => (
-                  <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+                  <Box sx={{ display: "flex", flexDirection: "row" }}>
                     {labels.map((label) => (
                       <LegendItem key={`legend-quantile-${label.index}`} margin="0 5px">
                         <svg width={legendGlyphSize} height={legendGlyphSize}>
-                          <rect fill={colorToRGBA(label.value || '', colorOpacity)} width={legendGlyphSize} height={legendGlyphSize} />
+                          <title>Legend item</title>
+                          <rect fill={colorToRGBA(label.value || "", colorOpacity)} width={legendGlyphSize} height={legendGlyphSize} />
                         </svg>
                         <LegendLabel align="left" margin="0 0 0 4px">
                           {t(label.text)}
@@ -171,7 +173,8 @@ export default withTooltip<PieProps, PieData>((props) => {
               >
                 <Stack direction="row" spacing={0.5}>
                   <svg width={legendGlyphSize} height={legendGlyphSize}>
-                    <rect fill={colorToRGBA(tooltipData.color || '', colorOpacity)} width={legendGlyphSize} height={legendGlyphSize} />
+                    <title>Tooltip legend</title>
+                    <rect fill={colorToRGBA(tooltipData.color || "", colorOpacity)} width={legendGlyphSize} height={legendGlyphSize} />
                   </svg>
                   <span>{t(tooltipData.label)}</span> :<strong>{tooltipData.value}</strong>
                 </Stack>

@@ -1,26 +1,26 @@
-import uaParser from 'useragent-parser-js';
+import uaParser from "useragent-parser-js";
 
-import DeleteIcon from '@mui/icons-material/Delete';
-import DesktopWindowsOutlinedIcon from '@mui/icons-material/DesktopWindowsOutlined';
-import PhoneAndroidOutlinedIcon from '@mui/icons-material/PhoneAndroidOutlined';
-import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined';
-import TabletAndroidOutlinedIcon from '@mui/icons-material/TabletAndroidOutlined';
+import DeleteIcon from "@mui/icons-material/Delete";
+import DesktopWindowsOutlinedIcon from "@mui/icons-material/DesktopWindowsOutlined";
+import PhoneAndroidOutlinedIcon from "@mui/icons-material/PhoneAndroidOutlined";
+import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
+import TabletAndroidOutlinedIcon from "@mui/icons-material/TabletAndroidOutlined";
 
-import { SessionAttributes } from '@friday-ai/shared';
-import { Avatar, IconButton, ListItem, ListItemAvatar, ListItemText, Tooltip } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { useSession } from '../../../../services/api/useSession';
-import { formatDistance } from '../../../../utils/data';
+import type { SessionAttributes } from "@friday-ai/shared";
+import { Avatar, IconButton, ListItem, ListItemAvatar, ListItemText, Tooltip } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useSession } from "../../../../services/api/useSession";
+import { formatDistance } from "../../../../utils/data";
 
 export default function SessionItem({ session }: { session: SessionAttributes }) {
   const { t } = useTranslation();
   const { revokeSession } = useSession();
 
   let icon = <ReportProblemOutlinedIcon />;
-  let label: string = '';
+  let label = "";
 
-  if (session.userAgent === '') {
-    label = 'Error';
+  if (session.userAgent === "") {
+    label = "Error";
   } else {
     const userAgent = uaParser.parse(session.userAgent);
     label = `${userAgent.browser} - ${userAgent.platform} - ${userAgent.os}`;
@@ -44,8 +44,8 @@ export default function SessionItem({ session }: { session: SessionAttributes })
     <ListItem
       sx={{ width: { xs: 300, sm: 500, md: 700 } }}
       secondaryAction={
-        <Tooltip title={t('settings.sessions.revoke')}>
-          <IconButton edge="end" aria-label={t('settings.sessions.revoke')} onClick={hanldeRevokeSession}>
+        <Tooltip title={t("settings.sessions.revoke")}>
+          <IconButton edge="end" aria-label={t("settings.sessions.revoke")} onClick={hanldeRevokeSession}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -58,7 +58,7 @@ export default function SessionItem({ session }: { session: SessionAttributes })
         primaryTypographyProps={{ noWrap: true }}
         primary={label}
         secondaryTypographyProps={{ noWrap: true }}
-        secondary={`${t('settings.sessions.connected')} ${formatDistance(session.createdAt)}`}
+        secondary={`${t("settings.sessions.connected")} ${formatDistance(session.createdAt)}`}
       />
     </ListItem>
   );

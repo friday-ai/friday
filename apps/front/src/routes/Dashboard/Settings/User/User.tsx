@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import { Divider, IconButton, Stack, Tooltip, Typography } from '@mui/material';
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import { Divider, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 
-import { AvailableLanguages, UserAttributes, UserCreationAttributes, UserRole } from '@friday-ai/shared';
-import { useTranslation } from 'react-i18next';
-import LoaderSuspense from '../../../../components/Loader/LoaderSuspense';
-import { useGetUsers } from '../../../../services/api/useUser';
-import UserCard from './UserCard';
-import UserDetails from './UserDetails';
+import { AvailableLanguages, type UserAttributes, type UserCreationAttributes, UserRole } from "@friday-ai/shared";
+import { useTranslation } from "react-i18next";
+import LoaderSuspense from "../../../../components/Loader/LoaderSuspense";
+import { useGetUsers } from "../../../../services/api/useUser";
+import UserCard from "./UserCard";
+import UserDetails from "./UserDetails";
 
 export default function User() {
   const { t } = useTranslation();
@@ -18,12 +18,14 @@ export default function User() {
 
   const addUser = () => {
     setNewUser(true);
-    setSelectedUser({ userName: 'New User', email: 'newuser@friday.com', password: '', language: AvailableLanguages.EN, role: UserRole.HABITANT });
+    setSelectedUser({ userName: "New User", email: "newuser@friday.com", password: "", language: AvailableLanguages.EN, role: UserRole.HABITANT });
   };
 
   const handleSelectUser = (id: string) => {
-    const [selected] = users!.filter((u) => u.id === id);
-    setSelectedUser(selected);
+    if (users) {
+      const [selected] = users.filter((u) => u.id === id);
+      setSelectedUser(selected);
+    }
   };
 
   useEffect(() => {
@@ -37,31 +39,31 @@ export default function User() {
     }
 
     // Check if is selected user was deleted, in case select the first user of list
-    if (users && selectedUser && 'id' in selectedUser && users.filter((h) => h.id === selectedUser.id).length === 0) {
+    if (users && selectedUser && "id" in selectedUser && users.filter((h) => h.id === selectedUser.id).length === 0) {
       setSelectedUser(users[0]);
     }
-  }, [users]);
+  }, [users, newUser, selectedUser]);
 
   return (
     <LoaderSuspense isFetching={isFetching && !isFetchedAfterMount}>
-      <Stack spacing={2} direction={{ xs: 'column', lg: 'row' }} divider={<Divider orientation="vertical" flexItem />} justifyContent="center">
+      <Stack spacing={2} direction={{ xs: "column", lg: "row" }} divider={<Divider orientation="vertical" flexItem />} justifyContent="center">
         <Stack spacing={2} maxWidth={{ lg: 550 }}>
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="h6" fontWeight="bold">
-              {t('settings.user.title')}
+              {t("settings.user.title")}
             </Typography>
-            <Tooltip title={t('settings.user.add')}>
+            <Tooltip title={t("settings.user.add")}>
               <IconButton aria-label="add user" onClick={addUser}>
                 <AddCircleOutlineOutlinedIcon />
               </IconButton>
             </Tooltip>
           </Stack>
 
-          <Stack spacing={2} direction={{ xs: 'row', lg: 'column' }} overflow={'auto'} justifyContent={{ xs: 'unset', md: 'center' }}>
+          <Stack spacing={2} direction={{ xs: "row", lg: "column" }} overflow={"auto"} justifyContent={{ xs: "unset", md: "center" }}>
             {users &&
               selectedUser &&
               users.map((user) => (
-                <UserCard key={user.id} user={user} selected={'id' in selectedUser && selectedUser.id === user.id} selectUser={handleSelectUser} />
+                <UserCard key={user.id} user={user} selected={"id" in selectedUser && selectedUser.id === user.id} selectUser={handleSelectUser} />
               ))}
           </Stack>
 

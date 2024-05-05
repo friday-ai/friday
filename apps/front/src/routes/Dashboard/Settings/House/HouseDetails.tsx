@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
-import { Chip, Divider, IconButton, InputAdornment, Paper, Stack, TextField, Tooltip, Typography } from '@mui/material';
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
+import { Chip, Divider, IconButton, InputAdornment, Paper, Stack, TextField, Tooltip, Typography } from "@mui/material";
 
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
-import { HouseAttributes, HouseCreationAttributes } from '@friday-ai/shared';
-import { enqueueSnackbar } from 'notistack';
-import CustomMap from '../../../../components/Map/Map';
-import useHouse from '../../../../services/api/useHouse';
-import useRoom from '../../../../services/api/useRoom';
+import type { HouseAttributes, HouseCreationAttributes } from "@friday-ai/shared";
+import { enqueueSnackbar } from "notistack";
+import CustomMap from "../../../../components/Map/Map";
+import useHouse from "../../../../services/api/useHouse";
+import useRoom from "../../../../services/api/useRoom";
 
 interface HouseDetailsProps {
   house: HouseAttributes | HouseCreationAttributes;
@@ -22,10 +22,10 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
   const { createHouse, updateHouse } = useHouse();
   const { createRoom, deleteRoom } = useRoom();
 
-  const [houseName, setHouseName] = useState('');
+  const [houseName, setHouseName] = useState("");
   const [houseCoordinates, setHouseCoordinates] = useState<[number, number]>([0, 0]);
 
-  const [roomName, setRoomName] = useState('');
+  const [roomName, setRoomName] = useState("");
   const [rooms, setRooms] = useState<string[]>([]);
   const [roomsToDelete, setRoomsToDelete] = useState<string[]>([]);
   const [roomsToCreate, setRoomsToCreate] = useState<string[]>([]);
@@ -33,10 +33,10 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
   const houseMustBeSaved = houseName !== house.name || houseCoordinates[0] + houseCoordinates[1] !== Number(house.latitude) + Number(house.longitude);
 
   const handleAddRoom = () => {
-    if (roomName !== '' && roomName.replace(/ /g, '') !== '') {
+    if (roomName !== "" && roomName.replace(/ /g, "") !== "") {
       // If in initial state key 'rooms' is present, it mean isn't a new house
       // so additional stuff is necessary, else, simply add to list
-      if ('rooms' in house && house.rooms) {
+      if ("rooms" in house && house.rooms) {
         // Add to list only if the room was not present in the starting list
         // else remove it from delete list
         if (!house.rooms.some((r) => r.name === roomName)) {
@@ -50,7 +50,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
       }
 
       setRooms([...rooms, roomName]);
-      setRoomName('');
+      setRoomName("");
     }
   };
 
@@ -60,7 +60,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
 
     // If in initial state key 'rooms' is present, it mean isn't a new house
     // so additional stuff is necessary
-    if ('rooms' in house && house.rooms) {
+    if ("rooms" in house && house.rooms) {
       const id = house.rooms.filter((r) => r.name === name).map((r) => r.id);
       const newList = [...roomsToDelete, ...id];
       setRoomsToDelete(newList);
@@ -71,10 +71,10 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
   };
 
   const handleSave = async () => {
-    let houseId = 'id' in house ? house.id : '';
+    let houseId = "id" in house ? house.id : "";
 
     if (houseMustBeSaved) {
-      if ('id' in house) {
+      if ("id" in house) {
         await updateHouse.mutateAsync({
           id: houseId,
           house: { name: houseName, latitude: houseCoordinates[0].toString(), longitude: houseCoordinates[1].toString() },
@@ -104,7 +104,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
 
     // Ensure house still selected
     selectHouse(houseId);
-    enqueueSnackbar(t('settings.house.saved'), { variant: 'success' });
+    enqueueSnackbar(t("settings.house.saved"), { variant: "success" });
   };
 
   /** This is necessary because it is the parent component which
@@ -114,17 +114,17 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
   useEffect(() => {
     setHouseName(house.name);
     setHouseCoordinates([Number(house.latitude), Number(house.longitude)]);
-    setRooms('rooms' in house && house.rooms ? house.rooms.map((h) => h.name) : []);
+    setRooms("rooms" in house && house.rooms ? house.rooms.map((h) => h.name) : []);
   }, [house]);
 
   return (
     <Stack spacing={2}>
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="space-between">
         <Typography variant="h6" fontWeight="bold">
-          {t('settings.house.edit')}
+          {t("settings.house.edit")}
         </Typography>
 
-        <Tooltip title={t('settings.house.save')}>
+        <Tooltip title={t("settings.house.save")}>
           <span>
             <IconButton
               aria-label="save house"
@@ -136,11 +136,11 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
           </span>
         </Tooltip>
       </Stack>
-      <Paper sx={{ padding: '2rem', alignSelf: 'center' }}>
-        <Stack direction={{ xs: 'column', md: 'row' }} spacing={4}>
+      <Paper sx={{ padding: "2rem", alignSelf: "center" }}>
+        <Stack direction={{ xs: "column", md: "row" }} spacing={4}>
           <Stack spacing={2} minWidth={{ xs: 250, lg: 400 }}>
             <TextField
-              label={t('settings.house.houseName')}
+              label={t("settings.house.houseName")}
               id="house"
               type="text"
               value={houseName}
@@ -157,7 +157,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
             />
 
             <TextField
-              label={t('settings.house.latitude')}
+              label={t("settings.house.latitude")}
               id="latitude"
               type="number"
               value={houseCoordinates[0]}
@@ -167,7 +167,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
             />
 
             <TextField
-              label={t('settings.house.longitude')}
+              label={t("settings.house.longitude")}
               id="longitude"
               type="number"
               value={houseCoordinates[1]}
@@ -177,12 +177,12 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
             />
           </Stack>
 
-          <Divider orientation="vertical" flexItem sx={{ display: { xs: 'none', md: 'block' } }} />
-          <Divider flexItem sx={{ display: { xs: 'block', md: 'none' } }} />
+          <Divider orientation="vertical" flexItem sx={{ display: { xs: "none", md: "block" } }} />
+          <Divider flexItem sx={{ display: { xs: "block", md: "none" } }} />
 
           <Stack spacing={2} maxWidth={350}>
             <TextField
-              label={t('settings.house.rooms')}
+              label={t("settings.house.rooms")}
               id="rooms"
               type="text"
               value={roomName}
@@ -192,7 +192,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
               InputProps={{
                 onKeyPress: (event) => {
                   const { key } = event;
-                  if (key === 'Enter') {
+                  if (key === "Enter") {
                     handleAddRoom();
                   }
                 },
@@ -205,7 +205,7 @@ export default function HouseDetails({ house, selectHouse }: HouseDetailsProps) 
                 ),
               }}
             />
-            <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 1 }}>
+            <Stack direction="row" sx={{ flexWrap: "wrap", gap: 1 }}>
               {rooms.map((r) => (
                 <Chip key={`${r}`} label={r} color="primary" variant="outlined" onDelete={() => handleDeleteRoom(r)} />
               ))}
