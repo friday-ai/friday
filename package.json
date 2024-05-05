@@ -12,6 +12,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@biomejs/biome": "^1.7.2",
     "@friday-ai/tools": "workspace:^",
     "turbo": "^1.12.2"
   }
