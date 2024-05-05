@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout project code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout project code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
