@@ -1,7 +1,7 @@
-import { DeviceCapabilitySettingsSchema, DevicesActions, DcstAttributes } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import DeviceClass from '../device';
-import { CapabilityManagerParamsList } from '../../../utils/interfaces';
+import logger from "@friday-ai/logger";
+import { type DcstAttributes, type DeviceCapabilitySettingsSchema, DevicesActions } from "@friday-ai/shared";
+import type { CapabilityManagerParamsList } from "../../../utils/interfaces";
+import type DeviceClass from "../device";
 
 export const options: CapabilityManagerParamsList = {
   setBrightness: {

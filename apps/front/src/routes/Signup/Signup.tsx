@@ -1,27 +1,27 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
-import { useTheme } from '@mui/material/styles';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useTheme } from "@mui/material/styles";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-import { ReactComponent as ReactLogo } from '../../assets/svg/favicon.svg';
+import { ReactComponent as ReactLogo } from "../../assets/svg/favicon.svg";
 
-import AnimationContainer from '../../components/App/AnimationContainer';
-import LoaderLayout from '../../components/Loader/LoaderLayout';
-import Account from './Steps/Account';
-import House from './Steps/House';
-import Language from './Steps/Language';
-import Time from './Steps/Time';
-import Units from './Steps/Units';
+import AnimationContainer from "../../components/App/AnimationContainer";
+import LoaderLayout from "../../components/Loader/LoaderLayout";
+import Account from "./Steps/Account";
+import House from "./Steps/House";
+import Language from "./Steps/Language";
+import Time from "./Steps/Time";
+import Units from "./Steps/Units";
 
-import useSystem from '../../services/api/useSystem';
-import request from '../../services/app/request';
+import useSystem from "../../services/api/useSystem";
+import request from "../../services/app/request";
 
 // Welcome
 // Step 0: Choose your language
@@ -51,22 +51,23 @@ export default function Signup() {
     setTimeout(async () => {
       const res = await initSystem.mutateAsync(undefined, {
         onError: () => {
-          navigate('/server-down');
+          navigate("/server-down");
         },
       });
 
       if (res) {
-        navigate('/dashboard');
+        navigate("/dashboard");
       }
     }, 3000);
   };
 
   // Prevent user to acces this route if instance is already configured
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Need to be triggered only once
   useEffect(() => {
-    request<number>('get', '/api/v1/user/count', '')
+    request<number>("get", "/api/v1/user/count", "")
       .then((count) => {
         if (count !== 0) {
-          navigate('/login');
+          navigate("/login");
         }
       })
       .catch((error) => {
@@ -76,18 +77,18 @@ export default function Signup() {
 
   return (
     <Container maxWidth="sm">
-      <AnimationContainer id={`${isSignupStarted && activeStep > 4}`} style={{ height: '100%' }}>
+      <AnimationContainer id={`${isSignupStarted && activeStep > 4}`} style={{ height: "100%" }}>
         {!isSignupStarted && (
           <Box display="flex" flexDirection="column" height="100%" justifyContent="center">
             <Stack spacing={4} alignItems="center">
               <ReactLogo width="200px" display="block" fill={theme.palette.primary.main} />
 
               <Typography variant="h4" align="center" gutterBottom>
-                {t('signup.general.welcome')}
+                {t("signup.general.welcome")}
               </Typography>
 
-              <Button variant="contained" size="small" onClick={() => setIsSignupStarted(true)} sx={{ marginX: 'auto', paddingX: 10 }}>
-                {t('signup.general.start')}
+              <Button variant="contained" size="small" onClick={() => setIsSignupStarted(true)} sx={{ marginX: "auto", paddingX: 10 }}>
+                {t("signup.general.start")}
               </Button>
             </Stack>
           </Box>
@@ -100,7 +101,7 @@ export default function Signup() {
             </Box>
 
             <AnimationContainer id={activeStep}>
-              <Paper sx={{ padding: '2rem 3rem' }}>
+              <Paper sx={{ padding: "2rem 3rem" }}>
                 <Stack spacing={4}>
                   {activeStep === 0 && <Language activeStep={activeStep} setActiveStep={setActiveStep} />}
                   {activeStep === 1 && <Account activeStep={activeStep} setActiveStep={setActiveStep} />}
@@ -119,10 +120,10 @@ export default function Signup() {
               <LoaderLayout />
 
               <Typography variant="h6" fontWeight="bold" color={theme.palette.primary.main}>
-                {t('signup.general.fridayInit')}
+                {t("signup.general.fridayInit")}
               </Typography>
               <Typography variant="subtitle2" fontWeight="bold" color={theme.palette.text.disabled}>
-                {t('signup.general.fridayInitDesc')}
+                {t("signup.general.fridayInitDesc")}
               </Typography>
             </Stack>
           </Box>

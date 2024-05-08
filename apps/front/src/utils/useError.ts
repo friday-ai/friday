@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const useError = () => {
   const [error, setError] = useState<unknown>(null);

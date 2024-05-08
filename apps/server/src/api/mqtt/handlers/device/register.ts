@@ -1,6 +1,6 @@
-import { DeviceCreationAttributes } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import Friday from '../../../../core/friday';
+import logger from "@friday-ai/logger";
+import type { DeviceCreationAttributes } from "@friday-ai/shared";
+import type Friday from "../../../../core/friday";
 
 /*
  * @route('friday/master/device/register')

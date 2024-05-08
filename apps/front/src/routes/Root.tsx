@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-import { SnackbarProvider } from 'notistack';
+import { SnackbarProvider } from "notistack";
 
-import useSharedApp from '../services/app/useApp';
+import useSharedApp from "../services/app/useApp";
 
-import LoaderSuspense from '../components/Loader/LoaderSuspense';
-import { defaultSnackbar, errorSnackbar, infoSnackbar, successSnackbar, warningSnackbar } from '../components/Snackbar/Snackbar';
-import useError from '../utils/useError';
+import LoaderSuspense from "../components/Loader/LoaderSuspense";
+import { defaultSnackbar, errorSnackbar, infoSnackbar, successSnackbar, warningSnackbar } from "../components/Snackbar/Snackbar";
+import useError from "../utils/useError";
 
 export default function Root() {
   const { init } = useSharedApp();
@@ -16,6 +16,8 @@ export default function Root() {
   const navigate = useNavigate();
 
   const [isLoadingSession, setLoadingSession] = useState(true);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Need to be triggered once
   useEffect(() => {
     // If the user tries to access the opening pages, let's do nothing
     if (/login|signup/.test(pathname)) {
@@ -26,16 +28,16 @@ export default function Root() {
     init()
       .then((res) => {
         // It response is typeof number, then there is no session in local storage
-        if (typeof res === 'number') {
+        if (typeof res === "number") {
           // Redirect user to appropriate route
           if (res !== 0) {
-            navigate('/login');
+            navigate("/login");
           } else {
-            navigate('/signup');
+            navigate("/signup");
           }
-        } else if (pathname === '/') {
+        } else if (pathname === "/") {
           // But else, and, if the pathname is empty, redirect user to dashbaord
-          navigate('/dashboard');
+          navigate("/dashboard");
         }
 
         setLoadingSession(false);
@@ -51,7 +53,7 @@ export default function Root() {
   return (
     <>
       <LoaderSuspense isFetching={isLoadingSession}>
-        <Outlet></Outlet>
+        <Outlet />
       </LoaderSuspense>
       <SnackbarProvider
         Components={{
@@ -61,7 +63,7 @@ export default function Root() {
           error: errorSnackbar,
           info: infoSnackbar,
         }}
-        anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+        anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
         maxSnack={6}
       />
     </>

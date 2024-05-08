@@ -1,10 +1,10 @@
-import { QueryInterface } from 'sequelize';
-import { DataType } from 'sequelize-typescript';
+import type { QueryInterface } from "sequelize";
+import { DataType } from "sequelize-typescript";
 
 export default {
-  name: '20200823171723-create-session',
+  name: "20200823171723-create-session",
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
-    await queryInterface.createTable('session', {
+    await queryInterface.createTable("session", {
       id: {
         unique: true,
         allowNull: false,
@@ -41,5 +41,5 @@ export default {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('session'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable("session"),
 };

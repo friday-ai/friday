@@ -1,11 +1,11 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Session router
  */
-@FridayRouter('/v1/session')
+@FridayRouter("/v1/session")
 export default class SessionRouter {
   private readonly friday: Friday;
 
@@ -24,11 +24,11 @@ export default class SessionRouter {
    * @apiVersion 1.0.0
    */
   @Post({
-    path: '/access_token',
+    path: "/access_token",
     authenticated: false,
     rateLimit: true,
-    aclMethod: 'create',
-    aclResource: 'session',
+    aclMethod: "create",
+    aclResource: "session",
   })
   getAccessToken = async (req: Request, res: Response) => {
     const session = await this.friday.session.getAccessToken(req.body.refreshToken);
@@ -44,11 +44,11 @@ export default class SessionRouter {
    * @apiVersion 1.0.0
    */
   @Patch({
-    path: '/revoke/:id',
+    path: "/revoke/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'session',
+    aclMethod: "update",
+    aclResource: "session",
   })
   revoke = async (req: Request, res: Response) => {
     const session = await this.friday.session.revoke(req.params.id);
@@ -64,11 +64,11 @@ export default class SessionRouter {
    * @apiVersion 1.0.0
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'session',
+    aclMethod: "read",
+    aclResource: "session",
   })
   listAll = async (req: Request, res: Response) => {
     const sessions = await this.friday.session.listAll(req.query);

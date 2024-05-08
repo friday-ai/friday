@@ -14,105 +14,105 @@ import {
   Scopes,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { DeviceAttributes, DeviceCreationAttributes, DevicesTypes } from '@friday-ai/shared';
-import { isOwnerExisting } from '../utils/database/validation';
-import DeviceCapability from './device_capability';
-import Plugin from './plugin';
-import Room from './room';
+import { type DeviceAttributes, type DeviceCreationAttributes, DevicesTypes } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import DeviceCapability from "./device_capability";
+import Plugin from "./plugin";
+import Room from "./room";
 
 /**
  * Device model
  */
 @DefaultScope(() => ({
   attributes: [
-    'id',
-    'defaultName',
-    'defaultManufacturer',
-    'defaultModel',
-    'name',
-    'type',
-    'manufacturer',
-    'model',
-    'externalId',
-    'viaDevice',
-    'roomId',
-    'pluginId',
+    "id",
+    "defaultName",
+    "defaultManufacturer",
+    "defaultModel",
+    "name",
+    "type",
+    "manufacturer",
+    "model",
+    "externalId",
+    "viaDevice",
+    "roomId",
+    "pluginId",
   ],
 }))
 @Scopes(() => ({
   full: {
     attributes: [
-      'id',
-      'defaultName',
-      'defaultManufacturer',
-      'defaultModel',
-      'name',
-      'type',
-      'manufacturer',
-      'model',
-      'externalId',
-      'viaDevice',
-      'roomId',
-      'pluginId',
+      "id",
+      "defaultName",
+      "defaultManufacturer",
+      "defaultModel",
+      "name",
+      "type",
+      "manufacturer",
+      "model",
+      "externalId",
+      "viaDevice",
+      "roomId",
+      "pluginId",
     ],
     include: [Room, Plugin, DeviceCapability],
   },
   withRoom: {
     attributes: [
-      'id',
-      'defaultName',
-      'defaultManufacturer',
-      'defaultModel',
-      'name',
-      'type',
-      'manufacturer',
-      'model',
-      'externalId',
-      'viaDevice',
-      'roomId',
-      'pluginId',
+      "id",
+      "defaultName",
+      "defaultManufacturer",
+      "defaultModel",
+      "name",
+      "type",
+      "manufacturer",
+      "model",
+      "externalId",
+      "viaDevice",
+      "roomId",
+      "pluginId",
     ],
     include: [Room],
   },
   withPlugin: {
     attributes: [
-      'id',
-      'defaultName',
-      'defaultManufacturer',
-      'defaultModel',
-      'name',
-      'type',
-      'manufacturer',
-      'model',
-      'externalId',
-      'viaDevice',
-      'roomId',
-      'pluginId',
+      "id",
+      "defaultName",
+      "defaultManufacturer",
+      "defaultModel",
+      "name",
+      "type",
+      "manufacturer",
+      "model",
+      "externalId",
+      "viaDevice",
+      "roomId",
+      "pluginId",
     ],
     include: [Plugin],
   },
   withCapabilities: {
     attributes: [
-      'id',
-      'defaultName',
-      'defaultManufacturer',
-      'defaultModel',
-      'name',
-      'type',
-      'manufacturer',
-      'model',
-      'externalId',
-      'viaDevice',
-      'roomId',
-      'pluginId',
+      "id",
+      "defaultName",
+      "defaultManufacturer",
+      "defaultModel",
+      "name",
+      "type",
+      "manufacturer",
+      "model",
+      "externalId",
+      "viaDevice",
+      "roomId",
+      "pluginId",
     ],
-    include: [{ model: DeviceCapability.scope('withSettings') }],
+    include: [{ model: DeviceCapability.scope("withSettings") }],
   },
 }))
 @Table({
-  tableName: 'device',
+  tableName: "device",
   underscored: false,
 })
 export default class Device extends Model<DeviceAttributes, DeviceCreationAttributes> {
@@ -161,41 +161,41 @@ export default class Device extends Model<DeviceAttributes, DeviceCreationAttrib
   externalId!: string;
 
   @AllowNull(true)
-  @Is('viaDevice', (value) => (value !== undefined ? isOwnerExisting(value, ['device']) : true))
+  @Is("viaDevice", (value) => (value !== undefined ? isOwnerExisting(value, ["device"]) : true))
   @Column(DataType.UUIDV4)
   viaDevice!: string;
 
   @NotEmpty
   @AllowNull(true)
-  @Is('roomId', (value) => (value !== undefined ? isOwnerExisting(value, ['room']) : true))
+  @Is("roomId", (value) => (value !== undefined ? isOwnerExisting(value, ["room"]) : true))
   @Column(DataType.UUIDV4)
   roomId!: string;
 
   @NotEmpty
-  @Is('pluginId', (value) => isOwnerExisting(value, ['plugin']))
+  @Is("pluginId", (value) => isOwnerExisting(value, ["plugin"]))
   @Column(DataType.UUIDV4)
   pluginId!: string;
 
   @BelongsTo(() => Device, {
-    foreignKey: 'viaDevice',
+    foreignKey: "viaDevice",
     constraints: false,
   })
   device!: Device;
 
   @BelongsTo(() => Room, {
-    foreignKey: 'roomId',
+    foreignKey: "roomId",
     constraints: false,
   })
   room!: Room;
 
   @BelongsTo(() => Plugin, {
-    foreignKey: 'pluginId',
+    foreignKey: "pluginId",
     constraints: false,
   })
   plugin!: Plugin;
 
   @HasMany(() => DeviceCapability, {
-    foreignKey: 'deviceId',
+    foreignKey: "deviceId",
     constraints: false,
   })
   capabilities!: DeviceCapability[];

@@ -1,5 +1,5 @@
-import { DeviceAttributes, DeviceRegisterAttributes } from '@friday-ai/shared';
-import DeviceClass from './device';
+import type { DeviceAttributes, DeviceRegisterAttributes } from "@friday-ai/shared";
+import type DeviceClass from "./device";
 
 /**
  * Device register

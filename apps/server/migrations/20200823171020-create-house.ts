@@ -1,10 +1,10 @@
-import { QueryInterface } from 'sequelize';
-import { DataType } from 'sequelize-typescript';
+import type { QueryInterface } from "sequelize";
+import { DataType } from "sequelize-typescript";
 
 export default {
-  name: '20200823171020-create-house',
+  name: "20200823171020-create-house",
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
-    await queryInterface.createTable('house', {
+    await queryInterface.createTable("house", {
       id: {
         unique: true,
         allowNull: false,
@@ -34,5 +34,5 @@ export default {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('house'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable("house"),
 };

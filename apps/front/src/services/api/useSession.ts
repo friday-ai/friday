@@ -1,16 +1,16 @@
-import { SessionAttributes } from '@friday-ai/shared';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import type { SessionAttributes } from "@friday-ai/shared";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import useApp from '../app/useApp';
+import useApp from "../app/useApp";
 
 export const useSession = () => {
   const { request } = useApp();
   const queryClient = useQueryClient();
 
   const revokeSession = useMutation({
-    mutationFn: (id: string) => request<SessionAttributes>('patch', `/api/v1/session/revoke/${id}`),
+    mutationFn: (id: string) => request<SessionAttributes>("patch", `/api/v1/session/revoke/${id}`),
     onSuccess: (session) => {
-      queryClient.setQueryData(['getSessions'], (prevSessions: SessionAttributes[]) => prevSessions.filter((s) => s.id !== session.id));
+      queryClient.setQueryData(["getSessions"], (prevSessions: SessionAttributes[]) => prevSessions.filter((s) => s.id !== session.id));
     },
   });
 
@@ -20,8 +20,8 @@ export const useSession = () => {
 export const useGetSessions = () => {
   const { request } = useApp();
   return useQuery({
-    queryKey: ['getSessions'],
-    queryFn: () => request<SessionAttributes[]>('get', '/api/v1/session', { order: [['CREATEDAT', 'DESC']] }),
+    queryKey: ["getSessions"],
+    queryFn: () => request<SessionAttributes[]>("get", "/api/v1/session", { order: [["CREATEDAT", "DESC"]] }),
   });
 };
 

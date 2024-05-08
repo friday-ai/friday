@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import Friday from '../../../core/friday';
-import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Plugin router
@@ -11,7 +11,7 @@ import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorator
  * @apiParam {Boolean} [enabled] State of the plugin.
  * @apiParam {UUIDV4} satelliteId Identifier of the satellite to which the plugin belongs.
  */
-@FridayRouter('/v1/plugin')
+@FridayRouter("/v1/plugin")
 export default class PluginRouter {
   private readonly friday: Friday;
 
@@ -42,11 +42,11 @@ export default class PluginRouter {
    * },
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'install',
-    aclResource: 'plugin',
+    aclMethod: "install",
+    aclResource: "plugin",
   })
   install = async (req: Request, res: Response) => {
     const plugin = await this.friday.plugin.install(req.body);
@@ -72,11 +72,11 @@ export default class PluginRouter {
    * },
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'plugin',
+    aclMethod: "update",
+    aclResource: "plugin",
   })
   update = async (req: Request, res: Response) => {
     const plugin = await this.friday.plugin.update(req.params.id, req.body);
@@ -96,11 +96,11 @@ export default class PluginRouter {
    * }
    */
   @Patch({
-    path: '/stop/:id',
+    path: "/stop/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'plugin',
+    aclMethod: "update",
+    aclResource: "plugin",
   })
   stop = async (req: Request, res: Response) => {
     await this.friday.plugin.stop(req.params.id);
@@ -122,11 +122,11 @@ export default class PluginRouter {
    * }
    */
   @Patch({
-    path: '/restart/:id',
+    path: "/restart/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'plugin',
+    aclMethod: "update",
+    aclResource: "plugin",
   })
   restart = async (req: Request, res: Response) => {
     await this.friday.plugin.restart(req.params.id);
@@ -148,11 +148,11 @@ export default class PluginRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'plugin',
+    aclMethod: "delete",
+    aclResource: "plugin",
   })
   uninstall = async (req: Request, res: Response) => {
     await this.friday.plugin.uninstall(req.params.id);
@@ -179,11 +179,11 @@ export default class PluginRouter {
    * }],
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'plugin',
+    aclMethod: "read",
+    aclResource: "plugin",
   })
   listAll = async (req: Request, res: Response) => {
     const plugins = await this.friday.plugin.listAll(req.query);
@@ -208,11 +208,11 @@ export default class PluginRouter {
    * },
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'plugin',
+    aclMethod: "read",
+    aclResource: "plugin",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;

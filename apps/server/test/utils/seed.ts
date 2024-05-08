@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable global-require */
-import promise from 'bluebird';
-import { readdirSync } from 'fs';
-import { join } from 'path';
-import { database } from '../../src/config/database';
+import { readdirSync } from "node:fs";
+import { join } from "node:path";
+import promise from "bluebird";
+import { database } from "../../src/config/database";
 
-const SEEDERS_PATH = join(__filename, '../../../seeders');
+const SEEDERS_PATH = join(__filename, "../../../seeders");
 
 const files = readdirSync(SEEDERS_PATH);
 const seeds = files.map((file) => require(join(SEEDERS_PATH, file)).default);

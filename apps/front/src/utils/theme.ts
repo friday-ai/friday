@@ -1,7 +1,7 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 // Extend the theme type to include custom properties
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Theme {
     borders: {
       border: number;
@@ -26,7 +26,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-declare module '@mui/material/Paper' {
+declare module "@mui/material/Paper" {
   interface PaperPropsVariantOverrides {
     selected: true;
   }
@@ -36,19 +36,19 @@ declare module '@mui/material/Paper' {
 const themeLight = createTheme(
   {
     palette: {
-      mode: 'light',
+      mode: "light",
       background: {
-        default: '#f8fafc',
-        paper: '#ffffff',
+        default: "#f8fafc",
+        paper: "#ffffff",
       },
       primary: {
-        main: '#121C42',
+        main: "#121C42",
       },
       secondary: {
-        main: '#a19267',
+        main: "#a19267",
       },
       error: {
-        main: '#ba1a1a',
+        main: "#ba1a1a",
       },
     },
     shape: {
@@ -56,7 +56,7 @@ const themeLight = createTheme(
     },
     spacing: 8,
     typography: {
-      fontFamily: 'Inter, sans-serif',
+      fontFamily: "Inter, sans-serif",
     },
     components: {
       MuiContainer: {
@@ -70,9 +70,9 @@ const themeLight = createTheme(
       },
       MuiAppBar: {
         defaultProps: {
-          color: 'inherit',
+          color: "inherit",
           elevation: 0,
-          variant: 'outlined',
+          variant: "outlined",
           sx: {
             borderTop: 0,
             borderLeft: 0,
@@ -82,13 +82,13 @@ const themeLight = createTheme(
       },
       MuiPaper: {
         defaultProps: {
-          variant: 'outlined',
+          variant: "outlined",
         },
       },
       MuiCardContent: {
         defaultProps: {
           sx: {
-            padding: '2rem',
+            padding: "2rem",
           },
         },
       },
@@ -96,28 +96,28 @@ const themeLight = createTheme(
         defaultProps: {
           disableElevation: true,
           sx: {
-            borderRadius: '.6rem',
+            borderRadius: ".6rem",
           },
         },
       },
       MuiToggleButtonGroup: {
         defaultProps: {
           sx: {
-            '& .MuiToggleButtonGroup-grouped': {
+            "& .MuiToggleButtonGroup-grouped": {
               margin: 0.7,
               padding: 0.5,
               border: 0,
-              '&.Mui-disabled': {
+              "&.Mui-disabled": {
                 border: 0,
               },
-              '&:not(:first-of-type)': {
+              "&:not(:first-of-type)": {
                 borderRadius: 0.6,
               },
-              '&:first-of-type': {
+              "&:first-of-type": {
                 borderRadius: 0.6,
               },
-              '& .Mui-selected': {
-                color: 'primary.main',
+              "& .Mui-selected": {
+                color: "primary.main",
               },
             },
           },
@@ -126,21 +126,21 @@ const themeLight = createTheme(
       MuiStep: {
         defaultProps: {
           sx: {
-            '& .MuiStepLabel-iconContainer': {
+            "& .MuiStepLabel-iconContainer": {
               paddingRight: 0,
-              border: 'solid 1px',
-              borderColor: 'divider',
-              borderRadius: '50%',
+              border: "solid 1px",
+              borderColor: "divider",
+              borderRadius: "50%",
             },
-            '& .MuiStepIcon-root': {
-              width: '1.5em',
-              height: '1.5em',
+            "& .MuiStepIcon-root": {
+              width: "1.5em",
+              height: "1.5em",
             },
-            '& .Mui-disabled .MuiStepIcon-root': {
-              color: 'white',
+            "& .Mui-disabled .MuiStepIcon-root": {
+              color: "white",
             },
-            '& .Mui-disabled .MuiStepIcon-text': {
-              fill: '#121C42',
+            "& .Mui-disabled .MuiStepIcon-text": {
+              fill: "#121C42",
             },
           },
         },
@@ -148,22 +148,22 @@ const themeLight = createTheme(
       MuiStepConnector: {
         defaultProps: {
           sx: {
-            '&.Mui-active': {
-              '& .MuiStepConnector-line': {
-                borderColor: 'primary.main',
-                borderStyle: 'solid',
+            "&.Mui-active": {
+              "& .MuiStepConnector-line": {
+                borderColor: "primary.main",
+                borderStyle: "solid",
               },
             },
-            '&.Mui-completed': {
-              '& .MuiStepConnector-line': {
-                borderColor: 'primary.main',
-                borderStyle: 'solid',
+            "&.Mui-completed": {
+              "& .MuiStepConnector-line": {
+                borderColor: "primary.main",
+                borderStyle: "solid",
               },
             },
-            '& .MuiStepConnector-line': {
-              borderColor: 'divider',
+            "& .MuiStepConnector-line": {
+              borderColor: "divider",
               borderWidth: 1,
-              borderStyle: 'dashed',
+              borderStyle: "dashed",
             },
           },
         },
@@ -171,22 +171,22 @@ const themeLight = createTheme(
       MuiMobileStepper: {
         defaultProps: {
           sx: {
-            backgroundColor: 'transparent',
-            border: 'none',
+            backgroundColor: "transparent",
+            border: "none",
           },
         },
       },
       MuiSnackbar: {
         defaultProps: {
           sx: {
-            position: 'unset',
+            position: "unset",
           },
         },
       },
       MuiList: {
         defaultProps: {
           sx: {
-            '&.MuiList-root': {
+            "&.MuiList-root": {
               padding: 0,
             },
           },
@@ -195,8 +195,8 @@ const themeLight = createTheme(
       MuiMenuItem: {
         defaultProps: {
           sx: {
-            '&.MuiMenuItem-root': {
-              minHeight: 'auto',
+            "&.MuiMenuItem-root": {
+              minHeight: "auto",
               margin: 0.7,
               borderRadius: 0.6,
             },
@@ -207,10 +207,10 @@ const themeLight = createTheme(
         variants: [
           {
             props: {
-              variant: 'selected',
+              variant: "selected",
             },
             style: {
-              border: `1.5px solid rgba(18, 28, 66, 0.5)`,
+              border: "1.5px solid rgba(18, 28, 66, 0.5)",
               // background: `rgba(224, 228, 239, 0.75)`,
             },
           },
@@ -230,13 +230,13 @@ const themeLight = createTheme(
     borders: {
       border: 1,
       borderRadius: 0.8,
-      borderColor: 'divider',
+      borderColor: "divider",
     },
     chartsTooltip: {
-      background: '#fff',
-      color: 'rgba(0, 0, 0, 0.87)',
+      background: "#fff",
+      color: "rgba(0, 0, 0, 0.87)",
     },
-  }
+  },
 );
 
 export default themeLight;

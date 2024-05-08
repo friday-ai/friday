@@ -1,9 +1,9 @@
-import { DeviceCapabilityAttributes, DeviceCapabilityRegisterAttributes } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import DeviceCapability from '../../models/device_capability';
-import DeviceClass from './device';
-import { BadParametersError } from '../../utils/decorators/error';
-import { exclude } from '../../utils/object';
+import logger from "@friday-ai/logger";
+import type { DeviceCapabilityAttributes, DeviceCapabilityRegisterAttributes } from "@friday-ai/shared";
+import DeviceCapability from "../../models/device_capability";
+import { BadParametersError } from "../../utils/decorators/error";
+import { exclude } from "../../utils/object";
+import type DeviceClass from "./device";
 
 /**
  * Device capability
@@ -13,10 +13,10 @@ import { exclude } from '../../utils/object';
 export default async function setCapability(
   this: DeviceClass,
   deviceId: string,
-  capability: DeviceCapabilityRegisterAttributes
+  capability: DeviceCapabilityRegisterAttributes,
 ): Promise<DeviceCapabilityAttributes> {
-  if (deviceId === '') {
-    throw new BadParametersError({ name: 'Friday set capability', message: 'Device id is empty', metadata: capability });
+  if (deviceId === "") {
+    throw new BadParametersError({ name: "Friday set capability", message: "Device id is empty", metadata: capability });
   }
 
   const deviceCapabilityObject = await DeviceCapability.create({

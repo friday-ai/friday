@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Trigger router
@@ -10,7 +10,7 @@ import Friday from '../../../core/friday';
  * @apiParam {AvailableConditions} type Type of the trigger.
  * @apiParam {JSON} rules Rules of the trigger.
  */
-@FridayRouter('/v1/trigger')
+@FridayRouter("/v1/trigger")
 export default class TriggerRouter {
   private readonly friday: Friday;
 
@@ -39,11 +39,11 @@ export default class TriggerRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'trigger',
+    aclMethod: "create",
+    aclResource: "trigger",
   })
   create = async (req: Request, res: Response) => {
     const trigger = await this.friday.trigger.create(req.body);
@@ -71,11 +71,11 @@ export default class TriggerRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'trigger',
+    aclMethod: "update",
+    aclResource: "trigger",
   })
   update = async (req: Request, res: Response) => {
     const trigger = await this.friday.trigger.update(req.params.id, req.body);
@@ -95,11 +95,11 @@ export default class TriggerRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'trigger',
+    aclMethod: "delete",
+    aclResource: "trigger",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.trigger.destroy(req.params.id);
@@ -128,11 +128,11 @@ export default class TriggerRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'trigger',
+    aclMethod: "read",
+    aclResource: "trigger",
   })
   listAll = async (req: Request, res: Response) => {
     const triggers = await this.friday.trigger.listAll(req.query);
@@ -159,11 +159,11 @@ export default class TriggerRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'trigger',
+    aclMethod: "read",
+    aclResource: "trigger",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;

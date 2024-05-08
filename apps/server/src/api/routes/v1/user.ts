@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
-import { FridayMode } from '../../../config/constants';
+import type { Request, Response } from "express";
+import { FridayMode } from "../../../config/constants";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * User router
@@ -14,7 +14,7 @@ import { FridayMode } from '../../../config/constants';
  * @apiParam {UserRole} [role] Role of the user
  * @apiParam {AvailableLanguages} [language] Language of the user
  */
-@FridayRouter('/v1/user')
+@FridayRouter("/v1/user")
 export default class UserRouter {
   private readonly friday: Friday;
 
@@ -40,11 +40,11 @@ export default class UserRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'user',
+    aclMethod: "create",
+    aclResource: "user",
   })
   create = async (req: Request, res: Response) => {
     const user = await this.friday.user.create(req.body);
@@ -69,11 +69,11 @@ export default class UserRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'user',
+    aclMethod: "update",
+    aclResource: "user",
   })
   update = async (req: Request, res: Response) => {
     const user = await this.friday.user.update(req.params.id, req.body);
@@ -93,11 +93,11 @@ export default class UserRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'user',
+    aclMethod: "delete",
+    aclResource: "user",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.user.destroy(req.params.id);
@@ -122,11 +122,11 @@ export default class UserRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'user',
+    aclMethod: "read",
+    aclResource: "user",
   })
   listAll = async (req: Request, res: Response) => {
     const users = await this.friday.user.listAll(req.query);
@@ -142,11 +142,11 @@ export default class UserRouter {
    * @apiVersion 1.0.0
    */
   @Get({
-    path: '/count',
+    path: "/count",
     authenticated: false,
     rateLimit: true,
-    aclMethod: 'read',
-    aclResource: 'user',
+    aclMethod: "read",
+    aclResource: "user",
   })
   getUsersCount = async (_: Request, res: Response) => {
     const count = await this.friday.user.count();
@@ -169,11 +169,11 @@ export default class UserRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'user',
+    aclMethod: "read",
+    aclResource: "user",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;
@@ -193,15 +193,15 @@ export default class UserRouter {
    * @apiVersion 1.0.0
    */
   @Post({
-    path: '/login',
+    path: "/login",
     authenticated: false,
     rateLimit: true,
-    aclMethod: 'login',
-    aclResource: 'user',
+    aclMethod: "login",
+    aclResource: "user",
   })
   login = async (req: Request, res: Response) => {
     const user = await this.friday.user.login(req.body.email, req.body.password);
-    const session = await this.friday.session.create(user, req.headers['user-agent']);
+    const session = await this.friday.session.create(user, req.headers["user-agent"]);
     res.status(201).json(session);
   };
 
@@ -209,11 +209,11 @@ export default class UserRouter {
    * Sign up a user
    */
   @Post({
-    path: '/signup',
+    path: "/signup",
     authenticated: false,
     rateLimit: true,
-    aclMethod: '',
-    aclResource: '',
+    aclMethod: "",
+    aclResource: "",
   })
   signup = async (req: Request, res: Response) => {
     // This route is only active at first start for security reasons

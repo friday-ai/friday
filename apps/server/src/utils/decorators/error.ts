@@ -1,11 +1,7 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-useless-constructor */
-/* eslint-disable max-classes-per-file */
-import { UniqueConstraintError, ValidationError } from 'sequelize';
-import { JsonWebTokenError, NotBeforeError, TokenExpiredError } from 'jsonwebtoken';
-import logger from '@friday-ai/logger';
-import { ErrorType } from '../interfaces';
+import logger from "@friday-ai/logger";
+import { JsonWebTokenError, NotBeforeError, TokenExpiredError } from "jsonwebtoken";
+import { UniqueConstraintError, ValidationError } from "sequelize";
+import type { ErrorType } from "../interfaces";
 
 //      ____                                        __                                          __     _     __
 //     / __ \  ___   _____  ____    _____  ____ _  / /_  ____    _____   _____         __  __  / /_   (_)   / /   _____
@@ -23,7 +19,7 @@ export class CoreError extends Error {
   public name: string;
   public message: string;
   public cause?: Error;
-  public metadata?: any;
+  public metadata?: unknown;
 
   constructor(err: ErrorType) {
     super(err.message);
@@ -39,77 +35,49 @@ export class CoreError extends Error {
  * @class AuthError
  * @extends {CoreError}
  */
-export class AuthError extends CoreError {
-  constructor(err: ErrorType) {
-    super(err);
-  }
-}
+export class AuthError extends CoreError {}
 
 /**
  * Unauthorized error class
  * @class UnauthorizedError
  * @extends {CoreError}
  */
-export class UnauthorizedError extends CoreError {
-  constructor(err: ErrorType) {
-    super(err);
-  }
-}
+export class UnauthorizedError extends CoreError {}
 
 /**
  * Not found error class
  * @class NotFoundError
  * @extends {CoreError}
  */
-export class NotFoundError extends CoreError {
-  constructor(err: ErrorType) {
-    super(err);
-  }
-}
+export class NotFoundError extends CoreError {}
 
 /**
  * Database unique constraint error class
  * @class DatabaseUniqueConstraintError
  * @extends {CoreError}
  */
-export class DatabaseUniqueConstraintError extends CoreError {
-  constructor(err: ErrorType) {
-    super(err);
-  }
-}
+export class DatabaseUniqueConstraintError extends CoreError {}
 
 /**
  * Database validation error class
  * @class DatabaseValidationError
  * @extends {CoreError}
  */
-export class DatabaseValidationError extends CoreError {
-  constructor(err: ErrorType) {
-    super(err);
-  }
-}
+export class DatabaseValidationError extends CoreError {}
 
 /**
  * Bad parameters error class
  * @class BadParametersError
  * @extends {CoreError}
  */
-export class BadParametersError extends CoreError {
-  constructor(err: ErrorType) {
-    super(err);
-  }
-}
+export class BadParametersError extends CoreError {}
 
 /**
  * Platform not compatible error class
  * @class PlatformNotCompatible
  * @extends {CoreError}
  */
-export class PlatformNotCompatible extends CoreError {
-  constructor(err: ErrorType) {
-    super(err);
-  }
-}
+export class PlatformNotCompatible extends CoreError {}
 
 /**
  * Create an error instance
@@ -149,18 +117,21 @@ export default function error(err: ErrorType): CoreError {
 //  /_____/  \___/ \___/  \____/ /_/     \__,_/  \__/  \____/ /_/     /____/         /_/     \__,_/  \___/  \__/  \____/ /_/     /_/   \___/ /____/
 //
 
+// biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
 export const Catch = () => (_: any, __: string, descriptor: PropertyDescriptor) => {
   // save a reference to the original method
   const originalMethod = descriptor.value;
 
   // rewrite original method with custom wrapper
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   descriptor.value = function f(...args: any[]) {
     try {
       const result = originalMethod.apply(this, args);
 
       // check if method is asynchronous
-      if (result && typeof result.then === 'function' && typeof result.catch === 'function') {
+      if (result && typeof result.then === "function" && typeof result.catch === "function") {
         // return promise
+        // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
         return result.catch((e: any) => {
           logger.error(e);
           throw error({

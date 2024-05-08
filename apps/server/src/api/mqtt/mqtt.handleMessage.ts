@@ -1,12 +1,12 @@
-import logger from '@friday-ai/logger';
-import { TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
+import logger from "@friday-ai/logger";
+import { TopicHeaderSub, TopicToSubscribe as Topics } from "../../config/constants";
 
-import error from '../../utils/decorators/error';
-import MqttServer from './index';
+import error from "../../utils/decorators/error";
+import type MqttServer from "./index";
 
 export default function handleMessage(this: MqttServer, topic: string, message: string) {
   try {
-    const finalTopic = topic.replace(TopicHeaderSub, '');
+    const finalTopic = topic.replace(TopicHeaderSub, "");
 
     if (Object.values(Topics).includes(finalTopic)) {
       logger.info(`Received message on topic ${topic} (${message})`);

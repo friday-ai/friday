@@ -1,15 +1,15 @@
-import { AllowNull, Column, DataType, Default, DefaultScope, IsUUID, Model, NotEmpty, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AllowNull, Column, DataType, Default, DefaultScope, IsUUID, Model, NotEmpty, PrimaryKey, Table, Unique } from "sequelize-typescript";
 
-import { ScriptAttributes, ScriptCreationAttributes } from '@friday-ai/shared';
+import type { ScriptAttributes, ScriptCreationAttributes } from "@friday-ai/shared";
 
 /**
  * Script model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'code'],
+  attributes: ["id", "name", "code"],
 }))
 @Table({
-  tableName: 'script',
+  tableName: "script",
   underscored: false,
 })
 export default class Script extends Model<ScriptAttributes, ScriptCreationAttributes> {
@@ -28,7 +28,7 @@ export default class Script extends Model<ScriptAttributes, ScriptCreationAttrib
   name!: string;
 
   @AllowNull(false)
-  @Default('')
+  @Default("")
   @Column(DataType.STRING)
   code!: string;
 }

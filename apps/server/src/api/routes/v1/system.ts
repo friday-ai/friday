@@ -1,14 +1,14 @@
-import { AvailableState, SatelliteAttributes } from '@friday-ai/shared';
-import { Request, Response } from 'express';
-import { FridayMode } from '../../../config/constants';
-import Friday from '../../../core/friday';
-import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
-import { encrypt } from '../../../utils/keyring';
+import { AvailableState, type SatelliteAttributes } from "@friday-ai/shared";
+import type { Request, Response } from "express";
+import { FridayMode } from "../../../config/constants";
+import type Friday from "../../../core/friday";
+import { FridayRouter, Get, Post } from "../../../utils/decorators/route";
+import { encrypt } from "../../../utils/keyring";
 
 /**
  * System router
  */
-@FridayRouter('/v1/system')
+@FridayRouter("/v1/system")
 export default class SystemRouter {
   private readonly friday: Friday;
 
@@ -30,11 +30,11 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'system',
+    aclMethod: "read",
+    aclResource: "system",
   })
   getVersion = async (_: Request, res: Response) => {
     const version = await this.friday.getVersion();
@@ -57,11 +57,11 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path: '/settings',
+    path: "/settings",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'system',
+    aclMethod: "read",
+    aclResource: "system",
   })
   getSettings = async (_: Request, res: Response) => {
     const settings = await this.friday.getSettings();
@@ -72,11 +72,11 @@ export default class SystemRouter {
    * Init Friday
    */
   @Post({
-    path: '/init',
+    path: "/init",
     authenticated: true,
     rateLimit: true,
-    aclMethod: 'read',
-    aclResource: 'system',
+    aclMethod: "read",
+    aclResource: "system",
   })
   init = async (_: Request, res: Response) => {
     // This route is only active at first start for security reasons
@@ -104,11 +104,11 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path: '/info',
+    path: "/info",
     authenticated: false,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'system',
+    aclMethod: "read",
+    aclResource: "system",
   })
   masterInfo = async (_: Request, res: Response) =>
     res.json({
@@ -130,19 +130,19 @@ export default class SystemRouter {
    * }
    */
   @Get({
-    path: '/mqtt/config',
+    path: "/mqtt/config",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'system',
+    aclMethod: "read",
+    aclResource: "system",
   })
   configMqtt = async (_: Request, res: Response) => {
-    const satellites = await this.friday.satellite.listAll({ scope: 'withState' });
+    const satellites = await this.friday.satellite.listAll({ scope: "withState" });
 
     const satellite = satellites.filter((s: SatelliteAttributes) => s.state.value === AvailableState.SATELLITE_WAITING_CONFIGURATION);
 
     if (satellite.length === 0) {
-      return res.status(404).json('Satellite is not configured !');
+      return res.status(404).json("Satellite is not configured !");
     }
 
     const satelliteId = satellite[0].id;

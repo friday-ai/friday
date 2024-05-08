@@ -1,4 +1,4 @@
-import { AnimatePresence, m, MotionStyle } from 'framer-motion';
+import { AnimatePresence, type MotionStyle, m } from "framer-motion";
 
 interface AnimationContainerProps {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ const variants = {
   },
 };
 
-export default function AnimationContainer({ children, id, style }: AnimationContainerProps) {
+export default function AnimationContainer({ children, id, style = { width: "100%" } }: AnimationContainerProps) {
   return (
     <AnimatePresence mode="wait">
       <m.div key={id} initial={variants.initial} animate={variants.animate} exit={variants.exit} transition={variants.transition} style={style}>
@@ -33,7 +33,3 @@ export default function AnimationContainer({ children, id, style }: AnimationCon
     </AnimatePresence>
   );
 }
-
-AnimationContainer.defaultProps = {
-  style: { width: '100%' },
-};

@@ -1,10 +1,10 @@
-import type { WhereOptions } from 'sequelize';
-import { Model, ModelCtor } from 'sequelize-typescript';
-import { Catch, NotFoundError } from '../decorators/error';
-import type { GetOptions } from '../interfaces';
+import type { WhereOptions } from "sequelize";
+import type { Model, ModelCtor } from "sequelize-typescript";
+import { Catch, NotFoundError } from "../decorators/error";
+import type { GetOptions } from "../interfaces";
 
 const DEFAULT_OPTIONS: GetOptions = {
-  scope: '',
+  scope: "",
   take: 20,
   skip: 0,
   order: [],
@@ -31,16 +31,16 @@ export abstract class PartialModel<M extends Model, T> implements PartialModelTy
 
   @Catch()
   async getById(identifier: string, scope?: string): Promise<T> {
-    let entity;
+    let entity: M | null;
 
-    if (scope !== '' && scope !== null && scope !== undefined) {
+    if (scope !== "" && scope !== null && scope !== undefined) {
       entity = await this.model.scope(scope).findByPk(identifier);
     } else {
       entity = await this.model.findByPk(identifier);
     }
 
     if (entity === null) {
-      throw new NotFoundError({ name: 'Friday get entity by id', message: 'Entity not found', metadata: identifier });
+      throw new NotFoundError({ name: "Friday get entity by id", message: "Entity not found", metadata: identifier });
     }
 
     return <T>entity.get({ plain: true });
@@ -50,9 +50,9 @@ export abstract class PartialModel<M extends Model, T> implements PartialModelTy
   async listAll(options?: GetOptions, where?: WhereOptions<T>): Promise<T[]> {
     const mergedOptions = { ...DEFAULT_OPTIONS, ...options };
 
-    let entities;
+    let entities: M[] | null;
 
-    if (mergedOptions.scope !== '' && mergedOptions.scope !== null && mergedOptions.scope !== undefined) {
+    if (mergedOptions.scope !== "" && mergedOptions.scope !== null && mergedOptions.scope !== undefined) {
       entities = await this.model.scope(mergedOptions.scope).findAll({
         limit: mergedOptions.take,
         offset: mergedOptions.skip,

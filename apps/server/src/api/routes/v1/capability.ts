@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Post } from '../../../utils/decorators/route';
+import type { Request, Response } from "express";
+import { FridayRouter, Post } from "../../../utils/decorators/route";
 
-import Friday from '../../../core/friday';
+import type Friday from "../../../core/friday";
 
 /**
  * Capability router
  */
-@FridayRouter('/v1/capability')
+@FridayRouter("/v1/capability")
 export default class ActionRouter {
   private readonly friday: Friday;
 
@@ -19,11 +19,11 @@ export default class ActionRouter {
    * @apiName setState
    */
   @Post({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'capability',
+    aclMethod: "update",
+    aclResource: "capability",
   })
   setState = async (req: Request, res: Response) => {
     this.friday.event.emit(req.body.action, { id: req.params.id, value: req.body.value });

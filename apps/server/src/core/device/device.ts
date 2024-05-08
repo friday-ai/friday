@@ -6,23 +6,23 @@ import type {
   DeviceCommand,
   DeviceCreationAttributes,
   DeviceRegisterAttributes,
-} from '@friday-ai/shared';
+} from "@friday-ai/shared";
 
-import { DeviceCreationKeys, DevicesActions } from '@friday-ai/shared';
+import { DeviceCreationKeys, type DevicesActions } from "@friday-ai/shared";
 
-import DeviceModel from '../../models/device';
-import BaseModel from '../../utils/database/model.base';
-import { Catch } from '../../utils/decorators/error';
-import EventClass from '../../utils/event';
+import DeviceModel from "../../models/device";
+import BaseModel from "../../utils/database/model.base";
+import { Catch } from "../../utils/decorators/error";
+import type EventClass from "../../utils/event";
 
-import exec from './device.exec';
-import getCapabilityById from './device.getCapabilityById';
-import register from './device.register';
-import setCapability from './device.setCapability';
-import setCapabilitySettings from './device.setCapabilitySettings';
-import setCapabilityState from './device.setCapabilityState';
+import exec from "./device.exec";
+import getCapabilityById from "./device.getCapabilityById";
+import register from "./device.register";
+import setCapability from "./device.setCapability";
+import setCapabilitySettings from "./device.setCapabilitySettings";
+import setCapabilityState from "./device.setCapabilityState";
 
-import capabilities from './capabilities';
+import capabilities from "./capabilities";
 
 /**
  * Device
@@ -34,17 +34,17 @@ export default class Device extends BaseModel<DeviceModel, DeviceAttributes, Dev
     super(DeviceModel, DeviceCreationKeys);
     this.event = event;
 
-    Object.values(capabilities).forEach((capability) => {
-      Object.keys(capability.options).forEach((key) => {
-        capability.options[key].actions.forEach((action: DevicesActions) => {
+    for (const capability of Object.values(capabilities)) {
+      for (const key of Object.keys(capability.options)) {
+        for (const action of capability.options[key].actions) {
           // Dynamically create type of capability
-          type capabilityType = Omit<typeof capability, 'options'>;
+          type capabilityType = Omit<typeof capability, "options">;
           const fn = capability[key as keyof capabilityType] as (...args: unknown[]) => void;
 
           this.event.on(action, (e) => fn.bind(this)(e));
-        });
-      });
-    });
+        }
+      }
+    }
   }
 
   @Catch()
@@ -58,7 +58,7 @@ export default class Device extends BaseModel<DeviceModel, DeviceAttributes, Dev
   }
 
   @Catch()
-  async getCapabilityById(id: string, scope = '') {
+  async getCapabilityById(id: string, scope = "") {
     return getCapabilityById.call(this, id, scope);
   }
 

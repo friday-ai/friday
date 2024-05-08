@@ -16,36 +16,36 @@ import {
   Scopes,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { AvailableLanguages, UserAttributes, UserCreationAttributes, UserRole } from '@friday-ai/shared';
-import { hash } from '../utils/password';
-import Session from './session';
-import State from './state';
-import Variable from './variable';
+import { AvailableLanguages, type UserAttributes, type UserCreationAttributes, UserRole } from "@friday-ai/shared";
+import { hash } from "../utils/password";
+import Session from "./session";
+import State from "./state";
+import Variable from "./variable";
 
 /**
  * User model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
+  attributes: ["id", "userName", "email", "theme", "role", "language"],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
+    attributes: ["id", "userName", "email", "theme", "role", "language"],
     include: [Variable, { model: State, where: { last: true } }],
   },
   withState: {
-    attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
+    attributes: ["id", "userName", "email", "theme", "role", "language"],
     include: [{ model: State, where: { last: true } }],
   },
   withVariables: {
-    attributes: ['id', 'userName', 'email', 'theme', 'role', 'language'],
+    attributes: ["id", "userName", "email", "theme", "role", "language"],
     include: [Variable],
   },
 }))
 @Table({
-  tableName: 'user',
+  tableName: "user",
   underscored: false,
 })
 export default class User extends Model<UserAttributes, UserCreationAttributes> {
@@ -90,19 +90,19 @@ export default class User extends Model<UserAttributes, UserCreationAttributes> 
   language!: AvailableLanguages;
 
   @HasMany(() => Variable, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   variables?: Variable[];
 
   @HasOne(() => State, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   state?: State;
 
   @HasMany(() => Session, {
-    foreignKey: 'userId',
+    foreignKey: "userId",
     constraints: false,
   })
   session?: Session[];

@@ -1,20 +1,20 @@
-import { Catch } from '../../utils/decorators/error';
-import SchedulerClass from '../../utils/scheduler';
-import HouseClass from '../house/house';
-import RoomClass from '../room/room';
-import SatelliteClass from '../satellite/satellite';
-import StateClass from '../state/state';
-import UserClass from '../user/user';
-import VariableClass from '../variable/variable';
+import { Catch } from "../../utils/decorators/error";
+import type SchedulerClass from "../../utils/scheduler";
+import type HouseClass from "../house/house";
+import type RoomClass from "../room/room";
+import type SatelliteClass from "../satellite/satellite";
+import type StateClass from "../state/state";
+import type UserClass from "../user/user";
+import type VariableClass from "../variable/variable";
 
-import getSettings from './system.getSettings';
-import getVersion from './system.getVersion';
-import init from './system.init';
-import saveVersion from './system.saveVersion';
-import shutdown from './system.shutdown';
-import start from './system.start';
+import getSettings from "./system.getSettings";
+import getVersion from "./system.getVersion";
+import init from "./system.init";
+import saveVersion from "./system.saveVersion";
+import shutdown from "./system.shutdown";
+import start from "./system.start";
 
-import * as DBType from '../../config/database';
+import type * as DBType from "../../config/database";
 
 /**
  * System
@@ -28,7 +28,7 @@ export default class System {
   public state: StateClass;
   public scheduler: SchedulerClass;
   public database: typeof DBType;
-  public env = process.env.NODE_ENV || 'production';
+  public env = process.env.NODE_ENV || "production";
 
   constructor(
     variable: VariableClass,
@@ -38,7 +38,7 @@ export default class System {
     user: UserClass,
     state: StateClass,
     scheduler: SchedulerClass,
-    database: typeof DBType
+    database: typeof DBType,
   ) {
     this.variable = variable;
     this.house = house;

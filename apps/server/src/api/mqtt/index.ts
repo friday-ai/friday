@@ -1,17 +1,18 @@
-import logger from '@friday-ai/logger';
-import { MqttOptions } from '@friday-ai/shared';
-import mqtt, { connect } from 'mqtt';
-import { EventsType, TopicHeaderSub, TopicToSubscribe as Topics } from '../../config/constants';
-import Friday from '../../core/friday';
-import handleMessage from './mqtt.handleMessage';
-import sendMessage from './mqtt.sendMessage';
+import logger from "@friday-ai/logger";
+import type { MqttOptions } from "@friday-ai/shared";
+import type mqtt from "mqtt";
+import { connect } from "mqtt";
+import { EventsType, TopicHeaderSub, TopicToSubscribe as Topics } from "../../config/constants";
+import type Friday from "../../core/friday";
+import handleMessage from "./mqtt.handleMessage";
+import sendMessage from "./mqtt.sendMessage";
 
-import MqttHandlers, { handlerFnType } from './handlers';
+import MqttHandlers, { type handlerFnType } from "./handlers";
 
 const defaultMqttOptions: MqttOptions = {
   port: 1883,
-  host: process.env.MQTT_HOST || 'localhost',
-  protocol: 'mqtt',
+  host: process.env.MQTT_HOST || "localhost",
+  protocol: "mqtt",
   reconnectPeriod: 5000,
 };
 
@@ -33,9 +34,9 @@ export default class MqttServer {
     this.friday.event.on(EventsType.MQTT_PUBLISH, (event) => this.sendMessage(event));
     this.friday.event.on(EventsType.MQTT_PUBLISH_ALL, (event) => this.sendMessage(event, { sendAll: true }));
 
-    Object.keys(MqttHandlers).forEach((topic) => {
+    for (const topic of Object.keys(MqttHandlers)) {
       this.handlers[topic] = MqttHandlers[topic];
-    });
+    }
   }
 
   async start(mqttOptions?: MqttOptions) {
@@ -43,27 +44,29 @@ export default class MqttServer {
 
     this.MqttClient = connect(options);
 
-    this.MqttClient.once('connect', () => {
+    this.MqttClient.once("connect", () => {
       this.friday.mqttSecret = options;
-      logger.info('Connected on mqtt broker');
+      logger.info("Connected on mqtt broker");
 
       logger.info("Subscribing to friday's topics... ");
-      Object.keys(Topics)
-        .filter((element) => Number.isNaN(Number(element)))
-        .forEach((topic) => {
+      for (const topic of Object.keys(Topics)) {
+        if (!Number.isNaN(Number(topic))) {
           this.MqttClient.subscribe(`${TopicHeaderSub}${topic}`);
-        });
+        }
+      }
 
-      this.MqttClient.on('message', (topic, message) => {
+      this.MqttClient.on("message", (topic, message) => {
         this.handleMessage(topic, message.toString());
       });
 
-      clearInterval(this.retryInterval!);
-      this.retryInterval = null;
+      if (this.retryInterval) {
+        clearInterval(this.retryInterval);
+        this.retryInterval = null;
+      }
     });
 
-    this.MqttClient.on('error', (_error) => {
-      logger.warning('Error while connecting to MQTT, trying reconnection');
+    this.MqttClient.on("error", (_error) => {
+      logger.warning("Error while connecting to MQTT, trying reconnection");
       this.retryTimes += 1;
     });
 
@@ -71,7 +74,7 @@ export default class MqttServer {
       // TODO: Send warning to front
       if (this.retryTimes >= 5) {
         this.stop();
-        logger.warning('MQTT max reconection limit, stop retry');
+        logger.warning("MQTT max reconection limit, stop retry");
       }
     });
 

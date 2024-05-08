@@ -1,6 +1,6 @@
-import { SatelliteAttributes } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import Friday from '../../../../core/friday';
+import logger from "@friday-ai/logger";
+import type { SatelliteAttributes } from "@friday-ai/shared";
+import type Friday from "../../../../core/friday";
 
 /*
  * @route('friday/master/satellite/discoverme')

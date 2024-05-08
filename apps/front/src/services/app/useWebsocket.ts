@@ -1,8 +1,8 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from "react";
 
-import { WebsocketMessageTypes, WebsocketPayload } from '@friday-ai/shared';
+import { WebsocketMessageTypes, type WebsocketPayload } from "@friday-ai/shared";
 
-const port = parseInt(import.meta.env.VITE_SERVER_PORT, 10) || 3000;
+const port = Number.parseInt(import.meta.env.VITE_SERVER_PORT, 10) || 3000;
 
 type Listener = (payload: WebsocketPayload) => void;
 type Handlers = Record<WebsocketMessageTypes, Listener[]>;
@@ -37,19 +37,21 @@ const useWebsocket = () => {
       ws.current.onmessage = (event) => {
         const data = JSON.parse(event.data) as WebsocketPayload;
         if (handlers[data.type] !== undefined) {
-          handlers[data.type].forEach((cb) => cb(data));
+          for (const cb of handlers[data.type]) {
+            cb(data);
+          }
         }
       };
 
       ws.current.onclose = (event) => {
-        if (event.reason === 'Auth failed') {
-          localStorage.removeItem('session');
-          localStorage.removeItem('i18nextLng');
-          throw Error('Auth failed');
+        if (event.reason === "Auth failed") {
+          localStorage.removeItem("session");
+          localStorage.removeItem("i18nextLng");
+          throw Error("Auth failed");
         }
 
         if (event.code === 1006) {
-          throw Error('Connection timeout');
+          throw Error("Connection timeout");
         }
       };
     },
@@ -67,7 +69,7 @@ const useWebsocket = () => {
       newHandlers[event].push(callback);
       setHandlers(newHandlers);
     },
-    [handlers, setHandlers],
+    [handlers],
   );
 
   const off = useCallback(
@@ -79,7 +81,7 @@ const useWebsocket = () => {
         setHandlers(newHandlers);
       }
     },
-    [handlers, setHandlers],
+    [handlers],
   );
 
   return { connect, on, off, send: ws.current?.send };

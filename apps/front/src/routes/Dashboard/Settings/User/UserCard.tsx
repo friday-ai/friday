@@ -1,13 +1,13 @@
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import { Avatar, Card, CardHeader, IconButton, Stack, Tooltip } from '@mui/material';
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import { Avatar, Card, CardHeader, IconButton, Stack, Tooltip } from "@mui/material";
 
-import NiceModal from '@ebay/nice-modal-react';
-import { UserAttributes, UserCreationAttributes, UserRole } from '@friday-ai/shared';
-import { useTranslation } from 'react-i18next';
-import Confirm from '../../../../components/Modal/Confirm';
-import useUser from '../../../../services/api/useUser';
+import NiceModal from "@ebay/nice-modal-react";
+import { type UserAttributes, type UserCreationAttributes, UserRole } from "@friday-ai/shared";
+import { useTranslation } from "react-i18next";
+import Confirm from "../../../../components/Modal/Confirm";
+import useUser from "../../../../services/api/useUser";
 
 interface UserCardProps {
   user: UserAttributes | UserCreationAttributes;
@@ -20,10 +20,10 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
   const { deleteUser } = useUser();
 
   const handleDeleteUser = async () => {
-    if ('id' in user) {
+    if ("id" in user) {
       NiceModal.show(Confirm, {
-        title: t('settings.user.areYouSure'),
-        content: `${t('settings.user.deleteMessage')} <b>${user.userName}</b>.`,
+        title: t("settings.user.areYouSure"),
+        content: `${t("settings.user.deleteMessage")} <b>${user.userName}</b>.`,
         onClose: async (confirm: boolean) => {
           if (confirm) {
             await deleteUser.mutateAsync(user.id);
@@ -34,7 +34,7 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
   };
 
   return (
-    <Card variant={selected ? 'selected' : 'outlined'} sx={{ minWidth: { xs: 250, md: 320, lg: 400 } }}>
+    <Card variant={selected ? "selected" : "outlined"} sx={{ minWidth: { xs: 250, md: 320, lg: 400 } }}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">
@@ -47,12 +47,12 @@ export default function UserCard({ user, selected, selectUser }: UserCardProps) 
         subheaderTypographyProps={{ noWrap: true, width: { xs: 60, sm: 90, md: 120, lg: 200 } }}
         action={
           <Stack direction="row">
-            <Tooltip title={t('settings.user.select')}>
-              <IconButton aria-label="select user" onClick={() => selectUser('id' in user ? user.id : 'newUser')}>
+            <Tooltip title={t("settings.user.select")}>
+              <IconButton aria-label="select user" onClick={() => selectUser("id" in user ? user.id : "newUser")}>
                 <EditNoteOutlinedIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title={t('settings.user.delete')}>
+            <Tooltip title={t("settings.user.delete")}>
               <span>
                 <IconButton aria-label="delete user" onClick={handleDeleteUser} disabled={user.role === UserRole.SUPERADMIN}>
                   <DeleteOutlineOutlinedIcon />

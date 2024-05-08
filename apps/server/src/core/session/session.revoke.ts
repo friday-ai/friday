@@ -1,6 +1,6 @@
-import { SessionAttributes } from '@friday-ai/shared';
-import Session from '../../models/session';
-import { BadParametersError, NotFoundError } from '../../utils/decorators/error';
+import type { SessionAttributes } from "@friday-ai/shared";
+import Session from "../../models/session";
+import { BadParametersError, NotFoundError } from "../../utils/decorators/error";
 
 /**
  * Revoke an session.
@@ -12,8 +12,8 @@ import { BadParametersError, NotFoundError } from '../../utils/decorators/error'
  * ````
  */
 export default async function revoke(sessionId: string): Promise<SessionAttributes> {
-  if (sessionId === '' || sessionId === null || sessionId === undefined) {
-    throw new BadParametersError({ name: 'Revoke an Session', message: 'Incorrect params', metadata: { sessionId } });
+  if (sessionId === "" || sessionId === null || sessionId === undefined) {
+    throw new BadParametersError({ name: "Revoke an Session", message: "Incorrect params", metadata: { sessionId } });
   }
 
   const session = await Session.findOne({
@@ -23,7 +23,7 @@ export default async function revoke(sessionId: string): Promise<SessionAttribut
   });
 
   if (session === null) {
-    throw new NotFoundError({ name: 'Revoke an Session', message: 'Session not found', metadata: { sessionId } });
+    throw new NotFoundError({ name: "Revoke an Session", message: "Session not found", metadata: { sessionId } });
   }
 
   session.revoked = true;

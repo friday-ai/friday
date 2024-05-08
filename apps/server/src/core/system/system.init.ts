@@ -1,7 +1,7 @@
-import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from '@friday-ai/shared';
-import System from './system';
-import { CoreError } from '../../utils/decorators/error';
-import { version as packageVersion } from '../../../package.json';
+import { AvailableState, StateOwner, SystemVariablesNames, VariableOwner } from "@friday-ai/shared";
+import { version as packageVersion } from "../../../package.json";
+import { CoreError } from "../../utils/decorators/error";
+import type System from "./system";
 
 /**
  * Function to create necessary elements in database at first run of Friday system
@@ -9,13 +9,13 @@ import { version as packageVersion } from '../../../package.json';
 export default async function init(this: System): Promise<string> {
   // Find id of master
   const satellites = await this.satellite.listAll();
-  let master = satellites.filter((s) => s.name === 'Master')[0];
+  let master = satellites.filter((s) => s.name === "Master")[0];
 
   // If is first start, master does not exist
   if (!master) {
     // So create it
     const room = await this.room.listAll({ take: 1 });
-    master = await this.satellite.create({ name: 'Master', roomId: room[0].id, lastHeartbeat: new Date() });
+    master = await this.satellite.create({ name: "Master", roomId: room[0].id, lastHeartbeat: new Date() });
 
     // Create state of Master
     await this.state.set({
@@ -38,5 +38,5 @@ export default async function init(this: System): Promise<string> {
 
     return master.id;
   }
-  throw new CoreError({ name: 'Friday init error', message: 'Master satellite already exists' });
+  throw new CoreError({ name: "Friday init error", message: "Master satellite already exists" });
 }

@@ -1,5 +1,5 @@
-import Docker from '../index';
-import { NotFoundError, PlatformNotCompatible } from '../utils/error';
+import type Docker from "../index";
+import { NotFoundError, PlatformNotCompatible } from "../utils/error";
 
 /**
  * Get a container's state.
@@ -9,13 +9,23 @@ import { NotFoundError, PlatformNotCompatible } from '../utils/error';
  */
 export default async function getContainerState(this: Docker, id: string): Promise<string> {
   if (!this.dockerode) {
-    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'App not running on Docker' });
+    throw new PlatformNotCompatible({
+      name: "Platform not compatible",
+      message: "App not running on Docker",
+    });
   }
 
   // Check if container exist without throwing an error type 404
-  const containers = await this.dockerode.listContainers({ all: true, filters: { id: [id] } });
+  const containers = await this.dockerode.listContainers({
+    all: true,
+    filters: { id: [id] },
+  });
   if (containers.length === 0) {
-    throw new NotFoundError({ name: 'Get Container by id', message: 'Container not found', metadata: id });
+    throw new NotFoundError({
+      name: "Get Container by id",
+      message: "Container not found",
+      metadata: id,
+    });
   }
 
   // If container exist, get manually his instance

@@ -1,13 +1,11 @@
 {
   "name": "@friday-ai/logger",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Friday: Log manager",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
   "typings": "lib/index.d.ts",
-  "files": [
-    "lib/"
-  ],
+  "files": ["lib/"],
   "keywords": [],
   "author": "Mathieu Andrade",
   "license": "MIT",
@@ -16,15 +14,14 @@
     "build": "tsup",
     "build:packages": "tsup",
     "build:logger": "tsup",
-    "lint": "eslint --ext .ts,.tsx ./src",
-    "lint:fix": "eslint --ext .ts,.tsx --fix ./src"
+    "lint": "biome check --apply ./src"
   },
-  "prettier": "@friday-ai/tools/configs/prettier.config.js",
   "peerDependencies": {
     "@types/node": "^20.11.17",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.7.2",
     "@friday-ai/tools": "workspace:^",
     "tsup": "^8.0.2"
   },

@@ -1,8 +1,8 @@
-import Container from '@mui/material/Container';
-import Paper from '@mui/material/Paper';
-import { Outlet } from 'react-router-dom';
+import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
+import { Outlet } from "react-router-dom";
 
-import AppBar from '../AppBar/AppBar';
+import AppBar from "../AppBar/AppBar";
 
 export default function DashboardLayout() {
   return (
@@ -10,7 +10,7 @@ export default function DashboardLayout() {
       <AppBar />
       <Container sx={{ padding: 2, paddingTop: 2 }}>
         <Outlet />
-        <Paper className="primary-gradient"></Paper>
+        <Paper className="primary-gradient" />
       </Container>
     </Container>
   );

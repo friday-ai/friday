@@ -1,6 +1,6 @@
-import logger from '@friday-ai/logger';
-import { AvailableState, EventsType, StateOwner, WebsocketMessageTypes } from '@friday-ai/shared';
-import PluginClass from './plugin';
+import logger from "@friday-ai/logger";
+import { AvailableState, EventsType, StateOwner, WebsocketMessageTypes } from "@friday-ai/shared";
+import type PluginClass from "./plugin";
 
 /**
  * Stop a plugin.
@@ -30,8 +30,8 @@ export default async function stop(this: PluginClass, id: string): Promise<boole
 
     return true;
   } catch (error) {
-    if (error.message.includes('Container not found')) {
-      logger.warning('Container not exist');
+    if (error.message.includes("Container not found")) {
+      logger.warning("Container not exist");
 
       await this.state.set({
         owner: id,
@@ -48,8 +48,8 @@ export default async function stop(this: PluginClass, id: string): Promise<boole
       return false;
     }
 
-    if (error.message.includes('container already stopped')) {
-      logger.warning('Container already stopped');
+    if (error.message.includes("container already stopped")) {
+      logger.warning("Container already stopped");
 
       await this.state.set({
         owner: id,

@@ -1,10 +1,10 @@
-import { QueryInterface } from 'sequelize';
-import { DataType } from 'sequelize-typescript';
+import type { QueryInterface } from "sequelize";
+import { DataType } from "sequelize-typescript";
 
 export default {
-  name: '20200823171918-create-trigger',
+  name: "20200823171918-create-trigger",
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
-    await queryInterface.createTable('trigger', {
+    await queryInterface.createTable("trigger", {
       id: {
         unique: true,
         allowNull: false,
@@ -38,5 +38,5 @@ export default {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('trigger'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable("trigger"),
 };

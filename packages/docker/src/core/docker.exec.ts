@@ -1,6 +1,6 @@
-import { ExecCreateOptions } from 'dockerode';
-import Docker from '../index';
-import { PlatformNotCompatible } from '../utils/error';
+import type { ExecCreateOptions } from "dockerode";
+import type Docker from "../index";
+import { PlatformNotCompatible } from "../utils/error";
 
 /**
  * Execute a command in a container image.
@@ -11,7 +11,10 @@ import { PlatformNotCompatible } from '../utils/error';
  */
 export default async function exec(this: Docker, id: string, options: ExecCreateOptions): Promise<boolean> {
   if (!this.dockerode) {
-    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'App not running on Docker' });
+    throw new PlatformNotCompatible({
+      name: "Platform not compatible",
+      message: "App not running on Docker",
+    });
   }
 
   const container = await this.getContainer(id);

@@ -1,22 +1,21 @@
-import { assert, expect } from 'chai';
-import Dockerode, { Container } from 'dockerode';
-import Docker from '../../src/index';
-import { NotFoundError, PlatformNotCompatible } from '../../src/utils/error';
+import { assert, expect } from "chai";
+import Dockerode, { type Container } from "dockerode";
+import type Docker from "../../src/index";
+import { NotFoundError, PlatformNotCompatible } from "../../src/utils/error";
 
 let docker: Docker;
 let container: Container;
 
-describe('Docker.exec', () => {
-  before(async () => {
+describe("Docker.exec", () => {
+  before(async function before() {
+    this.timeout(15000);
+
     docker = global.DOCKER;
     // Override object for tests
     docker.dockerode = new Dockerode();
-  });
 
-  before(async function before() {
-    this.timeout(15000);
     container = await docker.createContainer({
-      Image: 'alpine',
+      Image: "alpine",
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
@@ -35,21 +34,21 @@ describe('Docker.exec', () => {
     await container.remove();
   });
 
-  it('should run exec on container', async function run() {
+  it("should run exec on container", async function run() {
     this.timeout(30000);
-    const promise = await docker.exec(container.id, { Cmd: ['echo', 'foo'] });
+    const promise = await docker.exec(container.id, { Cmd: ["echo", "foo"] });
     expect(promise).to.equal(true);
   });
 
-  it('should not run exec on container', async () => {
-    const promise = docker.exec('71501a8ab0f8', { Cmd: ['echo', 'foo'] });
+  it("should not run exec on container", async () => {
+    const promise = docker.exec("71501a8ab0f8", { Cmd: ["echo", "foo"] });
     await assert.isRejected(promise, NotFoundError);
   });
 
-  it('should not run exec on container', async () => {
+  it("should not run exec on container", async () => {
     // Override object to force throw for tests
     docker.dockerode = null;
-    const promise = docker.exec(container.id, { Cmd: ['echo', 'foo'] });
+    const promise = docker.exec(container.id, { Cmd: ["echo", "foo"] });
     await assert.isRejected(promise, PlatformNotCompatible);
   });
 });

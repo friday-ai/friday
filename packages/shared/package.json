@@ -1,13 +1,11 @@
 {
   "name": "@friday-ai/shared",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Friday: Shared utilites",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
   "typings": "lib/index.d.ts",
-  "files": [
-    "lib/"
-  ],
+  "files": ["lib/"],
   "author": "Mathieu Andrade",
   "license": "MIT",
   "scripts": {
@@ -15,16 +13,14 @@
     "build": "tsup",
     "build:packages": "tsup",
     "build:shared": "tsup",
-    "type": "tsc src/index.ts --declaration --emitDeclarationOnly --skipLibCheck --esModuleInterop --outFile lib/types.d.ts",
-    "lint": "eslint --ext .ts,.tsx ./src",
-    "lint:fix": "eslint --ext .ts,.tsx --fix ./src"
+    "lint": "biome check --apply ./src"
   },
-  "prettier": "@friday-ai/tools/configs/prettier.config.js",
   "peerDependencies": {
     "@types/node": "^20.11.16",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.7.2",
     "@friday-ai/tools": "workspace:^",
     "tsup": "^8.0.2"
   }

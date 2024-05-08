@@ -15,12 +15,15 @@ jobs:
   lint:
     name: Lint project
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     strategy:
       matrix:
         workdir: [/apps/server, /apps/front, /packages/docker, /packages/logger, /packages/shared]
     steps:
       - name: ⬇️ Checkout project code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: 📦 Prepare environment
         uses: ./.github/actions/prepare-env
@@ -28,11 +31,8 @@ jobs:
           build: true
           build-only-packages: true
 
-      - name: 📝 ESLint check
-        uses: reviewdog/action-eslint@v1
+      - name: 📝 Linter check
+        uses: mongolyy/reviewdog-action-biome@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: "github-pr-review"
-          fail_on_error: true
-          eslint_flags: "--ext .js,.jsx,.ts,.tsx ./"
-          workdir: ${{ matrix.workdir }}
+          biome_flags: ${{ matrix.workdir }}

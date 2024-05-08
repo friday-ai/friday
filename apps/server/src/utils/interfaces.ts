@@ -1,6 +1,6 @@
-import { DevicesActions, WebsocketMessageTypes } from '@friday-ai/shared';
-import { Order } from 'sequelize';
-import { EventsType, MqttMessageTypes, TopicsTypes } from '../config/constants';
+import type { DevicesActions, WebsocketMessageTypes } from "@friday-ai/shared";
+import type { Order } from "sequelize";
+import type { EventsType, MqttMessageTypes, TopicsTypes } from "../config/constants";
 
 /**
  * Options for core functions type 'getAll'

@@ -1,10 +1,10 @@
-import { VariableAttributes, VariableCreationAttributes, VariableCreationKeys } from '@friday-ai/shared';
-import BaseModel from '../../utils/database/model.base';
-import VariableModel from '../../models/variable';
-import { Catch } from '../../utils/decorators/error';
+import { type VariableAttributes, type VariableCreationAttributes, VariableCreationKeys } from "@friday-ai/shared";
+import VariableModel from "../../models/variable";
+import BaseModel from "../../utils/database/model.base";
+import { Catch } from "../../utils/decorators/error";
 
-import update from './variable.update';
-import getValue from './variable.getValue';
+import getValue from "./variable.getValue";
+import update from "./variable.update";
 
 /**
  * Variable

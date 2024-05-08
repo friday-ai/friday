@@ -1,6 +1,6 @@
-import { VariableAttributes } from '@friday-ai/shared';
-import Variable from '../../models/variable';
-import { BadParametersError, NotFoundError } from '../../utils/decorators/error';
+import type { VariableAttributes } from "@friday-ai/shared";
+import Variable from "../../models/variable";
+import { BadParametersError, NotFoundError } from "../../utils/decorators/error";
 
 /**
  * Update a variable.
@@ -17,8 +17,8 @@ import { BadParametersError, NotFoundError } from '../../utils/decorators/error'
  * ````
  */
 export default async function update(idOrKey: string, data: Partial<VariableAttributes>): Promise<VariableAttributes> {
-  if (!idOrKey || idOrKey === '') {
-    throw new BadParametersError({ name: 'Update an Variable', message: "Variable's id or key must be specified", metadata: data });
+  if (!idOrKey || idOrKey === "") {
+    throw new BadParametersError({ name: "Update an Variable", message: "Variable's id or key must be specified", metadata: data });
   }
 
   let variable = await Variable.findByPk(idOrKey);
@@ -33,7 +33,7 @@ export default async function update(idOrKey: string, data: Partial<VariableAttr
   }
 
   if (variable === null) {
-    throw new NotFoundError({ name: 'Update an Variable', message: 'Variable not found', metadata: data });
+    throw new NotFoundError({ name: "Update an Variable", message: "Variable not found", metadata: data });
   }
 
   await variable.update(data);

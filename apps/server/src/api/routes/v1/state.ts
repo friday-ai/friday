@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Get, Post } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { FridayRouter, Get, Post } from "../../../utils/decorators/route";
 
 /**
  * State router
@@ -9,7 +9,7 @@ import Friday from '../../../core/friday';
  * @apiParam {StateOwner} owner Type The type of owner of the state.
  * @apiParam {AvailableState} value Value of the state.
  */
-@FridayRouter('/v1/state')
+@FridayRouter("/v1/state")
 export default class StateRouter {
   private readonly friday: Friday;
 
@@ -34,11 +34,11 @@ export default class StateRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'state',
+    aclMethod: "create",
+    aclResource: "state",
   })
   create = async (req: Request, res: Response) => {
     const state = await this.friday.state.set(req.body);
@@ -61,11 +61,11 @@ export default class StateRouter {
    * }
    */
   @Get({
-    path: '/:owner',
+    path: "/:owner",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'state',
+    aclMethod: "read",
+    aclResource: "state",
   })
   getByOwner = async (req: Request, res: Response) => {
     const state = await this.friday.state.getByOwner(req.params.owner);

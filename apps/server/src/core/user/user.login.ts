@@ -1,9 +1,9 @@
-import { SessionCredentials, UserAttributes } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import User from '../../models/user';
-import { AuthError, NotFoundError } from '../../utils/decorators/error';
-import { compare } from '../../utils/password';
-import { exclude } from '../../utils/object';
+import logger from "@friday-ai/logger";
+import type { SessionCredentials, UserAttributes } from "@friday-ai/shared";
+import User from "../../models/user";
+import { AuthError, NotFoundError } from "../../utils/decorators/error";
+import { exclude } from "../../utils/object";
+import { compare } from "../../utils/password";
 
 /**
  * User login
@@ -20,18 +20,18 @@ export default async function login(email: string, password: string): Promise<Se
     where: {
       email,
     },
-    attributes: ['password'],
+    attributes: ["password"],
   });
 
   if (user === null) {
-    throw new NotFoundError({ name: 'User login', message: 'User not found', metadata: email });
+    throw new NotFoundError({ name: "User login", message: "User not found", metadata: email });
   }
 
   const userToReturn = <UserAttributes>user.get({ plain: true });
   const passwordMatches = await compare(password, userToReturn.password);
 
   if (!passwordMatches) {
-    throw new AuthError({ name: 'User login', message: 'Password not matches.', metadata: email });
+    throw new AuthError({ name: "User login", message: "Password not matches.", metadata: email });
   }
 
   logger.success(`User ${user.userName} logged in`);

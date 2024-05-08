@@ -1,14 +1,14 @@
-import type { SessionAttributes, SessionCredentials } from '@friday-ai/shared';
-import SessionModel from '../../models/session';
-import { PartialModel } from '../../utils/database/model.partial';
-import { Catch } from '../../utils/decorators/error';
+import type { SessionAttributes, SessionCredentials } from "@friday-ai/shared";
+import SessionModel from "../../models/session";
+import { PartialModel } from "../../utils/database/model.partial";
+import { Catch } from "../../utils/decorators/error";
 
-import type { GetOptions } from '../../utils/interfaces';
-import create from './session.create';
-import getAccessToken from './session.getAccessToken';
-import revoke from './session.revoke';
-import validateAccessToken from './session.validateAccessToken';
-import validateRefreshToken from './session.validateRefreshToken';
+import type { GetOptions } from "../../utils/interfaces";
+import create from "./session.create";
+import getAccessToken from "./session.getAccessToken";
+import revoke from "./session.revoke";
+import validateAccessToken from "./session.validateAccessToken";
+import validateRefreshToken from "./session.validateRefreshToken";
 
 /**
  * Session

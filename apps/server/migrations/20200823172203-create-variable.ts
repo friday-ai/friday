@@ -1,10 +1,10 @@
-import { QueryInterface } from 'sequelize';
-import { DataType } from 'sequelize-typescript';
+import type { QueryInterface } from "sequelize";
+import { DataType } from "sequelize-typescript";
 
 export default {
-  name: '20200823172203-create-variable',
+  name: "20200823172203-create-variable",
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
-    await queryInterface.createTable('variable', {
+    await queryInterface.createTable("variable", {
       id: {
         unique: true,
         allowNull: false,
@@ -38,5 +38,5 @@ export default {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('variable'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable("variable"),
 };

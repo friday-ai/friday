@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-import AnimationLayout from '../App/AnimationLayout';
-import LoaderLayout from './LoaderLayout';
+import AnimationLayout from "../App/AnimationLayout";
+import LoaderLayout from "./LoaderLayout";
 
 interface Props {
   isFetching: boolean;
@@ -13,17 +13,19 @@ export default function LoaderSuspense({ isFetching, children }: Props) {
   const [timeoutExceeded, setTimeoutExceeded] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setMinimumLoadingTimeExpired(true);
-    }, 1000);
+    if (isFetching) {
+      setTimeout(() => {
+        setMinimumLoadingTimeExpired(true);
+      }, 1000);
 
-    setTimeout(() => {
-      setTimeoutExceeded(true);
-    }, 10000);
+      setTimeout(() => {
+        setTimeoutExceeded(true);
+      }, 10000);
+    }
   }, [isFetching]);
 
   if (timeoutExceeded && isFetching) {
-    throw Error('Connection timeout');
+    throw Error("Connection timeout");
   }
 
   if (!minimumLoadingTimeExpired && isFetching) {

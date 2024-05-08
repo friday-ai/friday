@@ -1,6 +1,6 @@
-import { PluginAttributes } from '@friday-ai/shared';
-import logger from '@friday-ai/logger';
-import Friday from '../../../../core/friday';
+import logger from "@friday-ai/logger";
+import type { PluginAttributes } from "@friday-ai/shared";
+import type Friday from "../../../../core/friday";
 
 /*
  * @route('friday/master/plugin/discoverme')

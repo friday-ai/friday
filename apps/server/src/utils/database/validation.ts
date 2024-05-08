@@ -1,8 +1,7 @@
-/* eslint-disable import/prefer-default-export */
-import promise from 'bluebird';
-import { NotFoundError } from '../decorators/error';
+import promise from "bluebird";
+import { NotFoundError } from "../decorators/error";
 
-import { modelsObj } from '../../models/index';
+import { modelsObj } from "../../models/index";
 
 const callLater = () =>
   new Promise((resolve) => {
@@ -20,6 +19,6 @@ export const isOwnerExisting = async (id: string, owners: Array<string>): Promis
   await promise.mapSeries(models, (model) => callLater().then(async () => result.push(await model.findByPk(id))));
 
   if (result.every((element) => element === null)) {
-    throw new NotFoundError({ name: 'Test if owner exist', message: 'Owner not found', metadata: id });
+    throw new NotFoundError({ name: "Test if owner exist", message: "Owner not found", metadata: id });
   }
 };

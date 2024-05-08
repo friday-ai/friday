@@ -1,5 +1,5 @@
-import logger from '@friday-ai/logger';
-import Friday from '../../../../core/friday';
+import logger from "@friday-ai/logger";
+import type Friday from "../../../../core/friday";
 
 /*
  * @route('friday/master/plugin/heartbeat')

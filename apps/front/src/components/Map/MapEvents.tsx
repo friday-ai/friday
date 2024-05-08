@@ -1,7 +1,7 @@
-import { useMapEvents } from 'react-leaflet';
+import { useMapEvents } from "react-leaflet";
 
-import { LeafletMouseEvent } from 'leaflet';
-import { round } from '../../utils/number';
+import type { LeafletMouseEvent } from "leaflet";
+import { round } from "../../utils/number";
 
 interface MapEventsProps {
   onClick: (latitude: number, longitude: number) => void;

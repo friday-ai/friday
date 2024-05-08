@@ -1,6 +1,6 @@
-import { Container, ContainerCreateOptions } from 'dockerode';
-import Docker from '../index';
-import { PlatformNotCompatible } from '../utils/error';
+import type { Container, ContainerCreateOptions } from "dockerode";
+import type Docker from "../index";
+import { PlatformNotCompatible } from "../utils/error";
 
 /**
  * Create a container.
@@ -11,12 +11,12 @@ import { PlatformNotCompatible } from '../utils/error';
  */
 export default async function createContainer(this: Docker, options: ContainerCreateOptions): Promise<Container> {
   if (!this.dockerode) {
-    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'App not running on Docker' });
+    throw new PlatformNotCompatible({ name: "Platform not compatible", message: "App not running on Docker" });
   }
 
   // TODO: Improve this error handling
-  if (options.Image === undefined || options.Image === '') {
-    throw new Error('Image name is required');
+  if (options.Image === undefined || options.Image === "") {
+    throw new Error("Image name is required");
   }
 
   const availableImages = await this.dockerode.listImages({ all: true });

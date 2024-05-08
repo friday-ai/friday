@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import type { Options } from 'tsup';
 
 export const tsup: Options = {

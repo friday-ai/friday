@@ -1,5 +1,5 @@
-import { m } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { m } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 const pageVariants = {
   initial: {
@@ -14,8 +14,8 @@ const pageVariants = {
 };
 
 const pageTransition = {
-  type: 'tween',
-  ease: 'linear',
+  type: "tween",
+  ease: "linear",
   duration: 0.5,
 };
 

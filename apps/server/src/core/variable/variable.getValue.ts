@@ -1,6 +1,6 @@
-import { VariableAttributes } from '@friday-ai/shared';
-import Variable from '../../models/variable';
-import { BadParametersError, NotFoundError } from '../../utils/decorators/error';
+import type { VariableAttributes } from "@friday-ai/shared";
+import Variable from "../../models/variable";
+import { BadParametersError, NotFoundError } from "../../utils/decorators/error";
 
 /**
  * Get a variable value by key.
@@ -12,8 +12,8 @@ import { BadParametersError, NotFoundError } from '../../utils/decorators/error'
  * ````
  */
 export default async function getValue(key: string): Promise<VariableAttributes> {
-  if (key === '') {
-    throw new BadParametersError({ name: 'Get value of an Variable', message: "Variable's key can not be empty", metadata: key });
+  if (key === "") {
+    throw new BadParametersError({ name: "Get value of an Variable", message: "Variable's key can not be empty", metadata: key });
   }
 
   const variable = await Variable.findOne({
@@ -23,7 +23,7 @@ export default async function getValue(key: string): Promise<VariableAttributes>
   });
 
   if (variable === null) {
-    throw new NotFoundError({ name: 'Get value of an Variable', message: 'Variable not found', metadata: key });
+    throw new NotFoundError({ name: "Get value of an Variable", message: "Variable not found", metadata: key });
   }
 
   return <VariableAttributes>variable.get({ plain: true });

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 interface CountdownProps {
   start: boolean;
@@ -9,12 +9,12 @@ export default function Countdown({ start, count }: CountdownProps) {
   useEffect(() => {
     if (start) {
       let counter = count;
-      const style = document.getElementById('countdown')?.style;
-      style?.setProperty('--value', counter.toString());
+      const style = document.getElementById("countdown")?.style;
+      style?.setProperty("--value", counter.toString());
       setInterval(() => {
         if (counter > 0) {
           counter -= 1;
-          style?.setProperty('--value', counter.toString());
+          style?.setProperty("--value", counter.toString());
         }
       }, 1000);
     }

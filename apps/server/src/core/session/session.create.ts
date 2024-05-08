@@ -1,7 +1,7 @@
-import { SessionAttributes, SessionCreationAttributes, SessionCredentials } from '@friday-ai/shared';
-import Session from '../../models/session';
-import SessionClass from './session';
-import { generateRefreshToken, generateAccessToken } from '../../utils/jwt';
+import type { SessionAttributes, SessionCreationAttributes, SessionCredentials } from "@friday-ai/shared";
+import Session from "../../models/session";
+import { generateAccessToken, generateRefreshToken } from "../../utils/jwt";
+import type SessionClass from "./session";
 
 /**
  * Create a session.
@@ -24,7 +24,7 @@ export default async function create(this: SessionClass, user: SessionCredential
     refreshToken: refreshTokenHash,
     validUntil: new Date(Date.now() + refreshTokenValidity * 1000),
     userId: user.id,
-    userAgent: userAgent || '',
+    userAgent: userAgent || "",
     revoked: false,
   };
 

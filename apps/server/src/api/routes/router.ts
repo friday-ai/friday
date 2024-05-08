@@ -1,16 +1,16 @@
-import { RequestHandler, Router } from 'express';
-import 'reflect-metadata';
+import { type RequestHandler, Router } from "express";
+import "reflect-metadata";
 
-import Friday from '../../core/friday';
-import { RouteDefinition } from '../../utils/decorators/route';
-import aclMiddleware from '../middlewares/aclMiddleware';
-import asyncMiddleware from '../middlewares/asyncMiddleware';
-import authMiddleware from '../middlewares/authMiddleware';
-import rateLimitMiddleware from '../middlewares/rateLimitMiddleware';
+import type Friday from "../../core/friday";
+import type { RouteDefinition } from "../../utils/decorators/route";
+import aclMiddleware from "../middlewares/aclMiddleware";
+import asyncMiddleware from "../middlewares/asyncMiddleware";
+import authMiddleware from "../middlewares/authMiddleware";
+import rateLimitMiddleware from "../middlewares/rateLimitMiddleware";
 
-import routersV1 from './v1/index';
+import routersV1 from "./v1/index";
 
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || "production";
 
 /**
  * Express router
@@ -23,12 +23,12 @@ const env = process.env.NODE_ENV || 'production';
 export default function router(friday: Friday): Router {
   const routerObject = Router();
 
-  routersV1.forEach((RouterClass) => {
+  for (const RouterClass of routersV1) {
     const instance = new RouterClass(friday);
-    const prefix = Reflect.getMetadata('prefix', RouterClass);
-    const routes = <RouteDefinition[]>Reflect.getMetadata('routes', RouterClass);
+    const prefix = Reflect.getMetadata("prefix", RouterClass);
+    const routes = <RouteDefinition[]>Reflect.getMetadata("routes", RouterClass);
 
-    routes.forEach((route) => {
+    for (const route of routes) {
       const routerParams = [];
 
       // if the route is marked as authenticated
@@ -38,7 +38,7 @@ export default function router(friday: Friday): Router {
         routerParams.push(aclMiddleware(route.aclMethod, route.aclResource));
       }
       // if the route need rate limit
-      if (route.rateLimit && env === 'production') {
+      if (route.rateLimit && env === "production") {
         routerParams.push(rateLimitMiddleware);
       }
 
@@ -49,8 +49,8 @@ export default function router(friday: Friday): Router {
       routerParams.push(asyncMiddleware(handler));
 
       routerObject[route.requestMethod](`/api${prefix}${route.path}`, ...routerParams);
-    });
-  });
+    }
+  }
 
   return routerObject;
 }

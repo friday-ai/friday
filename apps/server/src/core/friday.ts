@@ -1,29 +1,29 @@
-import Docker from '@friday-ai/docker';
-import logger from '@friday-ai/logger';
+import Docker from "@friday-ai/docker";
+import logger from "@friday-ai/logger";
 
-import * as database from '../config/database';
-import Action from './action/action';
-import Device from './device/device';
-import House from './house/house';
-import Plugin from './plugin/plugin';
-import Room from './room/room';
-import Satellite from './satellite/satellite';
-import Scene from './scene/scene';
-import Script from './script/script';
-import Session from './session/session';
-import State from './state/state';
-import System from './system/system';
-import Trigger from './trigger/trigger';
-import User from './user/user';
-import Variable from './variable/variable';
+import * as database from "../config/database";
+import Action from "./action/action";
+import Device from "./device/device";
+import House from "./house/house";
+import Plugin from "./plugin/plugin";
+import Room from "./room/room";
+import Satellite from "./satellite/satellite";
+import Scene from "./scene/scene";
+import Script from "./script/script";
+import Session from "./session/session";
+import State from "./state/state";
+import System from "./system/system";
+import Trigger from "./trigger/trigger";
+import User from "./user/user";
+import Variable from "./variable/variable";
 
-import * as Constants from '../config/constants';
-import { FridayMode } from '../config/constants';
-import jobs from '../config/jobs';
-import error from '../utils/decorators/error';
-import Event from '../utils/event';
-import { generateJwtSecret } from '../utils/jwt';
-import Scheduler from '../utils/scheduler';
+import * as Constants from "../config/constants";
+import { FridayMode } from "../config/constants";
+import jobs from "../config/jobs";
+import error from "../utils/decorators/error";
+import Event from "../utils/event";
+import { generateJwtSecret } from "../utils/jwt";
+import Scheduler from "../utils/scheduler";
 
 /**
  * Friday
@@ -31,7 +31,7 @@ import Scheduler from '../utils/scheduler';
  */
 export default class Friday {
   readonly secretJwt: string = generateJwtSecret();
-  public masterId = '';
+  public masterId = "";
 
   public event = Event;
   public scheduler = new Scheduler(this.event, jobs);
@@ -68,7 +68,7 @@ export default class Friday {
       this.masterId = await this.system.start();
 
       // If masterId is empty, is because master satellite not initialized
-      if (this.masterId === '') {
+      if (this.masterId === "") {
         this.mode = FridayMode.INIT;
       }
     } catch (e) {

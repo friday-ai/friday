@@ -1,9 +1,9 @@
-import { expect } from 'chai';
-import Friday from '../../../src/core/friday';
-import { FridayMode } from '../../../src/config/constants';
+import { expect } from "chai";
+import { FridayMode } from "../../../src/config/constants";
+import Friday from "../../../src/core/friday";
 
-describe('System.start', () => {
-  it('should start friday system and go to init mode', async function start() {
+describe("System.start", () => {
+  it("should start friday system and go to init mode", async function start() {
     this.timeout(8000);
 
     const friday = new Friday();

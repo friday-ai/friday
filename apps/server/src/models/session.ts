@@ -14,26 +14,26 @@ import {
   Scopes,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { SessionAttributes, SessionCreationAttributes } from '@friday-ai/shared';
-import { isOwnerExisting } from '../utils/database/validation';
-import User from './user';
+import type { SessionAttributes, SessionCreationAttributes } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import User from "./user";
 
 /**
  * Session model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'refreshToken', 'revoked', 'userAgent', 'validUntil', 'userId', 'createdAt'],
+  attributes: ["id", "refreshToken", "revoked", "userAgent", "validUntil", "userId", "createdAt"],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'refreshToken', 'revoked', 'userAgent', 'validUntil', 'userId', 'createdAt'],
+    attributes: ["id", "refreshToken", "revoked", "userAgent", "validUntil", "userId", "createdAt"],
     include: [User],
   },
 }))
 @Table({
-  tableName: 'session',
+  tableName: "session",
   underscored: false,
 })
 export default class Session extends Model<SessionAttributes, SessionCreationAttributes> {
@@ -66,12 +66,12 @@ export default class Session extends Model<SessionAttributes, SessionCreationAtt
   validUntil!: Date;
 
   @NotEmpty
-  @Is('userId', (value) => isOwnerExisting(value, ['user']))
+  @Is("userId", (value) => isOwnerExisting(value, ["user"]))
   @Column(DataType.UUIDV4)
   userId!: string;
 
   @BelongsTo(() => User, {
-    foreignKey: 'userId',
+    foreignKey: "userId",
     constraints: false,
   })
   user!: User;

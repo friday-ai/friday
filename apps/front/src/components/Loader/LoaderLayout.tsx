@@ -1,6 +1,6 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 
-import FaviconLoader from './Loader';
+import FaviconLoader from "./Loader";
 
 export default function LoaderLayout() {
   return (

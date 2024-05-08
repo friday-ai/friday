@@ -1,9 +1,9 @@
-import type { HouseAttributes, HouseCreationAttributes } from '@friday-ai/shared';
-import { AvailableState, HouseCreationKeys, StateOwner } from '@friday-ai/shared';
-import HouseModel from '../../models/house';
-import BaseModel from '../../utils/database/model.base';
-import { Catch } from '../../utils/decorators/error';
-import StateClass from '../state/state';
+import type { HouseAttributes, HouseCreationAttributes } from "@friday-ai/shared";
+import { AvailableState, HouseCreationKeys, StateOwner } from "@friday-ai/shared";
+import HouseModel from "../../models/house";
+import BaseModel from "../../utils/database/model.base";
+import { Catch } from "../../utils/decorators/error";
+import type StateClass from "../state/state";
 
 /**
  * House

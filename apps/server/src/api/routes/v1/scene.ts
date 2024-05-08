@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { FridayRouter, Get, Patch, Post, Delete } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Scene router
@@ -9,7 +9,7 @@ import Friday from '../../../core/friday';
  * @apiParam {String} [description] Description of the scene.
  * @apiParam {UUIDV4} [triggerId] Identifier of the trigger to which the scene belongs.
  */
-@FridayRouter('/v1/scene')
+@FridayRouter("/v1/scene")
 export default class SceneRouter {
   private readonly friday: Friday;
 
@@ -34,11 +34,11 @@ export default class SceneRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'scene',
+    aclMethod: "create",
+    aclResource: "scene",
   })
   create = async (req: Request, res: Response) => {
     const scene = await this.friday.scene.create(req.body);
@@ -62,11 +62,11 @@ export default class SceneRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'scene',
+    aclMethod: "update",
+    aclResource: "scene",
   })
   update = async (req: Request, res: Response) => {
     const scene = await this.friday.scene.update(req.params.id, req.body);
@@ -86,11 +86,11 @@ export default class SceneRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'scene',
+    aclMethod: "delete",
+    aclResource: "scene",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.scene.destroy(req.params.id);
@@ -115,11 +115,11 @@ export default class SceneRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'scene',
+    aclMethod: "read",
+    aclResource: "scene",
   })
   listAll = async (req: Request, res: Response) => {
     const scenes = await this.friday.scene.listAll(req.query);
@@ -142,11 +142,11 @@ export default class SceneRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'scene',
+    aclMethod: "read",
+    aclResource: "scene",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;

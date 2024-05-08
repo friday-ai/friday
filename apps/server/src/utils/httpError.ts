@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-useless-constructor */
-/* eslint-disable max-classes-per-file */
-import { TokenExpiredError, NotBeforeError, JsonWebTokenError } from 'jsonwebtoken';
+import { JsonWebTokenError, NotBeforeError, TokenExpiredError } from "jsonwebtoken";
 import {
+  AuthError,
   BadParametersError,
-  NotFoundError,
   DatabaseUniqueConstraintError,
   DatabaseValidationError,
-  AuthError,
+  NotFoundError,
   UnauthorizedError,
-} from './decorators/error';
+} from "./decorators/error";
 
-import { ErrorType } from './interfaces';
+import type { ErrorType } from "./interfaces";
 
 /**
  * base http error class
@@ -19,7 +17,7 @@ import { ErrorType } from './interfaces';
  */
 export class BaseHttpError extends Error {
   public status = 500;
-  public code = 'SERVER_ERROR';
+  public code = "SERVER_ERROR";
   public cause?: Error;
   public metadata?: unknown;
 
@@ -40,7 +38,7 @@ export class Error400 extends BaseHttpError {
   constructor(err: ErrorType) {
     super(err);
     this.status = 400;
-    this.code = 'BAD_REQUEST';
+    this.code = "BAD_REQUEST";
   }
 }
 /**
@@ -52,7 +50,7 @@ export class Error401 extends BaseHttpError {
   constructor(err: ErrorType) {
     super(err);
     this.status = 401;
-    this.code = 'UNAUTHORIZED';
+    this.code = "UNAUTHORIZED";
   }
 }
 /**
@@ -64,7 +62,7 @@ export class Error403 extends BaseHttpError {
   constructor(err: ErrorType) {
     super(err);
     this.status = 403;
-    this.code = 'FORBIDDEN';
+    this.code = "FORBIDDEN";
   }
 }
 
@@ -77,7 +75,7 @@ export class Error404 extends BaseHttpError {
   constructor(err: ErrorType) {
     super(err);
     this.status = 404;
-    this.code = 'NOT_FOUND';
+    this.code = "NOT_FOUND";
   }
 }
 /**
@@ -89,7 +87,7 @@ export class Error409 extends BaseHttpError {
   constructor(err: ErrorType) {
     super(err);
     this.status = 409;
-    this.code = 'CONFLICT';
+    this.code = "CONFLICT";
   }
 }
 /**
@@ -101,7 +99,7 @@ export class Error422 extends BaseHttpError {
   constructor(err: ErrorType) {
     super(err);
     this.status = 422;
-    this.code = 'UNPROCESSABLE_ENTITY';
+    this.code = "UNPROCESSABLE_ENTITY";
   }
 }
 
@@ -114,7 +112,7 @@ export class Error500 extends BaseHttpError {
   constructor(err: ErrorType) {
     super(err);
     this.status = 500;
-    this.code = 'SERVER_ERROR';
+    this.code = "SERVER_ERROR";
   }
 }
 

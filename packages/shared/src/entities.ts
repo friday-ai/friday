@@ -1,6 +1,6 @@
-import { ActionsType, AvailableConditions, AvailableLanguages, AvailableState, StateOwner, UserRole, VariableOwner } from './constants';
-import { DeviceCapabilitySettingsSchema, DevicesCapabilities, DevicesTypes } from './devices';
-import { Color, Optional, PartlyRequired } from './utils';
+import type { ActionsType, AvailableConditions, AvailableLanguages, AvailableState, StateOwner, UserRole, VariableOwner } from "./constants";
+import type { DeviceCapabilitySettingsSchema, DevicesCapabilities, DevicesTypes } from "./devices";
+import type { Color, Optional, PartlyRequired } from "./utils";
 
 /**
  * Action type
@@ -17,8 +17,8 @@ export type ActionAttributes = {
   scene: SceneAttributes;
 };
 
-export type ActionCreationAttributes = Optional<Omit<ActionAttributes, 'id' | 'scene'>, 'variableKey' | 'variableValue'>;
-export const ActionCreationKeys = ['name', 'description', 'type', 'subType', 'sceneId', 'variableKey', 'variableValue'];
+export type ActionCreationAttributes = Optional<Omit<ActionAttributes, "id" | "scene">, "variableKey" | "variableValue">;
+export const ActionCreationKeys = ["name", "description", "type", "subType", "sceneId", "variableKey", "variableValue"];
 
 /**
  * Device type.
@@ -43,22 +43,22 @@ export type DeviceAttributes = {
 };
 
 export type DeviceCreationAttributes = PartlyRequired<
-  Partial<Omit<DeviceAttributes, 'id' | 'room' | 'plugin' | 'capabilities' | 'device'>>,
-  'type' | 'defaultName' | 'defaultManufacturer' | 'defaultModel' | 'pluginId'
+  Partial<Omit<DeviceAttributes, "id" | "room" | "plugin" | "capabilities" | "device">>,
+  "type" | "defaultName" | "defaultManufacturer" | "defaultModel" | "pluginId"
 >;
 
 export const DeviceCreationKeys = [
-  'defaultName',
-  'defaultManufacturer',
-  'defaultModel',
-  'name',
-  'type',
-  'manufacturer',
-  'model',
-  'externalId',
-  'viaDevice',
-  'roomId',
-  'pluginId',
+  "defaultName",
+  "defaultManufacturer",
+  "defaultModel",
+  "name",
+  "type",
+  "manufacturer",
+  "model",
+  "externalId",
+  "viaDevice",
+  "roomId",
+  "pluginId",
 ];
 
 /**
@@ -81,12 +81,12 @@ export type DeviceCapabilityAttributes = {
 /** Syntactic sugar for "DeviceCapabilityAttributes" */
 export type DcAttributes = DeviceCapabilityAttributes;
 
-export type DeviceCapabilityCreationAttributes = PartlyRequired<Partial<Omit<DcAttributes, 'id' | 'room' | 'device'>>, 'defaultName' | 'type'>;
+export type DeviceCapabilityCreationAttributes = PartlyRequired<Partial<Omit<DcAttributes, "id" | "room" | "device">>, "defaultName" | "type">;
 
 /** Syntactic sugar for "DeviceCapabilityCreationAttributes" */
 export type DcCreationAttributes = DeviceCapabilityCreationAttributes;
 
-export const DeviceCapabilityCreationKeys = ['defaultName', 'name', 'type', 'externalId', 'deviceId', 'roomId', 'settings', 'state'];
+export const DeviceCapabilityCreationKeys = ["defaultName", "name", "type", "externalId", "deviceId", "roomId", "settings", "state"];
 
 /** Syntactic sugar for "DeviceCapabilityCreationKeys" */
 export const DcCreationKeys = DeviceCapabilityCreationKeys;
@@ -104,7 +104,7 @@ export type DeviceCapabilitySettingsAttributes = {
 /** Syntactic sugar for "DeviceCapabilitySettingsAttributes" */
 export type DcsAttributes = DeviceCapabilitySettingsAttributes;
 
-export type DeviceCapabilitySettingsCreationAttributes = PartlyRequired<Partial<Omit<DcsAttributes, 'id' | 'capability'>>, 'capabilityId'>;
+export type DeviceCapabilitySettingsCreationAttributes = PartlyRequired<Partial<Omit<DcsAttributes, "id" | "capability">>, "capabilityId">;
 
 /** Syntactic sugar for "DeviceCapabilitySettingsCreationAttributes" */
 export type DcsCreationAttributes = DeviceCapabilitySettingsCreationAttributes;
@@ -123,12 +123,12 @@ export type DeviceCapabilityStateAttributes = {
 /** Syntactic sugar for "DeviceCapabilityStateAttributes" */
 export type DcstAttributes = DeviceCapabilityStateAttributes;
 
-export type DeviceCapabilityStateCreationAttributes = PartlyRequired<Partial<Omit<DcstAttributes, 'id' | 'capability'>>, 'value' | 'capabilityId'>;
+export type DeviceCapabilityStateCreationAttributes = PartlyRequired<Partial<Omit<DcstAttributes, "id" | "capability">>, "value" | "capabilityId">;
 
 /** Syntactic sugar for "DeviceCapabilityStateCreationAttributes" */
 export type DcstCreationAttributes = DeviceCapabilityStateCreationAttributes;
 
-export const DeviceCapabilityStateCreationKeys = ['value', 'last', 'capabilityId'];
+export const DeviceCapabilityStateCreationKeys = ["value", "last", "capabilityId"];
 
 /** Syntactic sugar for "DeviceCapabilityStateCreationKeys" */
 export const DcstCreationKeys = DeviceCapabilityStateCreationKeys;
@@ -145,8 +145,8 @@ export type HouseAttributes = {
   state: StateAttributes;
 };
 
-export type HouseCreationAttributes = Optional<Omit<HouseAttributes, 'id'>, 'rooms' | 'state'>;
-export const HouseCreationKeys = ['name', 'latitude', 'longitude', 'rooms', 'state'];
+export type HouseCreationAttributes = Optional<Omit<HouseAttributes, "id">, "rooms" | "state">;
+export const HouseCreationKeys = ["name", "latitude", "longitude", "rooms", "state"];
 
 /**
  * Plugin type.
@@ -166,8 +166,8 @@ export type PluginAttributes = {
   lastHeartbeat: Date;
 };
 
-export type PluginCreationAttributes = Optional<Omit<PluginAttributes, 'id' | 'satellite' | 'devices'>, 'state' | 'variables'>;
-export const PluginCreationKeys = ['dockerId', 'name', 'version', 'url', 'enabled', 'satelliteId', 'state', 'variables', 'lastHeartbeat'];
+export type PluginCreationAttributes = Optional<Omit<PluginAttributes, "id" | "satellite" | "devices">, "state" | "variables">;
+export const PluginCreationKeys = ["dockerId", "name", "version", "url", "enabled", "satelliteId", "state", "variables", "lastHeartbeat"];
 
 export type PluginInstallAttributes = {
   name: string;
@@ -190,8 +190,8 @@ export type RoomAttributes = {
   satellites: Array<SatelliteAttributes>;
 };
 
-export type RoomCreationAttributes = Optional<Omit<RoomAttributes, 'id' | 'house' | 'devices' | 'satellites'>, 'state'>;
-export const RoomsCreationKeys = ['name', 'houseId', 'state'];
+export type RoomCreationAttributes = Optional<Omit<RoomAttributes, "id" | "house" | "devices" | "satellites">, "state">;
+export const RoomsCreationKeys = ["name", "houseId", "state"];
 
 /**
  * Satellite type.
@@ -207,8 +207,8 @@ export type SatelliteAttributes = {
   lastHeartbeat: Date;
 };
 
-export type SatelliteCreationAttributes = Optional<Omit<SatelliteAttributes, 'id' | 'room' | 'plugins'>, 'variables' | 'state'>;
-export const SatelliteCreationKeys = ['name', 'roomId', 'variables', 'state', 'lastHeartbeat'];
+export type SatelliteCreationAttributes = Optional<Omit<SatelliteAttributes, "id" | "room" | "plugins">, "variables" | "state">;
+export const SatelliteCreationKeys = ["name", "roomId", "variables", "state", "lastHeartbeat"];
 
 /**
  * Scene type.
@@ -222,8 +222,8 @@ export type SceneAttributes = {
   actions: Array<ActionAttributes>;
 };
 
-export type SceneCreationAttributes = Optional<Omit<SceneAttributes, 'id' | 'trigger'>, 'triggerId' | 'actions'>;
-export const SceneCreationKeys = ['name', 'description', 'triggerId', 'actions'];
+export type SceneCreationAttributes = Optional<Omit<SceneAttributes, "id" | "trigger">, "triggerId" | "actions">;
+export const SceneCreationKeys = ["name", "description", "triggerId", "actions"];
 
 /**
  * Script type.
@@ -234,8 +234,8 @@ export type ScriptAttributes = {
   code: string;
 };
 
-export type ScriptCreationAttributes = Optional<Omit<ScriptAttributes, 'id'>, 'code'>;
-export const ScriptCreationKeys = ['name', 'code'];
+export type ScriptCreationAttributes = Optional<Omit<ScriptAttributes, "id">, "code">;
+export const ScriptCreationKeys = ["name", "code"];
 
 /**
  * Session type.
@@ -252,10 +252,10 @@ export type SessionAttributes = {
   createdAt: Date;
 };
 
-export type SessionCreationAttributes = Omit<SessionAttributes, 'id' | 'user' | 'accessToken' | 'createdAt'>;
-export type SessionCredentials = Optional<Omit<UserAttributes, 'password' | 'state' | 'variables'>, 'theme' | 'language'>;
+export type SessionCreationAttributes = Omit<SessionAttributes, "id" | "user" | "accessToken" | "createdAt">;
+export type SessionCredentials = Optional<Omit<UserAttributes, "password" | "state" | "variables">, "theme" | "language">;
 
-export const SessionCreationKeys = ['refreshToken', 'revoked', 'validUntil', 'userId', 'userAgent'];
+export const SessionCreationKeys = ["refreshToken", "revoked", "validUntil", "userId", "userAgent"];
 
 /**
  * State type.
@@ -274,8 +274,8 @@ export type StateAttributes = {
   device: DeviceAttributes;
 };
 
-export type StateCreationAttributes = Omit<StateAttributes, 'id' | 'user' | 'room' | 'house' | 'plugin' | 'satellite' | 'device'>;
-export const StateCreationKeys = ['owner', 'ownerType', 'value', 'last'];
+export type StateCreationAttributes = Omit<StateAttributes, "id" | "user" | "room" | "house" | "plugin" | "satellite" | "device">;
+export const StateCreationKeys = ["owner", "ownerType", "value", "last"];
 
 /**
  * Trigger type.
@@ -289,8 +289,8 @@ export type TriggerAttributes = {
   scenes: Array<SceneAttributes>;
 };
 
-export type TriggerCreationAttributes = Optional<Omit<TriggerAttributes, 'id'>, 'rules' | 'scenes'>;
-export const TriggerCreationKeys = ['name', 'description', 'type', 'rules', 'scenes'];
+export type TriggerCreationAttributes = Optional<Omit<TriggerAttributes, "id">, "rules" | "scenes">;
+export const TriggerCreationKeys = ["name", "description", "type", "rules", "scenes"];
 
 /**
  * User type.
@@ -307,13 +307,13 @@ export type UserAttributes = {
   variables: Array<VariableAttributes>;
 };
 
-export type UserCreationAttributes = Optional<Omit<UserAttributes, 'id'>, 'theme' | 'state' | 'variables'>;
+export type UserCreationAttributes = Optional<Omit<UserAttributes, "id">, "theme" | "state" | "variables">;
 export type UserCredentialsAttributes = Optional<
-  Omit<UserAttributes, 'id' | 'theme' | 'role' | 'language' | 'state' | 'variables'>,
-  'userName' | 'email'
+  Omit<UserAttributes, "id" | "theme" | "role" | "language" | "state" | "variables">,
+  "userName" | "email"
 >;
-export type UserUpdateAttributes = Optional<UserCreationAttributes, 'userName' | 'email' | 'language' | 'password' | 'role'>;
-export const UserCreationKeys = ['userName', 'email', 'password', 'theme', 'role', 'language', 'state'];
+export type UserUpdateAttributes = Optional<UserCreationAttributes, "userName" | "email" | "language" | "password" | "role">;
+export const UserCreationKeys = ["userName", "email", "password", "theme", "role", "language", "state"];
 
 /**
  * Variable type.
@@ -326,5 +326,5 @@ export type VariableAttributes = {
   ownerType: VariableOwner;
 };
 
-export type VariableCreationAttributes = Omit<VariableAttributes, 'id'>;
-export const VariableCreationKeys = ['key', 'value', 'owner', 'ownerType'];
+export type VariableCreationAttributes = Omit<VariableAttributes, "id">;
+export const VariableCreationKeys = ["key", "value", "owner", "ownerType"];

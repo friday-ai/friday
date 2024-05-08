@@ -14,35 +14,35 @@ import {
   Scopes,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { SceneAttributes, SceneCreationAttributes } from '@friday-ai/shared';
-import { isOwnerExisting } from '../utils/database/validation';
-import Action from './action';
-import Trigger from './trigger';
+import type { SceneAttributes, SceneCreationAttributes } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import Action from "./action";
+import Trigger from "./trigger";
 
 /**
  * Scene model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'name', 'description', 'triggerId'],
+  attributes: ["id", "name", "description", "triggerId"],
 }))
 @Scopes(() => ({
   full: {
-    attributes: ['id', 'name', 'description', 'triggerId'],
+    attributes: ["id", "name", "description", "triggerId"],
     include: [Trigger, Action],
   },
   withActions: {
-    attributes: ['id', 'name', 'description', 'triggerId'],
+    attributes: ["id", "name", "description", "triggerId"],
     include: [Action],
   },
   withTrigger: {
-    attributes: ['id', 'name', 'description', 'triggerId'],
+    attributes: ["id", "name", "description", "triggerId"],
     include: [Trigger],
   },
 }))
 @Table({
-  tableName: 'scene',
+  tableName: "scene",
   underscored: false,
 })
 export default class Scene extends Model<SceneAttributes, SceneCreationAttributes> {
@@ -64,22 +64,22 @@ export default class Scene extends Model<SceneAttributes, SceneCreationAttribute
   @Column(DataType.STRING)
   description!: string;
 
-  @Is('triggerId', async (value) => {
+  @Is("triggerId", async (value) => {
     if (value !== undefined) {
-      await isOwnerExisting(value, ['trigger']);
+      await isOwnerExisting(value, ["trigger"]);
     }
   })
   @Column(DataType.UUIDV4)
   triggerId!: string;
 
   @BelongsTo(() => Trigger, {
-    foreignKey: 'triggerId',
+    foreignKey: "triggerId",
     constraints: false,
   })
   trigger!: Trigger;
 
   @HasMany(() => Action, {
-    foreignKey: 'sceneId',
+    foreignKey: "sceneId",
     constraints: false,
   })
   actions!: Action[];

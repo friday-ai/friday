@@ -12,24 +12,24 @@ import {
   PrimaryKey,
   Table,
   Unique,
-} from 'sequelize-typescript';
+} from "sequelize-typescript";
 
-import { StateAttributes, StateCreationAttributes, StateOwner } from '@friday-ai/shared';
-import { isOwnerExisting } from '../utils/database/validation';
-import House from './house';
-import Plugin from './plugin';
-import Room from './room';
-import Satellite from './satellite';
-import User from './user';
+import { type StateAttributes, type StateCreationAttributes, StateOwner } from "@friday-ai/shared";
+import { isOwnerExisting } from "../utils/database/validation";
+import House from "./house";
+import Plugin from "./plugin";
+import Room from "./room";
+import Satellite from "./satellite";
+import User from "./user";
 
 /**
  * State model
  */
 @DefaultScope(() => ({
-  attributes: ['id', 'owner', 'ownerType', 'value'],
+  attributes: ["id", "owner", "ownerType", "value"],
 }))
 @Table({
-  tableName: 'state',
+  tableName: "state",
   underscored: false,
 })
 export default class State extends Model<StateAttributes, StateCreationAttributes> {
@@ -43,7 +43,7 @@ export default class State extends Model<StateAttributes, StateCreationAttribute
 
   @AllowNull(false)
   @NotEmpty
-  @Is('owner', (value) => isOwnerExisting(value, ['user', 'room', 'house', 'satellite', 'plugin']))
+  @Is("owner", (value) => isOwnerExisting(value, ["user", "room", "house", "satellite", "plugin"]))
   @Column(DataType.UUIDV4)
   owner!: string;
 
@@ -62,31 +62,31 @@ export default class State extends Model<StateAttributes, StateCreationAttribute
   last!: boolean;
 
   @BelongsTo(() => User, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   user?: User;
 
   @BelongsTo(() => Room, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   room?: Room;
 
   @BelongsTo(() => House, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   house?: House;
 
   @BelongsTo(() => Plugin, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   plugin?: Plugin;
 
   @BelongsTo(() => Satellite, {
-    foreignKey: 'owner',
+    foreignKey: "owner",
     constraints: false,
   })
   satellite?: Satellite;

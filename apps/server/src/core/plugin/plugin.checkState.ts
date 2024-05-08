@@ -1,5 +1,5 @@
-import { AvailableState, EventsType, StateOwner, WebsocketMessageTypes } from '@friday-ai/shared';
-import PluginClass from './plugin';
+import { AvailableState, EventsType, StateOwner, WebsocketMessageTypes } from "@friday-ai/shared";
+import type PluginClass from "./plugin";
 
 /**
  * Check state of a plugin.
@@ -16,7 +16,7 @@ export default async function checkState(this: PluginClass, id: string): Promise
   const state = await this.docker.getContainerState(plugin.dockerId);
 
   switch (state) {
-    case 'running':
+    case "running":
       await this.state.set({
         owner: plugin.id,
         ownerType: StateOwner.PLUGIN,
@@ -30,7 +30,7 @@ export default async function checkState(this: PluginClass, id: string): Promise
       });
       break;
 
-    case 'exited':
+    case "exited":
       await this.state.set({
         owner: plugin.id,
         ownerType: StateOwner.PLUGIN,

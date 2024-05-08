@@ -1,19 +1,19 @@
-import { Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
-import Dashboard from './Dashboard/Dashboard';
-import Devices from './Dashboard/Devices';
-import SatellitesDetails from './Dashboard/Satellites/Details';
-import PluginInstall from './Dashboard/Satellites/Plugins/Install';
-import Satellites from './Dashboard/Satellites/Satellites';
-import House from './Dashboard/Settings/House/House';
-import Session from './Dashboard/Settings/Session/Session';
-import Settings from './Dashboard/Settings/Settings';
-import System from './Dashboard/Settings/System/System';
-import User from './Dashboard/Settings/User/User';
-import ErrorBoundary from './Errors/ErrorBoundary';
-import Login from './Login/Login';
-import Root from './Root';
-import Signup from './Signup/Signup';
+import Dashboard from "./Dashboard/Dashboard";
+import Devices from "./Dashboard/Devices";
+import SatellitesDetails from "./Dashboard/Satellites/Details";
+import PluginInstall from "./Dashboard/Satellites/Plugins/Install";
+import Satellites from "./Dashboard/Satellites/Satellites";
+import House from "./Dashboard/Settings/House/House";
+import Session from "./Dashboard/Settings/Session/Session";
+import Settings from "./Dashboard/Settings/Settings";
+import System from "./Dashboard/Settings/System/System";
+import User from "./Dashboard/Settings/User/User";
+import ErrorBoundary from "./Errors/ErrorBoundary";
+import Login from "./Login/Login";
+import Root from "./Root";
+import Signup from "./Signup/Signup";
 
 type RemixRouter = ReturnType<typeof createBrowserRouter>;
 
@@ -37,8 +37,8 @@ const router: RemixRouter = createBrowserRouter(
         <Route path="settings" element={<Settings />}>
           <Route index path="system" element={<System />} />
           <Route path="houses" element={<House />} />
-          <Route path="users" element={<User />}></Route>
-          <Route path="sessions" element={<Session />}></Route>
+          <Route path="users" element={<User />} />
+          <Route path="sessions" element={<Session />} />
         </Route>
       </Route>
     </Route>,

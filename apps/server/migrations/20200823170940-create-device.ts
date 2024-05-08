@@ -1,10 +1,10 @@
-import { QueryInterface } from 'sequelize';
-import { DataType } from 'sequelize-typescript';
+import type { QueryInterface } from "sequelize";
+import { DataType } from "sequelize-typescript";
 
 export default {
-  name: '20200823170940-create-device',
+  name: "20200823170940-create-device",
   up: async ({ context: queryInterface }: { context: QueryInterface }) => {
-    await queryInterface.createTable('device', {
+    await queryInterface.createTable("device", {
       id: {
         unique: true,
         allowNull: false,
@@ -59,5 +59,5 @@ export default {
       },
     });
   },
-  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable('device'),
+  down: ({ context: queryInterface }: { context: QueryInterface }) => queryInterface.dropTable("device"),
 };

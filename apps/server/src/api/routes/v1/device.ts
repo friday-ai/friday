@@ -1,6 +1,6 @@
-import { Request, Response } from 'express';
-import { Delete, FridayRouter, Get, Patch, Post } from '../../../utils/decorators/route';
-import Friday from '../../../core/friday';
+import type { Request, Response } from "express";
+import type Friday from "../../../core/friday";
+import { Delete, FridayRouter, Get, Patch, Post } from "../../../utils/decorators/route";
 
 /**
  * Device router
@@ -14,7 +14,7 @@ import Friday from '../../../core/friday';
  * @apiParam {UUIDV4} roomId Identifier of the room to which the device belongs.
  * @apiParam {UUIDV4} pluginId Plugin of the scene to which the device belongs.
  */
-@FridayRouter('/v1/device')
+@FridayRouter("/v1/device")
 export default class DeviceRouter {
   private readonly friday: Friday;
 
@@ -44,11 +44,11 @@ export default class DeviceRouter {
    * }
    */
   @Post({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'create',
-    aclResource: 'device',
+    aclMethod: "create",
+    aclResource: "device",
   })
   register = async (req: Request, res: Response) => {
     const device = await this.friday.device.register(req.body);
@@ -77,11 +77,11 @@ export default class DeviceRouter {
    * }
    */
   @Patch({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'update',
-    aclResource: 'device',
+    aclMethod: "update",
+    aclResource: "device",
   })
   update = async (req: Request, res: Response) => {
     const device = await this.friday.device.update(req.params.id, req.body);
@@ -101,11 +101,11 @@ export default class DeviceRouter {
    * }
    */
   @Delete({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'delete',
-    aclResource: 'device',
+    aclMethod: "delete",
+    aclResource: "device",
   })
   destroy = async (req: Request, res: Response) => {
     await this.friday.device.destroy(req.params.id);
@@ -135,11 +135,11 @@ export default class DeviceRouter {
    * }]
    */
   @Get({
-    path: '/',
+    path: "/",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'device',
+    aclMethod: "read",
+    aclResource: "device",
   })
   listAll = async (req: Request, res: Response) => {
     const devices = await this.friday.device.listAll(req.query);
@@ -167,11 +167,11 @@ export default class DeviceRouter {
    * }
    */
   @Get({
-    path: '/:id',
+    path: "/:id",
     authenticated: true,
     rateLimit: false,
-    aclMethod: 'read',
-    aclResource: 'device',
+    aclMethod: "read",
+    aclResource: "device",
   })
   getById = async (req: Request, res: Response) => {
     const scope = req.query.scope as string;

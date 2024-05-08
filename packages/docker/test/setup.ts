@@ -1,8 +1,8 @@
-import chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
-import chaiLike from 'chai-like';
-import chaiThings from 'chai-things';
-import Docker from '../src/index';
+import chai from "chai";
+import chaiAsPromised from "chai-as-promised";
+import chaiLike from "chai-like";
+import chaiThings from "chai-things";
+import Docker from "../src/index";
 
 chai.use(chaiLike);
 chai.use(chaiThings);

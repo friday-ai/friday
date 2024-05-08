@@ -1,4 +1,3 @@
-/* eslint-disable */
 const mocha = require("mocha");
 const JUnit = require("mocha-junit-reporter");
 const Spec = mocha.reporters.Spec;

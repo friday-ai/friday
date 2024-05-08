@@ -1,20 +1,22 @@
-/* eslint-disable @typescript-eslint/no-unsafe-declaration-merging */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 /** This file is shamelessly copied from https://github.com/zwave-js/node-zwave-js/tree/master/packages/shared
  * thanks to @AlCalzone and his team for this great work!
  */
 
-import { EventEmitter } from 'node:events';
-import process from 'node:process';
-import { applyMixin } from './inheritance';
+import { EventEmitter } from "node:events";
+import process from "node:process";
+import { applyMixin } from "./inheritance";
 
 export type EventHandler =
   // Add more overloads as necessary
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   | ((arg1: any, arg2: any, arg3: any, arg4: any) => void)
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   | ((arg1: any, arg2: any, arg3: any) => void)
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   | ((arg1: any, arg2: any) => void)
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   | ((arg1: any) => void)
+  // biome-ignore lint/suspicious/noExplicitAny: "Any" type is necessary here to have flexibility
   | ((...args: any[]) => void);
 
 /**
@@ -56,10 +58,11 @@ export interface TypedEventEmitter<TEvents extends Record<keyof TEvents, EventHa
   emit<TEvent extends keyof TEvents>(event: TEvent, ...args: Parameters<TEvents[TEvent]>): boolean;
 }
 
+// biome-ignore lint/suspicious/noUnsafeDeclarationMerging:
 export class TypedEventEmitter<TEvents extends Record<keyof TEvents, EventHandler>> {}
 
 // Only apply the mixin if we are in a Node.js environment
-if ('env' in Object.keys(process)) {
+if ("env" in Object.keys(process)) {
   // Make TypedEventEmitter inherit from EventEmitter without actually extending
   // because that causes TypeScript to complain about invalid inheritance
   applyMixin(TypedEventEmitter, EventEmitter);

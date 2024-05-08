@@ -1,21 +1,21 @@
-import crypto from 'crypto';
-import jwt from 'jsonwebtoken';
-import util from 'util';
+import crypto from "node:crypto";
+import util from "node:util";
+import jwt from "jsonwebtoken";
 
 const accessTokenValidity = 24 * 60 * 60; // access token is valid 24 hours
 const refreshTokenValidity = 15 * 24 * 60 * 60; // refresh token is valid 15 days
 const randomBytes = util.promisify(crypto.randomBytes);
 const tokenLength = 500;
 const apiKeyLength = 32;
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || "production";
 
 /**
  * Hash a token
  * @param {string} token - The token to hash.
  * @returns {string} The hash of the token.
  */
-export function hashToken(token: string) {
-  return crypto.createHash('sha256').update(token).digest('hex');
+export function hashToken(token: string): string {
+  return crypto.createHash("sha256").update(token).digest("hex");
 }
 
 /**
@@ -23,15 +23,15 @@ export function hashToken(token: string) {
  * @private
  * @returns {string} JwtSecret.
  */
-export function generateJwtSecret() {
-  if (env === 'test') {
-    return 'secretJwt';
+export function generateJwtSecret(): string {
+  if (env === "test") {
+    return "secretJwt";
   }
 
   // return required number of characters
   return crypto
     .randomBytes(Math.ceil(tokenLength / 2))
-    .toString('hex') // convert to hexadecimal format
+    .toString("hex") // convert to hexadecimal format
     .slice(0, tokenLength);
 }
 
@@ -44,11 +44,11 @@ export function generateJwtSecret() {
  * @param {string} jwtSecret - JWT secret.
  * @returns {string} Return accessToken.
  */
-export function generateAccessToken(userId: string, role: string, sessionId: string, jwtSecret: string) {
+export function generateAccessToken(userId: string, role: string, sessionId: string, jwtSecret: string): string {
   return jwt.sign({ user: userId, role, session: sessionId }, jwtSecret, {
-    algorithm: 'HS256',
-    audience: 'user',
-    issuer: 'friday',
+    algorithm: "HS256",
+    audience: "user",
+    issuer: "friday",
     expiresIn: accessTokenValidity,
   });
 }
@@ -58,8 +58,8 @@ export function generateAccessToken(userId: string, role: string, sessionId: str
  * @private
  * @returns {Promise} Resolving with refreshToken, refreshTokenHash and refreshTokenValidity.
  */
-export async function generateRefreshToken() {
-  const refreshToken = (await randomBytes(Math.ceil(tokenLength / 2))).toString('hex').slice(0, tokenLength);
+export async function generateRefreshToken(): Promise<{ refreshToken: string; refreshTokenHash: string; refreshTokenValidity: number }> {
+  const refreshToken = (await randomBytes(Math.ceil(tokenLength / 2))).toString("hex").slice(0, tokenLength);
   const refreshTokenHash = hashToken(refreshToken);
 
   return {
@@ -74,8 +74,8 @@ export async function generateRefreshToken() {
  * @private
  * @returns {Promise} Resolving with apiKey and apiKeyHash.
  */
-export async function generateApiKey() {
-  const apiKey = (await randomBytes(Math.ceil(apiKeyLength / 2))).toString('hex').slice(0, apiKeyLength);
+export async function generateApiKey(): Promise<{ apiKey: string; apiKeyHash: string }> {
+  const apiKey = (await randomBytes(Math.ceil(apiKeyLength / 2))).toString("hex").slice(0, apiKeyLength);
   const apiKeyHash = hashToken(apiKey);
 
   return {

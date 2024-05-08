@@ -1,18 +1,18 @@
-import { useTheme } from '@mui/material/styles';
-import { m, Transition } from 'framer-motion';
+import { useTheme } from "@mui/material/styles";
+import { type Transition, m } from "framer-motion";
 
 const transition: Transition = {
   duration: 4,
-  repeat: Infinity,
-  repeatType: 'reverse',
-  ease: 'easeInOut',
+  repeat: Number.POSITIVE_INFINITY,
+  repeatType: "reverse",
+  ease: "easeInOut",
 };
 
 export default function FaviconLoader() {
   const theme = useTheme();
 
   return (
-    <div style={{ width: 'fit-content', height: 'fit-content' }}>
+    <div style={{ width: "fit-content", height: "fit-content" }}>
       <svg
         id="466f8ab7-2527-4c08-a168-e79693ae8f8f"
         width="100%"
@@ -22,6 +22,7 @@ export default function FaviconLoader() {
         stroke={theme.palette.primary.main}
         strokeWidth="10"
       >
+        <title>Favicon loader</title>
         <m.path
           d="M621 373L265.48 728L265.48 1499.45L3.47987 1499.45L3.47986 619L621 2"
           initial={{ pathLength: 1 }}

@@ -1,6 +1,6 @@
-import { Container } from 'dockerode';
-import Docker from '../index';
-import { NotFoundError, PlatformNotCompatible } from '../utils/error';
+import type { Container } from "dockerode";
+import type Docker from "../index";
+import { NotFoundError, PlatformNotCompatible } from "../utils/error";
 
 /**
  * Get a container by id.
@@ -10,13 +10,23 @@ import { NotFoundError, PlatformNotCompatible } from '../utils/error';
  */
 export default async function getContainer(this: Docker, id: string): Promise<Container> {
   if (!this.dockerode) {
-    throw new PlatformNotCompatible({ name: 'Platform not compatible', message: 'App not running on Docker' });
+    throw new PlatformNotCompatible({
+      name: "Platform not compatible",
+      message: "App not running on Docker",
+    });
   }
 
-  const containers = await this.dockerode.listContainers({ all: true, filters: { id: [id] } });
+  const containers = await this.dockerode.listContainers({
+    all: true,
+    filters: { id: [id] },
+  });
 
   if (containers.length === 0) {
-    throw new NotFoundError({ name: 'Get Container by id', message: 'Container not found', metadata: id });
+    throw new NotFoundError({
+      name: "Get Container by id",
+      message: "Container not found",
+      metadata: id,
+    });
   }
 
   // Return container object and not container infos
