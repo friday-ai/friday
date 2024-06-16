@@ -29,6 +29,7 @@ export const TopicHeaderSub = "friday/master/";
 export const TopicHeaderPub = "friday/satellite/";
 
 export enum TopicToSubscribe {
+  "capability/state" = 8,
   "device/destroy" = 0,
   "device/register" = 1,
   "plugin/discoverme" = 2,
@@ -37,7 +38,6 @@ export enum TopicToSubscribe {
   "satellite/discoverme" = 5,
   "satellite/heartbeat" = 6,
   "satellite/init" = 7,
-  "state/set" = 8,
 }
 
 export enum TopicsTypes {
