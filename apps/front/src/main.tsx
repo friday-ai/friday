@@ -1,4 +1,3 @@
-import { registerSW } from "virtual:pwa-register";
 import NiceModal from "@ebay/nice-modal-react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
@@ -7,11 +6,13 @@ import { LazyMotion, domAnimation } from "framer-motion";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
+import { registerSW } from "virtual:pwa-register";
+
+import router from "./routes/router";
+import theme from "./theme/theme";
 
 import "./index.css";
-import router from "./routes/router";
 import "./utils/i18n";
-import theme from "./utils/theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {

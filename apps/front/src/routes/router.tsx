@@ -1,6 +1,6 @@
 import { Route, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
-import Dashboard from "./Dashboard/Dashboard";
+import DashboardLayout from "../components/App/DashboardLayout";
 import Devices from "./Dashboard/Devices";
 import SatellitesDetails from "./Dashboard/Satellites/Details";
 import PluginInstall from "./Dashboard/Satellites/Plugins/Install";
@@ -23,7 +23,7 @@ const router: RemixRouter = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
 
-      <Route path="dashboard" element={<Dashboard />}>
+      <Route path="dashboard" element={<DashboardLayout />}>
         <Route index element={<Devices />} />
 
         <Route path="satellites">

@@ -43,6 +43,7 @@ const useApp = () => {
     setHeaders("");
     localStorage.removeItem("session");
     localStorage.removeItem("i18nextLng");
+    location.reload();
     return true;
   }, [session, request]);
 

@@ -75,7 +75,7 @@ export default function Login() {
             }}
           />
 
-          <div>
+          <Stack>
             <TextField
               error={error === 2}
               label={t("login.password")}
@@ -108,7 +108,7 @@ export default function Login() {
                 {t("login.forgotPassword")}
               </Typography>
             </Tooltip>
-          </div>
+          </Stack>
 
           <Button variant="contained" onClick={submit}>
             {t("login.signin")}
