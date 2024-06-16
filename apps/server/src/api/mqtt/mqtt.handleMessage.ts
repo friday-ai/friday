@@ -9,7 +9,7 @@ export default function handleMessage(this: MqttServer, topic: string, message: 
     const finalTopic = topic.replace(TopicHeaderSub, "");
 
     if (Object.values(Topics).includes(finalTopic)) {
-      logger.info(`Received message on topic ${topic} (${message})`);
+      logger.info(`Received message on topic ${topic}`);
 
       const handler = this.handlers[finalTopic];
       if (handler) {

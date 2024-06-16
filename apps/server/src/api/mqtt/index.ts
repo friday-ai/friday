@@ -49,8 +49,8 @@ export default class MqttServer {
       logger.info("Connected on mqtt broker");
 
       logger.info("Subscribing to friday's topics... ");
-      for (const topic of Object.keys(Topics)) {
-        if (!Number.isNaN(Number(topic))) {
+      for (const topic of Object.values(Topics)) {
+        if (typeof topic === "string") {
           this.MqttClient.subscribe(`${TopicHeaderSub}${topic}`);
         }
       }

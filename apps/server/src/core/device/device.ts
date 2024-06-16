@@ -8,7 +8,7 @@ import type {
   DeviceRegisterAttributes,
 } from "@friday-ai/shared";
 
-import { DeviceCreationKeys, type DevicesActions } from "@friday-ai/shared";
+import { DeviceCreationKeys } from "@friday-ai/shared";
 
 import DeviceModel from "../../models/device";
 import BaseModel from "../../utils/database/model.base";

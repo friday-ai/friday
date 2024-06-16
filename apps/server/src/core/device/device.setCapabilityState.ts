@@ -32,7 +32,7 @@ export default async function setCapabilityState(this: DeviceClass, state: DcstC
   // And then, create the new state
   const newState = await DeviceCapabilityState.create(state);
 
-  logger.success(`State ${newState.value} created for capability ${newState.id}`);
+  logger.success(`State ${newState.value} created for capability ${state.capabilityId}`);
 
   return <DcstAttributes>newState.get({ plain: true });
 }
