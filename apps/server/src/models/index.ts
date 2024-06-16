@@ -1,5 +1,5 @@
+import type { KVArr } from "@friday-ai/shared";
 import type { ModelCtor } from "sequelize-typescript";
-import type { KVArr } from "../utils/interfaces";
 
 import Action from "./action";
 import Device from "./device";

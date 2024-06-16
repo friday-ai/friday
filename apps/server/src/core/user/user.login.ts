@@ -1,8 +1,8 @@
 import logger from "@friday-ai/logger";
 import type { SessionCredentials, UserAttributes } from "@friday-ai/shared";
+import { exclude } from "@friday-ai/shared";
 import User from "../../models/user";
 import { AuthError, NotFoundError } from "../../utils/decorators/error";
-import { exclude } from "../../utils/object";
 import { compare } from "../../utils/password";
 
 /**

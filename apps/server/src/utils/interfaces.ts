@@ -56,13 +56,6 @@ export interface JobsInterface {
 }
 
 /**
- * Interface for array with key/value pair
- */
-export interface KVArr<T> {
-  [Key: string]: T;
-}
-
-/**
  * Options for sending mqtt message
  */
 export interface MqttSendOptions {
@@ -78,11 +71,6 @@ export interface MqttMessagePayload {
   topic: TopicsTypes;
   message: string | object;
   receiver?: string;
-}
-
-export interface DeviceCommandType {
-  action: DevicesActions;
-  params: unknown;
 }
 
 export interface CapabilityManagerParams {

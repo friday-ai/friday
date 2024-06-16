@@ -1,6 +1,6 @@
+import type { KVArr } from "@friday-ai/shared";
 import { Sequelize } from "sequelize-typescript";
 import { SequelizeStorage, Umzug } from "umzug";
-import type { KVArr } from "../utils/interfaces";
 
 import migrations from "../../migrations";
 import { modelsArr } from "../models";

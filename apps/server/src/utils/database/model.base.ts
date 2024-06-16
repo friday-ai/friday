@@ -1,6 +1,6 @@
+import { exclude, pick } from "@friday-ai/shared";
 import type { Model, ModelCtor } from "sequelize-typescript";
 import { Catch, NotFoundError } from "../decorators/error";
-import { exclude, pick } from "../object";
 import { PartialModel } from "./model.partial";
 
 export interface BaseModelType<T, C> {

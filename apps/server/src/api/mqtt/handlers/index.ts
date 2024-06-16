@@ -1,5 +1,5 @@
+import type { KVArr } from "@friday-ai/shared";
 import type Friday from "../../../core/friday";
-import type { KVArr } from "../../../utils/interfaces";
 
 import DeviceDestroy from "./device/destroy";
 import DeviceRegister from "./device/register";

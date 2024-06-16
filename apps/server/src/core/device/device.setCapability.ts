@@ -1,8 +1,8 @@
 import logger from "@friday-ai/logger";
 import type { DeviceCapabilityAttributes, DeviceCapabilityRegisterAttributes } from "@friday-ai/shared";
+import { exclude } from "@friday-ai/shared";
 import DeviceCapability from "../../models/device_capability";
 import { BadParametersError } from "../../utils/decorators/error";
-import { exclude } from "../../utils/object";
 import type DeviceClass from "./device";
 
 /**
