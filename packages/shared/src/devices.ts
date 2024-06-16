@@ -1,3 +1,5 @@
+import type { DcAttributes } from "./entities";
+
 export enum DevicesTypes {
   PHYSICAL = "physical",
   VIRTUAL = "virtual",
@@ -27,6 +29,7 @@ export enum DevicesCapabilities {
 }
 
 export enum DevicesActions {
+  AUTO = "action.devices.commands.auto",
   TURN_ON = "action.devices.commands.turn_on",
   TURN_OFF = "action.devices.commands.turn_off",
   SET_BRIGHTNESS = "action.devices.commands.set_brightness",
@@ -49,7 +52,13 @@ export enum DevicesActions {
 
 export type DeviceCommand = {
   action: DevicesActions;
-  params: { value: boolean | string | number };
+  emitter: "client" | "plugin";
+  emitterId?: string;
+  capability?: DcAttributes;
+  params: {
+    capabilityId: string;
+    value: never;
+  };
 };
 
 export type OnOffSettings = null;

@@ -1,6 +1,6 @@
 {
   "name": "@friday-ai/shared",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Friday: Shared utilites",
   "main": "lib/index.js",
   "module": "lib/index.mjs",
@@ -23,5 +23,8 @@
     "@biomejs/biome": "^1.7.2",
     "@friday-ai/tools": "workspace:^",
     "tsup": "^8.0.2"
+  },
+  "dependencies": {
+    "@friday-ai/logger": "workspace:^"
   }
 }

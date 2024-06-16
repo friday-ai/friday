@@ -43,6 +43,13 @@ export interface SystemSettings {
 }
 
 /**
+ * Interface for array with key/value pair
+ */
+export interface KVArr<T> {
+  [Key: string]: T;
+}
+
+/**
  * Type helper for making certain fields of an object optional. This is helpful
  * for creating the comlpex `CreationAttributes` of database.
  * // Shamelessly copied from https://github.com/sequelize/sequelize/blob/main/src/utils/types.ts
