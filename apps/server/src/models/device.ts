@@ -108,7 +108,7 @@ import Room from "./room";
       "roomId",
       "pluginId",
     ],
-    include: [{ model: DeviceCapability.scope("withSettings") }],
+    include: [{ model: DeviceCapability.scope("withSettingsAndState") }],
   },
 }))
 @Table({

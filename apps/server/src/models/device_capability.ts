@@ -16,7 +16,7 @@ import {
   Unique,
 } from "sequelize-typescript";
 
-import { type DcAttributes, type DcCreationAttributes, DevicesCapabilities } from "@friday-ai/shared";
+import { DevicesCapabilities, type DcAttributes, type DcCreationAttributes } from "@friday-ai/shared";
 import { isOwnerExisting } from "../utils/database/validation";
 import Device from "./device";
 import DeviceCapabilitySettings from "./device_capability_settings";
@@ -50,6 +50,14 @@ import Room from "./room";
   withSettings: {
     attributes: ["id", "defaultName", "name", "type", "externalId", "deviceId", "roomId"],
     include: [DeviceCapabilitySettings],
+  },
+  withSettingsAndState: {
+    attributes: ["id", "defaultName", "name", "type", "externalId", "deviceId", "roomId"],
+    include: [DeviceCapabilitySettings, { model: DeviceCapabilityState, where: { last: true } }],
+  },
+  withSettingsAndDevice: {
+    attributes: ["id", "defaultName", "name", "type", "externalId", "deviceId", "roomId"],
+    include: [DeviceCapabilitySettings, Device],
   },
 }))
 @Table({
