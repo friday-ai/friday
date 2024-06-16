@@ -1,3 +1,4 @@
+import * as auto from "./auto";
 import * as brightness from "./brightness";
 import * as energyConsumption from "./energyConsumption";
 import * as hue from "./hue";
@@ -8,6 +9,7 @@ import * as openClose from "./openClose";
 import * as temperatureHumidity from "./temperatureHumidity";
 
 const capabilities = {
+  auto,
   brightness,
   energyConsumption,
   hue,
