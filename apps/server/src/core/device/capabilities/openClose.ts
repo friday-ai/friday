@@ -1,5 +1,4 @@
-import logger from "@friday-ai/logger";
-import { type DcstAttributes, DevicesActions } from "@friday-ai/shared";
+import { DevicesActions, checkBoolValue, type DcstAttributes, type DeviceCommand } from "@friday-ai/shared";
 import type { CapabilityManagerParamsList } from "../../../utils/interfaces";
 import type DeviceClass from "../device";
 
@@ -9,25 +8,18 @@ export const options: CapabilityManagerParamsList = {
   },
 };
 
-const ACCEPTED_BOOL_VALUE = [true, false, 1, 0];
-
-function checkBoolValue(val: boolean | number) {
-  if (!ACCEPTED_BOOL_VALUE.includes(val)) {
-    const message = `The value must be a boolean format (${ACCEPTED_BOOL_VALUE.toString()}), actual is ${val}`;
-    logger.error(message);
-    throw new Error(message);
-  }
-}
-
 /**
  * openClose device capability
  * @param args
  */
-export async function openClose(this: DeviceClass, args: { id: string; value: boolean }): Promise<DcstAttributes> {
-  checkBoolValue(args.value);
+export async function openClose(this: DeviceClass, args: DeviceCommand): Promise<DcstAttributes> {
+  checkBoolValue(args.params.value);
 
-  return this.exec(args.id, {
-    action: args.value ? DevicesActions.OPEN : DevicesActions.CLOSE,
-    params: { value: args.value },
+  return this.exec({
+    action: args.params.value ? DevicesActions.OPEN : DevicesActions.CLOSE,
+    emitter: args.emitter,
+    capability: args.capability,
+    emitterId: args.emitterId,
+    params: args.params,
   });
 }

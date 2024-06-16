@@ -73,7 +73,7 @@ export default class Device extends BaseModel<DeviceModel, DeviceAttributes, Dev
   }
 
   @Catch()
-  async exec(identifier: string, command: DeviceCommand) {
-    return exec.call(this, identifier, command);
+  async exec(command: DeviceCommand) {
+    return exec.call(this, command);
   }
 }

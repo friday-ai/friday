@@ -26,7 +26,18 @@ export default class ActionRouter {
     aclResource: "capability",
   })
   setState = async (req: Request, res: Response) => {
-    this.friday.event.emit(req.body.action, { id: req.params.id, value: req.body.value });
+    const capability = await this.friday.device.getCapabilityById(req.params.id, "withSettingsAndDevice");
+
+    this.friday.event.emit(req.body.action, {
+      action: req.body.action,
+      emitter: "client",
+      capability,
+      params: {
+        capabilityId: req.params.id,
+        value: req.body.value,
+      },
+    });
+
     res.status(200).json({ success: true });
   };
 }

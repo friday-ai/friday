@@ -1,5 +1,4 @@
-import logger from "@friday-ai/logger";
-import { type DcstAttributes, DevicesActions } from "@friday-ai/shared";
+import { DevicesActions, checkBoolValue, type DcstAttributes, type DeviceCommand } from "@friday-ai/shared";
 import type { CapabilityManagerParamsList } from "../../../utils/interfaces";
 import type DeviceClass from "../device";
 
@@ -9,20 +8,8 @@ export const options: CapabilityManagerParamsList = {
   },
 };
 
-const ACCEPTED_BOOL_VALUE = [true, false, 1, 0];
+export async function setMotion(this: DeviceClass, args: DeviceCommand): Promise<DcstAttributes> {
+  checkBoolValue(args.params.value);
 
-function checkBoolValue(val: boolean | number) {
-  if (!ACCEPTED_BOOL_VALUE.includes(val)) {
-    const message = `The value must be a boolean format (${ACCEPTED_BOOL_VALUE.toString()}), actual is ${val}`;
-    logger.error(message);
-    throw new Error(message);
-  }
-}
-
-export async function setMotion(this: DeviceClass, args: { id: string; value: boolean }): Promise<DcstAttributes> {
-  checkBoolValue(args.value);
-  return this.exec(args.id, {
-    action: DevicesActions.SET_MOTION,
-    params: { value: args.value },
-  });
+  return this.exec(args);
 }

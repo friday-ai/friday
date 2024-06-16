@@ -1,28 +1,15 @@
-import { type DcstAttributes, DevicesActions } from "@friday-ai/shared";
+import { DevicesActions, type DcstAttributes, type DeviceCommand } from "@friday-ai/shared";
 import type { CapabilityManagerParamsList } from "../../../utils/interfaces";
 import type DeviceClass from "../device";
 
 export const options: CapabilityManagerParamsList = {
-  setTemperature: {
-    actions: [DevicesActions.SET_TEMPERATURE],
-  },
-  setHumidity: {
-    actions: [DevicesActions.SET_HUMIDITY],
+  setTemperatureOrHumidity: {
+    actions: [DevicesActions.SET_TEMPERATURE, DevicesActions.SET_HUMIDITY],
   },
 };
 
-async function setTemperature(this: DeviceClass, args: { id: string; value: number }): Promise<DcstAttributes> {
-  return this.exec(args.id, {
-    action: DevicesActions.SET_TEMPERATURE,
-    params: { value: args.value },
-  });
+async function setTemperatureOrHumidity(this: DeviceClass, args: DeviceCommand): Promise<DcstAttributes> {
+  return this.exec(args);
 }
 
-async function setHumidity(this: DeviceClass, args: { id: string; value: number }): Promise<DcstAttributes> {
-  return this.exec(args.id, {
-    action: DevicesActions.SET_HUMIDITY,
-    params: { value: args.value },
-  });
-}
-
-export { setTemperature, setHumidity };
+export { setTemperatureOrHumidity };
