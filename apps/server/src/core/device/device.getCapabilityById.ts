@@ -1,4 +1,5 @@
 import type { DcAttributes } from "@friday-ai/shared";
+import { Op } from "sequelize";
 import DeviceCapability from "../../models/device_capability";
 import { NotFoundError } from "../../utils/decorators/error";
 import type DeviceClass from "./device";
@@ -10,9 +11,17 @@ export default async function getCapabilityById(this: DeviceClass, id: string, s
   let capability: DeviceCapability | null;
 
   if (scope !== "" && scope !== null && scope !== undefined) {
-    capability = await DeviceCapability.scope(scope).findByPk(id);
+    capability = await DeviceCapability.scope(scope).findOne({
+      where: {
+        [Op.or]: [{ id }, { externalId: id }],
+      },
+    });
   } else {
-    capability = await DeviceCapability.findByPk(id);
+    capability = await DeviceCapability.findOne({
+      where: {
+        [Op.or]: [{ id }, { externalId: id }],
+      },
+    });
   }
 
   if (capability === null) {
